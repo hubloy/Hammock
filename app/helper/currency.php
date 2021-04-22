@@ -1,0 +1,412 @@
+<?php
+namespace Hammock\Helper;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
+/**
+ * Currency helper
+ *
+ * @since 1.0.0
+ */
+class Currency {
+
+	/**
+	 * List currencies
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array
+	 */
+	public static function list_currencies() {
+		static $currencies;
+		if ( ! isset( $currencies ) ) {
+			$currencies = array_unique(
+				apply_filters(
+					'hammock_currencies',
+					array(
+						'AED' => __( 'United Arab Emirates dirham', 'hammock' ),
+						'AFN' => __( 'Afghan afghani', 'hammock' ),
+						'ALL' => __( 'Albanian lek', 'hammock' ),
+						'AMD' => __( 'Armenian dram', 'hammock' ),
+						'ANG' => __( 'Netherlands Antillean guilder', 'hammock' ),
+						'AOA' => __( 'Angolan kwanza', 'hammock' ),
+						'ARS' => __( 'Argentine peso', 'hammock' ),
+						'AUD' => __( 'Australian dollar', 'hammock' ),
+						'AWG' => __( 'Aruban florin', 'hammock' ),
+						'AZN' => __( 'Azerbaijani manat', 'hammock' ),
+						'BAM' => __( 'Bosnia and Herzegovina convertible mark', 'hammock' ),
+						'BBD' => __( 'Barbadian dollar', 'hammock' ),
+						'BDT' => __( 'Bangladeshi taka', 'hammock' ),
+						'BGN' => __( 'Bulgarian lev', 'hammock' ),
+						'BHD' => __( 'Bahraini dinar', 'hammock' ),
+						'BIF' => __( 'Burundian franc', 'hammock' ),
+						'BMD' => __( 'Bermudian dollar', 'hammock' ),
+						'BND' => __( 'Brunei dollar', 'hammock' ),
+						'BOB' => __( 'Bolivian boliviano', 'hammock' ),
+						'BRL' => __( 'Brazilian real', 'hammock' ),
+						'BSD' => __( 'Bahamian dollar', 'hammock' ),
+						'BTC' => __( 'Bitcoin', 'hammock' ),
+						'BTN' => __( 'Bhutanese ngultrum', 'hammock' ),
+						'BWP' => __( 'Botswana pula', 'hammock' ),
+						'BYR' => __( 'Belarusian ruble (old)', 'hammock' ),
+						'BYN' => __( 'Belarusian ruble', 'hammock' ),
+						'BZD' => __( 'Belize dollar', 'hammock' ),
+						'CAD' => __( 'Canadian dollar', 'hammock' ),
+						'CDF' => __( 'Congolese franc', 'hammock' ),
+						'CHF' => __( 'Swiss franc', 'hammock' ),
+						'CLP' => __( 'Chilean peso', 'hammock' ),
+						'CNY' => __( 'Chinese yuan', 'hammock' ),
+						'COP' => __( 'Colombian peso', 'hammock' ),
+						'CRC' => __( 'Costa Rican col&oacute;n', 'hammock' ),
+						'CUC' => __( 'Cuban convertible peso', 'hammock' ),
+						'CUP' => __( 'Cuban peso', 'hammock' ),
+						'CVE' => __( 'Cape Verdean escudo', 'hammock' ),
+						'CZK' => __( 'Czech koruna', 'hammock' ),
+						'DJF' => __( 'Djiboutian franc', 'hammock' ),
+						'DKK' => __( 'Danish krone', 'hammock' ),
+						'DOP' => __( 'Dominican peso', 'hammock' ),
+						'DZD' => __( 'Algerian dinar', 'hammock' ),
+						'EGP' => __( 'Egyptian pound', 'hammock' ),
+						'ERN' => __( 'Eritrean nakfa', 'hammock' ),
+						'ETB' => __( 'Ethiopian birr', 'hammock' ),
+						'EUR' => __( 'Euro', 'hammock' ),
+						'FJD' => __( 'Fijian dollar', 'hammock' ),
+						'FKP' => __( 'Falkland Islands pound', 'hammock' ),
+						'GBP' => __( 'Pound sterling', 'hammock' ),
+						'GEL' => __( 'Georgian lari', 'hammock' ),
+						'GGP' => __( 'Guernsey pound', 'hammock' ),
+						'GHS' => __( 'Ghana cedi', 'hammock' ),
+						'GIP' => __( 'Gibraltar pound', 'hammock' ),
+						'GMD' => __( 'Gambian dalasi', 'hammock' ),
+						'GNF' => __( 'Guinean franc', 'hammock' ),
+						'GTQ' => __( 'Guatemalan quetzal', 'hammock' ),
+						'GYD' => __( 'Guyanese dollar', 'hammock' ),
+						'HKD' => __( 'Hong Kong dollar', 'hammock' ),
+						'HNL' => __( 'Honduran lempira', 'hammock' ),
+						'HRK' => __( 'Croatian kuna', 'hammock' ),
+						'HTG' => __( 'Haitian gourde', 'hammock' ),
+						'HUF' => __( 'Hungarian forint', 'hammock' ),
+						'IDR' => __( 'Indonesian rupiah', 'hammock' ),
+						'ILS' => __( 'Israeli new shekel', 'hammock' ),
+						'IMP' => __( 'Manx pound', 'hammock' ),
+						'INR' => __( 'Indian rupee', 'hammock' ),
+						'IQD' => __( 'Iraqi dinar', 'hammock' ),
+						'IRR' => __( 'Iranian rial', 'hammock' ),
+						'IRT' => __( 'Iranian toman', 'hammock' ),
+						'ISK' => __( 'Icelandic kr&oacute;na', 'hammock' ),
+						'JEP' => __( 'Jersey pound', 'hammock' ),
+						'JMD' => __( 'Jamaican dollar', 'hammock' ),
+						'JOD' => __( 'Jordanian dinar', 'hammock' ),
+						'JPY' => __( 'Japanese yen', 'hammock' ),
+						'KES' => __( 'Kenyan shilling', 'hammock' ),
+						'KGS' => __( 'Kyrgyzstani som', 'hammock' ),
+						'KHR' => __( 'Cambodian riel', 'hammock' ),
+						'KMF' => __( 'Comorian franc', 'hammock' ),
+						'KPW' => __( 'North Korean won', 'hammock' ),
+						'KRW' => __( 'South Korean won', 'hammock' ),
+						'KWD' => __( 'Kuwaiti dinar', 'hammock' ),
+						'KYD' => __( 'Cayman Islands dollar', 'hammock' ),
+						'KZT' => __( 'Kazakhstani tenge', 'hammock' ),
+						'LAK' => __( 'Lao kip', 'hammock' ),
+						'LBP' => __( 'Lebanese pound', 'hammock' ),
+						'LKR' => __( 'Sri Lankan rupee', 'hammock' ),
+						'LRD' => __( 'Liberian dollar', 'hammock' ),
+						'LSL' => __( 'Lesotho loti', 'hammock' ),
+						'LYD' => __( 'Libyan dinar', 'hammock' ),
+						'MAD' => __( 'Moroccan dirham', 'hammock' ),
+						'MDL' => __( 'Moldovan leu', 'hammock' ),
+						'MGA' => __( 'Malagasy ariary', 'hammock' ),
+						'MKD' => __( 'Macedonian denar', 'hammock' ),
+						'MMK' => __( 'Burmese kyat', 'hammock' ),
+						'MNT' => __( 'Mongolian t&ouml;gr&ouml;g', 'hammock' ),
+						'MOP' => __( 'Macanese pataca', 'hammock' ),
+						'MRU' => __( 'Mauritanian ouguiya', 'hammock' ),
+						'MUR' => __( 'Mauritian rupee', 'hammock' ),
+						'MVR' => __( 'Maldivian rufiyaa', 'hammock' ),
+						'MWK' => __( 'Malawian kwacha', 'hammock' ),
+						'MXN' => __( 'Mexican peso', 'hammock' ),
+						'MYR' => __( 'Malaysian ringgit', 'hammock' ),
+						'MZN' => __( 'Mozambican metical', 'hammock' ),
+						'NAD' => __( 'Namibian dollar', 'hammock' ),
+						'NGN' => __( 'Nigerian naira', 'hammock' ),
+						'NIO' => __( 'Nicaraguan c&oacute;rdoba', 'hammock' ),
+						'NOK' => __( 'Norwegian krone', 'hammock' ),
+						'NPR' => __( 'Nepalese rupee', 'hammock' ),
+						'NZD' => __( 'New Zealand dollar', 'hammock' ),
+						'OMR' => __( 'Omani rial', 'hammock' ),
+						'PAB' => __( 'Panamanian balboa', 'hammock' ),
+						'PEN' => __( 'Sol', 'hammock' ),
+						'PGK' => __( 'Papua New Guinean kina', 'hammock' ),
+						'PHP' => __( 'Philippine peso', 'hammock' ),
+						'PKR' => __( 'Pakistani rupee', 'hammock' ),
+						'PLN' => __( 'Polish z&#x142;oty', 'hammock' ),
+						'PRB' => __( 'Transnistrian ruble', 'hammock' ),
+						'PYG' => __( 'Paraguayan guaran&iacute;', 'hammock' ),
+						'QAR' => __( 'Qatari riyal', 'hammock' ),
+						'RON' => __( 'Romanian leu', 'hammock' ),
+						'RSD' => __( 'Serbian dinar', 'hammock' ),
+						'RUB' => __( 'Russian ruble', 'hammock' ),
+						'RWF' => __( 'Rwandan franc', 'hammock' ),
+						'SAR' => __( 'Saudi riyal', 'hammock' ),
+						'SBD' => __( 'Solomon Islands dollar', 'hammock' ),
+						'SCR' => __( 'Seychellois rupee', 'hammock' ),
+						'SDG' => __( 'Sudanese pound', 'hammock' ),
+						'SEK' => __( 'Swedish krona', 'hammock' ),
+						'SGD' => __( 'Singapore dollar', 'hammock' ),
+						'SHP' => __( 'Saint Helena pound', 'hammock' ),
+						'SLL' => __( 'Sierra Leonean leone', 'hammock' ),
+						'SOS' => __( 'Somali shilling', 'hammock' ),
+						'SRD' => __( 'Surinamese dollar', 'hammock' ),
+						'SSP' => __( 'South Sudanese pound', 'hammock' ),
+						'STN' => __( 'S&atilde;o Tom&eacute; and Pr&iacute;ncipe dobra', 'hammock' ),
+						'SYP' => __( 'Syrian pound', 'hammock' ),
+						'SZL' => __( 'Swazi lilangeni', 'hammock' ),
+						'THB' => __( 'Thai baht', 'hammock' ),
+						'TJS' => __( 'Tajikistani somoni', 'hammock' ),
+						'TMT' => __( 'Turkmenistan manat', 'hammock' ),
+						'TND' => __( 'Tunisian dinar', 'hammock' ),
+						'TOP' => __( 'Tongan pa&#x2bb;anga', 'hammock' ),
+						'TRY' => __( 'Turkish lira', 'hammock' ),
+						'TTD' => __( 'Trinidad and Tobago dollar', 'hammock' ),
+						'TWD' => __( 'New Taiwan dollar', 'hammock' ),
+						'TZS' => __( 'Tanzanian shilling', 'hammock' ),
+						'UAH' => __( 'Ukrainian hryvnia', 'hammock' ),
+						'UGX' => __( 'Ugandan shilling', 'hammock' ),
+						'USD' => __( 'United States (US) dollar', 'hammock' ),
+						'UYU' => __( 'Uruguayan peso', 'hammock' ),
+						'UZS' => __( 'Uzbekistani som', 'hammock' ),
+						'VEF' => __( 'Venezuelan bol&iacute;var', 'hammock' ),
+						'VES' => __( 'Bol&iacute;var soberano', 'hammock' ),
+						'VND' => __( 'Vietnamese &#x111;&#x1ed3;ng', 'hammock' ),
+						'VUV' => __( 'Vanuatu vatu', 'hammock' ),
+						'WST' => __( 'Samoan t&#x101;l&#x101;', 'hammock' ),
+						'XAF' => __( 'Central African CFA franc', 'hammock' ),
+						'XCD' => __( 'East Caribbean dollar', 'hammock' ),
+						'XOF' => __( 'West African CFA franc', 'hammock' ),
+						'XPF' => __( 'CFP franc', 'hammock' ),
+						'YER' => __( 'Yemeni rial', 'hammock' ),
+						'ZAR' => __( 'South African rand', 'hammock' ),
+						'ZMW' => __( 'Zambian kwacha', 'hammock' ),
+					)
+				)
+			);
+		}
+
+		return $currencies;
+	}
+
+
+	public static function get_currency_symbol( $currency = 'USD' ) {
+		$symbols         = apply_filters(
+			'hammock_currency_symbols',
+			array(
+				'AED' => '&#x62f;.&#x625;',
+				'AFN' => '&#x60b;',
+				'ALL' => 'L',
+				'AMD' => 'AMD',
+				'ANG' => '&fnof;',
+				'AOA' => 'Kz',
+				'ARS' => '&#36;',
+				'AUD' => '&#36;',
+				'AWG' => 'Afl.',
+				'AZN' => 'AZN',
+				'BAM' => 'KM',
+				'BBD' => '&#36;',
+				'BDT' => '&#2547;&nbsp;',
+				'BGN' => '&#1083;&#1074;.',
+				'BHD' => '.&#x62f;.&#x628;',
+				'BIF' => 'Fr',
+				'BMD' => '&#36;',
+				'BND' => '&#36;',
+				'BOB' => 'Bs.',
+				'BRL' => '&#82;&#36;',
+				'BSD' => '&#36;',
+				'BTC' => '&#3647;',
+				'BTN' => 'Nu.',
+				'BWP' => 'P',
+				'BYR' => 'Br',
+				'BYN' => 'Br',
+				'BZD' => '&#36;',
+				'CAD' => '&#36;',
+				'CDF' => 'Fr',
+				'CHF' => '&#67;&#72;&#70;',
+				'CLP' => '&#36;',
+				'CNY' => '&yen;',
+				'COP' => '&#36;',
+				'CRC' => '&#x20a1;',
+				'CUC' => '&#36;',
+				'CUP' => '&#36;',
+				'CVE' => '&#36;',
+				'CZK' => '&#75;&#269;',
+				'DJF' => 'Fr',
+				'DKK' => 'DKK',
+				'DOP' => 'RD&#36;',
+				'DZD' => '&#x62f;.&#x62c;',
+				'EGP' => 'EGP',
+				'ERN' => 'Nfk',
+				'ETB' => 'Br',
+				'EUR' => '&euro;',
+				'FJD' => '&#36;',
+				'FKP' => '&pound;',
+				'GBP' => '&pound;',
+				'GEL' => '&#x20be;',
+				'GGP' => '&pound;',
+				'GHS' => '&#x20b5;',
+				'GIP' => '&pound;',
+				'GMD' => 'D',
+				'GNF' => 'Fr',
+				'GTQ' => 'Q',
+				'GYD' => '&#36;',
+				'HKD' => '&#36;',
+				'HNL' => 'L',
+				'HRK' => 'kn',
+				'HTG' => 'G',
+				'HUF' => '&#70;&#116;',
+				'IDR' => 'Rp',
+				'ILS' => '&#8362;',
+				'IMP' => '&pound;',
+				'INR' => '&#8377;',
+				'IQD' => '&#x639;.&#x62f;',
+				'IRR' => '&#xfdfc;',
+				'IRT' => '&#x062A;&#x0648;&#x0645;&#x0627;&#x0646;',
+				'ISK' => 'kr.',
+				'JEP' => '&pound;',
+				'JMD' => '&#36;',
+				'JOD' => '&#x62f;.&#x627;',
+				'JPY' => '&yen;',
+				'KES' => 'KSh',
+				'KGS' => '&#x441;&#x43e;&#x43c;',
+				'KHR' => '&#x17db;',
+				'KMF' => 'Fr',
+				'KPW' => '&#x20a9;',
+				'KRW' => '&#8361;',
+				'KWD' => '&#x62f;.&#x643;',
+				'KYD' => '&#36;',
+				'KZT' => 'KZT',
+				'LAK' => '&#8365;',
+				'LBP' => '&#x644;.&#x644;',
+				'LKR' => '&#xdbb;&#xdd4;',
+				'LRD' => '&#36;',
+				'LSL' => 'L',
+				'LYD' => '&#x644;.&#x62f;',
+				'MAD' => '&#x62f;.&#x645;.',
+				'MDL' => 'MDL',
+				'MGA' => 'Ar',
+				'MKD' => '&#x434;&#x435;&#x43d;',
+				'MMK' => 'Ks',
+				'MNT' => '&#x20ae;',
+				'MOP' => 'P',
+				'MRU' => 'UM',
+				'MUR' => '&#x20a8;',
+				'MVR' => '.&#x783;',
+				'MWK' => 'MK',
+				'MXN' => '&#36;',
+				'MYR' => '&#82;&#77;',
+				'MZN' => 'MT',
+				'NAD' => '&#36;',
+				'NGN' => '&#8358;',
+				'NIO' => 'C&#36;',
+				'NOK' => '&#107;&#114;',
+				'NPR' => '&#8360;',
+				'NZD' => '&#36;',
+				'OMR' => '&#x631;.&#x639;.',
+				'PAB' => 'B/.',
+				'PEN' => 'S/',
+				'PGK' => 'K',
+				'PHP' => '&#8369;',
+				'PKR' => '&#8360;',
+				'PLN' => '&#122;&#322;',
+				'PRB' => '&#x440;.',
+				'PYG' => '&#8370;',
+				'QAR' => '&#x631;.&#x642;',
+				'RMB' => '&yen;',
+				'RON' => 'lei',
+				'RSD' => '&#x434;&#x438;&#x43d;.',
+				'RUB' => '&#8381;',
+				'RWF' => 'Fr',
+				'SAR' => '&#x631;.&#x633;',
+				'SBD' => '&#36;',
+				'SCR' => '&#x20a8;',
+				'SDG' => '&#x62c;.&#x633;.',
+				'SEK' => '&#107;&#114;',
+				'SGD' => '&#36;',
+				'SHP' => '&pound;',
+				'SLL' => 'Le',
+				'SOS' => 'Sh',
+				'SRD' => '&#36;',
+				'SSP' => '&pound;',
+				'STN' => 'Db',
+				'SYP' => '&#x644;.&#x633;',
+				'SZL' => 'L',
+				'THB' => '&#3647;',
+				'TJS' => '&#x405;&#x41c;',
+				'TMT' => 'm',
+				'TND' => '&#x62f;.&#x62a;',
+				'TOP' => 'T&#36;',
+				'TRY' => '&#8378;',
+				'TTD' => '&#36;',
+				'TWD' => '&#78;&#84;&#36;',
+				'TZS' => 'Sh',
+				'UAH' => '&#8372;',
+				'UGX' => 'UGX',
+				'USD' => '&#36;',
+				'UYU' => '&#36;',
+				'UZS' => 'UZS',
+				'VEF' => 'Bs F',
+				'VES' => 'Bs.S',
+				'VND' => '&#8363;',
+				'VUV' => 'Vt',
+				'WST' => 'T',
+				'XAF' => 'CFA',
+				'XCD' => '&#36;',
+				'XOF' => 'CFA',
+				'XPF' => 'Fr',
+				'YER' => '&#xfdfc;',
+				'ZAR' => '&#82;',
+				'ZMW' => 'ZK',
+			)
+		);
+		$currency_symbol = isset( $symbols[ $currency ] ) ? $symbols[ $currency ] : '';
+
+		return apply_filters( 'hammock_currency_symbol', $currency_symbol, $currency );
+	}
+
+	/**
+	 * Get Membership currency
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string
+	 */
+	public static function get_membership_currency() {
+		$settings = new \Hammock\Model\Settings();
+		$general  = $settings->get_general_settings();
+		$currency = $general['currency'];
+		$code     = self::get_currency_symbol( $currency );
+		return apply_filters( 'hammock_get_membership_currency', $code, $currency );
+	}
+
+
+	/**
+	 * Formats a number to display a valid price.
+	 *
+	 * @param  numeric $price
+	 * 
+	 * @since  1.0.0
+	 * 
+	 * 
+	 * @return numeric
+	 */
+	public static function format_price( $price ) {
+		$formatted = number_format_i18n( $price, 2 );
+
+		return apply_filters(
+			'hammock_format_price',
+			$formatted,
+			$price
+		);
+	}
+}
+

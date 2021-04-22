@@ -1,0 +1,38 @@
+.hammock-membership-list{
+	display: flex;
+	.hammock-account-membership-plan{
+		&-card {
+			text-align: center;
+			padding: 5px;
+			width: auto;
+			min-width: 200px;
+
+			.hammock-account-membership-plan {
+				&--title{
+					font-size: 20px;
+					margin-bottom: 10px;
+					padding: 0;
+					line-height: 18px;
+				}
+				&--details{
+					font-size: 15px;
+					line-height: 20px;
+					top: -5px;
+					position: relative;
+				}
+				&--price{
+					font-size: 40px;
+					line-height: 55px;
+					margin-top: 11px;
+					margin-bottom: 0;
+					&-description {
+						font-size: 15px;
+						position: relative;
+						display: block;
+						line-height: 30px;
+					}
+				}
+			}
+		}
+	}
+}

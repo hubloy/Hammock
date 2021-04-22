@@ -1,0 +1,25 @@
+.hammock-hidden {
+	display:none;
+}
+
+.hammock-notification {
+	border-radius: 3px;
+    padding: 15px;
+	margin-bottom: 15px;
+	&--error {
+		background-color: $error-color;
+		color: $white-color;
+	}
+	&--success {
+		background-color: $success-color;
+		color: $white-color;
+	}
+	&--warning {
+		background-color: $warning-color;
+		color: $white-color;
+	}
+	&--primary {
+		background-color: $primary-color;
+		color: $white-color;
+	}
+}

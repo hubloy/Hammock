@@ -1,0 +1,104 @@
+body{
+	height: auto !important;
+}
+.hammock-dashboard {
+
+	#wpbody-content{
+		background: #f1f1f1;
+	}
+
+	.uk-offcanvas-overlay{
+		z-index: 99999;
+		background-color: $white-color;
+		color: $black-color;
+	}
+
+	#wpcontent {
+		padding-left: 0px;
+	}
+
+	.hammock-container{
+		min-height: 100vh;
+		height: 100%;
+		margin: 0 auto;
+		text-align: left;
+		max-width: 100%;
+		padding: 1.5rem;
+		background: #f1f1f1;
+
+		.hammock-nav{
+			left: 19px;
+			width: 100%;
+		}
+	}
+
+	a{
+		&:active{
+			outline: none;
+			border: none;
+		}
+
+		&:focus{
+			outline: none;
+			border: none;
+		}
+	}
+
+	.ignore-form {
+		display:block;
+	}
+
+	.hammock-switcher-nav{
+		padding-left: 0px;
+	}
+
+	
+}
+
+.hammock-check{
+	color:$teal-color;
+}
+.hammock-question{
+	color: $blue-color;
+}
+.hammock-warning{
+	color: $red-color;
+}
+
+.float-r{
+	float:right;
+}
+
+.float-l{
+	float:left;
+}
+
+.hammock-offcanvas-flip{
+	min-width: 50%;
+	.uk-offcanvas-close {
+		top:50px;
+	}
+	.uk-offcanvas-bar{
+		width: 100%;
+		background-color: $white-color !important;
+		color: $black-color !important;
+		label, p, span, .addon-title, .uk-close {
+			color: $black-color !important;
+		}
+
+		.uk-button-primary {
+			background-color: $button-blue;
+			color: $white-color;
+
+			&:hover{
+				background-color: $button-blue;
+				color: $white-color;
+			}
+		}
+		
+	}
+}
+
+.hammock-pointer{
+	cursor: pointer;
+}
