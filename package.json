@@ -8,8 +8,8 @@
 	"scripts": {
 		"build": "grunt build",
 		"test": "grunt test",
-		"react-build": "webpack --progress --colors --watch --mode=development",
-		"react-prod": "webpack --progress --colors -p --config webpack.config.js --mode=production"
+		"react-build": "webpack --progress --watch --mode=development",
+		"react-prod": "webpack --progress -p --config webpack.config.js --mode=production"
 	},
 	"authors": [
 		{
@@ -30,7 +30,6 @@
 		"@babel/plugin-proposal-class-properties": "^7.13.0",
 		"@babel/preset-env": "^7.13.15",
 		"@babel/preset-react": "^7.13.13",
-		"autoprefixer": "^10.2.5",
 		"babel-eslint": "^10.1.0",
 		"babel-loader": "^8.2.2",
 		"eslint": "^7.24.0",
@@ -53,15 +52,14 @@
 		"grunt-exec": "^2.0.0",
 		"grunt-jsvalidate": "^0.2.2",
 		"grunt-phpcs": "^0.4.0",
-		"grunt-postcss": "^0.9.0",
 		"grunt-wp-i18n": "1.0.0",
 		"load-grunt-tasks": "^3.5.2",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
 		"time-grunt": "^2.0.0",
 		"uglify-es": "^3.3.9",
-		"webpack": "^5.35.0",
-		"webpack-cli": "^4.6.0"
+		"webpack": "^4.44.2",
+		"webpack-cli": "^3.3.12"
 	},
 	"keywords": []
 }
