@@ -1,4 +1,5 @@
 const path = require('path');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = (env, argv) => {
 	let production = argv.mode === 'production'
@@ -21,6 +22,19 @@ module.exports = (env, argv) => {
 		output: {
 			filename: '[name].js',
 			path: path.resolve(__dirname, 'assets'),
+		},
+
+		plugins: [
+			new CompressionPlugin({
+				test: /\.js(\?.*)?$/i,
+			}),
+		],
+		performance: {
+			hints: "warning",
+			// Calculates sizes of gziped bundles.
+			assetFilter: function (assetFilename) {
+				return assetFilename.endsWith(".js.gz");
+			},
 		},
 
 		devtool: '',
