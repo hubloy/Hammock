@@ -16,7 +16,7 @@ export default class SiteSettings extends Component {
 		return (
 			<Dashboard hammock={this.props.hammock}>
 				<div uk-grid="">
-					<LazyLoad>
+					<LazyLoad className="uk-width-1-4 uk-height-medium">
 						<Nav hammock={this.props.hammock} active_nav={'general'}/>
 					</LazyLoad>
 					

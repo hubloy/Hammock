@@ -6,7 +6,7 @@ export default class Nav extends PureComponent {
     render() {
         const { active_nav, hammock } = this.props;
         return (
-            <div className="uk-width-1-4 uk-height-medium">
+            <div>
                 <h2 className="uk-heading-divider">{hammock.common.string.title}</h2>
                 <ul className="uk-nav-default hammock-switcher-nav uk-nav-parent-icon" uk-nav="">
                     <li className={active_nav === 'general' ? 'uk-active' : '' }>

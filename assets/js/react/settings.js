@@ -159,7 +159,9 @@ class SiteSettings extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       hammock: this.props.hammock
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       "uk-grid": ""
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_lazyload__WEBPACK_IMPORTED_MODULE_2___default.a, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_settings_Nav__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_lazyload__WEBPACK_IMPORTED_MODULE_2___default.a, {
+      className: "uk-width-1-4 uk-height-medium"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_settings_Nav__WEBPACK_IMPORTED_MODULE_5__["default"], {
       hammock: this.props.hammock,
       active_nav: 'general'
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -291,9 +293,7 @@ class Nav extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       active_nav,
       hammock
     } = this.props;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "uk-width-1-4 uk-height-medium"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
       className: "uk-heading-divider"
     }, hammock.common.string.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
       className: "uk-nav-default hammock-switcher-nav uk-nav-parent-icon",
