@@ -141,8 +141,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_lazyload__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-lazyload */ "./node_modules/react-lazyload/lib/index.js");
 /* harmony import */ var react_lazyload__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_lazyload__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _layout_Dashboard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./layout/Dashboard */ "./_src/react/admin/containers/subsite/layout/Dashboard.jsx");
-/* harmony import */ var _settings_sections_SubSiteSettings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./settings/sections/SubSiteSettings */ "./_src/react/admin/containers/subsite/settings/sections/SubSiteSettings.jsx");
-/* harmony import */ var _settings_Nav__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./settings/Nav */ "./_src/react/admin/containers/subsite/settings/Nav.jsx");
+/* harmony import */ var _settings_sections_SubSiteGateways__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./settings/sections/SubSiteGateways */ "./_src/react/admin/containers/subsite/settings/sections/SubSiteGateways.jsx");
+/* harmony import */ var _settings_sections_SubSiteSettings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./settings/sections/SubSiteSettings */ "./_src/react/admin/containers/subsite/settings/sections/SubSiteSettings.jsx");
+/* harmony import */ var _settings_Nav__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./settings/Nav */ "./_src/react/admin/containers/subsite/settings/Nav.jsx");
+
 
 
 
@@ -155,22 +157,28 @@ class SiteSettings extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   render() {
+    var section = this.props.match.params.section !== undefined ? this.props.match.params.section : 'general';
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layout_Dashboard__WEBPACK_IMPORTED_MODULE_3__["default"], {
       hammock: this.props.hammock
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       "uk-grid": ""
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_lazyload__WEBPACK_IMPORTED_MODULE_2___default.a, {
       className: "uk-width-1-4 uk-height-medium"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_settings_Nav__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_settings_Nav__WEBPACK_IMPORTED_MODULE_6__["default"], {
       hammock: this.props.hammock,
-      active_nav: 'general'
+      active_nav: section
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "hammock-settings uk-width-expand uk-margin-left uk-card uk-card-body"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "hammock-settings-settings uk-background-default uk-padding-small uk-border-rounded"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_settings_sections_SubSiteSettings__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      hammock: this.props.hammock
-    })))));
+    }, {
+      'gateways': /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_settings_sections_SubSiteGateways__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        hammock: this.props.hammock
+      }),
+      'general': /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_settings_sections_SubSiteSettings__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        hammock: this.props.hammock
+      })
+    }[section]))));
   }
 
 }
@@ -213,60 +221,6 @@ class Dashboard extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
 }
 Dashboard.propTypes = {
-  hammock: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
-};
-
-/***/ }),
-
-/***/ "./_src/react/admin/containers/subsite/settings/GatewaySetting.jsx":
-/*!*************************************************************************!*\
-  !*** ./_src/react/admin/containers/subsite/settings/GatewaySetting.jsx ***!
-  \*************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GatewaySettings; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_lazyload__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-lazyload */ "./node_modules/react-lazyload/lib/index.js");
-/* harmony import */ var react_lazyload__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_lazyload__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _layout_Dashboard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../layout/Dashboard */ "./_src/react/admin/containers/subsite/layout/Dashboard.jsx");
-/* harmony import */ var _sections_SubSiteGateways__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./sections/SubSiteGateways */ "./_src/react/admin/containers/subsite/settings/sections/SubSiteGateways.jsx");
-/* harmony import */ var _Nav__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Nav */ "./_src/react/admin/containers/subsite/settings/Nav.jsx");
-
-
-
-
-
-
-class GatewaySettings extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layout_Dashboard__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      hammock: this.props.hammock
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      "uk-grid": ""
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_lazyload__WEBPACK_IMPORTED_MODULE_2___default.a, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Nav__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      hammock: this.props.hammock,
-      active_nav: 'gateways'
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "hammock-settings uk-width-expand uk-margin-left uk-card uk-card-body"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "hammock-settings-gateway"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sections_SubSiteGateways__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      hammock: this.props.hammock
-    })))));
-  }
-
-}
-GatewaySettings.propTypes = {
   hammock: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
 };
 
@@ -1541,9 +1495,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _admin_containers_NotFound__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./admin/containers/NotFound */ "./_src/react/admin/containers/NotFound.jsx");
 /* harmony import */ var _admin_containers_subsite_Settings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./admin/containers/subsite/Settings */ "./_src/react/admin/containers/subsite/Settings.jsx");
-/* harmony import */ var _admin_containers_subsite_settings_GatewaySetting__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./admin/containers/subsite/settings/GatewaySetting */ "./_src/react/admin/containers/subsite/settings/GatewaySetting.jsx");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
 
 
 
@@ -1562,18 +1514,14 @@ document.addEventListener('DOMContentLoaded', function () {
       hammock: window.hammock
     }, props));
 
-    const GatewaySettingsPage = props => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_admin_containers_subsite_settings_GatewaySetting__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({
+    const GatewaySettingsPage = props => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(GatewaySettings, _extends({
       hammock: window.hammock
     }, props));
 
     const routing = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["HashRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
       exact: true,
-      path: "/",
+      path: "/:section?",
       component: SettingsPage
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-      exact: true,
-      path: "/gateways",
-      component: GatewaySettingsPage
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
       component: DefaultView
     })));
