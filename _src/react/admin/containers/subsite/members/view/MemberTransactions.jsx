@@ -49,7 +49,7 @@ export default class MemberTransactions extends Component {
 		return (
 			<Dashboard hammock={this.props.hammock}>
 				<div uk-grid="">
-					<LazyLoad>
+					<LazyLoad className="uk-width-1-4 uk-height-medium">
 						<Nav hammock={this.props.hammock} active_nav={'transactions'} member_id={this.state.id}/>
 					</LazyLoad>
 					<div className="uk-width-expand uk-margin-left uk-card uk-card-body uk-background-default uk-padding-small">

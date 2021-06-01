@@ -6,7 +6,7 @@ export function Nav(props) {
 	const { active_nav, hammock, member_id } = props;
 	const strings = hammock.strings;
     return (
-        <div className="uk-width-1-4 uk-height-medium">
+        <div>
             <h2 className="uk-heading-divider">{strings.edit.title}</h2>
             <Link className="uk-border-rounded uk-margin-bottom uk-background-default uk-button uk-button-default uk-button-small" to="/">{strings.edit.back}</Link>
             <ul className="uk-nav-default hammock-switcher-nav uk-nav-parent-icon" uk-nav="">
