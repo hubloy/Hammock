@@ -229,6 +229,51 @@ body {
 .hammock-dashboard .hammock-switcher-nav {
   padding-left: 0px;
 }
+.hammock-dashboard .infobox {
+  width: 50%;
+  padding: 25px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.hammock-dashboard .infobox .info-icon {
+  border-radius: 50%;
+  display: inline-block;
+  padding: 15px 0 15px 0;
+  margin-bottom: 0px;
+  text-align: center;
+  width: 100%;
+}
+.hammock-dashboard .infobox .info-icon svg {
+  width: 50px;
+  height: 50px;
+  stroke-width: 1px;
+  color: #39f;
+}
+.hammock-dashboard .infobox .info-heading {
+  font-weight: 600;
+  font-size: 19px;
+  margin-bottom: 14px;
+  margin-top: 0px;
+  letter-spacing: 2px;
+  text-align: center;
+}
+.hammock-dashboard .infobox .info-text {
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 15px;
+  text-align: center;
+}
+.hammock-dashboard .infobox .info-link {
+  color: #39f;
+  font-weight: 600;
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+.hammock-dashboard .infobox .info-link svg {
+  width: 15px;
+  height: 15px;
+}
 
 .hammock-check {
   color: #007071;
@@ -261,7 +306,11 @@ body {
   background-color: #fff !important;
   color: #000 !important;
 }
-.hammock-offcanvas-flip .uk-offcanvas-bar label, .hammock-offcanvas-flip .uk-offcanvas-bar p, .hammock-offcanvas-flip .uk-offcanvas-bar span, .hammock-offcanvas-flip .uk-offcanvas-bar .addon-title, .hammock-offcanvas-flip .uk-offcanvas-bar .uk-close {
+.hammock-offcanvas-flip .uk-offcanvas-bar label,
+.hammock-offcanvas-flip .uk-offcanvas-bar p,
+.hammock-offcanvas-flip .uk-offcanvas-bar span,
+.hammock-offcanvas-flip .uk-offcanvas-bar .addon-title,
+.hammock-offcanvas-flip .uk-offcanvas-bar .uk-close {
   color: #000 !important;
 }
 .hammock-offcanvas-flip .uk-offcanvas-bar .uk-button-primary {

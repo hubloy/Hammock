@@ -107,9 +107,12 @@ export default class Table extends Component {
 				return (
 					<React.Fragment>
 						{items.length <= 0 ? (
-							<div className="uk-text-center">
-								<h3>{strings.dashboard.table.not_found}</h3>
-								<a className="uk-margin-small-top uk-button uk-button-primary uk-border-rounded" href="#hammock-add-member" uk-toggle="">{strings.dashboard.add_new.button}</a>
+							<div className="infobox">
+								<div className="info-icon">
+									<span uk-icon="icon: users; ratio: 2"></span>
+								</div>
+								<h5 className="info-heading">{strings.dashboard.table.not_found}</h5>
+								<a className="info-link uk-button uk-button-small" href="#hammock-add-member" uk-toggle="">{strings.dashboard.add_new.button} <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
 							</div>
 						) : (
 							<table className="uk-table">

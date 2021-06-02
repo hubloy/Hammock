@@ -1,13 +1,12 @@
-body{
+body {
 	height: auto !important;
 }
 .hammock-dashboard {
-
-	#wpbody-content{
+	#wpbody-content {
 		background: #f1f1f1;
 	}
 
-	.uk-offcanvas-overlay{
+	.uk-offcanvas-overlay {
 		z-index: 99999;
 		background-color: $white-color;
 		color: $black-color;
@@ -17,7 +16,7 @@ body{
 		padding-left: 0px;
 	}
 
-	.hammock-container{
+	.hammock-container {
 		min-height: 100vh;
 		height: 100%;
 		margin: 0 auto;
@@ -26,63 +25,115 @@ body{
 		padding: 1.5rem;
 		background: #f1f1f1;
 
-		.hammock-nav{
+		.hammock-nav {
 			left: 19px;
 			width: 100%;
 		}
 	}
 
-	a{
-		&:active{
+	a {
+		&:active {
 			outline: none;
 			border: none;
 		}
 
-		&:focus{
+		&:focus {
 			outline: none;
 			border: none;
 		}
 	}
 
 	.ignore-form {
-		display:block;
+		display: block;
 	}
 
-	.hammock-switcher-nav{
+	.hammock-switcher-nav {
 		padding-left: 0px;
 	}
 
-	
+	.infobox {
+		width: 50%;
+		padding: 25px;
+		margin-right: auto;
+		margin-left: auto;
+
+		.info-icon {
+			border-radius: 50%;
+			display: inline-block;
+			padding: 15px 0 15px 0;
+			margin-bottom: 0px;
+			text-align: center;
+			width: 100%;
+			svg {
+				width: 50px;
+				height: 50px;
+				stroke-width: 1px;
+				color: $blue-color;
+			}
+		}
+
+		.info-heading {
+			font-weight: 600;
+			font-size: 19px;
+			margin-bottom: 14px;
+			margin-top:0px;
+			letter-spacing: 2px;
+			text-align: center;
+		}
+
+		.info-text {
+			font-size: 15px;
+			color: $label-gray-color;
+			margin-bottom: 15px;
+			text-align: center;
+		}
+
+		.info-link {
+			color: $blue-color;
+			font-weight: 600;
+			text-align: center;
+			width: 100%;
+			display: block;
+			svg {
+				width: 15px;
+				height: 15px;
+			}
+		}
+	}
 }
 
-.hammock-check{
-	color:$teal-color;
+.hammock-check {
+	color: $teal-color;
 }
-.hammock-question{
+.hammock-question {
 	color: $blue-color;
 }
-.hammock-warning{
+.hammock-warning {
 	color: $red-color;
 }
 
-.float-r{
-	float:right;
+.float-r {
+	float: right;
 }
 
-.float-l{
-	float:left;
+.float-l {
+	float: left;
 }
 
-.hammock-offcanvas-flip{
+.hammock-offcanvas-flip {
 	min-width: 50%;
 	.uk-offcanvas-close {
-		top:50px;
+		top: 50px;
 	}
-	.uk-offcanvas-bar{
+	.uk-offcanvas-bar {
 		width: 100%;
 		background-color: $white-color !important;
 		color: $black-color !important;
-		label, p, span, .addon-title, .uk-close {
+		label,
+		p,
+		span,
+		.addon-title,
+		.uk-close {
 			color: $black-color !important;
 		}
 
@@ -90,15 +141,14 @@ body{
 			background-color: $button-blue;
 			color: $white-color;
 
-			&:hover{
+			&:hover {
 				background-color: $button-blue;
 				color: $white-color;
 			}
 		}
-		
 	}
 }
 
-.hammock-pointer{
+.hammock-pointer {
 	cursor: pointer;
 }

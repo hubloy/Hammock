@@ -1432,6 +1432,63 @@ function Header(props) {
 
 /***/ }),
 
+/***/ "./_src/react/admin/ui/admin/elements/InfoBox.jsx":
+/*!********************************************************!*\
+  !*** ./_src/react/admin/ui/admin/elements/InfoBox.jsx ***!
+  \********************************************************/
+/*! exports provided: InfoBox */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InfoBox", function() { return InfoBox; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function InfoBox(props) {
+  const {
+    title,
+    icon,
+    linkText = '',
+    linkTo = ''
+  } = props;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "infobox"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "info-icon"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    "uk-icon": "icon: " + icon + "; ratio: 2"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+    className: "info-heading"
+  }, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "info-link uk-button uk-button-small",
+    href: linkTo
+  }, linkText, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    className: "feather feather-arrow-right"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("line", {
+    x1: "5",
+    y1: "12",
+    x2: "19",
+    y2: "12"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("polyline", {
+    points: "12 5 19 12 12 19"
+  }))));
+}
+
+/***/ }),
+
 /***/ "./_src/react/admin/ui/admin/elements/Input.jsx":
 /*!******************************************************!*\
   !*** ./_src/react/admin/ui/admin/elements/Input.jsx ***!
@@ -1860,7 +1917,7 @@ class TextAreaUI extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
 /*!********************************************!*\
   !*** ./_src/react/admin/ui/admin/form.jsx ***!
   \********************************************/
-/*! exports provided: CardUI, DropDownUI, InputUI, LinkUI, ModalUI, SwitchUI, PaginationUI, NoticeUI, Canvas, TextAreaUI */
+/*! exports provided: CardUI, DropDownUI, InputUI, LinkUI, ModalUI, SwitchUI, PaginationUI, NoticeUI, Canvas, TextAreaUI, InfoBox */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1894,6 +1951,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony import */ var _elements_TextArea__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./elements/TextArea */ "./_src/react/admin/ui/admin/elements/TextArea.jsx");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TextAreaUI", function() { return _elements_TextArea__WEBPACK_IMPORTED_MODULE_9__["TextAreaUI"]; });
+
+/* harmony import */ var _elements_InfoBox__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./elements/InfoBox */ "./_src/react/admin/ui/admin/elements/InfoBox.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "InfoBox", function() { return _elements_InfoBox__WEBPACK_IMPORTED_MODULE_10__["InfoBox"]; });
+
 
 
 

@@ -8,5 +8,6 @@ import { PaginationUI } from './elements/Pagination';
 import { NoticeUI } from './elements/Notice';
 import { Canvas } from './elements/Canvas';
 import { TextAreaUI } from './elements/TextArea';
+import { InfoBox } from './elements/InfoBox';
 
-export {CardUI, DropDownUI, InputUI, LinkUI, ModalUI, SwitchUI, PaginationUI, NoticeUI, Canvas, TextAreaUI };
+export {CardUI, DropDownUI, InputUI, LinkUI, ModalUI, SwitchUI, PaginationUI, NoticeUI, Canvas, TextAreaUI, InfoBox };
