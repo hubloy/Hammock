@@ -1,5 +1,5 @@
 /*! Hammock  - v1.0.0
- * https://www.hubloy.com
+ * https://www.hammock-membership.com
  * Copyright (c) 2021; * Licensed GPLv2+ */
 /*global UIkit:false */
 /*global $:false */
