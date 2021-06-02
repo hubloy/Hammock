@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:         Hammock
- * Plugin URI:          https://www.hubloy.com/project/memberships
+ * Plugin URI:          https://www.hammock-membership.com
  * Description:         Manage access to your WordPress site like a pro
  * Version:             1.0.0
  * Author:              Hubloy
@@ -11,7 +11,7 @@
  * Text Domain:         hammock
  * Domain Path:         /languages/
  * 
- * @package Hubloy Memberships
+ * @package Hammock
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

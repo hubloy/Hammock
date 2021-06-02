@@ -3,7 +3,7 @@
 	"title": "Hammock ",
 	"description": "Hammock is a Membership plugin",
 	"version": "1.0.0",
-	"homepage": "https://www.hubloy.com",
+	"homepage": "https://www.hammock-membership.com",
 	"license": "GPL-3.0",
 	"scripts": {
 		"build": "grunt build",
