@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import fetchWP from '../../../../utils/fetchWP';
-import {PaginationUI} from '../../../ui/admin/form';
+import {PaginationUI, ToggleInfoBox} from '../../../ui/admin/form';
 
 
 export default class Table extends Component {
@@ -66,10 +66,7 @@ export default class Table extends Component {
 				return (
 					<React.Fragment>
 						{items.length <= 0 ? (
-							<div className="uk-text-center">
-								<h3>{strings.dashboard.table.not_found}</h3>
-								<a className="uk-margin-small-top uk-button uk-button-primary uk-border-rounded" href="#hammock-add-membership" uk-toggle="">{strings.dashboard.add_new.button}</a>
-							</div>
+							<ToggleInfoBox title={strings.dashboard.table.not_found} icon={'album'} linkText={strings.dashboard.add_new.button} linkTo={'#hammock-add-membership'}/>
 						) : (
 							<table className="uk-table">
 								<thead>

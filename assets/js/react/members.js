@@ -774,37 +774,12 @@ class Table extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
           className: "uk-text-center uk-text-danger"
         }, hammock.error);
       } else {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, items.length <= 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "infobox"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "info-icon"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          "uk-icon": "icon: users; ratio: 2"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-          className: "info-heading"
-        }, strings.dashboard.table.not_found), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          className: "info-link uk-button uk-button-small",
-          href: "#hammock-add-member",
-          "uk-toggle": ""
-        }, strings.dashboard.add_new.button, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
-          xmlns: "http://www.w3.org/2000/svg",
-          width: "24",
-          height: "24",
-          viewBox: "0 0 24 24",
-          fill: "none",
-          stroke: "currentColor",
-          strokeWidth: "2",
-          strokeLinecap: "round",
-          strokeLinejoin: "round",
-          className: "feather feather-arrow-right"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("line", {
-          x1: "5",
-          y1: "12",
-          x2: "19",
-          y2: "12"
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("polyline", {
-          points: "12 5 19 12 12 19"
-        })))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, items.length <= 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_admin_form__WEBPACK_IMPORTED_MODULE_4__["ToggleInfoBox"], {
+          title: strings.dashboard.table.not_found,
+          icon: 'users',
+          linkText: strings.dashboard.add_new.button,
+          linkTo: '#hammock-add-member'
+        }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
           className: "uk-table"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           className: "uk-checkbox hammock-top-checkbox",
@@ -2049,19 +2024,19 @@ function Header(props) {
 /*!********************************************************!*\
   !*** ./_src/react/admin/ui/admin/elements/InfoBox.jsx ***!
   \********************************************************/
-/*! exports provided: InfoBox */
+/*! exports provided: ToggleInfoBox */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InfoBox", function() { return InfoBox; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ToggleInfoBox", function() { return ToggleInfoBox; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 
 
-function InfoBox(props) {
+function ToggleInfoBox(props) {
   const {
     title,
     icon,
@@ -2078,7 +2053,8 @@ function InfoBox(props) {
     className: "info-heading"
   }, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "info-link uk-button uk-button-small",
-    href: linkTo
+    href: linkTo,
+    "uk-toggle": ""
   }, linkText, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     width: "24",
@@ -2530,7 +2506,7 @@ class TextAreaUI extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
 /*!********************************************!*\
   !*** ./_src/react/admin/ui/admin/form.jsx ***!
   \********************************************/
-/*! exports provided: CardUI, DropDownUI, InputUI, LinkUI, ModalUI, SwitchUI, PaginationUI, NoticeUI, Canvas, TextAreaUI, InfoBox */
+/*! exports provided: CardUI, DropDownUI, InputUI, LinkUI, ModalUI, SwitchUI, PaginationUI, NoticeUI, Canvas, TextAreaUI, ToggleInfoBox */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2566,7 +2542,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TextAreaUI", function() { return _elements_TextArea__WEBPACK_IMPORTED_MODULE_9__["TextAreaUI"]; });
 
 /* harmony import */ var _elements_InfoBox__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./elements/InfoBox */ "./_src/react/admin/ui/admin/elements/InfoBox.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "InfoBox", function() { return _elements_InfoBox__WEBPACK_IMPORTED_MODULE_10__["InfoBox"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ToggleInfoBox", function() { return _elements_InfoBox__WEBPACK_IMPORTED_MODULE_10__["ToggleInfoBox"]; });
 
 
 
