@@ -78,16 +78,39 @@ export default class Admin extends Component {
 		return (
 			<Dashboard hammock={this.props.hammock}>
 				<div uk-grid="">
-					<div className="uk-width-1-2@m uk-width-1-1@s uk-height-medium">
-						<div className="uk-background-default uk-padding uk-panel uk-height-medium">
+					<div className="uk-width-1-2@m uk-width-1-1@s">
+						<div className="uk-background-default uk-padding-small uk-panel uk-height-medium">
 							<p className="uk-h4">Members <span className="hammock-badge-circle">100</span></p>
+							<div>
+								<ul className="uk-list uk-list-striped">
+									<li>Member 1</li>
+									<li>Member 2</li>
+									<li>Member 3</li>
+									<li>Member 4</li>
+								</ul>
+							</div>
 						</div>
-						<div className="uk-background-default uk-margin-medium-top uk-padding uk-panel uk-height-medium">
+						<div className="uk-background-default uk-margin-medium-top uk-padding-small uk-panel uk-height-medium">
 							<p className="uk-h4">Memberships <span className="hammock-badge-circle">100</span></p>
+							<div>
+								<ul className="uk-list uk-list-striped">
+									<li>Membership 1</li>
+									<li>Membership 2</li>
+									<li>Membership 3</li>
+									<li>Membership 4</li>
+								</ul>
+							</div>
+						</div>
+						<div className="uk-background-default uk-margin-medium-top uk-padding-small uk-panel uk-height-medium">
+							<p className="uk-h4">Site Management</p>
+							<div>
+								<a><div className="uk-margin-small uk-padding-small uk-card uk-card-default uk-card-body">Add Memberships</div></a>
+								<a><div className="uk-margin-small uk-padding-small uk-card uk-card-default uk-card-body">View Addons</div></a>
+							</div>
 						</div>
 					</div>
 					<div className="uk-width-1-2@m uk-width-1-1@s">
-						<div className="uk-background-default uk-padding uk-panel" uk-height-viewport="min-height: 800">
+						<div className="uk-background-default uk-padding-small uk-panel" uk-height-viewport="min-height: 800">
 							<p className="uk-h4">Stats Overview</p>
 							<div>
 								<Bar data={data} options={options}/>
