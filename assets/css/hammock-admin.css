@@ -326,6 +326,21 @@ body {
   cursor: pointer;
 }
 
+.hammock-badge-circle {
+  background-color: #f0f0f0;
+  border-radius: 20px;
+  display: inline-block;
+  text-align: center;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 27px;
+  align-items: center;
+  width: 32px;
+  height: 28px;
+  color: #1e1e1e;
+}
+
 .hammock-margin-left-negative-5 {
   margin-left: -5px;
 }
