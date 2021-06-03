@@ -2,16 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Dashboard from './layout/Dashboard';
-import {
-	XYPlot,
-	XAxis,
-	YAxis,
-	VerticalGridLines,
-	HorizontalGridLines,
-	VerticalBarSeries,
-	VerticalBarSeriesCanvas,
-	LabelSeries
-} from 'react-vis';
+import { Bar, Line } from 'react-chartjs-2';
+
 
 export default class Admin extends Component {
 	constructor(props) {
@@ -19,14 +11,70 @@ export default class Admin extends Component {
 	}
 
 	render() {
-		const greenData = [{ x: 'A', y: 10 }, { x: 'B', y: 5 }, { x: 'C', y: 15 }];
+		const data = {
+			labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			datasets: [
+				{
+					label: '# of Subscribers',
+					data: [12, 19, 3, 5, 2, 3, 20],
+					backgroundColor: 'rgb(49, 104, 142)',
+					borderColor: 'rgb(49, 104, 142)',
+					borderWidth: 1,
+				},
+			],
+		};
 
-		const blueData = [{ x: 'A', y: 12 }, { x: 'B', y: 2 }, { x: 'C', y: 11 }];
+		const options = {
+			scales: {
+				yAxes: [
+					{
+						ticks: {
+							beginAtZero: true,
+						},
+					},
+				],
+			},
+			plugins: {
+				legend: {
+					onClick: function(e, item) {
+						return;
+					}
+				}
+			}
+		};
 
-		const labelData = greenData.map((d, idx) => ({
-			x: d.x,
-			y: Math.max(greenData[idx].y, blueData[idx].y)
-		}));
+		const linedata = {
+			labels: ['1', '2', '3', '4', '5', '6'],
+			datasets: [
+				{
+					label: '# of Transactions',
+					data: [12, 19, 3, 5, 2, 3],
+					fill: false,
+					backgroundColor: 'rgb(49, 104, 142)',
+					borderColor: 'rgba(49, 104, 142)',
+				},
+			],
+		};
+
+		const lineoptions = {
+			scales: {
+				yAxes: [
+					{
+						ticks: {
+							beginAtZero: true,
+						},
+					},
+				],
+			},
+			plugins: {
+				legend: {
+					onClick: function(e, item) {
+						return;
+					}
+				}
+			}
+		};
+
 		return (
 			<Dashboard hammock={this.props.hammock}>
 				<div uk-grid="">
@@ -42,15 +90,11 @@ export default class Admin extends Component {
 						<div className="uk-background-default uk-padding uk-panel" uk-height-viewport="min-height: 800">
 							<p className="uk-h4">Stats Overview</p>
 							<div>
-							<XYPlot xType="ordinal" width={400} height={300} xDistance={100}>
-								<VerticalGridLines />
-								<HorizontalGridLines />
-								<XAxis />
-								<YAxis />
-								<VerticalBarSeries className="vertical-bar-series-example" data={greenData} />
-								<VerticalBarSeries data={blueData} />
-								<LabelSeries data={labelData} getLabel={d => d.x} />
-							</XYPlot>
+								<Bar data={data} options={options}/>
+							</div>
+							<hr/>
+							<div>
+								<Line data={linedata} options={lineoptions} />
 							</div>
 						</div>
 					</div>
