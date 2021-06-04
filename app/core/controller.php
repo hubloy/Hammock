@@ -51,6 +51,7 @@ class Controller {
 		\Hammock\Rest\Site\Activity::instance();
 		\Hammock\Rest\Site\Settings::instance();
 		\Hammock\Rest\Site\Gateways::instance();
+		\Hammock\Rest\Site\Dashboard::instance();
 		\Hammock\Rest\Site\Memberships::instance();
 		\Hammock\Rest\Site\Transactions::instance();
 	}
