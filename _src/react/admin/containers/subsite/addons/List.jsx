@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import fetchWP from '../../../../utils/fetchWP';
+import fetchWP from 'utils/fetchWP';
 
 import Card from './Card';
 
-import { InputUI, Canvas } from '../../../ui/admin/form'
+import { InputUI, Canvas } from 'ui/admin/form'
 
 export default class List extends PureComponent {
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Dashboard from '../layout/Dashboard'
+import Dashboard from 'layout/Dashboard'
 import SubSiteCodes from './SubSiteCodes'
 
 export default class InviteAddonSetting extends Component {

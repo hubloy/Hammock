@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import fetchWP from '../../../../utils/fetchWP';
-import {PaginationUI} from '../../../ui/admin/form';
+import fetchWP from 'utils/fetchWP';
+import {PaginationUI} from 'ui/admin/form';
 
 
 export default class Table extends Component {

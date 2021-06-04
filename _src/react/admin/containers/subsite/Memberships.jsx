@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Dashboard from './layout/Dashboard';
+import Dashboard from 'layout/Dashboard';
 import { Filter } from './memberships/Filter';
 import Table from './memberships/Table';
 import CreateMembership from './memberships/Create';
-import fetchWP from '../../../utils/fetchWP'
+import fetchWP from 'utils/fetchWP'
 
 export default class Memberships extends Component {
 	constructor(props) {

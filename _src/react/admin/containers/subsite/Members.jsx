@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Dashboard from './layout/Dashboard'
+import Dashboard from 'layout/Dashboard'
 import { Filter } from './members/Filter';
 import Table from './members/Table';
 import {Create} from './members/Create';
-import fetchWP from '../../../utils/fetchWP'
+import fetchWP from 'utils/fetchWP'
 
 export default class Members extends Component {
 	constructor(props) {

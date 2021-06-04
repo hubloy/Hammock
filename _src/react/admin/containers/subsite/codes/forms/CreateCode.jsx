@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazyload';
 
-import Dashboard from '../../layout/Dashboard'
+import Dashboard from 'layout/Dashboard'
 import { Link } from 'react-router-dom';
-import fetchWP from '../../../../../utils/fetchWP';
-import { SwitchUI, InputUI, DropDownUI } from '../../../../ui/admin/form';
+import fetchWP from 'utils/fetchWP';
+import { SwitchUI, InputUI, DropDownUI } from 'ui/admin/form';
 
 export default class CreateCode extends Component {
 

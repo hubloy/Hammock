@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import fetchWP from '../../../../utils/fetchWP';
+import fetchWP from 'utils/fetchWP';
 
 export default class Card extends PureComponent {
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Dashboard from './subsite/layout/Dashboard'
+import Dashboard from 'layout/Dashboard'
 
 export default class NotFound extends Component {
 	constructor(props) {

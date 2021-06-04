@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazyload';
 
-import fetchWP from '../../../../../utils/fetchWP';
-import Dashboard from '../../layout/Dashboard';
+import fetchWP from 'utils/fetchWP';
+import Dashboard from 'layout/Dashboard';
 import {Nav} from './Nav'
-import { SwitchUI, InputUI, DropDownUI } from '../../../../ui/admin/form';
+import { SwitchUI, InputUI, DropDownUI } from 'ui/admin/form';
 import PlanList from './subscription/List';
 
 

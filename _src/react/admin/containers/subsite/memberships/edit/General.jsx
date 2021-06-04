@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import { Multiselect } from 'multiselect-react-dropdown';
 
-import fetchWP from '../../../../../utils/fetchWP'
-import { SwitchUI, InputUI, DropDownUI, TextAreaUI } from '../../../../ui/admin/form';
+import fetchWP from 'utils/fetchWP'
+import { SwitchUI, InputUI, DropDownUI, TextAreaUI } from 'ui/admin/form';
 
 export default class General extends PureComponent {
 

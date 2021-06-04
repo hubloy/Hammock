@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { SwitchUI, InputUI, DropDownUI } from '../../../ui/admin/form';
+import { SwitchUI, InputUI, DropDownUI } from 'ui/admin/form';
 import {Users} from '../common/Users';
-import fetchWP from '../../../../utils/fetchWP';
+import fetchWP from 'utils/fetchWP';
 
 export class Create extends PureComponent {
 

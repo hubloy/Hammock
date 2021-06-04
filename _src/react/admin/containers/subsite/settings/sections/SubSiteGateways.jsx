@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import fetchWP from '../../../../../utils/fetchWP';
-import { Canvas } from '../../../../ui/admin/form';
+import fetchWP from 'utils/fetchWP';
 import GatewaySetting from './gateways/GatewaySetting';
 
 

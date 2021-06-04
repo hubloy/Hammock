@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazyload';
 
-import Dashboard from './layout/Dashboard'
+import Dashboard from 'layout/Dashboard'
 import SubSiteGateways from './settings/sections/SubSiteGateways'
 import SubSiteSettings from './settings/sections/SubSiteSettings'
 

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import fetchWP from '../../../../utils/fetchWP';
-import { SwitchUI, InputUI, DropDownUI } from '../../../ui/admin/form';
-import Dashboard from '../layout/Dashboard';
+import fetchWP from 'utils/fetchWP';
+import { SwitchUI, InputUI, DropDownUI } from 'ui/admin/form';
+import Dashboard from 'layout/Dashboard';
 
 import { Link } from 'react-router-dom';
 

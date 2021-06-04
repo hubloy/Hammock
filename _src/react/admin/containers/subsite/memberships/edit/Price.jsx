@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 
-import fetchWP from '../../../../../utils/fetchWP'
-import { SwitchUI, InputUI, DropDownUI } from '../../../../ui/admin/form';
+import fetchWP from 'utils/fetchWP'
+import { SwitchUI, InputUI, DropDownUI } from 'ui/admin/form';
 
 export default class Price extends PureComponent {
 

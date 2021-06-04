@@ -242,7 +242,6 @@ class Controller extends Component {
 	 * @return String
 	 */
 	public function render() {
-
 		?>
 		<div id="hammock-admin-container"></div>
 		<?php

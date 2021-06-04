@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Dashboard from './layout/Dashboard'
-import fetchWP from '../../../utils/fetchWP';
+import Dashboard from 'layout/Dashboard'
+import fetchWP from 'utils/fetchWP';
 import { Nav } from './comms/Nav'
 import Table from './comms/Table'
 

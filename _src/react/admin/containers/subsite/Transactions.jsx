@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import Dashboard from './layout/Dashboard'
+import Dashboard from 'layout/Dashboard'
 import { Filter } from './transactions/Filter';
 import Table from './transactions/Table';
 

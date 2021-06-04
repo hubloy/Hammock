@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { InputUI, DropDownUI } from '../../../ui/admin/form';
+import { InputUI, DropDownUI } from 'ui/admin/form';
 
 export function Filter(props) {
     const { hammock } = props;

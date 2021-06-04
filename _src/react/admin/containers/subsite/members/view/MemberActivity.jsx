@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazyload';
 
-import fetchWP from '../../../../../utils/fetchWP';
-import Dashboard from '../../layout/Dashboard';
-import {PaginationUI} from '../../../../ui/admin/form';
+import fetchWP from 'utils/fetchWP';
+import Dashboard from 'layout/Dashboard';
+import {PaginationUI} from 'ui/admin/form';
 import {Nav} from './Nav'
 
 export default class MemberActivity extends Component {

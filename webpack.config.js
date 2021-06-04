@@ -28,8 +28,8 @@ module.exports = {
 	resolve: {
 		alias: {
 			utils: path.resolve(__dirname, '_src/react/utils'),
-			ui: path.resolve(__dirname, '_src/react/ui'),
-			layout: path.resolve(__dirname, '_src/react/layout')
+			ui: path.resolve(__dirname, '_src/react/admin/ui'),
+			layout: path.resolve(__dirname, '_src/react/admin/containers/layout')
 		},
 		extensions: [".js", ".jsx", ".json"],
 	},
