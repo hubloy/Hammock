@@ -119,7 +119,6 @@ class Account extends Controller {
 	 */
 	public function member_account_content() {
 		global $wp;
-
 		$current_user = Members::user_details( get_current_user_id(), true );
 		if ( ! empty( $wp->query_vars ) ) {
 			if ( isset( $wp->query_vars['member-logout'] ) ) {
@@ -134,6 +133,7 @@ class Account extends Controller {
 				if ( 'pagename' === $key ) {
 					continue;
 				}
+				
 				if ( has_action( 'hammock_member_account_' . $key . '_content' ) ) {
 					do_action( 'hammock_member_account_' . $key . '_content', $value, $current_user );
 					return;

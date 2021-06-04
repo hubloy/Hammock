@@ -171,6 +171,9 @@ class Settings extends Rest {
 			$pages['account_page'] = $account_page;
 		}
 
+		//Flush rules especially for new account pages to be set up well
+		flush_rewrite_rules();
+
 		if ( $settings->get_general_setting( 'account_verification' ) !== $account_verification ) {
 			$type = \Hammock\Services\Emails::COMM_TYPE_REGISTRATION_VERIFY;
 			$verifcation_enabled = ( $account_verification === 1 );
