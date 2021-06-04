@@ -60,7 +60,6 @@ class Gateway extends Controller {
 	 * @since 1.0.0
 	 */
 	function load_gateways() {
-		\Hammock\Gateway\Stripe\Stripe::instance();
 		\Hammock\Gateway\Manual\Manual::instance();
 
 		do_action( 'hammock_load_gateways' );
