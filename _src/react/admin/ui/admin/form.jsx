@@ -9,5 +9,6 @@ import { NoticeUI } from './elements/Notice';
 import { Canvas } from './elements/Canvas';
 import { TextAreaUI } from './elements/TextArea';
 import { ToggleInfoBox } from './elements/InfoBox';
+import { Preloader } from './elements/Preloader';
 
-export {CardUI, DropDownUI, InputUI, LinkUI, ModalUI, SwitchUI, PaginationUI, NoticeUI, Canvas, TextAreaUI, ToggleInfoBox };
+export {CardUI, DropDownUI, InputUI, LinkUI, ModalUI, SwitchUI, PaginationUI, NoticeUI, Canvas, TextAreaUI, ToggleInfoBox, Preloader };
