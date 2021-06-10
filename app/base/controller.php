@@ -259,7 +259,11 @@ class Controller extends Component {
 	protected function is_page( $page_id ) {
 		if ( isset( $_GET['page'] ) ) {
 			$page = sanitize_text_field( $_GET['page'] );
-			return $page == self::MENU_SLUG . '-' . $page_id;
+			if ( $page === self::MENU_SLUG ) {
+				return true;
+			} else {
+				return $page == self::MENU_SLUG . '-' . $page_id;
+			}
 		}
 		return false;
 	}

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Dashboard from 'layout/Dashboard';
 import { Bar, Line } from 'react-chartjs-2';
 
+import MembersDashboard from './dashboard/members';
 
 export default class Admin extends Component {
 	constructor(props) {
@@ -79,17 +80,7 @@ export default class Admin extends Component {
 			<Dashboard hammock={this.props.hammock}>
 				<div uk-grid="">
 					<div className="uk-width-1-2@m uk-width-1-1@s">
-						<div className="uk-background-default uk-padding-small uk-panel uk-height-medium">
-							<p className="uk-h4">Members <span className="hammock-badge-circle">100</span></p>
-							<div>
-								<ul className="uk-list uk-list-striped">
-									<li>Member 1</li>
-									<li>Member 2</li>
-									<li>Member 3</li>
-									<li>Member 4</li>
-								</ul>
-							</div>
-						</div>
+						<MembersDashboard hammock={this.props.hammock} />
 						<div className="uk-background-default uk-margin-medium-top uk-padding-small uk-panel uk-height-medium">
 							<p className="uk-h4">Memberships <span className="hammock-badge-circle">100</span></p>
 							<div>

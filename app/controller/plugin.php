@@ -23,6 +23,15 @@ class Plugin extends Controller {
 	 */
 	protected $is_base = true;
 
+	/**
+	 * String translations
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var array
+	 */
+	private $strings = array();
+
 
 	/**
 	 * Main plugin controller
@@ -412,6 +421,37 @@ class Plugin extends Controller {
 	 */
 	function register_routes() {
 		do_action( 'hammock_register_rest_route' );
+	}
+
+	/**
+	 * Set up admin js variables
+	 *
+	 * @param array $vars
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array
+	 */
+	function admin_js_vars( $vars ) {
+		if ( $this->is_page( 'hammock' ) ) {
+			$vars['common']['string']['title'] = __( 'Dashboard', 'hammock' );
+			$vars['active_page']               = 'dashboard';
+			$vars['strings']                   = $this->get_strings();
+		}
+		return $vars;
+	}
+
+	/**
+	 * Get the strings
+	 * This sets the strings if not defined
+	 *
+	 * @since 1.0.0
+	 */
+	private function get_strings() {
+		if ( empty( $this->strings ) ) {
+			$this->strings = include HAMMOCK_LOCALE_DIR . '/site/dashboard.php';
+		}
+		return $this->strings;
 	}
 }
 ?>

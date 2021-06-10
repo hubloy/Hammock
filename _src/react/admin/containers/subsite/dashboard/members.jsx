@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import fetchWP from 'utils/fetchWP';
+
+import {Preloader, Center} from 'ui/admin/form';
 
 export default class MembersDashboard extends Component {
 
@@ -32,17 +35,29 @@ export default class MembersDashboard extends Component {
 	}
 
 	render() {
+		var members = this.state.members;
+		var hammock = this.props.hammock;
 		return (
 			<div className="uk-background-default uk-padding-small uk-panel uk-height-medium">
-				<p className="uk-h4">Members <span className="hammock-badge-circle">100</span></p>
-				<div>
-					<ul className="uk-list uk-list-striped">
-						<li>Member 1</li>
-						<li>Member 2</li>
-						<li>Member 3</li>
-						<li>Member 4</li>
-					</ul>
-				</div>
+				{this.state.loading ? (
+					<Preloader />
+				) : (
+					<React.Fragment>
+						<p className="uk-h4">{hammock.strings.members.title} <span className="hammock-badge-circle">{members.length}</span></p>
+						<div>
+							{members.length <= 0 ? (
+								<Center text={hammock.strings.members.none} className="uk-text-info" />
+							) : (
+								<ul className="uk-list uk-list-striped">
+									{members.map(item =>
+										<li key={item.id}><Link className="uk-text-primary" to={"/member/" + item.id}>{item.user_info.name}</Link></li>
+									)}
+								</ul>
+							)}
+						</div>
+					</React.Fragment>
+				)}
+				
 			</div>
 		)
 	}
