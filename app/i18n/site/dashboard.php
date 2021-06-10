@@ -22,8 +22,8 @@ return array(
 		'title'	=> __( 'Site Management', 'hammock' ),
 		'types'	=> apply_filters( 'hammock_dashboard_links',  array(
 			'memberships' => array(
-				'name'	=> __( 'Add Membership', 'hammock' ),
-				'url'	=> admin_url( 'admin.php?page=hammock-memberships#hammock-add-membership' )
+				'name'	=> __( 'View Memberships', 'hammock' ),
+				'url'	=> admin_url( 'admin.php?page=hammock-memberships' )
 			),
 			'addons' => array(
 				'name'	=> __( 'View Addons', 'hammock' ),
