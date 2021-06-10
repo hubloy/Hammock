@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import fetchWP from 'utils/fetchWP';
 
 import {Preloader, Center} from 'ui/admin/form';
 
-export default class MembersDashboard extends Component {
+export default class MembershipDashboard extends Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
 			loading : true,
-			members : []
+			memberships : []
         };
         this.fetchWP = new fetchWP({
 			api_url: this.props.hammock.api_url,
@@ -24,9 +25,9 @@ export default class MembersDashboard extends Component {
 	}
 
 	load_data = async() => {
-		this.fetchWP.get( 'dashboard/members' )
+		this.fetchWP.get( 'dashboard/memberships' )
 			.then( (json) => this.setState({
-				members : json,
+				memberships : json,
 				loading : false,
 				error : false,
 			}), (err) => this.setState({ loading : false, error : true })
@@ -34,22 +35,22 @@ export default class MembersDashboard extends Component {
 	}
 
 	render() {
-		var members = this.state.members;
+		var memberships = this.state.memberships;
 		var hammock = this.props.hammock;
 		return (
-			<div className="uk-background-default uk-padding-small uk-panel uk-height-medium">
+			<div className="uk-background-default uk-padding-small uk-margin-medium-top uk-panel uk-height-medium">
 				{this.state.loading ? (
 					<Preloader />
 				) : (
 					<React.Fragment>
-						<p className="uk-h4">{hammock.strings.members.title} <span className="hammock-badge-circle">{members.length}</span></p>
+						<p className="uk-h4">{hammock.strings.memberships.title} <span className="hammock-badge-circle">{memberships.length}</span></p>
 						<div>
-							{members.length <= 0 ? (
-								<Center text={hammock.strings.members.none} className="uk-text-info" />
+							{memberships.length <= 0 ? (
+								<Center text={hammock.strings.memberships.none} className="uk-text-info" />
 							) : (
 								<ul className="uk-list uk-list-striped">
-									{members.map(item =>
-										<li key={item.id}><a className="uk-text-primary" href={hammock.strings.members.url + "#/member/" + item.id}>{item.user_info.name}</a></li>
+									{memberships.map(item =>
+										<li key={item.id}><a className="uk-text-primary" href={hammock.strings.memberships.url + "#/edit/" + item.id}>{item.name}</a></li>
 									)}
 								</ul>
 							)}

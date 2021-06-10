@@ -211,20 +211,6 @@ class Plugin extends Controller {
 	}
 
 	/**
-	 * Set up admin js variables
-	 *
-	 * @param array $vars
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return array
-	 */
-	public function admin_js_vars( $vars ) {
-
-		return $vars;
-	}
-
-	/**
 	 * Load JavasSript for admin
 	 *
 	 * @since  1.0.0
@@ -351,7 +337,7 @@ class Plugin extends Controller {
 		if ( !defined( 'HAMMOCK_HIDE_TOP_BAR' ) ) {
 			$args = array(
 				'id'     => 'hammock',
-				'title'  => 'Hammock',
+				'title'  => __( 'Memberships', 'hammock' ),
 				'href'   => is_multisite() ? esc_url( network_admin_url( 'admin.php?page=hammock' ) ) : esc_url( admin_url( 'admin.php?page=hammock' ) ),
 			);
 			$admin_bar->add_node( $args );

@@ -5,6 +5,7 @@ import Dashboard from 'layout/Dashboard';
 import { Bar, Line } from 'react-chartjs-2';
 
 import MembersDashboard from './dashboard/members';
+import MembershipDashboard from './dashboard/memberships';
 
 export default class Admin extends Component {
 	constructor(props) {
@@ -75,34 +76,25 @@ export default class Admin extends Component {
 				}
 			}
 		};
-
+		var hammock = this.props.hammock;
 		return (
-			<Dashboard hammock={this.props.hammock}>
+			<Dashboard hammock={hammock}>
 				<div uk-grid="">
 					<div className="uk-width-1-2@m uk-width-1-1@s">
-						<MembersDashboard hammock={this.props.hammock} />
+						<MembersDashboard hammock={hammock} />
+						<MembershipDashboard hammock={hammock} />
 						<div className="uk-background-default uk-margin-medium-top uk-padding-small uk-panel uk-height-medium">
-							<p className="uk-h4">Memberships <span className="hammock-badge-circle">100</span></p>
+							<p className="uk-h4">{hammock.strings.management.title}</p>
 							<div>
-								<ul className="uk-list uk-list-striped">
-									<li>Membership 1</li>
-									<li>Membership 2</li>
-									<li>Membership 3</li>
-									<li>Membership 4</li>
-								</ul>
-							</div>
-						</div>
-						<div className="uk-background-default uk-margin-medium-top uk-padding-small uk-panel uk-height-medium">
-							<p className="uk-h4">Site Management</p>
-							<div>
-								<a><div className="uk-margin-small uk-padding-small uk-card uk-card-default uk-card-body">Add Memberships</div></a>
-								<a><div className="uk-margin-small uk-padding-small uk-card uk-card-default uk-card-body">View Addons</div></a>
+								{Object.entries(hammock.strings.management.types).map((type, index) => {
+									return (<a key={index} href={type[1].url}><div className="uk-margin-small uk-padding-small uk-card uk-card-default uk-card-body">{type[1].name}</div></a>)
+								})}
 							</div>
 						</div>
 					</div>
 					<div className="uk-width-1-2@m uk-width-1-1@s">
 						<div className="uk-background-default uk-padding-small uk-panel" uk-height-viewport="min-height: 800">
-							<p className="uk-h4">Stats Overview</p>
+							<p className="uk-h4">{hammock.strings.stats.title}</p>
 							<div>
 								<Bar data={data} options={options}/>
 							</div>
