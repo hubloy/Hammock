@@ -1,6 +1,8 @@
 const path = require('path');
+const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 
 module.exports = {
 
@@ -32,6 +34,17 @@ module.exports = {
 			layout: path.resolve(__dirname, '_src/react/admin/containers/layout')
 		},
 		extensions: [".js", ".jsx", ".json"],
+		fallback : {
+			"fs": false,
+			"tls": false,
+			"net": false,
+			"path": false,
+			"zlib": false,
+			"http": false,
+			"https": false,
+			"stream": false,
+			"crypto": false,
+		}
 	},
 
 	module: {
@@ -50,5 +63,8 @@ module.exports = {
 		]
 	},
 
-	plugins : [new MiniCssExtractPlugin()]
+	plugins : [new MiniCssExtractPlugin(), new webpack.ProvidePlugin({
+		process: 'process/browser',
+	  }), new NodePolyfillPlugin()
+	]
 }

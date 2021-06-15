@@ -139,139 +139,6 @@ module.exports = function( grunt ) {
 			}
 		},
 
-		// JS - Validate .js source code.
-		jshint: {
-			all: [
-				'Gruntfile.js',
-				conf.src_js_folder + '/**/*.js',
-			],
-			options: {
-				curly:   true,
-				eqeqeq:  true,
-				immed:   true,
-				latedef: true,
-				newcap:  true,
-				noarg:   true,
-				sub:     true,
-				undef:   true,
-				boss:    true,
-				eqnull:  true,
-				globals: {
-					exports: true,
-					module:  false
-				},
-				esversion: 6
-			}
-		},
-
-		// JS - Uglyfies the source code of .js files (to make files smaller).
-		uglify: {
-			all: {
-				files: [{
-					expand: true,
-					src: ['*.js', '!*.min.js'],
-					cwd: conf.js_folder,
-					dest: conf.js_folder,
-					ext: '.min.js',
-					extDot: 'last'
-				}],
-				options: {
-					banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
-						' * <%= pkg.homepage %>\n' +
-						' * Copyright (c) <%= grunt.template.today("yyyy") %>;' +
-						' * Licensed GPLv2+' +
-						' */\n',
-					mangle: {
-						reserved: ['jQuery']
-					}
-				}
-			}
-		},
-
-		// TEST - Run the PHPUnit tests.
-		phpunit: {
-			classes: {
-				dir: ''
-			},
-			options: {
-				bin: 'phpunit',
-				bootstrap: 'tests/php/bootstrap.php',
-				testsuite: 'default',
-				configuration: 'tests/php/phpunit.xml',
-				colors: true,
-				//tap: true,
-				//testdox: true,
-				//stopOnError: true,
-				staticBackup: false,
-				noGlobalsBackup: false
-			}
-		},
-
-		// CSS - Compile a .scss file into a normal .css file.
-		sass:   {
-			all: {
-				options: {
-					'sourcemap=none': true, // 'sourcemap': 'none' does not work...
-					unixNewlines: true,
-					style: 'expanded'
-				},
-				files: conf.css_files_compile
-			}
-		},
-
-
-		// CSS - Required for CSS-autoprefixer and maybe some SCSS function.
-		compass: {
-			options: {
-			},
-			server: {
-				options: {
-					debugInfo: true
-				}
-			}
-		},
-
-		// CSS - Minify all .css files.
-		cssmin: {
-			options: {
-				banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
-					' * <%= pkg.homepage %>\n' +
-					' * Copyright (c) <%= grunt.template.today("yyyy") %>;' +
-					' * Licensed GPLv2+' +
-					' */\n'
-			},
-			minify: {
-				expand: true,
-				src: ['*.css', '!*.min.css'],
-				cwd: conf.css_folder,
-				dest: conf.css_folder,
-				ext: '.min.css',
-				extDot: 'last'
-			}
-		},
-
-		// WATCH - Watch filesystem for changes during development.
-		watch:  {
-			sass: {
-				files: [
-					conf.src_css_folder + '**/*.scss'
-				],
-				tasks: ['sass','cssmin'],
-				options: {
-					debounceDelay: 500
-				}
-			},
-
-			scripts: {
-				files: [
-					conf.src_js_folder + '**/*.js',
-				],
-				tasks: ['jshint', 'concat', 'uglify'],
-				options: {
-					debounceDelay: 500
-				}
-			}
-		},
 
 		// BUILD - Remove previous build version and temp files.
 		clean: {
@@ -364,8 +231,8 @@ module.exports = function( grunt ) {
 	});
 
 	// Development tasks.
-	grunt.registerTask( 'default', ['clean:temp', 'jshint', 'concat', 'uglify', 'sass','cssmin'] );
-	grunt.registerTask( 'test', ['phpunit', 'jshint'] );
+	grunt.registerTask( 'default', ['clean:temp'] );
+	grunt.registerTask( 'test' );
 	grunt.registerTask( 'docs', ['exec:phpdoc'] );
 
 	grunt.task.run( 'clear' );
