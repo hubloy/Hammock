@@ -128,7 +128,9 @@ class Dashboard extends Rest {
 	 * @return array
 	 */
 	public function subscribers( $request ) {
-
+		$service 	= new Members();
+		$items		= $service->get_weekly_member_stats();
+		return $items;
 	}
 
 	/**

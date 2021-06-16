@@ -1016,5 +1016,26 @@ class Members {
 	public function delete_meta( $member_id, $key ) {
 		$this->meta->delete( $member_id, 'member', $key );
 	}
+
+	/**
+	 * Get member stats to be used in the dashboard
+	 * This returns an array of the number of new members per day of the week
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
+	public function get_weekly_member_stats() {
+		global $wpdb;
+		$members	= array();
+		$sql 		= "SELECT count(`id`) as total, WEEKDAY(`start_date`) as week_day FROM {$this->plans_table_name} WHERE `start_date` BETWEEN (FROM_DAYS(TO_DAYS(CURDATE())-MOD(TO_DAYS(CURDATE())-1,7))) AND (FROM_DAYS(TO_DAYS(CURDATE())-MOD(TO_DAYS(CURDATE())-1,7)) + INTERVAL 7 DAY)";
+		$results    = $wpdb->get_results( $sql );
+		if ( ! empty( $results ) ) {
+			foreach ( $results as $result ) {
+				$members[$result->week_day] = $result->total;
+			}
+		}
+		return $members;
+	}
 }
 
