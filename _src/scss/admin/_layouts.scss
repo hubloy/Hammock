@@ -138,6 +138,12 @@ body {
 			}
 		}
 	}
+
+	.hammock-background-contain {
+		background-position: center;
+		background-size: contain;
+		background-repeat: no-repeat;
+	}
 }
 
 .hammock-check {

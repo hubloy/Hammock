@@ -71,9 +71,9 @@ export default class StatsDashboard extends Component {
 			}
 		};
 		return (
-			<div className="uk-background-default uk-padding-small uk-panel" uk-height-viewport="min-height: 800">
-				<p className="uk-h4">{hammock.strings.stats.title}</p>
-				<div>
+			<React.Fragment>
+					
+				<div className="uk-background-default uk-padding-small uk-margin-medium-top uk-panel uk-height-medium">
 					{this.state.loading_subs ? (
 						<Preloader />
 					) : (
@@ -91,12 +91,11 @@ export default class StatsDashboard extends Component {
 								],
 							}} options={options}/>
 						) : (
-							<Center text={hammock.strings.stats.no_data.subscribers}/>
+							<Center text={hammock.strings.stats.no_data.subscribers} backgroundImage={hammock.assets_url + '/img/preloader-chart.jpg'}/>
 						)
 					)}
 				</div>
-				<hr/>
-				<div>
+				<div className="uk-background-default uk-padding-small uk-margin-medium-top uk-panel uk-height-medium">
 					{this.state.loading_trans ? (
 						<Preloader />
 					) : (
@@ -114,11 +113,11 @@ export default class StatsDashboard extends Component {
 								],
 							}} options={options} />
 						) : (
-							<Center text={hammock.strings.stats.no_data.transactions}/>
+							<Center text={hammock.strings.stats.no_data.transactions} backgroundImage={hammock.assets_url + '/img/preloader-chart.jpg'}/>
 						)
 					)}
 				</div>
-			</div>
+			</React.Fragment>
 		)
 	}
 }

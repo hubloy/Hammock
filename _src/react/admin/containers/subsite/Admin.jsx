@@ -31,6 +31,7 @@ export default class Admin extends Component {
 						</div>
 					</div>
 					<div className="uk-width-1-2@m uk-width-1-1@s">
+						<p className="uk-h4">{hammock.strings.stats.title}</p>
 						<StatsDashboard hammock={hammock}/>
 					</div>
 				</div>
