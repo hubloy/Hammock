@@ -10,6 +10,7 @@ body {
 		z-index: 99999;
 		background-color: $white-color;
 		color: $black-color;
+		
 	}
 
 	#wpcontent {
@@ -144,6 +145,10 @@ body {
 		background-size: contain;
 		background-repeat: no-repeat;
 	}
+
+	.uk-text-meta {
+		font-size: .8rem;
+	}
 }
 
 .hammock-check {
@@ -173,21 +178,34 @@ body {
 		width: 100%;
 		background-color: $white-color !important;
 		color: $black-color !important;
-		label,
-		p,
-		span,
-		.addon-title,
-		.uk-close {
+		* {
 			color: $black-color !important;
 		}
 
+		a {
+			color: $blue-color !important;
+		}
+
+		input {
+			border: 1px solid $input-border;
+		}
+
+		.uk-button-secondary {
+			background-color: $button-black;
+			color: $white-color !important;
+			&:hover {
+				background-color: $button-black;
+				color: $white-color !important;
+			}
+		}
+		
 		.uk-button-primary {
 			background-color: $button-blue;
-			color: $white-color;
+			color: $white-color !important;
 
 			&:hover {
 				background-color: $button-blue;
-				color: $white-color;
+				color: $white-color !important;
 			}
 		}
 	}

@@ -84,5 +84,29 @@ class Mailchimp extends Addon {
 		);
 		return $view->render( true );
 	}
+
+
+	/**
+	 * Update addon settings
+	 *
+	 * @param array $response
+	 * @param array $data - the post data
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array
+	 */
+	public function update_settings( $response = array(), $data ) {
+		$protected = $data['protected'];
+		$protected = array_map( 'sanitize_text_field', wp_unslash( $protected ) );
+		$settings  = $this->settings();
+		$settings['protected'] = $protected;
+		$this->settings->set_addon_setting( $this->id, $settings );
+		$this->settings->save();
+		return array(
+			'status' => true,
+			'message'	=> __( 'Category Setting updated', 'hammock' )
+		);
+	}
 }
 
