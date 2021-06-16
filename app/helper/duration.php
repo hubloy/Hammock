@@ -253,5 +253,43 @@ class Duration {
 			$type
 		);
 	}
+
+	/**
+	 * Convert the mysql weekday to string
+	 * 
+	 * @param int $week_day - the mysql week day
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return string
+	 */
+	public static function mysql_week_day_to_string( $week_day ) {
+		switch ( $week_day ) {
+			case 0:
+				return 'mon';
+			break;
+			case 1:
+				return 'tue';
+			break;
+			case 2:
+				return 'wed';
+			break;
+			case 3:
+				return 'thu';
+			break;
+			case 4:
+				return 'fri';
+			break;
+			case 5:
+				return 'sat';
+			break;
+			case 6:
+				return 'sun';
+			break;
+			default:
+				return '';
+			break;
+		}
+	}
 }
 ?>

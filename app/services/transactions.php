@@ -11,7 +11,7 @@ use Hammock\Model\Member;
 use Hammock\Model\Membership;
 use Hammock\Model\Settings;
 use Hammock\Helper\Currency;
-
+use Hammock\Helper\Duration;
 /**
  * Transactions service
  *
@@ -418,7 +418,8 @@ class Transactions {
 		$results    = $wpdb->get_results( $wpdb->prepare( $sql, self::STATUS_PAID ) );
 		if ( ! empty( $results ) ) {
 			foreach ( $results as $result ) {
-				$members[$result->week_day] = $result->total;
+				$week_day = Duration::mysql_week_day_to_string( $result->week_day );
+				$members[$week_day] = $result->total;
 			}
 		}
 		return $members;

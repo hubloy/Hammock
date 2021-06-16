@@ -10,6 +10,7 @@ use Hammock\Model\Member;
 use Hammock\Model\Membership;
 use Hammock\Model\Plan;
 use Hammock\Model\Meta;
+use Hammock\Helper\Duration;
 
 /**
  * Members service
@@ -1032,7 +1033,8 @@ class Members {
 		$results    = $wpdb->get_results( $sql );
 		if ( ! empty( $results ) ) {
 			foreach ( $results as $result ) {
-				$members[$result->week_day] = $result->total;
+				$week_day = Duration::mysql_week_day_to_string( $result->week_day );
+				$members[$week_day] = $result->total;
 			}
 		}
 		return $members;

@@ -45,6 +45,10 @@ return array(
 			),
 			'subscribers'	=> sprintf( __( '%s of Subscribers', 'hammock' ), '#' ),
 			'transactions'	=> sprintf( __( '%s of Transactions', 'hammock' ), '#' )
+		),
+		'no_data' => array(
+			'subscribers'	=> __( 'No Subscriber Data found for this week', 'hammock' ),
+			'transactions'	=> __( 'No Transaction Data found for this week', 'hammock' )
 		)
 	)
 );

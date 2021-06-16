@@ -52,52 +52,7 @@ export default class StatsDashboard extends Component {
 		var transactions = this.state.transactions;
 		var hammock = this.props.hammock,
 			days = hammock.strings.stats.charts.days;
-		const data = {
-			labels: [days.mon, days.tue, days.wed, days.thu, days.fri, days.sat, days.sun],
-			datasets: [
-				{
-					label: hammock.strings.stats.charts.subscribers,
-					data: [12, 19, 3, 5, 2, 3, 20],
-					backgroundColor: 'rgb(49, 104, 142)',
-					borderColor: 'rgb(49, 104, 142)',
-					borderWidth: 1,
-				},
-			],
-		};
-
 		const options = {
-			scales: {
-				yAxes: [
-					{
-						ticks: {
-							beginAtZero: true,
-						},
-					},
-				],
-			},
-			plugins: {
-				legend: {
-					onClick: function(e, item) {
-						return;
-					}
-				}
-			}
-		};
-
-		const linedata = {
-			labels: [days.mon, days.tue, days.wed, days.thu, days.fri, days.sat, days.sun],
-			datasets: [
-				{
-					label: hammock.strings.stats.charts.transactions,
-					data: [12, 19, 3, 5, 2, 3, 20],
-					fill: false,
-					backgroundColor: 'rgb(49, 104, 142)',
-					borderColor: 'rgba(49, 104, 142)',
-				},
-			],
-		};
-
-		const lineoptions = {
 			scales: {
 				yAxes: [
 					{
@@ -119,11 +74,49 @@ export default class StatsDashboard extends Component {
 			<div className="uk-background-default uk-padding-small uk-panel" uk-height-viewport="min-height: 800">
 				<p className="uk-h4">{hammock.strings.stats.title}</p>
 				<div>
-					<Bar data={data} options={options}/>
+					{this.state.loading_subs ? (
+						<Preloader />
+					) : (
+						subscribers.length > 0 ? (
+							<Bar data={{
+								labels: [days.mon, days.tue, days.wed, days.thu, days.fri, days.sat, days.sun],
+								datasets: [
+									{
+										label: hammock.strings.stats.charts.subscribers,
+										data: [12, 19, 3, 5, 2, 3, 20],
+										backgroundColor: 'rgb(49, 104, 142)',
+										borderColor: 'rgb(49, 104, 142)',
+										borderWidth: 1,
+									},
+								],
+							}} options={options}/>
+						) : (
+							<Center text={hammock.strings.stats.no_data.subscribers}/>
+						)
+					)}
 				</div>
 				<hr/>
 				<div>
-					<Line data={linedata} options={lineoptions} />
+					{this.state.loading_trans ? (
+						<Preloader />
+					) : (
+						transactions.length > 0 ? (
+							<Line data={{
+								labels: [days.mon, days.tue, days.wed, days.thu, days.fri, days.sat, days.sun],
+								datasets: [
+									{
+										label: hammock.strings.stats.charts.transactions,
+										data: [12, 19, 3, 5, 2, 3, 20],
+										fill: false,
+										backgroundColor: 'rgb(49, 104, 142)',
+										borderColor: 'rgba(49, 104, 142)',
+									},
+								],
+							}} options={options} />
+						) : (
+							<Center text={hammock.strings.stats.no_data.transactions}/>
+						)
+					)}
 				</div>
 			</div>
 		)
