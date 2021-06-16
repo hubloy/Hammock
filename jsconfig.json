@@ -1,9 +1,9 @@
 {
 	"compilerOptions": {
-		"baseUrl": "./_src/react"
+		"baseUrl": "_src/react"
 	},
 	"include": [
 		"_src/react"
 	],
-	"exclude": ["node_modules", "assets"]
+	"exclude": ["./node_modules", "assets"]
 }

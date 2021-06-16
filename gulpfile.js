@@ -63,5 +63,6 @@ gulp.task('watch-js', gulp.parallel('admin-scripts', function() {
 
 // Register tasks to 'gulp' command
 gulp.task('default', gulp.parallel('styles', 'watch', 'admin-scripts', 'front-scripts', 'watch-js'));
+gulp.task('scripts', gulp.parallel('admin-scripts', 'front-scripts'));
 gulp.task('js', gulp.parallel('admin-scripts', 'watch-js'));
 gulp.task('build', gulp.parallel('admin-scripts', 'front-scripts', 'styles'));

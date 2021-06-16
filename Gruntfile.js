@@ -82,7 +82,23 @@ module.exports = function( grunt ) {
 				'!docs/phpdoc-**',
 				'!vendor/**',
 				'!webpack.config.js',
-				'!**/webpack.config.js'
+				'!**/webpack.config.js',
+				'!postcss.config.js',
+				'!**/postcss.config.js',
+				'!composer.json',
+				'!**/composer.json',
+				'!composer.lock',
+				'!**/composer.lock',
+				'!phpcs.xml.dist',
+				'!**/phpcs.xml.dist',
+				'!phpunit.xml.dist',
+				'!**/phpunit.xml.dist',
+				'!gulpfile.js',
+				'!**/gulpfile.js',
+				'!jsconfig.json',
+				'!**/jsconfig.json',
+				'!README.md',
+				'!**/README.md'
 			]
 		},
 

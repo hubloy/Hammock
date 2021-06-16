@@ -83,7 +83,7 @@ export default class StatsDashboard extends Component {
 								datasets: [
 									{
 										label: hammock.strings.stats.charts.subscribers,
-										data: [12, 19, 3, 5, 2, 3, 20],
+										data: [subscribers.mon, subscribers.tue, subscribers.wed, subscribers.thu, subscribers.fri, subscribers.sat, subscribers.sun],
 										backgroundColor: 'rgb(49, 104, 142)',
 										borderColor: 'rgb(49, 104, 142)',
 										borderWidth: 1,
@@ -106,7 +106,7 @@ export default class StatsDashboard extends Component {
 								datasets: [
 									{
 										label: hammock.strings.stats.charts.transactions,
-										data: [12, 19, 3, 5, 2, 3, 20],
+										data: [transactions.mon, transactions.tue, transactions.wed, transactions.thu, transactions.fri, transactions.sat, transactions.sun],
 										fill: false,
 										backgroundColor: 'rgb(49, 104, 142)',
 										borderColor: 'rgba(49, 104, 142)',
