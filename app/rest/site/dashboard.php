@@ -9,6 +9,7 @@ use Hammock\Base\Rest;
 use Hammock\Core\Util;
 use Hammock\Services\Members;
 use Hammock\Services\Memberships;
+use Hammock\Services\Transactions;
 
 /**
  * Dashboard rest controller
@@ -141,6 +142,8 @@ class Dashboard extends Rest {
 	 * @return array
 	 */
 	public function transactions( $request ) {
-
+		$service 	= new Transactions();
+		$items		= $service->get_weekly_transaction_stats();
+		return $items;
 	}
 }

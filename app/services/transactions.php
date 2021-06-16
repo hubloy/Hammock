@@ -401,5 +401,27 @@ class Transactions {
 			return false;
 		}
 	}
+
+
+	/**
+	 * Get transaction stats to be used in the dashboard
+	 * This returns an array of the sum transactions per day of the week
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
+	public function get_weekly_transaction_stats() {
+		global $wpdb;
+		$members	= array();
+		$sql 		= "SELECT sum(`amount`) as total, WEEKDAY(`due_date`) as week_day FROM {$this->plans_table_name} WHERE `status` = %s AND `due_date` BETWEEN (FROM_DAYS(TO_DAYS(CURDATE())-MOD(TO_DAYS(CURDATE())-1,7))) AND (FROM_DAYS(TO_DAYS(CURDATE())-MOD(TO_DAYS(CURDATE())-1,7)) + INTERVAL 7 DAY)";
+		$results    = $wpdb->get_results( $wpdb->prepare( $sql, self::STATUS_PAID ) );
+		if ( ! empty( $results ) ) {
+			foreach ( $results as $result ) {
+				$members[$result->week_day] = $result->total;
+			}
+		}
+		return $members;
+	}
 }
 
