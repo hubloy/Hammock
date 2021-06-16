@@ -163,63 +163,63 @@ class Resource {
 
 		wp_register_script(
 			'hammock-addons-react',
-			HAMMOCK_ASSETS_URL . '/js/react/addon.js',
+			HAMMOCK_ASSETS_URL . '/js/react/addon.min.js',
 			array( 'jquery' ),
 			HAMMOCK_VERSION
 		);
 
 		wp_register_script(
 			'hammock-admin-react',
-			HAMMOCK_ASSETS_URL . '/js/react/admin.js',
+			HAMMOCK_ASSETS_URL . '/js/react/admin.min.js',
 			array( 'jquery' ),
 			HAMMOCK_VERSION
 		);
 
 		wp_register_script(
 			'hammock-comms-react',
-			HAMMOCK_ASSETS_URL . '/js/react/comms.js',
+			HAMMOCK_ASSETS_URL . '/js/react/comms.min.js',
 			array( 'jquery' ),
 			HAMMOCK_VERSION
 		);
 
 		wp_register_script(
 			'hammock-members-react',
-			HAMMOCK_ASSETS_URL . '/js/react/members.js',
+			HAMMOCK_ASSETS_URL . '/js/react/members.min.js',
 			array( 'jquery' ),
 			HAMMOCK_VERSION
 		);
 
 		wp_register_script(
 			'hammock-memberships-react',
-			HAMMOCK_ASSETS_URL . '/js/react/memberships.js',
+			HAMMOCK_ASSETS_URL . '/js/react/memberships.min.js',
 			array( 'jquery' ),
 			HAMMOCK_VERSION
 		);
 
 		wp_register_script(
 			'hammock-settings-react',
-			HAMMOCK_ASSETS_URL . '/js/react/settings.js',
+			HAMMOCK_ASSETS_URL . '/js/react/settings.min.js',
 			array( 'jquery' ),
 			HAMMOCK_VERSION
 		);
 
 		wp_register_script(
 			'hammock-transactions-react',
-			HAMMOCK_ASSETS_URL . '/js/react/transactions.js',
+			HAMMOCK_ASSETS_URL . '/js/react/transactions.min.js',
 			array( 'jquery' ),
 			HAMMOCK_VERSION
 		);
 
 		wp_register_script(
 			'hammock-coupons-react',
-			HAMMOCK_ASSETS_URL . '/js/react/coupons.js',
+			HAMMOCK_ASSETS_URL . '/js/react/coupons.min.js',
 			array( 'jquery' ),
 			HAMMOCK_VERSION
 		);
 
 		wp_register_script(
 			'hammock-invites-react',
-			HAMMOCK_ASSETS_URL . '/js/react/invites.js',
+			HAMMOCK_ASSETS_URL . '/js/react/invites.min.js',
 			array( 'jquery' ),
 			HAMMOCK_VERSION
 		);
