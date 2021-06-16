@@ -91,12 +91,10 @@ class Addon extends Controller {
 	public function load_addons() {
 		\Hammock\Addon\Media\Media::instance();
 		\Hammock\Addon\Coupon\Coupon::instance();
-		\Hammock\Addon\Bbpress\Bbpress::instance();
 		\Hammock\Addon\Prorate\Prorate::instance();
 		\Hammock\Addon\Redirect\Redirect::instance();
 		\Hammock\Addon\Category\Category::instance();
 		\Hammock\Addon\Mailchimp\Mailchimp::instance();
-		\Hammock\Addon\Buddypress\Buddypress::instance();
 		\Hammock\Addon\Invitation\Invitation::instance();
 		\Hammock\Addon\Woocommerce\Woocommerce::instance();
 		
