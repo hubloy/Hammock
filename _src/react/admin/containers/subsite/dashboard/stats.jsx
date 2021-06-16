@@ -50,12 +50,13 @@ export default class StatsDashboard extends Component {
 	render() {
 		var subscribers = this.state.subscribers;
 		var transactions = this.state.transactions;
-		var hammock = this.props.hammock;
+		var hammock = this.props.hammock,
+			days = hammock.strings.stats.charts.days;
 		const data = {
-			labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			labels: [days.mon, days.tue, days.wed, days.thu, days.fri, days.sat, days.sun],
 			datasets: [
 				{
-					label: '# of Subscribers',
+					label: hammock.strings.stats.charts.subscribers,
 					data: [12, 19, 3, 5, 2, 3, 20],
 					backgroundColor: 'rgb(49, 104, 142)',
 					borderColor: 'rgb(49, 104, 142)',
@@ -84,11 +85,11 @@ export default class StatsDashboard extends Component {
 		};
 
 		const linedata = {
-			labels: ['1', '2', '3', '4', '5', '6'],
+			labels: [days.mon, days.tue, days.wed, days.thu, days.fri, days.sat, days.sun],
 			datasets: [
 				{
-					label: '# of Transactions',
-					data: [12, 19, 3, 5, 2, 3],
+					label: hammock.strings.stats.charts.transactions,
+					data: [12, 19, 3, 5, 2, 3, 20],
 					fill: false,
 					backgroundColor: 'rgb(49, 104, 142)',
 					borderColor: 'rgba(49, 104, 142)',

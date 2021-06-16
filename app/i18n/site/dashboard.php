@@ -32,6 +32,19 @@ return array(
 		) )
 	),
 	'stats'	=> array(
-		'title'	=> __( 'Stats Overview', 'hammock' )
+		'title'		=> __( 'Stats Overview', 'hammock' ),
+		'charts'	=> array(
+			'days'			=> array(
+				'mon' 	=> __( 'Mon', 'hammock' ),
+				'tue' 	=> __( 'Tue', 'hammock' ),
+				'wed'	=> __( 'Wed', 'hammock' ),
+				'thur'	=> __( 'Thu', 'hammock' ),
+				'fri'	=> __( 'Fri', 'hammock' ),
+				'sat'	=> __( 'Sat', 'hammock' ),
+				'sub'	=> __( 'Sun', 'hammock' )
+			),
+			'subscribers'	=> sprintf( __( '%s of Subscribers', 'hammock' ), '#' ),
+			'transactions'	=> sprintf( __( '%s of Transactions', 'hammock' ), '#' )
+		)
 	)
 );
