@@ -97,15 +97,23 @@ class Mailchimp extends Addon {
 	 * @return array
 	 */
 	public function update_settings( $response = array(), $data ) {
-		$protected = $data['protected'];
-		$protected = array_map( 'sanitize_text_field', wp_unslash( $protected ) );
-		$settings  = $this->settings();
-		$settings['protected'] = $protected;
+		$apikey 		= sanitize_text_field( $data['apikey'] );
+		$optin 			= isset( $data['mailchimp_double_optin'] );
+		$reg_list 		= sanitize_text_field( $data['mailchimp_registered_list'] );
+		$sub_list 		= sanitize_text_field( $data['mailchimp_subscriber_list'] );
+		$unsub_list 	= sanitize_text_field( $data['mailchimp_unsubscriber_list'] );
+		$settings  		= $this->settings();
+
+		$settings['mailchimp_apikey'] 				= $apikey;
+		$settings['mailchimp_double_optin'] 		= $optin;
+		$settings['mailchimp_registered_list'] 		= $reg_list;
+		$settings['mailchimp_subscriber_list'] 		= $sub_list;
+		$settings['mailchimp_unsubscriber_list'] 	= $unsub_list;
 		$this->settings->set_addon_setting( $this->id, $settings );
 		$this->settings->save();
 		return array(
 			'status' => true,
-			'message'	=> __( 'Category Setting updated', 'hammock' )
+			'message'	=> __( 'MailChimp Settings Saved', 'hammock' )
 		);
 	}
 }
