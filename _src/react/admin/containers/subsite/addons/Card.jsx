@@ -90,6 +90,11 @@ export default class Card extends PureComponent {
 										<a className="hammock-addon-toggle-setting" data-id={this.props.id} data-name={this.props.item.name} data-nonce={hammock.ajax_nonce}>{hammock.common.general.configure}</a>
 									</div>
 								}
+								{ typeof this.props.item.message !== 'undefined' &&
+									<div className="uk-position-bottom-left uk-padding-small uk-width-1-1">
+										<span className="uk-text-center">{this.props.item.message}</span>
+									</div>
+								}
 								{ typeof this.props.item.url !== 'undefined' && checked > 0 &&
 									<div className="uk-position-bottom-left uk-padding-small">
 										<a href={this.props.item.url}>{hammock.common.general.settings}</a>

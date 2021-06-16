@@ -65,8 +65,11 @@ class Category extends Addon {
 				'name'        => __( 'Category Protection', 'hammock' ),
 				'description' => __( 'Protect your posts by category.', 'hammock' ),
 				'icon'        => 'dashicons dashicons-category',
-				'settings'    => true,
+				'settings'    => true
 			);
+			if ( !$this->plugin_active() ) {
+				$addons['category']['message'] = __( 'Content protection is currently disabled', 'hammock' );
+			}
 		}
 		return $addons;
 	}

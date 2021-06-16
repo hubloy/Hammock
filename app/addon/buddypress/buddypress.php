@@ -55,7 +55,7 @@ class Buddypress extends Addon {
 			$active = $this->plugin_active();
 			$addons['buddypress'] = array(
 				'name'        => __( 'BuddyPress Integration', 'hammock' ),
-				'description' => $active ? __( 'Integrate BuddyPress', 'hammock' ) : __( 'Insatall and active BuddyPress to use this addon', 'hammock' ),
+				'description' => $active ? __( 'Integrate BuddyPress', 'hammock' ) : __( 'Install and active BuddyPress to use this addon', 'hammock' ),
 				'icon'        => 'dashicons dashicons-buddicons-buddypress-logo',
 				'configure'   => true,
 			);
