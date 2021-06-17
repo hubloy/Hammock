@@ -92,7 +92,7 @@ export default class List extends PureComponent {
 								<li uk-filter-control=".disabled"><a href="#">{hammock.common.status.disabled}</a></li>
 							</ul>
 
-							<ul className="addon-filter uk-child-width-1-2 uk-child-width-1-3@m uk-text-center" uk-grid="">
+							<ul className="addon-filter uk-child-width-1-2 uk-child-width-1-3@m uk-child-width-1-5@l uk-text-center" uk-grid="">
 								{Object.keys(items).map(item =>
 									<React.Fragment key={item}>
 										<Card hammock={hammock} id={item} item={items[item]} key={item}/>

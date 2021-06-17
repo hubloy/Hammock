@@ -98,17 +98,17 @@ class Mailchimp extends Addon {
 	 */
 	public function update_settings( $response = array(), $data ) {
 		$apikey 		= sanitize_text_field( $data['apikey'] );
-		$optin 			= isset( $data['mailchimp_double_optin'] );
-		$reg_list 		= sanitize_text_field( $data['mailchimp_registered_list'] );
-		$sub_list 		= sanitize_text_field( $data['mailchimp_subscriber_list'] );
-		$unsub_list 	= sanitize_text_field( $data['mailchimp_unsubscriber_list'] );
+		$optin 			= isset( $data['double_optin'] );
+		$reg_list 		= sanitize_text_field( $data['registered_list'] );
+		$sub_list 		= sanitize_text_field( $data['subscriber_list'] );
+		$unsub_list 	= sanitize_text_field( $data['unsubscriber_list'] );
 		$settings  		= $this->settings();
 
-		$settings['mailchimp_apikey'] 				= $apikey;
-		$settings['mailchimp_double_optin'] 		= $optin;
-		$settings['mailchimp_registered_list'] 		= $reg_list;
-		$settings['mailchimp_subscriber_list'] 		= $sub_list;
-		$settings['mailchimp_unsubscriber_list'] 	= $unsub_list;
+		$settings['apikey'] 				= $apikey;
+		$settings['double_optin'] 		= $optin;
+		$settings['registered_list'] 		= $reg_list;
+		$settings['subscriber_list'] 		= $sub_list;
+		$settings['unsubscriber_list'] 	= $unsub_list;
 		$this->settings->set_addon_setting( $this->id, $settings );
 		$this->settings->save();
 		return array(

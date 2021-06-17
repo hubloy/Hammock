@@ -164,7 +164,7 @@ export default class SubSiteSettings extends Component {
 							</div>
 						</div>
 						<h1 className="uk-heading-divider uk-text-small">{strings.pages.title}</h1>
-						<div className="uk-child-width-1-1@s uk-child-width-1-2@m" uk-grid="">
+						<div className="uk-child-width-1-1@s uk-child-width-1-2@m uk-child-width-1-3@l" uk-grid="">
 							<div>
 								<div className="uk-height-small uk-card uk-card-default uk-card-body uk-padding-small">
 									<label>{strings.pages.membership_list.title}</label>

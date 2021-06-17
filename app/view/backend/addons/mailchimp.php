@@ -24,11 +24,11 @@ class Mailchimp extends View {
 	 */
 	protected function to_html() {
 		$settings 		= $this->data['settings'];
-		$optin 			= isset( $settings['mailchimp_double_optin'] ) ? $settings['mailchimp_double_optin'] : true;
-		$apikey 		= isset( $settings['mailchimp_apikey'] ) ? $settings['mailchimp_apikey'] : '';
-		$reg_list 		= isset( $settings['mailchimp_registered_list'] ) ? $settings['mailchimp_registered_list'] : '';
-		$sub_list 		= isset( $settings['mailchimp_subscriber_list'] ) ? $settings['mailchimp_subscriber_list'] : '';
-		$unsub_list 	= isset( $settings['mailchimp_unsubscriber_list'] ) ? $settings['mailchimp_unsubscriber_list'] : '';
+		$optin 			= isset( $settings['double_optin'] ) ? $settings['double_optin'] : true;
+		$apikey 		= isset( $settings['apikey'] ) ? $settings['apikey'] : '';
+		$reg_list 		= isset( $settings['registered_list'] ) ? $settings['registered_list'] : '';
+		$sub_list 		= isset( $settings['subscriber_list'] ) ? $settings['subscriber_list'] : '';
+		$unsub_list 	= isset( $settings['unsubscriber_list'] ) ? $settings['unsubscriber_list'] : '';
 		ob_start();
 		?>
 		<div class="uk-margin">
