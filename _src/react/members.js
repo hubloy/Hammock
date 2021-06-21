@@ -10,8 +10,8 @@ import MemberTransactions from './admin/containers/subsite/members/view/MemberTr
 
 
 document.addEventListener('DOMContentLoaded', function () {
-	const jengaPressContainer = document.getElementById( 'hammock-members-container' );
-	if ( jengaPressContainer !== null ) {
+	const hammockContainer = document.getElementById( 'hammock-members-container' );
+	if ( hammockContainer !== null ) {
 		const DefaultView = (props) => <NotFound hammock={window.hammock} {...props}/>
 		const MembersPage = (props) => <SiteMembers hammock={window.hammock} {...props} />
 		const MemberViewPage = (props) => <MemberDetail hammock={window.hammock} {...props} />
@@ -31,6 +31,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				</Switch>
 			</HashRouter>
 		);
-		ReactDOM.render(routing, jengaPressContainer);
+		ReactDOM.render(routing, hammockContainer);
 	}
 });

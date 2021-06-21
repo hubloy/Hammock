@@ -6,8 +6,8 @@ import NotFound from './admin/containers/NotFound';
 import SiteSettings from './admin/containers/subsite/Settings';
 
 document.addEventListener('DOMContentLoaded', function () {
-	const jengaPressContainer = document.getElementById( 'hammock-settings-container' );
-	if ( jengaPressContainer !== null ) {
+	const hammockContainer = document.getElementById( 'hammock-settings-container' );
+	if ( hammockContainer !== null ) {
 		const DefaultView = (props) => <NotFound hammock={window.hammock} {...props}/>
 		const SettingsPage = (props) => <SiteSettings hammock={window.hammock} {...props}/>
 		const GatewaySettingsPage = (props) => <GatewaySettings hammock={window.hammock} {...props} />
@@ -19,6 +19,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				</Switch>
 			</HashRouter>
 		);
-		ReactDOM.render(routing, jengaPressContainer);
+		ReactDOM.render(routing, hammockContainer);
 	}
 });

@@ -217,6 +217,14 @@ class Resource {
 			HAMMOCK_VERSION
 		);
 
+
+		wp_register_script(
+			'hammock-marketing-react',
+			HAMMOCK_ASSETS_URL . '/js/react/marketing.min.js',
+			array( 'jquery' ),
+			HAMMOCK_VERSION
+		);
+
 		wp_register_script(
 			'hammock-invites-react',
 			HAMMOCK_ASSETS_URL . '/js/react/invites.min.js',

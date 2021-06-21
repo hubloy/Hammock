@@ -5,8 +5,8 @@ import SiteMemberships from './admin/containers/subsite/Memberships';
 import Edit from './admin/containers/subsite/memberships/Edit';
 
 document.addEventListener('DOMContentLoaded', function () {
-	const jengaPressContainer = document.getElementById('hammock-memberships-container');
-	if (jengaPressContainer !== null) {
+	const hammockContainer = document.getElementById('hammock-memberships-container');
+	if (hammockContainer !== null) {
 		const MembershipPage = (props) => <SiteMemberships hammock={window.hammock} {...props} />
 		const MembershipEditPage = (props) => <Edit hammock={window.hammock} {...props} />
 		const routing = (
@@ -18,6 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				</Switch>
 			</HashRouter>
 		);
-		ReactDOM.render(routing, jengaPressContainer);
+		ReactDOM.render(routing, hammockContainer);
 	}
 });

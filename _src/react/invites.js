@@ -8,8 +8,8 @@ import InviteAddonCreate from './admin/containers/subsite/codes/forms/CreateCode
 import InviteAddonEdit from './admin/containers/subsite/codes/forms/EditCode'
 
 document.addEventListener('DOMContentLoaded', function () {
-	const jengaPressContainer = document.getElementById( 'hammock-invites-container' );
-	if ( jengaPressContainer !== null ) {
+	const hammockContainer = document.getElementById( 'hammock-invites-container' );
+	if ( hammockContainer !== null ) {
 		const DefaultView = (props) => <NotFound hammock={window.hammock} {...props}/>
 		const InvitesPage = (props) => <InviteAddonSetting hammock={window.hammock} {...props} />
 		const InvitesCreatePage = (props) => <InviteAddonCreate type={`invitation`} hammock={window.hammock} {...props} />
@@ -24,6 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				</Switch>
 			</HashRouter>
 		);
-		ReactDOM.render(routing, jengaPressContainer);
+		ReactDOM.render(routing, hammockContainer);
 	}
 });

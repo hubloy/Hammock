@@ -8,8 +8,8 @@ import CouponAddonCreate from './admin/containers/subsite/codes/forms/CreateCode
 import CouponAddonEdit from './admin/containers/subsite/codes/forms/EditCode'
 
 document.addEventListener('DOMContentLoaded', function () {
-	const jengaPressContainer = document.getElementById( 'hammock-coupons-container' );
-	if ( jengaPressContainer !== null ) {
+	const hammockContainer = document.getElementById( 'hammock-coupons-container' );
+	if ( hammockContainer !== null ) {
 		const DefaultView = (props) => <NotFound hammock={window.hammock} {...props}/>
 		const CouponsPage = (props) => <CouponAddonSetting hammock={window.hammock} {...props} />
 		const CouponsCreatePage = (props) => <CouponAddonCreate type={`coupons`} hammock={window.hammock} {...props} />
@@ -24,6 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				</Switch>
 			</HashRouter>
 		);
-		ReactDOM.render(routing, jengaPressContainer);
+		ReactDOM.render(routing, hammockContainer);
 	}
 });

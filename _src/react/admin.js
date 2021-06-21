@@ -5,12 +5,12 @@ import NetworkAdmin from './admin/containers/network/Admin';
 import SiteAdmin from './admin/containers/subsite/Admin';
 
 document.addEventListener('DOMContentLoaded', function () {
-	const jengaPressContainer = document.getElementById( 'hammock-admin-container' );
-	if ( jengaPressContainer !== null ) {
+	const hammockContainer = document.getElementById( 'hammock-admin-container' );
+	if ( hammockContainer !== null ) {
 		if ( window.hammock.is_multisite ) {
-			ReactDOM.render(<NetworkAdmin hammock={window.hammock} />, jengaPressContainer);
+			ReactDOM.render(<NetworkAdmin hammock={window.hammock} />, hammockContainer);
 		} else {
-			ReactDOM.render(<SiteAdmin hammock={window.hammock} />, jengaPressContainer);
+			ReactDOM.render(<SiteAdmin hammock={window.hammock} />, hammockContainer);
 		}
 	}
 });
