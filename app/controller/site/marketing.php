@@ -8,12 +8,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 use Hammock\Base\Controller;
 
 /**
- * Members controller
- * Manages all members
+ * Marketing controller
+ * Manages all marketing elements used to boost the site
  *
  * @since 1.0.0
  */
-class Members extends Controller {
+class Marketing extends Controller {
 
 	/**
 	 * Page id
@@ -39,7 +39,7 @@ class Members extends Controller {
 	 *
 	 * @var string
 	 */
-	const MENU_SLUG = 'members';
+	const MENU_SLUG = 'marketing';
 
 	/**
 	 * String translations
@@ -55,7 +55,7 @@ class Members extends Controller {
 	 *
 	 * @since  1.0.0
 	 *
-	 * @var Members
+	 * @var Marketing
 	 */
 	private static $instance = null;
 
@@ -67,7 +67,7 @@ class Members extends Controller {
 	 * @static
 	 * @access public
 	 *
-	 * @return Members
+	 * @return Marketing
 	 */
 	public static function instance() {
 		if ( ! self::$instance ) {
@@ -76,6 +76,7 @@ class Members extends Controller {
 
 		return self::$instance;
 	}
+
 
 	/**
 	 * Create the menu page
@@ -90,13 +91,14 @@ class Members extends Controller {
 		$this->_cap     = $cap;
 		add_submenu_page(
 			$slug,
-			__( 'Members', 'hammock' ),
-			__( 'Members', 'hammock' ),
+			__( 'Marketing', 'hammock' ),
+			__( 'Marketing', 'hammock' ),
 			$this->_cap,
 			$this->_page_id,
 			array( $this, 'render' )
 		);
 	}
+
 
 	/**
 	 * Set up admin js variables
@@ -109,50 +111,7 @@ class Members extends Controller {
 	 */
 	function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'members' ) ) {
-			$service = new \Hammock\Services\Memberships();
-			$vars['common']['string']['title'] = __( 'Members', 'hammock' );
-			$vars['active_page']               = 'members';
-			$vars['strings']                   = $this->get_strings();
-			$vars['page_strings']              = array(
-				'type'		=> $service->list_simple_memberships(),
-				'gateways' 	=> \Hammock\Services\Gateways::list_simple_gateways(),
-			);
+
 		}
-		return $vars;
-	}
-
-	/**
-	 * Get the strings
-	 * This sets the strings if not defined
-	 *
-	 * @since 1.0.0
-	 */
-	private function get_strings() {
-		if ( empty( $this->strings ) ) {
-			$this->strings = include HAMMOCK_LOCALE_DIR . '/site/members.php';
-		}
-		return $this->strings;
-	}
-
-	/**
-	 * Load controller specific scripts
-	 *
-	 * @since 1.0.0
-	 */
-	public function controller_scripts() {
-		wp_enqueue_script( 'hammock-members-react' );
-	}
-
-	/**
-	 * Render view
-	 *
-	 * @return String
-	 */
-	public function render() {
-
-		?>
-		<div id="hammock-members-container"></div>
-		<?php
 	}
 }
-?>

@@ -22,16 +22,16 @@ export default class Admin extends Component {
 						<MembersDashboard hammock={hammock} />
 						<MembershipDashboard hammock={hammock} />
 						<div className="uk-background-default uk-margin-medium-top uk-padding-small uk-panel uk-height-medium">
-							<p className="uk-h4">{hammock.strings.management.title}</p>
+							<p className="uk-h4">{hammock.strings.dashboard.management.title}</p>
 							<div>
-								{Object.entries(hammock.strings.management.types).map((type, index) => {
+								{Object.entries(hammock.strings.dashboard.management.types).map((type, index) => {
 									return (<a key={index} href={type[1].url}><div className="uk-margin-small uk-padding-small uk-card uk-card-default uk-card-body">{type[1].name}</div></a>)
 								})}
 							</div>
 						</div>
 					</div>
 					<div className="uk-width-1-2@m uk-width-1-1@s">
-						<p className="uk-h4">{hammock.strings.stats.title}</p>
+						<p className="uk-h4">{hammock.strings.dashboard.stats.title}</p>
 						<StatsDashboard hammock={hammock}/>
 					</div>
 				</div>

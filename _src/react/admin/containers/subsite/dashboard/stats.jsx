@@ -51,7 +51,7 @@ export default class StatsDashboard extends Component {
 		var subscribers = this.state.subscribers;
 		var transactions = this.state.transactions;
 		var hammock = this.props.hammock,
-			days = hammock.strings.stats.charts.days;
+			days = hammock.strings.dashboard.stats.charts.days;
 		const options = {
 			scales: {
 				yAxes: [
@@ -82,7 +82,7 @@ export default class StatsDashboard extends Component {
 								labels: [days.mon, days.tue, days.wed, days.thu, days.fri, days.sat, days.sun],
 								datasets: [
 									{
-										label: hammock.strings.stats.charts.subscribers,
+										label: hammock.strings.dashboard.stats.charts.subscribers,
 										data: [subscribers.mon, subscribers.tue, subscribers.wed, subscribers.thu, subscribers.fri, subscribers.sat, subscribers.sun],
 										backgroundColor: 'rgb(49, 104, 142)',
 										borderColor: 'rgb(49, 104, 142)',
@@ -91,7 +91,7 @@ export default class StatsDashboard extends Component {
 								],
 							}} options={options}/>
 						) : (
-							<Center text={hammock.strings.stats.no_data.subscribers} backgroundImage={hammock.assets_url + '/img/preloader-chart.jpg'}/>
+							<Center text={hammock.strings.dashboard.stats.no_data.subscribers} backgroundImage={hammock.assets_url + '/img/preloader-chart.jpg'}/>
 						)
 					)}
 				</div>
@@ -104,7 +104,7 @@ export default class StatsDashboard extends Component {
 								labels: [days.mon, days.tue, days.wed, days.thu, days.fri, days.sat, days.sun],
 								datasets: [
 									{
-										label: hammock.strings.stats.charts.transactions,
+										label: hammock.strings.dashboard.stats.charts.transactions,
 										data: [transactions.mon, transactions.tue, transactions.wed, transactions.thu, transactions.fri, transactions.sat, transactions.sun],
 										fill: false,
 										backgroundColor: 'rgb(49, 104, 142)',
@@ -113,7 +113,7 @@ export default class StatsDashboard extends Component {
 								],
 							}} options={options} />
 						) : (
-							<Center text={hammock.strings.stats.no_data.transactions} backgroundImage={hammock.assets_url + '/img/preloader-chart.jpg'}/>
+							<Center text={hammock.strings.dashboard.stats.no_data.transactions} backgroundImage={hammock.assets_url + '/img/preloader-chart.jpg'}/>
 						)
 					)}
 				</div>

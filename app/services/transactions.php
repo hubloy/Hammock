@@ -414,7 +414,7 @@ class Transactions {
 	public function get_weekly_transaction_stats() {
 		global $wpdb;
 		$members	= array();
-		$sql 		= "SELECT sum(`amount`) as total, WEEKDAY(`due_date`) as week_day FROM {$this->plans_table_name} WHERE `status` = %s AND `due_date` BETWEEN (FROM_DAYS(TO_DAYS(CURDATE())-MOD(TO_DAYS(CURDATE())-1,7))) AND (FROM_DAYS(TO_DAYS(CURDATE())-MOD(TO_DAYS(CURDATE())-1,7)) + INTERVAL 7 DAY)";
+		$sql 		= "SELECT sum(`amount`) as total, WEEKDAY(`due_date`) as week_day FROM {$this->table_name} WHERE `status` = %s AND `due_date` BETWEEN (FROM_DAYS(TO_DAYS(CURDATE())-MOD(TO_DAYS(CURDATE())-1,7))) AND (FROM_DAYS(TO_DAYS(CURDATE())-MOD(TO_DAYS(CURDATE())-1,7)) + INTERVAL 7 DAY)";
 		$results    = $wpdb->get_results( $wpdb->prepare( $sql, self::STATUS_PAID ) );
 		if ( ! empty( $results ) ) {
 			foreach ( $results as $result ) {

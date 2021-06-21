@@ -420,9 +420,9 @@ class Plugin extends Controller {
 	 */
 	function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'hammock' ) ) {
-			$vars['common']['string']['title'] = __( 'Dashboard', 'hammock' );
-			$vars['active_page']               = 'dashboard';
-			$vars['strings']                   = $this->get_strings();
+			$vars['common']['string']['title'] 	= __( 'Dashboard', 'hammock' );
+			$vars['active_page']               	= 'dashboard';
+			$vars['strings']['dashboard']		= $this->get_strings();
 		}
 		return $vars;
 	}

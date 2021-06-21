@@ -43,14 +43,14 @@ export default class MembershipDashboard extends Component {
 					<Preloader />
 				) : (
 					<React.Fragment>
-						<p className="uk-h4">{hammock.strings.memberships.title} <span className="hammock-badge-circle">{memberships.length}</span></p>
+						<p className="uk-h4">{hammock.strings.dashboard.memberships.title} <span className="hammock-badge-circle">{memberships.length}</span></p>
 						<div>
 							{memberships.length <= 0 ? (
-								<Center text={hammock.strings.memberships.none} className="uk-text-info" />
+								<Center text={hammock.strings.dashboard.memberships.none} className="uk-text-info" />
 							) : (
 								<ul className="uk-list uk-list-striped">
 									{memberships.map(item =>
-										<li key={item.id}><a className="uk-text-primary" href={hammock.strings.memberships.url + "#/edit/" + item.id}>{item.name}</a></li>
+										<li key={item.id}><a className="uk-text-primary" href={hammock.strings.dashboard.memberships.url + "#/edit/" + item.id}>{item.name}</a></li>
 									)}
 								</ul>
 							)}
