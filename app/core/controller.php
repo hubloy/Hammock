@@ -27,6 +27,7 @@ class Controller {
 		\Hammock\Controller\Site\Invites::instance();
 		\Hammock\Controller\Site\Settings::instance();
 		\Hammock\Controller\Site\Activity::instance();
+		\Hammock\Controller\Site\Marketing::instance();
 		\Hammock\Controller\Site\Shortcodes::instance();
 		\Hammock\Controller\Site\Memberships::instance();
 		\Hammock\Controller\Site\Transactions::instance();

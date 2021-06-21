@@ -113,6 +113,7 @@ class Marketing extends Controller {
 		if ( $this->is_page( 'marketing' ) ) {
 
 		}
+		return $vars;
 	}
 
 
