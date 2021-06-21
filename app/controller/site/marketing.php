@@ -110,8 +110,44 @@ class Marketing extends Controller {
 	 * @return array
 	 */
 	function admin_js_vars( $vars ) {
-		if ( $this->is_page( 'members' ) ) {
+		if ( $this->is_page( 'marketing' ) ) {
 
 		}
+	}
+
+
+	/**
+	 * Get the strings
+	 * This sets the strings if not defined
+	 *
+	 * @since 1.0.0
+	 */
+	private function get_strings() {
+		if ( empty( $this->strings ) ) {
+			$this->strings = include HAMMOCK_LOCALE_DIR . '/site/marketing.php';
+		}
+		return $this->strings;
+	}
+
+
+	/**
+	 * Load controller specific scripts
+	 *
+	 * @since 1.0.0
+	 */
+	public function controller_scripts() {
+		wp_enqueue_script( 'hammock-marketing-react' );
+	}
+
+	/**
+	 * Render view
+	 *
+	 * @return String
+	 */
+	public function render() {
+
+		?>
+		<div id="hammock-marketing-container"></div>
+		<?php
 	}
 }
