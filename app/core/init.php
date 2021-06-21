@@ -17,6 +17,7 @@ class Init {
 	 * @since 1.0.0
 	 */
 	public static function activate() {
+		flush_rewrite_rules();
 		\Hammock\Helper\Logger::init_directory();
 		Database::init();
 	}

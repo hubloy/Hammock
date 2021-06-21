@@ -151,6 +151,7 @@ class Settings extends Rest {
 
 		$settings             	= new \Hammock\Model\Settings();
 		$pages					= $settings->get_general_setting( 'pages', array() );
+		$flush_rules			= false;
 		if ( $membership_list == 'c' ) {
 			$page_id = Pages::create( 'membership_list' );
 			$pages['membership_list'] = $page_id;
@@ -164,15 +165,22 @@ class Settings extends Rest {
 		} else {
 			$pages['protected_content'] = $protected_content;
 		}
+
 		if ( $account_page == 'c' ) {
+			$flush_rules = true;
 			$page_id = Pages::create( 'account_page' );
 			$pages['account_page'] = $page_id;
 		} else {
+			if ( isset( $pages['account_page'] ) && ( $pages['account_page'] !== $account_page ) ) {
+				$flush_rules = true;
+			}
 			$pages['account_page'] = $account_page;
 		}
 
-		//Flush rules especially for new account pages to be set up well
-		flush_rewrite_rules();
+		if ( $flush_rules ) {
+			//Flush rules especially for new account pages to be set up well
+			flush_rewrite_rules();
+		}
 
 		if ( $settings->get_general_setting( 'account_verification' ) !== $account_verification ) {
 			$type = \Hammock\Services\Emails::COMM_TYPE_REGISTRATION_VERIFY;
