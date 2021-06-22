@@ -12,7 +12,10 @@ export default class MailChimpSettings extends Component {
         this.state = {
             settings: {},
             loading : true,
-			error : false
+			error : false,
+			lists : [],
+			valid: false,
+			enabled : false
         };
         
         this.fetchWP = new fetchWP({
@@ -21,6 +24,7 @@ export default class MailChimpSettings extends Component {
         });
 
 		this.mailchimp_settings = React.createRef();
+		this.showOptions = this.showOptions.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -34,6 +38,8 @@ export default class MailChimpSettings extends Component {
                 settings : json,
                 loading : false,
 				error : false,
+				enabled : ( json.enabled == 1 ),
+				valid : ( json.valid == 1 )
             }), (err) => this.setState({ loading : false, error : true })
         );
     }
@@ -42,6 +48,10 @@ export default class MailChimpSettings extends Component {
 	handleSubmit( event ) {
         event.preventDefault();
 
+	}
+
+	showOptions( checked ) {
+		this.setState({ enabled: checked });
 	}
 
 	render() {
@@ -58,33 +68,40 @@ export default class MailChimpSettings extends Component {
 				)
 			} else {
 				var hammock = this.props.hammock;
-				var data = this.state.settings;
+				var data = this.state.settings,
+					enabled = this.state.enabled,
+					valid = this.state.valid;
 				return (
 					<form name="hammock-settings-form" className="uk-form-horizontal uk-margin-small" method="POST" onSubmit={this.handleSubmit} ref={this.mailchimp_settings}>
-						
-						<div className="uk-margin">
-							<label className="uk-form-label" htmlFor="apikey">{hammock.strings.mailchimp.apikey}</label>
-							<div className="uk-form-controls">
-								<div className="uk-grid-collapse uk-child-width-expand@s uk-text-center" uk-grid="">
-									<div className="uk-width-expand">
-										<div className="uk-inline uk-width-1-1">
-											<span className="uk-form-icon uk-form-icon-flip success" uk-icon="icon: check"></span>
-											<InputUI name={`apikey`} type={`text`} value={data.apikey} />
-										</div>
-									</div>
-									<div className="uk-width-auto uk-margin-small-left">
-										<a className="uk-button uk-button-primary">{hammock.strings.mailchimp.validate}</a>
-									</div>
-								</div>
-								<p className="uk-text-meta" dangerouslySetInnerHTML={{ __html: hammock.strings.mailchimp.info }} />
-							</div>
-						</div>
 						<div className="uk-margin">
 							<label className="uk-form-label" htmlFor="apikey">{hammock.strings.mailchimp.enabled}</label>
 							<div className="uk-form-controls hammock-input">
-								<CheckBox name={`enabled`} value={`1`} checked={data.enabled == 1}/>
+								<CheckBox name={`enabled`} action={this.showOptions} value={`1`} checked={enabled}/>
 							</div>
 						</div>
+						{enabled &&
+							<React.Fragment>
+								<div className="uk-margin">
+									<label className="uk-form-label" htmlFor="apikey">{hammock.strings.mailchimp.apikey}</label>
+									<div className="uk-form-controls">
+										<div className="uk-grid-collapse uk-child-width-expand@s uk-text-center" uk-grid="">
+											<div className="uk-width-expand">
+												<div className="uk-inline uk-width-1-1">
+													{valid &&
+														<span className="uk-form-icon uk-form-icon-flip success" uk-icon="icon: check"></span>
+													}
+													<InputUI name={`apikey`} type={`text`} value={data.apikey} />
+												</div>
+											</div>
+											<div className="uk-width-auto uk-margin-small-left">
+												<a className="uk-button uk-button-primary">{hammock.strings.mailchimp.validate}</a>
+											</div>
+										</div>
+										<p className="uk-text-meta" dangerouslySetInnerHTML={{ __html: hammock.strings.mailchimp.info }} />
+									</div>
+								</div>
+							</React.Fragment>
+						}
 					</form>
 				)
 			}

@@ -10,6 +10,15 @@ use Hammock\Base\Addon;
 class Mailchimp extends Addon {
 
 	/**
+	 * The API instance
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @var API
+	 */
+	private $api = null;
+
+	/**
 	 * Singletone instance of the addon.
 	 *
 	 * @since  1.0.0
