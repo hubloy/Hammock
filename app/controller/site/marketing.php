@@ -111,7 +111,9 @@ class Marketing extends Controller {
 	 */
 	function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'marketing' ) ) {
-
+			$vars['common']['string']['title'] = __( 'Marketing', 'hammock' );
+			$vars['active_page']               = 'marketing';
+			$vars['strings']                   = $this->get_strings();
 		}
 		return $vars;
 	}

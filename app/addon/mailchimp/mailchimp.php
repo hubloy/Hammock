@@ -54,7 +54,7 @@ class Mailchimp extends Addon {
 				'name'        => __( 'MailChimp Integration', 'hammock' ),
 				'description' => __( 'MailChimp integration.', 'hammock' ),
 				'icon'        => 'dashicons dashicons-email',
-				'settings'    => true,
+				'url'   	  => admin_url( 'admin.php?page=hammock-marketing' ),
 			);
 		}
 		return $addons;

@@ -9,5 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 
 return array(
-
+	'nav'	=> array(
+		'mailchimp'	=> __( 'MailChimp', 'hammock' )
+	)
 );
