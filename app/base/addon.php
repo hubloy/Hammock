@@ -38,6 +38,7 @@ class Addon extends Component {
 		$this->add_filter( 'hammock_register_addons', 'register' );
 		$this->add_filter( 'hammock_register_addon_setting_link', 'settings_link' );
 		$this->add_filter( 'hammock_get_addon_' . $this->id . '_active', 'plugin_active' );
+		$this->add_filter( 'hammock_addon_' . $this->id . '_action', 'addon_action', 10, 2 );
 		if ( $this->is_enabled() ) {
 			$this->add_action( 'hammock_init_addon', 'init_addon' );
 		}
@@ -154,8 +155,26 @@ class Addon extends Component {
 		return $enabled;
 	}
 
+	/**
+	 * Used to check if a dependancy is active
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return bool
+	 */
 	public function plugin_active() {
 		return true;
+	}
+
+	/**
+	 * Used to handle custom addon actions
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
+	public function addon_action( $response = array(), $data ) {
+		return $response;
 	}
 }
 

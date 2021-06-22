@@ -120,6 +120,33 @@ class Addons extends Rest {
 				),
 			)
 		);
+
+		//Custom actions
+		register_rest_route(
+			$namespace,
+			self::BASE_API_ROUTE . 'action',
+			array(
+				array(
+					'methods'             => \WP_REST_Server::CREATABLE,
+					'callback'            => array( $this, 'inner_action' ),
+					'permission_callback' => array( $this, 'validate_request' ),
+					'args'                => array(
+						'id'    => array(
+							'required'          => true,
+							'sanitize_callback' => 'sanitize_text_field',
+							'type'              => 'string',
+							'description'       => __( 'The addon unique key', 'hammock' ),
+						),
+						'action' => array(
+							'required'          => true,
+							'sanitize_callback' => 'sanitize_text_field',
+							'type'              => 'string',
+							'description'       => __( 'The custom addon action to call', 'hammock' ),
+						),
+					),
+				),
+			)
+		);
 	}
 
 	/**
@@ -154,7 +181,7 @@ class Addons extends Rest {
 				'active'	=> $active
 			);
 		} else {
-			return new WP_Error( 'rest_addon_invalid', esc_html__( 'The addon does not exist.', 'hammock' ), array( 'status' => 404 ) );
+			return new \WP_Error( 'rest_addon_invalid', esc_html__( 'The addon does not exist.', 'hammock' ), array( 'status' => 404 ) );
 		}
 	}
 
@@ -196,8 +223,21 @@ class Addons extends Rest {
 				200
 			);
 		} else {
-			return new WP_Error( 'rest_addon_invalid', esc_html__( 'The addon does not exist.', 'hammock' ), array( 'status' => 404 ) );
+			return new \WP_Error( 'rest_addon_invalid', esc_html__( 'The addon does not exist.', 'hammock' ), array( 'status' => 404 ) );
 		}
+	}
+
+	/**
+	 * Inner addon actions
+	 * 
+	 * @since 1.0.0
+	 *
+	 * @return mixed
+	 */
+	public function inner_action( $request ) {
+		$id 		= $request['id'];
+		$response 	= apply_filters( 'hammock_addon_' . $id . '_action', array( 'success' => true, 'message' => __( 'Action executed', 'hammock' ) ), $request );
+		return $response;
 	}
 }
 

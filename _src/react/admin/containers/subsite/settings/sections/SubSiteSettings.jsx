@@ -28,6 +28,7 @@ export default class SubSiteSettings extends Component {
     }
 
     get_settings = async () => {
+		this.setState({ loading : true, error : false });
         this.fetchWP.get( 'settings/get' )
             .then( (json) => this.setState({
                 settings : json,
@@ -68,8 +69,7 @@ export default class SubSiteSettings extends Component {
             .then( (json) => {
                 if ( json.status ) {
                     helper.alert( this.props.hammock.common.status.success, json.message, 'success');
-                    self.get_pages();
-                    self.get_settings();
+					Promise.all([self.get_settings(), self.get_pages()]); 
                 } else {
                     helper.alert( this.props.hammock.common.status.error, json.message, 'warning' );
                 }

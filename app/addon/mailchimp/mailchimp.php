@@ -125,5 +125,34 @@ class Mailchimp extends Addon {
 			'message'	=> __( 'MailChimp Settings Saved', 'hammock' )
 		);
 	}
+
+
+	/**
+	 * Used to handle custom addon actions
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
+	public function addon_action( $response = array(), $data ) {
+		$action = sanitize_text_field( $data['action'] );
+		switch ( $action ) {
+			case 'check_status':
+				$apikey 	= sanitize_text_field( $data['apikey'] );
+				$this->api 	= new Api( $apikey );
+				$lists		= $this->api->get_lists();
+				if ( is_wp_error( $lists ) ) {
+					return array( 'error' => true, 'message' => sprintf( __( 'Error: %s', 'hammock' ), $lists->get_error_message() ) );
+				}
+				//Set the api key
+				$settings   		= $this->settings();
+				$settings['apikey']	= $apikey;
+				$this->settings->set_addon_setting( $this->id, $settings );
+				$this->settings->save();
+				return array( 'success' => true, 'message' => __( 'Valid API key', 'hammock' ), 'lists' => $lists );
+				break;
+		}
+		return array( 'success' => true, 'message' => __( 'Action executed', 'hammock' ) );
+	}
 }
 

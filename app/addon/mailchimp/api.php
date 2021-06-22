@@ -117,7 +117,7 @@ class Api {
 	public function get_lists( $count = 0 ) {
 		return $this->_get( 'lists', array(
 			'user' => $this->_user . ':' . $this->_api_key,
-			'count' => ( $count > 0 ) ? ( $count * 10 ) : 10
+			'count' => ( $count > 0 ) ? ( $count * 20 ) : 20
 		) );
 	}
 

@@ -25,6 +25,7 @@ export default class MailChimpSettings extends Component {
 
 		this.mailchimp_settings = React.createRef();
 		this.showOptions = this.showOptions.bind(this);
+		this.validateApiKey = this.validateApiKey.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -48,6 +49,38 @@ export default class MailChimpSettings extends Component {
 	handleSubmit( event ) {
         event.preventDefault();
 
+	}
+
+
+	validateApiKey( event ) {
+		event.preventDefault();
+		var form = this.form_form.current,
+			$button = form.querySelectorAll('.submit-button')[0],
+			apikey = form.getElementsByName('apikey')[0],
+			content = $button.innerHTML,
+			self = this,
+			hammock = self.props.hammock,
+			helper = hammock.helper;
+		$button.disabled = true;
+		$button.innerHTML = "<div uk-spinner></div>";
+		this.fetchWP.post( 'addons/action', { id: 'mailchimp', action : 'check_status', apikey : apikey.value } )
+			.then( (json) => {
+				if ( json.status ) {
+                    helper.alert( this.props.hammock.common.status.success, json.message, 'success');
+					self.setState({ valid : true });
+                } else {
+                    helper.alert( this.props.hammock.common.status.error, json.message, 'warning' );
+					self.setState({ valid : false });
+                }
+                $button.disabled = false;
+                $button.innerHTML = content;
+			}, (err) => {
+				$button.disabled = false;
+                $button.innerHTML = content;
+				helper.alert( this.props.hammock.common.status.error, err.message, 'error' );
+				self.setState({ valid : false });
+			}
+		);
 	}
 
 	showOptions( checked ) {
@@ -94,7 +127,7 @@ export default class MailChimpSettings extends Component {
 												</div>
 											</div>
 											<div className="uk-width-auto uk-margin-small-left">
-												<a className="uk-button uk-button-primary">{hammock.strings.mailchimp.validate}</a>
+												<a className="uk-button uk-button-primary validation-button" onClick={this.validateApiKey}>{hammock.strings.mailchimp.validate}</a>
 											</div>
 										</div>
 										<p className="uk-text-meta" dangerouslySetInnerHTML={{ __html: hammock.strings.mailchimp.info }} />
