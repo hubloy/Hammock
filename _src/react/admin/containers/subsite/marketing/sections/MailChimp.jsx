@@ -67,7 +67,7 @@ export default class MailChimpSettings extends Component {
 			.then( (json) => {
 				if ( json.status ) {
                     helper.alert( this.props.hammock.common.status.success, json.message, 'success');
-					self.setState({ valid : true });
+					self.setState({ valid : true, lists : json.lists });
                 } else {
                     helper.alert( this.props.hammock.common.status.error, json.message, 'warning' );
 					self.setState({ valid : false });
