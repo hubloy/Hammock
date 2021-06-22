@@ -70,6 +70,78 @@
 		}
 	}
 
+	.switch-checkbox {
+		.switch {
+			position: relative;
+			width: 115px;
+			height: 36px;
+			overflow: hidden;
+			border: 1px solid $green-color;
+			.checkbox {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				padding: 0;
+				margin: 0;
+				opacity: 0;
+				cursor: pointer;
+				z-index: 3;
+
+				&:checked + .knobs span{
+					color: #4e4e4e;
+				}
+
+				&:checked + .knobs:before {
+					left: 57px;
+					background-color: $blue-color;
+				}
+
+				&:checked + .knobs:after {
+					color: $white-color;
+				}
+
+				&:checked ~ .layer {
+					background-color: #fcebeb;
+				}
+			}
+			.knobs {
+				z-index: 2;
+				
+				&:before, &:after, span{
+					position: absolute;
+					top: 0;
+					width: 50px;
+					height: 16px;
+					font-size: 10px;
+					font-weight: bold;
+					text-align: center;
+					line-height: 1;
+					padding: 11px 4px;
+					border-radius: 2px;
+					transition: 0.3s ease all;
+				}
+
+				&:before {
+					content: '';
+					left: 0px;
+					background-color: $black-color;
+				}
+				&:after{
+					right: 0px;
+					padding-left: 23px;
+					color: #4e4e4e;
+				}
+				span {
+					display: inline-block;
+					left: 0px;
+					color: #fff;
+					z-index: 1;
+				}
+			}
+
+		}
+	}
+
 	.hammock-no-suggestions {
 		color: $label-gray-color;
 		padding: 0.5rem;

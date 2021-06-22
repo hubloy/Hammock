@@ -105,7 +105,7 @@ class Mailchimp extends Addon {
 		$settings  		= $this->settings();
 
 		$settings['apikey'] 				= $apikey;
-		$settings['double_optin'] 		= $optin;
+		$settings['double_optin'] 			= $optin;
 		$settings['registered_list'] 		= $reg_list;
 		$settings['subscriber_list'] 		= $sub_list;
 		$settings['unsubscriber_list'] 	= $unsub_list;

@@ -229,6 +229,14 @@ class Plugin extends Controller {
 			wp_enqueue_style( 'hammock-jquery-tags' );
 			wp_enqueue_style( 'hammock-styled-notifications' );
 			wp_enqueue_style( 'hammock-admin' );
+
+			$enabled_text = __( 'Enabled', 'hammock' );
+			$custom_css = "
+				.hammock-input .switch-checkbox .switch .knobs::after {
+                    content: '{$enabled_text}';
+                }";
+       		wp_add_inline_style( 'hammock-admin', $custom_css );
+
 			// Add body classes
 			add_filter( 'admin_body_class', array( $this, 'add_body_class' ) );
 		}

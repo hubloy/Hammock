@@ -32,6 +32,10 @@ body {
 		}
 	}
 
+	.success {
+		color: $green-color !important;
+	}
+
 	a {
 		&:active {
 			outline: none;

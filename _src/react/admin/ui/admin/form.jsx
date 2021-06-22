@@ -11,5 +11,6 @@ import { TextAreaUI } from './elements/TextArea';
 import { ToggleInfoBox } from './elements/InfoBox';
 import { Preloader } from './elements/Preloader';
 import { Center } from './elements/Center';
+import { CheckBox } from './elements/CheckBox';
 
-export { CardUI, DropDownUI, InputUI, LinkUI, ModalUI, SwitchUI, PaginationUI, NoticeUI, Canvas, TextAreaUI, ToggleInfoBox, Preloader, Center };
+export { CardUI, DropDownUI, InputUI, LinkUI, ModalUI, SwitchUI, PaginationUI, NoticeUI, Canvas, TextAreaUI, ToggleInfoBox, Preloader, Center, CheckBox };

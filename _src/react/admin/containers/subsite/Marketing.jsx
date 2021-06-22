@@ -5,6 +5,8 @@ import LazyLoad from 'react-lazyload';
 import Dashboard from 'layout/Dashboard';
 import Nav from './marketing/Nav';
 
+import MailChimpSettings from './marketing/sections/MailChimp';
+
 export default class Marketing extends Component {
 	constructor(props) {
 		super(props);
@@ -21,8 +23,12 @@ export default class Marketing extends Component {
 					</LazyLoad>
 					
 					<div className="hammock-settings uk-width-expand uk-margin-left uk-card uk-card-body">
-						<div className="hammock-settings-settings uk-background-default uk-padding-small uk-border-rounded">
-							
+						<div className="hammock-settings-settings hammock-marketing-settings uk-background-default uk-padding-small uk-border-rounded">
+							{
+								{
+									'mailchimp': <MailChimpSettings hammock={this.props.hammock}/>
+								}[section]
+							}
 						</div>
 					</div>
 				</div>
