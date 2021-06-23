@@ -35,15 +35,35 @@ export default class MailChimpSettings extends Component {
 
 	get_settings = async () => {
         this.fetchWP.get( 'addons/settings?name=mailchimp' )
-            .then( (json) => this.setState({
-                settings : json,
-                loading : false,
-				error : false,
-				enabled : ( json.enabled == 1 ),
-				valid : ( json.valid == 1 )
-            }), (err) => this.setState({ loading : false, error : true })
+            .then( (json) => {
+				this.setState({
+					settings : json,
+					loading : false,
+					error : false,
+					enabled : json.enabled,
+					valid : json.valid
+				});
+
+				if (json.valid) {
+					this.get_lists();
+				}
+			}, (err) => this.setState({ loading : false, error : true })
         );
     }
+
+	get_lists = async () => {
+		this.fetchWP.post( 'addons/action', { id: 'mailchimp', action : 'get_lists' } )
+			.then( (json) => {
+				if ( json.status ) {
+					self.setState({ lists : json.lists });
+                } else {
+					self.setState({ lists : [] });
+                }
+			}, (err) => {
+				self.setState({ lists : [] });
+			}
+		);
+	}
 	
 
 	handleSubmit( event ) {
