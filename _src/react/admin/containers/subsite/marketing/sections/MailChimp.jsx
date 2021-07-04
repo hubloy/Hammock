@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import fetchWP from 'utils/fetchWP'
 import { CheckBox, InputUI, DropDownUI, SwitchUI } from 'ui/admin/form';
+import { toast } from 'react-toastify';
 
 export default class MailChimpSettings extends Component {
 
@@ -34,6 +35,11 @@ export default class MailChimpSettings extends Component {
 
 	componentDidMount() {
 		this.get_settings();
+	}
+
+
+	notify(type, message) {
+		toast[type](message, {toastId: 'mailchimp-toast'});
 	}
 
 	get_settings = async () => {
@@ -76,24 +82,23 @@ export default class MailChimpSettings extends Component {
 			$button = $form.find('.submit-button'),
 			$btn_txt = $button.text(),
 			form = $form.serialize(),
-			hammock = this.props.hammock,
-			helper = hammock.helper;
+			hammock = this.props.hammock;
 		$button.attr('disabled', 'disabled');
 		$button.html("<div uk-spinner></div>");
 		this.fetchWP.post( 'addons/settings/update', form, true )
 			.then( (json) => {
 				console.log(json);
 				if ( json.status ) {
-					helper.alert( hammock.common.status.success, json.message, 'success' );
+					self.notify( 'success', json.message );
 				} else {
-					helper.alert( hammock.common.status.error, json.message, 'warning' );
+					self.notify( 'warning', json.message );
 				}
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				helper.alert( hammock.common.status.error, self.props.hammock.error, 'error' );
+				self.notify( 'error', hammock.error );
 			}
 		);
 	}
@@ -106,17 +111,16 @@ export default class MailChimpSettings extends Component {
 			apikey = form.querySelectorAll('.apikey')[0],
 			content = $button.innerHTML,
 			self = this,
-			hammock = self.props.hammock,
-			helper = hammock.helper;
+			hammock = self.props.hammock;
 		$button.disabled = true;
 		$button.innerHTML = "<div uk-spinner></div>";
 		this.fetchWP.post( 'addons/action', { id: 'mailchimp', action : 'check_status', apikey : apikey.value } )
 			.then( (json) => {
 				if ( json.success ) {
-                    helper.alert( hammock.common.status.success, json.message, 'success');
+                    self.notify( 'success', json.message );
 					self.setState({ valid : true, lists : json.lists, loading_lists : false });
                 } else {
-                    helper.alert( hammock.common.status.error, json.message, 'warning' );
+                    self.notify( 'warning', json.message );
 					self.setState({ valid : false });
                 }
                 $button.disabled = false;
@@ -124,7 +128,7 @@ export default class MailChimpSettings extends Component {
 			}, (err) => {
 				$button.disabled = false;
                 $button.innerHTML = content;
-				helper.alert( hammock.common.status.error, err.message, 'error' );
+				self.notify( 'error', hammock.error );
 				self.setState({ valid : false });
 			}
 		);
