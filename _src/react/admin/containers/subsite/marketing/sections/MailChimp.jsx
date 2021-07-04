@@ -89,7 +89,7 @@ export default class MailChimpSettings extends Component {
 			.then( (json) => {
 				console.log(json);
 				if ( json.status ) {
-					self.notify( 'success', json.message );
+					self.notify( 'info', json.message );
 				} else {
 					self.notify( 'warning', json.message );
 				}
@@ -117,7 +117,7 @@ export default class MailChimpSettings extends Component {
 		this.fetchWP.post( 'addons/action', { id: 'mailchimp', action : 'check_status', apikey : apikey.value } )
 			.then( (json) => {
 				if ( json.success ) {
-                    self.notify( 'success', json.message );
+                    self.notify( 'info', json.message );
 					self.setState({ valid : true, lists : json.lists, loading_lists : false });
                 } else {
                     self.notify( 'warning', json.message );
