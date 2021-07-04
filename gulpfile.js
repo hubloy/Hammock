@@ -9,7 +9,7 @@ var paths = {
 // Load packages
 var gulp = require('gulp'),
 	{ watch } = require('gulp'),
-	sass = require('gulp-sass'),
+	sass = require('gulp-sass')(require('sass')),
 	postcss = require('gulp-postcss'),
 	notify = require('gulp-notify'),
 	concat = require('gulp-concat'),

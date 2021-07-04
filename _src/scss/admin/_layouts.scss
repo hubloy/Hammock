@@ -2,6 +2,11 @@ body {
 	height: auto !important;
 }
 .hammock-dashboard {
+
+	.Toastify__toast-container--top-center {
+		top:5em !important;
+	}
+	
 	#wpbody-content {
 		background: #f1f1f1;
 	}
