@@ -104,7 +104,7 @@ export default class List extends PureComponent {
 						<Canvas canvas_id={`addons-settings`}>
 							<h3 className="addon-title">{hammock.common.status.loading}</h3>
 							<div className="uk-container uk-padding-remove">
-								<form className="uk-form-horizontal uk-margin-large" onSubmit={this.handleUpdateAddonSetting.bind} ref={this.addon_side_content}>
+								<form className="uk-form-horizontal uk-margin-large" onSubmit={this.handleUpdateAddonSetting} ref={this.addon_side_content}>
 									<InputUI name={`id`} class_name={`addon_id`} type={`hidden`} value=''/>
 									<div className="addon-content">
 

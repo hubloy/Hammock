@@ -107,17 +107,19 @@ class Mailchimp extends Addon {
 	 */
 	public function update_settings( $response = array(), $data ) {
 		$apikey 		= sanitize_text_field( $data['apikey'] );
+		$enabled 		= isset( $data['enabled'] ) ? 1 : 0;
 		$optin 			= isset( $data['double_optin'] ) ? 1 : 0;
 		$reg_list 		= sanitize_text_field( $data['registered_list'] );
 		$sub_list 		= sanitize_text_field( $data['subscriber_list'] );
 		$unsub_list 	= sanitize_text_field( $data['unsubscriber_list'] );
 		$settings  		= $this->settings();
 
+		$settings['enabled']				= $enabled;
 		$settings['apikey'] 				= $apikey;
 		$settings['double_optin'] 			= $optin;
 		$settings['registered_list'] 		= $reg_list;
 		$settings['subscriber_list'] 		= $sub_list;
-		$settings['unsubscriber_list'] 	= $unsub_list;
+		$settings['unsubscriber_list'] 		= $unsub_list;
 		$this->settings->set_addon_setting( $this->id, $settings );
 		$this->settings->save();
 		return array(
@@ -138,9 +140,11 @@ class Mailchimp extends Addon {
 		$action = sanitize_text_field( $data['action'] );
 		switch ( $action ) {
 			case 'check_status':
-				$apikey 	= sanitize_text_field( $data['apikey'] );
-				$this->api 	= new Api( $apikey );
-				$lists		= $this->get_lists();
+				$apikey 		= sanitize_text_field( $data['apikey'] );
+				$exploded 		= explode( '-', $apikey );
+				$data_center 	= end( $exploded );
+				$this->api 		= new Api( $apikey, $data_center );
+				$lists			= $this->get_lists();
 				if ( is_wp_error( $lists ) ) {
 					return array( 'error' => true, 'message' => sprintf( __( 'Error: %s', 'hammock' ), $lists->get_error_message() ) );
 				}
@@ -155,9 +159,12 @@ class Mailchimp extends Addon {
 				return array( 'success' => true, 'message' => __( 'Valid API key', 'hammock' ), 'lists' => $lists );
 			break;
 			case 'get_lists':
-				$settings   = $this->settings();
-				$this->api 	= new Api( $settings['apikey'] );
-				$lists		= $this->get_lists();
+				$settings   	= $this->settings();
+				$apikey 		= $settings['apikey'];
+				$exploded 		= explode( '-', $apikey );
+				$data_center 	= end( $exploded );
+				$this->api 		= new Api( $apikey, $data_center );
+				$lists			= $this->get_lists();
 				if ( is_wp_error( $lists ) ) {
 					return array( 'error' => true, 'message' => sprintf( __( 'Error: %s', 'hammock' ), $lists->get_error_message() ) );
 				} else {
@@ -180,16 +187,15 @@ class Mailchimp extends Addon {
 		if ( is_wp_error( $response ) ) {
 			return $response;
 		}
-		$lists 		= array();
+		$lists 		= array(
+			''	=> __( 'Select List', 'hammock' )
+		);
 		$_lists   	= $response->lists;
 		$total    	= $response->total_items;
 		if ( is_array( $_lists ) ) {
 			foreach( $_lists as $list ) {
-				$list = (array) $list;
-				array_push( $lists, array(
-					'label' 	=> $list['name'],
-					'value' 	=> $list['id']
-				) );
+				$list 				= (array) $list;
+				$lists[$list['id']] = $list['name'];
 			}
 		}
 		return $lists;
