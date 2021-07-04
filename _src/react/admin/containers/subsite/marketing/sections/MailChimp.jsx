@@ -76,11 +76,13 @@ export default class MailChimpSettings extends Component {
 			$button = $form.find('.submit-button'),
 			$btn_txt = $button.text(),
 			form = $form.serialize(),
-			helper = window.hammock.helper;
+			hammock = this.props.hammock,
+			helper = hammock.helper;
 		$button.attr('disabled', 'disabled');
 		$button.html("<div uk-spinner></div>");
 		this.fetchWP.post( 'addons/settings/update', form, true )
 			.then( (json) => {
+				console.log(json);
 				if ( json.status ) {
 					helper.alert( hammock.common.status.success, json.message, 'success' );
 				} else {
