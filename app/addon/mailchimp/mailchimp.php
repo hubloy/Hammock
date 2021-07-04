@@ -107,7 +107,7 @@ class Mailchimp extends Addon {
 	 */
 	public function update_settings( $response = array(), $data ) {
 		$apikey 		= sanitize_text_field( $data['apikey'] );
-		$optin 			= isset( $data['double_optin'] );
+		$optin 			= isset( $data['double_optin'] ) ? 1 : 0;
 		$reg_list 		= sanitize_text_field( $data['registered_list'] );
 		$sub_list 		= sanitize_text_field( $data['subscriber_list'] );
 		$unsub_list 	= sanitize_text_field( $data['unsubscriber_list'] );

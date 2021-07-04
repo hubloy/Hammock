@@ -33,7 +33,7 @@ class Template {
 	 * @return string
 	 */
 	public static function template_directory() {
-		return apply_filters( 'hammock_template_directory', 'hubloy-membr' );
+		return apply_filters( 'hammock_template_directory', 'hammock' );
 	}
 
 	/**
@@ -46,7 +46,7 @@ class Template {
 	 * @return string
 	 */
 	public static function get_theme_template_file( $template ) {
-		return get_stylesheet_directory() . '/' . apply_filters( 'hammock_template_directory', 'hubloy-membr', $template ) . '/' . $template;
+		return get_stylesheet_directory() . '/' . apply_filters( 'hammock_template_directory', 'hammock', $template ) . '/' . $template;
 	}
 
 	/**

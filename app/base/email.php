@@ -106,7 +106,6 @@ class Email extends Component {
 	/**
 	 * Strings to find in subjects/headings.
 	 *
-	 * @deprecated 3.2.0 in favour of placeholders
 	 * @var array
 	 */
 	public $find = array();
@@ -114,7 +113,6 @@ class Email extends Component {
 	/**
 	 * Strings to replace in subjects/headings.
 	 *
-	 * @deprecated 3.2.0 in favour of placeholders
 	 * @var array
 	 */
 	public $replace = array();

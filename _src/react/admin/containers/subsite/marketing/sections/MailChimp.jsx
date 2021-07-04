@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import fetchWP from 'utils/fetchWP'
-import { CheckBox, InputUI, DropDownUI } from 'ui/admin/form';
+import { CheckBox, InputUI, DropDownUI, SwitchUI } from 'ui/admin/form';
 
 export default class MailChimpSettings extends Component {
 
@@ -123,7 +123,8 @@ export default class MailChimpSettings extends Component {
 				var hammock = this.props.hammock;
 				var data = this.state.settings,
 					enabled = this.state.enabled,
-					valid = this.state.valid;
+					valid = this.state.valid,
+					lists = this.state.lists;
 				return (
 					<form name="hammock-settings-form" className="uk-form-horizontal uk-margin-small" method="POST" onSubmit={this.handleSubmit} ref={this.mailchimp_settings}>
 						<div className="uk-margin">
@@ -153,8 +154,42 @@ export default class MailChimpSettings extends Component {
 										<p className="uk-text-meta" dangerouslySetInnerHTML={{ __html: hammock.strings.mailchimp.info }} />
 									</div>
 								</div>
+								{valid &&
+									<React.Fragment>
+										<div className="uk-margin">
+											<label className="uk-form-label" htmlFor="double_optin">{hammock.strings.mailchimp.opt_in.label}</label>
+											<div className="uk-form-controls">
+												<div className="hammock-input">
+													<SwitchUI name={`double_optin`} class_name={`double_optin`} title={''} value={`1`} selected={data.double_optin} checked={data.double_optin == 1}/>
+													<p className="uk-text-meta">{hammock.strings.mailchimp.opt_in.description}</p>
+												</div>
+											</div>
+										</div>
+										<div className="uk-margin">
+											<label className="uk-form-label" htmlFor="registered_list">{hammock.strings.mailchimp.lists.registered}</label>
+											<div className="uk-form-controls">
+												<DropDownUI name={`registered_list`} values={lists} value={data.registered_list} />
+											</div>
+										</div>
+										<div className="uk-margin">
+											<label className="uk-form-label" htmlFor="subscriber_list">{hammock.strings.mailchimp.lists.subscriber}</label>
+											<div className="uk-form-controls">
+												<DropDownUI name={`subscriber_list`} values={lists} value={data.subscriber_list} />
+											</div>
+										</div>
+										<div className="uk-margin">
+											<label className="uk-form-label" htmlFor="unsubscriber_list">{hammock.strings.mailchimp.lists.unsubscriber}</label>
+											<div className="uk-form-controls">
+												<DropDownUI name={`unsubscriber_list`} values={lists} value={data.unsubscriber_list} />
+											</div>
+										</div>
+									</React.Fragment>
+								}
 							</React.Fragment>
 						}
+						<div className="uk-margin ">
+							<button className="uk-button uk-button-primary save-button">{hammock.common.buttons.save}</button>
+						</div>
 					</form>
 				)
 			}
