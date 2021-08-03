@@ -27,7 +27,7 @@ class Rest extends Component {
 	 * @since 1.0.0
 	 */
 	function register_rest_route() {
-		$this->set_up_route( HAMMOCK_REST_NAMESPACE );
+		$this->set_up_route( untrailingslashit( HAMMOCK_REST_NAMESPACE ) );
 	}
 
 
