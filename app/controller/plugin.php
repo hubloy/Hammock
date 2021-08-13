@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 use Hammock\Base\Controller;
 use Hammock\Core\Resource;
 use Hammock\Helper\Pages;
-
+use Hammock\Core\Util;
 
 class Plugin extends Controller {
 
@@ -157,17 +157,22 @@ class Plugin extends Controller {
 			array( $this, 'render' )
 		);
 
-		/**
-		 * Action to set up additional admin pages
-		 * This is called by the base controller
-		 *
-		 * @param boolean $is_network - if is network page
-		 * @param string $slug - the menu slug
-		 * @param string $cap - the menu capabilities
-		 *
-		 * @since 1.0.0
-		 */
-		do_action( 'hammock_admin_menu_page', self::MENU_SLUG, $cap );
+		$installed = Util::get_option( 'hammock_installed' );
+
+		//Flag to check if wizard has run for first use
+		if ( $installed == 1 ) {
+			/**
+			 * Action to set up additional admin pages
+			 * This is called by the base controller
+			 *
+			 * @param boolean $is_network - if is network page
+			 * @param string $slug - the menu slug
+			 * @param string $cap - the menu capabilities
+			 *
+			 * @since 1.0.0
+			 */
+			do_action( 'hammock_admin_menu_page', self::MENU_SLUG, $cap );
+		}
 	}
 
 	/**
@@ -197,17 +202,22 @@ class Plugin extends Controller {
 			array( $this, 'network_render' )
 		);
 
-		/**
-		 * Action to set up additional admin pages
-		 * This is called by the base controller
-		 *
-		 * @param boolean $is_network - if is network page
-		 * @param string $slug - the menu slug
-		 * @param string $cap - the menu capabilities
-		 *
-		 * @since 1.0.0
-		 */
-		do_action( 'hammock_network_admin_menu_page', self::MENU_SLUG, $cap );
+		$installed = Util::get_option( 'hammock_installed' );
+
+		//Flag to check if wizard has run for first use
+		if ( $installed == 1 ) {
+			/**
+			 * Action to set up additional admin pages
+			 * This is called by the base controller
+			 *
+			 * @param boolean $is_network - if is network page
+			 * @param string $slug - the menu slug
+			 * @param string $cap - the menu capabilities
+			 *
+			 * @since 1.0.0
+			 */
+			do_action( 'hammock_network_admin_menu_page', self::MENU_SLUG, $cap );
+		}
 	}
 
 	/**
@@ -396,6 +406,26 @@ class Plugin extends Controller {
 
 
 	/**
+	 * Render view
+	 * By default it will return the base view
+	 *
+	 * @return String
+	 */
+	public function render() {
+		$installed = Util::get_option( 'hammock_installed' );
+
+		//Flag to check if wizard has run for first use
+		if ( $installed == 1 ) {
+			?>
+			<div id="hammock-admin-container"></div>
+			<?php
+		} else {
+			$this->show_wizard_page();
+		}
+	}
+
+
+	/**
 	 * Render admin page
 	 *
 	 * @since 1.0.0
@@ -403,9 +433,16 @@ class Plugin extends Controller {
 	 * @return string
 	 */
 	function network_render() {
-		?>
-		<div id="hammock-admin-container"></div>
-		<?php
+		$installed = Util::get_option( 'hammock_installed' );
+
+		//Flag to check if wizard has run for first use
+		if ( $installed == 1 ) {
+			?>
+			<div id="hammock-admin-container"></div>
+			<?php
+		} else {
+			$this->show_wizard_page();
+		}
 	}
 
 	/**
@@ -415,6 +452,17 @@ class Plugin extends Controller {
 	 */
 	function register_routes() {
 		do_action( 'hammock_register_rest_route' );
+	}
+
+	/**
+	 * Show the wizard page if first use
+	 * 
+	 * @since 1.0.0
+	 */
+	public function show_wizard_page() {
+		?>
+		<div id="hammock-wizard-container"></div>
+		<?php
 	}
 
 	/**

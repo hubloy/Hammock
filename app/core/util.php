@@ -61,9 +61,9 @@ class Util {
 	 */
 	public static function update_option( $key, $value ) {
 		if ( is_multisite() ) {
-			update_site_option( $key, $value );
+			update_site_option( $key, $value, false );
 		} else {
-			update_option( $key, $value );
+			update_option( $key, $value, false );
 		}
 	}
 
@@ -92,7 +92,7 @@ class Util {
 		if ( ! self::$active_plugins ) {
 			self::init_plugins();
 		}
-		return in_array( 'woocommerce/woocommerce.php', self::$active_plugins ) || array_key_exists( 'woocommerce/woocommerce.php', self::$active_plugins );
+		return in_array( $plugin_slug, self::$active_plugins ) || array_key_exists( $plugin_slug, self::$active_plugins );
 	}
 }
 

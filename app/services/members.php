@@ -532,7 +532,7 @@ class Members {
 				 * 
 				 * @since 1.0.0
 				 */
-				$name = apply_filters( 'jengparess_full_user_names', $user->first_name .  " " . $user->last_name, $user );
+				$name = apply_filters( 'hammock_full_user_names', $user->first_name .  " " . $user->last_name, $user );
 			} else if ( !empty( $user->last_name )) {
 				$name = $user->last_name;
 			} else if ( !empty( $user->first_name ) ) {
@@ -645,7 +645,7 @@ class Members {
 				 * 
 				 * @since 1.0.0
 				 */
-				$name = apply_filters( 'jengparess_full_user_names', $user->first_name .  " " . $user->last_name, $user );
+				$name = apply_filters( 'hammock_full_user_names', $user->first_name .  " " . $user->last_name, $user );
 			} else if ( !empty( $user->last_name )) {
 				$name = $user->last_name;
 			} else if ( !empty( $user->first_name ) ) {
