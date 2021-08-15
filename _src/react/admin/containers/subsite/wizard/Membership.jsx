@@ -72,7 +72,7 @@ export default class WizardCreateMembership extends PureComponent {
                 <div className="uk-margin">
                     <legend className="uk-form-label">{strings.labels.type}</legend>
                     <div className="uk-form-controls">
-                        <DropDownUI name={`membership_type`} values={hammock.page_strings.type} class_name={`hammock-membership-type`}/>
+                        <DropDownUI name={`membership_type`} values={strings.type} class_name={`hammock-membership-type`}/>
                     </div>
                 </div>
                 <div className="uk-margin hammock-membership-date">
@@ -84,7 +84,7 @@ export default class WizardCreateMembership extends PureComponent {
                 <div className="uk-margin hammock-membership-recurring">
                     <legend className="uk-form-label">{strings.labels.recurring_duration}</legend>
                     <div className="uk-form-controls">
-                        <DropDownUI name={`recurring_duration`} values={hammock.page_strings.duration} />
+                        <DropDownUI name={`recurring_duration`} values={strings.duration} />
                     </div>
                 </div>
                 <div className="uk-margin">

@@ -13,7 +13,8 @@ export default class Wizard extends Component {
 		super(props);
         this.state = {
 			loading : true,
-			step : { value : 10, step : 'options' }
+			step : { value : 10, step : 'options' },
+			currency : this.props.hammock.common.currency_code
         };
         this.fetchWP = new fetchWP({
 			api_url: this.props.hammock.api_url,
@@ -36,8 +37,8 @@ export default class Wizard extends Component {
         );
     }
 
-	buttonClick( step ) {
-
+	buttonClick( step, currency ) {
+		this.setState({ step : step, currency : currency });
     }
 
 	render() {
@@ -57,7 +58,7 @@ export default class Wizard extends Component {
 							{
 								{
 									'options': <WizardSettings hammock={hammock} action={this.buttonClick}/>,
-									'membership': <WizardCreateMembership hammock={hammock} action={this.buttonClick}/>
+									'membership': <WizardCreateMembership hammock={hammock} currency={this.state.currency} action={this.buttonClick}/>
 								}[step.step]
 							}
 						</React.Fragment>

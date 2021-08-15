@@ -84,6 +84,8 @@ return array(
 				'days'           	   => __( 'Grant access for the following days', 'hammock' ),
 				'recurring_duration'   => __( 'Recurring Frequency', 'hammock' ),
 			),
+			'type'         => \Hammock\Services\Memberships::payment_types(),
+			'duration'     => \Hammock\Services\Memberships::payment_durations(),
 		)
 	)
 );

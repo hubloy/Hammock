@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use Hammock\Base\Rest;
 use Hammock\Core\Util;
+use Hammock\Helper\Pages;
 
 /**
  * Wizard rest route
@@ -157,10 +158,13 @@ class Wizard extends Rest {
 		//Update wizard step
 		Util::update_option( 'hammock_wizard_step', $stage );
 
+		$code = \Hammock\Helper\Currency::get_membership_currency();
+
 		return array( 
 			'status' 	=> true,
 			'message'	=> __( 'Settings updated', 'hammock' ),
-			'data'		=> $stage
+			'data'		=> $stage,
+			'currency'	=> esc_html( $code )
 		);
 	}
 

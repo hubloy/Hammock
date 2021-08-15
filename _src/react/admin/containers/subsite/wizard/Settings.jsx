@@ -74,7 +74,7 @@ export default class WizardSettings extends PureComponent {
             .then( (json) => {
                 if ( json.status ) {
                     helper.alert( hammock.common.status.success, json.message, 'success');
-					action( json.data );
+					action( json.data, json.currency );
                 } else {
                     helper.alert( hammock.common.status.error, json.message, 'warning' );
                 }

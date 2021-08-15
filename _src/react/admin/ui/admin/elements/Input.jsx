@@ -10,7 +10,7 @@ export class InputUI extends PureComponent {
     }
 
     onChange(e) {
-		this.setState({ value: event.target.value });
+		this.setState({ value: e.target.value });
     }
     
     render() {
