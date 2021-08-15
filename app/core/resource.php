@@ -106,6 +106,7 @@ class Resource {
 				'common'       => array(
 					'buttons'       => array(
 						'save'   	=> __( 'Save', 'hammock' ),
+						'continue'  => __( 'Save and Continue', 'hammock' ),
 						'update'	=> __( 'Update', 'hammock' ),
 						'edit'   	=> __( 'Edit', 'hammock' ),
 						'delete' 	=> __( 'Delete', 'hammock' ),

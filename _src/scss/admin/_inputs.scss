@@ -184,6 +184,14 @@
 			font-weight: 700;
 		}
 	}
+
+	.hammock-preloader{
+		width: 100%;
+		svg {
+			margin: 0 auto;
+			display: block;
+		}
+	}
 }
 
 .uk-button-teal {
