@@ -101,6 +101,7 @@ export default class WizardSettings extends PureComponent {
                 strings = hammock.strings.dashboard.wizard;
             return (
                 <form name="hammock-settings-form" className="uk-form-horizontal uk-margin-small" method="POST" onSubmit={this.saveSettings} ref={this.setting_form}>
+                    <h1 className="uk-heading-divider">{strings.settings.title}</h1>
                     <div className="uk-margin">
                         <label>{strings.settings.currency.title}</label>
                         <DropDownUI name={`membership_currency`} values={this.state.currencies} value={this.state.settings.currency}/>

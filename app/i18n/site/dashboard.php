@@ -54,6 +54,7 @@ return array(
 	'wizard'	=> array(
 		'title'			=> __( 'Initial Setup', 'hammock' ),
 		'settings'		=> array(
+			'title'			=> __( 'General Settings', 'hammock' ),
 			'currency' => array(
 				'title'       => __( 'Membership Currency', 'hammock' ),
 				'description' => __( 'This is the currency used to purchase memberships', 'hammock' ),

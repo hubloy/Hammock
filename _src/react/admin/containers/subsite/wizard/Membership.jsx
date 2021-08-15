@@ -22,7 +22,8 @@ export default class WizardCreateMembership extends PureComponent {
 			$button = $form.find('button'),
 			$btn_txt = $button.text(),
 			form = $form.serialize(),
-			helper = window.hammock.helper;
+            hammock = this.props.hammock,
+			helper = hammock.helper;
 			
 
 		$button.attr('disabled', 'disabled');
@@ -31,16 +32,20 @@ export default class WizardCreateMembership extends PureComponent {
 		this.fetchWP.post( 'wizard/membership', form, true )
 			.then( (json) => {
 				if ( json.status ) {
-					
+                    helper.alert( hammock.common.status.success, json.message, 'success', 'nfc-top-right', function() {
+                        setTimeout(function(){
+                            window.location.reload();
+                        }, 5000);
+                    });
 				} else {
-					helper.notify( json.message, 'warning' );
+					helper.alert( hammock.common.status.error, json.message, 'warning' );
 				}
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				helper.notify( this.props.hammock.error, 'error' );
+				helper.alert( hammock.common.status.error, hammock.error, 'error' );
 			}
 		);
 	}
