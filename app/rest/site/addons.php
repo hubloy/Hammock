@@ -19,14 +19,14 @@ class Addons extends Rest {
 
 
 	/**
-	 * Singletone instance of the plugin.
+	 * Singletone instance of the rest route.
 	 *
 	 * @since  1.0.0
 	 */
 	private static $instance = null;
 
 	/**
-	 * Returns singleton instance of the plugin.
+	 * Returns singleton instance of the rest route.
 	 *
 	 * @since  1.0.0
 	 *

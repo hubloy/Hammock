@@ -231,6 +231,13 @@ class Resource {
 			array( 'jquery' ),
 			HAMMOCK_VERSION
 		);
+
+		wp_register_script(
+			'hammock-wizard-react',
+			HAMMOCK_ASSETS_URL . '/js/react/wizard.min.js',
+			array( 'jquery' ),
+			HAMMOCK_VERSION
+		);
 	}
 
 	/**

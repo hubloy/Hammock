@@ -291,7 +291,7 @@ class Plugin extends Controller {
 			wp_enqueue_script( 'hammock-styled-notifications' );
 			wp_enqueue_script( 'hammock-admin' );
 			wp_enqueue_script( 'hammock-admin-react' );
-
+			wp_enqueue_script( 'hammock-wizard-react' );
 			do_action( 'hammock_controller_scripts' );
 		}
 	}

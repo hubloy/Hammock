@@ -50,5 +50,8 @@ return array(
 			'subscribers'	=> __( 'No Subscriber Data found for this week', 'hammock' ),
 			'transactions'	=> __( 'No Transaction Data found for this week', 'hammock' )
 		)
+	),
+	'wizard'	=> array(
+		'title'		=> __( 'Initial Setup', 'hammock' ),
 	)
 );

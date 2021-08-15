@@ -19,14 +19,14 @@ class Memberships extends Rest {
 	const BASE_API_ROUTE = '/memberships/';
 
 	/**
-	 * Singletone instance of the plugin.
+	 * Singletone instance of the rest route.
 	 *
 	 * @since  1.0.0
 	 */
 	private static $instance = null;
 
 	/**
-	 * Returns singleton instance of the plugin.
+	 * Returns singleton instance of the rest route.
 	 *
 	 * @since  1.0.0
 	 *

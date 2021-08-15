@@ -16,7 +16,8 @@ module.exports = {
 		'js/react/transactions': path.resolve(__dirname, '_src/react/transactions.js'),
 		'js/react/marketing': path.resolve(__dirname, '_src/react/marketing.js'),
 		'js/react/invites': path.resolve(__dirname, '_src/react/invites.js'),
-		'js/react/coupons': path.resolve(__dirname, '_src/react/coupons.js')
+		'js/react/coupons': path.resolve(__dirname, '_src/react/coupons.js'),
+		'js/react/wizard': path.resolve(__dirname, '_src/react/wizard.js')
 	},
 
 	output: {
