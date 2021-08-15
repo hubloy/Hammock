@@ -11,22 +11,20 @@ export default class Wizard extends Component {
         this.state = {
 			loading : true,
 			loading_settings : true,
-			loading_pages : true,
-			loading_currencies : true,
 			processing : false,
 			settings: {},
-            pages : {},
-            currencies : {},
 			step : { value : 10, step : 'options' }
         };
         this.fetchWP = new fetchWP({
 			api_url: this.props.hammock.api_url,
 			api_nonce: this.props.hammock.api_nonce,
         });
+
+        this.buttonClick = this.buttonClick.bind(this);
 	}
 
 	componentDidMount() {
-        Promise.all([this.get_step(), this.get_settings(), this.get_pages(), this.get_currencies()]);    
+        this.get_step();
     }
 
 	get_step = async () => {
@@ -38,32 +36,8 @@ export default class Wizard extends Component {
         );
     }
 
-	get_settings = async () => {
-        this.fetchWP.get( 'settings/get' )
-            .then( (json) => this.setState({
-                settings : json,
-                loading_settings : false,
-				error : false,
-            }), (err) => console.log( 'error', err )
-        );
-    }
+	buttonClick( step ) {
 
-    get_pages = async () => {
-        this.fetchWP.get( 'settings/pages' )
-            .then( (json) => this.setState({
-                pages : json,
-				loading_pages : false
-            }), (err) => console.log( 'error', err )
-        );
-    }
-
-    get_currencies = async () => {
-        this.fetchWP.get( 'settings/currencies' )
-            .then( (json) => this.setState({
-                currencies : json,
-				loading_currencies : false
-            }), (err) => console.log( 'error', err )
-        ); 
     }
 
 	render() {

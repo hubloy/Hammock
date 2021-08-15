@@ -52,6 +52,37 @@ return array(
 		)
 	),
 	'wizard'	=> array(
-		'title'		=> __( 'Initial Setup', 'hammock' ),
+		'title'			=> __( 'Initial Setup', 'hammock' ),
+		'settings'		=> array(
+			'currency' => array(
+				'title'       => __( 'Membership Currency', 'hammock' ),
+				'description' => __( 'This is the currency used to purchase memberships', 'hammock' ),
+			)
+		),
+		'pages'			=> array(
+			'title'             => __( 'Membership Pages', 'hammock' ),
+			'membership_list'   => array(
+				'title'       => __( 'Membership List', 'hammock' ),
+				'description' => __( 'List of public memberships', 'hammock' ),
+			),
+			'protected_content' => array(
+				'title'       => __( 'Protected Content', 'hammock' ),
+				'description' => __( 'Displayed when a user cannot access the requested page', 'hammock' ),
+			),
+			'account_page'      => array(
+				'title'       => __( 'Account', 'hammock' ),
+				'description' => __( 'Shows details about the current user', 'hammock' ),
+			),
+		),
+		'membership'	=> array(
+			'labels'    => array(
+				'name'                 => __( 'Membership Name', 'hammock' ),
+				'status'               => __( 'Status', 'hammock' ),
+				'type'                 => __( 'Membership Type', 'hammock' ),
+				'price'                => __( 'Membership Price', 'hammock' ),
+				'days'           	   => __( 'Grant access for the following days', 'hammock' ),
+				'recurring_duration'   => __( 'Recurring Frequency', 'hammock' ),
+			),
+		)
 	)
 );

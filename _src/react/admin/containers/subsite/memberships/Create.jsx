@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { SwitchUI, InputUI, DropDownUI, TextAreaUI } from 'ui/admin/form';
+import { SwitchUI, InputUI, DropDownUI } from 'ui/admin/form';
 import fetchWP from 'utils/fetchWP';
 
 export default class CreateMembership extends PureComponent {

@@ -106,8 +106,8 @@ export default class SubSiteSettings extends Component {
 					<h3 className="uk-text-center uk-text-danger">{this.props.hammock.error}</h3>
 				)
 			} else {
-				var pages = this.state.settings.pages;
-				var strings = this.props.hammock.strings;
+				var pages = this.state.settings.pages,
+					strings = this.props.hammock.strings;
 				return (
 					<form name="hammock-settings-form" className="uk-form-horizontal uk-margin-small" method="POST" onSubmit={this.saveSettings.bind(this)} ref={this.save_sub_site_setting}>
 						<div id="hammock-before-settings" className="hammock-before-settings"></div>
