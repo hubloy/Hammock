@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import { DropDownUI } from 'ui/admin/form';
 import fetchWP from 'utils/fetchWP';
 
+import { toast } from 'react-toastify';
+
 export default class WizardSettings extends PureComponent {
     constructor(props) {
 		super(props);
@@ -23,6 +25,10 @@ export default class WizardSettings extends PureComponent {
         });
 
         this.saveSettings = this.saveSettings.bind(this);
+	}
+
+    notify(type, message) {
+		toast[type](message, {toastId: 'wizard-settings-toast'});
 	}
 
 	componentDidMount() {
@@ -73,17 +79,17 @@ export default class WizardSettings extends PureComponent {
         this.fetchWP.post( 'wizard/settings', form, true )
             .then( (json) => {
                 if ( json.status ) {
-                    helper.alert( hammock.common.status.success, json.message, 'success');
+                    self.notify( json.message, 'success' );
 					action( json.data, json.currency );
                 } else {
-                    helper.alert( hammock.common.status.error, json.message, 'warning' );
+                    self.notify( json.message, 'warning' );
                 }
                 $button.removeAttr('disabled');
                 $button.html($btn_txt);
             }, (err) => {
                 $button.removeAttr('disabled');
                 $button.html($btn_txt);
-                helper.alert( hammock.common.status.error, hammock.error, 'error' );
+                self.notify( hammock.error, 'error' );
             }
         );
     }

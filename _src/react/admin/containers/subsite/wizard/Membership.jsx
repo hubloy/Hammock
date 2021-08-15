@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import { SwitchUI, InputUI, DropDownUI } from 'ui/admin/form';
 import fetchWP from 'utils/fetchWP';
 
+import { toast } from 'react-toastify';
+
 export default class WizardCreateMembership extends PureComponent {
 
     constructor(props) {
@@ -13,6 +15,10 @@ export default class WizardCreateMembership extends PureComponent {
         });
 
         this.handleSubmit = this.handleSubmit.bind(this);
+	}
+
+    notify(type, message) {
+		toast[type](message, {toastId: 'wizard-membership-toast'});
 	}
 
 	handleSubmit(event) {
@@ -32,20 +38,19 @@ export default class WizardCreateMembership extends PureComponent {
 		this.fetchWP.post( 'wizard/membership', form, true )
 			.then( (json) => {
 				if ( json.status ) {
-                    helper.alert( hammock.common.status.success, json.message, 'success', 'nfc-top-right', function() {
-                        setTimeout(function(){
-                            window.location.reload();
-                        }, 5000);
-                    });
+                    self.notify( json.message, 'success' );
+                    setTimeout(function(){
+                        window.location.reload();
+                    }, 5000);
 				} else {
-					helper.alert( hammock.common.status.error, json.message, 'warning' );
+					self.notify( json.message, 'warning' );
 				}
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				helper.alert( hammock.common.status.error, hammock.error, 'error' );
+				self.notify( hammock.error, 'error' );
 			}
 		);
 	}
