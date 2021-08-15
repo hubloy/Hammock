@@ -36,8 +36,9 @@ class Init {
 			foreach ( $table_names as $table ) {
 				$wpdb->query( "DROP TABLE IF EXISTS {$table}" );
 			}
-			delete_option( 'hammock_settings' );
-			delete_option( 'hammock_installed' );
+			Util::delete_option( 'hammock_settings' );
+			Util::delete_option( 'hammock_installed' );
+			Util::delete_option( 'hammock_wizard_step' );
 		}
 	}
 }
