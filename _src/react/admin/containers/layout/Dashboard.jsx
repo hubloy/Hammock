@@ -19,7 +19,7 @@ export default class Dashboard extends Component {
 				</div>
 				<ToastContainer
 					position="top-center"
-					autoClose={3000}
+					autoClose={1200}
 					hideProgressBar={false}
 					newestOnTop={false}
 					closeOnClick

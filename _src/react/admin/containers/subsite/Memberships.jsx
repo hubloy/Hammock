@@ -7,6 +7,8 @@ import Table from './memberships/Table';
 import CreateMembership from './memberships/Create';
 import fetchWP from 'utils/fetchWP'
 
+import { toast } from 'react-toastify';
+
 export default class Memberships extends Component {
 	constructor(props) {
 		super(props);
@@ -25,13 +27,20 @@ export default class Memberships extends Component {
 	async componentDidMount() {
 		this.count_memberships();
 	}
+
+	notify(type, message) {
+		toast[type](message, {toastId: 'memberships-toast'});
+	}
 	
 	count_memberships = async () => {
         this.fetchWP.get( 'memberships/count' )
             .then( (json) => this.setState({
 				total : typeof json.total !== 'undefined' ? json.total : 0,
 				loading : false
-            }), (err) => console.log( 'error', err )
+            }), (err) => {
+				this.notify( this.props.hammock.error, 'error' );
+				this.setState({loading : false});
+			}
         );
     }
 
@@ -41,10 +50,10 @@ export default class Memberships extends Component {
 			<Dashboard hammock={this.props.hammock}>
 				<h2 className="uk-text-center uk-heading-divider">{this.props.hammock.common.string.title}</h2>
 				{!this.state.loading && this.state.total > 0 && 
-					<a className="uk-button uk-button-primary uk-button-small" href="#hammock-add-membership" uk-toggle="">{strings.dashboard.add_new.button}</a>
-				}
-				{!this.state.loading && this.state.total > 0 && 
-					<Filter strings={strings}/>
+					<React.Fragment>
+						<a className="uk-button uk-button-primary uk-button-small" href="#hammock-add-membership" uk-toggle="">{strings.dashboard.add_new.button}</a>
+						<Filter strings={strings}/>
+					</React.Fragment>
 				}
 				<div className="uk-container uk-padding-small uk-margin-top uk-width-1-1 uk-background-default">
 					<Table hammock={this.props.hammock} />

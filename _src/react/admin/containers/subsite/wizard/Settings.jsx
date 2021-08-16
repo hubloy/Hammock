@@ -71,7 +71,6 @@ export default class WizardSettings extends PureComponent {
 			$btn_txt = $button.text(),
 			form = $form.serialize(),
             hammock = this.props.hammock,
-            helper =  hammock.helper,
             action = self.props.action;
             
         $button.attr('disabled', 'disabled');

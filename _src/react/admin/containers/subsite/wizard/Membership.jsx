@@ -28,8 +28,7 @@ export default class WizardCreateMembership extends PureComponent {
 			$button = $form.find('button'),
 			$btn_txt = $button.text(),
 			form = $form.serialize(),
-            hammock = this.props.hammock,
-			helper = hammock.helper;
+            hammock = this.props.hammock;
 			
 
 		$button.attr('disabled', 'disabled');
