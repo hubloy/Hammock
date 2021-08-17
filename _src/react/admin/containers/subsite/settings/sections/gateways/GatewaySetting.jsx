@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 
 import fetchWP from 'utils/fetchWP';
 import { InputUI } from 'ui/admin/form'
+
+import { toast } from 'react-toastify';
 
 export default class GatewaySetting extends PureComponent {
 
@@ -26,6 +27,10 @@ export default class GatewaySetting extends PureComponent {
 		this.setState({ checked: !!e.target.checked });
 	}
 
+	notify(type, message) {
+		toast[type](message, {toastId: 'site-gateway-toast'});
+	}
+
 	componentDidMount() {
 		const id = this.props.id;
 		this.fetchWP.get( 'gateways/settings?id=' + id )
@@ -43,8 +48,7 @@ export default class GatewaySetting extends PureComponent {
 			$form = jQuery(self.gateway_setting.current),
 			$button = $form.find('button'),
 			$btn_txt = $button.text(),
-			form = $form.serialize(),
-			helper = window.hammock.helper;
+			form = $form.serialize();
 
 		$button.attr('disabled', 'disabled');
 		$button.html("<div uk-spinner></div>");
@@ -55,16 +59,16 @@ export default class GatewaySetting extends PureComponent {
 					this.setState({
 						settings : json.settings
 					});
-					helper.notify( json.message, 'success' );
+					self.notify( json.message, 'success' );
 				} else {
-					helper.notify( json.message, 'warning' );
+					self.notify( json.message, 'warning' );
 				}
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				helper.notify( this.props.hammock.error, 'error' );
+				self.notify( this.props.hammock.error, 'error' );
 			}
 		);
 	}

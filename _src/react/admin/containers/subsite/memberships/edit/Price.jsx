@@ -3,6 +3,8 @@ import React, { PureComponent } from 'react';
 import fetchWP from 'utils/fetchWP'
 import { SwitchUI, InputUI, DropDownUI } from 'ui/admin/form';
 
+import { toast } from 'react-toastify';
+
 export default class Price extends PureComponent {
 
 	constructor(props) {
@@ -18,14 +20,17 @@ export default class Price extends PureComponent {
         });
 	}
 
+	notify(type, message) {
+		toast[type](message, {toastId: 'memberships-edit-price-toast'});
+	}
+
 	handleSubmit(event) {
 		event.preventDefault();
         var self = this,
 			$form = jQuery(self.membership_price.current),
 			$button = $form.find('button'),
 			$btn_txt = $button.text(),
-			form = $form.serialize(),
-			helper = window.hammock.helper;
+			form = $form.serialize();
 			
 
 		$button.attr('disabled', 'disabled');
@@ -37,16 +42,16 @@ export default class Price extends PureComponent {
 					this.setState({
 						membership : json.membership
 					});
-					helper.notify( json.message, 'success' );
+					self.notify( json.message, 'success' );
 				} else {
-					helper.notify( json.message, 'warning' );
+					self.notify( json.message, 'warning' );
 				}
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				helper.notify( this.props.hammock.error, 'error' );
+				self.notify( this.props.hammock.error, 'error' );
 			}
 		);
 	}

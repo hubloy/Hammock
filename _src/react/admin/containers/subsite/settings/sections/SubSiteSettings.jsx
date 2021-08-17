@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import fetchWP from 'utils/fetchWP'
 import { SwitchUI, InputUI, DropDownUI } from 'ui/admin/form';
 
+import { toast } from 'react-toastify';
+
 export default class SubSiteSettings extends Component {
 
     constructor(props) {
@@ -22,6 +24,10 @@ export default class SubSiteSettings extends Component {
 			api_nonce: this.props.hammock.api_nonce,
         });
     }
+
+	notify(type, message) {
+		toast[type](message, {toastId: 'site-settings-toast'});
+	}
 
     componentDidMount() {
         Promise.all([this.get_settings(), this.get_pages(), this.get_currencies()]);    
@@ -60,25 +66,24 @@ export default class SubSiteSettings extends Component {
             $form = jQuery(self.save_sub_site_setting.current),
             $button = $form.find('button'),
 			$btn_txt = $button.text(),
-			form = $form.serialize(),
-            helper = window.hammock.helper;
+			form = $form.serialize();
             
         $button.attr('disabled', 'disabled');
         $button.html("<div uk-spinner></div>");
         this.fetchWP.post( 'settings/update', form, true )
             .then( (json) => {
                 if ( json.status ) {
-                    helper.alert( this.props.hammock.common.status.success, json.message, 'success');
+                    self.notify( json.message, 'success');
 					Promise.all([self.get_settings(), self.get_pages()]); 
                 } else {
-                    helper.alert( this.props.hammock.common.status.error, json.message, 'warning' );
+                    self.notify( json.message, 'warning' );
                 }
                 $button.removeAttr('disabled');
                 $button.html($btn_txt);
             }, (err) => {
                 $button.removeAttr('disabled');
                 $button.html($btn_txt);
-                helper.alert( this.props.hammock.common.status.error, this.props.hammock.error, 'error' );
+                self.notify( self.props.hammock.error, 'error' );
             }
         );
     }

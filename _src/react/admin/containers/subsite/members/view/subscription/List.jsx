@@ -3,6 +3,7 @@ import React, { PureComponent } from 'react';
 import fetchWP from 'utils/fetchWP';
 import { SwitchUI, InputUI, DropDownUI } from 'ui/admin/form';
 
+import { toast } from 'react-toastify';
 
 export default class PlanList extends PureComponent {
 
@@ -24,13 +25,20 @@ export default class PlanList extends PureComponent {
 		this.list_status();
 	}
 
+	notify(type, message) {
+		toast[type](message, {toastId: 'members-sub-list-toast'});
+	}
+
 	list_status = async () => {
 		this.fetchWP.get( 'members/list/status' )
 			.then( (json) => this.setState({
 				statuses : json,
 				loading : false,
 				error:false
-			}), (err) => this.setState({ loading : false, error : true })
+			}), (err) => {
+				this.setState({ loading : false, error : true });
+				this.notify( this.props.hammock.error, 'error' );
+			}
 		);
 	}
 
@@ -49,27 +57,26 @@ export default class PlanList extends PureComponent {
 			$form = jQuery(self.update_member_plan.current),
 			$button = $form.find('button'),
 			form = $form.serialize(),
-			$btn_txt = $button.text(),
-			helper = window.hammock.helper;
+			$btn_txt = $button.text();
 		$button.attr('disabled', 'disabled');
 		$button.html("<div uk-spinner></div>");
 		this.fetchWP.post( 'members/plan/update', form, true )
 			.then( (json) => {
 				if ( json.status ) {
-					helper.notify( json.message, 'success');
+					self.notify( json.message, 'success');
 					if(typeof this.props.action !== 'undefined' && typeof this.props.action === 'function') {
 						var action = this.props.action;
 						action();
 					}
 				} else {
-					helper.notify( json.message, 'warning' );
+					self.notify( json.message, 'warning' );
 				}
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				helper.notify( this.props.hammock.error, 'error' );
+				self.notify( this.props.hammock.error, 'error' );
 			}
 		);
 	}
@@ -80,14 +87,16 @@ export default class PlanList extends PureComponent {
 			id = $button.attr('data-id'),
 			$btn_txt = $button.text(),
 			prompt = $button.attr('data-prompt'),
-			helper = window.hammock.helper,
-			error = this.props.hammock.error,
+			self = this,
+			hammock = self.props.hammock,
+			helper = hammock.helper,
+			error = hammock.error,
 			action = false,
 			fetchWP = this.fetchWP;
 
 		
-		if(typeof this.props.action !== 'undefined' && typeof this.props.action === 'function') {
-			action = this.props.action;
+		if(typeof self.props.action !== 'undefined' && typeof self.props.action === 'function') {
+			action = self.props.action;
 		}
 		helper.confirm( prompt, 'warning', function() {
 			//continue
@@ -96,19 +105,19 @@ export default class PlanList extends PureComponent {
 			fetchWP.post( 'members/plan/remove', { plan : id } )
 				.then( (json) => {
 					if ( json.status ) {
-						helper.notify( json.message, 'success');
+						self.notify( json.message, 'success');
 						if( action && typeof action === 'function') {
 							action();
 						}
 					} else {
-						helper.notify( json.message, 'warning' );
+						self.notify( json.message, 'warning' );
 					}
 					$button.removeAttr('disabled');
 					$button.html($btn_txt);
 				}, (err) => {
 					$button.removeAttr('disabled');
 					$button.html($btn_txt);
-					helper.notify( error, 'error' );
+					self.notify( error, 'error' );
 				}
 			);
 		});

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import fetchWP from 'utils/fetchWP';
 import {PaginationUI, ToggleInfoBox} from 'ui/admin/form';
 
+import { toast } from 'react-toastify';
 
 export default class Table extends Component {
 
@@ -21,6 +22,10 @@ export default class Table extends Component {
 			api_nonce: this.props.hammock.api_nonce,
         });
     }
+
+	notify(type, message) {
+		toast[type](message, {toastId: 'memberships-table-toast'});
+	}
     
     async componentDidMount() {
         this.loadPage();
@@ -41,7 +46,9 @@ export default class Table extends Component {
                     pager : json.pager,
 					loading : false,
 					error : false,
-                }), (err) => this.setState({ loading : false, error : true })
+                }), (err) => {
+					this.setState({ loading : false, error : true });
+				}
             );
         }
     }

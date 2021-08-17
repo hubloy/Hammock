@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import fetchWP from 'utils/fetchWP';
 import Dashboard from 'layout/Dashboard';
@@ -25,6 +24,7 @@ export default class Edit extends Component {
         });
 	}
 	
+
 	async componentDidMount() {
 		const id = this.state.id;
 		this.fetchWP.get( 'memberships/get?id=' + id )
@@ -32,7 +32,9 @@ export default class Edit extends Component {
 				membership : json,
 				loading : false,
 				error : false,
-			}), (err) => this.setState({ loading : false, error : true })
+			}), (err) => {
+				this.setState({ loading : false, error : true });
+			}
 		);
 	}
 

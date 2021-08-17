@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import fetchWP from 'utils/fetchWP'
 import { CheckBox, InputUI, DropDownUI, SwitchUI } from 'ui/admin/form';
-import { toast } from 'react-toastify';
-
 import { toast } from 'react-toastify';
 
 export default class MailChimpSettings extends Component {

@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import Dashboard from 'layout/Dashboard'
-import { SwitchUI, InputUI, DropDownUI } from 'ui/admin/form';
+import { InputUI, DropDownUI } from 'ui/admin/form';
 import fetchWP from 'utils/fetchWP';
 import {Members} from '../common/Members'
+
+import { toast } from 'react-toastify';
 
 export default class AddTransaction extends Component {
 
@@ -24,6 +26,10 @@ export default class AddTransaction extends Component {
 			api_url: this.props.hammock.api_url,
 			api_nonce: this.props.hammock.api_nonce,
         });
+	}
+
+	notify(type, message) {
+		toast[type](message, {toastId: 'transactions-add-toast'});
 	}
 
 	async componentDidMount() {
@@ -66,27 +72,27 @@ export default class AddTransaction extends Component {
 			$form = jQuery(self.add_transaction.current),
 			$button = $form.find('button'),
 			$btn_txt = $button.text(),
-			form = $form.serialize(),
-			helper = window.hammock.helper;
+			form = $form.serialize();
 		$button.attr('disabled', 'disabled');
 		$button.html("<div uk-spinner></div>");
 		this.fetchWP.post( 'transactions/save', form, true )
 			.then( (json) => {
 				if ( json.status ) {
-					helper.notify( json.message, 'success', function() {
+					self.notify( json.message, 'success' );
+					setTimeout(function(){
 						if ( typeof json.id !== 'undefined' ) {
 							window.location.hash = "#/transaction/" + json.id;
 						}
-					} );
+					}, 1000);
 				} else {
-					helper.notify( json.message, 'warning' );
+					self.notify( json.message, 'warning' );
 				}
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				helper.notify( self.props.hammock.error, 'error' );
+				self.notify( self.props.hammock.error, 'error' );
 			}
 		);
 	}

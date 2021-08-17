@@ -4,6 +4,8 @@ import { Multiselect } from 'multiselect-react-dropdown';
 import fetchWP from 'utils/fetchWP'
 import { SwitchUI, InputUI, DropDownUI, TextAreaUI } from 'ui/admin/form';
 
+import { toast } from 'react-toastify';
+
 export default class General extends PureComponent {
 
 	constructor(props) {
@@ -19,6 +21,11 @@ export default class General extends PureComponent {
 			api_url: this.props.hammock.api_url,
 			api_nonce: this.props.hammock.api_nonce,
         });
+	}
+
+
+	notify(type, message) {
+		toast[type](message, {toastId: 'memberships-edit-general-toast'});
 	}
 
 	async componentDidMount() {
@@ -73,7 +80,7 @@ export default class General extends PureComponent {
 		this.fetchWP.get( 'codes/dropdown/invitation' )
 			.then( (json) => this.setState({
 				invites : json,
-			}), (err) => console.log(err)
+			}), (err) => self.notify( this.props.hammock.error, 'error' )
 		);
 	}
 
@@ -84,8 +91,7 @@ export default class General extends PureComponent {
 			$button = $form.find('button.update-button'),
 			$details = $form.find('input.membership_details'),
 			$btn_txt = $button.text(),
-			$detail_content = this.getWPEditorContent(),
-			helper = window.hammock.helper;
+			$detail_content = this.getWPEditorContent();
 			
 		$details.val($detail_content);
 
@@ -98,16 +104,16 @@ export default class General extends PureComponent {
 					this.setState({
 						membership : json.membership
 					});
-					helper.notify( json.message, 'success' );
+					self.notify( json.message, 'success' );
 				} else {
-					helper.notify( json.message, 'warning' );
+					self.notify( json.message, 'warning' );
 				}
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				helper.notify( this.props.hammock.error, 'error' );
+				self.notify( this.props.hammock.error, 'error' );
 			}
 		);
 	}

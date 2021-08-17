@@ -8,6 +8,7 @@ import {Nav} from './Nav'
 import { SwitchUI, InputUI, DropDownUI } from 'ui/admin/form';
 import PlanList from './subscription/List';
 
+import { toast } from 'react-toastify';
 
 export default class MemberDetail extends Component {
 
@@ -36,6 +37,10 @@ export default class MemberDetail extends Component {
         });
 	}
 
+	notify(type, message) {
+		toast[type](message, {toastId: 'members-detail-toast'});
+	}
+
 	async componentDidMount() {
 		Promise.all([this.load_member(), this.load_memberships(), this.load_member_plans()]);
 	}
@@ -50,26 +55,27 @@ export default class MemberDetail extends Component {
 			$form = jQuery(self.assign_membership.current),
 			$button = $form.find('button'),
 			form = $form.serialize(),
-			$btn_txt = $button.text(),
-			helper = window.hammock.helper;
+			$btn_txt = $button.text();
+
 		$button.attr('disabled', 'disabled');
 		$button.html("<div uk-spinner></div>");
 		this.fetchWP.post( 'members/plan/create', form, true )
 			.then( (json) => {
 				if ( json.status ) {
-					helper.notify( json.message, 'success', function() {
+					self.notify( json.message, 'success' );
+					setTimeout(function(){
 						UIkit.modal(jQuery('#hammock-add-subscription')).hide();
 						self.load_member_plans();
-					} );
+					}, 1000);
 				} else {
-					helper.notify( json.message, 'warning' );
+					self.notify( json.message, 'warning' );
 				}
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				helper.notify( self.props.hammock.error, 'error' );
+				self.notify( self.props.hammock.error, 'error' );
 			}
 		);
 	}
@@ -81,7 +87,10 @@ export default class MemberDetail extends Component {
 				member : json,
 				loading : false,
 				error : false,
-			}), (err) => this.setState({ loading : false, error : true })
+			}), (err) => {
+				this.setState({ loading : false, error : true });
+				this.notify( self.props.hammock.error, 'error' );
+			}
 		);
 	}
 
@@ -94,7 +103,10 @@ export default class MemberDetail extends Component {
 		this.fetchWP.get( 'members/get/plans?id=' + id )
 			.then( (json) => this.setState({
 				plans : json
-			}), (err) => this.setState({ loading : false, error : true })
+			}), (err) => {
+				this.setState({ loading : false, error : true });
+				this.notify( self.props.hammock.error, 'error' );
+			}
 		);
 	}
 
@@ -103,7 +115,10 @@ export default class MemberDetail extends Component {
 		this.fetchWP.get( 'memberships/list_simple?member=' + id )
 			.then( (json) => this.setState({
 				memberships : json,
-			}), (err) => this.setState({ loading : false, error : true })
+			}), (err) => {
+				this.setState({ loading : false, error : true });
+				this.notify( self.props.hammock.error, 'error' );
+			}
 		);
 	}
 
@@ -111,7 +126,7 @@ export default class MemberDetail extends Component {
 		this.fetchWP.get( 'members/list/status' )
 			.then( (json) => this.setState({
 				statuses : json,
-			}), (err) => console.log(err)
+			}), (err) => this.notify( self.props.hammock.error, 'error' )
 		);
 	}
 
@@ -120,7 +135,7 @@ export default class MemberDetail extends Component {
 			.then( (json) => this.setState({ new_sub : {
 				membership : id,
 				object : json
-			} }), (err) => console.log(err)
+			} }), (err) => this.notify( self.props.hammock.error, 'error' )
 		);
 	}
 

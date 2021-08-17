@@ -7,6 +7,8 @@ import Dashboard from 'layout/Dashboard';
 import {PaginationUI} from 'ui/admin/form';
 import {Nav} from './Nav'
 
+import { toast } from 'react-toastify';
+
 export default class MemberTransactions extends Component {
 
 	constructor(props) {
@@ -25,6 +27,10 @@ export default class MemberTransactions extends Component {
         });
 	}
 
+	notify(type, message) {
+		toast[type](message, {toastId: 'members-transactions-toast'});
+	}
+
 	async componentDidMount() {
 		this.loadPage();
 	}
@@ -38,7 +44,10 @@ export default class MemberTransactions extends Component {
                     pager : json.pager,
                     loading : false,
 				    error : false,
-                }), (err) => this.setState({ loading : false, error : true })
+                }), (err) => {
+					this.setState({ loading : false, error : true });
+					sethislf.notify( this.props.hammock.error, 'error' );
+				}
             );
         }
 	}

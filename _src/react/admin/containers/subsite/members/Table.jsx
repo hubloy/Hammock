@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import fetchWP from 'utils/fetchWP';
 import {PaginationUI, ToggleInfoBox} from 'ui/admin/form';
 
+import { toast } from 'react-toastify';
 
 export default class Table extends Component {
 
@@ -21,6 +21,10 @@ export default class Table extends Component {
 			api_nonce: this.props.hammock.api_nonce,
         });
     }
+
+	notify(type, message) {
+		toast[type](message, {toastId: 'members-table-toast'});
+	}
     
     async componentDidMount() {
         this.loadPage();
@@ -72,17 +76,17 @@ export default class Table extends Component {
 			fetchWP.post( 'members/delete', { member : id } )
 				.then( (json) => {
 					if ( json.status ) {
-						helper.notify( json.message, 'success');
+						$this.notify( json.message, 'success');
 						$this.load_members();
 					} else {
-						helper.notify( json.message, 'warning' );
+						$this.notify( json.message, 'warning' );
 					}
 					$button.removeAttr('disabled');
 					$button.html($btn_txt);
 				}, (err) => {
 					$button.removeAttr('disabled');
 					$button.html($btn_txt);
-					helper.notify( error, 'error' );
+					$this.notify( error, 'error' );
 				}
 			);
 		});

@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { SwitchUI, InputUI, DropDownUI } from 'ui/admin/form';
+import { InputUI } from 'ui/admin/form';
 import {Users} from '../common/Users';
 import fetchWP from 'utils/fetchWP';
+
+import { toast } from 'react-toastify';
 
 export class Create extends PureComponent {
 
@@ -14,6 +15,10 @@ export class Create extends PureComponent {
 			api_url: this.props.hammock.api_url,
 			api_nonce: this.props.hammock.api_nonce,
         });
+	}
+
+	notify(type, message) {
+		toast[type](message, {toastId: 'members-create-toast'});
 	}
 
 	handleSubmitExisting(event) {
@@ -34,28 +39,28 @@ export class Create extends PureComponent {
 		var $button = $form.find('button'),
 			$btn_txt = $button.text(),
 			form = $form.serialize(),
-			helper = window.hammock.helper;
+			self = this;
 
 		$button.attr('disabled', 'disabled');
 		$button.html("<div uk-spinner></div>");
 		this.fetchWP.post( 'members/save/' + $type, form, true )
 			.then( (json) => {
 				if ( json.status ) {
-					helper.notify( json.message, 'success', function() {
-						UIkit.modal(jQuery('#hammock-add-member')).hide();
+					self.notify( json.message, 'success' );
+					setTimeout(function(){
 						if ( typeof json.id !== 'undefined' ) {
 							window.location.hash = "#/member/" + json.id;
 						}
-					} );
+					}, 1000);
 				} else {
-					helper.notify( json.message, 'warning' );
+					self.notify( json.message, 'warning' );
 				}
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				helper.notify( self.props.hammock.error, 'error' );
+				self.notify( self.props.hammock.error, 'error' );
 			}
 		);
 	}
