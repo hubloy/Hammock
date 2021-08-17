@@ -47,7 +47,6 @@ export default class Card extends PureComponent {
 				loading : false,
 				error : false,
 			}), (err) => {
-				this.notify( this.props.hammock.error, 'error' );
 				this.setState({ loading : false, error : true });
 			}
 		);
