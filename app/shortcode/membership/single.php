@@ -1,5 +1,5 @@
 <?php
-namespace Hammock\Shortcode;
+namespace Hammock\Shortcode\Membership;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -8,13 +8,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 use Hammock\Base\Shortcode;
 
 /**
- * Memberships shortcode manager
- * Handles content of the memberships
- * Renders list of memberships
+ * Single Membership shortcode manager
+ * Display a single membership
  * 
  * @since 1.0.0
  */
-class Memberships extends Shortcode {
+class Single extends Shortcode {
 
 	/**
 	 * Singletone instance of the shortcode.
