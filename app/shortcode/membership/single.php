@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Hammock\Base\Shortcode;
+use Hammock\Model\Membership;
 
 /**
  * Single Membership shortcode manager
@@ -51,7 +52,22 @@ class Single extends Shortcode {
 	 * @since 1.0.0
 	 */
 	public function output( $atts ) {
-		$this->get_template( 'membership-list.php' );
+        $attributes = shortcode_atts( array(
+			'plan_id' => false
+		), $atts );
+
+        if ( $attributes['plan_id'] ) {
+            $plan_id    = ( int ) $attributes['plan_id'];
+            $plan       = new Membership( $plan_id );
+
+            if ( $plan->id > 0 ) {
+                $this->get_template( 
+                    'plans/single-plan-card.php', array(
+                        'plan'	=> $plan,
+                    ) 
+                );
+            }
+        }
 	}
 }
 
