@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-
 import fetchWP from 'utils/fetchWP';
 
 import {Preloader, Center} from 'ui/admin/form';
+
+import { toast } from 'react-toastify';
 
 export default class MembershipDashboard extends Component {
 
@@ -24,13 +23,20 @@ export default class MembershipDashboard extends Component {
 		this.load_data();
 	}
 
+	notify(type, message) {
+		toast[type](message, {toastId: 'dashboard-membership-toast'});
+	}
+
 	load_data = async() => {
 		this.fetchWP.get( 'dashboard/memberships' )
 			.then( (json) => this.setState({
 				memberships : json,
 				loading : false,
 				error : false,
-			}), (err) => this.setState({ loading : false, error : true })
+			}), (err) => {
+				this.setState({ loading : false, error : true });
+				this.notify( this.props.hammock.error, 'error' );
+			}
 		);
 	}
 

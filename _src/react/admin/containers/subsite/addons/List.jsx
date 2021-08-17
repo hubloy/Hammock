@@ -7,6 +7,8 @@ import Card from './Card';
 
 import { InputUI, Canvas } from 'ui/admin/form'
 
+import { toast } from 'react-toastify';
+
 export default class List extends PureComponent {
 
 	constructor(props) {
@@ -31,29 +33,33 @@ export default class List extends PureComponent {
         this.loadPage();
 	}
 
+	notify(type, message) {
+		toast[type](message, {toastId: 'addon-list-toast'});
+	}
+
+
 	handleUpdateAddonSetting( event ) {
 		event.preventDefault();
         var self = this,
 			$form = jQuery(self.addon_side_content.current),
 			$button = $form.find('button'),
 			$btn_txt = $button.text(),
-			form = $form.serialize(),
-			helper = window.hammock.helper;
+			form = $form.serialize();
 		$button.attr('disabled', 'disabled');
 		$button.html("<div uk-spinner></div>");
 		this.fetchWP.post( 'addons/settings/update', form, true )
 			.then( (json) => {
 				if ( json.status ) {
-					helper.notify( json.message, 'success' );
+					self.notify( json.message, 'success' );
 				} else {
-					helper.notify( json.message, 'warning' );
+					self.notify( json.message, 'warning' );
 				}
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				helper.notify( self.props.hammock.error, 'error' );
+				self.notify( self.props.hammock.error, 'error' )
 			}
 		);
 	}

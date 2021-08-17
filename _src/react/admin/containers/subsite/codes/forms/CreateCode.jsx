@@ -5,7 +5,9 @@ import LazyLoad from 'react-lazyload';
 import Dashboard from 'layout/Dashboard'
 import { Link } from 'react-router-dom';
 import fetchWP from 'utils/fetchWP';
-import { SwitchUI, InputUI, DropDownUI } from 'ui/admin/form';
+import { InputUI, DropDownUI } from 'ui/admin/form';
+
+import { toast } from 'react-toastify';
 
 export default class CreateCode extends Component {
 
@@ -20,6 +22,9 @@ export default class CreateCode extends Component {
         });
 	}
 
+	notify(type, message) {
+		toast[type](message, {toastId: 'create-code-toast'});
+	}
 
 	async componentDidMount() {
 		window.hammock.helper.bind_date_range();
@@ -33,27 +38,27 @@ export default class CreateCode extends Component {
 			$form = jQuery(self.coupon_create_code.current),
 			$button = $form.find('button'),
 			$btn_txt = $button.text(),
-			form = $form.serialize(),
-			helper = window.hammock.helper;
+			form = $form.serialize();
 		$button.attr('disabled', 'disabled');
 		$button.html("<div uk-spinner></div>");
 		this.fetchWP.post( 'codes/save/' + type, form, true )
 			.then( (json) => {
 				if ( json.status ) {
-					helper.notify( json.message, 'success', function() {
+					self.notify( json.message, 'success' );
+					setTimeout(function(){
 						if ( typeof json.id !== 'undefined' ) {
 							window.location.hash = "#/edit/" + json.id;
 						}
-					} );
+					}, 1000);
 				} else {
-					helper.notify( json.message, 'warning' );
+					self.notify( json.message, 'warning' );
 				}
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				helper.notify( self.props.hammock.error, 'error' );
+				self.notify( self.props.hammock.error, 'error' );
 			}
 		);
 	}

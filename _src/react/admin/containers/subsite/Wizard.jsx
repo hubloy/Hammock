@@ -7,6 +7,9 @@ import fetchWP from 'utils/fetchWP';
 import WizardSettings from './wizard/Settings';
 import WizardCreateMembership from './wizard/Membership';
 
+import { toast } from 'react-toastify';
+
+
 export default class Wizard extends Component {
 
     constructor(props) {
@@ -24,6 +27,10 @@ export default class Wizard extends Component {
         this.buttonClick = this.buttonClick.bind(this);
 	}
 
+	notify(type, message) {
+		toast[type](message, {toastId: 'wizard-toast'});
+	}
+
 	componentDidMount() {
         this.get_step();
     }
@@ -33,7 +40,10 @@ export default class Wizard extends Component {
             .then( (json) => this.setState({
                 step : json,
 				loading : false
-            }), (err) => console.log( 'error', err )
+            }), (err) => {
+				this.notify( this.props.hammock.error, 'error' );
+				this.setState({loading : false});
+			}
         );
     }
 

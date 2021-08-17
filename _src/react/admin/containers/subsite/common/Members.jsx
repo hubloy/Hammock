@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import fetchWP from 'utils/fetchWP';
 import { InputUI } from 'ui/admin/form';
 
+import { toast } from 'react-toastify';
+
 export class Members extends Component {
 
 	constructor(props) {
@@ -22,6 +24,10 @@ export class Members extends Component {
 			userId : 0
 		};
 		this.retrieveDataAsynchronously = this.retrieveDataAsynchronously.bind(this);
+	}
+
+	notify(type, message) {
+		toast[type](message, {toastId: 'common-members-toast'});
 	}
 
 	onClick(e) {
@@ -44,7 +50,7 @@ export class Members extends Component {
 		this.fetchWP.get('members/existing_members?search=' + searchText)
 			.then((json) => this.setState({
 				filteredOptions: json
-			}), (err) => window.hammock.helper.notify(this.props.hammock.error, 'error')
+			}), (err) => this.notify(this.props.hammock.error, 'error')
 			);
 	}
 

@@ -5,6 +5,8 @@ import fetchWP from 'utils/fetchWP';
 import {Preloader, Center} from 'ui/admin/form';
 import { Bar, Line } from 'react-chartjs-2';
 
+import { toast } from 'react-toastify';
+
 export default class StatsDashboard extends Component {
 
 	constructor(props) {
@@ -21,6 +23,9 @@ export default class StatsDashboard extends Component {
         });
 	}
 
+	notify(type, message) {
+		toast[type](message, {toastId: 'dashboard-stats-toast'});
+	}
 
 	componentDidMount() {
 		Promise.all([this.load_subscribers(), this.load_transactions()]);
@@ -32,7 +37,10 @@ export default class StatsDashboard extends Component {
 				subscribers : json,
 				loading_subs : false,
 				error : false,
-			}), (err) => this.setState({ loading_subs : false, error : true })
+			}), (err) => {
+				this.setState({ loading_subs : false, error : true });
+				this.notify( this.props.hammock.error, 'error' );
+			}
 		);
 	}
 
@@ -42,7 +50,10 @@ export default class StatsDashboard extends Component {
 				transactions : json,
 				loading_trans : false,
 				error : false,
-			}), (err) => this.setState({ loading_trans : false, error : true })
+			}), (err) => {
+				this.setState({ loading_trans : false, error : true });
+				this.notify( this.props.hammock.error, 'error' );
+			}
 		);
 	}
 

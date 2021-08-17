@@ -4,6 +4,8 @@ import fetchWP from 'utils/fetchWP';
 
 import {Preloader, Center} from 'ui/admin/form';
 
+import { toast } from 'react-toastify';
+
 export default class MembersDashboard extends Component {
 
 	constructor(props) {
@@ -18,6 +20,11 @@ export default class MembersDashboard extends Component {
         });
 	}
 
+
+	notify(type, message) {
+		toast[type](message, {toastId: 'dashboard-members-toast'});
+	}
+
 	componentDidMount() {
 		this.load_data();
 	}
@@ -28,7 +35,10 @@ export default class MembersDashboard extends Component {
 				members : json,
 				loading : false,
 				error : false,
-			}), (err) => this.setState({ loading : false, error : true })
+			}), (err) => {
+				this.setState({ loading : false, error : true });
+				this.notify( this.props.hammock.error, 'error' );
+			}
 		);
 	}
 

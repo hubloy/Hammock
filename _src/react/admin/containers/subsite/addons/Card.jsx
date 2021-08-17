@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import fetchWP from 'utils/fetchWP';
 
+import { toast } from 'react-toastify';
+
 export default class Card extends PureComponent {
 
 	constructor(props) {
@@ -22,12 +24,16 @@ export default class Card extends PureComponent {
         });
 	}
 
+	notify(type, message) {
+		toast[type](message, {toastId: 'addon-card-toast'});
+	}
+
 	onChange(e) {
 		var $checked = !!e.target.checked;
 		this.fetchWP.post( 'addons/toggle', { name: this.props.id, enabled : $checked } )
 			.then( (json) => this.setState({
 				checked : json.enabled
-			}), (err) => console.log( 'error', err )
+			}), (err) => this.notify( this.props.hammock.error, 'error' )
 		);
 	}
 
@@ -40,7 +46,10 @@ export default class Card extends PureComponent {
 				active : json.active,
 				loading : false,
 				error : false,
-			}), (err) => this.setState({ loading : false, error : true })
+			}), (err) => {
+				this.notify( this.props.hammock.error, 'error' );
+				this.setState({ loading : false, error : true });
+			}
 		);
 	}
 

@@ -5,6 +5,8 @@ import fetchWP from 'utils/fetchWP'
 import { CheckBox, InputUI, DropDownUI, SwitchUI } from 'ui/admin/form';
 import { toast } from 'react-toastify';
 
+import { toast } from 'react-toastify';
+
 export default class MailChimpSettings extends Component {
 
 	constructor(props) {
@@ -33,13 +35,12 @@ export default class MailChimpSettings extends Component {
 		this.get_lists = this.get_lists.bind(this);
     }
 
-	componentDidMount() {
-		this.get_settings();
+	notify(type, message) {
+		toast[type](message, {toastId: 'marketing-mailchimp-toast'});
 	}
 
-
-	notify(type, message) {
-		toast[type](message, {toastId: 'mailchimp-toast'});
+	componentDidMount() {
+		this.get_settings();
 	}
 
 	get_settings = async () => {
@@ -67,9 +68,11 @@ export default class MailChimpSettings extends Component {
 					this.setState({ lists : json.lists, loading_lists : false });
                 } else {
 					this.setState({ lists : [], loading_lists : false });
+					this.notify( this.props.hammock.error, 'error' );
                 }
 			}, (err) => {
 				this.setState({ lists : [], loading_lists : false });
+				this.notify( this.props.hammock.error, 'error' );
 			}
 		);
 	}

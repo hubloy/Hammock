@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import fetchWP from 'utils/fetchWP';
-import { SwitchUI, InputUI, DropDownUI } from 'ui/admin/form';
+import { InputUI } from 'ui/admin/form';
 import Dashboard from 'layout/Dashboard';
 
 import { Link } from 'react-router-dom';
+
+import { toast } from 'react-toastify';
 
 export default class Manage extends Component {
 
@@ -24,6 +26,10 @@ export default class Manage extends Component {
         });
 	}
 
+	notify(type, message) {
+		toast[type](message, {toastId: 'comms-manage-toast'});
+	}
+
 	componentDidMount() {
 		const id = this.state.id;
 		this.fetchWP.get( 'emails/get?id=' + id )
@@ -39,24 +45,23 @@ export default class Manage extends Component {
 			$form = jQuery(self.comm_setting.current),
 			$button = $form.find('button.update-button'),
 			$btn_txt = $button.text(),
-			form = $form.serialize(),
-			helper = window.hammock.helper;
-			$button.attr('disabled', 'disabled');
-			$button.html("<div uk-spinner></div>");
-	
+			form = $form.serialize();
+
+		$button.attr('disabled', 'disabled');
+		$button.html("<div uk-spinner></div>");
 		this.fetchWP.post( 'emails/update', form, true )
 			.then( (json) => {
 				if ( json.status ) {
-					helper.notify( json.message, 'success' );
+					self.notify( json.message, 'success' );
 				} else {
-					helper.notify( json.message, 'warning' );
+					self.notify( json.message, 'warning' );
 				}
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				helper.notify( this.props.hammock.error, 'error' );
+				self.notify( this.props.hammock.error, 'error' );
 			}
 		);
 	}
