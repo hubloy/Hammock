@@ -60,7 +60,7 @@ class Single extends Shortcode {
             $plan_id    = ( int ) $attributes['plan_id'];
             $plan       = new Membership( $plan_id );
 
-            if ( $plan->id > 0 ) {
+            if ( $plan->is_valid() ) {
                 $this->get_template( 
                     'plans/single-plan-card.php', array(
                         'plan'	=> $plan,

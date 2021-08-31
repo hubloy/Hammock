@@ -323,7 +323,7 @@ class Plan {
 	 *
 	 * @since 1.0.0
 	 */
-	private function get_one( $id ) {
+	public function get_one( $id ) {
 		global $wpdb;
 		$sql  = "SELECT `plan_id`, `date_created`, `date_updated`, `member_id`, `membership_id`, `enabled`, `status`, `gateway`, `start_date`, `end_date` FROM {$this->table_name} WHERE `id` = %d";
 		$item = $wpdb->get_row( $wpdb->prepare( $sql, $id ) );

@@ -252,7 +252,7 @@ class Membership {
 	 *
 	 * @since 1.0.0
 	 */
-	private function get_one( $id, $load_meta = true ) {
+	public function get_one( $id, $load_meta = true ) {
 		global $wpdb;
 
 		$sql  = "SELECT `membership_id`, `date_created`, `date_updated`, `name`, `details`, `enabled`, `trial_enabled`, `limit_spaces`, `type`, `duration`, `price`, `signup_price`, `trial_price`, `trial_period`, `trial_duration`, `total_available` FROM {$this->table_name} WHERE `id` = %d";

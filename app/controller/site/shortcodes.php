@@ -9,6 +9,7 @@ use Hammock\Base\Controller;
 use Hammock\Shortcode\Account;
 use Hammock\Shortcode\Memberships;
 use Hammock\Shortcode\Restricted;
+use Hammock\Shortcode\Single;
 
 /**
  * Shortcodes controller

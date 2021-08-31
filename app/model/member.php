@@ -193,7 +193,7 @@ class Member {
 	 *
 	 * @since 1.0.0
 	 */
-	private function get_one( $id ) {
+	public function get_one( $id ) {
 		global $wpdb;
 		$sql  = "SELECT `date_created`, `date_updated`, `member_id`, `user_id`, `enabled` FROM {$this->table_name} WHERE `id` = %d";
 		$item = $wpdb->get_row( $wpdb->prepare( $sql, $id ) );

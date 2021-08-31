@@ -205,7 +205,7 @@ class Invoice {
 	 *
 	 * @since 1.0.0
 	 */
-	private function get_one( $id ) {
+	public function get_one( $id ) {
 		global $wpdb;
 		$sql    = "SELECT `id`, `gateway`, `status`, `member_id`, `plan_id`, `invoice_id`, `amount`, `tax_rate`, `gateway_identifier`, `notes`, `custom_data`, `user_id`, `due_date`, `date_created`, `last_updated` FROM {$this->table_name} WHERE `id` = %d";
 		$result = $wpdb->get_row( $wpdb->prepare( $sql, $id ) );
@@ -221,7 +221,7 @@ class Invoice {
 	 * 
 	 * @since 1.0.0
 	 */
-	private function get_by_invoice_id( $invoice_id ) {
+	public function get_by_invoice_id( $invoice_id ) {
 		global $wpdb;
 		$sql    = "SELECT `gateway`, `status`, `member_id`, `plan_id`, `id`, `invoice_id`, `amount`, `tax_rate`, `gateway_identifier`, `notes`, `custom_data`, `user_id`, `due_date`, `date_created`, `last_updated` FROM {$this->table_name} WHERE `invoice_id` = %s";
 		$result = $wpdb->get_row( $wpdb->prepare( $sql, $invoice_id ) );
