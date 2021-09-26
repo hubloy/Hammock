@@ -37,19 +37,19 @@ export default class WizardCreateMembership extends PureComponent {
 		this.fetchWP.post( 'wizard/membership', form, true )
 			.then( (json) => {
 				if ( json.status ) {
-                    self.notify( json.message, 'success' );
+                    self.notify( 'success', json.message );
                     setTimeout(function(){
                         window.location.reload();
-                    }, 5000);
+                    }, 2000);
 				} else {
-					self.notify( json.message, 'warning' );
+					self.notify( 'warning', json.message );
 				}
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				self.notify( hammock.error, 'error' );
+				self.notify( 'error', hammock.error );
 			}
 		);
 	}
@@ -58,7 +58,8 @@ export default class WizardCreateMembership extends PureComponent {
 		var hammock = this.props.hammock,
             strings = hammock.strings.dashboard.wizard.membership;
 		return (
-            <form className="uk-form-horizontal uk-margin-large" onSubmit={this.handleSubmit} ref={this.membership_create}>
+            <form className="uk-form-horizontal uk-margin-small" onSubmit={this.handleSubmit} ref={this.membership_create}>
+                <h2 className="uk-heading-divider">{strings.title}</h2>
                 <div className="uk-margin">
                     <legend className="uk-form-label">{strings.labels.name}</legend>
                     <div className="uk-form-controls">
