@@ -76,6 +76,7 @@ return array(
 			),
 		),
 		'membership'	=> array(
+			'title'		=> __( 'Create your first membership', 'hammock' ),
 			'labels'    => array(
 				'name'                 => __( 'Membership Name', 'hammock' ),
 				'status'               => __( 'Status', 'hammock' ),

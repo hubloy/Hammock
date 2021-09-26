@@ -78,17 +78,17 @@ export default class WizardSettings extends PureComponent {
         this.fetchWP.post( 'wizard/settings', form, true )
             .then( (json) => {
                 if ( json.status ) {
-                    self.notify( json.message, 'success' );
+                    self.notify( 'success', json.message );
 					action( json.data, json.currency );
                 } else {
-                    self.notify( json.message, 'warning' );
+                    self.notify( 'warning', json.message );
                 }
                 $button.removeAttr('disabled');
                 $button.html($btn_txt);
             }, (err) => {
                 $button.removeAttr('disabled');
                 $button.html($btn_txt);
-                self.notify( hammock.error, 'error' );
+                self.notify( 'error', hammock.error );
             }
         );
     }
