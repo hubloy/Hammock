@@ -25,7 +25,7 @@ export default class SubSiteSettings extends Component {
         });
     }
 
-	notify(type, message) {
+	notify(message, type) {
 		toast[type](message, {toastId: 'site-settings-toast'});
 	}
 
