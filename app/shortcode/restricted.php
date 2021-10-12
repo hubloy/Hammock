@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Hammock\Base\Shortcode;
+use Hammock\Services\Memberships;
 
 /**
  * Restricted shortcode manager
@@ -14,6 +15,13 @@ use Hammock\Base\Shortcode;
  * @since 1.0.0
  */
 class Restricted extends Shortcode {
+
+	/**
+	 * The membership service
+	 * 
+	 * @since 1.0.0
+	 */
+	private $membership_service = null;
 
 	/**
 	 * Singletone instance of the shortcode.
@@ -42,6 +50,9 @@ class Restricted extends Shortcode {
 		return self::$instance;
 	}
 
+	public function init() {
+		$this->membership_service = new Memberships();
+	}
 
 	/**
 	 * Get the shortcode content output
@@ -51,7 +62,12 @@ class Restricted extends Shortcode {
 	 * @since 1.0.0
 	 */
 	public function output( $atts ) {
-		
+		if ( isset( $atts['id'] ) ) {
+			$membership = $this->membership_service->get_membership_by_id( ( int ) $atts['id'] );
+			if ( $membership->is_valid() ) {
+
+			}
+		}
 	}
 }
 

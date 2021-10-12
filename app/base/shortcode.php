@@ -13,6 +13,28 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Shortcode {
 
+
+	/**
+	 * Initalize Shortcode
+	 *
+	 * @since  1.0.0
+	 */
+	public function __construct() {
+		$this->init();
+	}
+
+
+	/**
+	 * Main shortcode init
+	 * This function offers a safe way for each shortcode to initialize itself if
+	 * required.
+	 *
+	 * @since  1.0.0
+	 */
+	public function init() {
+
+	}
+
 	/**
 	 * Render shortcode
 	 * 

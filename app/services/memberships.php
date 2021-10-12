@@ -194,9 +194,22 @@ class Memberships {
 		$sql     	= "SELECT `id` FROM {$this->table_name} WHERE `membership_id` = %s";
 		$result		= $wpdb->get_var( $wpdb->prepare( $sql, $membership_id ) );
 		if ( $result ) {
-			return new Membership( $result );
+			return $this->get_membership_by_id( $result );
 		}
 		return false;
+	}
+
+	/**
+	 * Get membership by id
+	 * 
+	 * @param int $id - the id
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return object
+	 */
+	public function get_membership_by_id( $id ) {
+		return new Membership( $id );
 	}
 
 	/**
@@ -218,7 +231,7 @@ class Memberships {
 
 		if ( ! empty( $results ) ) {
 			foreach ( $results as $result ) {
-				$memberships[] = new Membership( $result->id );
+				$memberships[] = $this->get_membership_by_id( $result->id );
 			}
 		}
 
@@ -245,7 +258,7 @@ class Memberships {
 
 		if ( ! empty( $results ) ) {
 			foreach ( $results as $result ) {
-				$membership    = new Membership( $result->id );
+				$membership    = $this->get_membership_by_id( $result->id );
 				$memberships[] = $membership->to_html();
 			}
 		}
@@ -317,8 +330,7 @@ class Memberships {
 		$results     = $wpdb->get_results( $sql );
 		if ( ! empty( $results ) ) {
 			foreach ( $results as $result ) {
-				$membership    				= new Membership( $result->id );
-				$memberships[$result->id] 	= $membership;
+				$memberships[$result->id] = $this->get_membership_by_id( $result->id );
 			}
 		}
 		return $memberships;
