@@ -17,14 +17,15 @@ class Database {
 	 * Table key constants
 	 * These represent the table names
 	 */
-	const MEMBERSHIP = 'membership';
-	const META       = 'membership_meta';
-	const MEMBERS    = 'members';
-	const PLANS      = 'plans';
-	const INVOICE    = 'invoice';
-	const CODES      = 'codes';
-	const ACTIVITY   = 'activity';
-	const LOGS   	 = 'log';
+	const MEMBERSHIP 		= 'membership';
+	const MEMBERSHIP_RULES 	= 'membership_rules';
+	const META       		= 'meta';
+	const MEMBERS    		= 'members';
+	const PLANS      		= 'plans';
+	const INVOICE    		= 'invoice';
+	const CODES      		= 'codes';
+	const ACTIVITY   		= 'activity';
+	const LOGS   	 		= 'log';
 	
 
 	/**
@@ -45,14 +46,15 @@ class Database {
 		}
 
 		return array(
-			self::MEMBERSHIP => $db->prefix . 'hammock_membership',
-			self::META       => $db->prefix . 'hammock_meta',
-			self::MEMBERS    => $db->prefix . 'hammock_members',
-			self::PLANS		 => $db->prefix . 'hammock_plans',
-			self::INVOICE    => $db->prefix . 'hammock_invoice',
-			self::CODES      => $db->prefix . 'hammock_codes',
-			self::ACTIVITY	 => $db->prefix . 'hammock_activity',
-			self::LOGS		 => $db->prefix . 'hammock_subscription_log',
+			self::MEMBERSHIP 		=> $db->prefix . 'hammock_membership',
+			self::MEMBERSHIP_RULES 	=> $db->prefix . 'hammock_membership_rules',
+			self::META       		=> $db->prefix . 'hammock_meta',
+			self::MEMBERS    		=> $db->prefix . 'hammock_members',
+			self::PLANS		 		=> $db->prefix . 'hammock_plans',
+			self::INVOICE    		=> $db->prefix . 'hammock_invoice',
+			self::CODES      		=> $db->prefix . 'hammock_codes',
+			self::ACTIVITY	 		=> $db->prefix . 'hammock_activity',
+			self::LOGS		 		=> $db->prefix . 'hammock_subscription_log',
 		);
 	}
 
@@ -120,6 +122,29 @@ class Database {
                 KEY `hammock_membership_total_available` (`total_available`),
                 KEY `hammock_membership_date_created` (`date_created`)
 			) $charset_collate;";
+			dbDelta( $sql );
+		}
+
+		// Membership rules.
+		// Time duration is in milliseconds
+		$table_name = self::get_table_name( self::MEMBERSHIP_RULES );
+		if ( $table_name ) {
+			$sql = "CREATE TABLE {$table_name} (
+				`rule_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				`membership_id` bigint(20) unsigned NOT NULL,
+                `object_type` VARCHAR($max_index_length) NOT NULL,
+				`object_id` bigint(20) unsigned default NULL,
+				`custom_rule` LONGTEXT NULL,
+				`time_limit` tinyint(1) NOT NULL DEFAULT '0',
+				`time_duration` bigint(20) NOT NULL DEFAULT '0',
+				`date_created` datetime NOT NULL default '0000-00-00 00:00:00',
+				`date_updated` datetime NOT NULL default '0000-00-00 00:00:00',
+				PRIMARY KEY (`rule_id`),
+				KEY `rule_membership_id` (`membership_id` ASC ),
+				KEY `rule_object_type` (`object_type`($max_index_length)),
+				KEY `rule_type_id` (`object_id` ASC, `object_type` ASC),
+                KEY `rule_type_membership` (`object_id` ASC, `object_type` ASC, `membership_id` ASC))
+				$charset_collate;";
 			dbDelta( $sql );
 		}
 

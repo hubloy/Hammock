@@ -91,17 +91,17 @@ export default class General extends PureComponent {
 			$button = $form.find('button.update-button'),
 			$details = $form.find('input.membership_details'),
 			$btn_txt = $button.text(),
-			$detail_content = this.getWPEditorContent();
+			$detail_content = self.getWPEditorContent();
 			
 		$details.val($detail_content);
 
 		$button.attr('disabled', 'disabled');
 		$button.html("<div uk-spinner></div>");
 
-		this.fetchWP.post( 'memberships/update/general', $form.serialize(), true )
+		self.fetchWP.post( 'memberships/update/general', $form.serialize(), true )
 			.then( (json) => {
 				if ( json.status ) {
-					this.setState({
+					self.setState({
 						membership : json.membership
 					});
 					self.notify( json.message, 'success' );
@@ -113,7 +113,7 @@ export default class General extends PureComponent {
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				self.notify( this.props.hammock.error, 'error' );
+				self.notify( self.props.hammock.error, 'error' );
 			}
 		);
 	}
