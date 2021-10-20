@@ -60,6 +60,21 @@ class Cache {
 	}
 
 	/**
+	 * Get cache
+	 * 
+	 * @param string $cache_key The cache key.
+	 * @param string $group The cache group
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return mixed
+	 */
+	public static function get_cache( $cache_key, $group ) {
+		$prefix = self::get_cache_prefix( $group );
+		return wp_cache_get( $cache_key, $prefix );
+	}
+
+	/**
 	 * Delete cache
 	 * 
 	 * @param string $cache_key The cache key.
