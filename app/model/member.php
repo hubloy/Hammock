@@ -312,9 +312,9 @@ class Member {
 		$sql = "DELETE FROM {$this->table_name} WHERE `id` = %d";
 		$wpdb->query( $wpdb->prepare( $sql, $this->id ) );
 
-		$this->id = 0;
+		do_action( 'hammock_member_after_delete_member', $this->id );
 
-		do_action( 'hammock_member_after_delete_member' );
+		$this->id = 0;
 	}
 
 	/**
