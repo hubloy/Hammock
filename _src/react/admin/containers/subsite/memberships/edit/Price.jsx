@@ -11,13 +11,15 @@ export default class Price extends PureComponent {
 		super(props);
 		this.membership_price = React.createRef();
 		this.state = {
-            membership: undefined
+            membership: this.props.membership
         };
 		
         this.fetchWP = new fetchWP({
 			api_url: this.props.hammock.api_url,
 			api_nonce: this.props.hammock.api_nonce,
         });
+
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
 	notify(type, message) {
@@ -57,11 +59,11 @@ export default class Price extends PureComponent {
 	}
 
 	render() {
-		const membership = typeof this.state.membership === 'undefined' ? this.props.membership : this.state.membership;
+		const membership = this.state.membership;
 		var hammock = this.props.hammock;
 		var strings = hammock.strings;
 		return (
-			<form className="uk-form-horizontal uk-margin-large" onSubmit={this.handleSubmit.bind(this)} ref={this.membership_price}>
+			<form className="uk-form-horizontal uk-margin-large" onSubmit={this.handleSubmit} ref={this.membership_price}>
 				<InputUI name={`id`} type={`hidden`} value={membership.id}/>
 				<div className="uk-margin">
 					<legend className="uk-form-label">{strings.labels.price}</legend>

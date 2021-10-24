@@ -6,6 +6,7 @@ import Dashboard from 'layout/Dashboard';
 import { Nav } from './edit/Nav'
 import General from './edit/General'
 import Price from './edit/Price'
+import Rules from './edit/Rules'
 
 export default class Edit extends Component {
 
@@ -39,6 +40,7 @@ export default class Edit extends Component {
 	}
 
 	render() {
+		var hammock = this.props.hammock;
 		if ( this.state.loading ) {
 			return (
 				<div className="uk-container uk-padding-small uk-margin-top uk-width-1-1 uk-background-default">
@@ -48,25 +50,29 @@ export default class Edit extends Component {
 		} else {
 			if ( this.state.error) {
 				return (
-					<h3 className="uk-text-center uk-text-danger">{this.props.hammock.error}</h3>
+					<h3 className="uk-text-center uk-text-danger">{hammock.error}</h3>
 				)
 			} else {
+				var membership = this.state.membership;
 				return (
-					<Dashboard hammock={this.props.hammock}>
-						{this.state.membership.id > 0 ? (
+					<Dashboard hammock={hammock}>
+						{membership.id > 0 ? (
 							<div uk-grid="">
-								<Nav hammock={this.props.hammock}/>
+								<Nav hammock={hammock}/>
 								<div className="hammock-membership uk-width-expand uk-margin-left uk-card uk-card-body uk-switcher">
 									<div className="uk-background-default uk-padding-small uk-border-rounded">
-										<General hammock={this.props.hammock} membership={this.state.membership}/>
+										<General hammock={hammock} membership={membership}/>
 									</div>
 									<div className="uk-background-default uk-padding-small uk-border-rounded">
-										<Price hammock={this.props.hammock} membership={this.state.membership}/>
+										<Rules hammock={hammock} membership={membership}/>
+									</div>
+									<div className="uk-background-default uk-padding-small uk-border-rounded">
+										<Price hammock={hammock} membership={membership}/>
 									</div>
 								</div>
 							</div>
 						) : (
-							<h3 className="uk-text-center uk-text-danger">{this.props.hammock.strings.edit.not_found}</h3>
+							<h3 className="uk-text-center uk-text-danger">{hammock.strings.edit.not_found}</h3>
 						) }
 					</Dashboard>
 				)

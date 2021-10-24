@@ -53,6 +53,7 @@ return array(
 		'tabs'      => array(
 			'general' => __( 'General', 'hammock' ),
 			'price'   => __( 'Price', 'hammock' ),
+			'rules'	  => __( 'Rules', 'hammock' ),
 		),
 		'invites'	=> array(
 			'select'	=> __( 'Select Invite codes', 'hammock' ),

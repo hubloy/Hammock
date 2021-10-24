@@ -12,7 +12,7 @@ export default class General extends PureComponent {
 		super(props);
 		this.membership_general = React.createRef();
 		this.state = {
-			membership: undefined,
+			membership: this.props.membership,
 			invite_active: false,
 			invites:[]
         };
@@ -21,6 +21,8 @@ export default class General extends PureComponent {
 			api_url: this.props.hammock.api_url,
 			api_nonce: this.props.hammock.api_nonce,
         });
+
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
 
@@ -160,13 +162,13 @@ export default class General extends PureComponent {
 	}
 
 	render() {
-		const membership = typeof this.state.membership === 'undefined' ? this.props.membership : this.state.membership;
+		const membership = this.state.membership;
 		var hammock = this.props.hammock;
 		var strings = hammock.strings;
 		const invite_only = typeof membership.meta.invite_only === 'undefined' ? 0 : membership.meta.invite_only.meta_value,
 			invite_only_list = typeof membership.meta.invite_list === 'undefined' ? [] : membership.meta.invite_list.meta_value;
 		return (
-			<form className="uk-form-horizontal uk-margin-large" onSubmit={this.handleSubmit.bind(this)} ref={this.membership_general}>
+			<form className="uk-form-horizontal uk-margin-large" onSubmit={this.handleSubmit} ref={this.membership_general}>
 				<InputUI name={`id`} type={`hidden`} value={membership.id}/>
 				<InputUI name={`invite_only_list`} type={`hidden`} value={invite_only_list.join(',')}/>
 				<InputUI name={`membership_details`} type={`hidden`} value={membership.details}/>
