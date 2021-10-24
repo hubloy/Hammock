@@ -8,11 +8,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 use Hammock\Core\Database;
 
 /**
- * Membership rules
+ * Membership rule
  * 
  * @since 1.0.0
  */
-class Rules {
+class Rule {
 
 	/**
 	 * The database ID
