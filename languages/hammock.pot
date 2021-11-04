@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Hammock 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/hammock\n"
-"POT-Creation-Date: 2021-06-02 19:08:24+00:00\n"
+"POT-Creation-Date: 2021-11-04 17:20:04+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,38 +24,6 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Generator: grunt-wp-i18n 1.0.3\n"
 
-#: app/addon/bbpress/bbpress.php:57
-msgid "bbPress Integration"
-msgstr ""
-
-#: app/addon/bbpress/bbpress.php:58
-msgid "bbPress rules integration."
-msgstr ""
-
-#: app/addon/bbpress/bbpress.php:58
-msgid "Insatall and active bbPress to use this addon"
-msgstr ""
-
-#: app/addon/bbpress/bbpress.php:78
-msgid "bbPress"
-msgstr ""
-
-#: app/addon/buddypress/buddypress.php:57
-msgid "BuddyPress Integration"
-msgstr ""
-
-#: app/addon/buddypress/buddypress.php:58
-msgid "Integrate BuddyPress"
-msgstr ""
-
-#: app/addon/buddypress/buddypress.php:58
-msgid "Insatall and active BuddyPress to use this addon"
-msgstr ""
-
-#: app/addon/buddypress/buddypress.php:78
-msgid "BuddyPress"
-msgstr ""
-
 #: app/addon/category/category.php:65
 msgid "Category Protection"
 msgstr ""
@@ -64,31 +32,35 @@ msgstr ""
 msgid "Protect your posts by category."
 msgstr ""
 
-#: app/addon/category/category.php:100
+#: app/addon/category/category.php:71
+msgid "Content protection is currently disabled"
+msgstr ""
+
+#: app/addon/category/category.php:103
 msgid "Access"
 msgstr ""
 
-#: app/addon/category/category.php:121
+#: app/addon/category/category.php:124
 msgid "All"
 msgstr ""
 
-#: app/addon/category/category.php:121
+#: app/addon/category/category.php:124
 msgid "%d membership(s)"
 msgstr ""
 
-#: app/addon/category/category.php:145
+#: app/addon/category/category.php:148
 msgid "Membership Access"
 msgstr ""
 
-#: app/addon/category/category.php:148
+#: app/addon/category/category.php:151
 msgid "Select Memberships"
 msgstr ""
 
-#: app/addon/category/category.php:158
+#: app/addon/category/category.php:161
 msgid "Membership access to items under this category"
 msgstr ""
 
-#: app/addon/category/category.php:217
+#: app/addon/category/category.php:220
 msgid "Category Setting updated"
 msgstr ""
 
@@ -115,12 +87,58 @@ msgstr ""
 msgid "Users need an invitation code to subscribe to a membership."
 msgstr ""
 
-#: app/addon/mailchimp/mailchimp.php:54
+#: app/addon/mailchimp/api.php:188
+msgid ""
+"Something went wrong, please compare your Opt-in fields with MailChimp "
+"fields and add any missing fields."
+msgstr ""
+
+#: app/addon/mailchimp/api.php:191
+msgid "Successful subscription"
+msgstr ""
+
+#: app/addon/mailchimp/api.php:211
+msgid "This email address has already subscribed"
+msgstr ""
+
+#: app/addon/mailchimp/api.php:214
+msgid "You have been added to the new group"
+msgstr ""
+
+#: app/addon/mailchimp/api.php:252
+msgid "Couldn't update the user"
+msgstr ""
+
+#: app/addon/mailchimp/api.php:254
+msgid "User updated"
+msgstr ""
+
+#: app/addon/mailchimp/mailchimp.php:63
 msgid "MailChimp Integration"
 msgstr ""
 
-#: app/addon/mailchimp/mailchimp.php:55
+#: app/addon/mailchimp/mailchimp.php:64
 msgid "MailChimp integration."
+msgstr ""
+
+#: app/addon/mailchimp/mailchimp.php:127
+msgid "MailChimp Settings Saved"
+msgstr ""
+
+#: app/addon/mailchimp/mailchimp.php:149 app/addon/mailchimp/mailchimp.php:169
+msgid "Error: %s"
+msgstr ""
+
+#: app/addon/mailchimp/mailchimp.php:159
+msgid "Valid API key"
+msgstr ""
+
+#: app/addon/mailchimp/mailchimp.php:175 app/rest/site/addons.php:239
+msgid "Action executed"
+msgstr ""
+
+#: app/addon/mailchimp/mailchimp.php:191
+msgid "Select List"
 msgstr ""
 
 #: app/addon/media/media.php:54
@@ -147,45 +165,25 @@ msgstr ""
 msgid "Redirect users to specific pages based on certain rules"
 msgstr ""
 
-#: app/addon/woocommerce/woocommerce.php:56
-msgid "WooCommerce"
-msgstr ""
-
-#: app/addon/woocommerce/woocommerce.php:57
-msgid "Sell and activate Memberships via WooCommerce"
-msgstr ""
-
-#: app/addon/woocommerce/woocommerce.php:57
-msgid "Insatall and active WooCommerce to use this addon"
-msgstr ""
-
-#: app/addon/woocommerce/woocommerce.php:105 app/controller/plugin.php:133
-#: app/controller/plugin.php:134 app/controller/plugin.php:173
-#: app/controller/plugin.php:174 app/controller/site/memberships.php:94
-#: app/controller/site/memberships.php:95
-#: app/controller/site/memberships.php:113 app/services/protection.php:155
-msgid "Memberships"
-msgstr ""
-
 #: app/base/controller.php:176 app/base/rest.php:57
 msgid "Invalid request, you are not allowed to make this request"
 msgstr ""
 
-#: app/base/email.php:240 app/base/email.php:258
+#: app/base/email.php:238 app/base/email.php:256
 msgid "You don't have permission to do this."
 msgstr ""
 
-#: app/base/email.php:244
+#: app/base/email.php:242
 msgid "Template file copied to theme"
 msgstr ""
 
-#: app/base/email.php:262
+#: app/base/email.php:260
 msgid "Template file deleted from theme"
 msgstr ""
 
 #: app/base/plugin.php:159 app/controller/site/settings.php:100
 #: app/controller/site/settings.php:101 app/controller/site/settings.php:119
-#: app/core/resource.php:142
+#: app/core/resource.php:143
 msgid "Settings"
 msgstr ""
 
@@ -205,7 +203,7 @@ msgstr ""
 msgid "Every 6 Months"
 msgstr ""
 
-#: app/base/shortcode.php:39
+#: app/base/shortcode.php:61
 msgid "Shortcode"
 msgstr ""
 
@@ -277,35 +275,51 @@ msgstr ""
 msgid "Error adding plan to your account. Please try again"
 msgstr ""
 
-#: app/controller/plugin.php:116
+#: app/controller/plugin.php:125
 msgid "Membership Page"
 msgstr ""
 
-#: app/controller/plugin.php:144 app/controller/plugin.php:145
-#: app/controller/plugin.php:184 app/controller/plugin.php:185
-#: app/core/resource.php:119 app/core/resource.php:121
-#: app/functions/account.php:36 app/ui/default/header.php:9
+#: app/controller/plugin.php:142 app/controller/plugin.php:143
+#: app/controller/plugin.php:187 app/controller/plugin.php:188
+#: app/controller/plugin.php:358 app/controller/site/memberships.php:94
+#: app/controller/site/memberships.php:95
+#: app/controller/site/memberships.php:113 app/i18n/site/dashboard.php:17
+#: app/services/protection.php:155
+msgid "Memberships"
+msgstr ""
+
+#: app/controller/plugin.php:153 app/controller/plugin.php:154
+#: app/controller/plugin.php:198 app/controller/plugin.php:199
+#: app/controller/plugin.php:479 app/core/resource.php:120
+#: app/core/resource.php:122 app/functions/account.php:36
+#: app/ui/default/header.php:9
 msgid "Dashboard"
 msgstr ""
 
-#: app/controller/plugin.php:297 app/core/resource.php:97
-#: app/core/resource.php:334
+#: app/controller/plugin.php:243 app/core/resource.php:135
+#: app/i18n/site/members.php:69 app/services/codes.php:58
+#: app/view/backend/email/setting.php:30 app/view/backend/email/setting.php:35
+msgid "Enabled"
+msgstr ""
+
+#: app/controller/plugin.php:310 app/core/resource.php:97
+#: app/core/resource.php:350
 msgid "Ooops, no results found"
 msgstr ""
 
-#: app/controller/plugin.php:372
+#: app/controller/plugin.php:385
 msgid "Membership Plan %s  %s"
 msgstr ""
 
-#: app/controller/plugin.php:379
+#: app/controller/plugin.php:392
 msgid " %s details"
 msgstr ""
 
-#: app/controller/plugin.php:383
+#: app/controller/plugin.php:396
 msgid " %s Transactions"
 msgstr ""
 
-#: app/controller/plugin.php:387
+#: app/controller/plugin.php:400
 msgid " %s Subscriptions"
 msgstr ""
 
@@ -317,7 +331,7 @@ msgstr ""
 msgid "New plan added"
 msgstr ""
 
-#: app/controller/site/activity.php:134 app/services/members.php:907
+#: app/controller/site/activity.php:134 app/services/members.php:908
 msgid "Plan updated"
 msgstr ""
 
@@ -325,12 +339,12 @@ msgstr ""
 msgid "Plan deleted"
 msgstr ""
 
-#: app/controller/site/addon.php:130 app/controller/site/addon.php:131
-#: app/controller/site/addon.php:149
+#: app/controller/site/addon.php:126 app/controller/site/addon.php:127
+#: app/controller/site/addon.php:145
 msgid "Addons"
 msgstr ""
 
-#: app/controller/site/addon.php:185 app/rest/site/gateways.php:146
+#: app/controller/site/addon.php:181 app/rest/site/gateways.php:146
 msgid "Not implemented"
 msgstr ""
 
@@ -345,8 +359,14 @@ msgstr ""
 msgid "Action not implemented"
 msgstr ""
 
+#: app/controller/site/marketing.php:94 app/controller/site/marketing.php:95
+#: app/controller/site/marketing.php:114
+msgid "Marketing"
+msgstr ""
+
 #: app/controller/site/members.php:93 app/controller/site/members.php:94
-#: app/controller/site/members.php:113 app/i18n/site/memberships.php:43
+#: app/controller/site/members.php:113 app/i18n/site/dashboard.php:12
+#: app/i18n/site/memberships.php:43
 msgid "Members"
 msgstr ""
 
@@ -417,106 +437,105 @@ msgstr ""
 msgid "%d user accounts resent emails"
 msgstr ""
 
-#: app/core/resource.php:96 app/core/resource.php:332
+#: app/core/resource.php:96 app/core/resource.php:348
 msgid "An error occured"
 msgstr ""
 
-#: app/core/resource.php:108 app/core/resource.php:340
+#: app/core/resource.php:108 app/core/resource.php:356
 msgid "Save"
 msgstr ""
 
-#: app/core/resource.php:109 app/core/resource.php:341
+#: app/core/resource.php:109
+msgid "Save and Continue"
+msgstr ""
+
+#: app/core/resource.php:110 app/core/resource.php:357
 msgid "Update"
 msgstr ""
 
-#: app/core/resource.php:110 app/core/resource.php:342
+#: app/core/resource.php:111 app/core/resource.php:358
 msgid "Edit"
 msgstr ""
 
-#: app/core/resource.php:111 app/core/resource.php:343
+#: app/core/resource.php:112 app/core/resource.php:359
 msgid "Delete"
 msgstr ""
 
-#: app/core/resource.php:112
+#: app/core/resource.php:113
 msgid "Manage"
 msgstr ""
 
-#: app/core/resource.php:113 app/core/resource.php:344
+#: app/core/resource.php:114 app/core/resource.php:360
 msgid "Okay"
 msgstr ""
 
-#: app/core/resource.php:114 app/core/resource.php:345
+#: app/core/resource.php:115 app/core/resource.php:361
 msgid "Cancel"
 msgstr ""
 
-#: app/core/resource.php:115 app/core/resource.php:346
+#: app/core/resource.php:116 app/core/resource.php:362
 msgid "Back"
 msgstr ""
 
-#: app/core/resource.php:116
+#: app/core/resource.php:117
 msgid "Send Reminder"
 msgstr ""
 
-#: app/core/resource.php:120
+#: app/core/resource.php:121
 msgid "Sorry, we couldn't find what you are looking for"
 msgstr ""
 
-#: app/core/resource.php:124
+#: app/core/resource.php:125
 msgid "Search for user"
 msgstr ""
 
-#: app/core/resource.php:125
+#: app/core/resource.php:126
 msgid "User not found"
 msgstr ""
 
-#: app/core/resource.php:128
+#: app/core/resource.php:129
 msgid "Search for member"
 msgstr ""
 
-#: app/core/resource.php:129 app/i18n/site/members.php:47
+#: app/core/resource.php:130 app/i18n/site/members.php:47
 msgid "Member not found"
 msgstr ""
 
-#: app/core/resource.php:134 app/i18n/site/members.php:69
-#: app/services/codes.php:58 app/view/backend/email/setting.php:30
-#: app/view/backend/email/setting.php:35
-msgid "Enabled"
-msgstr ""
-
-#: app/core/resource.php:135 app/services/codes.php:59
+#: app/core/resource.php:136 app/services/codes.php:59
 msgid "Disabled"
 msgstr ""
 
-#: app/core/resource.php:136 app/functions/views.php:26
+#: app/core/resource.php:137 app/functions/views.php:26
 #: app/functions/views.php:45 app/i18n/site/codes.php:21
-#: app/i18n/site/members.php:37 app/i18n/site/members.php:55
-#: app/i18n/site/members.php:68 app/i18n/site/members.php:98
-#: app/i18n/site/memberships.php:15 app/i18n/site/transactions.php:22
-#: app/i18n/site/transactions.php:37 app/i18n/site/transactions.php:47
+#: app/i18n/site/dashboard.php:82 app/i18n/site/members.php:37
+#: app/i18n/site/members.php:55 app/i18n/site/members.php:68
+#: app/i18n/site/members.php:98 app/i18n/site/memberships.php:15
+#: app/i18n/site/transactions.php:22 app/i18n/site/transactions.php:37
+#: app/i18n/site/transactions.php:47
 msgid "Status"
 msgstr ""
 
-#: app/core/resource.php:137
+#: app/core/resource.php:138
 msgid "Loading..."
 msgstr ""
 
-#: app/core/resource.php:138
+#: app/core/resource.php:139
 msgid "Success"
 msgstr ""
 
-#: app/core/resource.php:139
+#: app/core/resource.php:140
 msgid "Error"
 msgstr ""
 
-#: app/core/resource.php:143
+#: app/core/resource.php:144
 msgid "Configure"
 msgstr ""
 
-#: app/core/resource.php:144
+#: app/core/resource.php:145
 msgid "Filter"
 msgstr ""
 
-#: app/core/resource.php:145
+#: app/core/resource.php:146
 msgid "Actions"
 msgstr ""
 
@@ -788,8 +807,8 @@ msgstr ""
 msgid "Access to this content is restricted"
 msgstr ""
 
-#: app/functions/views.php:25 app/i18n/site/memberships.php:13
-#: app/i18n/site/memberships.php:40
+#: app/functions/views.php:25 app/i18n/site/dashboard.php:81
+#: app/i18n/site/memberships.php:13 app/i18n/site/memberships.php:40
 msgid "Membership Name"
 msgstr ""
 
@@ -820,40 +839,6 @@ msgstr ""
 
 #: app/gateway/manual/manual.php:75
 msgid "Manual Gateway"
-msgstr ""
-
-#: app/gateway/stripe/stripe.php:105
-msgid "Stripe Gateway"
-msgstr ""
-
-#: app/gateway/stripe/stripe.php:324
-msgid "Payment event %s on subscription %s"
-msgstr ""
-
-#: app/gateway/stripe/stripe.php:330
-msgid "Could not find member for transaction"
-msgstr ""
-
-#: app/gateway/stripe/stripe.php:338
-msgid "Error getting plan"
-msgstr ""
-
-#: app/gateway/stripe/stripe.php:361
-msgid "Order %s already paid for : %s"
-msgstr ""
-
-#: app/gateway/stripe/stripe.php:405
-msgid "Update Card Information"
-msgstr ""
-
-#: app/gateway/stripe/stripe.php:474 app/gateway/stripe/stripe.php:541
-msgid ""
-"Customer authentication is required to complete this transaction. Please "
-"complete the verification steps issued by your payment provider."
-msgstr ""
-
-#: app/gateway/stripe/stripe.php:498
-msgid "%s : Order # %s"
 msgstr ""
 
 #: app/helper/currency.php:29
@@ -1624,13 +1609,13 @@ msgstr ""
 msgid "Select Page"
 msgstr ""
 
-#: app/helper/pages.php:94 app/i18n/site/settings.php:47
-#: app/services/pages.php:23
+#: app/helper/pages.php:94 app/i18n/site/dashboard.php:66
+#: app/i18n/site/settings.php:47 app/services/pages.php:23
 msgid "Membership List"
 msgstr ""
 
-#: app/helper/pages.php:98 app/i18n/site/settings.php:51
-#: app/services/pages.php:28
+#: app/helper/pages.php:98 app/i18n/site/dashboard.php:70
+#: app/i18n/site/settings.php:51 app/services/pages.php:28
 msgid "Protected Content"
 msgstr ""
 
@@ -1644,8 +1629,8 @@ msgstr ""
 msgid "Thank You"
 msgstr ""
 
-#: app/helper/pages.php:110 app/i18n/site/settings.php:55
-#: app/services/pages.php:33
+#: app/helper/pages.php:110 app/i18n/site/dashboard.php:74
+#: app/i18n/site/settings.php:55 app/services/pages.php:33
 msgid "Account"
 msgstr ""
 
@@ -1808,6 +1793,168 @@ msgstr ""
 
 #: app/i18n/site/comms.php:23
 msgid "Back To List"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:13
+msgid "No Members Found"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:18
+msgid "No Memberships Found"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:22
+msgid "Site Management"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:25
+msgid "View Memberships"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:29
+msgid "View Addons"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:35
+msgid "Stats Overview"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:38
+msgid "Mon"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:39
+msgid "Tue"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:40
+msgid "Wed"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:41
+msgid "Thu"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:42
+msgid "Fri"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:43
+msgid "Sat"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:44
+msgid "Sun"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:46
+msgid "%s of Subscribers"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:47
+msgid "%s of Transactions"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:50
+msgid "No Subscriber Data found for this week"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:51
+msgid "No Transaction Data found for this week"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:55
+msgid "Initial Setup"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:57 app/i18n/site/settings.php:25
+msgid "General Settings"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:59 app/i18n/site/settings.php:27
+msgid "Membership Currency"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:60 app/i18n/site/settings.php:28
+msgid "This is the currency used to purchase memberships"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:64 app/i18n/site/settings.php:45
+msgid "Membership Pages"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:67 app/i18n/site/settings.php:48
+msgid "List of public memberships"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:71 app/i18n/site/settings.php:52
+msgid "Displayed when a user cannot access the requested page"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:75 app/i18n/site/settings.php:56
+msgid "Shows details about the current user"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:79
+msgid "Create your first membership"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:83 app/i18n/site/memberships.php:16
+msgid "Membership Type"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:84 app/i18n/site/memberships.php:17
+msgid "Membership Price"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:85 app/i18n/site/memberships.php:19
+msgid "Grant access for the following days"
+msgstr ""
+
+#: app/i18n/site/dashboard.php:86 app/i18n/site/memberships.php:23
+msgid "Recurring Frequency"
+msgstr ""
+
+#: app/i18n/site/marketing.php:13
+msgid "MailChimp"
+msgstr ""
+
+#: app/i18n/site/marketing.php:16
+msgid "Enable MailChimp integration"
+msgstr ""
+
+#: app/i18n/site/marketing.php:17
+msgid "Visit %syour API dashboard%s to create an API Key."
+msgstr ""
+
+#: app/i18n/site/marketing.php:18
+msgid "API Key"
+msgstr ""
+
+#: app/i18n/site/marketing.php:19 app/view/backend/addons/mailchimp.php:54
+msgid "Validate"
+msgstr ""
+
+#: app/i18n/site/marketing.php:21
+msgid "Automatically opt-in new users to the mailing list."
+msgstr ""
+
+#: app/i18n/site/marketing.php:22
+msgid ""
+"Users will not receive an email confirmation. You are responsible to inform "
+"your users."
+msgstr ""
+
+#: app/i18n/site/marketing.php:25
+msgid "Registered users mailing list (not members)"
+msgstr ""
+
+#: app/i18n/site/marketing.php:26
+msgid "Members mailing list"
+msgstr ""
+
+#: app/i18n/site/marketing.php:27
+msgid "Deactivated memberships mailing list"
 msgstr ""
 
 #: app/i18n/site/members.php:11
@@ -1993,20 +2140,8 @@ msgstr ""
 msgid "Membership Description"
 msgstr ""
 
-#: app/i18n/site/memberships.php:16
-msgid "Membership Type"
-msgstr ""
-
-#: app/i18n/site/memberships.php:17
-msgid "Membership Price"
-msgstr ""
-
 #: app/i18n/site/memberships.php:18
 msgid "Sign-up Price"
-msgstr ""
-
-#: app/i18n/site/memberships.php:19
-msgid "Grant access for the following days"
 msgstr ""
 
 #: app/i18n/site/memberships.php:20
@@ -2021,11 +2156,7 @@ msgstr ""
 msgid "Total spots available for this membership"
 msgstr ""
 
-#: app/i18n/site/memberships.php:23
-msgid "Recurring Frequency"
-msgstr ""
-
-#: app/i18n/site/memberships.php:24 app/services/members.php:218
+#: app/i18n/site/memberships.php:24 app/services/members.php:219
 msgid "Trial"
 msgstr ""
 
@@ -2054,7 +2185,7 @@ msgid "New Membership"
 msgstr ""
 
 #: app/i18n/site/memberships.php:41 app/model/membership.php:472
-#: app/services/members.php:206 app/services/members.php:216
+#: app/services/members.php:207 app/services/members.php:217
 #: templates/account/plan/list/view-plan.php:67
 msgid "Active"
 msgstr ""
@@ -2083,11 +2214,15 @@ msgstr ""
 msgid "Membership with that id not found"
 msgstr ""
 
-#: app/i18n/site/memberships.php:58
-msgid "Select Invite codes"
+#: app/i18n/site/memberships.php:56
+msgid "Rules"
 msgstr ""
 
 #: app/i18n/site/memberships.php:59
+msgid "Select Invite codes"
+msgstr ""
+
+#: app/i18n/site/memberships.php:60
 msgid "No Invite codes fount"
 msgstr ""
 
@@ -2115,18 +2250,6 @@ msgstr ""
 msgid ""
 "This will force all registered accounts to first verify their emails before "
 "login"
-msgstr ""
-
-#: app/i18n/site/settings.php:25
-msgid "General Settings"
-msgstr ""
-
-#: app/i18n/site/settings.php:27
-msgid "Membership Currency"
-msgstr ""
-
-#: app/i18n/site/settings.php:28
-msgid "This is the currency used to purchase memberships"
 msgstr ""
 
 #: app/i18n/site/settings.php:31
@@ -2159,22 +2282,6 @@ msgstr ""
 
 #: app/i18n/site/settings.php:40
 msgid "Redirect to page"
-msgstr ""
-
-#: app/i18n/site/settings.php:45
-msgid "Membership Pages"
-msgstr ""
-
-#: app/i18n/site/settings.php:48
-msgid "List of public memberships"
-msgstr ""
-
-#: app/i18n/site/settings.php:52
-msgid "Displayed when a user cannot access the requested page"
-msgstr ""
-
-#: app/i18n/site/settings.php:56
-msgid "Shows details about the current user"
 msgstr ""
 
 #: app/i18n/site/settings.php:60
@@ -2230,9 +2337,9 @@ msgid "by"
 msgstr ""
 
 #: app/model/activity.php:66 app/model/invoice.php:515 app/model/plan.php:489
-#: app/model/plan.php:497 app/services/members.php:244
-#: app/services/members.php:552 app/services/members.php:553
-#: app/services/members.php:554 app/services/memberships.php:116
+#: app/model/plan.php:497 app/services/members.php:245
+#: app/services/members.php:553 app/services/members.php:554
+#: app/services/members.php:555 app/services/memberships.php:116
 #: app/services/memberships.php:151 app/services/memberships.php:165
 msgid "N/A"
 msgstr ""
@@ -2294,7 +2401,7 @@ msgid "Reference type"
 msgstr ""
 
 #: app/rest/site/addons.php:74 app/rest/site/addons.php:92
-#: app/rest/site/addons.php:111
+#: app/rest/site/addons.php:111 app/rest/site/addons.php:138
 msgid "The addon unique key"
 msgstr ""
 
@@ -2302,11 +2409,15 @@ msgstr ""
 msgid "Enabled status either 1 or 0"
 msgstr ""
 
-#: app/rest/site/addons.php:157 app/rest/site/addons.php:199
+#: app/rest/site/addons.php:144
+msgid "The custom addon action to call"
+msgstr ""
+
+#: app/rest/site/addons.php:184 app/rest/site/addons.php:226
 msgid "The addon does not exist."
 msgstr ""
 
-#: app/rest/site/addons.php:170
+#: app/rest/site/addons.php:197
 msgid "Addon not found"
 msgstr ""
 
@@ -2318,7 +2429,8 @@ msgstr ""
 msgid "The email id"
 msgstr ""
 
-#: app/rest/site/emails.php:138 app/rest/site/settings.php:192
+#: app/rest/site/emails.php:138 app/rest/site/settings.php:203
+#: app/rest/site/wizard.php:165
 msgid "Settings updated"
 msgstr ""
 
@@ -2371,11 +2483,11 @@ msgstr ""
 msgid "Invalid membership id"
 msgstr ""
 
-#: app/rest/site/memberships.php:252
+#: app/rest/site/memberships.php:252 app/rest/site/wizard.php:215
 msgid "Membership Saved"
 msgstr ""
 
-#: app/rest/site/memberships.php:258
+#: app/rest/site/memberships.php:258 app/rest/site/wizard.php:220
 msgid "Error saving membership"
 msgstr ""
 
@@ -2391,7 +2503,7 @@ msgstr ""
 msgid "%s settings updated"
 msgstr ""
 
-#: app/rest/site/settings.php:205
+#: app/rest/site/settings.php:216
 msgid "Create New Page"
 msgstr ""
 
@@ -2419,13 +2531,13 @@ msgstr ""
 msgid "Error updating transaction"
 msgstr ""
 
-#: app/services/codes.php:60 app/services/members.php:208
-#: app/services/members.php:220
+#: app/services/codes.php:60 app/services/members.php:209
+#: app/services/members.php:221
 msgid "Expired"
 msgstr ""
 
-#: app/services/codes.php:61 app/services/members.php:210
-#: app/services/members.php:222 app/services/transactions.php:86
+#: app/services/codes.php:61 app/services/members.php:211
+#: app/services/members.php:223 app/services/transactions.php:86
 msgid "Canceled"
 msgstr ""
 
@@ -2461,85 +2573,85 @@ msgstr ""
 msgid "Selected Code does not exist"
 msgstr ""
 
-#: app/services/members.php:205 app/services/members.php:215
+#: app/services/members.php:206 app/services/members.php:216
 #: app/services/transactions.php:85
 msgid "Pending"
 msgstr ""
 
-#: app/services/members.php:207 app/services/members.php:217
+#: app/services/members.php:208 app/services/members.php:218
 msgid "Paused"
 msgstr ""
 
-#: app/services/members.php:209 app/services/members.php:221
+#: app/services/members.php:210 app/services/members.php:222
 msgid "Deactivated"
 msgstr ""
 
-#: app/services/members.php:214
+#: app/services/members.php:215
 msgid "Created"
 msgstr ""
 
-#: app/services/members.php:219
+#: app/services/members.php:220
 msgid "Trial Expired"
 msgstr ""
 
-#: app/services/members.php:223
+#: app/services/members.php:224
 msgid "Not yet active"
 msgstr ""
 
-#: app/services/members.php:684
+#: app/services/members.php:685
 msgid "The email address is not valid."
 msgstr ""
 
-#: app/services/members.php:690
+#: app/services/members.php:691
 msgid "An account with the email address exists."
 msgstr ""
 
-#: app/services/members.php:697
+#: app/services/members.php:698
 msgid "User with username %s exists"
 msgstr ""
 
-#: app/services/members.php:728
+#: app/services/members.php:729
 msgid "User saved"
 msgstr ""
 
-#: app/services/members.php:735
+#: app/services/members.php:736
 msgid "Error saving user %s"
 msgstr ""
 
-#: app/services/members.php:767
+#: app/services/members.php:768
 msgid "Error saving member"
 msgstr ""
 
-#: app/services/members.php:782
+#: app/services/members.php:783
 msgid "Member saved"
 msgstr ""
 
-#: app/services/members.php:855
+#: app/services/members.php:856
 msgid "Plan saved"
 msgstr ""
 
-#: app/services/members.php:861 app/services/transactions.php:280
+#: app/services/members.php:862 app/services/transactions.php:280
 msgid "Error adding plan to member"
 msgstr ""
 
-#: app/services/members.php:867 app/services/members.php:973
+#: app/services/members.php:868 app/services/members.php:974
 #: app/services/transactions.php:286
 msgid "Member does not exist"
 msgstr ""
 
-#: app/services/members.php:912 app/services/members.php:947
+#: app/services/members.php:913 app/services/members.php:948
 msgid "Selected plan does not exist"
 msgstr ""
 
-#: app/services/members.php:937
+#: app/services/members.php:938
 msgid "Member and plan removed"
 msgstr ""
 
-#: app/services/members.php:942
+#: app/services/members.php:943
 msgid "Plan removed"
 msgstr ""
 
-#: app/services/members.php:968
+#: app/services/members.php:969
 msgid "Member deleted"
 msgstr ""
 
@@ -2579,7 +2691,7 @@ msgstr ""
 msgid "Year"
 msgstr ""
 
-#: app/services/memberships.php:271
+#: app/services/memberships.php:284
 msgid "Select Membership"
 msgstr ""
 
@@ -2617,6 +2729,16 @@ msgstr ""
 
 #: app/view/backend/addons/category.php:41
 msgid "Categories"
+msgstr ""
+
+#: app/view/backend/addons/mailchimp.php:35
+msgid "MailChimp API Key"
+msgstr ""
+
+#: app/view/backend/addons/mailchimp.php:50
+msgid ""
+"Visit <a href=\"%s\" target=\"_blank\">your API dashboard</a> to create an "
+"API Key."
 msgstr ""
 
 #: app/view/backend/email/setting.php:41
@@ -2680,46 +2802,6 @@ msgstr ""
 
 #: app/view/backend/gateways/manual.php:44
 msgid "Payment Instructions"
-msgstr ""
-
-#: app/view/backend/gateways/stripe.php:25
-msgid "Mode"
-msgstr ""
-
-#: app/view/backend/gateways/stripe.php:38
-msgid "Live"
-msgstr ""
-
-#: app/view/backend/gateways/stripe.php:39
-msgid "Sandbox"
-msgstr ""
-
-#: app/view/backend/gateways/stripe.php:47
-msgid "You can find your Stripe API Keys in your %1$sAccount Settings%2$s."
-msgstr ""
-
-#: app/view/backend/gateways/stripe.php:57
-msgid "Live Publishable Key"
-msgstr ""
-
-#: app/view/backend/gateways/stripe.php:74
-msgid "Live Secret Key"
-msgstr ""
-
-#: app/view/backend/gateways/stripe.php:91
-msgid "Test Publishable Key"
-msgstr ""
-
-#: app/view/backend/gateways/stripe.php:108
-msgid "Test Secret Key"
-msgstr ""
-
-#: app/view/backend/wizard/header.php:33
-msgid "JengaPress &rsaquo; Setup Wizard"
-msgstr ""
-
-#: app/view/backend/wizard/header.php:40
-msgid "JengaPress"
 msgstr ""
 
 #: templates/account/access/login-form.php:32
