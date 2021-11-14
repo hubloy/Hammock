@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazyload';
 
 import fetchWP from 'utils/fetchWP';
-import Dashboard from 'layout/Dashboard';
 import {PaginationUI} from 'ui/admin/form';
-import {Nav} from './Nav'
 
 import { toast } from 'react-toastify';
 
@@ -56,34 +54,29 @@ export default class MemberActivity extends Component {
 		const { pager, items } = this.state;
         var strings = this.props.hammock.strings;
 		return (
-			<Dashboard hammock={this.props.hammock}>
-				<div uk-grid="">
-					<LazyLoad className="uk-width-1-4 uk-height-medium">
-						<Nav hammock={this.props.hammock} active_nav={'activity'} member_id={this.state.id}/>
-					</LazyLoad>
-					<div className="uk-width-expand uk-margin-left uk-card uk-card-body uk-background-default uk-padding-small">
-						{items.length <= 0 ? (
-                            <h3 className="uk-text-center">{strings.edit.activities.not_found}</h3>
-                        ) : (
-							<ul className="uk-list uk-list-striped">
-								{items.map(item =>
-									<li key={item.log_id}>
-										<div className="uk-width-expand">
-											<p className="uk-text-meta uk-margin-remove-bottom uk-text-small">
-												<time datetime={item.date}>{item.date}</time>
-											</p>
-											<h6 className="uk-margin-remove-top uk-margin-remove-bottom">
-												{item.action} {':'} <span dangerouslySetInnerHTML={{ __html: item.description }} /> {'('} <span className="uk-text-small" dangerouslySetInnerHTML={{ __html: item.author }} /> {')'}
-											</h6>
-										</div>
-									</li>
-								)}
-							</ul>
-						)}
-						<PaginationUI pager={pager}/>
-					</div>
+			<React.Fragment>
+				<div>
+					{items.length <= 0 ? (
+						<h3 className="uk-text-center">{strings.edit.activities.not_found}</h3>
+					) : (
+						<ul className="uk-list uk-list-striped">
+							{items.map(item =>
+								<li key={item.log_id}>
+									<div className="uk-width-expand">
+										<p className="uk-text-meta uk-margin-remove-bottom uk-text-small">
+											<time datetime={item.date}>{item.date}</time>
+										</p>
+										<h6 className="uk-margin-remove-top uk-margin-remove-bottom">
+											{item.action} {':'} <span dangerouslySetInnerHTML={{ __html: item.description }} /> {'('} <span className="uk-text-small" dangerouslySetInnerHTML={{ __html: item.author }} /> {')'}
+										</h6>
+									</div>
+								</li>
+							)}
+						</ul>
+					)}
+					<PaginationUI pager={pager}/>
 				</div>
-			</Dashboard>
+			</React.Fragment>
 		)
 	}
 

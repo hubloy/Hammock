@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import LazyLoad from 'react-lazyload';
 
 import fetchWP from 'utils/fetchWP';
-import Dashboard from 'layout/Dashboard';
 import {PaginationUI} from 'ui/admin/form';
-import {Nav} from './Nav'
 
 import { toast } from 'react-toastify';
 
@@ -56,53 +53,48 @@ export default class MemberTransactions extends Component {
 		const { pager, items } = this.state;
         var strings = this.props.hammock.strings;
 		return (
-			<Dashboard hammock={this.props.hammock}>
-				<div uk-grid="">
-					<LazyLoad className="uk-width-1-4 uk-height-medium">
-						<Nav hammock={this.props.hammock} active_nav={'transactions'} member_id={this.state.id}/>
-					</LazyLoad>
-					<div className="uk-width-expand uk-margin-left uk-card uk-card-body uk-background-default uk-padding-small">
-						{items.length <= 0 ? (
-                            <h3 className="uk-text-center">{strings.edit.transactions.not_found}</h3>
-                        ) : (
-							<table className="uk-table">
-								 <thead>
-                                    <tr>
-                                        <th>{strings.edit.transactions.id}</th>
-                                        <th>{strings.edit.transactions.status}</th>
-                                        <th>{strings.edit.transactions.gateway}</th>
-                                        <th>{strings.edit.transactions.amount}</th>
-                                        <th>{strings.edit.transactions.date}</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>{strings.edit.transactions.id}</th>
-                                        <th>{strings.edit.transactions.status}</th>
-                                        <th>{strings.edit.transactions.gateway}</th>
-                                        <th>{strings.edit.transactions.amount}</th>
-                                        <th>{strings.edit.transactions.date}</th>
-                                    </tr>
-                                </tfoot>
-								<tbody>
-                                {items.map(item =>
-                                    <tr key={item.id}>
-                                        <td>
-											<a href={item.admin_edit_url} className="uk-text-primary" target="_blank">{item.invoice_id}</a>
-                                        </td>
-                                        <td>{item.status_name}</td>
-                                        <td>{item.gateway_name}</td>
-                                        <td><span dangerouslySetInnerHTML={{ __html: item.amount_formated }}></span></td>
-                                        <td>{item.date_created}</td>
-                                    </tr>
-                                )}
-                                </tbody>
-							</table>
-						)}
-						<PaginationUI pager={pager}/>
-					</div>
+			<React.Fragment>
+				<div>
+					{items.length <= 0 ? (
+						<h3 className="uk-text-center">{strings.edit.transactions.not_found}</h3>
+					) : (
+						<table className="uk-table">
+								<thead>
+								<tr>
+									<th>{strings.edit.transactions.id}</th>
+									<th>{strings.edit.transactions.status}</th>
+									<th>{strings.edit.transactions.gateway}</th>
+									<th>{strings.edit.transactions.amount}</th>
+									<th>{strings.edit.transactions.date}</th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr>
+									<th>{strings.edit.transactions.id}</th>
+									<th>{strings.edit.transactions.status}</th>
+									<th>{strings.edit.transactions.gateway}</th>
+									<th>{strings.edit.transactions.amount}</th>
+									<th>{strings.edit.transactions.date}</th>
+								</tr>
+							</tfoot>
+							<tbody>
+							{items.map(item =>
+								<tr key={item.id}>
+									<td>
+										<a href={item.admin_edit_url} className="uk-text-primary" target="_blank">{item.invoice_id}</a>
+									</td>
+									<td>{item.status_name}</td>
+									<td>{item.gateway_name}</td>
+									<td><span dangerouslySetInnerHTML={{ __html: item.amount_formated }}></span></td>
+									<td>{item.date_created}</td>
+								</tr>
+							)}
+							</tbody>
+						</table>
+					)}
+					<PaginationUI pager={pager}/>
 				</div>
-			</Dashboard>
+			</React.Fragment>
 		)
 	}
 

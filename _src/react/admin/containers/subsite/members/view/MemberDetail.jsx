@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import LazyLoad from 'react-lazyload';
 
 import fetchWP from 'utils/fetchWP';
-import Dashboard from 'layout/Dashboard';
-import {Nav} from './Nav'
 import { SwitchUI, InputUI, DropDownUI } from 'ui/admin/form';
 import PlanList from './subscription/List';
 
@@ -267,44 +264,39 @@ export default class MemberDetail extends Component {
 		var hammock = this.props.hammock;
 		const strings = hammock.strings;
 		return (
-			<Dashboard hammock={hammock}>
+			<React.Fragment>
 				{this.state.member.id > 0 ? (
-					<div uk-grid="">
-						<LazyLoad>
-							<Nav hammock={hammock} active_nav={'details'} member_id={this.state.member.id}/>
-						</LazyLoad>
-						<div className="uk-width-expand uk-margin-left uk-card uk-card-body">
-							<div uk-grid="" className="uk-background-default uk-padding-small">
-								<div className="uk-width-1-3 uk-padding-remove-left">
-									<img src={this.state.member.user_info.picture} title={this.state.member.user_info.name}/>
-								</div>
-								<div className="uk-width-expand">
-									<ul className="uk-list">
-										<li><strong>{this.state.member.user_info.name}</strong></li>
-										<li><a href={"mailto:" + this.state.member.user_info.email}>{this.state.member.user_info.email}</a></li>
-										<li>{strings.labels.member_id} : <code>{this.state.member.member_id}</code></li>
-										<li>{strings.edit.details.status} : {this.state.member.enabled ? hammock.common.status.enabled : hammock.common.status.disabled}</li>
-										<li>{strings.edit.details.since} : {this.state.member.date_created}</li>
-										<li><a href={this.state.member.user_edit_url} target="_blank" className="uk-button uk-button-default uk-button-small">{strings.labels.profile_url}</a></li>
-										<li><a href="#" data-id={this.state.member.id} data-prompt={strings.edit.details.delete.prompt} onClick={this.delete.bind(this)} className="uk-button uk-button-danger uk-button-small">{strings.edit.details.delete.title}</a></li>
-									</ul>
-								</div>
+					<div>
+						<div uk-grid="" className="uk-background-default uk-padding-small">
+							<div className="uk-width-1-3 uk-padding-remove-left">
+								<img src={this.state.member.user_info.picture} title={this.state.member.user_info.name}/>
 							</div>
-							<div className="uk-background-default uk-padding-small uk-margin-small-top hammock-margin-left-negative-40">
-								<h4 className="uk-heading-divider">{strings.edit.details.subscription.title}
-								{this.state.plans.total > 0 &&
-									<a className="uk-margin-small-left uk-button uk-button-primary uk-button-small" href="#hammock-add-subscription" uk-toggle="">{strings.edit.details.subscription.create.title}</a>
-								}
-								</h4>
-								{this.state.plans.total > 0 ? (
-										<PlanList plans={this.state.plans} hammock={hammock} action={this.refresh_member_plans.bind(this)}/>
-									) : (
-										<div className="uk-text-center">
-											<a className="uk-button uk-button-primary uk-button-small" href="#hammock-add-subscription" uk-toggle="">{strings.edit.details.subscription.create.title}</a>
-										</div>
-									)
-								}
+							<div className="uk-width-expand">
+								<ul className="uk-list">
+									<li><strong>{this.state.member.user_info.name}</strong></li>
+									<li><a href={"mailto:" + this.state.member.user_info.email}>{this.state.member.user_info.email}</a></li>
+									<li>{strings.labels.member_id} : <code>{this.state.member.member_id}</code></li>
+									<li>{strings.edit.details.status} : {this.state.member.enabled ? hammock.common.status.enabled : hammock.common.status.disabled}</li>
+									<li>{strings.edit.details.since} : {this.state.member.date_created}</li>
+									<li><a href={this.state.member.user_edit_url} target="_blank" className="uk-button uk-button-default uk-button-small">{strings.labels.profile_url}</a></li>
+									<li><a href="#" data-id={this.state.member.id} data-prompt={strings.edit.details.delete.prompt} onClick={this.delete.bind(this)} className="uk-button uk-button-danger uk-button-small">{strings.edit.details.delete.title}</a></li>
+								</ul>
 							</div>
+						</div>
+						<div className="uk-background-default uk-padding-small uk-margin-small-top hammock-margin-left-negative-40">
+							<h4 className="uk-heading-divider">{strings.edit.details.subscription.title}
+							{this.state.plans.total > 0 &&
+								<a className="uk-margin-small-left uk-button uk-button-primary uk-button-small" href="#hammock-add-subscription" uk-toggle="">{strings.edit.details.subscription.create.title}</a>
+							}
+							</h4>
+							{this.state.plans.total > 0 ? (
+									<PlanList plans={this.state.plans} hammock={hammock} action={this.refresh_member_plans.bind(this)}/>
+								) : (
+									<div className="uk-text-center">
+										<a className="uk-button uk-button-primary uk-button-small" href="#hammock-add-subscription" uk-toggle="">{strings.edit.details.subscription.create.title}</a>
+									</div>
+								)
+							}
 						</div>
 						{this.addSubscription( hammock, strings )}
 					</div>
@@ -313,7 +305,7 @@ export default class MemberDetail extends Component {
 						<h3 className="uk-text-center">{strings.edit.not_found}</h3>
 					</div>
 				) }
-			</Dashboard>
+			</React.Fragment>
 		)
 	}
 
