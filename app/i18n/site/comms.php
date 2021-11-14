@@ -9,17 +9,17 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 
 return array(
-	'tabs'      => array(
+	'tabs'  => array(
 		'admin' => __( 'Admin Emails', 'hammock' ),
 		'user'  => __( 'Member Emails', 'hammock' ),
 	),
-	'table'		=> array(
-		'email'			=> __( 'Email', 'hammock' ),
-		'description'	=> __( 'Description', 'hammock' ),
-		'recipient'		=> __( 'Recipient(s)', 'hammock' ),
-		'customer'		=> __( 'Customer', 'hammock' )
+	'table' => array(
+		'email'       => __( 'Email', 'hammock' ),
+		'description' => __( 'Description', 'hammock' ),
+		'recipient'   => __( 'Recipient(s)', 'hammock' ),
+		'customer'    => __( 'Customer', 'hammock' ),
 	),
-	'edit'      => array(
+	'edit'  => array(
 		'back' => __( 'Back To List', 'hammock' ),
 	),
 );

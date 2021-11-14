@@ -3,7 +3,7 @@
  * Member New Account
  *
  * This template can be overridden by copying it to yourtheme/hammock/emails/member-new-account.php.
- * 
+ *
  * @package Hammock/Templates/Emails
  * @version 1.0.0
  */

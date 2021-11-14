@@ -14,16 +14,16 @@ use Hammock\Services\Transactions;
 /**
  * Account controller
  * This manages front end functions for the account page including the account page template hooks
- * 
+ *
  * @since 1.0.0
  */
 class Account extends Controller {
 
 	/**
 	 * The member service
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var object
 	 */
 	private $member_service = null;
@@ -31,18 +31,18 @@ class Account extends Controller {
 
 	/**
 	 * The membership service
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var object
 	 */
 	private $membership_service = null;
 
 	/**
 	 * The transaction service
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var object
 	 */
 	private $transaction_service = null;
@@ -81,8 +81,8 @@ class Account extends Controller {
 	 */
 	public function init() {
 
-		$this->member_service = new Members();
-		$this->membership_service = new Memberships();
+		$this->member_service      = new Members();
+		$this->membership_service  = new Memberships();
 		$this->transaction_service = new Transactions();
 		/**
 		 * Account page navigation
@@ -94,7 +94,7 @@ class Account extends Controller {
 		 */
 		$this->add_action( 'hammock_member_account_content', 'member_account_content' );
 
-		//Action called to render various account page content
+		// Action called to render various account page content
 		$this->add_action( 'hammock_member_account_dashboard_content', 'member_account_dashboard_content' );
 		$this->add_action( 'hammock_member_account_edit-account_content', 'member_account_edit_content', 10, 2 );
 		$this->add_action( 'hammock_member_account_transactions_content', 'member_account_transactions_content', 10, 2 );
@@ -105,7 +105,7 @@ class Account extends Controller {
 
 	/**
 	 * Account navigation menu
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function member_account_navigation() {
@@ -114,7 +114,7 @@ class Account extends Controller {
 
 	/**
 	 * Account page content
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function member_account_content() {
@@ -127,13 +127,13 @@ class Account extends Controller {
 					window.location.href='" . hammock_get_account_page_links() . "';
 				</script>";
 			}
-			
+
 			foreach ( $wp->query_vars as $key => $value ) {
 				// Ignore pagename param.
 				if ( 'pagename' === $key ) {
 					continue;
 				}
-				
+
 				if ( has_action( 'hammock_member_account_' . $key . '_content' ) ) {
 					do_action( 'hammock_member_account_' . $key . '_content', $value, $current_user );
 					return;
@@ -146,65 +146,77 @@ class Account extends Controller {
 
 	/**
 	 * Member dashboard content
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function member_account_dashboard_content( $current_user ) {
-		Template::get_template( 'account/dashboard.php', array(
-			'current_user' => $current_user
-		) );
+		Template::get_template(
+			'account/dashboard.php',
+			array(
+				'current_user' => $current_user,
+			)
+		);
 	}
 
 	/**
 	 * Member account edit content
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function member_account_edit_content( $value, $current_user ) {
-		Template::get_template( 'account/edit-account.php', array(
-			'current_user' => $current_user
-		) );
+		Template::get_template(
+			'account/edit-account.php',
+			array(
+				'current_user' => $current_user,
+			)
+		);
 	}
 
 	/**
 	 * Member account transactions content
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function member_account_transactions_content( $value, $current_user ) {
 		$member = $this->member_service->get_member_by_user_id( $current_user->id );
-		Template::get_template( 'account/transactions.php', array(
-			'current_user' 	=> $current_user,
-			'member'		=> $member
-		) );
+		Template::get_template(
+			'account/transactions.php',
+			array(
+				'current_user' => $current_user,
+				'member'       => $member,
+			)
+		);
 	}
 
 	/**
 	 * Member account subscriptions content
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function member_account_subscriptions_content( $value, $current_user ) {
 		$member = $this->member_service->get_member_by_user_id( $current_user->id );
-		Template::get_template( 'account/subscriptions.php', array(
-			'current_user' 	=> $current_user,
-			'member'		=> $member
-		) );
+		Template::get_template(
+			'account/subscriptions.php',
+			array(
+				'current_user' => $current_user,
+				'member'       => $member,
+			)
+		);
 	}
 
 	/**
 	 * View plan page
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function member_account_view_plan_content( $value, $current_user ) {
@@ -216,24 +228,27 @@ class Account extends Controller {
 			</script>";
 		}
 
-		$member 	= $this->member_service->get_member_by_user_id( $current_user->id );
+		$member     = $this->member_service->get_member_by_user_id( $current_user->id );
 		$membership = $this->membership_service->get_membership_by_membership_id( $plan_id );
 		if ( $membership ) {
-			Template::get_template( 'account/subscription-plan.php', array(
-				'current_user' 	=> $current_user,
-				'member'		=> $member,
-				'plan'			=> $membership
-			) );
+			Template::get_template(
+				'account/subscription-plan.php',
+				array(
+					'current_user' => $current_user,
+					'member'       => $member,
+					'plan'         => $membership,
+				)
+			);
 		} else {
-			//Return 404
+			// Return 404
 		}
 	}
 
 	/**
 	 * View transaction page
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function member_account_view_transaction_content( $value, $current_user ) {
@@ -244,18 +259,21 @@ class Account extends Controller {
 				window.location.href='" . hammock_get_account_page_links( 'transactions' ) . "';
 			</script>";
 		}
-		$member 		= $this->member_service->get_member_by_user_id( $current_user->id );
-		$transaction 	= $this->transaction_service->get_invoice( $transaction_id );
+		$member      = $this->member_service->get_member_by_user_id( $current_user->id );
+		$transaction = $this->transaction_service->get_invoice( $transaction_id );
 		if ( $transaction ) {
-			Template::get_template( 'account/invoice.php', array(
-				'current_user' 	=> $current_user,
-				'member'		=> $member,
-				'invoice'		=> $transaction
-			) );
+			Template::get_template(
+				'account/invoice.php',
+				array(
+					'current_user' => $current_user,
+					'member'       => $member,
+					'invoice'      => $transaction,
+				)
+			);
 		} else {
-			//404
+			// 404
 		}
-		
+
 	}
 }
-?>
+

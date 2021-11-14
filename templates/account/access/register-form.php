@@ -4,7 +4,7 @@
  * Handles account creation
  *
  * This template can be overridden by copying it to yourtheme/hammock/account/access/register-form.php.
- * 
+ *
  * @package Hammock/Templates/Account/Access
  * @version 1.0.0
  */
@@ -17,11 +17,11 @@ do_action( 'hammock_before_account_register_form' );
 
 /**
  * Additional classes for the form
- * 
+ *
  * @since 1.0.0
- * 
+ *
  * @var string $extra_classes
- * 
+ *
  * @return string
  */
 $extra_classes = apply_filters( 'hammock_account_access_register_form_extra_classes', 'hammock-hidden' );

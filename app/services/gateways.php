@@ -39,7 +39,7 @@ class Gateways {
 	 * @return array
 	 */
 	static function list_simple_gateways( $include_select = true ) {
-		$gateways  = self::load_gateways();
+		$gateways = self::load_gateways();
 		if ( $include_select ) {
 			$drop_down = array(
 				'' => __( 'Select Gateway', 'hammock' ),
@@ -55,13 +55,13 @@ class Gateways {
 
 	/**
 	 * List active gateways
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	static function list_active_gateways() {
-		$gateways  = self::load_gateways();
+		$gateways        = self::load_gateways();
 		$active_gateways = array();
 		foreach ( $gateways as $key => $value ) {
 			$is_active = apply_filters( 'hammock_gateway_' . $key . '_is_active', false );

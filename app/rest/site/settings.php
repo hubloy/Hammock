@@ -62,7 +62,6 @@ class Settings extends Rest {
 			)
 		);
 
-
 		register_rest_route(
 			$namespace,
 			self::BASE_API_ROUTE . 'update',
@@ -128,47 +127,47 @@ class Settings extends Rest {
 
 	/**
 	 * Update settings
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function update_settings( $request ) {
-		$content_protection   	= isset( $request['content_protection'] ) ? intval( sanitize_text_field( $request['content_protection'] ) ) : 0;
-		$admin_toolbar        	= isset( $request['admin_toolbar'] ) ? intval( sanitize_text_field( $request['admin_toolbar'] ) ) : 0;
-		$account_verification 	= isset( $request['account_verification'] ) ? intval( sanitize_text_field( $request['account_verification'] ) ) : 0;
-		$currency             	= sanitize_text_field( $request['membership_currency'] );
-		$invoice_prefix       	= sanitize_text_field( $request['invoice_prefix'] );
-		$protection_level 		= sanitize_text_field( $request['protection_level'] );
+		$content_protection   = isset( $request['content_protection'] ) ? intval( sanitize_text_field( $request['content_protection'] ) ) : 0;
+		$admin_toolbar        = isset( $request['admin_toolbar'] ) ? intval( sanitize_text_field( $request['admin_toolbar'] ) ) : 0;
+		$account_verification = isset( $request['account_verification'] ) ? intval( sanitize_text_field( $request['account_verification'] ) ) : 0;
+		$currency             = sanitize_text_field( $request['membership_currency'] );
+		$invoice_prefix       = sanitize_text_field( $request['invoice_prefix'] );
+		$protection_level     = sanitize_text_field( $request['protection_level'] );
 
-		//Pages
-		$membership_list	  	= sanitize_text_field( $request['membership_list'] );
-		$protected_content	  	= sanitize_text_field( $request['protected_content'] );
-		$account_page	  		= sanitize_text_field( $request['account_page'] );
+		// Pages
+		$membership_list   = sanitize_text_field( $request['membership_list'] );
+		$protected_content = sanitize_text_field( $request['protected_content'] );
+		$account_page      = sanitize_text_field( $request['account_page'] );
 
-		//Data
-		$delete_on_uninstall	= isset( $request['delete_on_uninstall'] ) ? intval( sanitize_text_field( $request['delete_on_uninstall'] ) ) : 0;
+		// Data
+		$delete_on_uninstall = isset( $request['delete_on_uninstall'] ) ? intval( sanitize_text_field( $request['delete_on_uninstall'] ) ) : 0;
 
-		$settings             	= new \Hammock\Model\Settings();
-		$pages					= $settings->get_general_setting( 'pages', array() );
-		$flush_rules			= false;
+		$settings    = new \Hammock\Model\Settings();
+		$pages       = $settings->get_general_setting( 'pages', array() );
+		$flush_rules = false;
 		if ( $membership_list == 'c' ) {
-			$page_id = Pages::create( 'membership_list' );
+			$page_id                  = Pages::create( 'membership_list' );
 			$pages['membership_list'] = $page_id;
 		} else {
 			$pages['membership_list'] = $membership_list;
 		}
 
 		if ( $protected_content == 'c' ) {
-			$page_id = Pages::create( 'protected_content' );
+			$page_id                    = Pages::create( 'protected_content' );
 			$pages['protected_content'] = $page_id;
 		} else {
 			$pages['protected_content'] = $protected_content;
 		}
 
 		if ( $account_page == 'c' ) {
-			$flush_rules = true;
-			$page_id = Pages::create( 'account_page' );
+			$flush_rules           = true;
+			$page_id               = Pages::create( 'account_page' );
 			$pages['account_page'] = $page_id;
 		} else {
 			if ( isset( $pages['account_page'] ) && ( $pages['account_page'] !== $account_page ) ) {
@@ -178,12 +177,12 @@ class Settings extends Rest {
 		}
 
 		if ( $flush_rules ) {
-			//Flush rules especially for new account pages to be set up well
+			// Flush rules especially for new account pages to be set up well
 			flush_rewrite_rules();
 		}
 
 		if ( $settings->get_general_setting( 'account_verification' ) !== $account_verification ) {
-			$type = \Hammock\Services\Emails::COMM_TYPE_REGISTRATION_VERIFY;
+			$type                = \Hammock\Services\Emails::COMM_TYPE_REGISTRATION_VERIFY;
 			$verifcation_enabled = ( $account_verification === 1 );
 			do_action( 'hammock_email_sender_member-' . $type, $verifcation_enabled );
 		}
@@ -198,9 +197,9 @@ class Settings extends Rest {
 		$settings->set_general_setting( 'delete_on_uninstall', $delete_on_uninstall );
 		$settings->save();
 
-		return array( 
-			'status' 	=> true,
-			'message'	=> __( 'Settings updated', 'hammock' )
+		return array(
+			'status'  => true,
+			'message' => __( 'Settings updated', 'hammock' ),
 		);
 	}
 
@@ -212,7 +211,7 @@ class Settings extends Rest {
 	 * @return array
 	 */
 	public function get_pages( $request ) {
-		$pages = Pages::list_pages();
+		$pages      = Pages::list_pages();
 		$pages['c'] = __( 'Create New Page', 'hammock' );
 		return $pages;
 	}
@@ -230,9 +229,9 @@ class Settings extends Rest {
 
 	/**
 	 * List days
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function get_days( $request ) {

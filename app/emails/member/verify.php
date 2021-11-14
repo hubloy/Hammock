@@ -11,9 +11,9 @@ class Verify extends Email {
 
 	/**
 	 * Setting object
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var object
 	 */
 	private $settings = null;
@@ -46,11 +46,11 @@ class Verify extends Email {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$this->settings 		= new Settings();
-		$type                	= \Hammock\Services\Emails::COMM_TYPE_REGISTRATION_VERIFY;
-		$this->id            	= 'member-' . $type;
-		$this->template_html 	= 'emails/member-verify-account.php';
-		$this->placeholders  	= array();
+		$this->settings      = new Settings();
+		$type                = \Hammock\Services\Emails::COMM_TYPE_REGISTRATION_VERIFY;
+		$this->id            = 'member-' . $type;
+		$this->template_html = 'emails/member-verify-account.php';
+		$this->placeholders  = array();
 	}
 
 	/**

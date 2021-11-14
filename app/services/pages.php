@@ -40,40 +40,46 @@ class Pages {
 	/**
 	 * Page endpoints
 	 * These are all the endpoint urls used in the frontend
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public static function page_endpoits() {
-		return apply_filters( 'hammock_page_endpoits', array(
-			'memberships'		=> apply_filters( 'hammock_membership_endpoint', 'memberships' ),
-			'view-plan'			=> apply_filters( 'hammock_membership_plan_endpoint', 'view-plan' ),
-			'protected-content'	=> apply_filters( 'hammock_protected_content_endpoint', 'protected-content' ),
-			'account'			=> apply_filters( 'hammock_account_endpoint', 'account' ),
-			'edit-account'		=> apply_filters( 'hammock_edit_account_endpoint', 'edit-account' ),
-			'transactions'		=> apply_filters( 'hammock_ttransactions_endpoint', 'transactions' ),
-			'subscriptions'		=> apply_filters( 'hammock_subscriptions_endpoint', 'subscriptions' ),
-			'lost-password'		=> apply_filters( 'hammock_lost_password_endpoint', 'lost-password' ),
-			'member-logout'		=> apply_filters( 'hammock_member_logout_endpoint', 'member-logout' ),
-		) );
+		return apply_filters(
+			'hammock_page_endpoits',
+			array(
+				'memberships'       => apply_filters( 'hammock_membership_endpoint', 'memberships' ),
+				'view-plan'         => apply_filters( 'hammock_membership_plan_endpoint', 'view-plan' ),
+				'protected-content' => apply_filters( 'hammock_protected_content_endpoint', 'protected-content' ),
+				'account'           => apply_filters( 'hammock_account_endpoint', 'account' ),
+				'edit-account'      => apply_filters( 'hammock_edit_account_endpoint', 'edit-account' ),
+				'transactions'      => apply_filters( 'hammock_ttransactions_endpoint', 'transactions' ),
+				'subscriptions'     => apply_filters( 'hammock_subscriptions_endpoint', 'subscriptions' ),
+				'lost-password'     => apply_filters( 'hammock_lost_password_endpoint', 'lost-password' ),
+				'member-logout'     => apply_filters( 'hammock_member_logout_endpoint', 'member-logout' ),
+			)
+		);
 	}
 
 	/**
 	 * Account pae endpoints
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public static function account_page_endpoits() {
-		return apply_filters( 'hammock_account_page_endpoits', array(
-			'edit-account'		=> apply_filters( 'hammock_edit_account_endpoint', 'edit-account' ),
-			'transactions'		=> apply_filters( 'hammock_ttransactions_endpoint', 'transactions' ),
-			'subscriptions'		=> apply_filters( 'hammock_subscriptions_endpoint', 'subscriptions' ),
-			'member-logout'		=> apply_filters( 'hammock_member_logout_endpoint', 'member-logout' ),
-			'view-plan'			=> apply_filters( 'hammock_membership_plan_endpoint', 'view-plan' ),
-		) );
+		return apply_filters(
+			'hammock_account_page_endpoits',
+			array(
+				'edit-account'  => apply_filters( 'hammock_edit_account_endpoint', 'edit-account' ),
+				'transactions'  => apply_filters( 'hammock_ttransactions_endpoint', 'transactions' ),
+				'subscriptions' => apply_filters( 'hammock_subscriptions_endpoint', 'subscriptions' ),
+				'member-logout' => apply_filters( 'hammock_member_logout_endpoint', 'member-logout' ),
+				'view-plan'     => apply_filters( 'hammock_membership_plan_endpoint', 'view-plan' ),
+			)
+		);
 	}
 }
 

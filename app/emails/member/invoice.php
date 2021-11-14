@@ -54,7 +54,7 @@ class Invoice extends Email {
 			'title'       => __( 'New payment', 'hammock' ),
 			'description' => __( 'Sent each time a payment has been made', 'hammock' ),
 			'heading'     => sprintf( __( 'Membership receipt %s', 'hammock' ), '#{invoice_number}' ),
-			'subject'     => sprintf( __( '%s: Your %s membership receipt %s', 'hammock' ), '[{site_title}]', '{membership_name}', '#{invoice_number}' ),
+			'subject'     => sprintf( __( '%1$s: Your %2$s membership receipt %3$s', 'hammock' ), '[{site_title}]', '{membership_name}', '#{invoice_number}' ),
 			'recipient'   => '',
 			'enabled'     => false,
 		);

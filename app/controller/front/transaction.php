@@ -10,7 +10,7 @@ use Hammock\Base\Controller;
 /**
  * Transaction controller
  * Handles all transactions
- * 
+ *
  * @since 1.0.0
  */
 class Transaction extends Controller {
@@ -56,7 +56,7 @@ class Transaction extends Controller {
 	 * Handle IPN requests
 	 * This is used for gateways
 	 * There has to be a request parameter of the gateway id
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function ipn_notify() {
@@ -69,11 +69,11 @@ class Transaction extends Controller {
 	/**
 	 * Handle Payment returns
 	 * Handles payment returns. Incase its from a redirect or something else
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function handle_return() {
-		
+
 	}
 }
-?>
+

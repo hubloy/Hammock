@@ -47,9 +47,9 @@ class Invoice {
 
 	/**
 	 * Status of overdue invoice
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var bool
 	 */
 	public $is_overdue = false;
@@ -65,9 +65,9 @@ class Invoice {
 
 	/**
 	 * The plan id
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var int
 	 */
 	public $plan_id = 0;
@@ -93,18 +93,18 @@ class Invoice {
 	/**
 	 * The tax rate
 	 * The percentage tax rate
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var int
 	 */
 	public $tax_rate = 0;
 
 	/**
 	 * The gateway identifier
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var string
 	 */
 	public $gateway_identifier = '';
@@ -140,9 +140,9 @@ class Invoice {
 
 	/**
 	 * The invoice due date
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var string
 	 */
 	public $due_date = '';
@@ -167,9 +167,9 @@ class Invoice {
 
 	/**
 	 * Admin edit url
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var string
 	 */
 	public $admin_edit_url = '';
@@ -192,7 +192,7 @@ class Invoice {
 		$this->table_name = Database::get_table_name( Database::INVOICE );
 		if ( is_numeric( $id ) && $id > 0 ) {
 			$this->get_one( $id );
-		} else if ( is_string( $id ) && !is_null( $id ) ) {
+		} elseif ( is_string( $id ) && ! is_null( $id ) ) {
 			$this->get_by_invoice_id( $id );
 		}
 	}
@@ -216,9 +216,9 @@ class Invoice {
 
 	/**
 	 * Get by invoice id
-	 * 
+	 *
 	 * @param string $invoice_id
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function get_by_invoice_id( $invoice_id ) {
@@ -232,30 +232,31 @@ class Invoice {
 
 	/**
 	 * Populate the invoice variables
-	 * 
+	 *
 	 * @param object $result - the database result object
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	private function populate( $result ) {
-		$date_format        		= get_option( 'date_format' );
-		$this->id           		= $result->id;
-		$this->gateway      		= $result->gateway;
-		$this->status       		= $result->status;
-		$this->member_id    		= $result->member_id;
-		$this->plan_id				= $result->plan_id;
-		$this->invoice_id   		= $result->invoice_id;
-		$this->amount       		= $result->amount;
-		$this->tax_rate 			= $result->tax_rate;
-		$this->gateway_identifier 	= $result->gateway_identifier;
-		$this->notes 				= is_array( $result->notes ) ? array_map( 'maybe_unserialize', $result->notes ) : maybe_unserialize( $result->notes );;
-		$this->custom_data  		= is_array( $result->custom_data ) ? array_map( 'maybe_unserialize', $result->custom_data ) : maybe_unserialize( $result->custom_data );
-		$this->user_id      		= $result->user_id;
-		$this->due_date				= ! empty( $result->due_date ) ? date_i18n( $date_format, strtotime( $result->due_date ) ) : '';
-		$this->date_created 		= date_i18n( $date_format, strtotime( $result->date_created ) );
-		$this->date_updated 		= ! empty( $result->last_updated ) ? date_i18n( $date_format, strtotime( $result->last_updated ) ) : '';
-		$this->admin_edit_url 		= $this->admin_edit_url();
-		$this->is_overdue			= $this->is_overdue();
+		$date_format              = get_option( 'date_format' );
+		$this->id                 = $result->id;
+		$this->gateway            = $result->gateway;
+		$this->status             = $result->status;
+		$this->member_id          = $result->member_id;
+		$this->plan_id            = $result->plan_id;
+		$this->invoice_id         = $result->invoice_id;
+		$this->amount             = $result->amount;
+		$this->tax_rate           = $result->tax_rate;
+		$this->gateway_identifier = $result->gateway_identifier;
+		$this->notes              = is_array( $result->notes ) ? array_map( 'maybe_unserialize', $result->notes ) : maybe_unserialize( $result->notes );
+
+		$this->custom_data    = is_array( $result->custom_data ) ? array_map( 'maybe_unserialize', $result->custom_data ) : maybe_unserialize( $result->custom_data );
+		$this->user_id        = $result->user_id;
+		$this->due_date       = ! empty( $result->due_date ) ? date_i18n( $date_format, strtotime( $result->due_date ) ) : '';
+		$this->date_created   = date_i18n( $date_format, strtotime( $result->date_created ) );
+		$this->date_updated   = ! empty( $result->last_updated ) ? date_i18n( $date_format, strtotime( $result->last_updated ) ) : '';
+		$this->admin_edit_url = $this->admin_edit_url();
+		$this->is_overdue     = $this->is_overdue();
 	}
 
 	/**
@@ -278,27 +279,27 @@ class Invoice {
 			$wpdb->update(
 				$this->table_name,
 				array(
-					'gateway'      			=> $this->gateway,
-					'status'       			=> $this->status,
-					'member_id'    			=> $this->member_id,
-					'plan_id'      			=> $this->plan_id,
-					'amount'       			=> $this->amount,
-					'tax_rate'	   			=> $this->tax_rate,
-					'gateway_identifier'	=> $this->gateway_identifier,
-					'notes'					=> $notes,
-					'custom_data'  			=> $value,
-					'user_id'      			=> $this->user_id,
-					'due_date'	   			=> !empty( $this->due_date ) ? date_i18n( 'Y-m-d H:i:s', strtotime( $this->due_date ) ) : '',
-					'last_updated' 			=> date_i18n( 'Y-m-d H:i:s' ),
+					'gateway'            => $this->gateway,
+					'status'             => $this->status,
+					'member_id'          => $this->member_id,
+					'plan_id'            => $this->plan_id,
+					'amount'             => $this->amount,
+					'tax_rate'           => $this->tax_rate,
+					'gateway_identifier' => $this->gateway_identifier,
+					'notes'              => $notes,
+					'custom_data'        => $value,
+					'user_id'            => $this->user_id,
+					'due_date'           => ! empty( $this->due_date ) ? date_i18n( 'Y-m-d H:i:s', strtotime( $this->due_date ) ) : '',
+					'last_updated'       => date_i18n( 'Y-m-d H:i:s' ),
 				),
 				array( 'id' => $this->id )
 			);
 
 			/**
 			 * Action called after an invoice is updated
-			 * 
+			 *
 			 * @param object $invoice - the invoice object
-			 * 
+			 *
 			 * @since 1.0.0
 			 */
 			do_action( 'hammock_after_invoice_update', $this );
@@ -307,19 +308,19 @@ class Invoice {
 			$result = $wpdb->insert(
 				$this->table_name,
 				array(
-					'gateway'      			=> $this->gateway,
-					'status'       			=> $this->status,
-					'member_id'   		 	=> $this->member_id,
-					'plan_id'      			=> $this->plan_id,
-					'invoice_id'   			=> preg_replace( '/\s+/', '', $this->invoice_id ),
-					'amount'       			=> $this->amount,
-					'tax_rate'	   			=> $this->tax_rate,
-					'gateway_identifier'	=> $this->gateway_identifier,
-					'notes'					=> $notes,
-					'custom_data'  			=> $value,
-					'user_id'     			=> $this->user_id,
-					'due_date'	   			=> !empty( $this->due_date ) ? date_i18n( 'Y-m-d H:i:s', strtotime( $this->due_date ) ) : '',
-					'date_created' 			=> date_i18n( 'Y-m-d H:i:s' ),
+					'gateway'            => $this->gateway,
+					'status'             => $this->status,
+					'member_id'          => $this->member_id,
+					'plan_id'            => $this->plan_id,
+					'invoice_id'         => preg_replace( '/\s+/', '', $this->invoice_id ),
+					'amount'             => $this->amount,
+					'tax_rate'           => $this->tax_rate,
+					'gateway_identifier' => $this->gateway_identifier,
+					'notes'              => $notes,
+					'custom_data'        => $value,
+					'user_id'            => $this->user_id,
+					'due_date'           => ! empty( $this->due_date ) ? date_i18n( 'Y-m-d H:i:s', strtotime( $this->due_date ) ) : '',
+					'date_created'       => date_i18n( 'Y-m-d H:i:s' ),
 				)
 			);
 
@@ -331,9 +332,9 @@ class Invoice {
 
 				/**
 				 * Action called after an invoice is saved
-				 * 
+				 *
 				 * @param object $invoice - the invoice object
-				 * 
+				 *
 				 * @since 1.0.0
 				 */
 				do_action( 'hammock_after_invoice_save', $this );
@@ -344,26 +345,26 @@ class Invoice {
 
 	/**
 	 * After save update the invoice id
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	private function after_save() {
 		global $wpdb;
-		$settings 			= new Settings();
-		$prefix				= $settings->get_general_setting( 'prefix' );
-		$invoice_id 		= \Hammock\Helper\Invoice::generate_invoice_number( $this->id );
-		$invoice_id			= $prefix . $invoice_id;
-		$invoice_id			= preg_replace( '/\s+/', '', $invoice_id ); //trim white spaces
-		$this->invoice_id	= $invoice_id;
+		$settings         = new Settings();
+		$prefix           = $settings->get_general_setting( 'prefix' );
+		$invoice_id       = \Hammock\Helper\Invoice::generate_invoice_number( $this->id );
+		$invoice_id       = $prefix . $invoice_id;
+		$invoice_id       = preg_replace( '/\s+/', '', $invoice_id ); // trim white spaces
+		$this->invoice_id = $invoice_id;
 		$wpdb->update(
 			$this->table_name,
 			array(
-				'invoice_id' => $invoice_id
+				'invoice_id' => $invoice_id,
 			),
 			array( 'id' => $this->id )
 		);
 	}
-	
+
 
 	/**
 	 * Delete invoice
@@ -394,9 +395,9 @@ class Invoice {
 
 	/**
 	 * Admin edit url
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function admin_edit_url() {
@@ -405,9 +406,9 @@ class Invoice {
 
 	/**
 	 * Check if an invoice is paid
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function is_paid() {
@@ -420,7 +421,7 @@ class Invoice {
 	 */
 	public function is_overdue() {
 		$is_paid = $this->is_paid();
-		if ( !empty( $this->due_date ) && !$is_paid ) {
+		if ( ! empty( $this->due_date ) && ! $is_paid ) {
 			$is_past = Duration::is_past_date( $this->due_date );
 			return $is_past;
 		}
@@ -430,16 +431,16 @@ class Invoice {
 
 	/**
 	 * Get Custom data value
-	 * 
+	 *
 	 * @param string $meta_key - the meta key
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return mixed
 	 */
 	public function get_custom_data( $meta_key ) {
-		if ( isset( $this->custom_data[$meta_key] ) ) {
-			return $this->custom_data[$meta_key];
+		if ( isset( $this->custom_data[ $meta_key ] ) ) {
+			return $this->custom_data[ $meta_key ];
 		}
 		return false;
 	}
@@ -459,9 +460,9 @@ class Invoice {
 
 	/**
 	 * Add a note to the current notes
-	 * 
+	 *
 	 * @param string $note - the note
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function add_note( $note ) {
@@ -473,9 +474,9 @@ class Invoice {
 	 * This checks the meta table if the invoice has an error
 	 * If there is no error, false will be returned
 	 * If an error is present, the error key and message will be returned
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool|array
 	 */
 	public function has_error() {
@@ -500,22 +501,22 @@ class Invoice {
 				'gateway_name'    => $this->gateway_name(),
 				'status'          => $this->status,
 				'status_name'     => Transactions::get_transaction_status( $this->status ),
-				'is_overdue'	  => $this->is_overdue(),
+				'is_overdue'      => $this->is_overdue(),
 				'member_id'       => $this->member_id,
 				'member_user'     => new Member( $this->member_id ),
-				'plan_id'		  => $this->plan_id,
-				'plan'			  => new Plan( $this->plan_id ),
+				'plan_id'         => $this->plan_id,
+				'plan'            => new Plan( $this->plan_id ),
 				'invoice_id'      => $this->invoice_id,
 				'amount'          => $this->amount,
 				'amount_formated' => $code . '' . $this->amount,
 				'custom_data'     => $this->custom_data,
 				'user_id'         => $this->user_id,
 				'user_data'       => Members::user_details( $this->user_id ),
-				'due'		  	  => !empty( $this->due_date ) ? date_i18n( 'Y-m-d', strtotime( $this->due_date ) ) : '',
-				'due_date'		  => !empty( $this->due_date ) ? $this->due_date : __( 'N/A', 'hammock' ),
+				'due'             => ! empty( $this->due_date ) ? date_i18n( 'Y-m-d', strtotime( $this->due_date ) ) : '',
+				'due_date'        => ! empty( $this->due_date ) ? $this->due_date : __( 'N/A', 'hammock' ),
 				'date_created'    => $this->date_created,
 				'date_updated'    => $this->date_updated,
-				'admin_edit_url'  => $this->admin_edit_url
+				'admin_edit_url'  => $this->admin_edit_url,
 			),
 			$this
 		);

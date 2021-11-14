@@ -38,10 +38,10 @@ class Signup extends Email {
 	public function init() {
 		$type                = \Hammock\Services\Emails::COMM_TYPE_SIGNUP;
 		$this->id            = 'admin-' . $type;
-		$this->is_admin 	 = true;
+		$this->is_admin      = true;
 		$this->template_html = 'emails/admin/signup.php';
 		$this->placeholders  = array(
-			'{membership_name}' => ''
+			'{membership_name}' => '',
 		);
 	}
 
@@ -57,7 +57,7 @@ class Signup extends Email {
 			'title'       => __( 'Membership Sign-up', 'hammock' ),
 			'description' => __( 'Email sent to admin to notify a new user has registered', 'hammock' ),
 			'heading'     => sprintf( __( 'New sign-up %s', 'hammock' ), '{membership_name}' ),
-			'subject'     => sprintf( __( '%s: New sign-up %s', 'hammock' ), '[{site_title}]', '{membership_name}' ),
+			'subject'     => sprintf( __( '%1$s: New sign-up %2$s', 'hammock' ), '[{site_title}]', '{membership_name}' ),
 			'recipient'   => get_option( 'admin_email' ),
 			'enabled'     => true,
 		);

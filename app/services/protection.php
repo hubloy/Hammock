@@ -11,39 +11,38 @@ use Hammock\Helper\Pages;
 /**
  * Protection service
  * Handles content protection and access
- * 
+ *
  * @since 1.0.0
  */
 class Protection {
 
-	/** 
-	 * 
-	 * @var array valid post types for content restriction rules 
-	 * 
+	/**
+	 *
+	 * @var array valid post types for content restriction rules
 	 */
 	private static $valid_post_types_for_restriction_rules;
 
 	/**
 	 * Settings object
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	private $settings = null;
 
 	/**
 	 * The post rule
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var object
 	 */
 	private $post_rule = null;
 
 	/**
 	 * The category rule
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var object
 	 */
 	private $category_rule = null;
@@ -88,22 +87,22 @@ class Protection {
 
 	/**
 	 * Protect content
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function protect_content() {
-		$this->post_rule 		= null;
-		$this->category_rule 	= null;
+		$this->post_rule     = null;
+		$this->category_rule = null;
 		if ( $this->settings->get_general_setting( 'content_protection' ) ) {
 			add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
 
-			//Load protection rules
-			$this->post_rule 		= \Hammock\Rule\Post::instance();
-			$this->category_rule 	= \Hammock\Rule\Category::instance();
+			// Load protection rules
+			$this->post_rule     = \Hammock\Rule\Post::instance();
+			$this->category_rule = \Hammock\Rule\Category::instance();
 
 			/**
 			 * Action to load other protection rules
-			 * 
+			 *
 			 * @since 1.0.0
 			 */
 			do_action( 'hammock_load_protection_rule' );
@@ -113,7 +112,7 @@ class Protection {
 		 * Protection rule filters
 		 * All defined in the main Rule class
 		 * Checks if current user has access to content
-		 * 
+		 *
 		 * @since 1.0.0
 		 */
 		add_filter( 'hammock_enabled_member_has_access', array( $this, 'enabled_member_access' ), 10, 4 );
@@ -124,7 +123,7 @@ class Protection {
 
 	/**
 	 * Add protection meta box
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function add_meta_box() {
@@ -135,8 +134,8 @@ class Protection {
 			return;
 		}
 
-		$screen 	= get_current_screen();
-		$screens 	= self::get_post_types_for_meta_box();
+		$screen  = get_current_screen();
+		$screens = self::get_post_types_for_meta_box();
 
 		if ( ! $screen || ! in_array( $screen->id, $screens, true ) ) {
 			return;
@@ -162,31 +161,31 @@ class Protection {
 
 	/**
 	 * Render metabox to protect posts
-	 * 
+	 *
 	 * @param \WP_Post $post - the post object
 	 */
 	public function render_meta_box( $post ) {
-		
+
 	}
 
 	/**
 	 * Filter to check if enabled member has access
-	 * 
-	 * @param bool $access
+	 *
+	 * @param bool   $access
 	 * @param Member $member - the member object
 	 * @param object $object - the object
 	 * @param string $content_type - the content type
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function enabled_member_access( $access, $member, $object, $content_type ) {
 		$plans = $member->get_plans();
-		if ( !empty( $plans ) ) {
+		if ( ! empty( $plans ) ) {
 			if ( $object instanceof \WP_Post ) {
 				$post_meta = get_post_meta( $object->ID, '_hammock_mebership_access', true );
-				if ( $post_meta && is_array( $post_meta ) && !empty( $post_meta ) ) {
+				if ( $post_meta && is_array( $post_meta ) && ! empty( $post_meta ) ) {
 					foreach ( $plans as $plan_id ) {
 						if ( hammock_is_member_plan_active( $plan_id ) ) {
 							if ( in_array( $plan_id, $post_meta ) ) {
@@ -195,9 +194,9 @@ class Protection {
 						}
 					}
 				}
-			} else if ( $object instanceof \WP_Term ) {
+			} elseif ( $object instanceof \WP_Term ) {
 				$term_meta = get_term_meta( $object->term_id, '_hammock_mebership_access', true );
-				if ( $term_meta && is_array( $term_meta ) && !empty( $term_meta ) ) {
+				if ( $term_meta && is_array( $term_meta ) && ! empty( $term_meta ) ) {
 					foreach ( $plans as $plan_id ) {
 						if ( hammock_is_member_plan_active( $plan_id ) ) {
 							if ( in_array( $plan_id, $term_meta ) ) {
@@ -213,27 +212,27 @@ class Protection {
 
 	/**
 	 * Filter to check if disabled member has access
-	 * 
-	 * @param bool $access
+	 *
+	 * @param bool   $access
 	 * @param Member $member - the member object
 	 * @param object $object - the object
 	 * @param string $content_type - the content type
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function disabled_member_access( $access, $member, $object, $content_type ) {
 		if ( $object instanceof \WP_Post && $this->post_rule != null ) {
 			$restricted = $this->post_rule->get_member_restricted_content_ids();
-			if ( !empty( $restricted ) ) {
+			if ( ! empty( $restricted ) ) {
 				if ( in_array( $object->ID, $restricted ) ) {
 					$access = false;
 				}
 			}
-		} else if ( $object instanceof \WP_Term && $this->category_rule != null ) {
+		} elseif ( $object instanceof \WP_Term && $this->category_rule != null ) {
 			$restricted = $this->category_rule->get_member_restricted_content_ids();
-			if ( !empty( $restricted ) ) {
+			if ( ! empty( $restricted ) ) {
 				if ( in_array( $object->term_id, $restricted ) ) {
 					$access = false;
 				}
@@ -244,27 +243,27 @@ class Protection {
 
 	/**
 	 * Filter to check if non member user has access
-	 * 
-	 * @param bool $access
-	 * @param int $user_id - the user id
+	 *
+	 * @param bool   $access
+	 * @param int    $user_id - the user id
 	 * @param object $object - the object
 	 * @param string $content_type - the content type
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function non_member_access( $access, $user_id, $object, $content_type ) {
 		if ( $object instanceof \WP_Post && $this->post_rule != null ) {
 			$restricted = $this->post_rule->get_member_restricted_content_ids();
-			if ( !empty( $restricted ) ) {
+			if ( ! empty( $restricted ) ) {
 				if ( in_array( $object->ID, $restricted ) ) {
 					$access = false;
 				}
 			}
-		} else if ( $object instanceof \WP_Term && $this->category_rule != null ) {
+		} elseif ( $object instanceof \WP_Term && $this->category_rule != null ) {
 			$restricted = $this->category_rule->get_member_restricted_content_ids();
-			if ( !empty( $restricted ) ) {
+			if ( ! empty( $restricted ) ) {
 				if ( in_array( $object->term_id, $restricted ) ) {
 					$access = false;
 				}
@@ -275,26 +274,26 @@ class Protection {
 
 	/**
 	 * Guest access
-	 * 
-	 * @param bool $access
+	 *
+	 * @param bool   $access
 	 * @param object $object - the object
 	 * @param string $content_type - the content type
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function guest_access( $access, $object, $content_type ) {
 		if ( $object instanceof \WP_Post && $this->post_rule != null ) {
 			$restricted = $this->post_rule->get_member_restricted_content_ids();
-			if ( !empty( $restricted ) ) {
+			if ( ! empty( $restricted ) ) {
 				if ( in_array( $object->ID, $restricted ) ) {
 					$access = false;
 				}
 			}
-		} else if ( $object instanceof \WP_Term && $this->category_rule != null ) {
+		} elseif ( $object instanceof \WP_Term && $this->category_rule != null ) {
 			$restricted = $this->category_rule->get_member_restricted_content_ids();
-			if ( !empty( $restricted ) ) {
+			if ( ! empty( $restricted ) ) {
 				if ( in_array( $object->term_id, $restricted ) ) {
 					$access = false;
 				}
@@ -305,11 +304,11 @@ class Protection {
 
 	/**
 	 * Check if the post type has access to the current user
-	 * 
+	 *
 	 * @param string $type - the content type
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function has_access( $type ) {
@@ -317,9 +316,9 @@ class Protection {
 			return true;
 		}
 
-		$post 		= get_queried_object();
-		$post_id 	= ! empty( $post->ID ) ? $post->ID : 0;
-		$post_type 	= ! empty( $post->post_type ) ? $post->post_type : '';
+		$post      = get_queried_object();
+		$post_id   = ! empty( $post->ID ) ? $post->ID : 0;
+		$post_type = ! empty( $post->post_type ) ? $post->post_type : '';
 		if ( empty( $post_type ) && ! empty( $post->query_var ) ) {
 			$post_type = $post->query_var;
 		}
@@ -364,12 +363,15 @@ class Protection {
 	 * @return array
 	 */
 	public static function get_custom_post_types() {
-		$args 		= apply_filters( 'hammock_get_post_types_args',  array(
-			'public'   => true,
-			'_builtin' => false
-		) );
-		$cpts 		= get_post_types( $args );
-		$excluded 	= self::get_excluded_content();
+		$args     = apply_filters(
+			'hammock_get_post_types_args',
+			array(
+				'public'   => true,
+				'_builtin' => false,
+			)
+		);
+		$cpts     = get_post_types( $args );
+		$excluded = self::get_excluded_content();
 
 		return apply_filters(
 			'hammock_get_custom_post_types',
@@ -381,10 +383,9 @@ class Protection {
 	 * Returns valid post types for content restriction rules.
 	 *
 	 * @param bool $exclude_products whether to exclude products from results (default true, exclude them)
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
-	 * 
+	 *
 	 * @return array associative array of post type names and labels
 	 */
 	public static function get_post_types_for_meta_box( $exclude_products = true ) {
@@ -411,11 +412,14 @@ class Protection {
 			 *
 			 * @param array $post_types List of post types to exclude
 			 */
-			$excluded_post_types = apply_filters( 'hammock_content_restriction_excluded_post_types', array(
-				'attachment',
-				'wc_product_tab',
-				'wooframework',
-			) );
+			$excluded_post_types = apply_filters(
+				'hammock_content_restriction_excluded_post_types',
+				array(
+					'attachment',
+					'wc_product_tab',
+					'wooframework',
+				)
+			);
 
 			// skip excluded custom post types
 			if ( ! empty( $excluded_post_types ) ) {
@@ -440,4 +444,4 @@ class Protection {
 		return $post_types;
 	}
 }
-?>
+

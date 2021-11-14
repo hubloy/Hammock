@@ -14,15 +14,15 @@ class Invoice {
 
 	/**
 	 * Generate invoice number based on the id
-	 * 
+	 *
 	 * @param int $id - the id
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public static function generate_invoice_number( $id ) {
 		return sprintf( "%'.05d\n", $id );
 	}
 }
-?>
+

@@ -18,15 +18,15 @@ class Manual extends Gateway {
 	/**
 	 * What type of transactions are supported
 	 * This tells the frontend wht to show depending on the plan purchased
-	 * 
+	 *
 	 * single - single payments, non-recurring
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var array
 	 */
 	public $supports = array(
-		'single'
+		'single',
 	);
 
 	/**

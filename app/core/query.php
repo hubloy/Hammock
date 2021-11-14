@@ -8,14 +8,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Query class
  * Handles frontend queries to parse the url endpoints
- * 
+ *
  * @since 1.0.0
  */
 class Query {
 
 	/**
 	 * Query vars to add to wp.
-	 * 
+	 *
 	 * @since 1.0.0
 	 *
 	 * @var array
@@ -36,7 +36,7 @@ class Query {
 
 	/**
 	 * Add endpoints for query vars.
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function add_endpoints() {
@@ -53,9 +53,9 @@ class Query {
 	 * Add query vars.
 	 *
 	 * @param array $vars Query vars.
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function add_query_vars( $vars ) {
@@ -68,7 +68,7 @@ class Query {
 
 	/**
 	 * Parse the request and look for query vars - endpoints may not be supported.
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function parse_request() {
@@ -98,19 +98,19 @@ class Query {
 	 * Endpoint mask describing the places the endpoint should be added.
 	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return int
 	 */
 	public function get_endpoints_mask() {
 		if ( 'page' === get_option( 'show_on_front' ) ) {
-			$page_on_front     		= get_option( 'page_on_front' );
-			$membership_page_id 	= hammock_page_id( 'membership_list' );
-			$protected_page_id 		= hammock_page_id( 'protected_content' );
-			$registration_page_id 	= hammock_page_id( 'registration' );
-			$thank_you_page_id 		= hammock_page_id( 'thank_you_page' );
-			$account_page_id 		= hammock_page_id( 'account_page' );
+			$page_on_front        = get_option( 'page_on_front' );
+			$membership_page_id   = hammock_page_id( 'membership_list' );
+			$protected_page_id    = hammock_page_id( 'protected_content' );
+			$registration_page_id = hammock_page_id( 'registration' );
+			$thank_you_page_id    = hammock_page_id( 'thank_you_page' );
+			$account_page_id      = hammock_page_id( 'account_page' );
 
-			$page_ids				= array( $membership_page_id, $protected_page_id, $registration_page_id, $thank_you_page_id, $account_page_id );
+			$page_ids = array( $membership_page_id, $protected_page_id, $registration_page_id, $thank_you_page_id, $account_page_id );
 
 			if ( in_array( $page_on_front, $page_ids, true ) ) {
 				return EP_ROOT | EP_PAGES;
@@ -122,7 +122,7 @@ class Query {
 
 	/**
 	 * Get query vars.
-	 * 
+	 *
 	 * @since 1.0.0
 	 *
 	 * @return array
@@ -134,7 +134,7 @@ class Query {
 
 	/**
 	 * Get query current active query var.
-	 * 
+	 *
 	 * @since 1.0.0
 	 *
 	 * @return string
@@ -150,4 +150,4 @@ class Query {
 		return '';
 	}
 }
-?>
+

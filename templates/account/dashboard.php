@@ -3,7 +3,7 @@
  * Account dashboard
  *
  * This template can be overridden by copying it to yourtheme/hammock/account/dashboard.php.
- * 
+ *
  * @package Hammock/Templates/Account
  * @version 1.0.0
  */
@@ -20,5 +20,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 		'<strong>' . esc_html( $current_user->name ) . '</strong>',
 		esc_url( hammock_logout_url() )
 	);
-?>
+	?>
 </p>

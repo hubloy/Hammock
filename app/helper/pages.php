@@ -80,11 +80,11 @@ class Pages {
 
 	/**
 	 * Create a page and set the default content
-	 * 
+	 *
 	 * @param string $type - the page type
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return int|bool - the page id or false if failed
 	 */
 	public static function create( $type ) {
@@ -118,17 +118,17 @@ class Pages {
 
 	/**
 	 * Checks if the current page is a membership page
-	 * 
+	 *
 	 * @param int $page_id - the page id
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public static function is_membership_page( $page_id ) {
-		$settings	= \Hammock\Model\Settings::instance();
-		$pages		= $settings->get_general_setting( 'pages', array() );
-		$page_ids 	= array_values( $pages );
+		$settings = \Hammock\Model\Settings::instance();
+		$pages    = $settings->get_general_setting( 'pages', array() );
+		$page_ids = array_values( $pages );
 		if ( in_array( $page_id, $page_ids ) ) {
 			return true;
 		}
@@ -136,4 +136,4 @@ class Pages {
 	}
 }
 
-?>
+

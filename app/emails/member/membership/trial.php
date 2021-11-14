@@ -40,7 +40,7 @@ class Trial extends Email {
 		$this->id            = 'member-' . $type;
 		$this->template_html = 'emails/membership/trial.php';
 		$this->placeholders  = array(
-			'{membership_name}' => ''
+			'{membership_name}' => '',
 		);
 	}
 

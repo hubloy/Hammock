@@ -11,7 +11,7 @@ use Hammock\Services\Codes;
 
 /**
  * Coupons controller
- * 
+ *
  * Manages all coupons
  *
  * @since 1.0.0
@@ -96,8 +96,8 @@ class Coupons extends Controller {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$settings 		= Settings::instance();
-		$this->setting 	= $settings->get_addon_setting( 'coupons' );
+		$settings      = Settings::instance();
+		$this->setting = $settings->get_addon_setting( 'coupons' );
 	}
 
 	/**
@@ -111,8 +111,8 @@ class Coupons extends Controller {
 	public function menu_page( $slug, $cap ) {
 		$this->_page_id = $slug . '-' . self::MENU_SLUG;
 		$this->_cap     = $cap;
-		$enabled 		=  isset( $this->setting['enabled'] ) ? $this->setting['enabled'] : false;
-		if ( $enabled  ) {
+		$enabled        = isset( $this->setting['enabled'] ) ? $this->setting['enabled'] : false;
+		if ( $enabled ) {
 			add_submenu_page(
 				$slug,
 				__( 'Coupons', 'hammock' ),
@@ -139,8 +139,8 @@ class Coupons extends Controller {
 			$vars['active_page']               = 'coupons';
 			$vars['strings']                   = $this->get_strings();
 			$vars['page_strings']              = array(
-				'status'	=> Codes::get_code_statuses(),
-				'types'		=> Codes::get_code_amount_types(),
+				'status' => Codes::get_code_statuses(),
+				'types'  => Codes::get_code_amount_types(),
 			);
 		}
 		return $vars;

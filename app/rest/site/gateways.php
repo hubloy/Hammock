@@ -1,7 +1,6 @@
 <?php
 namespace Hammock\Rest\Site;
 
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -102,7 +101,7 @@ class Gateways extends Rest {
 
 	/**
 	 * List gateways
-	 * 
+	 *
 	 * @param WP_REST_Request $request - the rest request
 	 *
 	 * @since 1.0.0
@@ -116,7 +115,7 @@ class Gateways extends Rest {
 
 	/**
 	 * List simple gateways for drop down
-	 * 
+	 *
 	 * @param WP_REST_Request $request - the rest request
 	 *
 	 * @since 1.0.0
@@ -130,7 +129,7 @@ class Gateways extends Rest {
 
 	/**
 	 * Get gateway setting
-	 * 
+	 *
 	 * @param WP_REST_Request $request - the rest request
 	 *
 	 * @since 1.0.0
@@ -155,11 +154,11 @@ class Gateways extends Rest {
 
 	/**
 	 * Update gateway
-	 * 
+	 *
 	 * @param WP_REST_Request $request - the rest request
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return mixed
 	 */
 	public function update_gateway( $request ) {

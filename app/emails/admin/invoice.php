@@ -38,10 +38,10 @@ class Invoice extends Email {
 	public function init() {
 		$type                = \Hammock\Services\Emails::COMM_TYPE_INVOICE;
 		$this->id            = 'admin-' . $type;
-		$this->is_admin 	 = true;
+		$this->is_admin      = true;
 		$this->template_html = 'emails/admin/invoice.php';
 		$this->placeholders  = array(
-			'{invoice_number}' => ''
+			'{invoice_number}' => '',
 		);
 	}
 
@@ -57,7 +57,7 @@ class Invoice extends Email {
 			'title'       => __( 'New payment', 'hammock' ),
 			'description' => __( 'Email sent to admin to notify a new payment is received', 'hammock' ),
 			'heading'     => sprintf( __( 'New payment %s', 'hammock' ), '#{invoice_number}' ),
-			'subject'     => sprintf( __( '%s: New payment %s', 'hammock' ), '[{site_title}]', '#{invoice_number}' ),
+			'subject'     => sprintf( __( '%1$s: New payment %2$s', 'hammock' ), '[{site_title}]', '#{invoice_number}' ),
 			'recipient'   => get_option( 'admin_email' ),
 			'enabled'     => true,
 		);

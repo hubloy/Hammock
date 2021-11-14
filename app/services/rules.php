@@ -10,7 +10,7 @@ use Hammock\Model\Rule;
 
 /**
  * Rules service
- * 
+ *
  * @since 1.0.0
  */
 class Rules {
@@ -33,12 +33,12 @@ class Rules {
 
 	/**
 	 * Get rules by type
-	 * 
+	 *
 	 * @param string $type - the object type
-	 * @param int $id - the object id
-	 * 
+	 * @param int    $id - the object id
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function get_rules( $type, $id ) {

@@ -17,16 +17,16 @@ class Database {
 	 * Table key constants
 	 * These represent the table names
 	 */
-	const MEMBERSHIP 		= 'membership';
-	const MEMBERSHIP_RULES 	= 'membership_rules';
-	const META       		= 'meta';
-	const MEMBERS    		= 'members';
-	const PLANS      		= 'plans';
-	const INVOICE    		= 'invoice';
-	const CODES      		= 'codes';
-	const ACTIVITY   		= 'activity';
-	const LOGS   	 		= 'log';
-	
+	const MEMBERSHIP       = 'membership';
+	const MEMBERSHIP_RULES = 'membership_rules';
+	const META             = 'meta';
+	const MEMBERS          = 'members';
+	const PLANS            = 'plans';
+	const INVOICE          = 'invoice';
+	const CODES            = 'codes';
+	const ACTIVITY         = 'activity';
+	const LOGS             = 'log';
+
 
 	/**
 	 * Current tables
@@ -46,15 +46,15 @@ class Database {
 		}
 
 		return array(
-			self::MEMBERSHIP 		=> $db->prefix . 'hammock_membership',
-			self::MEMBERSHIP_RULES 	=> $db->prefix . 'hammock_membership_rules',
-			self::META       		=> $db->prefix . 'hammock_meta',
-			self::MEMBERS    		=> $db->prefix . 'hammock_members',
-			self::PLANS		 		=> $db->prefix . 'hammock_plans',
-			self::INVOICE    		=> $db->prefix . 'hammock_invoice',
-			self::CODES      		=> $db->prefix . 'hammock_codes',
-			self::ACTIVITY	 		=> $db->prefix . 'hammock_activity',
-			self::LOGS		 		=> $db->prefix . 'hammock_subscription_log',
+			self::MEMBERSHIP       => $db->prefix . 'hammock_membership',
+			self::MEMBERSHIP_RULES => $db->prefix . 'hammock_membership_rules',
+			self::META             => $db->prefix . 'hammock_meta',
+			self::MEMBERS          => $db->prefix . 'hammock_members',
+			self::PLANS            => $db->prefix . 'hammock_plans',
+			self::INVOICE          => $db->prefix . 'hammock_invoice',
+			self::CODES            => $db->prefix . 'hammock_codes',
+			self::ACTIVITY         => $db->prefix . 'hammock_activity',
+			self::LOGS             => $db->prefix . 'hammock_subscription_log',
 		);
 	}
 
@@ -269,7 +269,7 @@ class Database {
 			dbDelta( $sql );
 		}
 
-		//Activity logs
+		// Activity logs
 		$table_name = self::get_table_name( self::ACTIVITY );
 		if ( $table_name ) {
 			$sql = "CREATE TABLE {$table_name} (
@@ -299,7 +299,7 @@ class Database {
 			dbDelta( $sql );
 		}
 
-		//Keeps logs of subscriptions. This is used to verify and prevent members from joining the wrong memberships
+		// Keeps logs of subscriptions. This is used to verify and prevent members from joining the wrong memberships
 		$table_name = self::get_table_name( self::LOGS );
 		if ( $table_name ) {
 			$sql = "CREATE TABLE {$table_name} (

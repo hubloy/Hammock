@@ -40,7 +40,7 @@ class Signup extends Email {
 		$this->id            = 'member-' . $type;
 		$this->template_html = 'emails/membership/signup.php';
 		$this->placeholders  = array(
-			'{membership_name}' => ''
+			'{membership_name}' => '',
 		);
 	}
 

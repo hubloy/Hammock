@@ -15,49 +15,49 @@ class Duration {
 	/**
 	 * Period types
 	 */
-	const PERIOD_TYPE_DAYS 		= 'day';
-	const PERIOD_TYPE_WEEKS 	= 'week';
-	const PERIOD_TYPE_MONTHS 	= 'month';
-	const PERIOD_TYPE_YEARS 	= 'year';
+	const PERIOD_TYPE_DAYS   = 'day';
+	const PERIOD_TYPE_WEEKS  = 'week';
+	const PERIOD_TYPE_MONTHS = 'month';
+	const PERIOD_TYPE_YEARS  = 'year';
 
 	/**
 	 * List days
 	 * This gets an array of days
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public static function list_days() {
 		$days = array(
-			1 	=> __( 'One Day', 'hammock' ),
-			2 	=> __( 'Two Days', 'hammock' ),
-			3 	=> __( 'Three Days', 'hammock' ),
-			4 	=> __( 'Four Days', 'hammock' ),
-			5 	=> __( 'Five Days', 'hammock' ),
-			6 	=> __( 'Six Days', 'hammock' ),
-			7 	=> __( 'Seven Days', 'hammock' ),
-			8 	=> __( 'Eight Days', 'hammock' ),
-			9 	=> __( 'Nine Days', 'hammock' ),
-			10 	=> __( 'Ten Days', 'hammock' ),
-			11 	=> __( 'Eleven Days', 'hammock' ),
-			12 	=> __( 'Twelve Days', 'hammock' ),
-			13 	=> __( 'Thirteen Days', 'hammock' ),
-			14 	=> __( 'Fourteen Days', 'hammock' ),
-			15 	=> __( 'Fifteen Days', 'hammock' ),
-			16 	=> __( 'Sixteen Days', 'hammock' ),
-			17 	=> __( 'Seventeen Days', 'hammock' ),
-			18 	=> __( 'Eighteen Days', 'hammock' ),
-			19 	=> __( 'Nineteen Days', 'hammock' ),
-			20 	=> __( 'Twenty Days', 'hammock' ),
-			21 	=> __( 'Twenty-one Days', 'hammock' ),
-			22 	=> __( 'Twenty-two Days', 'hammock' ),
-			23 	=> __( 'Twenty-three Days', 'hammock' ),
-			24 	=> __( 'Twenty-four Days', 'hammock' ),
-			25 	=> __( 'Twenty-five Days', 'hammock' ),
-			26 	=> __( 'Twenty-six Days', 'hammock' ),
-			27 	=> __( 'Twenty-seven Days', 'hammock' ),
-			28 	=> __( 'Twenty-eight Days', 'hammock' )
+			1  => __( 'One Day', 'hammock' ),
+			2  => __( 'Two Days', 'hammock' ),
+			3  => __( 'Three Days', 'hammock' ),
+			4  => __( 'Four Days', 'hammock' ),
+			5  => __( 'Five Days', 'hammock' ),
+			6  => __( 'Six Days', 'hammock' ),
+			7  => __( 'Seven Days', 'hammock' ),
+			8  => __( 'Eight Days', 'hammock' ),
+			9  => __( 'Nine Days', 'hammock' ),
+			10 => __( 'Ten Days', 'hammock' ),
+			11 => __( 'Eleven Days', 'hammock' ),
+			12 => __( 'Twelve Days', 'hammock' ),
+			13 => __( 'Thirteen Days', 'hammock' ),
+			14 => __( 'Fourteen Days', 'hammock' ),
+			15 => __( 'Fifteen Days', 'hammock' ),
+			16 => __( 'Sixteen Days', 'hammock' ),
+			17 => __( 'Seventeen Days', 'hammock' ),
+			18 => __( 'Eighteen Days', 'hammock' ),
+			19 => __( 'Nineteen Days', 'hammock' ),
+			20 => __( 'Twenty Days', 'hammock' ),
+			21 => __( 'Twenty-one Days', 'hammock' ),
+			22 => __( 'Twenty-two Days', 'hammock' ),
+			23 => __( 'Twenty-three Days', 'hammock' ),
+			24 => __( 'Twenty-four Days', 'hammock' ),
+			25 => __( 'Twenty-five Days', 'hammock' ),
+			26 => __( 'Twenty-six Days', 'hammock' ),
+			27 => __( 'Twenty-seven Days', 'hammock' ),
+			28 => __( 'Twenty-eight Days', 'hammock' ),
 		);
 		return apply_filters( 'hammock_helper_duration_list_days', $days );
 	}
@@ -65,12 +65,12 @@ class Duration {
 	/**
 	 * Add a period interval to a date.
 
-	 * @param int $period_unit The period unit to add.
-	 * @param string $period_type The period type to add.
+	 * @param int        $period_unit The period unit to add.
+	 * @param string     $period_type The period type to add.
 	 * @param string|int $start_date The start date to add to.
-	 * 
+	 *
 	 * @since  1.0.0
-	 * 
+	 *
 	 * @return string The added date.
 	 */
 	public static function add_interval( $period_unit, $period_type, $start_date = null ) {
@@ -83,7 +83,7 @@ class Duration {
 		$result = $start_date;
 
 		if ( is_numeric( $period_unit ) && $period_unit > 0 ) {
-			$days 	= self::get_period_in_days( $period_unit, $period_type );
+			$days   = self::get_period_in_days( $period_unit, $period_type );
 			$result = strtotime( '+' . $days . 'days', $start_date );
 
 			if ( false === $result ) {
@@ -93,7 +93,10 @@ class Duration {
 
 		return apply_filters(
 			'hammock_duration_add_interval',
-			$result, $period_unit, $period_type, $start_date
+			$result,
+			$period_unit,
+			$period_type,
+			$start_date
 		);
 	}
 
@@ -102,8 +105,8 @@ class Duration {
 	 *
 	 * @since  1.0.0
 	 *
-	 * @param int $period_unit The period unit to subtract.
-	 * @param string $period_type The period type to subtract.
+	 * @param int        $period_unit The period unit to subtract.
+	 * @param string     $period_type The period type to subtract.
 	 * @param string|int $start_date The start date to subtract to.
 	 * @return string The subtracted date.
 	 */
@@ -117,7 +120,7 @@ class Duration {
 		$result = $start_date;
 
 		if ( is_numeric( $period_unit ) && $period_unit > 0 ) {
-			$days 	= self::get_period_in_days( $period_unit, $period_type );
+			$days   = self::get_period_in_days( $period_unit, $period_type );
 			$result = strtotime( '-' . $days . 'days', $start_date );
 
 			if ( false === $result ) {
@@ -125,7 +128,7 @@ class Duration {
 			}
 		}
 
-		$date_format	= get_option( 'date_format' );
+		$date_format = get_option( 'date_format' );
 
 		return apply_filters(
 			'hammock_subtract_interval',
@@ -140,14 +143,14 @@ class Duration {
 	 *
 	 * @param  Date $end_date The end date to subtract from in the format yyyy-mm-dd
 	 * @param  Date $start_date The start date to subtraction the format yyyy-mm-dd
-	 * @param  int $precission Time constant HOURS_IN_SECONDS will return the
-	 *         difference in hours. Default is DAY_IN_SECONDS (return = days).
+	 * @param  int  $precission Time constant HOURS_IN_SECONDS will return the
+	 *          difference in hours. Default is DAY_IN_SECONDS (return = days).
 	 * @param  bool $real_diff If set to true then the result is negative if
 	 *         enddate is before startdate. Default is false, which will return
 	 *         the absolute difference which is always positive.
-	 * 
+	 *
 	 * @since  1.0.0
-	 * 
+	 *
 	 * @return int The resulting difference of the date subtraction.
 	 */
 	public static function subtract_dates( $end_date, $start_date, $precission = null, $real_diff = false ) {
@@ -161,16 +164,16 @@ class Duration {
 		// expiring early in some countries...
 		//
 		// E.g. Server timezone is UTC
-		//      WP timezone is UTC -9
-		//      Expire date is '2016-03-01'
+		// WP timezone is UTC -9
+		// Expire date is '2016-03-01'
 		//
-		//      Resulting expire timestamp is:
-		//      2016-03-02 00:00:00 UTC
+		// Resulting expire timestamp is:
+		// 2016-03-02 00:00:00 UTC
 		//
-		//      While actual timestamp should be:
-		//      2016-03-02 00:00:00 UTC-9
+		// While actual timestamp should be:
+		// 2016-03-02 00:00:00 UTC-9
 		// (or) 2016-03-02 09:00:00 UTC
-		$end_date 	= new \DateTime( $end_date );
+		$end_date   = new \DateTime( $end_date );
 		$start_date = new \DateTime( $start_date );
 
 		if ( ! is_numeric( $precission ) || $precission <= 0 ) {
@@ -194,12 +197,12 @@ class Duration {
 
 	/**
 	 * Check if is past due date
-	 * 
+	 *
 	 * @param string $end_date - the end date
 	 * @param string $start_date - the start date. Defaults to today
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public static function is_past_date( $end_date, $start_date = '' ) {
@@ -208,20 +211,20 @@ class Duration {
 			$start_date = 'NOW';
 		}
 
-		$end_date 	= strtotime( $end_date );
+		$end_date   = strtotime( $end_date );
 		$start_date = strtotime( $start_date );
 
-		$result 	=  $end_date - $start_date;
-		return $result < 0 ;
+		$result = $end_date - $start_date;
+		return $result < 0;
 	}
 
 	/**
 	 * Get period in days.
 	 *
 	 * Convert period in week, month, years to days.
-	 * 
+	 *
 	 * @param $period The period to convert.
-	 * 
+	 *
 	 * @since  1.0.0
 	 *
 	 * @return int The calculated days.
@@ -256,11 +259,11 @@ class Duration {
 
 	/**
 	 * Convert the mysql weekday to string
-	 * 
+	 *
 	 * @param int $week_day - the mysql week day
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public static function mysql_week_day_to_string( $week_day ) {
@@ -292,4 +295,4 @@ class Duration {
 		}
 	}
 }
-?>
+

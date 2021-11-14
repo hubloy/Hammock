@@ -393,10 +393,9 @@ class Currency {
 	 * Formats a number to display a valid price.
 	 *
 	 * @param  numeric $price
-	 * 
+	 *
 	 * @since  1.0.0
-	 * 
-	 * 
+	 *
 	 * @return numeric
 	 */
 	public static function format_price( $price ) {

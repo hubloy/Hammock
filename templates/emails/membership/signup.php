@@ -3,7 +3,7 @@
  * Membership Signup
  *
  * This template can be overridden by copying it to yourtheme/hammock/emails/membership/signup.php.
- * 
+ *
  * @package Hammock/Templates/Emails
  * @version 1.0.0
  */

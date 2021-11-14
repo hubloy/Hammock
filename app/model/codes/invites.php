@@ -9,14 +9,14 @@ use Hammock\Model\Codes;
 
 /**
  * Invite codes
- * 
+ *
  * @since 1.0.0
  */
 class Invites extends Codes {
 
 	/**
 	 * Initialize model
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	protected function init() {
@@ -24,4 +24,4 @@ class Invites extends Codes {
 	}
 }
 
-?>
+

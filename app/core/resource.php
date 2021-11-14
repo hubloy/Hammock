@@ -64,8 +64,7 @@ class Resource {
 			true
 		);
 
-
-		//Jquery tags
+		// Jquery tags
 		wp_register_script(
 			'hammock-jquery-tags',
 			HAMMOCK_ASSETS_URL . '/vendor/tags/jquery.tagsinput.min.js',
@@ -74,7 +73,7 @@ class Resource {
 			true
 		);
 
-		//notifications
+		// notifications
 		wp_register_script(
 			'hammock-styled-notifications',
 			HAMMOCK_ASSETS_URL . '/vendor/styled-notifications/notifications.js',
@@ -96,7 +95,7 @@ class Resource {
 				'error'        => __( 'An error occured', 'hammock' ),
 				'no_results'   => __( 'Ooops, no results found', 'hammock' ),
 				'base_api_url' => rest_url( 'wp/v2/' ),
-				'api_url' 	   => rest_url( HAMMOCK_REST_NAMESPACE ),
+				'api_url'      => rest_url( HAMMOCK_REST_NAMESPACE ),
 				'api_nonce'    => wp_create_nonce( 'wp_rest' ),
 				'ajax_url'     => admin_url( 'admin-ajax.php' ),
 				'ajax_nonce'   => wp_create_nonce( 'hammock_rest_nonce' ),
@@ -105,31 +104,31 @@ class Resource {
 				'active_page'  => 'dashboard',
 				'common'       => array(
 					'buttons'       => array(
-						'save'   	=> __( 'Save', 'hammock' ),
-						'continue'  => __( 'Save and Continue', 'hammock' ),
-						'update'	=> __( 'Update', 'hammock' ),
-						'edit'   	=> __( 'Edit', 'hammock' ),
-						'delete' 	=> __( 'Delete', 'hammock' ),
-						'manage' 	=> __( 'Manage', 'hammock' ),
-						'ok'	 	=> __( 'Okay', 'hammock' ),
-						'cancel' 	=> __( 'Cancel', 'hammock' ),
-						'back' 		=> __( 'Back', 'hammock' ),
-						'reminder'	=> __( 'Send Reminder', 'hammock' )
+						'save'     => __( 'Save', 'hammock' ),
+						'continue' => __( 'Save and Continue', 'hammock' ),
+						'update'   => __( 'Update', 'hammock' ),
+						'edit'     => __( 'Edit', 'hammock' ),
+						'delete'   => __( 'Delete', 'hammock' ),
+						'manage'   => __( 'Manage', 'hammock' ),
+						'ok'       => __( 'Okay', 'hammock' ),
+						'cancel'   => __( 'Cancel', 'hammock' ),
+						'back'     => __( 'Back', 'hammock' ),
+						'reminder' => __( 'Send Reminder', 'hammock' ),
 					),
 					'string'        => array(
 						'dashboard' => __( 'Dashboard', 'hammock' ),
 						'not_found' => __( "Sorry, we couldn't find what you are looking for", 'hammock' ),
 						'title'     => __( 'Dashboard', 'hammock' ),
-						'search'	=> array(
-							'users' 	=> array(
-								'select' 	=> __( 'Search for user', 'hammock' ),
-								'not_found'	=> __( 'User not found', 'hammock' ),
+						'search'    => array(
+							'users'   => array(
+								'select'    => __( 'Search for user', 'hammock' ),
+								'not_found' => __( 'User not found', 'hammock' ),
 							),
-							'members' 	=> array(
-								'select' 	=> __( 'Search for member', 'hammock' ),
-								'not_found'	=> __( 'Member not found', 'hammock' ),
+							'members' => array(
+								'select'    => __( 'Search for member', 'hammock' ),
+								'not_found' => __( 'Member not found', 'hammock' ),
 							),
-						)
+						),
 					),
 					'status'        => array(
 						'enabled'  => __( 'Enabled', 'hammock' ),
@@ -218,7 +217,6 @@ class Resource {
 			HAMMOCK_VERSION
 		);
 
-
 		wp_register_script(
 			'hammock-marketing-react',
 			HAMMOCK_ASSETS_URL . '/js/react/marketing.min.js',
@@ -279,7 +277,7 @@ class Resource {
 			'1.8.7'
 		);
 
-		//Jquery tags
+		// Jquery tags
 		wp_register_style(
 			'hammock-jquery-tags',
 			HAMMOCK_ASSETS_URL . '/vendor/tags/jquery.tagsinput.min.css',
@@ -287,7 +285,7 @@ class Resource {
 			'1.8.7'
 		);
 
-		//Notifications
+		// Notifications
 		wp_register_style(
 			'hammock-styled-notifications',
 			HAMMOCK_ASSETS_URL . '/vendor/styled-notifications/notifications.css',
@@ -326,7 +324,7 @@ class Resource {
 	 */
 	public static function register_front_scripts() {
 
-		//Swal
+		// Swal
 		wp_register_script(
 			'hammock-sweetalert',
 			HAMMOCK_ASSETS_URL . '/vendor/sweetalert/sweetalert2.all.min.js',
@@ -351,17 +349,17 @@ class Resource {
 				'assets'     => array(
 					'spinner' => HAMMOCK_ASSETS_URL . '/img/spinner.gif',
 				),
-				'common'       => array(
-					'buttons'       => array(
-						'save'   	=> __( 'Save', 'hammock' ),
-						'update'	=> __( 'Update', 'hammock' ),
-						'edit'   	=> __( 'Edit', 'hammock' ),
-						'delete' 	=> __( 'Delete', 'hammock' ),
-						'ok'	 	=> __( 'Okay', 'hammock' ),
-						'cancel' 	=> __( 'Cancel', 'hammock' ),
-						'back' 		=> __( 'Back', 'hammock' )
+				'common'     => array(
+					'buttons' => array(
+						'save'   => __( 'Save', 'hammock' ),
+						'update' => __( 'Update', 'hammock' ),
+						'edit'   => __( 'Edit', 'hammock' ),
+						'delete' => __( 'Delete', 'hammock' ),
+						'ok'     => __( 'Okay', 'hammock' ),
+						'cancel' => __( 'Cancel', 'hammock' ),
+						'back'   => __( 'Back', 'hammock' ),
 					),
-				)
+				),
 			)
 		);
 

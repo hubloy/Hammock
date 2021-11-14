@@ -121,7 +121,7 @@ class Addons extends Rest {
 			)
 		);
 
-		//Custom actions
+		// Custom actions
 		register_rest_route(
 			$namespace,
 			self::BASE_API_ROUTE . 'action',
@@ -131,7 +131,7 @@ class Addons extends Rest {
 					'callback'            => array( $this, 'inner_action' ),
 					'permission_callback' => array( $this, 'validate_request' ),
 					'args'                => array(
-						'id'    => array(
+						'id'     => array(
 							'required'          => true,
 							'sanitize_callback' => 'sanitize_text_field',
 							'type'              => 'string',
@@ -172,13 +172,13 @@ class Addons extends Rest {
 		$name   = $request['name'];
 		$addons = \Hammock\Services\Addons::load_addons();
 		if ( isset( $addons[ $name ] ) ) {
-			$settings 	= new Settings();
-			$settings 	= $settings->get_addon_setting( $name );
-			$active 	= apply_filters( 'hammock_get_addon_' . $name . '_active', true );
+			$settings = new Settings();
+			$settings = $settings->get_addon_setting( $name );
+			$active   = apply_filters( 'hammock_get_addon_' . $name . '_active', true );
 			return array(
-				'settings' 	=> $settings,
-				'enabled'  	=> $settings['enabled'] && $active,
-				'active'	=> $active
+				'settings' => $settings,
+				'enabled'  => $settings['enabled'] && $active,
+				'active'   => $active,
 			);
 		} else {
 			return new \WP_Error( 'rest_addon_invalid', esc_html__( 'The addon does not exist.', 'hammock' ), array( 'status' => 404 ) );
@@ -187,14 +187,24 @@ class Addons extends Rest {
 
 	/**
 	 * Update settings
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function update_settings( $request ) {
-		$id = $request['id'];
-		$response = apply_filters( 'hammock_addon_' . $id . '_update_settings', array( 'status' => false, 'message' => __( 'Addon not found', 'hammock' ) ), $request );
+		$id       = $request['id'];
+		$response = apply_filters(
+			'hammock_addon_' . $id . '_update_settings',
+			array(
+				'status'  => false,
+				'message' => __(
+					'Addon not found',
+					'hammock'
+				),
+			),
+			$request
+		);
 		return $response;
 	}
 
@@ -229,14 +239,24 @@ class Addons extends Rest {
 
 	/**
 	 * Inner addon actions
-	 * 
+	 *
 	 * @since 1.0.0
 	 *
 	 * @return mixed
 	 */
 	public function inner_action( $request ) {
-		$id 		= $request['id'];
-		$response 	= apply_filters( 'hammock_addon_' . $id . '_action', array( 'success' => true, 'message' => __( 'Action executed', 'hammock' ) ), $request );
+		$id       = $request['id'];
+		$response = apply_filters(
+			'hammock_addon_' . $id . '_action',
+			array(
+				'success' => true,
+				'message' => __(
+					'Action executed',
+					'hammock'
+				),
+			),
+			$request
+		);
 		return $response;
 	}
 }

@@ -10,12 +10,12 @@
  * License URI:         https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:         hammock
  * Domain Path:         /languages/
- * 
+ *
  * @package Hammock
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit; // Exit if accessed directly.
 }
 
 if ( ! class_exists( 'Hammock' ) ) :
@@ -44,14 +44,16 @@ if ( ! class_exists( 'Hammock' ) ) :
 		 * The single instance of the class
 		 *
 		 * @since 1.0.0
+		 *
+		 * @var object
 		 */
 		protected static $_instance = null;
 
 		/**
 		 * The query object
-		 * 
+		 *
 		 * @since 1.0.0
-		 * 
+		 *
 		 * @var object
 		 */
 		private $query = null;
@@ -59,9 +61,9 @@ if ( ! class_exists( 'Hammock' ) ) :
 
 		/**
 		 * The api object
-		 * 
+		 *
 		 * @since 1.0.0
-		 * 
+		 *
 		 * @var object
 		 */
 		private $api = null;
@@ -84,20 +86,20 @@ if ( ! class_exists( 'Hammock' ) ) :
 		 * @since 1.0.0
 		 */
 		public function __construct() {
-			// Define plugin constants
+			// Define plugin constants.
 			$this->define_constants();
 
-			// Define autoloader
+			// Define autoloader.
 			$this->auto_load();
 
-			// Initiate plugin
+			// Initiate plugin.
 			\Hammock\Base\Plugin::instance();
 
-			$this->query 	= new \Hammock\Core\Query();
-			$this->api		= new \Hammock\Core\Api();
+			$this->query = new \Hammock\Core\Query();
+			$this->api   = new \Hammock\Core\Api();
 
-			if ( defined ( 'WP_CLI' ) && WP_CLI ) {
-				//Load wp_cli
+			if ( defined( 'WP_CLI' ) && WP_CLI ) {
+				// Load wp_cli
 			}
 
 			do_action( 'hammock_loaded' );
@@ -136,8 +138,8 @@ if ( ! class_exists( 'Hammock' ) ) :
 		/**
 		 * Define constant helper if not already set
 		 *
-		 * @param  string      $name
-		 * @param  string|bool $value
+		 * @param string      $name The name.
+		 * @param string|bool $value The value.
 		 *
 		 * @since 1.0.0
 		 */
@@ -159,21 +161,21 @@ if ( ! class_exists( 'Hammock' ) ) :
 
 
 		/**
-		 * Set up the class loader
+		 * Set up the class loader.
 		 *
-		 * @param $class
+		 * @param string $class The class name.
 		 */
 		public function _autoload( $class ) {
 			$base_path = __DIR__ . DIRECTORY_SEPARATOR;
 			$pools     = explode( '\\', $class );
 
-			if ( $pools[0] != 'Hammock' ) {
+			if ( 'Hammock' !== $pools[0] ) {
 				return;
 			}
 
 			$pools[0] = 'App';
 
-			// build the path
+			// build the path.
 			$path = implode( DIRECTORY_SEPARATOR, $pools );
 			$path = $base_path . strtolower( str_replace( '_', '-', $path ) ) . '.php';
 			if ( file_exists( $path ) ) {
@@ -183,21 +185,21 @@ if ( ! class_exists( 'Hammock' ) ) :
 
 		/**
 		 * Get query
-		 * 
+		 *
 		 * @since 1.0.0
-		 * 
+		 *
 		 * @return object
 		 */
 		public function get_query() {
 			return $this->query;
 		}
-		
+
 
 		/**
 		 * Get api
-		 * 
+		 *
 		 * @since 1.0.0
-		 * 
+		 *
 		 * @return object
 		 */
 		public function get_api() {

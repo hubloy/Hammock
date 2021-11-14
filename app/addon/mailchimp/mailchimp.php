@@ -11,9 +11,9 @@ class Mailchimp extends Addon {
 
 	/**
 	 * The API instance
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var API
 	 */
 	private $api = null;
@@ -63,7 +63,7 @@ class Mailchimp extends Addon {
 				'name'        => __( 'MailChimp Integration', 'hammock' ),
 				'description' => __( 'MailChimp integration.', 'hammock' ),
 				'icon'        => 'dashicons dashicons-email',
-				'url'   	  => admin_url( 'admin.php?page=hammock-marketing' ),
+				'url'         => admin_url( 'admin.php?page=hammock-marketing' ),
 			);
 		}
 		return $addons;
@@ -106,96 +106,112 @@ class Mailchimp extends Addon {
 	 * @return array
 	 */
 	public function update_settings( $response = array(), $data ) {
-		$apikey 		= sanitize_text_field( $data['apikey'] );
-		$enabled 		= isset( $data['enabled'] ) ? 1 : 0;
-		$optin 			= isset( $data['double_optin'] ) ? 1 : 0;
-		$reg_list 		= sanitize_text_field( $data['registered_list'] );
-		$sub_list 		= sanitize_text_field( $data['subscriber_list'] );
-		$unsub_list 	= sanitize_text_field( $data['unsubscriber_list'] );
-		$settings  		= $this->settings();
+		$apikey     = sanitize_text_field( $data['apikey'] );
+		$enabled    = isset( $data['enabled'] ) ? 1 : 0;
+		$optin      = isset( $data['double_optin'] ) ? 1 : 0;
+		$reg_list   = sanitize_text_field( $data['registered_list'] );
+		$sub_list   = sanitize_text_field( $data['subscriber_list'] );
+		$unsub_list = sanitize_text_field( $data['unsubscriber_list'] );
+		$settings   = $this->settings();
 
-		$settings['enabled']				= $enabled;
-		$settings['apikey'] 				= $apikey;
-		$settings['double_optin'] 			= $optin;
-		$settings['registered_list'] 		= $reg_list;
-		$settings['subscriber_list'] 		= $sub_list;
-		$settings['unsubscriber_list'] 		= $unsub_list;
+		$settings['enabled']           = $enabled;
+		$settings['apikey']            = $apikey;
+		$settings['double_optin']      = $optin;
+		$settings['registered_list']   = $reg_list;
+		$settings['subscriber_list']   = $sub_list;
+		$settings['unsubscriber_list'] = $unsub_list;
 		$this->settings->set_addon_setting( $this->id, $settings );
 		$this->settings->save();
 		return array(
-			'status' => true,
-			'message'	=> __( 'MailChimp Settings Saved', 'hammock' )
+			'status'  => true,
+			'message' => __( 'MailChimp Settings Saved', 'hammock' ),
 		);
 	}
 
 
 	/**
 	 * Used to handle custom addon actions
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function addon_action( $response = array(), $data ) {
 		$action = sanitize_text_field( $data['action'] );
 		switch ( $action ) {
 			case 'check_status':
-				$apikey 		= sanitize_text_field( $data['apikey'] );
-				$exploded 		= explode( '-', $apikey );
-				$data_center 	= end( $exploded );
-				$this->api 		= new Api( $apikey, $data_center );
-				$lists			= $this->get_lists();
+				$apikey      = sanitize_text_field( $data['apikey'] );
+				$exploded    = explode( '-', $apikey );
+				$data_center = end( $exploded );
+				$this->api   = new Api( $apikey, $data_center );
+				$lists       = $this->get_lists();
 				if ( is_wp_error( $lists ) ) {
-					return array( 'error' => true, 'message' => sprintf( __( 'Error: %s', 'hammock' ), $lists->get_error_message() ) );
+					return array(
+						'error'   => true,
+						'message' => sprintf( __( 'Error: %s', 'hammock' ), $lists->get_error_message() ),
+					);
 				}
-				//Set the api key
-				$settings   				= $this->settings();
-				$settings['apikey']			= $apikey;
-				$settings['valid']			= true;
-				$settings['double_optin']	= true;
+				// Set the api key
+				$settings                 = $this->settings();
+				$settings['apikey']       = $apikey;
+				$settings['valid']        = true;
+				$settings['double_optin'] = true;
 				$this->settings->set_addon_setting( $this->id, $settings );
 				$this->settings->save();
 
-				return array( 'success' => true, 'message' => __( 'Valid API key', 'hammock' ), 'lists' => $lists );
+				return array(
+					'success' => true,
+					'message' => __( 'Valid API key', 'hammock' ),
+					'lists'   => $lists,
+				);
 			break;
 			case 'get_lists':
-				$settings   	= $this->settings();
-				$apikey 		= $settings['apikey'];
-				$exploded 		= explode( '-', $apikey );
-				$data_center 	= end( $exploded );
-				$this->api 		= new Api( $apikey, $data_center );
-				$lists			= $this->get_lists();
+				$settings    = $this->settings();
+				$apikey      = $settings['apikey'];
+				$exploded    = explode( '-', $apikey );
+				$data_center = end( $exploded );
+				$this->api   = new Api( $apikey, $data_center );
+				$lists       = $this->get_lists();
 				if ( is_wp_error( $lists ) ) {
-					return array( 'error' => true, 'message' => sprintf( __( 'Error: %s', 'hammock' ), $lists->get_error_message() ) );
+					return array(
+						'error'   => true,
+						'message' => sprintf( __( 'Error: %s', 'hammock' ), $lists->get_error_message() ),
+					);
 				} else {
-					return array( 'success' => true, 'lists' => $lists );
+					return array(
+						'success' => true,
+						'lists'   => $lists,
+					);
 				}
-			break;
+				break;
 		}
-		return array( 'success' => true, 'message' => __( 'Action executed', 'hammock' ) );
+		return array(
+			'success' => true,
+			'message' => __( 'Action executed', 'hammock' ),
+		);
 	}
 
 	/**
 	 * Get lists
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return mixed
 	 */
 	public function get_lists( $refresh = false ) {
-		$response	= $this->api->get_lists();
+		$response = $this->api->get_lists();
 		if ( is_wp_error( $response ) ) {
 			return $response;
 		}
-		$lists 		= array(
-			''	=> __( 'Select List', 'hammock' )
+		$lists  = array(
+			'' => __( 'Select List', 'hammock' ),
 		);
-		$_lists   	= $response->lists;
-		$total    	= $response->total_items;
+		$_lists = $response->lists;
+		$total  = $response->total_items;
 		if ( is_array( $_lists ) ) {
-			foreach( $_lists as $list ) {
-				$list 				= (array) $list;
-				$lists[$list['id']] = $list['name'];
+			foreach ( $_lists as $list ) {
+				$list                 = (array) $list;
+				$lists[ $list['id'] ] = $list['name'];
 			}
 		}
 		return $lists;

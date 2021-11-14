@@ -8,40 +8,40 @@ if ( ! defined( 'ABSPATH' ) ) {
 use Hammock\Base\Rule;
 
 class Post extends Rule {
-	
+
 
 	/**
 	 * List of ids of restricted content
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var int[]
 	 */
 	private $content_restricted = array();
 
 	/**
 	 * List of ids of restricted posted content
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var array
 	 */
 	private $restricted_post_content = array();
 
 	/**
 	 * List of restricted sticky post ids
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var int[]
 	 */
 	private $restricted_sticky_posts = array();
 
 	/**
 	 * List of restricted comments by post
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var array
 	 */
 	private $restricted_comments_by_post_id = array();
@@ -72,7 +72,7 @@ class Post extends Rule {
 
 	/**
 	 * Main rule set up
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function init() {
@@ -89,8 +89,8 @@ class Post extends Rule {
 	public function protect_content() {
 		add_action( 'wp', array( $this, 'restrict_content' ) );
 
-		//user resitrictions
-		add_filter( 'posts_clauses',  array( $this, 'manage_posts_clauses' ), 999, 2 );
+		// user resitrictions
+		add_filter( 'posts_clauses', array( $this, 'manage_posts_clauses' ), 999, 2 );
 
 		add_filter( 'pre_get_posts', array( $this, 'exclude_restricted_posts' ), 999 );
 		add_filter( 'option_sticky_posts', array( $this, 'exclude_restricted_sticky_posts' ), 999 );
@@ -103,7 +103,7 @@ class Post extends Rule {
 		// handle single post previous/next pagination links
 		add_filter( 'get_previous_post_where', array( $this, 'exclude_restricted_adjacent_posts' ), 1, 5 );
 		add_filter( 'get_next_post_where', array( $this, 'exclude_restricted_adjacent_posts' ), 1, 5 );
-		
+
 		do_action(
 			'hammock_protect_post_content',
 			$this
@@ -112,7 +112,7 @@ class Post extends Rule {
 
 	/**
 	 * Restrict content
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function restrict_content() {
@@ -143,26 +143,26 @@ class Post extends Rule {
 
 	/**
 	 * Exclude restricted content
-	 * 
-	 * @param array $clauses - the clauses
+	 *
+	 * @param array    $clauses - the clauses
 	 * @param WP_Query $wp_query - the query
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function manage_posts_clauses( $clauses, $wp_query ) {
 		global $wpdb;
-		$protection_level 	= $this->settings->get_general_setting( 'protection_level' );
+		$protection_level = $this->settings->get_general_setting( 'protection_level' );
 		if ( 'hide' !== $protection_level ) {
 			return $clauses;
 		}
-		$restricted 		= $this->get_member_restricted_content_ids();
-		if ( !empty( $restricted ) ) {
-			$place_holders 		= implode( ', ', array_fill( 0, count( $restricted ), '%d' ) );
-			$clauses['where'] 	.= $wpdb->prepare( " AND $wpdb->posts.ID NOT IN ($place_holders) ", $restricted );
+		$restricted = $this->get_member_restricted_content_ids();
+		if ( ! empty( $restricted ) ) {
+			$place_holders     = implode( ', ', array_fill( 0, count( $restricted ), '%d' ) );
+			$clauses['where'] .= $wpdb->prepare( " AND $wpdb->posts.ID NOT IN ($place_holders) ", $restricted );
 		}
-		$clauses['where'] 	.= apply_filters( 'hammock_post_rule_manage_posts_clauses', '' );
+		$clauses['where'] .= apply_filters( 'hammock_post_rule_manage_posts_clauses', '' );
 		return $clauses;
 	}
 
@@ -174,11 +174,16 @@ class Post extends Rule {
 		$protection_level = $this->settings->get_general_setting( 'protection_level' );
 		if ( 'hide' === $protection_level ) {
 			$restricted = $this->get_member_restricted_content_ids();
-			if ( !empty( $restricted ) ) {
-				$wp_query->set( 'post__not_in', array_unique( array_merge(
-					$wp_query->get( 'post__not_in' ),
-					reset( $restricted )
-				) ) );
+			if ( ! empty( $restricted ) ) {
+				$wp_query->set(
+					'post__not_in',
+					array_unique(
+						array_merge(
+							$wp_query->get( 'post__not_in' ),
+							reset( $restricted )
+						)
+					)
+				);
 			}
 		}
 	}
@@ -188,9 +193,9 @@ class Post extends Rule {
 	 * Removes sticky posts from ever showing up when using the "hide completely" restriction mode and the user doesn't have access.
 	 *
 	 * @param array $sticky_posts - array of sticky post IDs
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function exclude_restricted_sticky_posts( $sticky_posts ) {
@@ -204,11 +209,11 @@ class Post extends Rule {
 
 			} elseif ( 'hide' === $protection_level ) {
 				$restricted = $this->get_member_restricted_content_ids();
-				if ( !empty( $restricted ) ) {
-					//Prevent infinite loops
+				if ( ! empty( $restricted ) ) {
+					// Prevent infinite loops
 					remove_filter( 'option_sticky_posts', array( $this, 'exclude_restricted_sticky_posts' ), 999 );
 
-					$sticky_posts 	= array_diff( $sticky_posts, $restricted );
+					$sticky_posts = array_diff( $sticky_posts, $restricted );
 
 					add_filter( 'option_sticky_posts', array( $this, 'exclude_restricted_sticky_posts' ), 999 );
 
@@ -223,9 +228,9 @@ class Post extends Rule {
 	 * Excludes restricted pages from `get_pages()` calls.
 	 *
 	 * @param array $pages indexed array of page objects
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function exclude_restricted_pages( $pages ) {
@@ -249,11 +254,11 @@ class Post extends Rule {
 	/**
 	 * Excludes restricted comments from comment feed.
 	 *
-	 * @param array $posts - array of posts
+	 * @param array    $posts - array of posts
 	 * @param WP_Query $query - the
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function exclude_restricted_content_comments( $posts, $query ) {
@@ -284,7 +289,7 @@ class Post extends Rule {
 	 * Filters the comment query to exclude posts the user doesn't have access to.
 	 *
 	 * @param WP_Comment_Query $comment_query - the comment query
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function exclude_restricted_comments( $comment_query ) {
@@ -294,7 +299,7 @@ class Post extends Rule {
 		 * Filters the restrictable comment types.
 		 *
 		 * @param array $restrictable_comment_types array of comment types
-		 * 
+		 *
 		 * @since 1.0.0
 		 */
 		$restrictable_comment_types = apply_filters( 'hammock_post_rule_exclude_restricted_comments_types', array( '', 'trackback', 'pingback', 'review', 'contribution_comment' ) );
@@ -316,9 +321,9 @@ class Post extends Rule {
 
 				} else {
 
-					$restrictions 			= $this->get_member_restricted_content_ids();
-					$post__not_in         	= isset( $comment_query->query_vars['post__not_in'] ) && is_array( $comment_query->query_vars['post__not_in'] ) ? array_filter( $comment_query->query_vars['post__not_in'] ) : array();
-					$original_post_not_in 	= $post__not_in; // used later to make sure posts marked for exclusion are not removed from this array
+					$restrictions         = $this->get_member_restricted_content_ids();
+					$post__not_in         = isset( $comment_query->query_vars['post__not_in'] ) && is_array( $comment_query->query_vars['post__not_in'] ) ? array_filter( $comment_query->query_vars['post__not_in'] ) : array();
+					$original_post_not_in = $post__not_in; // used later to make sure posts marked for exclusion are not removed from this array
 
 					// exclude restricted posts from the query
 					if ( ! empty( $restrictions ) ) {
@@ -355,10 +360,10 @@ class Post extends Rule {
 	 *
 	 * @since 1.10.0
 	 *
-	 * @param string $where_clause `WHERE` clause in the SQL
-	 * @param bool $in_same_term whether post should be in a same taxonomy term (optional)
-	 * @param int[] $excluded_terms array of excluded term IDs (optional)
-	 * @param string $taxonomy taxonomy name used to identify the term used when `$in_same_term` is true (optional)
+	 * @param string   $where_clause `WHERE` clause in the SQL
+	 * @param bool     $in_same_term whether post should be in a same taxonomy term (optional)
+	 * @param int[]    $excluded_terms array of excluded term IDs (optional)
+	 * @param string   $taxonomy taxonomy name used to identify the term used when `$in_same_term` is true (optional)
 	 * @param \WP_Post $post related post object the adjacent posts are retrieved for
 	 * @return string updated `WHERE` clause
 	 */
@@ -380,18 +385,18 @@ class Post extends Rule {
 	 * Restricts a post based on content restriction rules.
 	 *
 	 * @param WP_Post $post - the post object, passed by reference
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function restrict_post( $post ) {
-		
+
 		if ( ! in_array( $post->ID, $this->content_restricted, false ) && hammock_is_post_protected( $post->ID ) ) {
 			$message = hammock_content_protected_message( $post->ID, 'post', $post->post_type );
 
 			$this->restrict_post_content( $post, $message );
 			$this->restrict_comments( $post );
 		}
-		
+
 		if ( in_array( $post->ID, $this->content_restricted, false ) ) {
 			$this->content_restricted[] = (int) $post->ID;
 		}
@@ -402,8 +407,8 @@ class Post extends Rule {
 	 * Restricts post content.
 	 *
 	 * @param \WP_Post $post - the post object, passed by reference
-	 * @param string $message - the new content HTML
-	 * 
+	 * @param string   $message - the new content HTML
+	 *
 	 * @since 1.0.0
 	 */
 	private function restrict_post_content( \WP_Post $post, $message ) {
@@ -423,9 +428,9 @@ class Post extends Rule {
 
 	/**
 	 * Restrict comments
-	 * 
+	 *
 	 * @param \WP_Post $post the post object, passed by reference
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	private function restrict_comments( \WP_Post $post ) {
@@ -438,9 +443,9 @@ class Post extends Rule {
 	 * Makes sure the restricted content data is persisted.
 	 *
 	 * @param string $content
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function restricted_content_filtering( $content ) {
@@ -456,12 +461,12 @@ class Post extends Rule {
 	 * Restricts content feed enclosures if the related post is restricted and current user doesn't have access.
 	 *
 	 * @param string $enclosure feed enclosure
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
-	public function rss_enclosure_content( $enclosure )  {
+	public function rss_enclosure_content( $enclosure ) {
 		global $post;
 
 		$can_view = true;
@@ -496,18 +501,18 @@ class Post extends Rule {
 
 	/**
 	 * Check if content has protection
-	 * 
-	 * @param int $item_id - the item id
+	 *
+	 * @param int    $item_id - the item id
 	 * @param string $content_type - the content type
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	protected function does_content_have_protection( $item_id, $content_type ) {
-		$settings 			= $this->settings->get_addon_setting( 'category' );
-		$post_categories 	= wp_get_post_categories( $item_id, array( 'fields' => 'id=>slug' ) );
-		$protected 			= isset( $settings['protected'] ) ? $settings['protected'] : array();
+		$settings        = $this->settings->get_addon_setting( 'category' );
+		$post_categories = wp_get_post_categories( $item_id, array( 'fields' => 'id=>slug' ) );
+		$protected       = isset( $settings['protected'] ) ? $settings['protected'] : array();
 		foreach ( $post_categories as $id => $slug ) {
 			if ( in_array( $slug, $protected ) ) {
 				return true;
@@ -517,4 +522,4 @@ class Post extends Rule {
 	}
 }
 
-?>
+

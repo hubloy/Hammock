@@ -10,7 +10,7 @@ use Hammock\Base\Shortcode;
 /**
  * Account shortcode manager
  * Handles content of the account page
- * 
+ *
  * @since 1.0.0
  */
 class Account extends Shortcode {
@@ -45,23 +45,23 @@ class Account extends Shortcode {
 
 	/**
 	 * Get the shortcode content output
-	 * 
+	 *
 	 * @param array $atts - the shortcode attributes
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function output( $atts ) {
 
 		if ( isset( $_REQUEST['verify'] ) && isset( $_REQUEST['id'] ) ) {
-			$verify 	= sanitize_text_field( $_REQUEST['verify'] );
-			$user_id 	= absint( sanitize_text_field( $_REQUEST['id'] ) );
+			$verify  = sanitize_text_field( $_REQUEST['verify'] );
+			$user_id = absint( sanitize_text_field( $_REQUEST['id'] ) );
 
 			$user_activation_status = get_user_meta( $user_id, '_hammock_activation_status', true );
 
 			if ( $user_activation_status && intval( $user_activation_status ) === 2 ) {
 				$activation_code = get_user_meta( $user_id, '_hammock_activation_key', true );
 				if ( $activation_code === $verify ) {
-					//Account verified
+					// Account verified
 					update_user_meta( $user_id, '_hammock_activation_status', 3 );
 				}
 			}
@@ -75,4 +75,4 @@ class Account extends Shortcode {
 	}
 }
 
-?>
+

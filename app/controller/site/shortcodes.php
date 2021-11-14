@@ -13,7 +13,7 @@ use Hammock\Shortcode\Single;
 
 /**
  * Shortcodes controller
- * 
+ *
  * Holds all shortcodes used within the plugin
  *
  * @since 1.0.0
@@ -61,11 +61,11 @@ class Shortcodes extends Controller {
 
 	/**
 	 * Membership list content shortcode
-	 * 
+	 *
 	 * @param array $atts - user defined attributes
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function membership_list( $atts ) {
@@ -75,11 +75,11 @@ class Shortcodes extends Controller {
 
 	/**
 	 * Protected content shortcode
-	 * 
+	 *
 	 * @param array $atts - user defined attributes
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function protected_content( $atts ) {
@@ -87,14 +87,14 @@ class Shortcodes extends Controller {
 		return $output->render( $atts );
 	}
 
-	
+
 	/**
 	 * Member account page shortcode
-	 * 
+	 *
 	 * @param array $atts - user defined attributes
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function account_page( $atts ) {
@@ -102,4 +102,4 @@ class Shortcodes extends Controller {
 		return $output->render( $atts );
 	}
 }
-?>
+

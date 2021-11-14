@@ -3,7 +3,7 @@
  * Membership Payment Due
  *
  * This template can be overridden by copying it to yourtheme/hammock/emails/membership/payment/due.php.
- * 
+ *
  * @package Hammock/Templates/Emails
  * @version 1.0.0
  */

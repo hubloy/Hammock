@@ -4,7 +4,7 @@
  * Manage users transactions
  *
  * This template can be overridden by copying it to yourtheme/hammock/account/transactions.php.
- * 
+ *
  * @package Hammock/Templates/Account
  * @version 1.0.0
  */
@@ -13,12 +13,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( !hammock_current_user_can_subscribe() ) {
+if ( ! hammock_current_user_can_subscribe() ) {
 	_e( 'No transactions, Subscriptions are not enabled for your account.', 'hammock' );
 } else {
 	if ( $member ) {
-		$page				= hammock_get_current_page();
-		$status				= hammock_get_current_status();
+		$page               = hammock_get_current_page();
+		$status             = hammock_get_current_status();
 		$total_transactions = hammock_count_member_transactions( $member->id, $status );
 		if ( $total_transactions <= 0 ) {
 			?>
@@ -27,41 +27,44 @@ if ( !hammock_current_user_can_subscribe() ) {
 			</div>
 			<?php
 		} else {
-			$transactions = hammock_list_member_transactions(  $member_id, $per_page, $page, $status );
+			$transactions = hammock_list_member_transactions( $member_id, $per_page, $page, $status );
 			?>
 			<div class="hammock-list-header">
-				<h3><?php printf( __( '%d transactions', 'hammock' ), $total_transactions );?></h3>
+				<h3><?php printf( __( '%d transactions', 'hammock' ), $total_transactions ); ?></h3>
 			</div>
 			<table class="hammock-account-transactions hammock-list-table">
 				<thead>
 					<tr>
 						<?php
-							foreach ( hammock_view_transaction_list_table_columns() as $key => $value ) {
-								?>
+						foreach ( hammock_view_transaction_list_table_columns() as $key => $value ) {
+							?>
 								<th class="<?php echo $key; ?>"><?php echo $value; ?></th>
 								<?php
-							}
+						}
 						?>
 					</tr>
 				</thead>
 				<tbody>
 					<?php
-						foreach ( $transactions as $transaction ) {
-							hammock_get_template( 'account/transaction-list.php', array(
-								'transaction'	=> $transaction,
-								'member'		=> $member
-							));
-						}
+					foreach ( $transactions as $transaction ) {
+						hammock_get_template(
+							'account/transaction-list.php',
+							array(
+								'transaction' => $transaction,
+								'member'      => $member,
+							)
+						);
+					}
 					?>
 				</tbody>
 				<tfoot>
 					<tr>
 						<?php
-							foreach ( hammock_view_transaction_list_table_columns() as $key => $value ) {
-								?>
+						foreach ( hammock_view_transaction_list_table_columns() as $key => $value ) {
+							?>
 								<th class="<?php echo $key; ?>"><?php echo $value; ?></th>
 								<?php
-							}
+						}
 						?>
 					</tr>
 				</tfoot>

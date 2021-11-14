@@ -11,14 +11,14 @@ use Hammock\Services\Memberships;
 /**
  * Restricted shortcode manager
  * Handles content of the protected page content
- * 
+ *
  * @since 1.0.0
  */
 class Restricted extends Shortcode {
 
 	/**
 	 * The membership service
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	private $membership_service = null;
@@ -56,14 +56,14 @@ class Restricted extends Shortcode {
 
 	/**
 	 * Get the shortcode content output
-	 * 
+	 *
 	 * @param array $atts - the shortcode attributes
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function output( $atts ) {
 		if ( isset( $atts['id'] ) ) {
-			$membership = $this->membership_service->get_membership_by_id( ( int ) $atts['id'] );
+			$membership = $this->membership_service->get_membership_by_id( (int) $atts['id'] );
 			if ( $membership->is_valid() ) {
 
 			}
@@ -71,4 +71,4 @@ class Restricted extends Shortcode {
 	}
 }
 
-?>
+

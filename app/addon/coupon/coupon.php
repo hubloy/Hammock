@@ -54,7 +54,7 @@ class Coupon extends Addon {
 				'name'        => __( 'Coupon', 'hammock' ),
 				'description' => __( 'Discount coupons.', 'hammock' ),
 				'icon'        => 'dashicons dashicons-tickets-alt',
-				'url'   	  => admin_url( 'admin.php?page=hammock-coupons' ),
+				'url'         => admin_url( 'admin.php?page=hammock-coupons' ),
 			);
 		}
 		return $addons;
@@ -91,9 +91,9 @@ class Coupon extends Addon {
 
 	/**
 	 * The addon settings page
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function settings_page() {

@@ -65,8 +65,8 @@ class Plugin extends Controller {
 
 		$this->add_filter( 'single_post_title', 'custom_page_titles', 10, 2 );
 
-		//Set up content protection
-		//This checks if its enabled
+		// Set up content protection
+		// This checks if its enabled
 		\Hammock\Services\Protection::instance();
 	}
 
@@ -96,7 +96,7 @@ class Plugin extends Controller {
 
 	/**
 	 * Called when admin section has loaded
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function admin_init() {
@@ -108,18 +108,17 @@ class Plugin extends Controller {
 	 * display all available Posts/Pages. We use this filter to add a note
 	 * to all pages that are special membership pages.
 	 *
-	 * @param  array $states
+	 * @param  array   $states
 	 * @param  WP_Post $post
-	 * 
+	 *
 	 * @since  1.0.0
-	 * 
-	 * 
+	 *
 	 * @return array
 	 */
 	public function post_states( $states, $post ) {
 		if ( 'page' == $post->post_type ) {
 			if ( Pages::is_membership_page( $post->ID ) ) {
-				$url = admin_url( 'admin.php?page=hammock-settings#/' );
+				$url               = admin_url( 'admin.php?page=hammock-settings#/' );
 				$states['hammock'] = sprintf(
 					'<a style="%2$s" href="%3$s">%1$s</a>',
 					__( 'Membership Page', 'hammock' ),
@@ -159,7 +158,7 @@ class Plugin extends Controller {
 
 		$installed = Util::get_option( 'hammock_installed' );
 
-		//Flag to check if wizard has run for first use
+		// Flag to check if wizard has run for first use
 		if ( $installed == 1 ) {
 			/**
 			 * Action to set up additional admin pages
@@ -204,7 +203,7 @@ class Plugin extends Controller {
 
 		$installed = Util::get_option( 'hammock_installed' );
 
-		//Flag to check if wizard has run for first use
+		// Flag to check if wizard has run for first use
 		if ( $installed == 1 ) {
 			/**
 			 * Action to set up additional admin pages
@@ -229,8 +228,8 @@ class Plugin extends Controller {
 	 */
 	public function enqueue_plugin_styles( $hook ) {
 		$screen = get_current_screen();
-		//Load on all screens as we need the multi select
-		wp_enqueue_style( 'hammock-jquery-chosen' ); 
+		// Load on all screens as we need the multi select
+		wp_enqueue_style( 'hammock-jquery-chosen' );
 		$load_resources = apply_filters( 'hammock_load_admin_resouces', strpos( $screen->id, self::MENU_SLUG ) );
 		if ( $load_resources !== false ) {
 			wp_enqueue_style( 'hammock-uikit' );
@@ -241,11 +240,11 @@ class Plugin extends Controller {
 			wp_enqueue_style( 'hammock-admin' );
 
 			$enabled_text = __( 'Enabled', 'hammock' );
-			$custom_css = "
+			$custom_css   = "
 				.hammock-input .switch-checkbox .switch .knobs::after {
                     content: '{$enabled_text}';
                 }";
-       		wp_add_inline_style( 'hammock-admin', $custom_css );
+			wp_add_inline_style( 'hammock-admin', $custom_css );
 
 			// Add body classes
 			add_filter( 'admin_body_class', array( $this, 'add_body_class' ) );
@@ -275,7 +274,7 @@ class Plugin extends Controller {
 	 */
 	public function enqueue_plugin_scripts( $hook ) {
 		$screen = get_current_screen();
-		//Load on all screens as we need the multi select
+		// Load on all screens as we need the multi select
 		wp_enqueue_script( 'hammock-jquery-chosen' );
 		$footer_script = $this->footer_common_scripts();
 		wp_add_inline_script( 'hammock-jquery-chosen', $footer_script );
@@ -298,9 +297,9 @@ class Plugin extends Controller {
 
 	/**
 	 * Common scripts in footer
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function footer_common_scripts() {
@@ -324,23 +323,23 @@ class Plugin extends Controller {
 
 	/**
 	 * Add front body class
-	 * 
+	 *
 	 * @param array $classes - the current classes
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function front_body_class( $classes ) {
 		if ( hammock_is_account_page() ) {
 			return array_merge( $classes, array( 'hammock-account-page' ) );
-		} else if ( hammock_is_membership_page() ) {
+		} elseif ( hammock_is_membership_page() ) {
 			return array_merge( $classes, array( 'hammock-memberhsip-page' ) );
-		} else if ( hammock_is_protected_content_page() ) {
+		} elseif ( hammock_is_protected_content_page() ) {
 			return array_merge( $classes, array( 'hammock-protected-content-page' ) );
-		} else if ( hammock_is_registration_page() ) {
+		} elseif ( hammock_is_registration_page() ) {
 			return array_merge( $classes, array( 'hammock-registration-page' ) );
-		} else if ( hammock_is_thank_you_page() ) {
+		} elseif ( hammock_is_thank_you_page() ) {
 			return array_merge( $classes, array( 'hammock-thank-you-page' ) );
 		}
 		return $classes;
@@ -348,15 +347,15 @@ class Plugin extends Controller {
 
 	/**
 	 * Admin bar menu
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function admin_bar_menu( $admin_bar ) {
-		if ( !defined( 'HAMMOCK_HIDE_TOP_BAR' ) ) {
+		if ( ! defined( 'HAMMOCK_HIDE_TOP_BAR' ) ) {
 			$args = array(
-				'id'     => 'hammock',
-				'title'  => __( 'Memberships', 'hammock' ),
-				'href'   => is_multisite() ? esc_url( network_admin_url( 'admin.php?page=hammock' ) ) : esc_url( admin_url( 'admin.php?page=hammock' ) ),
+				'id'    => 'hammock',
+				'title' => __( 'Memberships', 'hammock' ),
+				'href'  => is_multisite() ? esc_url( network_admin_url( 'admin.php?page=hammock' ) ) : esc_url( admin_url( 'admin.php?page=hammock' ) ),
 			);
 			$admin_bar->add_node( $args );
 		}
@@ -365,9 +364,9 @@ class Plugin extends Controller {
 	/**
 	 * Handle custom page titles
 	 * This checks the query args and sets the appropriate page title
-	 * 
+	 *
 	 * @param array $title - the current title
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function custom_page_titles( $title, $post ) {
@@ -375,30 +374,30 @@ class Plugin extends Controller {
 
 		if ( hammock_is_account_page() ) {
 			$endpoint = hammock()->get_query()->get_current_endpoint();
-			$sep 	= apply_filters( 'hammock_account_title_separator', '|' );
+			$sep      = apply_filters( 'hammock_account_title_separator', '|' );
 			switch ( $endpoint ) {
 				case 'view-plan':
 					$plan_id = $wp->query_vars['view-plan'];
-					if ( !empty( $plan_id ) ) {
+					if ( ! empty( $plan_id ) ) {
 						$membership = hammock_get_plan_by_id( $plan_id );
 						if ( $membership ) {
-							$title 	= sprintf( __( 'Membership Plan %s  %s', 'hammock' ), $sep, $membership->name );
+							$title = sprintf( __( 'Membership Plan %1$s  %2$s', 'hammock' ), $sep, $membership->name );
 						}
 					}
-					
-				break;
+
+					break;
 
 				case 'edit-account':
-					$title .=  sprintf( __( ' %s details', 'hammock' ), $sep );
-				break;
+					$title .= sprintf( __( ' %s details', 'hammock' ), $sep );
+					break;
 
 				case 'transactions':
-					$title .=  sprintf( __( ' %s Transactions', 'hammock' ), $sep );
-				break;
+					$title .= sprintf( __( ' %s Transactions', 'hammock' ), $sep );
+					break;
 
 				case 'subscriptions':
-					$title .=  sprintf( __( ' %s Subscriptions', 'hammock' ), $sep );
-				break;
+					$title .= sprintf( __( ' %s Subscriptions', 'hammock' ), $sep );
+					break;
 			}
 		}
 		return $title;
@@ -414,7 +413,7 @@ class Plugin extends Controller {
 	public function render() {
 		$installed = Util::get_option( 'hammock_installed' );
 
-		//Flag to check if wizard has run for first use
+		// Flag to check if wizard has run for first use
 		if ( $installed == 1 ) {
 			?>
 			<div id="hammock-admin-container"></div>
@@ -435,7 +434,7 @@ class Plugin extends Controller {
 	function network_render() {
 		$installed = Util::get_option( 'hammock_installed' );
 
-		//Flag to check if wizard has run for first use
+		// Flag to check if wizard has run for first use
 		if ( $installed == 1 ) {
 			?>
 			<div id="hammock-admin-container"></div>
@@ -456,7 +455,7 @@ class Plugin extends Controller {
 
 	/**
 	 * Show the wizard page if first use
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function show_wizard_page() {
@@ -476,9 +475,9 @@ class Plugin extends Controller {
 	 */
 	function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'hammock' ) ) {
-			$vars['common']['string']['title'] 	= __( 'Dashboard', 'hammock' );
-			$vars['active_page']               	= 'dashboard';
-			$vars['strings']['dashboard']		= $this->get_strings();
+			$vars['common']['string']['title'] = __( 'Dashboard', 'hammock' );
+			$vars['active_page']               = 'dashboard';
+			$vars['strings']['dashboard']      = $this->get_strings();
 		}
 		return $vars;
 	}

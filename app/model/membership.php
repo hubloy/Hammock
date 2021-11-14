@@ -28,9 +28,9 @@ class Membership {
 
 	/**
 	 * The unique membership id
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var string
 	 */
 	public $membership_id = '';
@@ -47,9 +47,9 @@ class Membership {
 	/**
 	 * The membership details
 	 * This takes long text of the details
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var string
 	 */
 	public $details = '';
@@ -93,9 +93,9 @@ class Membership {
 
 	/**
 	 * Human readable type
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var string
 	 */
 	public $type_text = '';
@@ -121,7 +121,7 @@ class Membership {
 	/**
 	 * Membership signup price
 	 * Price charged for signup
-	 * 
+	 *
 	 * @since 1.0.0
 	 *
 	 * @var float
@@ -176,9 +176,9 @@ class Membership {
 	/**
 	 * Invite list
 	 * This is a list of codes that have access to this membership
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var array
 	 */
 	public $invite_list = array();
@@ -248,7 +248,7 @@ class Membership {
 	 * Checks the database and sets all values in the model
 	 *
 	 * @param string $id - the membership id
-	 * @param bool $load_meta - load meta
+	 * @param bool   $load_meta - load meta
 	 *
 	 * @since 1.0.0
 	 */
@@ -258,29 +258,29 @@ class Membership {
 		$sql  = "SELECT `membership_id`, `date_created`, `date_updated`, `name`, `details`, `enabled`, `trial_enabled`, `limit_spaces`, `type`, `duration`, `price`, `signup_price`, `trial_price`, `trial_period`, `trial_duration`, `total_available` FROM {$this->table_name} WHERE `id` = %d";
 		$item = $wpdb->get_row( $wpdb->prepare( $sql, $id ) );
 		if ( $item ) {
-			$date_format           		= get_option( 'date_format' );
-			$this->id              		= $id;
-			$this->membership_id		= $item->membership_id;
-			$this->date_created    		= date_i18n( $date_format, strtotime( $item->date_created ) );
-			$this->date_updated    		= ! empty( $item->date_updated ) ? date_i18n( $date_format, strtotime( $item->date_updated ) ) : '';
-			$this->name            		= $item->name;
-			$this->details				= $item->details;
-			$this->enabled         		= ( $item->enabled == 1 );
-			$this->trial_enabled   		= ( $item->trial_enabled == 1 );
-			$this->limit_spaces    		= ( $item->limit_spaces == 1 );
-			$this->type            		= $item->type;
-			$this->type_text			= Memberships::get_type( $item->type );
-			$this->duration    			= $item->duration;
-			$this->price           		= $item->price;
-			$this->signup_price			= $item->signup_price;
-			$this->trial_price     		= $item->trial_price;
-			$this->trial_period    		= $item->trial_period;
-			$this->trial_duration  		= $item->trial_duration;
-			$this->trial_duration_text	= Memberships::get_trial_duration( $item->trial_duration );
-			$this->total_available 		= $item->total_available;
+			$date_format               = get_option( 'date_format' );
+			$this->id                  = $id;
+			$this->membership_id       = $item->membership_id;
+			$this->date_created        = date_i18n( $date_format, strtotime( $item->date_created ) );
+			$this->date_updated        = ! empty( $item->date_updated ) ? date_i18n( $date_format, strtotime( $item->date_updated ) ) : '';
+			$this->name                = $item->name;
+			$this->details             = $item->details;
+			$this->enabled             = ( $item->enabled == 1 );
+			$this->trial_enabled       = ( $item->trial_enabled == 1 );
+			$this->limit_spaces        = ( $item->limit_spaces == 1 );
+			$this->type                = $item->type;
+			$this->type_text           = Memberships::get_type( $item->type );
+			$this->duration            = $item->duration;
+			$this->price               = $item->price;
+			$this->signup_price        = $item->signup_price;
+			$this->trial_price         = $item->trial_price;
+			$this->trial_period        = $item->trial_period;
+			$this->trial_duration      = $item->trial_duration;
+			$this->trial_duration_text = Memberships::get_trial_duration( $item->trial_duration );
+			$this->total_available     = $item->total_available;
 			if ( $load_meta ) {
-				$this->meta            	= Meta::get_all( $id, 'membership' );
-				$this->invite_list		= $this->get_invite_codes();
+				$this->meta        = Meta::get_all( $id, 'membership' );
+				$this->invite_list = $this->get_invite_codes();
 			}
 		}
 	}
@@ -288,9 +288,9 @@ class Membership {
 	/**
 	 * If membership is valid
 	 * This checks if the id is greater than 0
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function is_valid() {
@@ -299,25 +299,25 @@ class Membership {
 
 	/**
 	 * Get meta value from key
-	 * 
+	 *
 	 * @param string $meta_key - the meta key
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return mixed
 	 */
 	public function get_meta_value( $meta_key ) {
-		if ( isset( $this->meta[$meta_key] ) ) {
-			return $this->meta[$meta_key]['meta_value'];
+		if ( isset( $this->meta[ $meta_key ] ) ) {
+			return $this->meta[ $meta_key ]['meta_value'];
 		}
 		return false;
 	}
 
 	/**
 	 * Get total members
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return int
 	 */
 	public function total_members() {
@@ -327,9 +327,9 @@ class Membership {
 	/**
 	 * Get membership price
 	 * This checks if there is a trial and the amount of available memberships
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return double
 	 */
 	public function get_price() {
@@ -346,9 +346,9 @@ class Membership {
 	/**
 	 * Check if its limited memberships
 	 * If the total available is greater than 0, it will be limited
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function limited_memberships() {
@@ -358,9 +358,9 @@ class Membership {
 	/**
 	 * Checks the remaining memberships
 	 * Returns 1000 if the memberships are not limited
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return int
 	 */
 	public function remaining_memberships() {
@@ -373,9 +373,9 @@ class Membership {
 
 	/**
 	 * Get invite codes
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function get_invite_codes() {
@@ -390,9 +390,9 @@ class Membership {
 	/**
 	 * Get the readable type
 	 * This returns a readable type to the user e.g. per month. one time access
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function get_readable_type() {
@@ -415,9 +415,9 @@ class Membership {
 
 	/**
 	 * Checks if membership is recurring
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function is_recurring() {
@@ -426,15 +426,15 @@ class Membership {
 
 	/**
 	 * Readable trial text
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function get_readable_trial_text() {
 		$trial_text = '';
 		if ( $this->trial_enabled ) {
-			$trial_text = sprintf( __( 'Free trial for %s %s', 'hammock' ), $this->trial_period, strtolower( $this->trial_duration_text ) );
+			$trial_text = sprintf( __( 'Free trial for %1$s %2$s', 'hammock' ), $this->trial_period, strtolower( $this->trial_duration_text ) );
 		}
 		return apply_filters( 'hammock_membership_get_readable_trial_text', $trial_text, $this );
 	}
@@ -442,9 +442,9 @@ class Membership {
 	/**
 	 * Get trial period days
 	 * This gets the total days in the trial
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return int
 	 */
 	public function get_trial_period_days() {
@@ -456,33 +456,33 @@ class Membership {
 	 * Render values to readable strings
 	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function to_html() {
 		return apply_filters(
 			'hammock_membership_to_html',
 			array(
-				'id'              		=> $this->id,
-				'membership_id'			=> $this->membership_id,
-				'date_created'    		=> $this->date_created,
-				'date_updated'    		=> $this->date_updated,
-				'name'            		=> $this->name,
-				'details'				=> $this->details,
-				'enabled'         		=> $this->enabled ? __( 'Active', 'hammock' ) : __( 'Active', 'hammock' ),
-				'trial_enabled'   		=> $this->trial_enabled ? __( 'Trial Enabled', 'hammock' ) : __( 'No Trial', 'hammock' ),
-				'limit_spaces'    		=> $this->limit_spaces ? __( 'Limited Registration', 'hammock' ) : __( 'Open Registration', 'hammock' ),
-				'type'            		=> Memberships::get_type( $this->type ),
-				'duration'    			=> $this->duration,
-				'signup_price'			=> hammock_format_currency( $this->signup_price ),
-				'price'           		=> hammock_format_currency( $this->price ),
-				'trial_price'     		=> hammock_format_currency( $this->trial_price ),
-				'trial_period'    		=> $this->trial_period,
-				'trial_duration'  		=> $this->trial_duration,
-				'trial_duration_text' 	=> $this->trial_duration_text,
-				'total_available' 		=> $this->total_available,
-				'members'         		=> $this->total_members(),
-				'meta'            		=> $this->meta,
+				'id'                  => $this->id,
+				'membership_id'       => $this->membership_id,
+				'date_created'        => $this->date_created,
+				'date_updated'        => $this->date_updated,
+				'name'                => $this->name,
+				'details'             => $this->details,
+				'enabled'             => $this->enabled ? __( 'Active', 'hammock' ) : __( 'Active', 'hammock' ),
+				'trial_enabled'       => $this->trial_enabled ? __( 'Trial Enabled', 'hammock' ) : __( 'No Trial', 'hammock' ),
+				'limit_spaces'        => $this->limit_spaces ? __( 'Limited Registration', 'hammock' ) : __( 'Open Registration', 'hammock' ),
+				'type'                => Memberships::get_type( $this->type ),
+				'duration'            => $this->duration,
+				'signup_price'        => hammock_format_currency( $this->signup_price ),
+				'price'               => hammock_format_currency( $this->price ),
+				'trial_price'         => hammock_format_currency( $this->trial_price ),
+				'trial_period'        => $this->trial_period,
+				'trial_duration'      => $this->trial_duration,
+				'trial_duration_text' => $this->trial_duration_text,
+				'total_available'     => $this->total_available,
+				'members'             => $this->total_members(),
+				'meta'                => $this->meta,
 			),
 			$this
 		);

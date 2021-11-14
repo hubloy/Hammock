@@ -11,7 +11,7 @@ use Hammock\Model\Membership;
 /**
  * Single Membership shortcode manager
  * Display a single membership
- * 
+ *
  * @since 1.0.0
  */
 class Single extends Shortcode {
@@ -46,29 +46,33 @@ class Single extends Shortcode {
 
 	/**
 	 * Get the shortcode content output
-	 * 
+	 *
 	 * @param array $atts - the shortcode attributes
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function output( $atts ) {
-        $attributes = shortcode_atts( array(
-			'plan_id' => false
-		), $atts );
+		$attributes = shortcode_atts(
+			array(
+				'plan_id' => false,
+			),
+			$atts
+		);
 
-        if ( $attributes['plan_id'] ) {
-            $plan_id    = ( int ) $attributes['plan_id'];
-            $plan       = new Membership( $plan_id );
+		if ( $attributes['plan_id'] ) {
+			$plan_id = (int) $attributes['plan_id'];
+			$plan    = new Membership( $plan_id );
 
-            if ( $plan->is_valid() ) {
-                $this->get_template( 
-                    'plans/single-plan-card.php', array(
-                        'plan'	=> $plan,
-                    ) 
-                );
-            }
-        }
+			if ( $plan->is_valid() ) {
+				$this->get_template(
+					'plans/single-plan-card.php',
+					array(
+						'plan' => $plan,
+					)
+				);
+			}
+		}
 	}
 }
 
-?>
+

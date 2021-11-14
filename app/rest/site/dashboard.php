@@ -14,7 +14,7 @@ use Hammock\Services\Transactions;
 /**
  * Dashboard rest controller
  * Handles dashboard content
- * 
+ *
  * @since 1.0.0
  */
 class Dashboard extends Rest {
@@ -97,53 +97,53 @@ class Dashboard extends Rest {
 
 	/**
 	 * List Recent Members
-	 * 
+	 *
 	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
 	public function members( $request ) {
-		$service	= new Members();
-		$items		= $service->list_html_members( 4, 0 );
+		$service = new Members();
+		$items   = $service->list_html_members( 4, 0 );
 		return $items;
 	}
 
 	/**
 	 * List Recent Memberships
-	 * 
+	 *
 	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
 	public function memberships( $request ) {
-		$service 	= new Memberships();
-		$items		= $service->list_html_memberships( 4, 0 );
+		$service = new Memberships();
+		$items   = $service->list_html_memberships( 4, 0 );
 		return $items;
 	}
 
 	/**
 	 * Get graph subscription data
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function subscribers( $request ) {
-		$service 	= new Members();
-		$items		= $service->get_weekly_member_stats();
+		$service = new Members();
+		$items   = $service->get_weekly_member_stats();
 		return $items;
 	}
 
 	/**
 	 * Get graph transaction data
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function transactions( $request ) {
-		$service 	= new Transactions();
-		$items		= $service->get_weekly_transaction_stats();
+		$service = new Transactions();
+		$items   = $service->get_weekly_transaction_stats();
 		return $items;
 	}
 }

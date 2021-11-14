@@ -13,34 +13,34 @@ use Hammock\Services\Memberships;
 /**
  * Auth controller
  * This manages front end account authentication or creation processes
- * 
+ *
  * @since 1.0.0
  */
 class Auth extends Controller {
 
 	/**
 	 * The member service
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var object
 	 */
 	private $member_service = null;
 
 	/**
 	 * The membership service
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var object
 	 */
 	private $membership_service = null;
 
 	/**
 	 * Setting object
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var object
 	 */
 	private $settings = null;
@@ -78,56 +78,57 @@ class Auth extends Controller {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$this->settings = new Settings();
-		$this->member_service = new Members();
+		$this->settings           = new Settings();
+		$this->member_service     = new Members();
 		$this->membership_service = new Memberships();
-		
+
 		$this->add_ajax_action( 'hammock_register', 'account_register', true, true );
 		$this->add_ajax_action( 'hammock_reset', 'account_reset', true, true );
 		$this->add_ajax_action( 'hammock_login', 'account_login', true, true );
 
-		//Verification code check
+		// Verification code check
 		$this->add_action( 'wp_login', 'handle_verification_code', 10, 2 );
 
-		//Handle messages on auth page
+		// Handle messages on auth page
 		$this->add_action( 'hammock_before_account_access', 'message_on_auth_page' );
 	}
 
 	/**
 	 * Handle registration
 	 * This handles the account creation process
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return application/json
 	 */
 	public function account_register() {
 		$this->verify_nonce( 'hammock_account_register_nonce' );
 
-		$user_login 	= sanitize_text_field( $_POST['user_login'] );
-		$user_email 	= sanitize_text_field( $_POST['user_email'] );
-		$user_password 	= sanitize_text_field( $_POST['user_password'] );
+		$user_login    = sanitize_text_field( $_POST['user_login'] );
+		$user_email    = sanitize_text_field( $_POST['user_email'] );
+		$user_password = sanitize_text_field( $_POST['user_password'] );
 
-		if ( !is_email( $user_email ) ) {
+		if ( ! is_email( $user_email ) ) {
 			wp_send_json_error( __( 'Invalid email', 'hammock' ) );
 		}
-		
+
 		/**
 		 * Save user but do not save member
 		 */
-		$response 		= $this->member_service->save_new_user( $email, '', '', $user_login, $user_password, false );
+		$response = $this->member_service->save_new_user( $email, '', '', $user_login, $user_password, false );
 
 		if ( $response['status'] ) {
-			$user_id 	= $response['user_id'];
-			$user 		= get_user_by( 'ID', $user_id );
+			$user_id = $response['user_id'];
+			$user    = get_user_by( 'ID', $user_id );
 			if ( $user ) {
 				do_action( 'signup_finished' );
 
-				$type  = \Hammock\Services\Emails::COMM_TYPE_REGISTRATION;
+				$type = \Hammock\Services\Emails::COMM_TYPE_REGISTRATION;
 				/**
 				 * Send the email
+				 *
 				 * @see \Hammock\Base\Email::send_email
-				 * 
+				 *
 				 * @since 1.0.0
 				 */
 				do_action( 'hammock_send_email_member-' . $type, array(), $user, $user_email, array(), array() );
@@ -135,18 +136,18 @@ class Auth extends Controller {
 				if ( $this->settings->get_general_setting( 'account_verification' ) === 1 ) {
 
 					$verify_key = wp_generate_password( 20, false );
-					//Flag the account
+					// Flag the account
 					update_user_meta( $user_id, '_hammock_activation_status', 2 );
 					update_user_meta( $user_id, '_hammock_activation_key', $verify_key );
 
-					$type  = \Hammock\Services\Emails::COMM_TYPE_REGISTRATION_VERIFY;
+					$type = \Hammock\Services\Emails::COMM_TYPE_REGISTRATION_VERIFY;
 
 					$user_object = (object) array(
-						'user_login' 	=> $user_login,
-						'user_id'	 	=> $user_id,
-						'verify_key'	=> $verify_key
+						'user_login' => $user_login,
+						'user_id'    => $user_id,
+						'verify_key' => $verify_key,
 					);
-					//Send verification email
+					// Send verification email
 					do_action( 'hammock_send_email_member-' . $type, array(), $user_object, $user_email, array(), array() );
 
 					wp_send_json_success( __( 'Registration successful. An email has been sent with a link to verify your account', 'hammock' ) );
@@ -159,7 +160,7 @@ class Auth extends Controller {
 								'remember'      => true,
 							)
 						);
-			
+
 						// Stop here in case the login failed.
 						if ( is_wp_error( $auth_user ) ) {
 							wp_send_json_error( sprintf( __( 'Error : %s', 'hammock' ), $auth_user->get_error_message() ) );
@@ -170,10 +171,12 @@ class Auth extends Controller {
 					wp_set_auth_cookie( $user->ID );
 					do_action( 'wp_login', $user->username, $user );
 
-					wp_send_json_success( array(
-						'message' 	=> __( 'Registration successful', 'hammock' ),
-						'reload'	=> true
-					) );
+					wp_send_json_success(
+						array(
+							'message' => __( 'Registration successful', 'hammock' ),
+							'reload'  => true,
+						)
+					);
 				}
 			} else {
 				wp_send_json_error( __( 'There was an error creating your account', 'hammock' ) );
@@ -181,15 +184,15 @@ class Auth extends Controller {
 		} else {
 			wp_send_json_error( $response['message'] );
 		}
-		
+
 	}
 
 	/**
 	 * Handle password reset
 	 * This handles the account password reset process
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return application/json
 	 */
 	public function account_reset() {
@@ -228,15 +231,16 @@ class Auth extends Controller {
 			 */
 			$site_name = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 		}
-		$type  = \Hammock\Services\Emails::COMM_TYPE_RESETPASSWORD;
+		$type         = \Hammock\Services\Emails::COMM_TYPE_RESETPASSWORD;
 		$placeholders = array(
-			'{reset_url}' 	=> network_site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user_login ), 'login' ),
+			'{reset_url}' => network_site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user_login ), 'login' ),
 		);
 
 		/**
 		 * Send the email
+		 *
 		 * @see \Hammock\Base\Email::send_email
-		 * 
+		 *
 		 * @since 1.0.0
 		 */
 		do_action( 'hammock_send_email_member-' . $type, $placeholders, $user_data, $user_email, array(), array() );
@@ -246,30 +250,30 @@ class Auth extends Controller {
 
 	/**
 	 * Login action
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function account_login() {
 		$this->verify_nonce( 'hammock_account_login_nonce' );
 
-		$rememberme 	= isset( $_POST['rememberme'] );
-		$user_login 	= sanitize_text_field( $_POST['user_login'] );
-		$user_pass 		= sanitize_text_field( $_POST['user_pass'] );
+		$rememberme = isset( $_POST['rememberme'] );
+		$user_login = sanitize_text_field( $_POST['user_login'] );
+		$user_pass  = sanitize_text_field( $_POST['user_pass'] );
 
 		$info = array(
-			'user_login' 	=> $user_login,
+			'user_login'    => $user_login,
 			'user_password' => $user_pass,
-			'remember' 		=> $rememberme,
+			'remember'      => $rememberme,
 		);
 
 		/**
 		 * Check if the current user can login
-		 * 
+		 *
 		 * @param bool $can_login - true or false
 		 * @param array $info - the user info
-		 * 
+		 *
 		 * @since 1.0.0
-		 * 
+		 *
 		 * @return bool
 		 */
 		$can_login = apply_filters( 'hammock_account_can_login', true, $info );
@@ -280,7 +284,7 @@ class Auth extends Controller {
 				do_action( 'hammock_account_login_error', $user_signon );
 				wp_send_json_error( $user_signon->get_error_message() );
 			} else {
-				if ( !is_super_admin( $user_signon->ID ) ) {
+				if ( ! is_super_admin( $user_signon->ID ) ) {
 					$user_activation_status = get_user_meta( $user_signon->ID, '_hammock_activation_status', true );
 					if ( $user_activation_status && intval( $user_activation_status ) === 2 ) {
 						do_action( 'hammock_verification_failed', $login, $user );
@@ -290,10 +294,12 @@ class Auth extends Controller {
 					}
 				}
 
-				wp_send_json_success( array(
-					'message' 	=> __( 'Login successful', 'hammock' ),
-					'reload'	=> true
-				) );
+				wp_send_json_success(
+					array(
+						'message' => __( 'Login successful', 'hammock' ),
+						'reload'  => true,
+					)
+				);
 				do_action( 'hammock_account_login_success', $user_signon );
 			}
 		} else {
@@ -303,24 +309,27 @@ class Auth extends Controller {
 
 	/**
 	 * Check that the user is erified to log in
-	 * 
-	 * @param string $login - the user login
+	 *
+	 * @param string  $login - the user login
 	 * @param WP_User $user - the user
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function handle_verification_code( $login, $user ) {
 		if ( $this->settings->get_general_setting( 'account_verification' ) === 1 ) {
-			if ( !is_super_admin( $user->ID ) ) {
+			if ( ! is_super_admin( $user->ID ) ) {
 				$user_activation_status = get_user_meta( $user->ID, '_hammock_activation_status', true );
 				if ( $user_activation_status && intval( $user_activation_status ) === 2 ) {
 					do_action( 'hammock_verification_failed', $login, $user );
 					wp_destroy_current_session();
 					wp_clear_auth_cookie();
 					$login_url = hammock_get_account_url();
-					$login_url = add_query_arg( array(
-						'ver_error' 	=> true,
-					), $login_url );
+					$login_url = add_query_arg(
+						array(
+							'ver_error' => true,
+						),
+						$login_url
+					);
 					if ( ! defined( 'DOING_AJAX' ) ) {
 						wp_redirect( $login_url );
 						exit;
@@ -334,9 +343,9 @@ class Auth extends Controller {
 
 	/**
 	 * Prints specific messages on auth page
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function message_on_auth_page() {
@@ -349,9 +358,9 @@ class Auth extends Controller {
 			<?php
 		}
 		if ( ! is_user_logged_in() ) {
-			//Non logged in user message
+			// Non logged in user message
 			if ( isset( $wp->query_vars['view-plan'] ) ) {
-				$plan_id = $wp->query_vars['view-plan'];
+				$plan_id    = $wp->query_vars['view-plan'];
 				$membership = $this->membership_service->get_membership_by_membership_id( $plan_id );
 				if ( $membership ) {
 					?>

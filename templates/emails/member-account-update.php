@@ -3,7 +3,7 @@
  * Member Account Update
  *
  * This template can be overridden by copying it to yourtheme/hammock/emails/member-account-update.php.
- * 
+ *
  * @package Hammock/Templates/Emails
  * @version 1.0.0
  */

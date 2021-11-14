@@ -109,13 +109,13 @@ class Members extends Controller {
 	 */
 	function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'members' ) ) {
-			$service = new \Hammock\Services\Memberships();
+			$service                           = new \Hammock\Services\Memberships();
 			$vars['common']['string']['title'] = __( 'Members', 'hammock' );
 			$vars['active_page']               = 'members';
 			$vars['strings']                   = $this->get_strings();
 			$vars['page_strings']              = array(
-				'type'		=> $service->list_simple_memberships(),
-				'gateways' 	=> \Hammock\Services\Gateways::list_simple_gateways(),
+				'type'     => $service->list_simple_memberships(),
+				'gateways' => \Hammock\Services\Gateways::list_simple_gateways(),
 			);
 		}
 		return $vars;

@@ -3,7 +3,7 @@
  * Membership subscription complete
  *
  * This template can be overridden by copying it to yourtheme/hammock/emails/membership/status/finished.php.
- * 
+ *
  * @package Hammock/Templates/Emails
  * @version 1.0.0
  */

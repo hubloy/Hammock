@@ -116,9 +116,9 @@ class Addon extends Component {
 
 	/**
 	 * The addon settings page
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function settings_page() {
@@ -147,9 +147,9 @@ class Addon extends Component {
 	 * @return bool
 	 */
 	public function is_enabled() {
-		$settings 	= $this->settings();
-		$enabled 	=  isset( $settings['enabled'] ) ? $settings['enabled'] : false;
-		if ( $enabled  ) {
+		$settings = $this->settings();
+		$enabled  = isset( $settings['enabled'] ) ? $settings['enabled'] : false;
+		if ( $enabled ) {
 			return $this->plugin_active();
 		}
 		return $enabled;
@@ -157,9 +157,9 @@ class Addon extends Component {
 
 	/**
 	 * Used to check if a dependancy is active
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function plugin_active() {
@@ -168,9 +168,9 @@ class Addon extends Component {
 
 	/**
 	 * Used to handle custom addon actions
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function addon_action( $response = array(), $data ) {

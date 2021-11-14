@@ -58,7 +58,6 @@ class Emails extends Rest {
 			)
 		);
 
-
 		register_rest_route(
 			$namespace,
 			self::BASE_API_ROUTE . 'get',
@@ -94,7 +93,7 @@ class Emails extends Rest {
 
 	/**
 	 * List emails
-	 * 
+	 *
 	 * @param WP_REST_Request $request - the rest request
 	 *
 	 * @since 1.0.0
@@ -108,7 +107,7 @@ class Emails extends Rest {
 
 	/**
 	 * Get Sender by id
-	 * 
+	 *
 	 * @param WP_REST_Request $request - the rest request
 	 *
 	 * @since 1.0.0
@@ -116,26 +115,26 @@ class Emails extends Rest {
 	 * @return mixed
 	 */
 	public function get_sender( $request ) {
-		$id  		= $request['id'];
-		$response 	= apply_filters( 'hammock_email_sender_' . $id . '_get_setting_form', array(), $request );
+		$id       = $request['id'];
+		$response = apply_filters( 'hammock_email_sender_' . $id . '_get_setting_form', array(), $request );
 		return $response;
 	}
 
 	/**
 	 * Update email sender
-	 * 
+	 *
 	 * @param WP_REST_Request $request - the rest request
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return mixed
 	 */
 	public function update_sender( $request ) {
-		$id 	= $request['id'];
+		$id = $request['id'];
 		do_action( 'hammock_email_sender_' . $id . '_update_settings', $request );
 		return array(
-			'status'   => true,
-			'message'  => __( 'Settings updated', 'hammock' )
+			'status'  => true,
+			'message' => __( 'Settings updated', 'hammock' ),
 		);
 	}
 

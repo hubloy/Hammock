@@ -3,7 +3,7 @@
  * Admin member subscription signup
  *
  * This template can be overridden by copying it to yourtheme/hammock/emails/admin/signup.php.
- * 
+ *
  * @package Hammock/Templates/Emails
  * @version 1.0.0
  */

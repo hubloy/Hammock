@@ -12,9 +12,9 @@ class Category extends Addon {
 
 	/**
 	 * The membership service
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var object
 	 */
 	private $membership_service = null;
@@ -46,7 +46,7 @@ class Category extends Addon {
 	 */
 	public function init() {
 		$this->membership_service = new Memberships();
-		$this->id = 'category';
+		$this->id                 = 'category';
 	}
 
 	/**
@@ -65,9 +65,9 @@ class Category extends Addon {
 				'name'        => __( 'Category Protection', 'hammock' ),
 				'description' => __( 'Protect your posts by category.', 'hammock' ),
 				'icon'        => 'dashicons dashicons-category',
-				'settings'    => true
+				'settings'    => true,
 			);
-			if ( !$this->plugin_active() ) {
+			if ( ! $this->plugin_active() ) {
 				$addons['category']['message'] = __( 'Content protection is currently disabled', 'hammock' );
 			}
 		}
@@ -84,7 +84,7 @@ class Category extends Addon {
 		$protected = isset( $settings['protected'] ) ? $settings['protected'] : array();
 		foreach ( $protected as $slug ) {
 			add_filter( "manage_edit-{$slug}_columns", array( $this, 'protection_column' ), 10 );
-			add_filter( "manage_{$slug}_custom_column", array( $this, 'protection_column_content' ), 10, 3);
+			add_filter( "manage_{$slug}_custom_column", array( $this, 'protection_column_content' ), 10, 3 );
 			add_action( "{$slug}_edit_form_fields", array( $this, 'term_protection_fields' ), 10, 2 );
 			add_action( "edited_{$slug}", array( $this, 'term_protection_update' ), 10, 2 );
 		}
@@ -92,33 +92,33 @@ class Category extends Addon {
 
 	/**
 	 * Add custom column to taxonomy selected
-	 * 
+	 *
 	 * @param array $columns - the current columns
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function protection_column( $columns ) {
-		$columns['hammock'] = __( 'Access', 'hammock' ); 
-  		return $columns;
+		$columns['hammock'] = __( 'Access', 'hammock' );
+		return $columns;
 	}
 
 	/**
 	 * Custom column content
-	 * 
+	 *
 	 * @param $value - the default value
-	 * @param string $column_name - the current column name
-	 * @param int $tax_id - the current taxonomy id
-	 * 
+	 * @param string                    $column_name - the current column name
+	 * @param int                       $tax_id - the current taxonomy id
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function protection_column_content( $value, $column_name, $tax_id ) {
 		if ( $column_name === 'hammock' ) {
 			$access = get_term_meta( $tax_id, '_hammock_mebership_access', true );
-			if ( !is_array( $access ) ) {
+			if ( ! is_array( $access ) ) {
 				$access = array();
 			}
 			return empty( $access ) ? __( 'All', 'hammock' ) : sprintf( __( '%d membership(s)', 'hammock' ), count( $access ) );
@@ -128,18 +128,18 @@ class Category extends Addon {
 
 	/**
 	 * Edit taxonomy field
-	 * 
+	 *
 	 * @param WP_Term $tag -Current taxonomy term object.
 	 * @param string  $taxonomy - Current taxonomy slug.
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function term_protection_fields( $tag, $taxonomy ) {
-		$access 		= get_term_meta( $tag->term_id, '_hammock_mebership_access', true );
-		$memberships 	= $this->membership_service->list_simple_memberships( 0, false );
-		if ( !is_array( $access ) ) {
+		$access      = get_term_meta( $tag->term_id, '_hammock_mebership_access', true );
+		$memberships = $this->membership_service->list_simple_memberships( 0, false );
+		if ( ! is_array( $access ) ) {
 			$access = array();
 		}
 		?>
@@ -149,12 +149,12 @@ class Category extends Addon {
 			</th>
 			<td>
 				<select name="hammock_membership[]" data-placeholder="<?php _e( 'Select Memberships', 'hammock' ); ?>" multiple class="hammock-multi-select">
-					<?php 
-						foreach ( $memberships as $id => $name ) {
-							?>
+					<?php
+					foreach ( $memberships as $id => $name ) {
+						?>
 							<option value="<?php echo $id; ?>" <?php echo in_array( $id, $access ) ? 'selected' : ''; ?>><?php echo $name; ?></option>
 							<?php
-						}
+					}
 					?>
 					
 				</select>
@@ -166,10 +166,10 @@ class Category extends Addon {
 
 	/**
 	 * Handle term update
-	 * 
+	 *
 	 * @param int $term_id Term ID.
-     * @param int $tt_id   Term taxonomy ID.
-	 * 
+	 * @param int $tt_id   Term taxonomy ID.
+	 *
 	 * @since 1.0.0
 	 */
 	public function term_protection_update( $term_id, $tt_id ) {
@@ -209,24 +209,24 @@ class Category extends Addon {
 	 * @return array
 	 */
 	public function update_settings( $response = array(), $data ) {
-		$protected = $data['protected'];
-		$protected = array_map( 'sanitize_text_field', wp_unslash( $protected ) );
-		$settings  = $this->settings();
+		$protected             = $data['protected'];
+		$protected             = array_map( 'sanitize_text_field', wp_unslash( $protected ) );
+		$settings              = $this->settings();
 		$settings['protected'] = $protected;
 		$this->settings->set_addon_setting( $this->id, $settings );
 		$this->settings->save();
 		return array(
-			'status' => true,
-			'message'	=> __( 'Category Setting updated', 'hammock' )
+			'status'  => true,
+			'message' => __( 'Category Setting updated', 'hammock' ),
 		);
 	}
 
 
 	/**
 	 * Check if protection setting is active
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function plugin_active() {

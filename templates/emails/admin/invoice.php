@@ -3,7 +3,7 @@
  * Admin invoice copy
  *
  * This template can be overridden by copying it to yourtheme/hammock/emails/admin/invoice.php.
- * 
+ *
  * @package Hammock/Templates/Emails
  * @version 1.0.0
  */

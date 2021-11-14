@@ -14,34 +14,34 @@ use Hammock\Services\Transactions;
 /**
  * Signup controller
  * This manages front end functions for the signup process
- * 
+ *
  * @since 1.0.0
  */
 class Signup extends Controller {
 
 	/**
 	 * The member service
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var object
 	 */
 	private $member_service = null;
 
 	/**
 	 * The membership service
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var object
 	 */
 	private $membership_service = null;
 
 	/**
 	 * Transaction service
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var object
 	 */
 	private $transaction_service = null;
@@ -79,9 +79,9 @@ class Signup extends Controller {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$this->member_service = new Members();
-		$this->membership_service = new Memberships();
-		$this->transaction_service 	= new Transactions();
+		$this->member_service      = new Members();
+		$this->membership_service  = new Memberships();
+		$this->transaction_service = new Transactions();
 
 		$this->add_ajax_action( 'hammock_purchase_plan', 'purchase_plan', true, true );
 	}
@@ -89,7 +89,7 @@ class Signup extends Controller {
 
 	/**
 	 * First step in purchasing a plan
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function purchase_plan() {
@@ -100,47 +100,46 @@ class Signup extends Controller {
 		if ( $membership->id > 0 ) {
 
 			$can_join = hammock_can_user_join_plan( $plan_id );
-			if ( !$can_join['status'] ) {
+			if ( ! $can_join['status'] ) {
 				wp_send_json_error( $can_join['message'] );
 			}
 
 			$user_id = get_current_user_id();
 
 			$member = $this->member_service->get_member_by_user_id( $user_id );
-			if ( !$member ) {
+			if ( ! $member ) {
 				$response = $this->member_service->save_member( $user_id );
 				if ( $response['status'] ) {
-					$member_id 	= $response['id'];
-					$member 	= $this->member_service->get_member_by_id( $member_id );
+					$member_id = $response['id'];
+					$member    = $this->member_service->get_member_by_id( $member_id );
 				}
 			}
 
-			if ( !$member || $member->id <= 0 ) {
+			if ( ! $member || $member->id <= 0 ) {
 				wp_send_json_error( __( 'Error getting member profile. Please try again', 'hammock' ) );
 			}
 
 			$plan = $member->add_plan( $membership );
 			if ( $plan ) {
 
-
-				//Create transaction
+				// Create transaction
 				$due_date = date_i18n( 'Y-m-d H:i:s', strtotime( 'now' ) );
 
 				if ( $plan->has_trial() ) {
-					//After trial
+					// After trial
 					$due_date = $plan->end_date;
 				}
 
 				/**
 				 * Filter to modify the due date on auto-generate plans
-				 * 
+				 *
 				 * @param string $due_date - the due date. Defaults to now
 				 * @param object $member - the member object
 				 * @param object $membership - the membership object
 				 * @param object $plan - the plan
-				 * 
+				 *
 				 * @since 1.0.0
-				 * 
+				 *
 				 * @return $due_date
 				 */
 				$due_date = apply_filters( 'hammock_new_plan_invoice_due_date', $due_date, $member, $membership, $plan );
@@ -152,14 +151,16 @@ class Signup extends Controller {
 				$invoice_id = $this->transaction_service->save_transaction( '', Transactions::STATUS_PENDING, $member, $plan, $membership->get_price(), $due_date );
 
 				if ( $invoice_id ) {
-					wp_send_json_success( array(
-						'message' 	=> __( 'Plan joined. Proceeding to payments', 'hammock' ),
-						'reload'	=> true
-					) );
+					wp_send_json_success(
+						array(
+							'message' => __( 'Plan joined. Proceeding to payments', 'hammock' ),
+							'reload'  => true,
+						)
+					);
 				}
 			}
 		}
 		wp_send_json_error( __( 'Error adding plan to your account. Please try again', 'hammock' ) );
 	}
 }
-?>
+

@@ -129,7 +129,7 @@ class Memberships extends Rest {
 			array(
 				'methods'             => \WP_REST_Server::CREATABLE,
 				'callback'            => array( $this, 'save_membership' ),
-				'permission_callback' => array( $this, 'validate_request' )
+				'permission_callback' => array( $this, 'validate_request' ),
 			)
 		);
 
@@ -175,29 +175,29 @@ class Memberships extends Rest {
 
 	/**
 	 * Count memberships
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function count_memberships( $request ) {
-		$service      = new \Hammock\Services\Memberships();
-		$total        = $service->count_memberships();
+		$service = new \Hammock\Services\Memberships();
+		$total   = $service->count_memberships();
 		return array(
-			'total' => $total
+			'total' => $total,
 		);
 	}
 
 	/**
 	 * List simple memberships for drop down select
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function list_simple_memberships( $request ) {
-		$service 	= new \Hammock\Services\Memberships();
-		$member		= $request->get_param( 'member' );
+		$service = new \Hammock\Services\Memberships();
+		$member  = $request->get_param( 'member' );
 		return $service->list_simple_memberships( $member );
 	}
 
@@ -217,19 +217,19 @@ class Memberships extends Rest {
 	/**
 	 * Save Membership
 	 * This saves membership details
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function save_membership( $request ) {
-		$name     	= sanitize_text_field( $request['membership_name'] );
-		$enabled  	= isset( $request['membership_enabled'] ) ? intval( sanitize_text_field( $request['membership_enabled'] ) ) : 0;
-		$type     	= sanitize_text_field( $request['membership_type'] );
-		$days     	= false;
-		$end      	= false;
-		$duration 	= false;
-		$price    	= sanitize_text_field( $request['membership_price'] );
+		$name     = sanitize_text_field( $request['membership_name'] );
+		$enabled  = isset( $request['membership_enabled'] ) ? intval( sanitize_text_field( $request['membership_enabled'] ) ) : 0;
+		$type     = sanitize_text_field( $request['membership_type'] );
+		$days     = false;
+		$end      = false;
+		$duration = false;
+		$price    = sanitize_text_field( $request['membership_price'] );
 		if ( $type === 'date-range' ) {
 			$days = sanitize_text_field( $request['membership_days'] );
 		} elseif ( $type === 'recurring' ) {
@@ -247,15 +247,15 @@ class Memberships extends Rest {
 				$service->update_duration( $id, $duration );
 			}
 
-			return	array(
-				'status'  	=> true,
-				'message' 	=> __( 'Membership Saved', 'hammock' ),
-				'id'		=> $id
+			return array(
+				'status'  => true,
+				'message' => __( 'Membership Saved', 'hammock' ),
+				'id'      => $id,
 			);
 		} else {
-			return	array(
-				'status'  	=> false,
-				'message' 	=> __( 'Error saving membership', 'hammock' )
+			return array(
+				'status'  => false,
+				'message' => __( 'Error saving membership', 'hammock' ),
 			);
 		}
 	}
@@ -276,17 +276,17 @@ class Memberships extends Rest {
 		if ( $membership->id > 0 ) {
 			switch ( $method ) {
 				case 'general':
-					$name      		= sanitize_text_field( $request['membership_name'] );
-					$details		= sanitize_text_field( $request['membership_details'] );
-					$enabled   		= isset( $request['membership_enabled'] ) ? intval( $request['membership_enabled'] ) : 0;
-					$lmited    		= isset( $request['limit_spaces'] ) ? intval( $request['limit_spaces'] ) : 0;
-					$available 		= sanitize_text_field( $request['total_available'] );
-					$type      		= sanitize_text_field( $request['membership_type'] );
-					$invite_list	= sanitize_text_field( $request['invite_only_list'] );
-					$invite_only    = isset( $request['invite_only'] ) ? intval( $request['invite_only'] ) : 0;
-					$days     		= false;
-					$end       		= false;
-					$duration  		= false;
+					$name        = sanitize_text_field( $request['membership_name'] );
+					$details     = sanitize_text_field( $request['membership_details'] );
+					$enabled     = isset( $request['membership_enabled'] ) ? intval( $request['membership_enabled'] ) : 0;
+					$lmited      = isset( $request['limit_spaces'] ) ? intval( $request['limit_spaces'] ) : 0;
+					$available   = sanitize_text_field( $request['total_available'] );
+					$type        = sanitize_text_field( $request['membership_type'] );
+					$invite_list = sanitize_text_field( $request['invite_only_list'] );
+					$invite_only = isset( $request['invite_only'] ) ? intval( $request['invite_only'] ) : 0;
+					$days        = false;
+					$end         = false;
+					$duration    = false;
 					if ( $type === 'date-range' ) {
 						$days = sanitize_text_field( $request['membership_days'] );
 					} elseif ( $type === 'recurring' ) {
@@ -299,8 +299,8 @@ class Memberships extends Rest {
 					if ( $duration ) {
 						$service->update_duration( $id, $duration );
 					}
-					if ( !empty( $invite_list ) ) {
-						$invite_list = explode( ",", $invite_list );
+					if ( ! empty( $invite_list ) ) {
+						$invite_list = explode( ',', $invite_list );
 					} else {
 						$invite_list = array();
 					}
@@ -310,7 +310,7 @@ class Memberships extends Rest {
 				break;
 				case 'price':
 					$price          = sanitize_text_field( $request['membership_price'] );
-					$signup_price	= sanitize_text_field( $request['signup_price'] );
+					$signup_price   = sanitize_text_field( $request['signup_price'] );
 					$trial_enabled  = isset( $request['trial_enabled'] ) ? intval( $request['trial_enabled'] ) : 0;
 					$trial_price    = sanitize_text_field( $request['trial_price'] );
 					$trial_period   = sanitize_text_field( $request['trial_period'] );
@@ -345,7 +345,7 @@ class Memberships extends Rest {
 	 * @return array
 	 */
 	private function return_success( $id, $method ) {
-		//We must load membership again with updated data
+		// We must load membership again with updated data
 		$membership = new \Hammock\Model\Membership( $id );
 		return array(
 			'status'     => true,

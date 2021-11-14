@@ -40,7 +40,7 @@ class Failed extends Email {
 		$this->id            = 'member-' . $type;
 		$this->template_html = 'emails/membership/payment/failed.php';
 		$this->placeholders  = array(
-			'{membership_name}' => ''
+			'{membership_name}' => '',
 		);
 	}
 

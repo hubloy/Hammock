@@ -136,11 +136,11 @@ class Meta {
 
 	/**
 	 * Delete meta
-	 * 
+	 *
 	 * @param int    $object_id - the current object id
 	 * @param string $type - the meta type
 	 * @param string $key - the meta key
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function delete( $object_id, $type, $key ) {
@@ -182,7 +182,7 @@ class Meta {
 
 	/**
 	 * Remove all object meta
-	 * 
+	 *
 	 * @param int    $object_id - the current object id
 	 * @param string $type - the meta type
 	 *
@@ -191,7 +191,7 @@ class Meta {
 	public static function remove_all( $object_id, $type ) {
 		global $wpdb;
 		$table_name = Database::get_table_name( Database::META );
-		$sql 		= "DELETE FROM {$table_name} WHERE `object_id` = %d AND `meta_type` = %s";
+		$sql        = "DELETE FROM {$table_name} WHERE `object_id` = %d AND `meta_type` = %s";
 		$wpdb->query( $wpdb->prepare( $sql, $object_id, $type ) );
 	}
 }

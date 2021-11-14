@@ -4,7 +4,7 @@
  * Handles login, registration and password reset
  *
  * This template can be overridden by copying it to yourtheme/hammock/account/auth-access.php.
- * 
+ *
  * @package Hammock/Templates/Account
  * @version 1.0.0
  */

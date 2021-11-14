@@ -16,7 +16,7 @@ return array(
 		'type'                 => __( 'Membership Type', 'hammock' ),
 		'price'                => __( 'Membership Price', 'hammock' ),
 		'signup_price'         => __( 'Sign-up Price', 'hammock' ),
-		'days'           	   => __( 'Grant access for the following days', 'hammock' ),
+		'days'                 => __( 'Grant access for the following days', 'hammock' ),
 		'limit_access'         => __( 'Limit number of members', 'hammock' ),
 		'total_available'      => __( 'Total Available', 'hammock' ),
 		'total_available_desc' => __( 'Total spots available for this membership', 'hammock' ),
@@ -26,7 +26,7 @@ return array(
 		'trial_duration'       => __( 'Trial Duration', 'hammock' ),
 		'invite_only'          => __( 'Invite Only', 'hammock' ),
 		'invite_list'          => __( 'Restrict to these codes', 'hammock' ),
-		
+
 	),
 
 	'dashboard' => array(
@@ -53,12 +53,12 @@ return array(
 		'tabs'      => array(
 			'general' => __( 'General', 'hammock' ),
 			'price'   => __( 'Price', 'hammock' ),
-			'rules'	  => __( 'Rules', 'hammock' ),
+			'rules'   => __( 'Rules', 'hammock' ),
 		),
-		'invites'	=> array(
-			'select'	=> __( 'Select Invite codes', 'hammock' ),
-			'empty'		=> __( 'No Invite codes fount', 'hammock' ),
-		)
+		'invites'   => array(
+			'select' => __( 'Select Invite codes', 'hammock' ),
+			'empty'  => __( 'No Invite codes fount', 'hammock' ),
+		),
 	),
 );
 

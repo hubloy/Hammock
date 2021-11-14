@@ -11,7 +11,7 @@ use Hammock\Services\Codes;
 
 /**
  * Invites controller
- * 
+ *
  * Manages all invites
  *
  * @since 1.0.0
@@ -96,8 +96,8 @@ class Invites extends Controller {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$settings 		= Settings::instance();
-		$this->setting 	= $settings->get_addon_setting( 'invitation' );
+		$settings      = Settings::instance();
+		$this->setting = $settings->get_addon_setting( 'invitation' );
 	}
 
 	/**
@@ -109,10 +109,10 @@ class Invites extends Controller {
 	 * @since 1.0.0
 	 */
 	public function menu_page( $slug, $cap ) {
-		$enabled 		=  isset( $this->setting['enabled'] ) ? $this->setting['enabled'] : false;
+		$enabled        = isset( $this->setting['enabled'] ) ? $this->setting['enabled'] : false;
 		$this->_page_id = $slug . '-' . self::MENU_SLUG;
 		$this->_cap     = $cap;
-		if ( $enabled  ) {
+		if ( $enabled ) {
 			add_submenu_page(
 				$slug,
 				__( 'Invitation Codes', 'hammock' ),
@@ -139,8 +139,8 @@ class Invites extends Controller {
 			$vars['active_page']               = 'invites';
 			$vars['strings']                   = $this->get_strings();
 			$vars['page_strings']              = array(
-				'status'	=> Codes::get_code_statuses(),
-				'types'		=> Codes::get_code_amount_types(),
+				'status' => Codes::get_code_statuses(),
+				'types'  => Codes::get_code_amount_types(),
 			);
 		}
 		return $vars;

@@ -4,7 +4,7 @@
  * This view is used as a row for transactions
  *
  * This template can be overridden by copying it to yourtheme/hammock/account/transaction/list/view-transaction.php.
- * 
+ *
  * @package Hammock/Templates/Account/Transaction/List/View
  * @version 1.0.0
  */

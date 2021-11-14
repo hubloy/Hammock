@@ -104,11 +104,11 @@ class Memberships {
 
 	/**
 	 * Get readable payment duration
-	 * 
+	 *
 	 * @param string $duration
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public static function get_payment_duration( $duration ) {
@@ -139,11 +139,11 @@ class Memberships {
 
 	/**
 	 * Get readable trial duration
-	 * 
+	 *
 	 * @param string $duration
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public static function get_trial_duration( $duration ) {
@@ -191,8 +191,8 @@ class Memberships {
 	 */
 	public function get_membership_by_membership_id( $membership_id ) {
 		global $wpdb;
-		$sql     	= "SELECT `id` FROM {$this->table_name} WHERE `membership_id` = %s";
-		$result		= $wpdb->get_var( $wpdb->prepare( $sql, $membership_id ) );
+		$sql    = "SELECT `id` FROM {$this->table_name} WHERE `membership_id` = %s";
+		$result = $wpdb->get_var( $wpdb->prepare( $sql, $membership_id ) );
 		if ( $result ) {
 			return $this->get_membership_by_id( $result );
 		}
@@ -201,11 +201,11 @@ class Memberships {
 
 	/**
 	 * Get membership by id
-	 * 
+	 *
 	 * @param int $id - the id
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return object
 	 */
 	public function get_membership_by_id( $id ) {
@@ -225,7 +225,7 @@ class Memberships {
 	public function list_memberships( $per_page, $page = 0 ) {
 		global $wpdb;
 		$memberships = array();
-		$page   	 = $per_page * $page;
+		$page        = $per_page * $page;
 		$sql         = "SELECT `id` FROM {$this->table_name} ORDER BY `id` DESC LIMIT %d, %d";
 		$results     = $wpdb->get_results( $wpdb->prepare( $sql, $page, $per_page ) );
 
@@ -252,7 +252,7 @@ class Memberships {
 	public function list_html_memberships( $per_page, $page = 0 ) {
 		global $wpdb;
 		$memberships = array();
-		$page   	 = $per_page * $page;
+		$page        = $per_page * $page;
 		$sql         = "SELECT `id` FROM {$this->table_name} ORDER BY `id` DESC LIMIT %d, %d";
 		$results     = $wpdb->get_results( $wpdb->prepare( $sql, $page, $per_page ) );
 
@@ -268,17 +268,17 @@ class Memberships {
 
 	/**
 	 * List key value of memberships. This will return id and name only of all memberships
-	 * 
-	 * @param int $member_id - the member id (optional)
+	 *
+	 * @param int  $member_id - the member id (optional)
 	 * @param bool $include_select - include select in the drop down (optional)
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function list_simple_memberships( $member_id = 0, $include_select = true ) {
 		global $wpdb;
-		$where = "";
+		$where = '';
 		if ( $include_select ) {
 			$memberships = array(
 				0 => __( 'Select Membership', 'hammock' ),
@@ -287,17 +287,17 @@ class Memberships {
 			$memberships = array();
 		}
 		if ( $member_id > 0 ) {
-			$members 	= new Members();
-			$ids 		= $members->get_member_plan_membership_ids( $member_id );
+			$members = new Members();
+			$ids     = $members->get_member_plan_membership_ids( $member_id );
 			if ( $ids ) {
 				$where = " AND `id` NOT IN($ids)";
 			}
 		}
-		$sql         = "SELECT `id`, `name` FROM {$this->table_name} WHERE `enabled` = 1 $where ORDER BY `id` DESC";
-		$results     = $wpdb->get_results( $sql );
+		$sql     = "SELECT `id`, `name` FROM {$this->table_name} WHERE `enabled` = 1 $where ORDER BY `id` DESC";
+		$results = $wpdb->get_results( $sql );
 		if ( ! empty( $results ) ) {
 			foreach ( $results as $result ) {
-				$memberships[$result->id] = $result->name;
+				$memberships[ $result->id ] = $result->name;
 			}
 		}
 		return $memberships;
@@ -305,32 +305,32 @@ class Memberships {
 
 	/**
 	 * List memberships a user can sign up to
-	 * 
+	 *
 	 * @param int $user_id - the user id
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function list_signup_memberships( $user_id = 0 ) {
 		global $wpdb;
-		$where = "";
+		$where       = '';
 		$memberships = array();
 		if ( $user_id > 0 ) {
-			$members 	= new Members();
-			$member		= $members->get_member_by_user_id( $user_id );
+			$members = new Members();
+			$member  = $members->get_member_by_user_id( $user_id );
 			if ( $member ) {
-				$ids 		= $members->get_member_plan_membership_ids( $member->id );
+				$ids = $members->get_member_plan_membership_ids( $member->id );
 				if ( $ids ) {
 					$where = " AND `id` NOT IN($ids)";
 				}
 			}
 		}
-		$sql         = "SELECT `id` FROM {$this->table_name} WHERE `enabled` = 1 $where ORDER BY `id` DESC";
-		$results     = $wpdb->get_results( $sql );
+		$sql     = "SELECT `id` FROM {$this->table_name} WHERE `enabled` = 1 $where ORDER BY `id` DESC";
+		$results = $wpdb->get_results( $sql );
 		if ( ! empty( $results ) ) {
 			foreach ( $results as $result ) {
-				$memberships[$result->id] = $this->get_membership_by_id( $result->id );
+				$memberships[ $result->id ] = $this->get_membership_by_id( $result->id );
 			}
 		}
 		return $memberships;
@@ -352,16 +352,16 @@ class Memberships {
 	public function save( $name, $details, $enabled, $type, $price ) {
 		global $wpdb;
 		$membership_id = wp_generate_password( 12, false );
-		$result = $wpdb->insert(
+		$result        = $wpdb->insert(
 			$this->table_name,
 			array(
-				'membership_id'	=> $membership_id,
-				'name'         	=> $name,
-				'details'		=> $details,
-				'enabled'      	=> $enabled,
-				'price'        	=> $price,
-				'type'         	=> $type,
-				'date_created' 	=> date_i18n( 'Y-m-d H:i:s' ),
+				'membership_id' => $membership_id,
+				'name'          => $name,
+				'details'       => $details,
+				'enabled'       => $enabled,
+				'price'         => $price,
+				'type'          => $type,
+				'date_created'  => date_i18n( 'Y-m-d H:i:s' ),
 			)
 		);
 
@@ -373,9 +373,9 @@ class Memberships {
 
 			/**
 			 * Action called when the general details are updated
-			 * 
+			 *
 			 * @param int $id - the membership id
-			 * 
+			 *
 			 * @since 1.0.0
 			 */
 			do_action( 'hammock_memberships_plan_created', $id );
@@ -401,31 +401,31 @@ class Memberships {
 		$wpdb->update(
 			$this->table_name,
 			array(
-				'name'            	=> $name,
-				'details'			=> $details,
-				'enabled'         	=> $enabled,
-				'type'            	=> $type,
-				'limit_spaces'   	=> $lmited,
-				'total_available' 	=> $available,
-				'date_updated'    	=> date_i18n( 'Y-m-d H:i:s' ),
+				'name'            => $name,
+				'details'         => $details,
+				'enabled'         => $enabled,
+				'type'            => $type,
+				'limit_spaces'    => $lmited,
+				'total_available' => $available,
+				'date_updated'    => date_i18n( 'Y-m-d H:i:s' ),
 			),
 			array( 'id' => $id )
 		);
 
 		/**
 		 * Action called when the general details are updated
-		 * 
+		 *
 		 * @param int $id - the membership id
-		 * 
+		 *
 		 * @since 1.0.0
 		 */
 		do_action( 'hammock_memberships_general_updated', $id );
 
 		/**
 		 * General action for all updates on a membership
-		 * 
+		 *
 		 * @param int $id - the membership id
-		 * 
+		 *
 		 * @since 1.0.0
 		 */
 		do_action( 'hammock_memberships_updated', $id );
@@ -433,10 +433,10 @@ class Memberships {
 
 	/**
 	 * Update the membership duration
-	 * 
+	 *
 	 * @param int    $id - the membership id
 	 * @param string $duration - the membership duration
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function update_duration( $id, $duration ) {
@@ -444,26 +444,26 @@ class Memberships {
 		$wpdb->update(
 			$this->table_name,
 			array(
-				'duration'        => $duration,
-				'date_updated'    => date_i18n( 'Y-m-d H:i:s' ),
+				'duration'     => $duration,
+				'date_updated' => date_i18n( 'Y-m-d H:i:s' ),
 			),
 			array( 'id' => $id )
 		);
 
 		/**
 		 * Action called when duration is updated
-		 * 
+		 *
 		 * @param int $id - the membership id
-		 * 
+		 *
 		 * @since 1.0.0
 		 */
 		do_action( 'hammock_memberships_duration_updated', $id );
 
 		/**
 		 * General action for all updates on a membership
-		 * 
+		 *
 		 * @param int $id - the membership id
-		 * 
+		 *
 		 * @since 1.0.0
 		 */
 		do_action( 'hammock_memberships_updated', $id );
@@ -488,7 +488,7 @@ class Memberships {
 			$this->table_name,
 			array(
 				'price'          => $price,
-				'signup_price'	 => $signup_price,
+				'signup_price'   => $signup_price,
 				'trial_enabled'  => $trial_enabled,
 				'trial_price'    => $trial_price,
 				'trial_period'   => $trial_period,
@@ -500,18 +500,18 @@ class Memberships {
 
 		/**
 		 * Action called when price is updated
-		 * 
+		 *
 		 * @param int $id - the membership id
-		 * 
+		 *
 		 * @since 1.0.0
 		 */
 		do_action( 'hammock_memberships_price_updated', $id );
 
 		/**
 		 * General action for all updates on a membership
-		 * 
+		 *
 		 * @param int $id - the membership id
-		 * 
+		 *
 		 * @since 1.0.0
 		 */
 		do_action( 'hammock_memberships_updated', $id );

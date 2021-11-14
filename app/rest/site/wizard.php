@@ -58,7 +58,6 @@ class Wizard extends Rest {
 			)
 		);
 
-
 		register_rest_route(
 			$namespace,
 			self::BASE_API_ROUTE . 'settings',
@@ -84,17 +83,17 @@ class Wizard extends Rest {
 	/**
 	 * Get the current wizard step
 	 * Used if someone has saved a step and would like to go to the next step
-	 * 
+	 *
 	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
 	public function get_step( $request ) {
 		$step = Util::get_option( 'hammock_wizard_step' );
-		if ( !$step || !is_array( $step ) ) {
+		if ( ! $step || ! is_array( $step ) ) {
 			$step = array(
-				'value'	=> 10,
-				'step'	=> 'options'
+				'value' => 10,
+				'step'  => 'options',
 			);
 		}
 		return rest_ensure_response( $step );
@@ -102,37 +101,37 @@ class Wizard extends Rest {
 
 	/**
 	 * Update the basic settings
-	 * 
+	 *
 	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
 	public function update_settings( $request ) {
-		$currency             	= sanitize_text_field( $request['membership_currency'] );
-		$membership_list	  	= sanitize_text_field( $request['membership_list'] );
-		$protected_content	  	= sanitize_text_field( $request['protected_content'] );
-		$account_page	  		= sanitize_text_field( $request['account_page'] );
+		$currency          = sanitize_text_field( $request['membership_currency'] );
+		$membership_list   = sanitize_text_field( $request['membership_list'] );
+		$protected_content = sanitize_text_field( $request['protected_content'] );
+		$account_page      = sanitize_text_field( $request['account_page'] );
 
-		$settings             	= new \Hammock\Model\Settings();
-		$pages					= $settings->get_general_setting( 'pages', array() );
-		$flush_rules			= false;
+		$settings    = new \Hammock\Model\Settings();
+		$pages       = $settings->get_general_setting( 'pages', array() );
+		$flush_rules = false;
 		if ( $membership_list == 'c' ) {
-			$page_id = Pages::create( 'membership_list' );
+			$page_id                  = Pages::create( 'membership_list' );
 			$pages['membership_list'] = $page_id;
 		} else {
 			$pages['membership_list'] = $membership_list;
 		}
 
 		if ( $protected_content == 'c' ) {
-			$page_id = Pages::create( 'protected_content' );
+			$page_id                    = Pages::create( 'protected_content' );
 			$pages['protected_content'] = $page_id;
 		} else {
 			$pages['protected_content'] = $protected_content;
 		}
 
 		if ( $account_page == 'c' ) {
-			$flush_rules = true;
-			$page_id = Pages::create( 'account_page' );
+			$flush_rules           = true;
+			$page_id               = Pages::create( 'account_page' );
 			$pages['account_page'] = $page_id;
 		} else {
 			if ( isset( $pages['account_page'] ) && ( $pages['account_page'] !== $account_page ) ) {
@@ -142,7 +141,7 @@ class Wizard extends Rest {
 		}
 
 		if ( $flush_rules ) {
-			//Flush rules especially for new account pages to be set up well
+			// Flush rules especially for new account pages to be set up well
 			flush_rewrite_rules();
 		}
 
@@ -151,39 +150,39 @@ class Wizard extends Rest {
 		$settings->save();
 
 		$stage = array(
-			'value'	=> 50,
-			'step'	=> 'membership'
+			'value' => 50,
+			'step'  => 'membership',
 		);
 
-		//Update wizard step
+		// Update wizard step
 		Util::update_option( 'hammock_wizard_step', $stage );
 
 		$code = \Hammock\Helper\Currency::get_membership_currency();
 
-		return array( 
-			'status' 	=> true,
-			'message'	=> __( 'Settings updated', 'hammock' ),
-			'data'		=> $stage,
-			'currency'	=> esc_html( $code )
+		return array(
+			'status'   => true,
+			'message'  => __( 'Settings updated', 'hammock' ),
+			'data'     => $stage,
+			'currency' => esc_html( $code ),
 		);
 	}
 
 	/**
 	 * Save initial membership
 	 * Saves and takes the user to the edit page
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function save_membership( $request ) {
-		$name     	= sanitize_text_field( $request['membership_name'] );
-		$enabled  	= isset( $request['membership_enabled'] ) ? intval( sanitize_text_field( $request['membership_enabled'] ) ) : 0;
-		$type     	= sanitize_text_field( $request['membership_type'] );
-		$days     	= false;
-		$end      	= false;
-		$duration 	= false;
-		$price    	= sanitize_text_field( $request['membership_price'] );
+		$name     = sanitize_text_field( $request['membership_name'] );
+		$enabled  = isset( $request['membership_enabled'] ) ? intval( sanitize_text_field( $request['membership_enabled'] ) ) : 0;
+		$type     = sanitize_text_field( $request['membership_type'] );
+		$days     = false;
+		$end      = false;
+		$duration = false;
+		$price    = sanitize_text_field( $request['membership_price'] );
 		if ( $type === 'date-range' ) {
 			$days = sanitize_text_field( $request['membership_days'] );
 		} elseif ( $type === 'recurring' ) {
@@ -196,11 +195,14 @@ class Wizard extends Rest {
 
 			Util::update_option( 'hammock_installed', 1 );
 
-			//Update wizard step
-			Util::update_option( 'hammock_wizard_step', array(
-				'value'	=> 100,
-				'step'	=> 'membership'
-			) );
+			// Update wizard step
+			Util::update_option(
+				'hammock_wizard_step',
+				array(
+					'value' => 100,
+					'step'  => 'membership',
+				)
+			);
 
 			if ( $days ) {
 				$service->save_meta( $id, 'membership_days', $days );
@@ -210,16 +212,16 @@ class Wizard extends Rest {
 				$service->update_duration( $id, $duration );
 			}
 
-			return	array(
-				'status'  	=> true,
-				'message' 	=> __( 'Membership Saved', 'hammock' )
+			return array(
+				'status'  => true,
+				'message' => __( 'Membership Saved', 'hammock' ),
 			);
 		} else {
-			return	array(
-				'status'  	=> false,
-				'message' 	=> __( 'Error saving membership', 'hammock' )
+			return array(
+				'status'  => false,
+				'message' => __( 'Error saving membership', 'hammock' ),
 			);
 		}
-		
+
 	}
 }

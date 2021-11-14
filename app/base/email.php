@@ -128,9 +128,9 @@ class Email extends Component {
 
 	/**
 	 * If the email type is for admin only
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var bool
 	 */
 	protected $is_admin = false;
@@ -155,10 +155,10 @@ class Email extends Component {
 			$this->placeholders
 		);
 
-		$this->enabled     = $this->get_setting( 'enabled', false );
-		$this->heading     = $this->get_setting( 'heading' );
-		$this->subject     = $this->get_setting( 'subject' );
-		$this->recipient   = $this->get_setting( 'recipient' );
+		$this->enabled   = $this->get_setting( 'enabled', false );
+		$this->heading   = $this->get_setting( 'heading' );
+		$this->subject   = $this->get_setting( 'subject' );
+		$this->recipient = $this->get_setting( 'recipient' );
 
 		$this->add_action( 'hammock_email_copy_theme_' . $this->id, 'copy_theme' );
 		$this->add_action( 'hammock_email_delete_theme_' . $this->id, 'delete_theme' );
@@ -204,21 +204,24 @@ class Email extends Component {
 	 *
 	 * @return array
 	 */
-	public function register( $senders = array( 'admin' => array(), 'member' => array() ) ) {
+	public function register( $senders = array(
+		'admin'  => array(),
+		'member' => array(),
+	) ) {
 		if ( $this->is_admin ) {
 			if ( ! isset( $senders['admin'][ $this->id ] ) ) {
 				$senders['admin'][ $this->id ] = array(
-					'id'     		=> $this->id,
-					'settings' 		=> $this->get_parameters(),
-					'place_holders'	=> array_keys( $this->placeholders )
+					'id'            => $this->id,
+					'settings'      => $this->get_parameters(),
+					'place_holders' => array_keys( $this->placeholders ),
 				);
 			}
 		} else {
 			if ( ! isset( $senders['member'][ $this->id ] ) ) {
 				$senders['member'][ $this->id ] = array(
-					'id'     		=> $this->id,
-					'settings' 		=> $this->get_parameters(),
-					'place_holders'	=> array_keys( $this->placeholders )
+					'id'            => $this->id,
+					'settings'      => $this->get_parameters(),
+					'place_holders' => array_keys( $this->placeholders ),
 				);
 			}
 		}
@@ -228,14 +231,14 @@ class Email extends Component {
 	/**
 	 * Copy theme
 	 * This copies a template file to the theme
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return application/json
 	 */
 	public function copy_theme() {
 		if ( ! current_user_can( 'edit_themes' ) ) {
-			wp_send_json_error( __( "You don't have permission to do this.", "hammock" ) );
+			wp_send_json_error( __( "You don't have permission to do this.", 'hammock' ) );
 		}
 		$success = Template::copy_to_theme( $this->template_html );
 		if ( $success ) {
@@ -246,14 +249,14 @@ class Email extends Component {
 	/**
 	 * Delete theme
 	 * This deletes the template file from the theme
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return application/json
 	 */
 	public function delete_theme() {
 		if ( ! current_user_can( 'edit_themes' ) ) {
-			wp_send_json_error( __( "You don't have permission to do this.", "hammock" ) );
+			wp_send_json_error( __( "You don't have permission to do this.", 'hammock' ) );
 		}
 		$success = Template::remove_template( $this->template_html );
 		if ( $success ) {
@@ -263,46 +266,46 @@ class Email extends Component {
 
 	/**
 	 * Get the settings form
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function setting_form( $form ) {
-		$view 		= new \Hammock\View\Backend\Email\Setting();
-		$params 	= $this->get_parameters();
+		$view       = new \Hammock\View\Backend\Email\Setting();
+		$params     = $this->get_parameters();
 		$view->data = array(
-			'params' 		=> $params,
-			'template'		=> $this->template_html,
-			'is_admin'		=> $this->is_admin,
-			'id'			=> $this->id,
-			'place_holders'	=> array_keys( $this->placeholders )
+			'params'        => $params,
+			'template'      => $this->template_html,
+			'is_admin'      => $this->is_admin,
+			'id'            => $this->id,
+			'place_holders' => array_keys( $this->placeholders ),
 		);
 		return array(
-			'id' 	=> $this->id,
-			'title'	=> $params['title'],
-			'form'	=> $view->render( true )
+			'id'    => $this->id,
+			'title' => $params['title'],
+			'form'  => $view->render( true ),
 		);
 	}
 
 	/**
 	 * Enable the sender
-	 * 
+	 *
 	 * @param bool $enabled - set to true or false to enable the sender
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function enable_sender( $enabled ) {
-		$settings 	= $this->config;
-		$setting 	= $this->get_settings();
+		$settings = $this->config;
+		$setting  = $this->get_settings();
 
 		$setting['enabled'] = $enabled;
 
 		$settings->set_setting( $this->id, $setting );
 		$settings->save();
-		$this->settings	= $setting;
+		$this->settings = $setting;
 
-		$this->enabled	= $setting['enabled'];
+		$this->enabled = $setting['enabled'];
 	}
 
 	/**
@@ -316,30 +319,30 @@ class Email extends Component {
 	 * @return array
 	 */
 	public function update_setting( $data ) {
-		$settings 	= $this->config;
-		$setting 	= $this->get_settings();
+		$settings = $this->config;
+		$setting  = $this->get_settings();
 
 		$setting['enabled'] = isset( $data['enabled'] );
 		$setting['subject'] = sanitize_text_field( $data['subject'] );
 		$setting['heading'] = sanitize_text_field( $data['heading'] );
 		if ( $this->is_admin ) {
-			$setting['recipient'] 	= sanitize_email( $data['recipient'] );
-			$this->recipient   		= $setting['recipient'];
+			$setting['recipient'] = sanitize_email( $data['recipient'] );
+			$this->recipient      = $setting['recipient'];
 		}
 		$settings->set_setting( $this->id, $setting );
 		$settings->save();
-		$this->settings	= $setting;
+		$this->settings = $setting;
 
-		$this->enabled	= $setting['enabled'];
-		$this->heading	= $setting['heading'];
-		$this->subject	= $setting['subject'];
+		$this->enabled = $setting['enabled'];
+		$this->heading = $setting['heading'];
+		$this->subject = $setting['subject'];
 	}
 
 	/**
 	 * Get settings
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function get_settings() {
@@ -401,12 +404,12 @@ class Email extends Component {
 	 */
 	public function get_parameters() {
 		$defaults = $this->register_defaults();
-		if ( !empty( $this->heading ) ) {
-			$params   = array(
-				'heading'     => $this->heading,
-				'subject'     => $this->subject,
-				'enabled'     => $this->enabled,
-				'recipient'   => $this->recipient,
+		if ( ! empty( $this->heading ) ) {
+			$params = array(
+				'heading'   => $this->heading,
+				'subject'   => $this->subject,
+				'enabled'   => $this->enabled,
+				'recipient' => $this->recipient,
 			);
 
 			return array_merge( $defaults, $params );
@@ -441,7 +444,7 @@ class Email extends Component {
 	/**
 	 * Format email string.
 	 *
-	 * @param array $placeholders - the placeholders. This is a key value representation
+	 * @param array  $placeholders - the placeholders. This is a key value representation
 	 * @param string $string - Text to replace placeholders in.
 	 *
 	 * @since 1.0.0
@@ -450,13 +453,13 @@ class Email extends Component {
 	 */
 	public function format_string( $placeholders, $string ) {
 
-		$find    	= array_keys( $placeholders );
-		$replace 	= array_values( $placeholders );
+		$find    = array_keys( $placeholders );
+		$replace = array_values( $placeholders );
 
-		$find[]    	= '{blogname}';
-		$replace[] 	= $this->get_blogname();
+		$find[]    = '{blogname}';
+		$replace[] = $this->get_blogname();
 
-		$string 	= str_replace( $find, $replace, $string );
+		$string = str_replace( $find, $replace, $string );
 
 		return apply_filters( 'hammock_email_format_string', $string, $this->id );
 	}
@@ -507,12 +510,12 @@ class Email extends Component {
 		return Template::get_template_html(
 			$this->template_html,
 			array(
-				'object'      	=> $this->object,
-				'heading'     	=> $this->heading,
-				'description' 	=> $this->description,
-				'title'       	=> $this->title,
-				'blog_name'		=> $this->get_blogname(),
-				'email'       	=> $this,
+				'object'      => $this->object,
+				'heading'     => $this->heading,
+				'description' => $this->description,
+				'title'       => $this->title,
+				'blog_name'   => $this->get_blogname(),
+				'email'       => $this,
 			)
 		);
 	}
@@ -520,7 +523,7 @@ class Email extends Component {
 	/**
 	 * Send email
 	 *
-	 * @param array $placeholders - the placeholders
+	 * @param array  $placeholders - the placeholders
 	 * @param string $to - recipient of email.
 	 * @param array  $attachments - Email attachments.
 	 * @param array  $cc - Email copy
@@ -583,8 +586,8 @@ class Email extends Component {
 	 * @since 1.0.0
 	 */
 	function send_email( $placeholders, $object, $to, $attachments = array(), $cc = array() ) {
-		$this->object       = $object;
-		$new_placeholders 	= array_merge( $this->placeholders, $placeholders );
+		$this->object     = $object;
+		$new_placeholders = array_merge( $this->placeholders, $placeholders );
 		$this->send( $new_placeholders, $to, $attachments, $cc );
 	}
 }

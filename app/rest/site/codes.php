@@ -12,7 +12,7 @@ use Hammock\Helper\Pagination;
 /**
  * Codes rest controller
  * Handles all invoice and coupon codes
- * 
+ *
  * @since 1.0.0
  */
 class Codes extends Rest {
@@ -80,7 +80,6 @@ class Codes extends Rest {
 			)
 		);
 
-
 		register_rest_route(
 			$namespace,
 			self::BASE_API_ROUTE . 'save/(?P<type>[\w-]+)',
@@ -101,7 +100,6 @@ class Codes extends Rest {
 			)
 		);
 
-
 		register_rest_route(
 			$namespace,
 			self::BASE_API_ROUTE . 'get/(?P<type>[\w-]+)',
@@ -120,7 +118,6 @@ class Codes extends Rest {
 			)
 		);
 
-
 		register_rest_route(
 			$namespace,
 			self::BASE_API_ROUTE . 'dropdown/(?P<type>[\w-]+)',
@@ -134,22 +131,22 @@ class Codes extends Rest {
 
 	/**
 	 * List codes by type
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function list_codes( $request ) {
-		$type     		= $request['type'];
-		$page     		= $request->get_param( 'page' );
-		$per_page 		= $request->get_param( 'per_page' );
-		$current_page 	= $page - 1;
-		$service		= new \Hammock\Services\Codes( $type );
-		$model 			= $service->get_model();
-		$total        	= $model->count();
-		$pages        	= Pagination::generate_pages( $total, $per_page, $page );
-		$items        	= $model->list_all( $per_page, $current_page );
-		$pager        	= array(
+		$type         = $request['type'];
+		$page         = $request->get_param( 'page' );
+		$per_page     = $request->get_param( 'per_page' );
+		$current_page = $page - 1;
+		$service      = new \Hammock\Services\Codes( $type );
+		$model        = $service->get_model();
+		$total        = $model->count();
+		$pages        = Pagination::generate_pages( $total, $per_page, $page );
+		$items        = $model->list_all( $per_page, $current_page );
+		$pager        = array(
 			'total'   => $total,
 			'pages'   => $pages,
 			'current' => $page,
@@ -162,55 +159,55 @@ class Codes extends Rest {
 
 	/**
 	 * Save code
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function save_code( $request ) {
-		$type     	= $request['type'];
-		$service 	= new \Hammock\Services\Codes( $type );
+		$type    = $request['type'];
+		$service = new \Hammock\Services\Codes( $type );
 		return $service->save_code( $request );
 	}
 
 	/**
 	 * Update code
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function update_code( $request ) {
-		$type     	= $request['type'];
-		$service 	= new \Hammock\Services\Codes( $type );
+		$type    = $request['type'];
+		$service = new \Hammock\Services\Codes( $type );
 		return $service->update_code( $request );
 	}
 
 	/**
 	 * Get Code by id
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return object
 	 */
 	public function get_code( $request ) {
-		$id 		= $request->get_param( 'id' );
-		$type		= $request['type'];
-		$service 	= new \Hammock\Services\Codes( $type );
+		$id      = $request->get_param( 'id' );
+		$type    = $request['type'];
+		$service = new \Hammock\Services\Codes( $type );
 		return $service->get_code( $id );
 	}
 
 	/**
 	 * Drop down list of codes
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function drop_down_list( $request ) {
-		$type		= $request['type'];
-		$service 	= new \Hammock\Services\Codes( $type );
+		$type    = $request['type'];
+		$service = new \Hammock\Services\Codes( $type );
 		return $service->drop_down();
 	}
 }
-?>
+

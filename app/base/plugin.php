@@ -110,7 +110,6 @@ class Plugin {
 			array( $this, 'setup_controller' )
 		);
 
-
 		add_action( 'plugins_loaded', array( $this, 'translate_plugin' ) );
 
 		add_filter( 'cron_schedules', array( $this, 'cron_time_intervals' ) );
@@ -178,7 +177,7 @@ class Plugin {
 
 	/**
 	 * Handle plugin translations
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function translate_plugin() {
@@ -264,7 +263,7 @@ class Plugin {
 	/**
 	 * Load function files
 	 * These are used mainly within themes and external resources
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	private function load_functions() {

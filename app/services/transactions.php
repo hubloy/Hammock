@@ -108,11 +108,11 @@ class Transactions {
 	/**
 	 * Checks if a transaction is paid
 	 * This checks the current transaction status with those set when paid
-	 * 
+	 *
 	 * @param string $status - the status
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public static function is_paid( $status ) {
@@ -144,8 +144,8 @@ class Transactions {
 	 * @param int   $page - current page
 	 * @param array $params - the query params are the fields in the transaction
 	 *                        these can be status, member_id, amount, gateway, method
-	 * 
-	 * @param bool $as_object - return array as objects
+	 *
+	 * @param bool  $as_object - return array as objects
 	 *
 	 * @since 1.0.0
 	 *
@@ -153,7 +153,7 @@ class Transactions {
 	 */
 	public function list_transactions( $per_page, $page = 0, $params = array(), $as_object = false ) {
 		global $wpdb;
-		$page   	  = $per_page * $page;
+		$page         = $per_page * $page;
 		$where        = $this->prepare_where( $params );
 		$sql          = "SELECT `id` FROM {$this->table_name} $where ORDER BY `id` DESC LIMIT %d, %d";
 		$results      = $wpdb->get_results( $wpdb->prepare( $sql, $page, $per_page ) );
@@ -161,7 +161,7 @@ class Transactions {
 		if ( ! empty( $results ) ) {
 			foreach ( $results as $result ) {
 				$invoice        = new Invoice( $result->id );
-				$transactions[] = $as_object ? ( object ) $invoice->to_html() : $invoice->to_html();
+				$transactions[] = $as_object ? (object) $invoice->to_html() : $invoice->to_html();
 			}
 		}
 		return $transactions;
@@ -169,11 +169,11 @@ class Transactions {
 
 	/**
 	 * Get invoice
-	 * 
+	 *
 	 * @param int|string $id - the invoice id (integer or string)
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return object
 	 */
 	public static function get_invoice( $id ) {
@@ -230,31 +230,31 @@ class Transactions {
 
 	/**
 	 * Create transaction
-	 * 
-	 * @param int $user_id - the user id
-	 * @param int $membership_id - the membership id
+	 *
+	 * @param int    $user_id - the user id
+	 * @param int    $membership_id - the membership id
 	 * @param string $status - the invoice status
 	 * @param string $gateway - the gateway
 	 * @param string $due_date - the due date
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function create_transaction( $user_id, $membership_id, $status, $gateway, $due_date ) {
-		$service 	= new Members();
-		$member 	= $service->get_member_by_user_id( $user_id );
+		$service = new Members();
+		$member  = $service->get_member_by_user_id( $user_id );
 		if ( $member && $member->exists() ) {
 			if ( $status == self::STATUS_PAID ) {
 				$args = array(
-					'status' 	=> Members::STATUS_ACTIVE
+					'status' => Members::STATUS_ACTIVE,
 				);
 			} else {
 				$args = array(
-					'status' 	=> Members::STATUS_PENDING
+					'status' => Members::STATUS_PENDING,
 				);
 			}
-			
+
 			$plan = $member->add_plan( $membership_id, $args );
 			if ( $plan ) {
 				$membership = new Membership( $membership_id );
@@ -263,44 +263,43 @@ class Transactions {
 
 				if ( $invoice_id ) {
 					return array(
-						'status' 	=> true,
-						'message'	=> __( 'Invoice saved', 'hammock' ),
-						'id'		=> $invoice_id
+						'status'  => true,
+						'message' => __( 'Invoice saved', 'hammock' ),
+						'id'      => $invoice_id,
 					);
 				} else {
 					return array(
-						'status' 	=> false,
-						'message'	=> __( 'Error saving invoice', 'hammock' ),
+						'status'  => false,
+						'message' => __( 'Error saving invoice', 'hammock' ),
 					);
 				}
-				
 			} else {
 				return array(
-					'status'	=> false,
-					'message'	=> __( 'Error adding plan to member', 'hammock' )
+					'status'  => false,
+					'message' => __( 'Error adding plan to member', 'hammock' ),
 				);
 			}
 		} else {
 			return array(
-				'status'	=> false,
-				'message'	=> __( 'Member does not exist', 'hammock' )
+				'status'  => false,
+				'message' => __( 'Member does not exist', 'hammock' ),
 			);
 		}
 	}
 
 	/**
 	 * Save Transaction
-	 * 
+	 *
 	 * @param string $gateway - the gateway
 	 * @param string $status - the status
 	 * @param object $member - the member object
 	 * @param object $plan - the plan object
 	 * @param double $amount - the amount
 	 * @param string $due_date - the due date
-	 * @param array $custom_data - the optional custom data
-	 * 
+	 * @param array  $custom_data - the optional custom data
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return int|bool
 	 */
 	public function save_transaction( $gateway, $status, $member, $plan, $amount, $due_date = '', $invoice_id = false, $custom_data = array() ) {
@@ -311,15 +310,15 @@ class Transactions {
 			$user_id = $member ? $member->user_id : 0;
 		}
 
-		$invoice->user_id		= $user_id;
-		$invoice->gateway 		= $gateway;
-		$invoice->status 		= $status;
-		$invoice->member_id 	= $member ? $member->id : 0;
-		$invoice->plan_id 		= $plan ? $plan->id : 0;
-		$invoice->amount 		= Currency::format_price( $amount );
-		$invoice->custom_data  	= $custom_data;
-		$invoice->due_date		= $due_date;
-		$invoice->invoice_id	= $invoice_id ? $invoice_id : date( 'YmdHis' );
+		$invoice->user_id     = $user_id;
+		$invoice->gateway     = $gateway;
+		$invoice->status      = $status;
+		$invoice->member_id   = $member ? $member->id : 0;
+		$invoice->plan_id     = $plan ? $plan->id : 0;
+		$invoice->amount      = Currency::format_price( $amount );
+		$invoice->custom_data = $custom_data;
+		$invoice->due_date    = $due_date;
+		$invoice->invoice_id  = $invoice_id ? $invoice_id : date( 'YmdHis' );
 		if ( $amount == 0 ) {
 			$invoice->status = self::STATUS_PAID;
 		}
@@ -328,22 +327,22 @@ class Transactions {
 		if ( $invoice->id > 0 ) {
 			/**
 			 * Action called when invoice is successfully saved
-			 * 
+			 *
 			 * @param object $invoice - the invoice
 			 * @param object $member - the member
 			 * @param object $plan - the plan
-			 * 
+			 *
 			 * @since 1.0.0
 			 */
 			do_action( 'hammock_invoice_saved', $invoice, $member, $plan );
 
 			/**
 			 * Action called when invoice is successfully saved based on status
-			 * 
+			 *
 			 * @param object $invoice - the invoice
 			 * @param object $member - the member
 			 * @param object $plan - the plan
-			 * 
+			 *
 			 * @since 1.0.0
 			 */
 			do_action( 'hammock_invoice_saved_' . $status, $invoice, $member, $plan );
@@ -355,47 +354,47 @@ class Transactions {
 
 	/**
 	 * Update invoice by id
-	 * 
-	 * @param int $id - the invoice id
+	 *
+	 * @param int    $id - the invoice id
 	 * @param string $gateway - the gateway
 	 * @param string $status - the status
 	 * @param double $amount - the amount
 	 * @param string $due_date - the due date
-	 * @param array $custom_data - the optional custom data
-	 * 
+	 * @param array  $custom_data - the optional custom data
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function update_transaction( $id, $gateway, $status, $amount, $due_date, $custom_data = array() ) {
 		$invoice = new Invoice( $id );
 		if ( $invoice->id > 0 ) {
-			if ( !empty( $gateway ) ) {
-				$invoice->gateway 	= $gateway;
+			if ( ! empty( $gateway ) ) {
+				$invoice->gateway = $gateway;
 			}
-			$invoice->status 		= $status;
-			$invoice->amount 		= Currency::format_price( $amount );
-			$invoice->due_date		= $due_date;
-			$invoice->custom_data  	= array_merge( $invoice->custom_data, $custom_data );
+			$invoice->status      = $status;
+			$invoice->amount      = Currency::format_price( $amount );
+			$invoice->due_date    = $due_date;
+			$invoice->custom_data = array_merge( $invoice->custom_data, $custom_data );
 			$invoice->save();
 
 			/**
 			 * Action called when invoice is successfully saved based on status
-			 * 
+			 *
 			 * @param object $invoice - the invoice
-			 * 
+			 *
 			 * @since 1.0.0
 			 */
-			do_action( 'hammock_invoice_updated', $invoice  );
+			do_action( 'hammock_invoice_updated', $invoice );
 
 			/**
 			 * Action called when invoice is successfully saved based on status
-			 * 
+			 *
 			 * @param object $invoice - the invoice
-			 * 
+			 *
 			 * @since 1.0.0
 			 */
-			do_action( 'hammock_invoice_updated_' . $status, $invoice  );
+			do_action( 'hammock_invoice_updated_' . $status, $invoice );
 			return true;
 		} else {
 			return false;
@@ -406,20 +405,20 @@ class Transactions {
 	/**
 	 * Get transaction stats to be used in the dashboard
 	 * This returns an array of the sum transactions per day of the week
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function get_weekly_transaction_stats() {
 		global $wpdb;
-		$members	= array();
-		$sql 		= "SELECT sum(`amount`) as total, WEEKDAY(`due_date`) as week_day FROM {$this->table_name} WHERE `status` = %s AND `due_date` BETWEEN (FROM_DAYS(TO_DAYS(CURDATE())-MOD(TO_DAYS(CURDATE())-1,7))) AND (FROM_DAYS(TO_DAYS(CURDATE())-MOD(TO_DAYS(CURDATE())-1,7)) + INTERVAL 7 DAY)";
-		$results    = $wpdb->get_results( $wpdb->prepare( $sql, self::STATUS_PAID ) );
+		$members = array();
+		$sql     = "SELECT sum(`amount`) as total, WEEKDAY(`due_date`) as week_day FROM {$this->table_name} WHERE `status` = %s AND `due_date` BETWEEN (FROM_DAYS(TO_DAYS(CURDATE())-MOD(TO_DAYS(CURDATE())-1,7))) AND (FROM_DAYS(TO_DAYS(CURDATE())-MOD(TO_DAYS(CURDATE())-1,7)) + INTERVAL 7 DAY)";
+		$results = $wpdb->get_results( $wpdb->prepare( $sql, self::STATUS_PAID ) );
 		if ( ! empty( $results ) ) {
 			foreach ( $results as $result ) {
-				$week_day = Duration::mysql_week_day_to_string( $result->week_day );
-				$members[$week_day] = $result->total;
+				$week_day             = Duration::mysql_week_day_to_string( $result->week_day );
+				$members[ $week_day ] = $result->total;
 			}
 		}
 		return $members;

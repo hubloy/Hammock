@@ -9,7 +9,7 @@ use Hammock\Core\Database;
 
 /**
  * Membership rule
- * 
+ *
  * @since 1.0.0
  */
 class Rule {
@@ -25,9 +25,9 @@ class Rule {
 
 	/**
 	 * The membership id
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var int
 	 */
 	public $membership_id = 0;
@@ -43,36 +43,36 @@ class Rule {
 
 	/**
 	 * The object id
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var int
 	 */
 	public $object_id = 0;
 
 	/**
 	 * The custom rules
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var array
 	 */
 	public $custom_rule = array();
 
 	/**
 	 * If the rule is time based
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var bool
 	 */
 	public $time_limit = false;
 
 	/**
 	 * The rule time duration in milliseconds
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var int
 	 */
 	public $time_duration = 0;
@@ -109,9 +109,9 @@ class Rule {
 
 	/**
 	 * Get rule by id
-	 * 
+	 *
 	 * @param int $id - the rule id
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function get_one( $id ) {
@@ -119,37 +119,37 @@ class Rule {
 		$sql  = "SELECT `rule_id`, `membership_id`, `object_type`, `object_id`, `custom_rule`, `time_limit`, `time_duration`, `date_created`, `date_updated` FROM {$this->table_name} WHERE `rule_id` = %d";
 		$item = $wpdb->get_row( $wpdb->prepare( $sql, $id ) );
 		if ( $item ) {
-			$date_format           	= get_option( 'date_format' );
-			$this->rule_id          = $id;
-			$this->membership_id	= $item->membership_id;
-			$this->object_type		= $item->object_type;
-			$this->object_id		= $item->object_id;
-			$this->custom_rule		= is_array( $item->custom_rule ) ? array_map( 'maybe_unserialize', $item->custom_rule ) : maybe_unserialize( $item->custom_rule );
-			$this->time_limit		= $item->time_limit;
-			$this->time_duration	= $item->time_duration;
-			$this->date_created    	= date_i18n( $date_format, strtotime( $item->date_created ) );
-			$this->date_updated    	= ! empty( $item->date_updated ) ? date_i18n( $date_format, strtotime( $item->date_updated ) ) : '';
+			$date_format         = get_option( 'date_format' );
+			$this->rule_id       = $id;
+			$this->membership_id = $item->membership_id;
+			$this->object_type   = $item->object_type;
+			$this->object_id     = $item->object_id;
+			$this->custom_rule   = is_array( $item->custom_rule ) ? array_map( 'maybe_unserialize', $item->custom_rule ) : maybe_unserialize( $item->custom_rule );
+			$this->time_limit    = $item->time_limit;
+			$this->time_duration = $item->time_duration;
+			$this->date_created  = date_i18n( $date_format, strtotime( $item->date_created ) );
+			$this->date_updated  = ! empty( $item->date_updated ) ? date_i18n( $date_format, strtotime( $item->date_updated ) ) : '';
 		}
 	}
 
 	/**
 	 * Checks if the rule exists
 	 * This validates the id is greater than 0
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function exists() {
-		return $this->rule_id > 0 ;
+		return $this->rule_id > 0;
 	}
 
 	/**
 	 * Check if rule has time limit.
 	 * Return the duration if it has a limit
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool|int
 	 */
 	public function has_time_limit() {
@@ -161,9 +161,9 @@ class Rule {
 
 	/**
 	 * Save or update a rule
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function save() {
@@ -174,13 +174,13 @@ class Rule {
 			$wpdb->update(
 				$this->table_name,
 				array(
-					'object_type'      		=> $this->object_type,
-					'object_id'       		=> $this->object_id,
-					'member_id'    			=> $this->member_id,
-					'custom_rule'      		=> $custom_rule,
-					'time_limit'       		=> $this->time_limit,
-					'time_duration'	   		=> $this->time_duration,
-					'due_date'	   			=> !empty( $this->due_date ) ? date_i18n( 'Y-m-d H:i:s', strtotime( $this->due_date ) ) : '',
+					'object_type'   => $this->object_type,
+					'object_id'     => $this->object_id,
+					'member_id'     => $this->member_id,
+					'custom_rule'   => $custom_rule,
+					'time_limit'    => $this->time_limit,
+					'time_duration' => $this->time_duration,
+					'due_date'      => ! empty( $this->due_date ) ? date_i18n( 'Y-m-d H:i:s', strtotime( $this->due_date ) ) : '',
 				),
 				array( 'rule_id' => $this->rule_id )
 			);
@@ -188,14 +188,14 @@ class Rule {
 			$result = $wpdb->insert(
 				$this->table_name,
 				array(
-					'membership_id'			=> $this->membership_id,
-					'object_type'      		=> $this->object_type,
-					'object_id'       		=> $this->object_id,
-					'member_id'    			=> $this->member_id,
-					'custom_rule'      		=> $custom_rule,
-					'time_limit'       		=> $this->time_limit,
-					'time_duration'	   		=> $this->time_duration,
-					'date_created' 			=> date_i18n( 'Y-m-d H:i:s' ),
+					'membership_id' => $this->membership_id,
+					'object_type'   => $this->object_type,
+					'object_id'     => $this->object_id,
+					'member_id'     => $this->member_id,
+					'custom_rule'   => $custom_rule,
+					'time_limit'    => $this->time_limit,
+					'time_duration' => $this->time_duration,
+					'date_created'  => date_i18n( 'Y-m-d H:i:s' ),
 				)
 			);
 
@@ -210,7 +210,7 @@ class Rule {
 
 	/**
 	 * Delete a rule
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function delete() {

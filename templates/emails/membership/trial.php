@@ -3,7 +3,7 @@
  * Membership Trial Almost Expire
  *
  * This template can be overridden by copying it to yourtheme/hammock/emails/membership/trial.php.
- * 
+ *
  * @package Hammock/Templates/Emails
  * @version 1.0.0
  */

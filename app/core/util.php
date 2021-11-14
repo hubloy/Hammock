@@ -14,9 +14,9 @@ class Util {
 
 	/**
 	 * List of active plugins
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var array
 	 */
 	private static $active_plugins;
@@ -69,7 +69,7 @@ class Util {
 
 	/**
 	 * Load plugins to check if plugins are enabled
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public static function init_plugins() {
@@ -81,11 +81,11 @@ class Util {
 
 	/**
 	 * Check if plugin is active
-	 * 
+	 *
 	 * @param string $plugin_slug - the plugin slug
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public static function plugin_active( $plugin_slug ) {

@@ -114,7 +114,6 @@ class Transactions extends Rest {
 			)
 		);
 
-
 		register_rest_route(
 			$namespace,
 			self::BASE_API_ROUTE . 'get',
@@ -197,51 +196,51 @@ class Transactions extends Rest {
 
 	/**
 	 * Get invoice
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return object
 	 */
 	public function get_invoice( $request ) {
-		$id 		= sanitize_text_field( $request['id'] );
-		$invoice 	= \Hammock\Services\Transactions::get_invoice( $id );
+		$id      = sanitize_text_field( $request['id'] );
+		$invoice = \Hammock\Services\Transactions::get_invoice( $id );
 		return (object) $invoice->to_html();
 	}
 
 	/**
 	 * Save new transaction
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function save_new_transaction( $request ) {
-		$user_id 	= sanitize_text_field( $request['user_id'] );
+		$user_id    = sanitize_text_field( $request['user_id'] );
 		$membership = sanitize_text_field( $request['membership'] );
-		$status 	= sanitize_text_field( $request['status'] );
-		$gateway 	= sanitize_text_field( $request['gateway'] );
-		$due_date 	= sanitize_text_field( $request['due_date'] );
-		$service	= new \Hammock\Services\Transactions();
+		$status     = sanitize_text_field( $request['status'] );
+		$gateway    = sanitize_text_field( $request['gateway'] );
+		$due_date   = sanitize_text_field( $request['due_date'] );
+		$service    = new \Hammock\Services\Transactions();
 		return $service->create_transaction( $user_id, $membership, $status, $gateway, $due_date );
 	}
 
 	/**
 	 * Update transaction
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function update_transaction( $request ) {
-		$id 		= sanitize_text_field( $request['id'] );
-		$status 	= sanitize_text_field( $request['status'] );
-		$due_date 	= sanitize_text_field( $request['due_date'] );
-		$amount		= sanitize_text_field( $request['amount'] );
-		$service	= new \Hammock\Services\Transactions();
-		$success 	= $service->update_transaction( $id, '', $status, $amount, $due_date );
+		$id       = sanitize_text_field( $request['id'] );
+		$status   = sanitize_text_field( $request['status'] );
+		$due_date = sanitize_text_field( $request['due_date'] );
+		$amount   = sanitize_text_field( $request['amount'] );
+		$service  = new \Hammock\Services\Transactions();
+		$success  = $service->update_transaction( $id, '', $status, $amount, $due_date );
 		return array(
-			'status' 	=> $success,
-			'message'	=> $success ? __( 'Transaction updated', 'hammock' ) : __( 'Error updating transaction', 'hammock' )
+			'status'  => $success,
+			'message' => $success ? __( 'Transaction updated', 'hammock' ) : __( 'Error updating transaction', 'hammock' ),
 		);
 	}
 }

@@ -277,14 +277,14 @@ class Settings {
 	 */
 	private function default_general_settings() {
 		return array(
-			'content_protection'   	=> 0,
-			'admin_toolbar'        	=> 0,
-			'account_verification' 	=> 0,
-			'currency'             	=> 'USD',
-			'protection_level'	   	=> 'hide',
-			'prefix'               	=> 'HBM',
-			'pages'				   	=> array(),
-			'delete_on_uninstall'	=> 0
+			'content_protection'   => 0,
+			'admin_toolbar'        => 0,
+			'account_verification' => 0,
+			'currency'             => 'USD',
+			'protection_level'     => 'hide',
+			'prefix'               => 'HBM',
+			'pages'                => array(),
+			'delete_on_uninstall'  => 0,
 		);
 	}
 }

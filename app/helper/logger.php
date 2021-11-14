@@ -29,11 +29,11 @@ class Logger {
 	 * @since 1.0.0
 	 */
 	protected static $_instance = null;
-	 
-	 
+
+
 	/**
 	 * Get the instance
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public static function instance() {
@@ -45,16 +45,16 @@ class Logger {
 
 	/**
 	 * Set up log directory
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public static function init_directory() {
-		if ( !is_dir( HAMMOCK_LOG_DIR ) ) {
+		if ( ! is_dir( HAMMOCK_LOG_DIR ) ) {
 			wp_mkdir_p( HAMMOCK_LOG_DIR );
 		}
 
 		if ( ! is_file( trailingslashit( HAMMOCK_LOG_DIR ) . 'index.php' ) ) {
-			//create a blank index file
+			// create a blank index file
 			$file_handle = @fopen( trailingslashit( HAMMOCK_LOG_DIR ) . 'index.php', 'w' );
 			if ( $file_handle ) {
 				fwrite( $file_handle, '' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fwrite
@@ -63,7 +63,7 @@ class Logger {
 		}
 
 		if ( ! is_file( trailingslashit( HAMMOCK_LOG_DIR ) . 'index.html' ) ) {
-			//create a blank index file
+			// create a blank index file
 			$file_handle = @fopen( trailingslashit( HAMMOCK_LOG_DIR ) . 'index.html', 'w' );
 			if ( $file_handle ) {
 				fwrite( $file_handle, '' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fwrite
@@ -72,7 +72,7 @@ class Logger {
 		}
 
 		if ( ! is_file( trailingslashit( HAMMOCK_LOG_DIR ) . '.htaccess' ) ) {
-			//create a blank index file
+			// create a blank index file
 			$file_handle = @fopen( trailingslashit( HAMMOCK_LOG_DIR ) . '.htaccess', 'w' );
 			if ( $file_handle ) {
 				fwrite( $file_handle, 'deny from all' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fwrite
@@ -86,7 +86,7 @@ class Logger {
 	 *
 	 * @since  1.0.0
 	 */
-	 public function reset() {
+	public function reset() {
 		$this->enabled = null;
 	}
 
@@ -118,8 +118,10 @@ class Logger {
 	public function is_enabled() {
 		$enabled = $this->enabled;
 		$is_ajax = false;
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) { $is_ajax = true; }
-		if ( defined( 'DOING_CRON' ) && DOING_CRON ) { $is_ajax = true; }
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			$is_ajax = true; }
+		if ( defined( 'DOING_CRON' ) && DOING_CRON ) {
+			$is_ajax = true; }
 
 		if ( null === $enabled ) {
 			if ( $is_ajax ) {
@@ -139,9 +141,9 @@ class Logger {
 	 */
 	public function log( $message ) {
 		if ( $this->is_enabled() ) {
-			$log_time	= date( "Y-m-d\tH:i:s\t" );
-			$log_file 	= date( "Y-m-d" );
-			$log_file 	= trailingslashit( HAMMOCK_LOG_DIR ) . $log_file . '_hammock.log';
+			$log_time = date( "Y-m-d\tH:i:s\t" );
+			$log_file = date( 'Y-m-d' );
+			$log_file = trailingslashit( HAMMOCK_LOG_DIR ) . $log_file . '_hammock.log';
 			foreach ( func_get_args() as $param ) {
 				if ( is_scalar( $param ) ) {
 					$dump = $param;
@@ -155,11 +157,11 @@ class Logger {
 
 	/**
 	 * Check if default debug is enabled
-	 * 
+	 *
 	 * @return bool
 	 */
-	public function wp_debug(){
+	public function wp_debug() {
 		return ( defined( 'WP_DEBUG' ) && WP_DEBUG === true );
 	}
 }
-?>
+

@@ -3,7 +3,7 @@
  * Member account dashboard
  *
  * This template can be overridden by copying it to yourtheme/hammock/member-account.php.
- * 
+ *
  * @package Hammock/Templates
  * @version 1.0.0
  */
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php
 	/**
 	 * The account navigation
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	do_action( 'hammock_member_account_navigation' );
@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php
 			/**
 			 * The account dashboard content
-			 * 
+			 *
 			 * @since 1.0.0
 			 */
 			do_action( 'hammock_member_account_content' );

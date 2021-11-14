@@ -55,13 +55,13 @@ class Activity extends Rest {
 				'callback'            => array( $this, 'list_activities' ),
 				'permission_callback' => array( $this, 'validate_request' ),
 				'args'                => array(
-					'page'      => array(
+					'page'     => array(
 						'required'          => true,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
 						'description'       => __( 'The current page', 'hammock' ),
 					),
-					'per_page'  => array(
+					'per_page' => array(
 						'required'          => false,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
@@ -74,7 +74,7 @@ class Activity extends Rest {
 						'type'              => 'string',
 						'description'       => __( 'Reference id', 'hammock' ),
 					),
-					'ref_type'    => array(
+					'ref_type' => array(
 						'required'          => true,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
@@ -84,10 +84,10 @@ class Activity extends Rest {
 			)
 		);
 	}
-	
+
 	/**
 	 * List activities
-	 * 
+	 *
 	 * @since 1.0.0
 	 *
 	 * @return array
@@ -100,10 +100,10 @@ class Activity extends Rest {
 		$current_page = $page - 1;
 		$service      = new \Hammock\Services\Activity();
 
-		$total        = $service->count_activities( $ref_id, $ref_type );
-		$pages        = Pagination::generate_pages( $total, $per_page, $page );
-		$items        = $service->list_activities( $ref_id, $ref_type, $per_page, $current_page );
-		$pager        = array(
+		$total = $service->count_activities( $ref_id, $ref_type );
+		$pages = Pagination::generate_pages( $total, $per_page, $page );
+		$items = $service->list_activities( $ref_id, $ref_type, $per_page, $current_page );
+		$pager = array(
 			'total'   => $total,
 			'pages'   => $pages,
 			'current' => $page,
@@ -114,4 +114,4 @@ class Activity extends Rest {
 		);
 	}
 }
-?>
+

@@ -123,8 +123,8 @@ class Settings extends Controller {
 				'tabs' => array(
 					'general'  => __( 'General', 'hammock' ),
 					'gateways' => __( 'Gateways', 'hammock' ),
-				)
-				
+				),
+
 			);
 
 		}

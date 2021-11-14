@@ -23,12 +23,12 @@ class Mailchimp extends View {
 	 * @return string
 	 */
 	protected function to_html() {
-		$settings 		= $this->data['settings'];
-		$optin 			= isset( $settings['double_optin'] ) ? $settings['double_optin'] : true;
-		$apikey 		= isset( $settings['apikey'] ) ? $settings['apikey'] : '';
-		$reg_list 		= isset( $settings['registered_list'] ) ? $settings['registered_list'] : '';
-		$sub_list 		= isset( $settings['subscriber_list'] ) ? $settings['subscriber_list'] : '';
-		$unsub_list 	= isset( $settings['unsubscriber_list'] ) ? $settings['unsubscriber_list'] : '';
+		$settings   = $this->data['settings'];
+		$optin      = isset( $settings['double_optin'] ) ? $settings['double_optin'] : true;
+		$apikey     = isset( $settings['apikey'] ) ? $settings['apikey'] : '';
+		$reg_list   = isset( $settings['registered_list'] ) ? $settings['registered_list'] : '';
+		$sub_list   = isset( $settings['subscriber_list'] ) ? $settings['subscriber_list'] : '';
+		$unsub_list = isset( $settings['unsubscriber_list'] ) ? $settings['unsubscriber_list'] : '';
 		ob_start();
 		?>
 		<div class="uk-margin">
@@ -47,7 +47,7 @@ class Mailchimp extends View {
 						);
 					?>
 					<p class="uk-text-meta">
-						<?php echo sprintf( __( 'Visit <a href="%s" target="_blank">your API dashboard</a> to create an API Key.', 'hammock' ), "http://admin.mailchimp.com/account/api" ); ?>
+						<?php echo sprintf( __( 'Visit <a href="%s" target="_blank">your API dashboard</a> to create an API Key.', 'hammock' ), 'http://admin.mailchimp.com/account/api' ); ?>
 					</p>
 				</div>
 				<div class="uk-width-1-4">

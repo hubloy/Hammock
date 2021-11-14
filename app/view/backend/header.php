@@ -24,4 +24,4 @@ class Header extends View {
 	}
 }
 
-?>
+

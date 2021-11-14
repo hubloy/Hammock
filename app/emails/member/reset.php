@@ -40,7 +40,7 @@ class Reset extends Email {
 		$this->id            = 'member-' . $type;
 		$this->template_html = 'emails/member-reset-password.php';
 		$this->placeholders  = array(
-			'{reset_url}' => ''
+			'{reset_url}' => '',
 		);
 	}
 

@@ -4,7 +4,7 @@
  * Handles account login
  *
  * This template can be overridden by copying it to yourtheme/hammock/account/access/login-form.php.
- * 
+ *
  * @package Hammock/Templates/Account/Access
  * @version 1.0.0
  */
@@ -18,11 +18,11 @@ do_action( 'hammock_before_account_login_form' );
 
 /**
  * Additional classes
- * 
+ *
  * @since 1.0.0
- * 
+ *
  * @param string $extra_classes
- * 
+ *
  * @return string
  */
 $extra_classes = apply_filters( 'hammock_account_access_login_form_extra_classes', '' );

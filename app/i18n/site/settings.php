@@ -22,23 +22,23 @@ return array(
 		'description' => __( 'This will force all registered accounts to first verify their emails before login', 'hammock' ),
 	),
 	'settings'             => array(
-		'title'    => __( 'General Settings', 'hammock' ),
-		'currency' => array(
+		'title'      => __( 'General Settings', 'hammock' ),
+		'currency'   => array(
 			'title'       => __( 'Membership Currency', 'hammock' ),
 			'description' => __( 'This is the currency used to purchase memberships', 'hammock' ),
 		),
-		'invoice'  => array(
+		'invoice'    => array(
 			'title'       => __( 'Invoice Prefix', 'hammock' ),
 			'description' => __( 'This is the prefix used on all invoices generated. This will not update existing invoices', 'hammock' ),
 		),
-		'protection'  => array(
-			'title'       	=> __( 'Content Protection Mode', 'hammock' ),
-			'description' 	=> __( 'Specifies the way content is restricted: whether to show nothing, excerpts, or send to a protected content', 'hammock' ),
-			'options'		=> array(
+		'protection' => array(
+			'title'       => __( 'Content Protection Mode', 'hammock' ),
+			'description' => __( 'Specifies the way content is restricted: whether to show nothing, excerpts, or send to a protected content', 'hammock' ),
+			'options'     => array(
 				'hide'         => __( 'Hide completely', 'hammock' ),
 				'hide_content' => __( 'Hide content only', 'hammock' ),
 				'redirect'     => __( 'Redirect to page', 'hammock' ),
-			)
+			),
 		),
 	),
 	'pages'                => array(
@@ -56,12 +56,12 @@ return array(
 			'description' => __( 'Shows details about the current user', 'hammock' ),
 		),
 	),
-	'data'	=> array(
-		'title'             => __( 'Data Management', 'hammock' ),
-		'delete_on_uninstall'   => array(
+	'data'                 => array(
+		'title'               => __( 'Data Management', 'hammock' ),
+		'delete_on_uninstall' => array(
 			'title'       => __( 'Delete data on uninstall', 'hammock' ),
 			'description' => __( 'This will delete all options and custom database tables once you deactivate and uninstall the plugin from your WordPress dashboard', 'hammock' ),
 		),
-	)
+	),
 );
 

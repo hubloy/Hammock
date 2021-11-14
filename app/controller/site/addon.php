@@ -96,7 +96,7 @@ class Addon extends Controller {
 		\Hammock\Addon\Category\Category::instance();
 		\Hammock\Addon\Mailchimp\Mailchimp::instance();
 		\Hammock\Addon\Invitation\Invitation::instance();
-		
+
 		do_action( 'hammock_load_addons' );
 	}
 

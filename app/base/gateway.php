@@ -34,9 +34,9 @@ class Gateway extends Component {
 
 	/**
 	 * Main plugin logger
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var \Hammock\Helper\Logger
 	 */
 	public $logger = null;
@@ -45,17 +45,17 @@ class Gateway extends Component {
 	 * What type of transactions are supported
 	 * This tells the frontend wht to show depending on the plan purchased
 	 * Ovveride this in the child class
-	 * 
+	 *
 	 * recurring - this is for recurring payments
 	 * single - single payments, non-recurring
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var array
 	 */
 	public $supports = array(
 		'recurring',
-		'single'
+		'single',
 	);
 
 	/**
@@ -65,7 +65,7 @@ class Gateway extends Component {
 	 */
 	public function __construct() {
 		$this->settings = new Settings();
-		$this->logger	= new Logger();
+		$this->logger   = new Logger();
 		$this->init();
 		$this->add_filter( 'hammock_register_gateways', 'register' );
 		$this->add_action( 'hammock_init_gateway', 'init_gateway' );
@@ -78,12 +78,11 @@ class Gateway extends Component {
 			// Register front end scripts and styles.
 			$this->add_action( 'wp_enqueue_scripts', 'register_scripts' );
 
-
-			//Memberships. Need to sync the plan to the gateway
+			// Memberships. Need to sync the plan to the gateway
 			$this->add_action( 'hammock_memberships_plan_created', 'membership_created_sync' );
 			$this->add_action( 'hammock_memberships_updated', 'membership_updated_sync' );
 
-			//Subscription actions
+			// Subscription actions
 			$this->add_action( 'hammock_gateway_' . $this->id . '_ipn_notify', 'ipn_notify' );
 			$this->add_action( 'hammock_gateway_' . $this->id . '_render_payment_form', 'render_payment_form' );
 			$this->add_action( 'hammock_gateway_' . $this->id . '_render_payment_update_form', 'render_payment_update_form' );
@@ -94,7 +93,7 @@ class Gateway extends Component {
 			$this->add_action( 'hammock_gateway_' . $this->id . '_process_resume', 'process_resume' );
 			$this->add_action( 'hammock_gateway_' . $this->id . '_handle_return', 'handle_return', 10, 2 );
 
-			//Member delete
+			// Member delete
 			$this->add_action( 'hammock_member_before_delete_member', 'handle_member_delete' );
 		}
 	}
@@ -139,11 +138,11 @@ class Gateway extends Component {
 	/**
 	 * Checks if a gateway is active
 	 * This loads the setting and checks if its active
-	 * 
+	 *
 	 * @param bool $is_active - active status
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function is_active( $is_active = false ) {
@@ -181,9 +180,9 @@ class Gateway extends Component {
 
 	/**
 	 * Get the site currency symbol
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function get_currency() {
@@ -194,7 +193,7 @@ class Gateway extends Component {
 
 	/**
 	 * Register script used for the gateway
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function register_scripts() {
@@ -204,10 +203,10 @@ class Gateway extends Component {
 	/**
 	 * Action called when a membership is created.
 	 * This is mainly to sync to the payment gateway
-	 * Most gateways require 
-	 * 
+	 * Most gateways require
+	 *
 	 * @param int $membership_id - the membership id
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function membership_created_sync( $membership_id ) {
@@ -218,9 +217,9 @@ class Gateway extends Component {
 	 * Action called when a membership is updated.
 	 * This is mainly to sync to the payment gateway
 	 * The plan will need to be updated on the gateway side
-	 * 
+	 *
 	 * @param int $membership_id - the membership id
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function membership_updated_sync( $membership_id ) {
@@ -230,7 +229,7 @@ class Gateway extends Component {
 
 	/**
 	 * Handle the ipn callbacks
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function ipn_notify() {
@@ -239,9 +238,9 @@ class Gateway extends Component {
 
 	/**
 	 * Render the payment form
-	 * 
+	 *
 	 * @param \Hammock\Model\Invoice $invoice - the invoice model
-	 * 
+	 *
 	 * @return string
 	 */
 	public function render_payment_form( $invoice ) {
@@ -250,9 +249,9 @@ class Gateway extends Component {
 
 	/**
 	 * Render the subscription payment update form
-	 * 
+	 *
 	 * @param \Hammock\Model\Plan $plan - the plan model
-	 * 
+	 *
 	 * @return string
 	 */
 	public function render_payment_update_form( $plan ) {
@@ -261,9 +260,9 @@ class Gateway extends Component {
 
 	/**
 	 * Process Payment
-	 * 
+	 *
 	 * @param \Hammock\Model\Invoice $invoice - the invoice model
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function process_payment( $invoice ) {
@@ -273,60 +272,60 @@ class Gateway extends Component {
 
 	/**
 	 * Process Refund
-	 * 
+	 *
 	 * @param \Hammock\Model\Invoice $invoice - the invoice model
-	 * @param \Hammock\Model\Plan $plan - the plan model
-	 * @param double $amount - the amount
-	 * 
+	 * @param \Hammock\Model\Plan    $plan - the plan model
+	 * @param double                 $amount - the amount
+	 *
 	 * @since 1.0.0
 	 */
 	public function process_refund( $invoice, $plan, $amount ) {
-		
+
 	}
 
 
 	/**
 	 * Process Cancel
 	 * Called when a plan is cancelled
-	 * 
+	 *
 	 * @param \Hammock\Model\Plan $plan - the plan model
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function process_cancel( $plan ) {
-		
+
 	}
 
 	/**
 	 * Process Pause
 	 * Called when a plan is paused
-	 * 
+	 *
 	 * @param \Hammock\Model\Plan $plan - the plan model
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function process_pause( $plan ) {
-		
+
 	}
 
 	/**
 	 * Process Resume
 	 * Called when a plan is resumed
-	 * 
+	 *
 	 * @param \Hammock\Model\Plan $plan - the plan model
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function process_resume( $plan ) {
-		
+
 	}
 
 	/**
 	 * Handle payment return
 	 * This is called after a payment gateway redirects
-	 * 
+	 *
 	 * @param \Hammock\Model\Invoice $invoice - the invoice model
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function handle_return( $invoice ) {
@@ -335,9 +334,9 @@ class Gateway extends Component {
 
 	/**
 	 * Handle member delete
-	 * 
+	 *
 	 * @param object $member - the current member
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function handle_member_delete( $member ) {

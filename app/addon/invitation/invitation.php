@@ -54,7 +54,7 @@ class Invitation extends Addon {
 				'name'        => __( 'Invitation Codes', 'hammock' ),
 				'description' => __( 'Users need an invitation code to subscribe to a membership.', 'hammock' ),
 				'icon'        => 'dashicons dashicons-unlock',
-				'url'   	  => admin_url( 'admin.php?page=hammock-invites' ),
+				'url'         => admin_url( 'admin.php?page=hammock-invites' ),
 			);
 		}
 		return $addons;

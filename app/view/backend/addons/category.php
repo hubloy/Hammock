@@ -23,14 +23,14 @@ class Category extends View {
 	 * @return string
 	 */
 	protected function to_html() {
-		$settings 	= $this->data['settings'];
-		$protected 	= isset( $settings['protected'] ) ? $settings['protected'] : array();
-		$args 		= array(
-			'public'  	=> true,
-			'_builtin' 	=> false
-		); 
-		$taxonomies = get_taxonomies( $args, 'object' ); 
-		$checked 	= in_array( 'category', $protected );
+		$settings   = $this->data['settings'];
+		$protected  = isset( $settings['protected'] ) ? $settings['protected'] : array();
+		$args       = array(
+			'public'   => true,
+			'_builtin' => false,
+		);
+		$taxonomies = get_taxonomies( $args, 'object' );
+		$checked    = in_array( 'category', $protected );
 		ob_start();
 		?>
 		<div class="uk-margin">
@@ -43,12 +43,12 @@ class Category extends View {
 						if ( $taxonomies ) {
 							?>
 								<?php
-									foreach ( $taxonomies as $taxonomy ) {
-										$checked = in_array( $taxonomy->name, $protected );
-										?>
+								foreach ( $taxonomies as $taxonomy ) {
+									$checked = in_array( $taxonomy->name, $protected );
+									?>
 										<li><label><input class="uk-checkbox" name="protected[]" <?php echo $checked ? 'checked="checked"' : ''; ?> value="<?php echo $taxonomy->name; ?>" type="checkbox">&nbsp;&nbsp;<?php echo $taxonomy->labels->name; ?></label></li>
 										<?php
-									}
+								}
 								?>
 							<?php
 						}

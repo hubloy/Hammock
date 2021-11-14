@@ -11,7 +11,7 @@ use Hammock\Base\Shortcode;
  * Memberships shortcode manager
  * Handles content of the memberships
  * Renders list of memberships
- * 
+ *
  * @since 1.0.0
  */
 class Memberships extends Shortcode {
@@ -46,9 +46,9 @@ class Memberships extends Shortcode {
 
 	/**
 	 * Get the shortcode content output
-	 * 
+	 *
 	 * @param array $atts - the shortcode attributes
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function output( $atts ) {
@@ -56,4 +56,4 @@ class Memberships extends Shortcode {
 	}
 }
 
-?>
+

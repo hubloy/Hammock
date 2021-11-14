@@ -40,7 +40,7 @@ class Renew extends Email {
 		$this->id            = 'member-' . $type;
 		$this->template_html = 'emails/membership/renew.php';
 		$this->placeholders  = array(
-			'{membership_name}' => ''
+			'{membership_name}' => '',
 		);
 	}
 

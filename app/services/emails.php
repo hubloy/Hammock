@@ -24,7 +24,7 @@ class Emails {
 	const COMM_TYPE_REGISTRATION          = 'new-account';
 	const COMM_TYPE_REGISTRATION_VERIFY   = 'new-account-verify';
 	const COMM_TYPE_RESETPASSWORD         = 'reset-password';
-	const COMM_TYPE_SIGNUP          	  = 'new-account';
+	const COMM_TYPE_SIGNUP                = 'new-account';
 	const COMM_TYPE_RENEWED               = 'renewed';
 	const COMM_TYPE_INVOICE               = 'invoice';
 	const COMM_TYPE_BEFORE_FINISHES       = 'before-membership-finishes';
@@ -83,7 +83,13 @@ class Emails {
 	 * @return array
 	 */
 	public static function get_email_senders() {
-		return apply_filters( 'hammock_get_email_senders', array( 'admin' => array(), 'member' => array() ) );
+		return apply_filters(
+			'hammock_get_email_senders',
+			array(
+				'admin'  => array(),
+				'member' => array(),
+			)
+		);
 	}
 }
 

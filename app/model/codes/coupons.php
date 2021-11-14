@@ -9,14 +9,14 @@ use Hammock\Model\Codes;
 
 /**
  * Coupon codes
- * 
+ *
  * @since 1.0.0
  */
 class Coupons extends Codes {
 
 	/**
 	 * Initialize model
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	protected function init() {
@@ -24,4 +24,4 @@ class Coupons extends Codes {
 	}
 }
 
-?>
+

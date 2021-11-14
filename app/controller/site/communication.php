@@ -95,15 +95,15 @@ class Communication extends Controller {
 
 	/**
 	 * Load comms classes
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	private function load_comms() {
-		//Load admin email types first
+		// Load admin email types first
 		\Hammock\Emails\Admin\Invoice::instance();
 		\Hammock\Emails\Admin\Signup::instance();
 
-		//Load user type emails
+		// Load user type emails
 		\Hammock\Emails\Member\Account::instance();
 		\Hammock\Emails\Member\Invoice::instance();
 		\Hammock\Emails\Member\Registration::instance();
@@ -204,7 +204,7 @@ class Communication extends Controller {
 	 * Get the email header.
 	 *
 	 * @param mixed $email_heading Heading for the email.
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function email_header( $email_heading = '' ) {
@@ -213,7 +213,7 @@ class Communication extends Controller {
 
 	/**
 	 * Get the email footer.
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function email_footer() {
@@ -222,9 +222,9 @@ class Communication extends Controller {
 
 	/**
 	 * Copy theme ajax action
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return application/json
 	 */
 	public function copy_theme() {
@@ -233,15 +233,15 @@ class Communication extends Controller {
 
 		do_action( 'hammock_email_copy_theme_' . $id );
 
-		wp_send_json_error( __( "Action not implemented", "hammock" ) );
+		wp_send_json_error( __( 'Action not implemented', 'hammock' ) );
 	}
 
-	
+
 	/**
 	 * Delete theme ajax action
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return application/json
 	 */
 	public function delete_theme() {
@@ -250,7 +250,7 @@ class Communication extends Controller {
 
 		do_action( 'hammock_email_delete_theme_' . $id );
 
-		wp_send_json_error( __( "Action not implemented", "hammock" ) );
+		wp_send_json_error( __( 'Action not implemented', 'hammock' ) );
 	}
 }
 ?>

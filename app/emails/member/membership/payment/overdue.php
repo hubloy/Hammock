@@ -40,7 +40,7 @@ class Overdue extends Email {
 		$this->id            = 'member-' . $type;
 		$this->template_html = 'emails/membership/payment/overdue.php';
 		$this->placeholders  = array(
-			'{membership_name}' => ''
+			'{membership_name}' => '',
 		);
 	}
 
