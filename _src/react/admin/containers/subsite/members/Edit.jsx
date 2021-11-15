@@ -4,7 +4,7 @@ import LazyLoad from 'react-lazyload';
 
 import fetchWP from 'utils/fetchWP';
 import Dashboard from 'layout/Dashboard';
-import {Nav} from './Nav'
+import {Nav} from './view/Nav'
 
 import MemberDetail from './view/MemberDetail';
 import MemberActivity from './view/MemberActivity';
@@ -30,12 +30,13 @@ export default class MemberEdit extends Component {
 		
 		var self = this,
 			hammock = self.props.hammock,
-			section = this.props.match.params.section !== undefined ? this.props.match.params.section : 'details';
+			section = this.props.match.params.section !== undefined ? this.props.match.params.section : 'details',
+			id = self.state.id;
 		return (
 			<Dashboard hammock={hammock}>
 				<div uk-grid="">
 					<LazyLoad className="uk-width-1-4 uk-height-medium">
-						<Nav hammock={hammock} active_nav={section} member_id={self.state.id}/>
+						<Nav hammock={hammock} active_nav={section} member_id={id}/>
 					</LazyLoad>
 					<div className="uk-width-expand uk-margin-left uk-card uk-card-body uk-background-default uk-padding-small">
 						{

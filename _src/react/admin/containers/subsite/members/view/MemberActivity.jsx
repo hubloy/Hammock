@@ -15,7 +15,7 @@ export default class MemberActivity extends Component {
 		this.state = {
 			pager: {},
             items: [],
-			id : this.props.match.params.id,
+			id : this.props.id,
 			loading : true,
 			error : false
         };

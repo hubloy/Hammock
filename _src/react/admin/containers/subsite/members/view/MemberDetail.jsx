@@ -26,7 +26,7 @@ export default class MemberDetail extends Component {
 				object : {}
 			},
 			selected_access : 'date',
-			id : this.props.match.params.id
+			id : this.props.id
         };
         this.fetchWP = new fetchWP({
 			api_url: this.props.hammock.api_url,
@@ -267,7 +267,7 @@ export default class MemberDetail extends Component {
 			<React.Fragment>
 				{this.state.member.id > 0 ? (
 					<div>
-						<div uk-grid="" className="uk-background-default uk-padding-small">
+						<div uk-grid="" className="uk-background-default uk-padding-small uk-margin-remove-left">
 							<div className="uk-width-1-3 uk-padding-remove-left">
 								<img src={this.state.member.user_info.picture} title={this.state.member.user_info.name}/>
 							</div>
@@ -283,7 +283,7 @@ export default class MemberDetail extends Component {
 								</ul>
 							</div>
 						</div>
-						<div className="uk-background-default uk-padding-small uk-margin-small-top hammock-margin-left-negative-40">
+						<div className="uk-background-default uk-padding-small uk-margin-small-top hammock-margin-left-negative-40 uk-margin-remove-left">
 							<h4 className="uk-heading-divider">{strings.edit.details.subscription.title}
 							{this.state.plans.total > 0 &&
 								<a className="uk-margin-small-left uk-button uk-button-primary uk-button-small" href="#hammock-add-subscription" uk-toggle="">{strings.edit.details.subscription.create.title}</a>
