@@ -149,7 +149,7 @@ class Memberships extends Controller {
 	/**
 	 * Render view
 	 *
-	 * @return String
+	 * @return string
 	 */
 	public function render() {
 

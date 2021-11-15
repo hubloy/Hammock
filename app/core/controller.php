@@ -20,6 +20,7 @@ class Controller {
 	public static function load_controllers() {
 		\Hammock\Controller\Site\Users::instance();
 		\Hammock\Controller\Site\Addon::instance();
+		\Hammock\Controller\Site\Rules::instance();
 		\Hammock\Controller\Site\Members::instance();
 		\Hammock\Controller\Site\Gateway::instance();
 		\Hammock\Controller\Site\Coupons::instance();
