@@ -131,7 +131,7 @@ class Database {
 		if ( $table_name ) {
 			$sql = "CREATE TABLE {$table_name} (
 				`rule_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-				`membership_id` bigint(20) unsigned NOT NULL,
+				`memberships` LONGTEXT NULL,
                 `object_type` VARCHAR($max_index_length) NOT NULL,
 				`object_id` bigint(20) unsigned default NULL,
 				`custom_rule` LONGTEXT NULL,
@@ -140,10 +140,9 @@ class Database {
 				`date_created` datetime NOT NULL default '0000-00-00 00:00:00',
 				`date_updated` datetime NOT NULL default '0000-00-00 00:00:00',
 				PRIMARY KEY (`rule_id`),
-				KEY `rule_membership_id` (`membership_id` ASC ),
 				KEY `rule_object_type` (`object_type`($max_index_length)),
 				KEY `rule_type_id` (`object_id` ASC, `object_type` ASC),
-                KEY `rule_type_membership` (`object_id` ASC, `object_type` ASC, `membership_id` ASC))
+                KEY `rule_type_membership` (`object_id` ASC, `object_type` ASC))
 				$charset_collate;";
 			dbDelta( $sql );
 		}

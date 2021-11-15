@@ -24,13 +24,13 @@ class Rule {
 	public $rule_id = 0;
 
 	/**
-	 * The membership id
+	 * The memberships
 	 *
 	 * @since 1.0.0
 	 *
-	 * @var int
+	 * @var array
 	 */
-	public $membership_id = 0;
+	public $memberships = array();
 
 	/**
 	 * The object type
@@ -49,15 +49,6 @@ class Rule {
 	 * @var int
 	 */
 	public $object_id = 0;
-
-	/**
-	 * The custom rules
-	 *
-	 * @since 1.0.0
-	 *
-	 * @var array
-	 */
-	public $custom_rule = array();
 
 	/**
 	 * If the rule is time based
@@ -116,15 +107,14 @@ class Rule {
 	 */
 	public function get_one( $id ) {
 		global $wpdb;
-		$sql  = "SELECT `rule_id`, `membership_id`, `object_type`, `object_id`, `custom_rule`, `time_limit`, `time_duration`, `date_created`, `date_updated` FROM {$this->table_name} WHERE `rule_id` = %d";
+		$sql  = "SELECT `rule_id`, `memberships`, `object_type`, `object_id`, `time_limit`, `time_duration`, `date_created`, `date_updated` FROM {$this->table_name} WHERE `rule_id` = %d";
 		$item = $wpdb->get_row( $wpdb->prepare( $sql, $id ) );
 		if ( $item ) {
 			$date_format         = get_option( 'date_format' );
 			$this->rule_id       = $id;
-			$this->membership_id = $item->membership_id;
 			$this->object_type   = $item->object_type;
 			$this->object_id     = $item->object_id;
-			$this->custom_rule   = is_array( $item->custom_rule ) ? array_map( 'maybe_unserialize', $item->custom_rule ) : maybe_unserialize( $item->custom_rule );
+			$this->memberships   = is_array( $item->memberships ) ? array_map( 'maybe_unserialize', $item->memberships ) : maybe_unserialize( $item->custom_rule );
 			$this->time_limit    = $item->time_limit;
 			$this->time_duration = $item->time_duration;
 			$this->date_created  = date_i18n( $date_format, strtotime( $item->date_created ) );
@@ -168,8 +158,8 @@ class Rule {
 	 */
 	public function save() {
 		global $wpdb;
-		$custom_rule = wp_unslash( $this->custom_rule );
-		$custom_rule = maybe_serialize( $custom_rule );
+		$memberships = wp_unslash( $this->memberships );
+		$memberships = maybe_serialize( $memberships );
 		if ( $this->rule_id > 0 ) {
 			$wpdb->update(
 				$this->table_name,
@@ -177,7 +167,7 @@ class Rule {
 					'object_type'   => $this->object_type,
 					'object_id'     => $this->object_id,
 					'member_id'     => $this->member_id,
-					'custom_rule'   => $custom_rule,
+					'memberships'   => $memberships,
 					'time_limit'    => $this->time_limit,
 					'time_duration' => $this->time_duration,
 					'due_date'      => ! empty( $this->due_date ) ? date_i18n( 'Y-m-d H:i:s', strtotime( $this->due_date ) ) : '',
@@ -188,11 +178,10 @@ class Rule {
 			$result = $wpdb->insert(
 				$this->table_name,
 				array(
-					'membership_id' => $this->membership_id,
 					'object_type'   => $this->object_type,
 					'object_id'     => $this->object_id,
 					'member_id'     => $this->member_id,
-					'custom_rule'   => $custom_rule,
+					'memberships'   => $memberships,
 					'time_limit'    => $this->time_limit,
 					'time_duration' => $this->time_duration,
 					'date_created'  => date_i18n( 'Y-m-d H:i:s' ),

@@ -6,7 +6,6 @@ import Dashboard from 'layout/Dashboard';
 import { Nav } from './edit/Nav'
 import General from './edit/General'
 import Price from './edit/Price'
-import Rules from './edit/Rules'
 
 export default class Edit extends Component {
 
@@ -62,9 +61,6 @@ export default class Edit extends Component {
 								<div className="hammock-membership uk-width-expand uk-margin-left uk-card uk-card-body uk-switcher">
 									<div className="uk-background-default uk-padding-small uk-border-rounded">
 										<General hammock={hammock} membership={membership}/>
-									</div>
-									<div className="uk-background-default uk-padding-small uk-border-rounded">
-										<Rules hammock={hammock} membership={membership}/>
 									</div>
 									<div className="uk-background-default uk-padding-small uk-border-rounded">
 										<Price hammock={hammock} membership={membership}/>

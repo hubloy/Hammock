@@ -13,9 +13,6 @@ export function Nav(props) {
                     <a href="#" className="hammock-nav-button uk-text-left uk-border-rounded uk-box-shadow-small uk-background-default uk-button uk-button-default uk-button-small"><span className="uk-margin-left">{strings.edit.tabs.general}</span></a>
                 </li>
                 <li>
-                    <a href="#" className="hammock-nav-button uk-text-left uk-border-rounded uk-box-shadow-small uk-background-default uk-button uk-button-default uk-button-small"><span className="uk-margin-left">{strings.edit.tabs.rules}</span></a>
-                </li>
-                <li>
                     <a href="#" className="hammock-nav-button uk-text-left uk-border-rounded uk-box-shadow-small uk-background-default uk-button uk-button-default uk-button-small"><span className="uk-margin-left">{strings.edit.tabs.price}</span></a>
                 </li>
             </ul>
