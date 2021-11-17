@@ -114,6 +114,9 @@ class Rules extends Controller {
 			$vars['common']['string']['title'] = __( 'Membership Rules', 'hammock' );
 			$vars['active_page']               = 'rules';
 			$vars['strings']                   = $this->get_strings();
+			$vars['page_strings']              = array(
+				'types' => $this->get_rules()
+			);
 		}
 		return $vars;
 	}
@@ -132,14 +135,14 @@ class Rules extends Controller {
 	}
 
 	/**
-	 * Generate the rules menu.
+	 * Get rules.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
-	public function generate_rules_menu() {
-
+	public function get_rules() {
+		return apply_filters( 'hammock_protection_rules', array() );
 	}
 
 	/**

@@ -70,7 +70,7 @@ class Rule {
 		$this->init();
 
 		// Register the rule.
-		add_filter( 'hammock_register_rule', array( $this, 'register_rule' ) );
+		add_filter( 'hammock_protection_rules', array( $this, 'register_rule' ) );
 
 		if ( $this->enabled ) {
 			add_filter( 'hammock_' . $this->id . '_content_has_access', array( $this, 'has_access' ), 10, 3 );
