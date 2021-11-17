@@ -99,6 +99,7 @@ class Rules extends Controller {
 		);
 	}
 
+
 	/**
 	 * Set up admin js variables
 	 *
@@ -128,6 +129,17 @@ class Rules extends Controller {
 			$this->strings = include HAMMOCK_LOCALE_DIR . '/site/rules.php';
 		}
 		return $this->strings;
+	}
+
+	/**
+	 * Generate the rules menu.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array
+	 */
+	public function generate_rules_menu() {
+
 	}
 
 	/**

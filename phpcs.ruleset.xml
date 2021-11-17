@@ -42,5 +42,6 @@
 		<exclude name="WordPress.WhiteSpace"/>
 		<exclude name="WordPress.WP.I18n.MissingTranslatorsComment"/>
 		<exclude name="WordPress.WP.I18n.NonSingularStringLiteralDomain"/>
+		<exclude name="Generic.Files.LineEndings.InvalidEOLChar"/>
 	</rule>
 </ruleset>

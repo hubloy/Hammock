@@ -24,6 +24,24 @@ class Rule {
 	 */
 	protected $id = '';
 
+	/**
+	 * The rule name
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var string
+	 */
+	protected $name = '';
+
+	/**
+	 * Check if the rule is enabled.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @var bool
+	 */
+	protected $enabled = false;
+
 
 	/**
 	 * Settings object
@@ -47,13 +65,21 @@ class Rule {
 	public function __construct() {
 		$this->settings        = new Settings();
 		$this->members_service = new Members();
+		// Enabled defaults to content protection. Rules can define their own enabled state in init
+		$this->enabled         = $this->settings->get_general_setting( 'content_protection' );
 		$this->init();
-		add_filter( 'hammock_' . $this->id . '_content_has_access', array( $this, 'has_access' ), 10, 3 );
-		if ( ! is_super_admin() && ! current_user_can( 'manage_options' ) ) {
-			if ( is_admin() || is_network_admin() ) {
-				$this->protect_admin_content();
-			} else {
-				$this->protect_content();
+
+		// Register the rule.
+		add_filter( 'hammock_register_rule', array( $this, 'register_rule' ) );
+
+		if ( $this->enabled ) {
+			add_filter( 'hammock_' . $this->id . '_content_has_access', array( $this, 'has_access' ), 10, 3 );
+			if ( ! is_super_admin() && ! current_user_can( 'manage_options' ) ) {
+				if ( is_admin() || is_network_admin() ) {
+					$this->protect_admin_content();
+				} else {
+					$this->protect_content();
+				}
 			}
 		}
 	}
@@ -72,6 +98,21 @@ class Rule {
 
 	}
 
+	/**
+	 * Register the rule.
+	 *
+	 * @param array $rules The current rules.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array
+	 */
+	public function register_rule( $rules ) {
+		if ( ! isset( $rules[$this->id] ) ) {
+			$rules[$this->id] = $this->name;
+		}
+		return $rules;
+	}
 
 	/**
 	 * Set initial protection for front-end.

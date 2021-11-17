@@ -48,6 +48,15 @@ class Protection {
 	private $category_rule = null;
 
 	/**
+	 * Check if content protection is enabled
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var bool
+	 */
+	private $enabled = false;
+
+	/**
 	 * Singletone instance of the plugin.
 	 *
 	 * @since  1.0.0
@@ -91,14 +100,11 @@ class Protection {
 	 * @since 1.0.0
 	 */
 	public function protect_content() {
-		$this->post_rule     = null;
-		$this->category_rule = null;
-		if ( $this->settings->get_general_setting( 'content_protection' ) ) {
+		$this->post_rule     = \Hammock\Rule\Post::instance();
+		$this->category_rule = \Hammock\Rule\Category::instance();
+		$this->enabled       = $this->settings->get_general_setting( 'content_protection' );
+		if ( $this->enabled ) {
 			add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
-
-			// Load protection rules
-			$this->post_rule     = \Hammock\Rule\Post::instance();
-			$this->category_rule = \Hammock\Rule\Category::instance();
 
 			/**
 			 * Action to load other protection rules
@@ -223,18 +229,20 @@ class Protection {
 	 * @return bool
 	 */
 	public function disabled_member_access( $access, $member, $object, $content_type ) {
-		if ( $object instanceof \WP_Post && $this->post_rule != null ) {
-			$restricted = $this->post_rule->get_member_restricted_content_ids();
-			if ( ! empty( $restricted ) ) {
-				if ( in_array( $object->ID, $restricted ) ) {
-					$access = false;
+		if ( $this->enabled ) {
+			if ( $object instanceof \WP_Post && $this->post_rule != null ) {
+				$restricted = $this->post_rule->get_member_restricted_content_ids();
+				if ( ! empty( $restricted ) ) {
+					if ( in_array( $object->ID, $restricted ) ) {
+						$access = false;
+					}
 				}
-			}
-		} elseif ( $object instanceof \WP_Term && $this->category_rule != null ) {
-			$restricted = $this->category_rule->get_member_restricted_content_ids();
-			if ( ! empty( $restricted ) ) {
-				if ( in_array( $object->term_id, $restricted ) ) {
-					$access = false;
+			} elseif ( $object instanceof \WP_Term && $this->category_rule != null ) {
+				$restricted = $this->category_rule->get_member_restricted_content_ids();
+				if ( ! empty( $restricted ) ) {
+					if ( in_array( $object->term_id, $restricted ) ) {
+						$access = false;
+					}
 				}
 			}
 		}
@@ -254,18 +262,20 @@ class Protection {
 	 * @return bool
 	 */
 	public function non_member_access( $access, $user_id, $object, $content_type ) {
-		if ( $object instanceof \WP_Post && $this->post_rule != null ) {
-			$restricted = $this->post_rule->get_member_restricted_content_ids();
-			if ( ! empty( $restricted ) ) {
-				if ( in_array( $object->ID, $restricted ) ) {
-					$access = false;
+		if ( $this->enabled ) {
+			if ( $object instanceof \WP_Post && $this->post_rule != null ) {
+				$restricted = $this->post_rule->get_member_restricted_content_ids();
+				if ( ! empty( $restricted ) ) {
+					if ( in_array( $object->ID, $restricted ) ) {
+						$access = false;
+					}
 				}
-			}
-		} elseif ( $object instanceof \WP_Term && $this->category_rule != null ) {
-			$restricted = $this->category_rule->get_member_restricted_content_ids();
-			if ( ! empty( $restricted ) ) {
-				if ( in_array( $object->term_id, $restricted ) ) {
-					$access = false;
+			} elseif ( $object instanceof \WP_Term && $this->category_rule != null ) {
+				$restricted = $this->category_rule->get_member_restricted_content_ids();
+				if ( ! empty( $restricted ) ) {
+					if ( in_array( $object->term_id, $restricted ) ) {
+						$access = false;
+					}
 				}
 			}
 		}
@@ -284,18 +294,20 @@ class Protection {
 	 * @return bool
 	 */
 	public function guest_access( $access, $object, $content_type ) {
-		if ( $object instanceof \WP_Post && $this->post_rule != null ) {
-			$restricted = $this->post_rule->get_member_restricted_content_ids();
-			if ( ! empty( $restricted ) ) {
-				if ( in_array( $object->ID, $restricted ) ) {
-					$access = false;
+		if ( $this->enabled ) {
+			if ( $object instanceof \WP_Post && $this->post_rule != null ) {
+				$restricted = $this->post_rule->get_member_restricted_content_ids();
+				if ( ! empty( $restricted ) ) {
+					if ( in_array( $object->ID, $restricted ) ) {
+						$access = false;
+					}
 				}
-			}
-		} elseif ( $object instanceof \WP_Term && $this->category_rule != null ) {
-			$restricted = $this->category_rule->get_member_restricted_content_ids();
-			if ( ! empty( $restricted ) ) {
-				if ( in_array( $object->term_id, $restricted ) ) {
-					$access = false;
+			} elseif ( $object instanceof \WP_Term && $this->category_rule != null ) {
+				$restricted = $this->category_rule->get_member_restricted_content_ids();
+				if ( ! empty( $restricted ) ) {
+					if ( in_array( $object->term_id, $restricted ) ) {
+						$access = false;
+					}
 				}
 			}
 		}

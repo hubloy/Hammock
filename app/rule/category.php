@@ -39,7 +39,8 @@ class Category extends Rule {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$this->id = 'term';
+		$this->id   = 'term';
+		$this->name = __( 'Categories', 'hammock' );
 	}
 
 	/**

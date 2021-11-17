@@ -76,7 +76,8 @@ class Post extends Rule {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$this->id = 'post';
+		$this->id   = 'post';
+		$this->name = __( 'Posts', 'hammock' );
 	}
 
 	/**
