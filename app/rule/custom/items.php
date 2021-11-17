@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use Hammock\Base\Rule;
 
-class Types extends Rule {
+class Items extends Rule {
 
 	/**
 	 * Singletone instance of the plugin.

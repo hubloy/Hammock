@@ -48,6 +48,60 @@ class Protection {
 	private $category_rule = null;
 
 	/**
+	 * The content rule
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var object
+	 */
+	private $content_rule = null;
+
+	/**
+	 * The media rule
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var object
+	 */
+	private $media_rule = null;
+
+	/**
+	 * The menu rule
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var object
+	 */
+	private $menu_rule = null;
+
+	/**
+	 * The page rule
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var object
+	 */
+	private $page_rule = null;
+
+	/**
+	 * The custom items rule
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var object
+	 */
+	private $custom_items_rule = null;
+
+	/**
+	 * The custom types rule
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var object
+	 */
+	private $custom_types_rule = null;
+
+	/**
 	 * Check if content protection is enabled
 	 *
 	 * @since 1.0.0
@@ -100,8 +154,15 @@ class Protection {
 	 * @since 1.0.0
 	 */
 	public function protect_content() {
-		$this->post_rule     = \Hammock\Rule\Post::instance();
-		$this->category_rule = \Hammock\Rule\Category::instance();
+		$this->post_rule         = \Hammock\Rule\Post::instance();
+		$this->category_rule     = \Hammock\Rule\Category::instance();
+		$this->content_rule      = \Hammock\Rule\Content::instance();
+		$this->media_rule        = \Hammock\Rule\Media::instance();
+		$this->menu_rule         = \Hammock\Rule\Menu::instance();
+		$this->page_rule         = \Hammock\Rule\Page::instance();
+		$this->custom_items_rule = \Hammock\Rule\Custom\Items::instance();
+		$this->custom_types_rule = \Hammock\Rule\Custom\Types::instance();
+
 		$this->enabled       = $this->settings->get_general_setting( 'content_protection' );
 		if ( $this->enabled ) {
 			add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
