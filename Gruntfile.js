@@ -251,6 +251,5 @@ module.exports = function( grunt ) {
 	grunt.registerTask( 'test' );
 	grunt.registerTask( 'docs', ['exec:phpdoc'] );
 
-	grunt.task.run( 'clear' );
 	grunt.util.linefeed = '\n';
 };
