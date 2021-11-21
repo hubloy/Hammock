@@ -18,9 +18,8 @@ export default class Admin extends Component {
 		var hammock = this.props.hammock;
 		return (
 			<Dashboard hammock={hammock}>
-				<div className="uk-margin-remove-left" uk-grid="">
+				<div uk-grid="">
 					<div className="uk-width-1-1">
-						<p className="uk-h4">{hammock.strings.dashboard.stats.title}</p>
 						<StatsDashboard hammock={hammock}/>
 					</div>
 					<div className="uk-width-1-1">
