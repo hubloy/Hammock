@@ -82,53 +82,57 @@ export default class StatsDashboard extends Component {
 			}
 		};
 		return (
-			<React.Fragment>
+			<div className="uk-grid-small uk-child-width-1-2@m uk-child-width-1-1@s" uk-grid="">
 					
-				<div className="uk-background-default uk-padding-small uk-margin-medium-top uk-panel uk-height-medium">
-					{this.state.loading_subs ? (
-						<Preloader />
-					) : (
-						subscribers.length > 0 ? (
-							<Bar data={{
-								labels: [days.mon, days.tue, days.wed, days.thu, days.fri, days.sat, days.sun],
-								datasets: [
-									{
-										label: hammock.strings.dashboard.stats.charts.subscribers,
-										data: [subscribers.mon, subscribers.tue, subscribers.wed, subscribers.thu, subscribers.fri, subscribers.sat, subscribers.sun],
-										backgroundColor: 'rgb(49, 104, 142)',
-										borderColor: 'rgb(49, 104, 142)',
-										borderWidth: 1,
-									},
-								],
-							}} options={options}/>
+				<div className="">
+					<div className="uk-padding-small uk-height-large uk-card uk-card-default uk-card-body">
+						{this.state.loading_subs ? (
+							<Preloader />
 						) : (
-							<Center text={hammock.strings.dashboard.stats.no_data.subscribers} backgroundImage={hammock.assets_url + '/img/preloader-chart.jpg'}/>
-						)
-					)}
+							subscribers.length > 0 ? (
+								<Bar data={{
+									labels: [days.mon, days.tue, days.wed, days.thu, days.fri, days.sat, days.sun],
+									datasets: [
+										{
+											label: hammock.strings.dashboard.stats.charts.subscribers,
+											data: [subscribers.mon, subscribers.tue, subscribers.wed, subscribers.thu, subscribers.fri, subscribers.sat, subscribers.sun],
+											backgroundColor: 'rgb(49, 104, 142)',
+											borderColor: 'rgb(49, 104, 142)',
+											borderWidth: 1,
+										},
+									],
+								}} options={options}/>
+							) : (
+								<Center text={hammock.strings.dashboard.stats.no_data.subscribers} backgroundImage={hammock.assets_url + '/img/preloader-chart.jpg'}/>
+							)
+						)}
+					</div>
 				</div>
-				<div className="uk-background-default uk-padding-small uk-margin-medium-top uk-panel uk-height-medium">
-					{this.state.loading_trans ? (
-						<Preloader />
-					) : (
-						transactions.length > 0 ? (
-							<Line data={{
-								labels: [days.mon, days.tue, days.wed, days.thu, days.fri, days.sat, days.sun],
-								datasets: [
-									{
-										label: hammock.strings.dashboard.stats.charts.transactions,
-										data: [transactions.mon, transactions.tue, transactions.wed, transactions.thu, transactions.fri, transactions.sat, transactions.sun],
-										fill: false,
-										backgroundColor: 'rgb(49, 104, 142)',
-										borderColor: 'rgba(49, 104, 142)',
-									},
-								],
-							}} options={options} />
+				<div className="">
+					<div className="uk-padding-small uk-height-large uk-card uk-card-default uk-card-body">
+						{this.state.loading_trans ? (
+							<Preloader />
 						) : (
-							<Center text={hammock.strings.dashboard.stats.no_data.transactions} backgroundImage={hammock.assets_url + '/img/preloader-chart.jpg'}/>
-						)
-					)}
+							transactions.length > 0 ? (
+								<Line data={{
+									labels: [days.mon, days.tue, days.wed, days.thu, days.fri, days.sat, days.sun],
+									datasets: [
+										{
+											label: hammock.strings.dashboard.stats.charts.transactions,
+											data: [transactions.mon, transactions.tue, transactions.wed, transactions.thu, transactions.fri, transactions.sat, transactions.sun],
+											fill: false,
+											backgroundColor: 'rgb(49, 104, 142)',
+											borderColor: 'rgba(49, 104, 142)',
+										},
+									],
+								}} options={options} />
+							) : (
+								<Center text={hammock.strings.dashboard.stats.no_data.transactions} backgroundImage={hammock.assets_url + '/img/preloader-chart.jpg'}/>
+							)
+						)}
+					</div>
 				</div>
-			</React.Fragment>
+			</div>
 		)
 	}
 }

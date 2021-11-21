@@ -44,7 +44,7 @@ export default class MembershipDashboard extends Component {
 		var memberships = this.state.memberships;
 		var hammock = this.props.hammock;
 		return (
-			<div className="uk-background-default uk-padding-small uk-margin-medium-top uk-panel uk-height-medium">
+			<div className="uk-background-default uk-padding-small uk-panel uk-height-medium">
 				{this.state.loading ? (
 					<Preloader />
 				) : (
