@@ -12,6 +12,9 @@ export default class Dashboard extends Component {
 	render() {
 		return (
 			<React.Fragment>
+				<div className="uk-container hammock-main-header uk-background-default">
+					<h2>{this.props.hammock.common.string.title}</h2>
+				</div>
 				<div className="hammock-container">
 					<div className="uk-width-auto">
 						{this.props.children}
