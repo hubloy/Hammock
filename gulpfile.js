@@ -11,7 +11,7 @@ var gulp = require('gulp'),
 	{ watch } = require('gulp'),
 	sass = require('gulp-sass')(require('sass')),
 	postcss = require('gulp-postcss'),
-	notify = require('gulp-notify'),
+	log = require('fancy-log'),
 	concat = require('gulp-concat'),
 	rename = require('gulp-rename'),
 	uglify = require('gulp-uglify');
@@ -20,11 +20,12 @@ var gulp = require('gulp'),
 // Styles task
 gulp.task('styles', function() {
 	return gulp.src(paths.src + '**/**/**/**/*.scss')
-		.pipe(sass({outputStyle: 'compressed'})).on('error', function(err) {notify().write(err);})
+		.pipe(sass({outputStyle: 'compressed'})).on('error', function(err) {log(err);}).on("finish", function() {
+			log('You\'re awesome! Changes are ready now.');
+		})
 		.pipe(postcss())
 		.pipe(rename({ suffix: '.min' }))
-		.pipe(gulp.dest(paths.dist))
-		.pipe(notify({message: 'You\'re awesome! Changes are ready now.', onLast: true}));
+		.pipe(gulp.dest(paths.dist));
 });
 
 var adminJsFiles = [

@@ -37,6 +37,12 @@ body {
 		}
 	}
 
+	.dashboard-heading {
+		z-index: 99999;
+		position: relative;
+		width: 100%;
+	}
+
 	.success {
 		color: $green-color !important;
 	}

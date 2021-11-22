@@ -35,7 +35,10 @@ return array(
 		),
 	),
 	'stats'       => array(
-		'title'   => __( 'Stats Overview', 'hammock' ),
+		'title'   => array(
+			'subscribers'  => __( 'Subscriber Data', 'hammock' ),
+			'transactions' => __( 'Transaction Data', 'hammock' ),
+		),
 		'charts'  => array(
 			'days'         => array(
 				'mon'  => __( 'Mon', 'hammock' ),
@@ -50,8 +53,8 @@ return array(
 			'transactions' => sprintf( __( '%s of Transactions', 'hammock' ), '#' ),
 		),
 		'no_data' => array(
-			'subscribers'  => __( 'No Subscriber Data found for this week', 'hammock' ),
-			'transactions' => __( 'No Transaction Data found for this week', 'hammock' ),
+			'subscribers'  => __( 'No data found for this week', 'hammock' ),
+			'transactions' => __( 'No data found for this week', 'hammock' ),
 		),
 	),
 	'wizard'      => array(
