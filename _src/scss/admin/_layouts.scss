@@ -37,10 +37,17 @@ body {
 		}
 	}
 
-	.dashboard-heading {
-		z-index: 99999;
-		position: relative;
-		width: 100%;
+	
+	.hammock-dashboard {
+		.dashboard-heading {
+			z-index: 99999;
+			position: relative;
+			width: 100%;
+		}
+		h4, .uk-h4 {
+			color: $text-gray;
+			font-size: 1.3rem;
+		}
 	}
 
 	.success {
