@@ -13,7 +13,8 @@ return array(
 		'mailchimp' => __( 'MailChimp', 'hammock' ),
 	),
 	'mailchimp' => array(
-		'enabled'  => __( 'Enable MailChimp integration', 'hammock' ),
+		'title'    => __( 'MailChimp integration', 'hammock' ),
+		'desc'     => __( 'Mailchimp is the All-In-One integrated marketing platform for small businesses, to grow your business on your terms.', 'hammock' ),
 		'info'     => sprintf( __( 'Visit %1$syour API dashboard%2$s to create an API Key.', 'hammock' ), '<a class="uk-text-primary" href="http://admin.mailchimp.com/account/api">', '</a>' ),
 		'apikey'   => __( 'API Key', 'hammock' ),
 		'validate' => __( 'Validate', 'hammock' ),

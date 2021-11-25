@@ -57,7 +57,7 @@ export default class Table extends Component {
         var strings = this.props.hammock.strings;
         if ( this.state.loading) {
             return (
-                <div className="uk-container uk-padding-small uk-margin-top uk-width-1-1 uk-background-default">
+                <div className="uk-container uk-padding-small uk-margin-top uk-width-1-1">
                     <span className="uk-text-center" uk-spinner="ratio: 3"></span>
                 </div>
             )
@@ -70,9 +70,9 @@ export default class Table extends Component {
                 return (
                     <React.Fragment>
                         {items.length <= 0 ? (
-                            <h3 className="uk-text-center">{strings.dashboard.table.not_found}</h3>
+                            <h3 className="uk-text-center uk-margin-top">{strings.dashboard.table.not_found}</h3>
                         ) : (
-                            <table className="uk-table">
+                            <table className="uk-table uk-background-default">
                                 <thead>
                                     <tr>
                                         <th><input className="uk-checkbox hammock-top-checkbox" type="checkbox" /></th>

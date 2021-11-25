@@ -171,6 +171,22 @@ body {
 	.uk-text-meta {
 		font-size: .8rem;
 	}
+
+	.hammock-navbar {
+		a {
+			padding: 5px 0;
+			min-height: auto;
+		}
+		li {
+			padding: 0 10px;
+			&.uk-active {
+				border-bottom: 3px solid $blue-color;
+			}
+		}
+	}
+	.uk-form-label {
+		font-weight: 600;
+	}
 }
 
 .hammock-check {

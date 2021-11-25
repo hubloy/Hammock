@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import fetchWP from 'utils/fetchWP'
-import { CheckBox, InputUI, DropDownUI, SwitchUI } from 'ui/admin/form';
+import { InputUI, DropDownUI, SwitchUI } from 'ui/admin/form';
 import { toast } from 'react-toastify';
 
 export default class MailChimpSettings extends Component {
@@ -160,9 +160,10 @@ export default class MailChimpSettings extends Component {
 					<form name="hammock-settings-form" className="uk-form-horizontal uk-margin-small" method="POST" onSubmit={this.handleSubmit} ref={this.mailchimp_settings}>
 						<InputUI name={`id`} class_name={`addon_id`} type={`hidden`} value='mailchimp'/>
 						<div className="uk-margin">
-							<label className="uk-form-label" htmlFor="apikey">{hammock.strings.mailchimp.enabled}</label>
+							<label className="uk-form-label" htmlFor="apikey">{hammock.strings.mailchimp.title}</label>
 							<div className="uk-form-controls hammock-input">
-								<CheckBox name={`enabled`} action={this.showOptions} value={`1`} checked={enabled}/>
+								<SwitchUI name={`enabled`} action={this.showOptions} value={`1`} checked={enabled} enabled_title={hammock.common.status.enabled} title={hammock.common.status.disabled}/>
+								<p className="uk-text-meta">{hammock.strings.mailchimp.desc}</p>
 							</div>
 						</div>
 						{enabled &&

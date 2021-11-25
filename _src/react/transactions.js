@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		const routing = (
 			<HashRouter>
 				<Switch>
-					<Route exact path="/:page?" component={TransactionsPage} />
+					<Route exact path="/" component={TransactionsPage} />
+					<Route exact path="/page/:page?" component={TransactionsPage} />
 					<Route exact path="/add" component={AddTransactionsPage} />
 					<Route exact path="/transaction/:id" component={EditTransactionPage} />
 				</Switch>
