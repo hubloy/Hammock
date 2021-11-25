@@ -54,9 +54,16 @@ export default class MembershipDashboard extends Component {
 							{memberships.length <= 0 ? (
 								<Center text={hammock.strings.dashboard.memberships.none} className="uk-text-info" />
 							) : (
-								<ul className="uk-list uk-list-striped">
+								<ul className="uk-list">
 									{memberships.map(item =>
-										<li key={item.id}><a className="uk-text-primary" href={hammock.strings.dashboard.memberships.url + "#/edit/" + item.id}>{item.name}</a></li>
+										<li key={item.id}>
+											<div className="uk-grid-collapse uk-child-width-expand@s" uk-grid="">
+												<div>
+													<a className="uk-text-primary" href={hammock.strings.dashboard.memberships.url + "#/edit/" + item.id} title={hammock.common.buttons.edit + ' ' + item.name}>{item.name}</a>
+												</div>
+												<div className="uk-width-1-3 uk-text-right">{item.enabled}</div>
+											</div>
+										</li>
 									)}
 								</ul>
 							)}

@@ -35,7 +35,7 @@ export default class Admin extends Component {
 									<p className="uk-h4">{hammock.strings.dashboard.management.title}</p>
 									<div>
 										{Object.entries(hammock.strings.dashboard.management.types).map((type, index) => {
-											return (<a key={index} href={type[1].url}><div className="uk-margin-small uk-padding-small uk-card uk-card-default uk-card-body">{type[1].name}</div></a>)
+											return (<a key={index} href={type[1].url} title={type[1].name}><div className="uk-margin-small uk-padding-small uk-card uk-card-default uk-card-body">{type[1].name}</div></a>)
 										})}
 									</div>
 								</div>

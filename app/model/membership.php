@@ -469,7 +469,7 @@ class Membership {
 				'date_updated'        => $this->date_updated,
 				'name'                => $this->name,
 				'details'             => $this->details,
-				'enabled'             => $this->enabled ? __( 'Active', 'hammock' ) : __( 'Active', 'hammock' ),
+				'enabled'             => $this->enabled ? __( 'Active', 'hammock' ) : __( 'Inactive', 'hammock' ),
 				'trial_enabled'       => $this->trial_enabled ? __( 'Trial Enabled', 'hammock' ) : __( 'No Trial', 'hammock' ),
 				'limit_spaces'        => $this->limit_spaces ? __( 'Limited Registration', 'hammock' ) : __( 'Open Registration', 'hammock' ),
 				'type'                => Memberships::get_type( $this->type ),

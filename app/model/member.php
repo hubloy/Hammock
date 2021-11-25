@@ -550,6 +550,7 @@ class Member {
 				'user_edit_url' => $this->user_edit_url,
 				'user_info'     => $this->user_info,
 				'enabled'       => $this->enabled,
+				'status'        => $this->enabled ? __( 'Enabled', 'hammock' ) : __( 'Disabled', 'hammock' ),
 				'plans'         => count( $this->plans ),
 			),
 			$this
