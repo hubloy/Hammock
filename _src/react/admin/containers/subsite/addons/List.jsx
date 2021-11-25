@@ -92,11 +92,15 @@ export default class List extends PureComponent {
 				return (
 					<React.Fragment>
 						<div uk-filter="target: .addon-filter">
-							<ul className="uk-subnav uk-subnav-pill">
-								<li className="uk-active" uk-filter-control=""><a href="#">All</a></li>
-								<li uk-filter-control=".enabled"><a href="#">{hammock.common.status.enabled}</a></li>
-								<li uk-filter-control=".disabled"><a href="#">{hammock.common.status.disabled}</a></li>
-							</ul>
+							<nav className="uk-navbar-container uk-navbar-transparent" uk-navbar="">
+								<div className="uk-navbar-left">
+									<ul className="uk-navbar-nav hammock-navbar">
+										<li className="uk-active" uk-filter-control=""><span>{hammock.common.general.all}</span></li>
+										<li uk-filter-control=".enabled"><span>{hammock.common.status.enabled}</span></li>
+										<li uk-filter-control=".disabled"><span>{hammock.common.status.disabled}</span></li>
+									</ul>
+								</div>
+							</nav>
 
 							<ul className="addon-filter uk-child-width-1-2 uk-child-width-1-3@m uk-child-width-1-5@l uk-text-center" uk-grid="">
 								{Object.keys(items).map(item =>

@@ -143,6 +143,7 @@ class Resource {
 						'configure' => __( 'Configure', 'hammock' ),
 						'filter'    => __( 'Filter', 'hammock' ),
 						'actions'   => __( 'Actions', 'hammock' ),
+						'all'       => __( 'All', 'hammock' ),
 					),
 					'urls'          => array(
 						'dash_url' => is_multisite() ? network_admin_url( 'admin.php?page=hammock' ) : admin_url( 'admin.php?page=hammock' ),

@@ -173,9 +173,13 @@ body {
 	}
 
 	.hammock-navbar {
-		a {
+		> *:focus {
+			outline: none;
+		}
+		span, a {
 			padding: 5px 0;
 			min-height: auto;
+			cursor: pointer;
 		}
 		li {
 			padding: 0 10px;

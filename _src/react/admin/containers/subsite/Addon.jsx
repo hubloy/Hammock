@@ -9,7 +9,6 @@ export default class Addon extends Component {
 	render() {
 		return (
 			<Dashboard hammock={this.props.hammock}>
-				<h2 className="uk-text-center uk-heading-divider">{this.props.hammock.common.string.title}</h2>
 				<List hammock={this.props.hammock}/>
 			</Dashboard>
 		)
