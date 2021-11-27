@@ -21,7 +21,7 @@ return array(
 	),
 	'dashboard' => array(
 		'add_new' => array(
-			'button' => __( 'New Member', 'hammock' ),
+			'button' => __( 'Add Member', 'hammock' ),
 			'modal'  => array(
 				'title'       => __( 'Add Member', 'hammock' ),
 				'select'      => array(

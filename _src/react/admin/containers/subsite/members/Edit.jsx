@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import LazyLoad from 'react-lazyload';
+import { Link } from 'react-router-dom';
 
 import fetchWP from 'utils/fetchWP';
 import Dashboard from 'layout/Dashboard';
@@ -8,6 +8,7 @@ import {Nav} from './view/Nav'
 
 import MemberDetail from './view/MemberDetail';
 import MemberActivity from './view/MemberActivity';
+import MemberSubscriptions from './view/MemberSubscriptions';
 import MemberTransactions from './view/MemberTransactions';
 
 export default class MemberEdit extends Component {
@@ -16,6 +17,7 @@ export default class MemberEdit extends Component {
 		super(props);
 
 		this.state = {
+			member : {},
 			id : this.props.match.params.id,
 			loading : true,
 			error : false
@@ -26,28 +28,63 @@ export default class MemberEdit extends Component {
         });
 	}
 
+	async componentDidMount() {
+		this.load_member();
+	}
+
+	load_member = async () => {
+		const id = this.state.id;
+		this.fetchWP.get( 'members/get?id=' + id )
+			.then( (json) => this.setState({
+				member : json,
+				loading : false,
+				error : false,
+			}), (err) => {
+				this.setState({ loading : false, error : true });
+				this.notify( self.props.hammock.error, 'error' );
+			}
+		);
+	}
+
 	render() {
 		
 		var self = this,
 			hammock = self.props.hammock,
 			section = this.props.match.params.section !== undefined ? this.props.match.params.section : 'details',
-			id = self.state.id;
+			id = self.state.id,
+			strings = hammock.strings,
+			member = this.state.member;
 		return (
 			<Dashboard hammock={hammock}>
-				<div uk-grid="">
-					<LazyLoad className="uk-width-1-4 uk-height-medium">
-						<Nav hammock={hammock} active_nav={section} member_id={id}/>
-					</LazyLoad>
-					<div className="uk-width-expand uk-margin-left uk-card uk-card-body uk-background-default uk-padding-small">
-						{
-							{
-								'details': <MemberDetail hammock={hammock} id={id} />,
-								'activity': <MemberActivity hammock={hammock} id={id}/>,
-								'transactions': <MemberTransactions hammock={hammock} id={id}/>
-							}[section]
-						}
+				{this.state.loading ? (
+					<div className="uk-container uk-padding-small uk-margin-top uk-width-1-1 uk-background-default">
+						<span className="uk-text-center" uk-spinner="ratio: 3"></span>
 					</div>
-				</div>
+				) : (
+					this.state.member.id <= 0 ? (
+						<div className="uk-container uk-text-center uk-padding-small uk-margin-top uk-width-1-1 uk-background-default">
+							<h3 className="uk-text-center">{strings.edit.not_found}</h3>
+							<Link className="uk-border-rounded uk-margin-bottom uk-background-default uk-button uk-button-default uk-button-small" to="/">{strings.edit.back}</Link>
+						</div>
+					) : (
+						<div uk-grid="">
+							<div className="uk-width-1-4 uk-height-medium">
+								<MemberDetail hammock={hammock} id={id} member={member} />
+							</div>
+							<div className="uk-width-expand uk-margin-left uk-card uk-card-body uk-background-default uk-padding-small">
+								<Nav active_nav={section} hammock={hammock} member_id={id} />
+								{
+									{
+										'details': <MemberSubscriptions hammock={hammock} id={id} member={member} />,
+										'activity': <MemberActivity hammock={hammock} id={id} member={member}/>,
+										'transactions': <MemberTransactions hammock={hammock} id={id} member={member}/>
+									}[section]
+								}
+							</div>
+						</div>
+					)
+				)}
+				
 			</Dashboard>
 		)
 	}

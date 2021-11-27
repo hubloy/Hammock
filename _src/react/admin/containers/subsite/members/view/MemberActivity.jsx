@@ -61,10 +61,10 @@ export default class MemberActivity extends Component {
 					) : (
 						<ul className="uk-list uk-list-striped">
 							{items.map(item =>
-								<li key={item.log_id}>
+								<li key={item.ref_id}>
 									<div className="uk-width-expand">
 										<p className="uk-text-meta uk-margin-remove-bottom uk-text-small">
-											<time datetime={item.date}>{item.date}</time>
+											<time dateTime={item.date}>{item.date}</time>
 										</p>
 										<h6 className="uk-margin-remove-top uk-margin-remove-bottom">
 											{item.action} {':'} <span dangerouslySetInnerHTML={{ __html: item.description }} /> {'('} <span className="uk-text-small" dangerouslySetInnerHTML={{ __html: item.author }} /> {')'}
