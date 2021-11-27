@@ -134,6 +134,7 @@ class Resource {
 						'enabled'  => __( 'Enabled', 'hammock' ),
 						'disabled' => __( 'Disabled', 'hammock' ),
 						'status'   => __( 'Status', 'hammock' ),
+						'expired'  => __( 'Expired', 'hammock' ),
 						'loading'  => __( 'Loading...', 'hammock' ),
 						'success'  => __( 'Success', 'hammock' ),
 						'error'    => __( 'Error', 'hammock' ),

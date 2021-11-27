@@ -50,7 +50,7 @@ export default class MemberEdit extends Component {
 		
 		var self = this,
 			hammock = self.props.hammock,
-			section = this.props.match.params.section !== undefined ? this.props.match.params.section : 'details',
+			section = this.props.match.params.section !== undefined ? this.props.match.params.section : 'subs',
 			id = self.state.id,
 			strings = hammock.strings,
 			member = this.state.member;
@@ -75,7 +75,7 @@ export default class MemberEdit extends Component {
 								<Nav active_nav={section} hammock={hammock} member_id={id} />
 								{
 									{
-										'details': <MemberSubscriptions hammock={hammock} id={id} member={member} />,
+										'subs': <MemberSubscriptions hammock={hammock} id={id} member={member} />,
 										'activity': <MemberActivity hammock={hammock} id={id} member={member}/>,
 										'transactions': <MemberTransactions hammock={hammock} id={id} member={member}/>
 									}[section]

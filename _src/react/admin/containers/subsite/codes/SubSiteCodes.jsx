@@ -88,55 +88,67 @@ export default class SubSiteCodes extends Component {
 						{items.length <= 0 ? (
                             <h3 className="uk-text-center">{strings.not_found}</h3>
                         ) : (
-							<table className="uk-table uk-background-default">
-								 <thead>
-                                    <tr>
-                                        <th><input className="uk-checkbox hammock-top-checkbox" type="checkbox" /></th>
-                                        <th>{strings.table.code}</th>
-                                        <th>{strings.table.status}</th>
-										{type === 'coupons' && 
-											<th>{strings.table.amount}</th>
-										}
-                                        <th>{strings.table.author}</th>
-                                        <th>{strings.table.date}</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th><input className="uk-checkbox hammock-bottom-checkbox" type="checkbox" /></th>
-                                        <th>{strings.table.code}</th>
-                                        <th>{strings.table.status}</th>
-										{type === 'coupons' && 
-											<th>{strings.table.amount}</th>
-										}
-                                        <th>{strings.table.author}</th>
-                                        <th>{strings.table.date}</th>
-                                    </tr>
-                                </tfoot>
-								<tbody>
-                                {items.map(item =>
-                                    <tr key={item.id}>
-                                        <td><input className="uk-checkbox" type="checkbox" value={item.id} /></td>
-                                        <td>
-                                            {item.code}
-                                            <div id={"code-hover-"+ item.id}>
-                                                <Link uk-tooltip={hammock.common.buttons.edit} title={hammock.common.buttons.edit} className="uk-text-primary" to={"/edit/"+ item.id}>{hammock.common.buttons.edit}</Link>
-                                                {' '}|{' '}
-                                                <a href="#" data-id={item.id} uk-tooltip={hammock.common.buttons.delete} title={hammock.common.buttons.delete} className="uk-text-danger" onClick={ e => this.handleRowAction(e, item.id, 'delete')}>{hammock.common.buttons.delete}</a>
-                                            </div>
-                                        </td>
-                                        <td>{item.status}</td>
-										{type === 'coupons' && 
-											<td><span dangerouslySetInnerHTML={{ __html: item.code_value }}></span></td>
-										}
-										<td>
-                                         	{item.author_data.name}
-                                        </td>
-                                        <td>{item.date_created}</td>
-                                    </tr>
-                                )}
-                                </tbody>
-							</table>
+                            <div uk-filter="target: .code-filter">
+                                <nav className="uk-navbar-container uk-navbar-transparent" uk-navbar="">
+                                    <div className="uk-navbar-left">
+                                        <ul className="uk-navbar-nav hammock-navbar">
+                                            <li className="uk-active" uk-filter-control=""><span>{hammock.common.general.all}</span></li>
+                                            <li uk-filter-control=".enabled"><span>{hammock.common.status.enabled}</span></li>
+                                            <li uk-filter-control=".disabled"><span>{hammock.common.status.disabled}</span></li>
+                                            <li uk-filter-control=".expired"><span>{hammock.common.status.expired}</span></li>
+                                        </ul>
+                                    </div>
+                                </nav>
+                                <table className="uk-table uk-background-default code-filter">
+                                    <thead>
+                                        <tr>
+                                            <th><input className="uk-checkbox hammock-top-checkbox" type="checkbox" /></th>
+                                            <th>{strings.table.code}</th>
+                                            <th>{strings.table.status}</th>
+                                            {type === 'coupons' && 
+                                                <th>{strings.table.amount}</th>
+                                            }
+                                            <th>{strings.table.author}</th>
+                                            <th>{strings.table.date}</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th><input className="uk-checkbox hammock-bottom-checkbox" type="checkbox" /></th>
+                                            <th>{strings.table.code}</th>
+                                            <th>{strings.table.status}</th>
+                                            {type === 'coupons' && 
+                                                <th>{strings.table.amount}</th>
+                                            }
+                                            <th>{strings.table.author}</th>
+                                            <th>{strings.table.date}</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    {items.map(item =>
+                                        <tr key={item.id} className={item.base_status}>
+                                            <td><input className="uk-checkbox" type="checkbox" value={item.id} /></td>
+                                            <td>
+                                                {item.code}
+                                                <div id={"code-hover-"+ item.id}>
+                                                    <Link uk-tooltip={hammock.common.buttons.edit} title={hammock.common.buttons.edit} className="uk-text-primary" to={"/edit/"+ item.id}>{hammock.common.buttons.edit}</Link>
+                                                    {' '}|{' '}
+                                                    <a href="#" data-id={item.id} uk-tooltip={hammock.common.buttons.delete} title={hammock.common.buttons.delete} className="uk-text-danger" onClick={ e => this.handleRowAction(e, item.id, 'delete')}>{hammock.common.buttons.delete}</a>
+                                                </div>
+                                            </td>
+                                            <td>{item.status}</td>
+                                            {type === 'coupons' && 
+                                                <td><span dangerouslySetInnerHTML={{ __html: item.code_value }}></span></td>
+                                            }
+                                            <td>
+                                                {item.author_data.name}
+                                            </td>
+                                            <td>{item.date_created}</td>
+                                        </tr>
+                                    )}
+                                    </tbody>
+                                </table>
+                            </div>
 						)}
 						<PaginationUI pager={pager}/>
 					</React.Fragment>

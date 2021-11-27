@@ -9,8 +9,8 @@ export function Nav(props) {
         <nav className="uk-navbar-container uk-navbar-transparent" uk-navbar="">
             <div className="uk-navbar-left">
                 <ul className="uk-navbar-nav hammock-navbar">
-                    <li className={active_nav === 'details' ? 'uk-active' : '' }>
-                        <Link to={"/member/" + member_id}><span>{strings.edit.tabs.details}</span></Link>
+                    <li className={active_nav === 'subs' ? 'uk-active' : '' }>
+                        <Link to={"/member/" + member_id}><span>{strings.edit.tabs.subs}</span></Link>
                     </li>
                     <li className={active_nav === 'activity' ? 'uk-active' : '' }>
                         <Link to={"/member/" + member_id + "/activity"}><span>{strings.edit.tabs.activity}</span></Link>

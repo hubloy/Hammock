@@ -19,7 +19,6 @@ export default class CouponAddonSetting extends Component {
 	render() {
 		return (
 			<Dashboard hammock={this.props.hammock}>
-				<h2 className="uk-text-center uk-heading-divider">{this.props.hammock.common.string.title}</h2>
 				<SubSiteCodes type={`coupons`} hammock={this.props.hammock}/>
 			</Dashboard>
 		)

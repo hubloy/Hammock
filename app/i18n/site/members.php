@@ -46,7 +46,7 @@ return array(
 		'back'         => __( 'Back to members', 'hammock' ),
 		'not_found'    => __( 'Member not found', 'hammock' ),
 		'tabs'         => array(
-			'details'      => __( 'Details', 'hammock' ),
+			'subs'         => __( 'Subscriptions', 'hammock' ),
 			'activity'     => __( 'Activity', 'hammock' ),
 			'transactions' => __( 'Transactions', 'hammock' ),
 		),

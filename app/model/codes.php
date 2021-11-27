@@ -409,6 +409,7 @@ class Codes {
 				'id'           => $this->id,
 				'code'         => $this->code,
 				'status'       => \Hammock\Services\Codes::get_code_status( $this->status ),
+				'base_status'  => $this->status,
 				'amount'       => $this->amount,
 				'amount_type'  => $this->amount_type,
 				'code_value'   => $this->get_code_value(),

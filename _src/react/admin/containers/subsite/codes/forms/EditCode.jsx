@@ -180,15 +180,7 @@ export default class EditCode extends Component {
 			page_strings = hammock.page_strings,
 			code = this.state.item;
 		return (
-			<Dashboard hammock={hammock}>
-				<h2 className="uk-text-center uk-heading-divider">
-					{type === 'coupons' ? (
-						strings.edit.coupon
-					) : ( 
-						strings.edit.invite
-					)}	
-				</h2>
-				<Link to={'/'} className="uk-button uk-button-primary uk-button-small">{hammock.common.buttons.back}</Link>
+			<Dashboard hammock={hammock} title={type === 'coupons' ? strings.add.coupon : strings.add.invite}>
 				<div className={"uk-background-default uk-padding-small uk-margin-small-top hammock-settings-" + type}>
 					<form className="uk-form-horizontal uk-margin-large" onSubmit={this.handleSubmit.bind(this)} ref={this.coupon_edit_code}>
 						<InputUI name={`type`} type={`hidden`} value={this.props.type}/>
@@ -198,8 +190,9 @@ export default class EditCode extends Component {
 						) : (
 							this.renderInviteForm( strings, page_strings, code )
 						)}
-						<div className="uk-margin">
+						<div className="uk-margin uk-button-group">
 							<button className="uk-button uk-button-primary save-button">{hammock.common.buttons.update}</button>
+							<Link to={'/'} className="uk-button uk-button-secondary uk-margin-small-left">{hammock.common.buttons.back}</Link>
 						</div>
 					</form>
 				</div>
