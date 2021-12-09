@@ -229,11 +229,9 @@ export default class MemberSubscriptions extends Component {
 		return (
 			<div>
 				<div className="uk-background-default uk-padding-small uk-margin-small-top hammock-margin-left-negative-40 uk-margin-remove-left">
-					<h4 className="uk-heading-divider">{strings.edit.details.subscription.title}
 					{this.state.plans.total > 0 &&
 						<a className="uk-margin-small-left uk-button uk-button-primary uk-button-small" href="#hammock-add-subscription" uk-toggle="">{strings.edit.details.subscription.create.title}</a>
 					}
-					</h4>
 					{this.state.plans.total > 0 ? (
 							<PlanList plans={this.state.plans} hammock={hammock} action={this.refresh_member_plans}/>
 						) : (

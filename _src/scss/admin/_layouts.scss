@@ -40,7 +40,7 @@ body {
 	
 	.hammock-dashboard {
 		.dashboard-heading {
-			z-index: 99999;
+			z-index: 9;
 			position: relative;
 			width: 100%;
 		}
@@ -63,6 +63,7 @@ body {
 		&:focus {
 			outline: none;
 			border: none;
+			box-shadow: none;
 		}
 	}
 
