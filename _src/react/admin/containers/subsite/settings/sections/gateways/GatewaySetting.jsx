@@ -77,7 +77,7 @@ export default class GatewaySetting extends PureComponent {
 		const enabled = this.state.settings.enabled !== 'undefined' ? this.state.settings.enabled : false;
 		var hammock = this.props.hammock;
 		return (
-			<li className="uk-background-default uk-padding-small" key={this.props.id}>
+			<li className="uk-background-default uk-box-shadow-small uk-padding-small" key={this.props.id}>
 				<span className="uk-accordion-title hammock-pointer" href="#">{this.props.item.name} <span className={ "uk-label uk-text-uppercase uk-text-small hammock-gateway-status " + (enabled ? 'uk-label-success' : '') }>{enabled ? hammock.common.status.enabled : hammock.common.status.disabled}</span></span>
 				<div className="uk-accordion-content">
 					<form className="uk-form-horizontal uk-margin-large" onSubmit={this.handleSubmit.bind(this)} ref={this.gateway_setting}>

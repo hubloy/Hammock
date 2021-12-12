@@ -52,7 +52,7 @@ export default class SubSiteGateways extends Component {
                 const { items } = this.state;
                 var hammock = this.props.hammock;
                 return (
-                    <div className="uk-container uk-padding-small">
+                    <div className="uk-padding-small">
                         <ul uk-accordion="">
                             {Object.keys(items).map(item =>
                                 <React.Fragment key={item}>

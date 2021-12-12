@@ -17,20 +17,17 @@ export default class SiteSettings extends Component {
 		var section = this.props.match.params.section !== undefined ? this.props.match.params.section : 'general';
 		return (
 			<Dashboard hammock={this.props.hammock}>
-				<div uk-grid="">
-					<LazyLoad className="uk-width-1-4@m uk-width-1-1@s uk-height-medium">
+				<div className="hammock-settings uk-width-expand">
+					<LazyLoad>
 						<Nav hammock={this.props.hammock} active_nav={section}/>
 					</LazyLoad>
-					
-					<div className="hammock-settings uk-width-expand uk-margin-left uk-card uk-card-body">
-						<div className="hammock-settings-settings uk-background-default uk-padding-small uk-border-rounded">
+					<div className="hammock-settings-settings uk-background-default uk-padding-small">
+						{
 							{
-								{
-									'gateways': <SubSiteGateways hammock={this.props.hammock} />,
-									'general': <SubSiteSettings hammock={this.props.hammock}/>
-								}[section]
-							}
-						</div>
+								'gateways': <SubSiteGateways hammock={this.props.hammock} />,
+								'general': <SubSiteSettings hammock={this.props.hammock}/>
+							}[section]
+						}
 					</div>
 				</div>
 			</Dashboard>
