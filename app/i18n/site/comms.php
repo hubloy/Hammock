@@ -14,6 +14,7 @@ return array(
 		'user'  => __( 'Member Emails', 'hammock' ),
 	),
 	'table' => array(
+		'status'      => __( 'Status', 'hammock' ),
 		'email'       => __( 'Email', 'hammock' ),
 		'description' => __( 'Description', 'hammock' ),
 		'recipient'   => __( 'Recipient(s)', 'hammock' ),

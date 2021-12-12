@@ -49,21 +49,19 @@ export default class Comms extends Component {
 			} else {
 				return (
 					<Dashboard hammock={hammock}>
-						<div uk-grid="">
-							{typeof items.admin !== 'undefined' &&
-								<React.Fragment>
-									<Nav hammock={hammock}/>
-									<div className="hammock-comms uk-width-expand uk-margin-left uk-card uk-card-body uk-switcher">
-										<div className="uk-background-default uk-padding-small uk-border-rounded">
-											<Table hammock={hammock} type={`admin`} items={items.admin}/>
-										</div>
-										<div className="uk-background-default uk-padding-small uk-border-rounded">
-											<Table hammock={hammock} type={`member`} items={items.member}/>
-										</div>
+						{typeof items.admin !== 'undefined' &&
+							<React.Fragment>
+								<Nav hammock={hammock}/>
+								<div className="hammock-comms uk-container uk-padding-small uk-margin-top uk-width-1-1 uk-background-default uk-switcher">
+									<div>
+										<Table hammock={hammock} type={`admin`} items={items.admin}/>
 									</div>
-								</React.Fragment>
-							}
-						</div>
+									<div>
+										<Table hammock={hammock} type={`member`} items={items.member}/>
+									</div>
+								</div>
+							</React.Fragment>
+						}
 					</Dashboard>
 				)
 			}

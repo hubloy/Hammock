@@ -11,7 +11,7 @@ export default class Table extends Component {
 			<table className="uk-table">
 				<thead>
 					<tr>
-						<th className="hammock-email-status"></th>
+						<th className="hammock-email-status">{strings.table.status}</th>
 						<th>{strings.table.email}</th>
 						<th>{strings.table.description}</th>
 						<th>{strings.table.recipient}</th>
@@ -20,7 +20,7 @@ export default class Table extends Component {
 				</thead>
 				<tfoot>
 					<tr>
-						<th className="hammock-email-status"></th>
+						<th className="hammock-email-status">{strings.table.status}</th>
 						<th>{strings.table.email}</th>
 						<th>{strings.table.description}</th>
 						<th>{strings.table.recipient}</th>

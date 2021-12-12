@@ -72,12 +72,11 @@ export default class Manage extends Component {
 			<Dashboard hammock={hammock}>
 				{this.state && typeof this.state.item.id !== 'undefined' ? (
 					<React.Fragment>
-						<div uk-grid="">
-							<div className="uk-width-1-4 uk-height-medium">
+						<div className='uk-container uk-padding-small uk-margin-top uk-width-1-1 uk-background-default'>
+							<div>
 								<h2 className="uk-heading-divider">{this.state.item.title}</h2>
-            					<Link className="uk-border-rounded uk-margin-bottom uk-background-default uk-button uk-button-default uk-button-small" to="/">{hammock.strings.edit.back}</Link>
 							</div>
-							<div className="hammock-membership uk-width-expand uk-margin-left uk-card uk-card-body uk-background-default">
+							<div className="hammock-membership hammock-membership-comms">
 								<form className="uk-form-horizontal uk-margin-large" onSubmit={this.handleSubmit.bind(this)} ref={this.comm_setting}>
 									<InputUI name={`id`} type={`hidden`} value={this.state.item.id}/>
 									<div dangerouslySetInnerHTML={{ __html: this.state.item.form }} />

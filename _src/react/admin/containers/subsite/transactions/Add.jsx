@@ -28,7 +28,7 @@ export default class AddTransaction extends Component {
         });
 	}
 
-	notify(type, message) {
+	notify(message, type) {
 		toast[type](message, {toastId: 'transactions-add-toast'});
 	}
 
@@ -105,44 +105,42 @@ export default class AddTransaction extends Component {
 		var strings = hammock.strings;
 		return (
 			<Dashboard hammock={hammock} title={strings.create.title}>
-				<div uk-grid="">
-					<div className="hammock-transaction uk-width-expand uk-margin-left uk-card uk-card-body uk-background-default">
-						<form className="uk-form-horizontal uk-margin-large" onSubmit={this.handleSubmit.bind(this)} ref={this.add_transaction}>
-							<div className="uk-margin">
-								<label className="uk-form-label">{strings.create.form.member}</label>
-								<div className="uk-form-controls">
-									<Members hammock={hammock}/>
-								</div>
+				<div className="hammock-transaction uk-background-default uk-padding-small">
+					<form className="uk-form-horizontal uk-margin-large" onSubmit={this.handleSubmit.bind(this)} ref={this.add_transaction}>
+						<div className="uk-margin">
+							<label className="uk-form-label">{strings.create.form.member}</label>
+							<div className="uk-form-controls">
+								<Members hammock={hammock}/>
 							</div>
-							<div className="uk-margin">
-								<label className="uk-form-label">{strings.create.form.membership}</label>
-								<div className="uk-form-controls">
-									<DropDownUI name={`membership`} values={this.state.memberships} required={true}/>
-								</div>
+						</div>
+						<div className="uk-margin">
+							<label className="uk-form-label">{strings.create.form.membership}</label>
+							<div className="uk-form-controls">
+								<DropDownUI name={`membership`} values={this.state.memberships} required={true}/>
 							</div>
-							<div className="uk-margin">
-								<label className="uk-form-label">{strings.create.form.status}</label>
-								<div className="uk-form-controls">
-									<DropDownUI name={`status`} values={this.state.status} required={true}/>
-								</div>
+						</div>
+						<div className="uk-margin">
+							<label className="uk-form-label">{strings.create.form.status}</label>
+							<div className="uk-form-controls">
+								<DropDownUI name={`status`} values={this.state.status} required={true}/>
 							</div>
-							<div className="uk-margin">
-								<label className="uk-form-label">{strings.create.form.gateway}</label>
-								<div className="uk-form-controls">
-									<DropDownUI name={`gateway`} values={this.state.gateways} required={true}/>
-								</div>
+						</div>
+						<div className="uk-margin">
+							<label className="uk-form-label">{strings.create.form.gateway}</label>
+							<div className="uk-form-controls">
+								<DropDownUI name={`gateway`} values={this.state.gateways} required={true}/>
 							</div>
-							<div className="uk-margin">
-								<label className="uk-form-label">{strings.create.form.date}</label>
-								<div className="uk-form-controls">
-									<InputUI name={`due_date`} class_name={`hammock-from-date`} />
-								</div>
+						</div>
+						<div className="uk-margin">
+							<label className="uk-form-label">{strings.create.form.date}</label>
+							<div className="uk-form-controls">
+								<InputUI name={`due_date`} class_name={`hammock-from-date`} />
 							</div>
-							<div className="uk-margin ">
-								<button className="uk-button uk-button-primary save-button">{hammock.common.buttons.save}</button>
-							</div>
-						</form>
-					</div>
+						</div>
+						<div className="uk-margin ">
+							<button className="uk-button uk-button-primary save-button">{hammock.common.buttons.save}</button>
+						</div>
+					</form>
 				</div>
 			</Dashboard>
 		)
