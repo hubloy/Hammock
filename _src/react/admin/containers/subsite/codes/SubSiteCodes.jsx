@@ -78,17 +78,10 @@ export default class SubSiteCodes extends Component {
 			} else {
 				return (
 					<React.Fragment>
-						<Link className="uk-button uk-button-primary uk-button-small" to={"/new"}>
-							{type === 'coupons' ? (
-								strings.add.coupon
-							) : (
-								strings.add.invite
-							)}
-						</Link>
 						{items.length <= 0 ? (
                             <h3 className="uk-text-center">{strings.not_found}</h3>
                         ) : (
-                            <div className='uk-margin-top'>
+                            <div>
                                 <table className="uk-table uk-background-default">
                                     <thead>
                                         <tr>

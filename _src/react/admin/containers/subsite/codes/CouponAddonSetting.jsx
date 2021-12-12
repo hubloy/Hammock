@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import { Link } from 'react-router-dom';
 import Dashboard from 'layout/Dashboard'
 import SubSiteCodes from './SubSiteCodes'
 
@@ -10,16 +10,11 @@ export default class CouponAddonSetting extends Component {
 		super(props);
 	}
 
-
-	handleUpdateAddonSetting( event ) {
-		event.preventDefault();
-	}
-
-
 	render() {
+		var hammock = this.props.hammock;
 		return (
-			<Dashboard hammock={this.props.hammock}>
-				<SubSiteCodes type={`coupons`} hammock={this.props.hammock}/>
+			<Dashboard hammock={hammock} button={<Link className="uk-button uk-button-primary uk-button-small" to={"/new"}>{hammock.strings.add.coupon}</Link>}>
+				<SubSiteCodes type={`coupons`} hammock={hammock}/>
 			</Dashboard>
 		)
 	}
