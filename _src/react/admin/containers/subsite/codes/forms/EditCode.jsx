@@ -26,7 +26,7 @@ export default class EditCode extends Component {
         };
 	}
 
-	notify(type, message) {
+	notify(message, type) {
 		toast[type](message, {toastId: 'edit-code-toast'});
 	}
 
@@ -180,7 +180,7 @@ export default class EditCode extends Component {
 			page_strings = hammock.page_strings,
 			code = this.state.item;
 		return (
-			<Dashboard hammock={hammock} title={type === 'coupons' ? strings.add.coupon : strings.add.invite}>
+			<Dashboard hammock={hammock} title={type === 'coupons' ? strings.edit.coupon : strings.edit.invite}>
 				<div className={"uk-background-default uk-padding-small uk-margin-small-top hammock-settings-" + type}>
 					<form className="uk-form-horizontal uk-margin-large" onSubmit={this.handleSubmit.bind(this)} ref={this.coupon_edit_code}>
 						<InputUI name={`type`} type={`hidden`} value={this.props.type}/>

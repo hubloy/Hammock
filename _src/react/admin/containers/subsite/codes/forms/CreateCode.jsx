@@ -22,7 +22,7 @@ export default class CreateCode extends Component {
         });
 	}
 
-	notify(type, message) {
+	notify(message, type) {
 		toast[type](message, {toastId: 'create-code-toast'});
 	}
 

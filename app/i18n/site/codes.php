@@ -12,8 +12,8 @@ return array(
 		'invite' => __( 'New Invite Code', 'hammock' ),
 	),
 	'edit'         => array(
-		'coupon' => __( 'Editing Coupon', 'hammock' ),
-		'invite' => __( 'Editing Invite Code', 'hammock' ),
+		'coupon' => __( 'Edit Coupon', 'hammock' ),
+		'invite' => __( 'Edit Invite Code', 'hammock' ),
 	),
 	'table'        => array(
 		'id'     => __( 'ID', 'hammock' ),

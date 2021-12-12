@@ -88,21 +88,11 @@ export default class SubSiteCodes extends Component {
 						{items.length <= 0 ? (
                             <h3 className="uk-text-center">{strings.not_found}</h3>
                         ) : (
-                            <div uk-filter="target: .code-filter">
-                                <nav className="uk-navbar-container uk-navbar-transparent" uk-navbar="">
-                                    <div className="uk-navbar-left">
-                                        <ul className="uk-navbar-nav hammock-navbar">
-                                            <li className="uk-active" uk-filter-control=""><span>{hammock.common.general.all}</span></li>
-                                            <li uk-filter-control=".enabled"><span>{hammock.common.status.enabled}</span></li>
-                                            <li uk-filter-control=".disabled"><span>{hammock.common.status.disabled}</span></li>
-                                            <li uk-filter-control=".expired"><span>{hammock.common.status.expired}</span></li>
-                                        </ul>
-                                    </div>
-                                </nav>
-                                <table className="uk-table uk-background-default code-filter">
+                            <div className='uk-margin-top'>
+                                <table className="uk-table uk-background-default">
                                     <thead>
                                         <tr>
-                                            <th><input className="uk-checkbox hammock-top-checkbox" type="checkbox" /></th>
+                                            <th className='uk-table-shrink'><input className="uk-checkbox hammock-top-checkbox" type="checkbox" /></th>
                                             <th>{strings.table.code}</th>
                                             <th>{strings.table.status}</th>
                                             {type === 'coupons' && 
@@ -114,7 +104,7 @@ export default class SubSiteCodes extends Component {
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th><input className="uk-checkbox hammock-bottom-checkbox" type="checkbox" /></th>
+                                            <th className='uk-table-shrink'><input className="uk-checkbox hammock-bottom-checkbox" type="checkbox" /></th>
                                             <th>{strings.table.code}</th>
                                             <th>{strings.table.status}</th>
                                             {type === 'coupons' && 
@@ -127,7 +117,7 @@ export default class SubSiteCodes extends Component {
                                     <tbody>
                                     {items.map(item =>
                                         <tr key={item.id} className={item.base_status}>
-                                            <td><input className="uk-checkbox" type="checkbox" value={item.id} /></td>
+                                            <td className='uk-table-shrink'><input className="uk-checkbox" type="checkbox" value={item.id} /></td>
                                             <td>
                                                 {item.code}
                                                 <div id={"code-hover-"+ item.id}>

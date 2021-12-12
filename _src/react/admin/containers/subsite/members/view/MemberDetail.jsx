@@ -71,8 +71,8 @@ export default class MemberDetail extends Component {
 							<li>{strings.labels.member_id} : <code>{member.member_id}</code></li>
 							<li>{strings.edit.details.status} : {member.enabled ? hammock.common.status.enabled : hammock.common.status.disabled}</li>
 							<li>{strings.edit.details.since} : {member.date_created}</li>
-							<li><a href={member.user_edit_url} target="_blank" className="uk-button uk-button-default uk-button-small">{strings.labels.profile_url}</a></li>
-							<li><a href="#" data-id={member.id} data-prompt={strings.edit.details.delete.prompt} onClick={this.delete} className="uk-button uk-button-danger uk-button-small delete-button">{strings.edit.details.delete.title}</a></li>
+							<li><a href={member.user_edit_url} target="_blank" className="uk-text-primary">{strings.labels.profile_url}</a></li>
+							<li><a href="#" data-id={member.id} data-prompt={strings.edit.details.delete.prompt} onClick={this.delete} className="uk-text-danger delete-button">{strings.edit.details.delete.title}</a></li>
 							<li><Link to="/" className="uk-button uk-button-default uk-button-small">{strings.edit.back}</Link></li>
 						</ul>
 					</div>
