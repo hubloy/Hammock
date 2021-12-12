@@ -104,12 +104,8 @@ export default class AddTransaction extends Component {
 	render_form( hammock ) {
 		var strings = hammock.strings;
 		return (
-			<Dashboard hammock={hammock}>
+			<Dashboard hammock={hammock} title={strings.create.title}>
 				<div uk-grid="">
-					<div className="uk-width-1-4 uk-height-medium">
-						<h2 className="uk-heading-divider">{strings.create.title}</h2>
-						<Link className="uk-border-rounded uk-margin-bottom uk-background-default uk-button uk-button-default uk-button-small" to="/">{strings.back}</Link>
-					</div>
 					<div className="hammock-transaction uk-width-expand uk-margin-left uk-card uk-card-body uk-background-default">
 						<form className="uk-form-horizontal uk-margin-large" onSubmit={this.handleSubmit.bind(this)} ref={this.add_transaction}>
 							<div className="uk-margin">

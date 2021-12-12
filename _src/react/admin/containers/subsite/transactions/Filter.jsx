@@ -10,9 +10,6 @@ export function Filter(props) {
     return (
         <form method="GET">
             <div className="uk-width-1-1 uk-child-width-expand@s uk-margin-small-top uk-flex-middle" uk-grid="">
-                <div className="uk-width-auto">
-                    <Link className="uk-background-default uk-icon-button" to={"/add"} uk-icon="plus" title={hammock.strings.dashboard.add_new.button}></Link>
-                </div>
 				<div className="uk-width-1-3">
 					<DropDownUI name={`gateway`} values={hammock.page_strings.gateways} class_name={`hammock-transaction-gateway`}/>
 				</div>

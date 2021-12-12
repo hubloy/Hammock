@@ -83,7 +83,7 @@ export default class Table extends Component {
 										<th>{strings.dashboard.table.active}</th>
 										<th>{strings.dashboard.table.members}</th>
 										<th>{strings.dashboard.table.price}</th>
-										<th>{strings.dashboard.table.shortcode}</th>
+										<th></th>
 									</tr>
 								</thead>
 								<tfoot>
@@ -93,7 +93,7 @@ export default class Table extends Component {
 										<th>{strings.dashboard.table.active}</th>
 										<th>{strings.dashboard.table.members}</th>
 										<th>{strings.dashboard.table.price}</th>
-										<th>{strings.dashboard.table.shortcode}</th>
+										<th></th>
 									</tr>
 								</tfoot>
 								<tbody>
@@ -111,7 +111,7 @@ export default class Table extends Component {
 											<td><span dangerouslySetInnerHTML={{ __html: item.price_name }}></span></td>
 											<td>
 												<div className="uk-inline">
-													<button className="uk-button uk-button-default uk-button-small" type="button"><span uk-icon="cog"></span></button>
+													<button className="uk-button uk-button-default uk-button-small uk-padding-small" type="button"><span uk-icon="cog"></span></button>
 													<div uk-dropdown="pos: bottom-right">
 														<ul className="uk-nav uk-dropdown-nav">
 															<li className="uk-nav-header">Header</li>
