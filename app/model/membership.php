@@ -451,6 +451,19 @@ class Membership {
 		return Duration::get_period_in_days( $this->trial_duration, $this->trial_period );
 	}
 
+	/**
+	 * Type price.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return string
+	 */
+	public function get_type_price() {
+		$price = hammock_format_currency( $this->price );
+		$type  = $this->get_readable_type();
+		return $price . ' ' .strtolower( $type );
+	}
+
 
 	/**
 	 * Render values to readable strings
@@ -476,6 +489,7 @@ class Membership {
 				'duration'            => $this->duration,
 				'signup_price'        => hammock_format_currency( $this->signup_price ),
 				'price'               => hammock_format_currency( $this->price ),
+				'price_name'          => $this->get_type_price(),
 				'trial_price'         => hammock_format_currency( $this->trial_price ),
 				'trial_period'        => $this->trial_period,
 				'trial_duration'      => $this->trial_duration,
