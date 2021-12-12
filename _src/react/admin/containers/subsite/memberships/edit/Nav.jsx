@@ -3,19 +3,21 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export function Nav(props) {
-	const strings = props.hammock.strings;
+	var strings = props.hammock.strings,
+    active_nav = props.active_nav,
+    id = props.id;
     return (
-        <div className="uk-width-1-4 uk-height-medium">
-            <h2 className="uk-heading-divider">{strings.edit.title}</h2>
-            <Link className="uk-border-rounded uk-margin-bottom uk-background-default uk-button uk-button-default uk-button-small" to="/">{strings.edit.back}</Link>
-            <ul className="uk-nav-default hammock-switcher-nav uk-nav-parent-icon" uk-nav="" uk-switcher="connect: .hammock-membership">
-                <li>
-                    <a href="#" className="hammock-nav-button uk-text-left uk-border-rounded uk-box-shadow-small uk-background-default uk-button uk-button-default uk-button-small"><span className="uk-margin-left">{strings.edit.tabs.general}</span></a>
-                </li>
-                <li>
-                    <a href="#" className="hammock-nav-button uk-text-left uk-border-rounded uk-box-shadow-small uk-background-default uk-button uk-button-default uk-button-small"><span className="uk-margin-left">{strings.edit.tabs.price}</span></a>
-                </li>
-            </ul>
-        </div>
+        <nav className="uk-navbar-container uk-navbar-transparent" uk-navbar="">
+            <div className="uk-navbar-left">
+                <ul className="uk-navbar-nav hammock-navbar">
+                    <li className={active_nav === 'general' ? 'uk-active' : '' }>
+                        <Link to={"/edit/" + id}><span>{strings.edit.tabs.general}</span></Link>
+                    </li>
+                    <li className={active_nav === 'price' ? 'uk-active' : '' }>
+                        <Link to={"/edit/" + id + "/price"}><span>{strings.edit.tabs.price}</span></Link>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     );
 }

@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			<HashRouter>
 				<Switch>
 					<Route exact path="/:page?" component={MembershipPage} />
-					<Route path="/edit/:id" component={MembershipEditPage} />
+					<Route path="/edit/:id/:section?" component={MembershipEditPage} />
 				</Switch>
 			</HashRouter>
 		);

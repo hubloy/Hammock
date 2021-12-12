@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	if ( hammockContainer !== null ) {
 		const DefaultView = (props) => <NotFound hammock={window.hammock} {...props}/>
 		const SettingsPage = (props) => <SiteSettings hammock={window.hammock} {...props}/>
-		const GatewaySettingsPage = (props) => <GatewaySettings hammock={window.hammock} {...props} />
 		const routing = (
 			<HashRouter>
 				<Switch>

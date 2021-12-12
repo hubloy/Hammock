@@ -48,7 +48,6 @@ export default class Memberships extends Component {
 		var strings = this.props.hammock.strings;
 		return (
 			<Dashboard hammock={this.props.hammock}>
-				<h2 className="uk-text-center uk-heading-divider">{this.props.hammock.common.string.title}</h2>
 				{!this.state.loading && this.state.total > 0 && 
 					<React.Fragment>
 						<a className="uk-button uk-button-primary uk-button-small" href="#hammock-add-membership" uk-toggle="">{strings.dashboard.add_new.button}</a>

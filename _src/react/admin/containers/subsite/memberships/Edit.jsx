@@ -53,18 +53,19 @@ export default class Edit extends Component {
 				)
 			} else {
 				var membership = this.state.membership;
+				var section = this.props.match.params.section !== undefined ? this.props.match.params.section : 'general';
 				return (
-					<Dashboard hammock={hammock}>
+					<Dashboard hammock={hammock} title={hammock.strings.edit.title}>
 						{membership.id > 0 ? (
-							<div uk-grid="">
-								<Nav hammock={hammock}/>
-								<div className="hammock-membership uk-width-expand uk-margin-left uk-card uk-card-body uk-switcher">
-									<div className="uk-background-default uk-padding-small uk-border-rounded">
-										<General hammock={hammock} membership={membership}/>
-									</div>
-									<div className="uk-background-default uk-padding-small uk-border-rounded">
-										<Price hammock={hammock} membership={membership}/>
-									</div>
+							<div className="hammock-settings uk-width-expand">
+								<Nav hammock={hammock} active_nav={section} id={this.state.id}/>
+								<div className="hammock-membership uk-background-default uk-padding-small">
+									{
+										{
+											'price': <Price hammock={hammock} membership={membership}/>,
+											'general': <General hammock={hammock} membership={membership}/>
+										}[section]
+									}
 								</div>
 							</div>
 						) : (
