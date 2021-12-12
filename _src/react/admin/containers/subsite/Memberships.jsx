@@ -47,10 +47,9 @@ export default class Memberships extends Component {
 	render() {
 		var strings = this.props.hammock.strings;
 		return (
-			<Dashboard hammock={this.props.hammock}>
+			<Dashboard hammock={this.props.hammock} button={<a className="uk-button uk-button-primary uk-button-small" href="#hammock-add-membership" uk-toggle="">{strings.dashboard.add_new.button}</a>}>
 				{!this.state.loading && this.state.total > 0 && 
 					<React.Fragment>
-						<a className="uk-button uk-button-primary uk-button-small" href="#hammock-add-membership" uk-toggle="">{strings.dashboard.add_new.button}</a>
 						<Filter strings={strings}/>
 					</React.Fragment>
 				}

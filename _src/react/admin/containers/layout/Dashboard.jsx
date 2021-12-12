@@ -10,11 +10,15 @@ export default class Dashboard extends Component {
 	}
 
 	render() {
-		var title = typeof this.props.title !== 'undefined' ? this.props.title : this.props.hammock.common.string.title;
+		var title = typeof this.props.title !== 'undefined' ? this.props.title : this.props.hammock.common.string.title,
+			button = typeof this.props.button !== 'undefined' ? this.props.button : '';
 		return (
 			<React.Fragment>
 				<div className="uk-container hammock-main-header uk-background-default uk-width-1-1 uk-padding-small" uk-sticky="top: #wpadminbar; offset: 30">
-					<h2>{title}</h2>
+					<div className="uk-grid-collapse uk-child-width-expand@s uk-grid-small" uk-grid="">
+						<div><h2>{title}</h2></div>
+						<div className="uk-text-right uk-margin-small-right uk-margin-small-top">{button}</div>
+					</div>
 				</div>
 				<div className="hammock-container">
 					<div className="uk-width-auto">
