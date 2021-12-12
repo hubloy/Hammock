@@ -30,7 +30,7 @@ export default class Table extends Component {
 				<tbody>
 					{Object.keys(items).map(item =>
 						<tr key={items[item].id}>
-							<td><span title={items[item].settings.enabled ? hammock.common.status.enabled : hammock.common.status.disabled} uk-tooltip={items[item].settings.enabled ? hammock.common.status.enabled : hammock.common.status.disabled} uk-icon={items[item].settings.enabled ? 'check' : 'close'}></span></td>
+							<td><span className={items[item].settings.enabled ? 'uk-text-success' : 'uk-text-warning'} title={items[item].settings.enabled ? hammock.common.status.enabled : hammock.common.status.disabled} uk-tooltip={items[item].settings.enabled ? hammock.common.status.enabled : hammock.common.status.disabled} uk-icon={items[item].settings.enabled ? 'check' : 'close'}></span></td>
 							<td>{items[item].settings.title}</td>
 							<td>{items[item].settings.description}</td>
 							<td>{type === 'member' ? strings.table.customer : items[item].settings.recipient}</td>
