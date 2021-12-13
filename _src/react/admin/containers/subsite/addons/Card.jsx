@@ -84,7 +84,7 @@ export default class Card extends PureComponent {
 				}
 				return(
 					<li className={checked ? 'enabled' : 'disabled'} key={this.props.id}>
-						<div className={"uk-card uk-card-body uk-card-hover uk-padding-remove addon-card " + ( checked ? 'uk-card-primary' : 'uk-card-default' )}>
+						<div className={"uk-card uk-card-hover uk-padding-remove addon-card " + ( checked ? 'uk-card-primary' : 'uk-card-default' )}>
 							<h3 className="uk-text-small uk-card-title uk-padding uk-padding-remove-bottom">
 								<span className={this.props.item.icon}></span> {this.props.item.name}
 								

@@ -1,9 +1,10 @@
 .hammock-container{
 	.addon-card {
 		min-height: 200px;
-		max-height: 200px;
 		.uk-card-body{
-			max-height: 33px;
+			min-height: 75px;
+		}
+		.uk-card-footer{
 			min-height: 33px;
 		}
 	}
