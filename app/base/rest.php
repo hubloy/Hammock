@@ -18,7 +18,17 @@ class Rest extends Component {
 	 * @since  1.0.0
 	 */
 	public function __construct() {
+		$this->init();
 		$this->add_action( 'hammock_register_rest_route', 'register_rest_route' );
+	}
+
+	/**
+	 * Initialize from sub-class
+	 * 
+	 * @since 1.0.0
+	 */
+	protected function init() {
+
 	}
 
 	/**
@@ -26,7 +36,7 @@ class Rest extends Component {
 	 *
 	 * @since 1.0.0
 	 */
-	function register_rest_route() {
+	public function register_rest_route() {
 		$this->set_up_route( untrailingslashit( HAMMOCK_REST_NAMESPACE ) );
 	}
 
@@ -34,11 +44,11 @@ class Rest extends Component {
 	/**
 	 * Set up the api routes
 	 *
-	 * @param String $namespace - the parent namespace
+	 * @param string $namespace - the parent namespace
 	 *
 	 * @since 1.0.0
 	 */
-	function set_up_route( $namespace ) {
+	public function set_up_route( $namespace ) {
 
 	}
 
@@ -49,7 +59,7 @@ class Rest extends Component {
 	 *
 	 * @return bool|WP_Error
 	 */
-	function validate_request( $request ) {
+	public function validate_request( $request ) {
 		$can_view = apply_filters( 'hammock_default_rest_check', current_user_can( 'manage_options' ), $request );
 		if ( ! $can_view ) {
 			return new \WP_Error(

@@ -43,7 +43,7 @@ class Wizard extends Rest {
 	/**
 	 * Set up the api routes
 	 *
-	 * @param String $namespace - the parent namespace
+	 * @param string $namespace - the parent namespace
 	 *
 	 * @since 1.0.0
 	 */

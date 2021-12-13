@@ -158,7 +158,7 @@ class Addons extends Rest {
 	 */
 	public function list_addons( $request ) {
 		$addons = \Hammock\Services\Addons::load_addons();
-		return $addons;
+		return rest_ensure_response( $addons );
 	}
 
 	/**
@@ -175,11 +175,11 @@ class Addons extends Rest {
 			$settings = new Settings();
 			$settings = $settings->get_addon_setting( $name );
 			$active   = apply_filters( 'hammock_get_addon_' . $name . '_active', true );
-			return array(
+			return rest_ensure_response( array(
 				'settings' => $settings,
 				'enabled'  => $settings['enabled'] && $active,
 				'active'   => $active,
-			);
+			) );
 		} else {
 			return new \WP_Error( 'rest_addon_invalid', esc_html__( 'The addon does not exist.', 'hammock' ), array( 'status' => 404 ) );
 		}
@@ -205,7 +205,7 @@ class Addons extends Rest {
 			),
 			$request
 		);
-		return $response;
+		return rest_ensure_response( $response );
 	}
 
 	/**
@@ -257,7 +257,7 @@ class Addons extends Rest {
 			),
 			$request
 		);
-		return $response;
+		return rest_ensure_response( $response );
 	}
 }
 

@@ -46,6 +46,7 @@ class Controller {
 	 */
 	public static function load_routes() {
 		\Hammock\Rest\Site\Codes::instance();
+		\Hammock\Rest\Site\Rules::instance();
 		\Hammock\Rest\Site\Wizard::instance();
 		\Hammock\Rest\Site\Emails::instance();
 		\Hammock\Rest\Site\Addons::instance();

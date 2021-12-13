@@ -108,10 +108,10 @@ class Activity extends Rest {
 			'pages'   => $pages,
 			'current' => $page,
 		);
-		return array(
+		return rest_ensure_response( array(
 			'pager' => $pager,
 			'items' => $items,
-		);
+		) );
 	}
 }
 

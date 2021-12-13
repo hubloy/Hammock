@@ -44,4 +44,15 @@ class Rules {
 	public function get_rules( $type, $id ) {
 
 	}
+
+	/**
+	 * List rule types
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
+	public function list_rule_types() {
+		return apply_filters( 'hammock_protection_rules', array() );
+	}
 }
