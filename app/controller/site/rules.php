@@ -146,6 +146,15 @@ class Rules extends Controller {
 	}
 
 	/**
+	 * Load controller specific scripts
+	 *
+	 * @since 1.0.0
+	 */
+	public function controller_scripts() {
+		wp_enqueue_script( 'hammock-rules-react' );
+	}
+
+	/**
 	 * Render view
 	 *
 	 * @return string
