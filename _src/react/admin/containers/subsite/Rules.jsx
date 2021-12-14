@@ -10,14 +10,15 @@ export default class Rules extends Component {
 	}
 
 	render() {
-		var hammock = this.props.hammock;
+		var hammock = this.props.hammock,
+		    active_nav = this.props.match.params.section !== undefined ? this.props.match.params.section : 'post';
 		return (
 			<Dashboard hammock={hammock}>
 				<div className="uk-child-width-expand hammock-rules" uk-grid="">
-                    <div className="hammock-grid-left uk-width-1-4">
-                        <Nav hammock={hammock} />
+                    <div className="hammock-rules-menu uk-width-auto">
+                        <Nav hammock={hammock} active_nav={active_nav}/>
                     </div>
-                    <div className="hammock-grid-right uk-width-expand">
+                    <div className="hammock-rules-container uk-width-expand">
 
                     </div>
                 </div>

@@ -33,7 +33,7 @@ export default class Nav extends PureComponent {
         const { active_nav } = this.props;
         var items = this.state.items;
         return (
-            <div>
+            <div className='nav-menu'>
                 {this.state.loading ? (
                     <span className="uk-text-center" uk-spinner="ratio: 2"></span>
                 ) : (
