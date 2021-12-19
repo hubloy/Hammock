@@ -154,14 +154,14 @@ class Protection {
 	 * @since 1.0.0
 	 */
 	public function protect_content() {
+		$this->page_rule         = \Hammock\Rule\Page::instance();
 		$this->post_rule         = \Hammock\Rule\Post::instance();
 		$this->category_rule     = \Hammock\Rule\Category::instance();
 		$this->content_rule      = \Hammock\Rule\Content::instance();
 		$this->media_rule        = \Hammock\Rule\Media::instance();
 		$this->menu_rule         = \Hammock\Rule\Menu::instance();
-		$this->page_rule         = \Hammock\Rule\Page::instance();
-		$this->custom_items_rule = \Hammock\Rule\Custom\Items::instance();
 		$this->custom_types_rule = \Hammock\Rule\Custom\Types::instance();
+		$this->custom_items_rule = \Hammock\Rule\Custom\Items::instance();		
 
 		$this->enabled       = $this->settings->get_general_setting( 'content_protection' );
 		if ( $this->enabled ) {

@@ -11,7 +11,7 @@ export default class Rules extends Component {
 
 	render() {
 		var hammock = this.props.hammock,
-		    active_nav = this.props.match.params.section !== undefined ? this.props.match.params.section : 'post';
+		    active_nav = this.props.match.params.section !== undefined ? this.props.match.params.section : 'page';
 		return (
 			<Dashboard hammock={hammock}>
 				<div className="uk-child-width-expand hammock-rules" uk-grid="">
