@@ -9,7 +9,7 @@ export default class Table extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			pager: {},
+			pager: { current : 0 },
 			items: [],
 			loading : true,
 			error : false,
@@ -18,30 +18,26 @@ export default class Table extends Component {
 			api_url: this.props.hammock.api_url,
 			api_nonce: this.props.hammock.api_nonce,
 		});
+
+		this.handleRowAction = this.handleRowAction.bind(this);
+		this.loadPage = this.loadPage.bind(this);
 	}
 	
 	async componentDidMount() {
-		this.loadPage();
+		var page = this.props.match.params.page !== undefined ? this.props.match.params.page : 0;
+		this.loadPage( page );
 	}
 
-	async componentDidUpdate() {
-		if ( typeof this.state.pager.current !== 'undefined' ) {
-			this.loadPage();
-		}
-	}
 
-	loadPage = async () => {
-		const page = parseInt( location.hash.split("/").pop() ) || 1;
-		if ( page !== this.state.pager.current ) {
-			this.fetchWP.get( 'transactions/list?page=' + page )
-				.then( (json) => this.setState({
-					items : json.items,
-					pager : json.pager,
-					loading : false,
-					error : false,
-				}), (err) => this.setState({ loading : false, error : true })
-			);
-		}
+	loadPage = async ( page ) => {
+		this.fetchWP.get( 'transactions/list?page=' + page )
+			.then( (json) => this.setState({
+				items : json.items,
+				pager : json.pager,
+				loading : false,
+				error : false,
+			}), (err) => this.setState({ loading : false, error : true })
+		);
 	}
 	
 	handleRowAction(event, id, action ) {
@@ -127,7 +123,7 @@ export default class Table extends Component {
 								</tbody>
 							</table>
 						)}
-						<PaginationUI pager={pager}/>
+						<PaginationUI pager={pager} onChange={this.loadPage}/>
 					</React.Fragment>
 				)
 			}

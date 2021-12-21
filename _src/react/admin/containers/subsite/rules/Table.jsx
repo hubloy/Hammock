@@ -9,7 +9,7 @@ export default class Table extends Component {
     constructor(props) {
 		super(props);
 		this.state = {
-			pager: {},
+			pager: { current : 0 },
 			items: [],
 			loading : true,
 			error : false,
@@ -18,10 +18,29 @@ export default class Table extends Component {
 			api_url: this.props.hammock.api_url,
 			api_nonce: this.props.hammock.api_nonce,
 		});
+
+		this.getData = this.getData.bind(this);
+	}
+
+	getData = async ( page ) => {
+		
+	}
+
+	async componentDidMount() {
+		var page = this.props.match.params.page !== undefined ? this.props.match.params.page : 0;
+		this.loadPage( page );
 	}
 
     renderRows() {
+		const { pager, items } = this.state;
+		return (
+			<React.Fragment>
+				<table className="uk-table uk-background-default">
 
+				</table>
+				<PaginationUI pager={pager} onChange={this.getData}/>
+			</React.Fragment>
+		)
     }
 
     render() {

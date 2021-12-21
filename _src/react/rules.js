@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			<HashRouter>
 				<Switch>
 					<Route exact path="/:section?" component={RulesPage} />
+					<Route exact path="/:section?/page/:page?" component={RulesPage} />
 				</Switch>
 			</HashRouter>
 		);
