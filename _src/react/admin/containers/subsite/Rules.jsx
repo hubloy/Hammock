@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Dashboard from 'layout/Dashboard'
 import Nav from './rules/Nav';
+import Table from './rules/Table';
 
 export default class Rules extends Component {
 	constructor(props) {

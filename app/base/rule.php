@@ -117,7 +117,7 @@ class Rule {
 	/**
 	 * Set initial protection for front-end.
 	 *
-	 * To be overridden by children classes.
+	 * To be overridden by child classes.
 	 *
 	 * @since  1.0.0
 	 */
@@ -132,7 +132,7 @@ class Rule {
 	/**
 	 * Set initial protection for admin side.
 	 *
-	 * To be overridden by children classes.
+	 * To be overridden by child classes.
 	 *
 	 * @since  1.0.0
 	 */
@@ -141,6 +141,32 @@ class Rule {
 			'hammock_protect_admin_content',
 			$this
 		);
+	}
+
+	/**
+	 * Count items to protect
+	 * 
+	 * @param array $args Optional arguments.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return int
+	 */
+	public function count_items( $args = array() ) {
+		return 0;
+	}
+
+	/**
+	 * list items to protect
+	 * 
+	 * @param array $args Optional arguments.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
+	public function list_items( $args = array() ) {
+		return array();
 	}
 
 
