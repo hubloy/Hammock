@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Hammock\Base\Rule;
+use Hammock\Helper\Cache;
 
 class Post extends Rule {
 
@@ -78,6 +79,85 @@ class Post extends Rule {
 	public function init() {
 		$this->id   = 'post';
 		$this->name = __( 'Posts', 'hammock' );
+
+		add_filter( 'pre_trash_post', array( $this, 'pre_trash_post' ), 10, 2 );
+        add_filter( 'pre_delete_post', array( $this, 'pre_delete_post' ), 10, 3 );
+
+        add_action( 'save_post', array( $this, 'save_post' ), 10, 3 );
+	}
+
+
+	/**
+	 * Count items to protect
+	 * 
+	 * @param array $args Optional arguments.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return int
+	 */
+	public function count_items( $args = array() ) {
+		global $wpdb;
+		$count = Cache::get_cache( 'count_posts', 'counts' );
+		if ( false !== $count ) {
+			return $count;
+		}
+		$query = "SELECT COUNT( * ) FROM {$wpdb->posts} WHERE post_type = %s";
+		$count = $wpdb->get_var( $wpdb->prepare( $query, 'post' ) );
+		Cache::set_cache( 'count_posts', $count, 'counts' );
+		return $count;
+	}
+
+	/**
+	 * list items to protect
+	 * 
+	 * @param array $args Optional arguments.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
+	public function list_items( $args = array() ) {
+		return array();
+	}
+
+	/**
+	 * Before a post is trashed, delete the cache.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return bool|null
+	 */
+	public function pre_trash_post( $check, $post ) {
+		if ( 'post' !== $post->post_type ) {
+			return $check;
+		}
+		Cache::delete_cache( 'count_posts', 'counts' );
+		return $check;
+	}
+
+	/**
+	 * Before a post is deleted.
+	 * 
+	 * @since 1.0.0
+	 *
+	 * @return bool|null
+	 */
+	public function pre_delete_post( $check, $post, $force ) {
+		$this->pre_trash_post( $check, $post );
+		return $check;
+	}
+
+	/**
+	 * Clear cache when a post is saved.
+	 * 
+	 * @since 1.0.0
+	 */
+	public function save_post( $post_id, $post, $update ) {
+		if ( 'post' !== $post->post_type ) {
+			return;
+		}
+		Cache::delete_cache( 'count_posts', 'counts' );
 	}
 
 	/**
