@@ -118,9 +118,7 @@ class Post extends Rule {
 	 * @return array
 	 */
 	public function list_items( $args = array() ) {
-		$offset                      = absint( $args['offset'] );
-		$limit                       = $offset + absint( $args['number'] );
-		$args['posts_per_page']      = $args['number'];
+		$args['posts_per_page']      = isset( $args['number'] ) ? ( int ) $args['number'] : 10;
 		$args['ignore_sticky_posts'] = true;
 		$args['public']              = true;
 		$args['post_status']         = 'publish';

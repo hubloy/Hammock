@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Hammock\Core\Database;
+use Hammock\Helper\Cache;
 
 /**
  * Membership rule
@@ -212,5 +213,33 @@ class Rule {
 
 		do_action( 'hammock_rule_after_delete_rule', $this->rule_id );
 		$this->rule_id = 0;
+	}
+
+
+	/**
+	 * Get rules by type
+	 *
+	 * @param string $type - the object type
+	 * @param int    $id - the object id
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return object|bool
+	 */
+	public static function get_rules( $type, $id ) {
+		global $wpdb;
+		$rule   = Cache::get_cache( 'get_rule_' . $type . '_' . $id, 'rule' );
+		if ( $rule && is_object( $rule ) ) {
+			return $rule;
+		}
+		$table_name = Database::get_table_name( Database::MEMBERSHIP_RULES );
+		$sql        = "SELECT `id` FROM {$table_name} WHERE `object_type` = %s AND `object_id` = %d";
+		$result     = $wpdb->get_row( $wpdb->prepare( $sql, $type, $id ) );
+		if ( $result ) {
+			$rule = new self( $result->id );
+			Cache::set_cache( 'get_rule_' . $type . '_' . $id, $rule, 'rule' );
+			return $rule;
+		}
+		return false;
 	}
 }

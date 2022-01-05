@@ -129,9 +129,9 @@ class Protection {
 	 *
 	 * @return Content
 	 */
-	public static function instance() {
+	public static function instance( $protect = true ) {
 		if ( ! self::$instance ) {
-			self::$instance = new self();
+			self::$instance = new self( $protect );
 		}
 
 		return self::$instance;
@@ -143,9 +143,28 @@ class Protection {
 	 *
 	 * Sets up the service
 	 */
-	public function __construct() {
+	public function __construct( $protect = true ) {
 		$this->settings = new Settings();
-		$this->protect_content();
+		$this->init_rules();
+		if ( $protect ) {
+			$this->protect_content();
+		}
+	}
+
+	/**
+	 * Initialize the rules
+	 * 
+	 * @since  1.0.0
+	 */
+	private function init_rules() {
+		$this->page_rule         = \Hammock\Rule\Page::instance();
+		$this->post_rule         = \Hammock\Rule\Post::instance();
+		$this->category_rule     = \Hammock\Rule\Category::instance();
+		$this->content_rule      = \Hammock\Rule\Content::instance();
+		$this->media_rule        = \Hammock\Rule\Media::instance();
+		$this->menu_rule         = \Hammock\Rule\Menu::instance();
+		$this->custom_types_rule = \Hammock\Rule\Custom\Types::instance();
+		$this->custom_items_rule = \Hammock\Rule\Custom\Items::instance();	
 	}
 
 	/**
@@ -154,15 +173,6 @@ class Protection {
 	 * @since 1.0.0
 	 */
 	public function protect_content() {
-		$this->page_rule         = \Hammock\Rule\Page::instance();
-		$this->post_rule         = \Hammock\Rule\Post::instance();
-		$this->category_rule     = \Hammock\Rule\Category::instance();
-		$this->content_rule      = \Hammock\Rule\Content::instance();
-		$this->media_rule        = \Hammock\Rule\Media::instance();
-		$this->menu_rule         = \Hammock\Rule\Menu::instance();
-		$this->custom_types_rule = \Hammock\Rule\Custom\Types::instance();
-		$this->custom_items_rule = \Hammock\Rule\Custom\Items::instance();		
-
 		$this->enabled       = $this->settings->get_general_setting( 'content_protection' );
 		if ( $this->enabled ) {
 			add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
@@ -401,6 +411,16 @@ class Protection {
 		}
 		return false;
 	}
+
+	public function &__get( $key ) {
+        if ( method_exists( $this, 'get_' . $key ) ) {
+            $value = call_user_func( array( $this, 'get_' . $key ) );
+        } else {
+            $value = &$this->{$key};
+        }
+
+        return $value;
+    }
 
 
 	/**
