@@ -81,19 +81,19 @@ class Post extends Rule {
 		$this->name = __( 'Posts', 'hammock' );
 
 		add_filter( 'pre_trash_post', array( $this, 'pre_trash_post' ), 10, 2 );
-        add_filter( 'pre_delete_post', array( $this, 'pre_delete_post' ), 10, 3 );
+		add_filter( 'pre_delete_post', array( $this, 'pre_delete_post' ), 10, 3 );
 
-        add_action( 'save_post', array( $this, 'save_post' ), 10, 3 );
+		add_action( 'save_post', array( $this, 'save_post' ), 10, 3 );
 	}
 
 
 	/**
 	 * Count items to protect
-	 * 
+	 *
 	 * @param array $args Optional arguments.
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return int
 	 */
 	public function count_items( $args = array() ) {
@@ -110,15 +110,38 @@ class Post extends Rule {
 
 	/**
 	 * list items to protect
-	 * 
+	 *
 	 * @param array $args Optional arguments.
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function list_items( $args = array() ) {
-		return array();
+		$offset                      = absint( $args['offset'] );
+		$limit                       = $offset + absint( $args['number'] );
+		$args['posts_per_page']      = $args['number'];
+		$args['ignore_sticky_posts'] = true;
+		$args['public']              = true;
+		$args['post_status']         = 'publish';
+		$posts                       = get_posts( $args );
+		if ( ! $posts ) {
+			return array();
+		}
+		$data = array();
+		foreach ( $posts as $post ) {
+			$rule           = $this->get_rule( $post->ID, 'post' );
+			$content        = array(
+				'id'        => $post->ID,
+				'type'      => $post->post_type,
+				'title'     => $post->post_title,
+				'edit_link' => get_edit_post_link( $post->ID ),
+				'view_link' => get_permalink( $post->ID ),
+				'rule'      => $rule,
+			);
+			$data[ $post->ID ] = $content;
+		}
+		return $data;
 	}
 
 	/**
@@ -138,7 +161,7 @@ class Post extends Rule {
 
 	/**
 	 * Before a post is deleted.
-	 * 
+	 *
 	 * @since 1.0.0
 	 *
 	 * @return bool|null
@@ -150,7 +173,7 @@ class Post extends Rule {
 
 	/**
 	 * Clear cache when a post is saved.
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function save_post( $post_id, $post, $update ) {

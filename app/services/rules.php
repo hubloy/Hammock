@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use Hammock\Core\Database;
 use Hammock\Model\Rule;
+use Hammock\Helper\Cache;
 
 /**
  * Rules service
@@ -39,10 +40,17 @@ class Rules {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return array
+	 * @return object|bool
 	 */
 	public function get_rules( $type, $id ) {
-
+		global $wpdb;
+		$sql    = "SELECT `id` FROM {$this->table_name} WHERE `object_type` = %s AND `object_id` = %d";
+		$result = $wpdb->get_row( $wpdb->prepare( $sql, $type, $id ) );
+		if ( $result ) {
+			$rule = new Rule( $result->id );
+			return $rule;
+		}
+		return false;
 	}
 
 	/**
