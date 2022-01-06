@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Dashboard from 'layout/Dashboard'
 import Nav from './rules/Nav';
-import Table from './rules/Table';
+import Content from './rules/Content';
 
 export default class Rules extends Component {
 	constructor(props) {
@@ -20,7 +20,12 @@ export default class Rules extends Component {
                         <Nav hammock={hammock} active_nav={active_nav}/>
                     </div>
                     <div className="hammock-rules-container uk-width-expand">
-
+						{
+							{
+								'page': <Content hammock={hammock} url={ 'rules/get/page' } />,
+								'post': <Content hammock={hammock} url={ 'rules/get/post' } />
+							}[active_nav]
+						}
                     </div>
                 </div>
 			</Dashboard>

@@ -74,7 +74,7 @@ class Rules extends Rest {
 
 		register_rest_route(
 			$namespace,
-			self::BASE_API_ROUTE . 'get/(?P<type>[\w-]+)/(?P<method>[\w-]+)',
+			self::BASE_API_ROUTE . 'get/(?P<type>[\w-]+)',
 			array(
 				array(
 					'methods'             => \WP_REST_Server::READABLE,
@@ -111,11 +111,9 @@ class Rules extends Rest {
 	 * @return array
 	 */
 	public function get_rule_data( $request ) {
-		$type   = $request['type'];
-		$method = $request['method'];
+		$type  = $request['type'];
 		return rest_ensure_response( $this->service->get_rule_type_data( array(
 			'type'   => $type,
-			'data'   => $method,
 			'offset' => $request->get_param( 'page' )
 		) ) );
 	}

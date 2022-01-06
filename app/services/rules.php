@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 use Hammock\Core\Database;
 use Hammock\Model\Rule;
 use Hammock\Helper\Cache;
+use Hammock\Helper\Pagination;
 
 /**
  * Rules service
@@ -82,13 +83,12 @@ class Rules {
 	public function get_rule_type_data( $args ) {
 		$defaults = array(
 			'type'   => '',
-			'data'   => 'count',
-			'offset' => 0
+			'offset' => 0,
+			'number' => 10,
 		);
 		$args   = wp_parse_args( $args, $defaults );
 		$types  = $this->list_rule_types();
 		$type   = strtolower( $args['type'] );
-		$data   = strtolower( $args['data'] );
 		$offset = ( int ) $args['offset'];
 		$rule   = false;
 		if ( ! isset( $types[$type] ) ) {
@@ -128,18 +128,21 @@ class Rules {
 				'success' => false
 			);
 		}
-		if ( 'count' === $data ) {
-			return array(
-				'total'   => $rule->count_items(),
-				'success' => true
-			);
-		} else {
-			return array(
-				'list'    => $rule->list_items( array(
-					'offset' => $offset
-				) ),
-				'success' => true
-			);
-		}
+		$per_page     = $args['number'];
+		$total        = $rule->count_items();
+		$pages        = Pagination::generate_pages( $total, $per_page, $page );
+		$pager        = array(
+			'total'   => $total,
+			'pages'   => $pages,
+			'current' => $offset,
+		);
+		return array(
+			'pager' => $pager,
+			'items' => $rule->list_items( array(
+				'offset' => $offset
+			) ),
+			'columns' => $rule->get_view_columns(),
+			'success' => true,
+		);
 	}
 }

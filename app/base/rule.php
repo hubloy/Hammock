@@ -181,6 +181,16 @@ class Rule {
 		return array();
 	}
 
+	/**
+	 * Get the view columns
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
+	public function get_view_columns() {
+		return array();
+	}
 
 	/**
 	 * Verify access to the current content.

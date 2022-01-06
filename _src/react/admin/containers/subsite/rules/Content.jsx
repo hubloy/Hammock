@@ -10,6 +10,7 @@ export default class Table extends Component {
 		this.state = {
 			pager: { current : 1, total : 0, pages : [] },
 			items: [],
+			columns : [],
 			loading : true,
 			error : false,
 		};
@@ -27,6 +28,7 @@ export default class Table extends Component {
 			.then( (json) => this.setState({
 				items : json.items,
 				pager : json.pager,
+				columns : json.columns,
 				loading : false,
 				error : false,
 			}), (err) => this.setState({ loading : false, error : true })
@@ -39,8 +41,7 @@ export default class Table extends Component {
 	}
 
     renderRows() {
-		const { pager, items } = this.state;
-		var columns = this.props.columns;
+		const { pager, items, columns } = this.state;
 		return (
 			<React.Fragment>
 				<table className="uk-table uk-background-default">
