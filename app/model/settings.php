@@ -273,7 +273,7 @@ class Settings {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return null
+	 * @return array
 	 */
 	private function default_general_settings() {
 		return array(
