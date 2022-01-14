@@ -94,6 +94,7 @@ class Resource {
 			array(
 				'error'        => __( 'An error occured', 'hammock' ),
 				'no_results'   => __( 'Ooops, no results found', 'hammock' ),
+				'no_data'      => __( 'Ooops, no data found', 'hammock' ),
 				'base_api_url' => rest_url( 'wp/v2/' ),
 				'api_url'      => rest_url( HAMMOCK_REST_NAMESPACE ),
 				'api_nonce'    => wp_create_nonce( 'wp_rest' ),

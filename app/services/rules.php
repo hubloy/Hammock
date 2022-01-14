@@ -130,7 +130,7 @@ class Rules {
 		}
 		$per_page     = $args['number'];
 		$total        = $rule->count_items();
-		$pages        = Pagination::generate_pages( $total, $per_page, $page );
+		$pages        = Pagination::generate_pages( $total, $per_page, $offset );
 		$pager        = array(
 			'total'   => $total,
 			'pages'   => $pages,

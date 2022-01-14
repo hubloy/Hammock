@@ -12,7 +12,8 @@ export default class Rules extends Component {
 
 	render() {
 		var hammock = this.props.hammock,
-		    active_nav = this.props.match.params.section !== undefined ? this.props.match.params.section : 'page';
+		    active_nav = this.props.match.params.section !== undefined ? this.props.match.params.section : 'page',
+			page = this.props.match.params.page !== undefined ? this.props.match.params.page : 0;
 		return (
 			<Dashboard hammock={hammock}>
 				<div className="uk-child-width-expand hammock-rules" uk-grid="">
@@ -22,8 +23,8 @@ export default class Rules extends Component {
                     <div className="hammock-rules-container uk-width-expand">
 						{
 							{
-								'page': <Content hammock={hammock} url={ 'rules/get/page' } />,
-								'post': <Content hammock={hammock} url={ 'rules/get/post' } />
+								'page': <Content hammock={hammock} url={ 'rules/get/page' } page={page}/>,
+								'post': <Content hammock={hammock} url={ 'rules/get/post' } page={page}/>
 							}[active_nav]
 						}
                     </div>

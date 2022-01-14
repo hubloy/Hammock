@@ -24,6 +24,7 @@ export default class Table extends Component {
 
 	getData = async ( page ) => {
 		var url = this.props.url;
+		console.log( url );
 		this.fetchWP.get( url + '?page=' + page )
 			.then( (json) => this.setState({
 				items : json.items,
@@ -36,87 +37,52 @@ export default class Table extends Component {
 	}
 
 	async componentDidMount() {
-		var page = this.props.match.params.page !== undefined ? this.props.match.params.page : 0;
-		this.getData( page );
+		this.getData( this.props.page );
 	}
 
-    renderRows() {
-		const { pager, items, columns } = this.state;
-		return (
-			<React.Fragment>
-				<table className="uk-table uk-background-default">
-					<thead>
-						<tr>
-							<th><input className="uk-checkbox hammock-top-checkbox" type="checkbox" /></th>
-							{Object.keys(columns).map((column) =>
-								<th key={column} className="uk-width-auto">{columns[column]}</th>
-							)}
-						</tr>
-					</thead>
-					<tfoot>
-						<tr>
-							<th><input className="uk-checkbox hammock-bottom-checkbox" type="checkbox" /></th>
-							{Object.keys(columns).map((column) =>
-								<th key={column} className="uk-width-auto">{columns[column]}</th>
-							)}
-						</tr>
-					</tfoot>
-					<tbody>
-						{items.map(item =>
-							<tr key={item.id}>
-								<td><input className="uk-checkbox" type="checkbox" value={item.id} /></td>
-								{Object.keys(columns).map((column) =>
-									<td key={column} className={column}><span dangerouslySetInnerHTML={{ __html: item[column] }}></span></td>
-								)}
-							</tr>
-						)}
-					</tbody>
-				</table>
-				<PaginationUI pager={pager} onChange={this.getData}/>
-			</React.Fragment>
-		)
-    }
-
     render() {
-		const { pager, items } = this.state;
-		var columns = this.props.columns;
+		const { pager, items, loading, columns } = this.state;
         var hammock = this.props.hammock;
 		return (
 			<React.Fragment>
-				<table className="uk-table uk-background-default">
-					<thead>
-						<tr>
-							<th><input className="uk-checkbox hammock-top-checkbox" type="checkbox" /></th>
-							{Object.keys(columns).map((column) =>
-								<th key={column} className="uk-width-auto">{columns[column]}</th>
-							)}
-						</tr>
-					</thead>
-					<tfoot>
-						<tr>
-							<th><input className="uk-checkbox hammock-bottom-checkbox" type="checkbox" /></th>
-							{Object.keys(columns).map((column) =>
-								<th key={column} className="uk-width-auto">{columns[column]}</th>
-							)}
-						</tr>
-					</tfoot>
-					<tbody>
-						{this.state.loading ? (
-							<div className="uk-container uk-padding-small uk-margin-top uk-width-1-1">
-								<span className="uk-text-center" uk-spinner="ratio: 3"></span>
-							</div>
-						) : (
-							items.map(item =>
-								<tr key={item.id}>
-									<td><input className="uk-checkbox" type="checkbox" value={item.id} /></td>
+				{loading ? (
+					<div className="uk-container uk-padding-small uk-margin-top uk-width-1-1">
+						<span className="uk-text-center" uk-spinner="ratio: 3"></span>
+					</div>
+				) : (
+					pager.total <= 0 ? (
+						<h3 className="uk-text-center uk-margin-top">{hammock.no_data}</h3>
+					) : (
+						<table className="uk-table uk-background-default">
+							<thead>
+								<tr>
+									<th><input className="uk-checkbox hammock-top-checkbox" type="checkbox" /></th>
 									{Object.keys(columns).map((column) =>
-										<td key={column} className={column}><span dangerouslySetInnerHTML={{ __html: item[column] }}></span></td>
+										<th key={column} className="uk-width-auto">{columns[column]}</th>
 									)}
 								</tr>
-							)
-						)}
-					</tbody>
-				</table>
+							</thead>
+							<tfoot>
+								<tr>
+									<th><input className="uk-checkbox hammock-bottom-checkbox" type="checkbox" /></th>
+									{Object.keys(columns).map((column) =>
+										<th key={column} className="uk-width-auto">{columns[column]}</th>
+									)}
+								</tr>
+							</tfoot>
+							<tbody>
+								{Object.keys(items).map((item) =>
+									<tr key={items[item].id}>
+										<td><input className="uk-checkbox" type="checkbox" value={items[item].id} /></td>
+										{Object.keys(columns).map((column) =>
+											<td key={column} className={column}><span dangerouslySetInnerHTML={{ __html: items[item][column] }}></span></td>
+										)}
+									</tr>
+								)}
+							</tbody>
+						</table>
+					)
+				)}
 				<PaginationUI pager={pager} onChange={this.getData}/>
 			</React.Fragment>
 		)
