@@ -23,9 +23,8 @@ export default class Table extends Component {
 	}
 
 	getData = async ( page ) => {
-		var url = this.props.url;
-		console.log( url );
-		this.fetchWP.get( url + '?page=' + page )
+		var type = this.props.type;
+		this.fetchWP.get( 'rules/get/' + type + '?page=' + page )
 			.then( (json) => this.setState({
 				items : json.items,
 				pager : json.pager,
@@ -38,6 +37,13 @@ export default class Table extends Component {
 
 	async componentDidMount() {
 		this.getData( this.props.page );
+	}
+
+	async componentDidUpdate( prevProps ) {
+		if ( this.props.type !== prevProps.type ) {
+			this.setState({ loading : true, error : false });
+			this.getData( this.props.page );
+		}
 	}
 
     render() {

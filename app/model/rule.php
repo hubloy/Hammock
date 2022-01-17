@@ -233,10 +233,10 @@ class Rule {
 			return $rule;
 		}
 		$table_name = Database::get_table_name( Database::MEMBERSHIP_RULES );
-		$sql        = "SELECT `id` FROM {$table_name} WHERE `object_type` = %s AND `object_id` = %d";
+		$sql        = "SELECT `rule_id` FROM {$table_name} WHERE `object_type` = %s AND `object_id` = %d";
 		$result     = $wpdb->get_row( $wpdb->prepare( $sql, $type, $id ) );
 		if ( $result ) {
-			$rule = new self( $result->id );
+			$rule = new self( $result->rule_id );
 			Cache::set_cache( 'get_rule_' . $type . '_' . $id, $rule, 'rule' );
 			return $rule;
 		}
