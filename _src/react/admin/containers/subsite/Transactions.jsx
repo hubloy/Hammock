@@ -12,11 +12,12 @@ export default class Transactions extends Component {
 
 	render() {
 		var hammock = this.props.hammock;
+		var page = this.props.match.params.page !== undefined ? this.props.match.params.page : 0;
 		return (
 			<Dashboard hammock={hammock} button={<Link className="uk-button uk-button-primary uk-button-small" to={"/add"}>{hammock.strings.dashboard.add_new.button}</Link>}>
 				<Filter hammock={hammock} />
 				<div className="uk-container uk-padding-small uk-margin-top uk-width-1-1">
-					<Table hammock={this.props.hammock} />
+					<Table hammock={this.props.hammock} page={page}/>
 				</div>
 			</Dashboard>
 		)

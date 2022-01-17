@@ -24,8 +24,7 @@ export default class Table extends Component {
 	}
 	
 	async componentDidMount() {
-		var page = this.props.match.params.page !== undefined ? this.props.match.params.page : 0;
-		this.loadPage( page );
+		this.loadPage( this.props.page );
 	}
 
 

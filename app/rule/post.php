@@ -129,17 +129,38 @@ class Post extends Rule {
 		$data = array();
 		foreach ( $posts as $post ) {
 			$rule           = $this->get_rule( $post->ID, 'post' );
+			$edit_link      = get_edit_post_link( $post->ID );
+			$view_link      = get_permalink( $post->ID );
 			$content        = array(
 				'id'        => $post->ID,
 				'type'      => $post->post_type,
 				'title'     => $post->post_title,
-				'edit_link' => get_edit_post_link( $post->ID ),
-				'view_link' => get_permalink( $post->ID ),
+				'edit_link' => $edit_link,
+				'edit_html' => sprintf( __( '%sEdit%s', 'hammock' ), '<a href="' . $edit_link . '" target="_blank">', '</a>' ),
+				'view_link' => $view_link,
+				'view_html' => sprintf( __( '%sView%s', 'hammock' ), '<a href="' . $view_link . '" target="_blank">', '</a>' ),
 				'rule'      => $rule,
 			);
 			$data[ $post->ID ] = $content;
 		}
 		return $data;
+	}
+
+
+	/**
+	 * Get the view columns
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
+	public function get_view_columns() {
+		return array(
+			'id'        => __( 'ID', 'hammock' ),
+			'title'     => __( 'Title', 'hammock' ),
+			'edit_html' => __( 'Edit', 'hammock' ),
+			'view_html' => __( 'View', 'hammock' ),
+		);
 	}
 
 	/**
