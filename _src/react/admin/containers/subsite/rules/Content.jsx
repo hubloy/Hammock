@@ -89,7 +89,7 @@ export default class Table extends Component {
 						</table>
 					)
 				)}
-				<PaginationUI pager={pager} onChange={this.getData}/>
+				<PaginationUI pager={pager} onChange={this.getData} base={this.props.type}/>
 			</React.Fragment>
 		)
     }
