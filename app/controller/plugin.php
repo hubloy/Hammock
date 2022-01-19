@@ -9,6 +9,7 @@ use Hammock\Base\Controller;
 use Hammock\Core\Resource;
 use Hammock\Helper\Pages;
 use Hammock\Core\Util;
+use Hammock\Core\Admin;
 
 class Plugin extends Controller {
 
@@ -22,6 +23,15 @@ class Plugin extends Controller {
 	 * @since 1.0.0
 	 */
 	protected $is_base = true;
+
+	/**
+	 * The admin core object
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @var object
+	 */
+	private $admin = null;
 
 	/**
 	 * String translations
@@ -39,8 +49,9 @@ class Plugin extends Controller {
 	 * Loads all required plugin files and set up admin pages
 	 */
 	public function __construct() {
-		// Enqueue resources
+		$this->admin = new Admin();
 
+		// Enqueue resources
 		$this->add_action( 'wp_loaded', 'wp_loaded' );
 
 		$this->add_action( 'admin_init', 'admin_init' );
@@ -64,6 +75,8 @@ class Plugin extends Controller {
 		$this->add_action( 'admin_bar_menu', 'admin_bar_menu', 999 );
 
 		$this->add_filter( 'single_post_title', 'custom_page_titles', 10, 2 );
+
+		$this->add_filter( 'hammock_admin_register_content_sub_page', 'register_content_page' );
 
 		// Set up content protection
 		// This checks if its enabled
@@ -149,8 +162,8 @@ class Plugin extends Controller {
 
 		add_submenu_page(
 			self::MENU_SLUG,
-			__( 'Dashboard', 'hammock' ),
-			__( 'Dashboard', 'hammock' ),
+			__( 'Membership Content', 'hammock' ),
+			__( 'Membership Content', 'hammock' ),
 			$cap,
 			self::MENU_SLUG,
 			array( $this, 'render' )
@@ -194,8 +207,8 @@ class Plugin extends Controller {
 
 		add_submenu_page(
 			self::MENU_SLUG,
-			__( 'Dashboard', 'hammock' ),
-			__( 'Dashboard', 'hammock' ),
+			__( 'Membership Content', 'hammock' ),
+			__( 'Membership Content', 'hammock' ),
 			$cap,
 			self::MENU_SLUG,
 			array( $this, 'network_render' )
@@ -217,6 +230,17 @@ class Plugin extends Controller {
 			 */
 			do_action( 'hammock_network_admin_menu_page', self::MENU_SLUG, $cap );
 		}
+	}
+
+	/**
+	 * Get the content sub-pages
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
+	public function content_pages() {
+		return apply_filters( 'hammock_admin_register_content_sub_page', $this->admin->get_content_pages() );
 	}
 
 	/**
@@ -401,6 +425,17 @@ class Plugin extends Controller {
 			}
 		}
 		return $title;
+	}
+
+	/**
+	 * Register content sub page
+	 * 
+	 * @param array $args
+	 * 
+	 * @since 1.0.0
+	 */
+	public function register_content_page( $args ) {
+		return $this->admin->register_content_sub_page( $args );
 	}
 
 

@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Hammock\Base\Controller;
-
+use Hammock\Core\Admin;
 /**
  * Settings controller
  * Manages all settings
@@ -31,6 +31,15 @@ class Settings extends Controller {
 	 * @var string
 	 */
 	private $_cap = '';
+
+	/**
+	 * The admin core object
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @var object
+	 */
+	private $admin = null;
 
 	/**
 	 * Plugin Menu slug.
@@ -80,8 +89,10 @@ class Settings extends Controller {
 	 * @since 1.0.0
 	 */
 	public function init() {
+		$this->admin = new Admin();
 		// Ajax to create missing pages
 		$this->add_ajax_action( 'hammock_settings_create_page', 'create_page' );
+		$this->add_filter( 'hammock_admin_register_setting_sub_page', 'register_setting_page' );
 	}
 
 	/**
@@ -103,6 +114,18 @@ class Settings extends Controller {
 			$this->_page_id,
 			array( $this, 'render' )
 		);
+	}
+
+
+	/**
+	 * Get the setting sub-pages
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
+	public function setting_pages() {
+		return apply_filters( 'hammock_admin_register_setting_sub_page', $this->admin->get_setting_pages() );
 	}
 
 	/**
@@ -173,9 +196,20 @@ class Settings extends Controller {
 	 *
 	 * @return application/json
 	 */
-	function create_page() {
+	public function create_page() {
 		$this->verify_nonce();
 		$page_id = sanitize_text_field( $_POST['page_id'] );
+	}
+
+	/**
+	 * Register setting sub page
+	 * 
+	 * @param array $args
+	 * 
+	 * @since 1.0.0
+	 */
+	public function register_setting_page( $args ) {
+		return $this->admin->register_setting_sub_page( $args );
 	}
 }
 ?>
