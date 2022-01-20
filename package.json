@@ -26,8 +26,7 @@
 		"react-lazyload": "3.2.0",
 		"react-router-dom": "^5.2.0",
 		"react-toastify": "8.1.0",
-		"redux": "4.1.2",
-		"rsuite": "^5.5.0"
+		"redux": "4.1.2"
 	},
 	"devDependencies": {
 		"@babel/core": "7.16.0",
@@ -60,6 +59,8 @@
 		"gulp-sass": "^5.0.0",
 		"gulp-sourcemaps": "^3.0.0",
 		"gulp-uglify": "^3.0.2",
+		"less": "^4.1.2",
+		"less-loader": "^10.2.0",
 		"load-grunt-tasks": "^3.5.2",
 		"mini-css-extract-plugin": "2.4.5",
 		"node-polyfill-webpack-plugin": "1.1.4",
