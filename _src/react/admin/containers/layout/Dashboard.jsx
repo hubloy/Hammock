@@ -13,16 +13,41 @@ export default class Dashboard extends Component {
 		var title = typeof this.props.title !== 'undefined' ? this.props.title : this.props.hammock.common.string.title,
 			button = typeof this.props.button !== 'undefined' ? this.props.button : '';
 		return (
-			<React.Fragment>
-				<div className="uk-container hammock-main-header uk-background-default uk-width-1-1 uk-padding-small" uk-sticky="top: #wpadminbar; offset: 30">
-					<div className="uk-grid-collapse uk-child-width-expand@s uk-grid-small" uk-grid="">
-						<div><h2>{title}</h2></div>
-						<div className="uk-text-right uk-margin-small-right uk-margin-small-top">{button}</div>
-					</div>
+			<div className='hammock-admin-content-container'>
+				<div className='hammock-menu-area'>
+					<h1 className="hammock-menu-area-title">{title}</h1>
+					<ul className="hammock-menu-area-items uk-iconnav uk-iconnav-vertical">
+						<li className="hammock-menu-area-item uk-active">
+							<a>
+								<span className="hammock-menu-area-item-icon" uk-icon="home"></span>
+								<span className="hammock-menu-area-item-name">Home</span>
+							</a>
+						</li>
+						<li className="hammock-menu-area-item">
+							<a>
+								<span className="hammock-menu-area-item-icon" uk-icon="settings"></span>
+								<span className="hammock-menu-area-item-name">Home</span>
+							</a>
+						</li>
+						<li className="hammock-menu-area-item">
+							<a>
+								<span className="hammock-menu-area-item-icon" uk-icon="home"></span>
+								<span className="hammock-menu-area-item-name">Home</span>
+							</a>
+						</li>
+					</ul>
 				</div>
-				<div className="hammock-container">
-					<div className="uk-width-auto">
-						{this.props.children}
+				<div className='hammock-content-area'>
+					<div className="uk-container hammock-main-header uk-background-default uk-width-1-1 uk-padding-small" uk-sticky="top: #wpadminbar; offset: 30">
+						<div className="uk-grid-collapse uk-child-width-expand@s uk-grid-small" uk-grid="">
+							<div><h2 className='hammock-main-header-title'>{title}</h2></div>
+							<div className="uk-text-right uk-margin-small-right uk-margin-small-top">{button}</div>
+						</div>
+					</div>
+					<div className="hammock-container">
+						<div className="uk-width-auto">
+							{this.props.children}
+						</div>
 					</div>
 				</div>
 				<ToastContainer
@@ -36,7 +61,7 @@ export default class Dashboard extends Component {
 					draggable={false}
 					pauseOnHover
 				/>
-			</React.Fragment>
+			</div>
 		)
 	}
 }

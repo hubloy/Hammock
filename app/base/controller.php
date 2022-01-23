@@ -5,6 +5,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+use Hammock\Core\Admin;
+
 /**
  * Base controller class
  * All controllers must extend this class
@@ -33,13 +35,32 @@ class Controller extends Component {
 	protected $is_base = false;
 
 	/**
+	 * If is a sub page
+	 * Always defaults to true
+	 * 
+	 * @since 1.0.0
+	 */
+	protected $is_sub_page = true;
+
+	/**
+	 * The admin core object
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @var object
+	 */
+	private $admin = null;
+
+	/**
 	 * Initalize Object Hooks
 	 *
 	 * @since  1.0.0
 	 */
 	public function __construct() {
+		$this->admin = new Admin();
 		$this->init_variables();
 		if ( ! $this->is_base ) {
+			$this->register_page();
 			$this->add_action( 'hammock_admin_menu_page', 'menu_page', 10, 2 );
 			$this->add_action( 'hammock_network_admin_menu_page', 'network_menu_page', 10, 2 );
 		}
@@ -79,6 +100,50 @@ class Controller extends Component {
 	 */
 	public function network_menu_page( $slug, $cap ) {
 
+	}
+
+	/**
+	 * Get admin pages
+	 * 
+	 * @param bool $admin Set to false to get non admin pages. Defaults to tru
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
+	public function get_pages( $admin = true ) {
+		return $admin ? $this->admin->get_content_pages() : $this->admin->get_setting_pages(); 
+	}
+
+	/**
+	 * Register a page
+	 * 
+	 * @since 1.0.0
+	 */
+	public function register_page() {
+
+	}
+
+	/**
+	 * Register the content page
+	 * 
+	 * @param array $args
+	 * 
+	 * @since 1.0.0
+	 */
+	public function register_content_page( $args ) {
+		$this->admin->register_content_sub_page( $args );
+	}
+
+	/**
+	 * Register setting sub page
+	 * 
+	 * @param array $args
+	 * 
+	 * @since 1.0.0
+	 */
+	public function register_setting_page( $args ) {
+		$this->admin->register_setting_sub_page( $args );
 	}
 
 
