@@ -36,6 +36,14 @@ export default class Dashboard extends Component {
 							</a>
 						</li>
 					</ul>
+					<div className='hammock-menu-area-toggle hide-if-no-js'>
+						<div className='hammock-menu-area-toggle-icon'>
+							<span className="uk-icon-button hammock-menu-area-toggle-icon-maximized" uk-icon="chevron-left"></span>
+						</div>
+						<div className='hammock-menu-area-toggle-label'>
+							Minimize Navigation
+						</div>
+					</div>
 				</div>
 				<div className='hammock-content-area'>
 					<div className="uk-container hammock-main-header uk-background-default uk-width-1-1 uk-padding-small" uk-sticky="top: #wpadminbar; offset: 30">
