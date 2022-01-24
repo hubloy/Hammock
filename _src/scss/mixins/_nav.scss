@@ -1,0 +1,35 @@
+@mixin minimized_menu() {
+	.hammock-menu-area-title-label,
+	.hammock-menu-area-item-name,
+	.hammock-menu-area-toggle-icon-maximized,
+    .hammock-menu-area-toggle-label {
+		display: none;
+	}
+	.hammock-menu-area {
+		width: 57px;
+	}
+    .hammock-menu-area-title .uk-icon {
+        margin-left: 10px;
+    }
+	.hammock-menu-area-item a {
+		text-align: center;
+		padding-left: 0px;
+		padding-right: 0;
+	}
+	.hammock-menu-area-title {
+		padding-left: 10px !important;
+	}
+
+	.hammock-menu-area-toggle-icon-minimized {
+		display: block !important;
+	}
+	.hammock-menu-area-toggle {
+		margin-left: 15px;
+		&-icon {
+			margin: 0;
+		}
+	}
+	.hammock-content-area {
+		margin-left: 57px;
+	}
+}

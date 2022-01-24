@@ -103,6 +103,10 @@ class Resource {
 				'assets_url'   => HAMMOCK_ASSETS_URL,
 				'is_multisite' => is_multisite(),
 				'active_page'  => 'dashboard',
+				'nav'          => array(
+					'minimize' => __( 'Minimize Navigation', 'hammock' ),
+					'maximize' => __( 'Maximize Navigation', 'hammock' ),
+				),
 				'common'       => array(
 					'buttons'       => array(
 						'save'     => __( 'Save', 'hammock' ),

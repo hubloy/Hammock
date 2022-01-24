@@ -30,6 +30,12 @@ body {
 	.hammock-admin-content-container {
 		height: calc(100vh - 32px);
 		display: flex;
+		&.minimized {
+			@include minimized_menu();
+		}
+		@media only screen and ( max-width: 960px ) {
+			@include minimized_menu();
+		}
 		.hammock-menu-area {
 			width: 287px;
 			background-color: $background-gray;
@@ -41,7 +47,10 @@ body {
 				font-size: 24px !important;
 				font-weight: 400 !important;
 				margin: 0 !important;
-				padding: 15px 0 15px 30px;
+				padding: 15px 0 15px 25px;
+				.uk-icon {
+					margin-right: 10px;
+				}
 			}
 			&-items {
 				display: flex;
@@ -108,10 +117,12 @@ body {
 				}
 				&-icon {
 					grid-column: span 2;
+					.hammock-menu-area-toggle-icon-minimized {
+						display: none;
+					}
 				}
 				&-label {
 					grid-column: span 10;
-					line-height: 2.5;
 				}
 			}
 		}

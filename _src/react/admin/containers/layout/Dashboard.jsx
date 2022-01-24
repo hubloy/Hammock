@@ -7,18 +7,44 @@ import 'react-toastify/dist/ReactToastify.css';
 export default class Dashboard extends Component {
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			minimized : false,
+		};
+
+		this.toggleNavigation = this.toggleNavigation.bind(this);
+	}
+
+	async componentDidMount() {
+		var minimized = window.localStorage.getItem( '_hammock_admin_menu' );
+		if ( minimized && minimized == 'minimized' ) {
+			this.setState( { minimized : true });
+		}
+	}
+
+	toggleNavigation() {
+		var minimized = this.state.minimized,
+			newState = !minimized;
+		if ( newState ) {
+			window.localStorage.setItem( '_hammock_admin_menu', 'minimized' );
+		} else {
+			window.localStorage.removeItem( '_hammock_admin_menu' );
+		}
+		this.setState( { minimized : newState });
 	}
 
 	render() {
-		var title = typeof this.props.title !== 'undefined' ? this.props.title : this.props.hammock.common.string.title,
-			button = typeof this.props.button !== 'undefined' ? this.props.button : '';
+		var hammock = this.props.hammock,
+			title = typeof this.props.title !== 'undefined' ? this.props.title : hammock.common.string.title,
+			button = typeof this.props.button !== 'undefined' ? this.props.button : '',
+			minimized = this.state.minimized;
 		return (
-			<div className='hammock-admin-content-container'>
+			<div className={'hammock-admin-content-container' + ( minimized ? ' minimized' : '')}>
 				<div className='hammock-menu-area'>
-					<h1 className="hammock-menu-area-title">{title}</h1>
+					<h1 className="hammock-menu-area-title"><span uk-icon="home"></span><span className='hammock-menu-area-title-label'>{title}</span></h1>
 					<ul className="hammock-menu-area-items uk-iconnav uk-iconnav-vertical">
 						<li className="hammock-menu-area-item uk-active">
-							<a>
+							<a uk-tooltip="title: Hello World; pos: right">
 								<span className="hammock-menu-area-item-icon" uk-icon="home"></span>
 								<span className="hammock-menu-area-item-name">Home</span>
 							</a>
@@ -36,12 +62,13 @@ export default class Dashboard extends Component {
 							</a>
 						</li>
 					</ul>
-					<div className='hammock-menu-area-toggle hide-if-no-js'>
+					<div className='hammock-menu-area-toggle hide-if-no-js' onClick={this.toggleNavigation}>
 						<div className='hammock-menu-area-toggle-icon'>
-							<span className="uk-icon-button hammock-menu-area-toggle-icon-maximized" uk-icon="chevron-left"></span>
+							<span className="hammock-menu-area-toggle-icon-maximized" uk-icon="chevron-left"></span>
+							<span className="hammock-menu-area-toggle-icon-minimized" uk-icon="chevron-right"></span>
 						</div>
 						<div className='hammock-menu-area-toggle-label'>
-							Minimize Navigation
+							{hammock.nav.minimize}
 						</div>
 					</div>
 				</div>
