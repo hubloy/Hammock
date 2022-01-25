@@ -42,6 +42,23 @@ class Members extends Controller {
 	const MENU_SLUG = 'members';
 
 	/**
+	 * If is a sub page
+	 * Always defaults to true
+	 * 
+	 * @since 1.0.0
+	 */
+	protected $is_sub_page = true;
+
+	/**
+	 * Set to true if content page
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @var bool
+	 */
+	protected $content_page = true;
+
+	/**
 	 * String translations
 	 *
 	 * @since 1.0.0

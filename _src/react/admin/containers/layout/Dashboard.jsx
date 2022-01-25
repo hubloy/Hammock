@@ -36,6 +36,7 @@ export default class Dashboard extends Component {
 	render() {
 		var hammock = this.props.hammock,
 			title = typeof this.props.title !== 'undefined' ? this.props.title : hammock.common.string.title,
+			section = typeof this.props.section !== 'undefined' ? this.props.section : hammock.common.string.section,
 			button = typeof this.props.button !== 'undefined' ? this.props.button : '',
 			minimized = this.state.minimized;
 		return (
@@ -46,7 +47,7 @@ export default class Dashboard extends Component {
 						<li className="hammock-menu-area-item uk-active">
 							<a uk-tooltip="title: Hello World; pos: right">
 								<span className="hammock-menu-area-item-icon" uk-icon="home"></span>
-								<span className="hammock-menu-area-item-name">Home</span>
+								<span className="hammock-menu-area-item-name">{section}</span>
 							</a>
 						</li>
 						<li className="hammock-menu-area-item">

@@ -107,6 +107,7 @@ class Resource {
 					'minimize' => __( 'Minimize Navigation', 'hammock' ),
 					'maximize' => __( 'Maximize Navigation', 'hammock' ),
 				),
+				'sub_menu'     => array(),
 				'common'       => array(
 					'buttons'       => array(
 						'save'     => __( 'Save', 'hammock' ),
@@ -124,6 +125,7 @@ class Resource {
 						'dashboard' => __( 'Dashboard', 'hammock' ),
 						'not_found' => __( "Sorry, we couldn't find what you are looking for", 'hammock' ),
 						'title'     => __( 'Dashboard', 'hammock' ),
+						'section'   => __( 'Dashboard', 'hammock' ),
 						'search'    => array(
 							'users'   => array(
 								'select'    => __( 'Search for user', 'hammock' ),

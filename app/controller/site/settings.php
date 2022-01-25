@@ -41,6 +41,23 @@ class Settings extends Controller {
 	const MENU_SLUG = 'settings';
 
 	/**
+	 * If is a sub page
+	 * Always defaults to true
+	 * 
+	 * @since 1.0.0
+	 */
+	protected $is_sub_page = false;
+
+	/**
+	 * Set to true if content page
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @var bool
+	 */
+	protected $content_page = false;
+
+	/**
 	 * Singletone instance of the plugin.
 	 *
 	 * @since  1.0.0
@@ -116,7 +133,8 @@ class Settings extends Controller {
 	 */
 	function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'settings' ) ) {
-			$vars['common']['string']['title'] = __( 'Settings', 'hammock' );
+			$vars['common']['string']['title']   = __( 'Settings', 'hammock' );
+			$vars['common']['string']['section'] = __( 'Settings', 'hammock' );
 			$vars['active_page']               = 'settings';
 			$vars['strings']                   = $this->get_strings();
 			$vars['page_strings']              = array(

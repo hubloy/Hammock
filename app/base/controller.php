@@ -43,6 +43,15 @@ class Controller extends Component {
 	protected $is_sub_page = true;
 
 	/**
+	 * Set to true if content page
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @var bool
+	 */
+	protected $content_page = false;
+
+	/**
 	 * The admin core object
 	 * 
 	 * @since 1.0.0
@@ -60,9 +69,12 @@ class Controller extends Component {
 		$this->admin = new Admin();
 		$this->init_variables();
 		if ( ! $this->is_base ) {
-			$this->register_page();
-			$this->add_action( 'hammock_admin_menu_page', 'menu_page', 10, 2 );
-			$this->add_action( 'hammock_network_admin_menu_page', 'network_menu_page', 10, 2 );
+			if ( $this->is_sub_page ) {
+				$this->register_page();
+			} else {
+				$this->add_action( 'hammock_admin_menu_page', 'menu_page', 10, 2 );
+				$this->add_action( 'hammock_network_admin_menu_page', 'network_menu_page', 10, 2 );
+			}
 		}
 		$this->add_action( 'hammock_plugin_admin_setup', 'setup' );
 		$this->add_action( 'hammock_controller_scripts', 'controller_scripts' );
@@ -105,14 +117,12 @@ class Controller extends Component {
 	/**
 	 * Get admin pages
 	 * 
-	 * @param bool $admin Set to false to get non admin pages. Defaults to tru
-	 * 
 	 * @since 1.0.0
 	 * 
 	 * @return array
 	 */
-	public function get_pages( $admin = true ) {
-		return $admin ? $this->admin->get_content_pages() : $this->admin->get_setting_pages(); 
+	public function get_pages() {
+		return $this->content_page ? $this->admin->get_content_pages() : $this->admin->get_setting_pages(); 
 	}
 
 	/**

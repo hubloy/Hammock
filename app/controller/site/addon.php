@@ -43,6 +43,23 @@ class Addon extends Controller {
 	const MENU_SLUG = 'addons';
 
 	/**
+	 * If is a sub page
+	 * Always defaults to true
+	 * 
+	 * @since 1.0.0
+	 */
+	protected $is_sub_page = false;
+
+	/**
+	 * Set to true if content page
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @var bool
+	 */
+	protected $content_page = false;
+
+	/**
 	 * Singletone instance of the plugin.
 	 *
 	 * @since  1.0.0
