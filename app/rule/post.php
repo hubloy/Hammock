@@ -122,12 +122,13 @@ class Post extends Rule {
 		$args['ignore_sticky_posts'] = true;
 		$args['public']              = true;
 		$args['post_status']         = 'publish';
-		$posts                       = get_posts( $args );
-		if ( ! $posts ) {
+		$args['post_type']           = 'post';
+		$query                       = new \WP_Query( $args );
+		$data                        = array();
+		if ( ! $query->have_posts() ) {
 			return array();
 		}
-		$data = array();
-		foreach ( $posts as $post ) {
+		foreach ( $query->posts as $post ) {
 			$rule           = $this->get_rule( $post->ID, 'post' );
 			$edit_link      = get_edit_post_link( $post->ID );
 			$view_link      = get_permalink( $post->ID );
@@ -143,6 +144,7 @@ class Post extends Rule {
 			);
 			$data[ $post->ID ] = $content;
 		}
+		wp_reset_postdata();
 		return $data;
 	}
 

@@ -83,13 +83,13 @@ class Rules {
 	public function get_rule_type_data( $args ) {
 		$defaults = array(
 			'type'   => '',
-			'offset' => 0,
+			'paged'  => 0,
 			'number' => 10,
 		);
 		$args   = wp_parse_args( $args, $defaults );
 		$types  = $this->list_rule_types();
 		$type   = strtolower( $args['type'] );
-		$offset = ( int ) $args['offset'];
+		$offset = ( int ) $args['paged'];
 		$rule   = false;
 		if ( ! isset( $types[$type] ) ) {
 			return array(

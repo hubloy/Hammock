@@ -114,7 +114,7 @@ class Rules extends Rest {
 		$type  = $request['type'];
 		return rest_ensure_response( $this->service->get_rule_type_data( array(
 			'type'   => $type,
-			'offset' => $request->get_param( 'page' )
+			'paged'  => $request->get_param( 'page' )
 		) ) );
 	}
 }
