@@ -96,11 +96,12 @@ class Admin {
 	 */
 	private function parse_args( $args ) {
 		$args = wp_parse_args( $args, array(
-			'id'    => '',
-			'name'  => '',
-			'icon'  => '',
-			'desc'  => '',
-			'class' => '',
+			'id'       => '',
+			'name'     => '',
+			'icon'     => '',
+			'desc'     => '',
+			'class'    => '',
+			'callback' => false
 		) );
 
 		return $args;

@@ -171,7 +171,8 @@ class Plugin {
 		$this->controller = new \Hammock\Controller\Plugin();
 		\Hammock\Core\Controller::load_controllers();
 		\Hammock\Core\Controller::load_routes();
-
+		// Register a page.
+		do_action( 'hammock_admin_register_page ');
 		do_action( 'hammock_setup_controller' );
 	}
 

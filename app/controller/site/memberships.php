@@ -117,6 +117,20 @@ class Memberships extends Controller {
 	}
 
 	/**
+	 * Register a page
+	 * 
+	 * @since 1.0.0
+	 */
+	public function register_page() {
+		$this->add_admin_page( array(
+			'id'       => self::MENU_SLUG,
+			'name'     => __( 'Memberships', 'hammock' ),
+			'icon'     => 'lock',
+			'callback' => array( $this, 'render' )
+		) );
+	}
+
+	/**
 	 * Set up admin js variables
 	 *
 	 * @param array $vars

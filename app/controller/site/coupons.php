@@ -142,6 +142,23 @@ class Coupons extends Controller {
 	}
 
 	/**
+	 * Register a page
+	 * 
+	 * @since 1.0.0
+	 */
+	public function register_page() {
+		$enabled = isset( $this->setting['enabled'] ) ? $this->setting['enabled'] : false;
+		if ( $enabled ) {
+			$this->add_admin_page( array(
+				'id'       => self::MENU_SLUG,
+				'name'     => __( 'Coupons', 'hammock' ),
+				'icon'     => 'tag',
+				'callback' => array( $this, 'render' )
+			) );
+		}
+	}
+
+	/**
 	 * Set up admin js variables
 	 *
 	 * @param array $vars

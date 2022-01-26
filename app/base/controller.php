@@ -70,7 +70,7 @@ class Controller extends Component {
 		$this->init_variables();
 		if ( ! $this->is_base ) {
 			if ( $this->is_sub_page ) {
-				$this->register_page();
+				$this->add_action( 'hammock_admin_register_page', 'register_page' );
 			} else {
 				$this->add_action( 'hammock_admin_menu_page', 'menu_page', 10, 2 );
 				$this->add_action( 'hammock_network_admin_menu_page', 'network_menu_page', 10, 2 );
@@ -131,7 +131,22 @@ class Controller extends Component {
 	 * @since 1.0.0
 	 */
 	public function register_page() {
+		
+	}
 
+	/**
+	 * Add the admin page
+	 *
+	 * @param array $args The arguments.
+	 *
+	 * @since 1.0.0
+	 */
+	protected function add_admin_page( $args ) {
+		if ( $this->content_page ) {
+			$this->register_content_page( $args );
+		} else {
+			$this->register_setting_page( $args );
+		}
 	}
 
 	/**
