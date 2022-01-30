@@ -140,4 +140,36 @@ jQuery(function($) {
 		$('.hammock-' + $target).hide();
 		$('.' + $target + '-' + $val ).show();
 	});
+
+	/**
+	 * Update rule
+	 */
+	$('body').on('click', '.hammock-rule-update', function(e){
+		e.preventDefault();
+		var $button = $(this),
+			$btn_txt = $button.text(),
+			$container = $button.parent(),
+			$id = $container.attr('data-id'),
+			$item = $container.attr('data-item'),
+			$selected = $container.find( '.hammock-chosen-select' ).val();
+
+		$button.attr('disabled', 'disabled');
+		$button.html("<div uk-spinner></div>");
+		$.post(
+			window.ajaxurl,
+			{ 'id' : $id, 'item' : $item, 'selected' : $selected, '_wpnonce' : hammock.ajax_nonce, 'action' : 'hammock_update_rule' }
+		).done( function( response ) {
+			$button.removeAttr('disabled');
+			$button.html($btn_txt);
+			if ( response.success === true ) {
+				hammock.helper.notify(response.data, 'success');
+			} else {
+				hammock.helper.notify(response.data, 'warning');
+			}
+		}).fail(function(xhr, status, error) {
+			$button.removeAttr('disabled');
+			$button.html($btn_txt);
+			hammock.helper.notify(hammock.error, 'error');
+		});
+	});
 });

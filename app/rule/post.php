@@ -137,7 +137,8 @@ class Post extends Rule {
 			$view_link      = get_permalink( $post->ID );
 			$access->data   = array(
 				'rule'        => $rule,
-				'id'          => $this->id,
+				'item'        => $this->id,
+				'id'          => $post->ID,
 				'memberships' => $memberships,
 			);
 			$content        = array(
