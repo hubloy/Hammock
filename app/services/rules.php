@@ -83,7 +83,7 @@ class Rules {
 	public function get_rule_type_data( $args ) {
 		$defaults = array(
 			'type'   => '',
-			'paged'  => 0,
+			'paged'  => 1,
 			'number' => 10,
 		);
 		$args   = wp_parse_args( $args, $defaults );
@@ -139,7 +139,7 @@ class Rules {
 		return array(
 			'pager' => $pager,
 			'items' => $rule->list_items( array(
-				'offset' => $offset
+				'paged' => $offset
 			) ),
 			'columns' => $rule->get_view_columns(),
 			'success' => true,
