@@ -78,6 +78,16 @@ class Rules extends Controller {
 		return self::$instance;
 	}
 
+
+	/**
+	 * Initialize controller
+	 *
+	 * @since 1.0.0
+	 */
+	public function init() {
+		$this->add_ajax_action( 'hammock_update_rule', 'update_rule' );
+	}
+
 	/**
 	 * Create the menu page
 	 *
@@ -164,5 +174,18 @@ class Rules extends Controller {
 		?>
 		<div id="hammock-rules-container"></div>
 		<?php
+	}
+
+	/**
+	 * Update rule
+	 * 
+	 * @since 1.0.0
+	 */
+	public function update_rule() {
+		$this->verify_nonce();
+
+		$id       = sanitize_text_field( $_POST['id'] );
+		$item     = sanitize_text_field( $_POST['item'] );
+		$selected = array_map( 'absint', $_POST['selected'] );
 	}
 }
