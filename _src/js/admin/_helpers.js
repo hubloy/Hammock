@@ -107,5 +107,9 @@ hammock.helper = {
 		}
 
 		return date;
+	},
+
+	select2 : function() {
+		jQuery(".hammock-chosen-select").chosen({ no_results_text: hammock.no_results, width: "95%" });
 	}
 };

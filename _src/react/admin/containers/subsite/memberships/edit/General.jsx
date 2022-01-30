@@ -26,7 +26,7 @@ export default class General extends PureComponent {
 	}
 
 
-	notify(type, message) {
+	notify(message,type) {
 		toast[type](message, {toastId: 'memberships-edit-general-toast'});
 	}
 

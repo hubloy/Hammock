@@ -41,7 +41,7 @@ class Mailchimp extends View {
 							array(
 								'name'        => 'apikey',
 								'class'       => 'uk-input uk-form-width-large',
-								'value'       => $apikey,
+								'value'       => sanitize_text_field( $apikey ),
 								'placeholder' => '',
 							)
 						);

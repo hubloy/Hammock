@@ -11,7 +11,7 @@ jQuery(function($) {
 		maxDate : "0"
 	});
 
-	$(".hammock-chosen-select").chosen({ no_results_text: hammock.no_results, width: "95%" });
+	hammock.helper.select2();
 
 	hammock.helper.bind_date_range();
 

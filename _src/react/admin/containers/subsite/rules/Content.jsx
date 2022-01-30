@@ -25,13 +25,16 @@ export default class Table extends Component {
 	getData = async ( page ) => {
 		var type = this.props.type;
 		this.fetchWP.get( 'rules/get/' + type + '?page=' + page )
-			.then( (json) => this.setState({
-				items : json.items,
-				pager : json.pager,
-				columns : json.columns,
-				loading : false,
-				error : false,
-			}), (err) => this.setState({ loading : false, error : true })
+			.then( (json) => {
+				this.setState({
+					items : json.items,
+					pager : json.pager,
+					columns : json.columns,
+					loading : false,
+					error : false,
+				});
+				window.hammock.helper.select2();
+			}, (err) => this.setState({ loading : false, error : true })
 		);
 	}
 

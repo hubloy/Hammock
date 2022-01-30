@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use Hammock\Base\Rule;
 use Hammock\Helper\Cache;
+use Hammock\View\Backend\Rules\Access;
 
 class Post extends Rule {
 
@@ -128,10 +129,17 @@ class Post extends Rule {
 		if ( ! $query->have_posts() ) {
 			return array();
 		}
+		$memberships = $this->list_memberships();
 		foreach ( $query->posts as $post ) {
+			$access         = new Access();
 			$rule           = $this->get_rule( $post->ID, 'post' );
 			$edit_link      = get_edit_post_link( $post->ID );
 			$view_link      = get_permalink( $post->ID );
+			$access->data   = array(
+				'rule'        => $rule,
+				'id'          => $this->id,
+				'memberships' => $memberships,
+			);
 			$content        = array(
 				'id'        => $post->ID,
 				'type'      => $post->post_type,
@@ -140,7 +148,7 @@ class Post extends Rule {
 				'edit_html' => sprintf( __( '%sEdit%s', 'hammock' ), '<a href="' . $edit_link . '" target="_blank">', '</a>' ),
 				'view_link' => $view_link,
 				'view_html' => sprintf( __( '%sView%s', 'hammock' ), '<a href="' . $view_link . '" target="_blank">', '</a>' ),
-				'rule'      => $rule,
+				'access'    => $access->render( true ),
 			);
 			$data[ $post->ID ] = $content;
 		}
@@ -160,6 +168,7 @@ class Post extends Rule {
 		return array(
 			'id'        => __( 'ID', 'hammock' ),
 			'title'     => __( 'Title', 'hammock' ),
+			'access'    => __( 'Who has access', 'hammock' ),
 			'edit_html' => __( 'Edit', 'hammock' ),
 			'view_html' => __( 'View', 'hammock' ),
 		);

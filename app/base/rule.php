@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use Hammock\Model\Settings;
 use Hammock\Services\Members;
+use Hammock\Services\Memberships;
 
 /**
  * Protection rules
@@ -58,13 +59,21 @@ class Rule {
 	protected $members_service = null;
 
 	/**
+	 * The membership service
+	 *
+	 * @since 1.0.0
+	 */
+	protected $membership_service = null;
+
+	/**
 	 * Rule constructor.
 	 *
 	 * @since  1.0.0
 	 */
 	public function __construct() {
-		$this->settings        = new Settings();
-		$this->members_service = new Members();
+		$this->settings           = new Settings();
+		$this->members_service    = new Members();
+		$this->membership_service = new Memberships();
 		// Enabled defaults to content protection. Rules can define their own enabled state in init
 		$this->enabled         = $this->settings->get_general_setting( 'content_protection' );
 		$this->init();
@@ -153,6 +162,17 @@ class Rule {
 	 */
 	public function get_rule( $id, $type ) {
 		return \Hammock\Model\Rule::get_rules( $type, $id );;
+	}
+
+	/**
+	 * List memberships
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
+	public function list_memberships() {
+		return $this->membership_service->list_simple_memberships( 0, false );
 	}
 
 	/**

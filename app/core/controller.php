@@ -19,9 +19,10 @@ class Controller {
 	 */
 	public static function load_controllers() {
 		\Hammock\Controller\Site\Users::instance();
+		\Hammock\Controller\Site\Memberships::instance();
+		\Hammock\Controller\Site\Members::instance();
 		\Hammock\Controller\Site\Addon::instance();
 		\Hammock\Controller\Site\Rules::instance();
-		\Hammock\Controller\Site\Members::instance();
 		\Hammock\Controller\Site\Gateway::instance();
 		\Hammock\Controller\Site\Coupons::instance();
 		\Hammock\Controller\Site\Invites::instance();
@@ -29,7 +30,7 @@ class Controller {
 		\Hammock\Controller\Site\Activity::instance();
 		\Hammock\Controller\Site\Marketing::instance();
 		\Hammock\Controller\Site\Shortcodes::instance();
-		\Hammock\Controller\Site\Memberships::instance();
+		
 		\Hammock\Controller\Site\Transactions::instance();
 		\Hammock\Controller\Site\Communication::instance();
 

@@ -22,7 +22,7 @@ export default class Price extends PureComponent {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	notify(type, message) {
+	notify(message,type) {
 		toast[type](message, {toastId: 'memberships-edit-price-toast'});
 	}
 

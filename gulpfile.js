@@ -40,16 +40,14 @@ gulp.task('admin-scripts', function() {
 	return gulp.src(adminJsFiles)
 		.pipe(concat('hammock-admin.min.js'))
 		.pipe(uglify())
-		.pipe(gulp.dest(jsDest))
-		.pipe(notify({message: 'Admin js is ready', onLast: true}));
+		.pipe(gulp.dest(jsDest));
 });
 
 gulp.task('front-scripts', function() {
 	return gulp.src(frontJsFiles)
 		.pipe(concat('hammock-front.min.js'))
 		.pipe(uglify())
-		.pipe(gulp.dest(jsDest))
-		.pipe(notify({message: 'Front js is ready', onLast: true}));
+		.pipe(gulp.dest(jsDest));
 });
 
 
