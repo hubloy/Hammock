@@ -176,6 +176,7 @@ class Rule {
 	public function update_rule( $id, $type, $memberships ) {
 		$rule = $this->get_rule( $id, $type );
 		if ( ! $rule ) {
+			$rule = new \Hammock\Model\Rule();
 			$rule->object_type = $type;
 			$rule->object_id   = $id;
 		}

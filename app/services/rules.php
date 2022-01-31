@@ -154,7 +154,7 @@ class Rules {
 	 */
 	private function get_rule_by_type( $type ) {
 		$types  = $this->list_rule_types();
-		$type   = strtolower( $args['type'] );
+		$type   = strtolower( $type );
 		if ( ! isset( $types[$type] ) ) {
 			return false;
 		}

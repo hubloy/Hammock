@@ -115,7 +115,7 @@ class Rule {
 			$this->rule_id       = $id;
 			$this->object_type   = $item->object_type;
 			$this->object_id     = $item->object_id;
-			$this->memberships   = is_array( $item->memberships ) ? array_map( 'maybe_unserialize', $item->memberships ) : maybe_unserialize( $item->custom_rule );
+			$this->memberships   = is_array( $item->memberships ) ? array_map( 'maybe_unserialize', $item->memberships ) : maybe_unserialize( $item->memberships );
 			$this->time_limit    = $item->time_limit;
 			$this->time_duration = $item->time_duration;
 			$this->date_created  = date_i18n( $date_format, strtotime( $item->date_created ) );
@@ -167,7 +167,6 @@ class Rule {
 				array(
 					'object_type'   => $this->object_type,
 					'object_id'     => $this->object_id,
-					'member_id'     => $this->member_id,
 					'memberships'   => $memberships,
 					'time_limit'    => $this->time_limit,
 					'time_duration' => $this->time_duration,
@@ -181,7 +180,6 @@ class Rule {
 				array(
 					'object_type'   => $this->object_type,
 					'object_id'     => $this->object_id,
-					'member_id'     => $this->member_id,
 					'memberships'   => $memberships,
 					'time_limit'    => $this->time_limit,
 					'time_duration' => $this->time_duration,
