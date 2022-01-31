@@ -187,5 +187,17 @@ class Rules extends Controller {
 		$id       = sanitize_text_field( $_POST['id'] );
 		$item     = sanitize_text_field( $_POST['item'] );
 		$selected = array_map( 'absint', $_POST['selected'] );
+		$service  = new \Hammock\Services\Rules();
+		$response = $service->save_rule(
+			array(
+				'type'        => $item,
+				'id'          => $id,
+				'memberships' => $selected,
+			)
+		);
+		if ( is_wp_error( $response ) ) {
+			wp_send_json_error( $response->get_error_message() );
+		}
+		wp_send_json_success( $response['message'] );
 	}
 }

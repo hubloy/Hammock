@@ -176,6 +176,22 @@ class Post extends Rule {
 	}
 
 	/**
+	 * Save rule
+	 *
+	 * @param array $memberships Array of memberships
+	 * @param int $item_id the item id to apply the rules to
+	 * 
+	 * @since 1.0.0
+	 */
+	public function save_rule( $memberships, $item_id ) {
+		$post = get_post( $item_id );
+		if ( ! $post ) {
+			return;
+		}
+		$this->update_rule( $item_id, 'post', $memberships );
+	}
+
+	/**
 	 * Before a post is trashed, delete the cache.
 	 *
 	 * @since 1.0.0

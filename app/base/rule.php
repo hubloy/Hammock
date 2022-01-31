@@ -165,6 +165,25 @@ class Rule {
 	}
 
 	/**
+	 * Update rule
+	 * 
+	 * @param int    $id - the object id
+	 * @param string $type - the object type
+	 * @param array  $memberships The memberships
+	 * 
+	 * @since 1.0.0
+	 */
+	public function update_rule( $id, $type, $memberships ) {
+		$rule = $this->get_rule( $id, $type );
+		if ( ! $rule ) {
+			$rule->object_type = $type;
+			$rule->object_id   = $id;
+		}
+		$rule->memberships = $memberships;
+		$rule->save();
+	}
+
+	/**
 	 * List memberships
 	 * 
 	 * @since 1.0.0
@@ -210,6 +229,18 @@ class Rule {
 	 */
 	public function get_view_columns() {
 		return array();
+	}
+
+	/**
+	 * Save rule
+	 *
+	 * @param array $memberships Array of memberships
+	 * @param int $item_id the item id to apply the rules to
+	 * 
+	 * @since 1.0.0
+	 */
+	public function save_rule( $memberships, $item_id ) {
+
 	}
 
 	/**

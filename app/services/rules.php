@@ -76,7 +76,7 @@ class Rules {
 	 * 		'data' The rule data. Either list or count
 	 * 		'offset' Optional page offset
 	 * 
-	 * @since x.x
+	 * @since 1.0.0
 	 * 
 	 * @return array
   	 */
@@ -87,15 +87,78 @@ class Rules {
 			'number' => 10,
 		);
 		$args   = wp_parse_args( $args, $defaults );
-		$types  = $this->list_rule_types();
-		$type   = strtolower( $args['type'] );
+		$rule   = $this->get_rule_by_type( $args['type'] );
 		$offset = ( int ) $args['paged'];
-		$rule   = false;
-		if ( ! isset( $types[$type] ) ) {
+		if ( ! $rule ) {
 			return array(
 				'success' => false
 			);
 		}
+
+		$per_page     = $args['number'];
+		$total        = $rule->count_items();
+		$pages        = Pagination::generate_pages( $total, $per_page, $offset );
+		$pager        = array(
+			'total'   => $total,
+			'pages'   => $pages,
+			'current' => $offset,
+		);
+		return array(
+			'pager' => $pager,
+			'items' => $rule->list_items( array(
+				'paged' => $offset
+			) ),
+			'columns' => $rule->get_view_columns(),
+			'success' => true,
+		);
+	}
+
+	/**
+	 * Save a rule
+	 * 
+	 * @param $args The rule data. This expects
+	 * 		'type' The rule type
+	 * 		'id' The rule componenet id
+	 * 		'memberships' List array of membership ids to assign
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return WP_Error|array Return an error if rule not found. Return an array if saved.
+	 */
+	public function save_rule( $args ) {
+		$defaults = array(
+			'type'        => '',
+			'id'          => 0,
+			'memberships' => array(),
+		);
+		$args   = wp_parse_args( $args, $defaults );
+		$rule   = $this->get_rule_by_type( $args['type'] );
+		if ( ! $rule ) {
+			return new \WP_Error( 'not_found', __( 'Rule type not found', 'hammock' ) );
+		}
+
+		$rule->save_rule( $args['memberships'], $args['id'] );
+		return array(
+			'message' => __( 'Rule saved', 'hammock' )
+		);
+	}
+
+	/**
+	 * Get rule by type.
+	 * 
+	 * @param string $type The rule type id
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return bool|object
+	 */
+	private function get_rule_by_type( $type ) {
+		$types  = $this->list_rule_types();
+		$type   = strtolower( $args['type'] );
+		if ( ! isset( $types[$type] ) ) {
+			return false;
+		}
+		$rule = false;
 		switch ( $type ) {
 			case 'post':
 				$rule = $this->protection_service->post_rule;
@@ -122,27 +185,6 @@ class Rules {
 				$rule = $this->protection_service->custom_types_rule;
 				break;
 		}
-
-		if ( ! $rule ) {
-			return array(
-				'success' => false
-			);
-		}
-		$per_page     = $args['number'];
-		$total        = $rule->count_items();
-		$pages        = Pagination::generate_pages( $total, $per_page, $offset );
-		$pager        = array(
-			'total'   => $total,
-			'pages'   => $pages,
-			'current' => $offset,
-		);
-		return array(
-			'pager' => $pager,
-			'items' => $rule->list_items( array(
-				'paged' => $offset
-			) ),
-			'columns' => $rule->get_view_columns(),
-			'success' => true,
-		);
+		return $rule;
 	}
 }
