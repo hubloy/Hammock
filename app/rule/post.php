@@ -124,6 +124,8 @@ class Post extends Rule {
 		$args['public']              = true;
 		$args['post_status']         = 'publish';
 		$args['post_type']           = 'post';
+		$args['order']               = 'ASC';
+		$args['orderby']             = 'title';
 		$query                       = new \WP_Query( $args );
 		$data                        = array();
 		if ( ! $query->have_posts() ) {
