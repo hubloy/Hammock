@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Dashboard from 'layout/Dashboard'
 import Nav from './rules/Nav';
 import Content from './rules/Content';
+import LazyLoad from 'react-lazyload';
 
 export default class Rules extends Component {
 	constructor(props) {
@@ -12,24 +13,19 @@ export default class Rules extends Component {
 
 	render() {
 		var hammock = this.props.hammock,
-		    active_nav = this.props.match.params.section !== undefined ? this.props.match.params.section : 'page',
+		    active_nav = this.props.match.params.section !== undefined ? this.props.match.params.section : 'all',
 			page = this.props.match.params.page !== undefined ? this.props.match.params.page : 1;
 			
 		return (
 			<Dashboard hammock={hammock}>
-				<div className="uk-child-width-expand hammock-rules" uk-grid="">
-                    <div className="hammock-rules-menu uk-width-auto">
-                        <Nav hammock={hammock} active_nav={active_nav}/>
-                    </div>
-                    <div className="hammock-rules-container uk-width-expand">
-						{
-							{
-								'page': <Content hammock={hammock} type={ 'page' } page={page}/>,
-								'post': <Content hammock={hammock} type={ 'post' } page={page}/>
-							}[active_nav]
-						}
-                    </div>
-                </div>
+				<div className="hammock-settings uk-width-expand">
+					<LazyLoad>
+						<Nav hammock={hammock} active_nav={active_nav}/>
+					</LazyLoad>
+					<div className="hammock-protection-rules uk-background-default uk-padding-small">
+						<Content hammock={hammock} type={active_nav} page={page}/>
+					</div>
+				</div>
 			</Dashboard>
 		)
 	}

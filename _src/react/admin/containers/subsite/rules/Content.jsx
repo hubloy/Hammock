@@ -66,32 +66,7 @@ export default class Table extends Component {
 							<h3 className="uk-text-center uk-margin-top">{hammock.no_data}</h3>
 						) : (
 							<table className="uk-table uk-background-default">
-								<thead>
-									<tr>
-										<th className='uk-table-shrink'><input className="uk-checkbox hammock-top-checkbox" type="checkbox" /></th>
-										{Object.keys(columns).map((column) =>
-											<th key={column} className={( 'id' == column ) ? "uk-table-shrink hammock-col-" + column : "uk-width-auto hammock-col-" + column}>{columns[column]}</th>
-										)}
-									</tr>
-								</thead>
-								<tfoot>
-									<tr>
-										<th className='uk-table-shrink'><input className="uk-checkbox hammock-bottom-checkbox" type="checkbox" /></th>
-										{Object.keys(columns).map((column) =>
-											<th key={column} className={( 'id' == column ) ? "uk-table-shrink hammock-col-" + column : "uk-width-auto hammock-col-" + column}>{columns[column]}</th>
-										)}
-									</tr>
-								</tfoot>
-								<tbody>
-									{Object.keys(items).map((item) =>
-										<tr key={items[item].id}>
-											<td><input className="uk-checkbox" type="checkbox" value={items[item].id} /></td>
-											{Object.keys(columns).map((column) =>
-												<td key={column} className={column}><span dangerouslySetInnerHTML={{ __html: items[item][column] }}></span></td>
-											)}
-										</tr>
-									)}
-								</tbody>
+								
 							</table>
 						)
 					)

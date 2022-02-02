@@ -87,30 +87,70 @@ class Rules {
 			'number' => 10,
 		);
 		$args   = wp_parse_args( $args, $defaults );
-		$rule   = $this->get_rule_by_type( $args['type'] );
-		$offset = ( int ) $args['paged'];
-		if ( ! $rule ) {
+		$types  = $this->list_rule_types();
+		$type   = $args['type'];
+		$type   = strtolower( $type );
+		if ( ! ( 'all' !== $type ) || ! isset( $types[ $type ] ) ) {
 			return array(
 				'success' => false
 			);
 		}
+		$offset = ( int ) $args['paged'];
+
 
 		$per_page     = $args['number'];
-		$total        = $rule->count_items();
+		$total        = $this->count_rules( $type );
 		$pages        = Pagination::generate_pages( $total, $per_page, $offset );
 		$pager        = array(
 			'total'   => $total,
 			'pages'   => $pages,
 			'current' => $offset,
 		);
+		$items       = $this->list_rules(array(
+			'paged'    => $offset,
+			'per_page' => $per_page,
+			'type'     => $type,
+		));
 		return array(
-			'pager' => $pager,
-			'items' => $rule->list_items( array(
-				'paged' => $offset
-			) ),
-			'columns' => $rule->get_view_columns(),
+			'pager'   => $pager,
+			'items'   => $items,
 			'success' => true,
 		);
+	}
+
+	/**
+	 * Count rules
+	 *
+	 * @param string $type The rule type.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return int
+	 */
+	public function count_rules( $type ) {
+		global $wpdb;
+		$where = '';
+		if ( 'all' !== $type ) {
+			$where = "WHERE `object_type` = %s";
+		}
+		global $wpdb;
+		$count = Cache::get_cache( 'count_rules_' . $type, 'counts' );
+		if ( false !== $count ) {
+			return $count;
+		}
+		$query = "SELECT COUNT( * ) FROM {$this->table_name} $where";
+		$count = $wpdb->get_var( $query );
+		Cache::set_cache( 'count_rules_' . $type , $count, 'counts' );
+		return $count;
+	}
+
+	public function list_rules( $type ) {
+		global $wpdb;
+		$where = '';
+		if ( 'all' !== $type ) {
+			$where = "WHERE `object_type` = %s";
+		}
+		return array();
 	}
 
 	/**

@@ -30,23 +30,25 @@ export default class Nav extends PureComponent {
     }
 
     render() {
-        const { active_nav } = this.props;
+        const { active_nav, hammock } = this.props;
         var items = this.state.items;
         return (
-            <div className='nav-menu'>
-                {this.state.loading ? (
-                    <span className="uk-text-center" uk-spinner="ratio: 2"></span>
-                ) : (
-                    <ul className="uk-nav uk-nav-default">
-                        {Object.keys(items).map(item =>
-                            <li className={active_nav === item ? 'uk-active' : '' } key={item}>
-                                <Link to={"/" + item}><span>{items[item]}</span></Link>
-                            </li>
-                        )}
-                    </ul>
-                )}
-                
-            </div>
+            <nav className="uk-navbar-container uk-navbar-transparent" uk-navbar="">
+                <div className="uk-navbar-left">
+                    {this.state.loading ? (
+                        <span className="uk-text-center" uk-spinner="ratio: 2"></span>
+                    ) : (
+                        <ul className="uk-navbar-nav hammock-navbar">
+                            <li className="uk-active" uk-filter-control=""><Link to={"/"}><span>{hammock.common.general.all}</span></Link></li>
+                            {Object.keys(items).map(item =>
+                                <li className={active_nav === item ? 'uk-active' : '' } key={item}>
+                                    <Link to={"/" + item}><span>{items[item]}</span></Link>
+                                </li>
+                            )}
+                        </ul>
+                    )}
+                </div>
+            </nav>
         );
     }
 }
