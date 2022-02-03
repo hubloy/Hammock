@@ -83,14 +83,14 @@ class Rules {
 	public function get_rule_type_data( $args ) {
 		$defaults = array(
 			'type'   => '',
-			'paged'  => 1,
+			'paged'  => 0,
 			'number' => 10,
 		);
 		$args   = wp_parse_args( $args, $defaults );
 		$types  = $this->list_rule_types();
 		$type   = $args['type'];
 		$type   = strtolower( $type );
-		if ( ! ( 'all' !== $type ) || ! isset( $types[ $type ] ) ) {
+		if ( ( 'all' !== $type ) && ! isset( $types[ $type ] ) ) {
 			return array(
 				'success' => false
 			);
@@ -106,7 +106,7 @@ class Rules {
 			'pages'   => $pages,
 			'current' => $offset,
 		);
-		$items       = $this->list_rules(array(
+		$items       = $this->list_rules( array(
 			'paged'    => $offset,
 			'per_page' => $per_page,
 			'type'     => $type,
@@ -133,24 +133,48 @@ class Rules {
 		if ( 'all' !== $type ) {
 			$where = "WHERE `object_type` = %s";
 		}
-		global $wpdb;
-		$count = Cache::get_cache( 'count_rules_' . $type, 'counts' );
+		$count = Cache::get_cache( 'rules_' . $type, 'counts' );
 		if ( false !== $count ) {
 			return $count;
 		}
 		$query = "SELECT COUNT( * ) FROM {$this->table_name} $where";
 		$count = $wpdb->get_var( $query );
-		Cache::set_cache( 'count_rules_' . $type , $count, 'counts' );
+		Cache::set_cache( 'rules_' . $type , $count, 'counts' );
 		return $count;
 	}
 
-	public function list_rules( $type ) {
+	/**
+	 * List rules by type
+	 * 
+	 * @param string $type The rule type
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
+	public function list_rules( $args ) {
 		global $wpdb;
-		$where = '';
+		$type 	  = $args['type'];
+		$page 	  = $args['paged'];
+		$per_page = $args['per_page'];
+		$where    = '';
 		if ( 'all' !== $type ) {
 			$where = "WHERE `object_type` = %s";
 		}
-		return array();
+		$lists = Cache::get_cache( 'rules_' . $type, 'list' );
+		if ( false !== $lists ) {
+			return $lists;
+		}
+		$lists   = array();
+		$query   = "SELECT `id` FROM {$this->table_name} $where LIMIT %d, %d";
+		$results = $wpdb->get_results( $wpdb->prepare( $query, $page, $per_page ) );
+		if ( ! empty( $results ) ) {
+			foreach ( $results as $result ) {
+				$lists[] = new Rule( $result->id );
+			}
+		}
+		Cache::set_cache( 'rules_' . $type , $lists, 'list' );
+		return $lists;
 	}
 
 	/**

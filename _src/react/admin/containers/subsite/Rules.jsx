@@ -14,7 +14,7 @@ export default class Rules extends Component {
 	render() {
 		var hammock = this.props.hammock,
 		    active_nav = this.props.match.params.section !== undefined ? this.props.match.params.section : 'all',
-			page = this.props.match.params.page !== undefined ? this.props.match.params.page : 1;
+			page = this.props.match.params.page !== undefined ? this.props.match.params.page : 0;
 			
 		return (
 			<Dashboard hammock={hammock}>
