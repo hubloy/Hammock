@@ -144,15 +144,16 @@ class Page extends Rule {
 	 *
 	 * @param array $memberships Array of memberships
 	 * @param int $item_id the item id to apply the rules to
+	 * @param string $status The rule status
 	 * 
 	 * @since 1.0.0
 	 */
-	public function save_rule( $memberships, $item_id ) {
+	public function save_rule( $memberships, $item_id, $status ) {
 		$post = get_post( $item_id );
 		if ( ! $post ) {
 			return;
 		}
-		$this->update_rule( $item_id, 'page', $memberships );
+		$this->update_rule( $item_id, 'page', $memberships, $status );
 	}
 
 	/**

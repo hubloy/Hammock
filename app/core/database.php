@@ -135,6 +135,7 @@ class Database {
                 `object_type` VARCHAR($max_index_length) NOT NULL,
 				`object_id` bigint(20) unsigned default NULL,
 				`custom_rule` LONGTEXT NULL,
+				`status` VARCHAR(10) NULL,
 				`time_limit` tinyint(1) NOT NULL DEFAULT '0',
 				`time_duration` bigint(20) NOT NULL DEFAULT '0',
 				`date_created` datetime NOT NULL default '0000-00-00 00:00:00',

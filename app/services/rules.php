@@ -34,6 +34,23 @@ class Rules {
 	private $protection_service = null;
 
 	/**
+	 * Membership rule status type constants.
+	 * Enabled rule status
+	 *
+	 * @since  1.0.0
+	 */
+	const STATUS_ENABLED = 'enabled';
+
+	/**
+	 * Membership rule status type constants.
+	 * Disabled rule status
+	 *
+	 * @since  1.0.0
+	 */
+	const STATUS_DISABLED = 'disabled';
+
+
+	/**
 	 * Main service constructor
 	 *
 	 * Sets up the service
@@ -166,11 +183,11 @@ class Rules {
 			return $lists;
 		}
 		$lists   = array();
-		$query   = "SELECT `id` FROM {$this->table_name} $where LIMIT %d, %d";
+		$query   = "SELECT `rule_id` FROM {$this->table_name} $where LIMIT %d, %d";
 		$results = $wpdb->get_results( $wpdb->prepare( $query, $page, $per_page ) );
 		if ( ! empty( $results ) ) {
 			foreach ( $results as $result ) {
-				$lists[] = new Rule( $result->id );
+				$lists[] = new Rule( $result->rule_id );
 			}
 		}
 		Cache::set_cache( 'rules_' . $type , $lists, 'list' );
@@ -193,6 +210,7 @@ class Rules {
 		$defaults = array(
 			'type'        => '',
 			'id'          => 0,
+			'status'      => self::STATUS_ENABLED,
 			'memberships' => array(),
 		);
 		$args   = wp_parse_args( $args, $defaults );
@@ -201,7 +219,7 @@ class Rules {
 			return new \WP_Error( 'not_found', __( 'Rule type not found', 'hammock' ) );
 		}
 
-		$rule->save_rule( $args['memberships'], $args['id'] );
+		$rule->save_rule( $args['memberships'], $args['id'], $args['status'] );
 		return array(
 			'message' => __( 'Rule saved', 'hammock' )
 		);

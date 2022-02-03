@@ -170,10 +170,11 @@ class Rule {
 	 * @param int    $id - the object id
 	 * @param string $type - the object type
 	 * @param array  $memberships The memberships
+	 * @param string $stats The rule status
 	 * 
 	 * @since 1.0.0
 	 */
-	public function update_rule( $id, $type, $memberships ) {
+	public function update_rule( $id, $type, $memberships, $status ) {
 		$rule = $this->get_rule( $id, $type );
 		if ( ! $rule ) {
 			$rule = new \Hammock\Model\Rule();
@@ -181,6 +182,7 @@ class Rule {
 			$rule->object_id   = $id;
 		}
 		$rule->memberships = $memberships;
+		$rule->status      = $status;
 		$rule->save();
 	}
 

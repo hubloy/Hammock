@@ -70,6 +70,15 @@ class Rule {
 	public $time_duration = 0;
 
 	/**
+	 * The rule status
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @var string
+	 */
+	public $status = '';
+
+	/**
 	 * Date created
 	 *
 	 * @since 1.0.0
@@ -108,7 +117,7 @@ class Rule {
 	 */
 	public function get_one( $id ) {
 		global $wpdb;
-		$sql  = "SELECT `rule_id`, `memberships`, `object_type`, `object_id`, `time_limit`, `time_duration`, `date_created`, `date_updated` FROM {$this->table_name} WHERE `rule_id` = %d";
+		$sql  = "SELECT `rule_id`, `memberships`, `object_type`, `object_id`, `status`, `time_limit`, `time_duration`, `date_created`, `date_updated` FROM {$this->table_name} WHERE `rule_id` = %d";
 		$item = $wpdb->get_row( $wpdb->prepare( $sql, $id ) );
 		if ( $item ) {
 			$date_format         = get_option( 'date_format' );
@@ -116,6 +125,7 @@ class Rule {
 			$this->object_type   = $item->object_type;
 			$this->object_id     = $item->object_id;
 			$this->memberships   = is_array( $item->memberships ) ? array_map( 'maybe_unserialize', $item->memberships ) : maybe_unserialize( $item->memberships );
+			$this->status        = $item->status;
 			$this->time_limit    = $item->time_limit;
 			$this->time_duration = $item->time_duration;
 			$this->date_created  = date_i18n( $date_format, strtotime( $item->date_created ) );
@@ -168,6 +178,7 @@ class Rule {
 					'object_type'   => $this->object_type,
 					'object_id'     => $this->object_id,
 					'memberships'   => $memberships,
+					'status'        => $this->status,
 					'time_limit'    => $this->time_limit,
 					'time_duration' => $this->time_duration,
 					'due_date'      => ! empty( $this->due_date ) ? date_i18n( 'Y-m-d H:i:s', strtotime( $this->due_date ) ) : '',
@@ -181,6 +192,7 @@ class Rule {
 					'object_type'   => $this->object_type,
 					'object_id'     => $this->object_id,
 					'memberships'   => $memberships,
+					'status'        => $this->status,
 					'time_limit'    => $this->time_limit,
 					'time_duration' => $this->time_duration,
 					'date_created'  => date_i18n( 'Y-m-d H:i:s' ),
