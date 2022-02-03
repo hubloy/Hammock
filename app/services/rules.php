@@ -187,7 +187,8 @@ class Rules {
 		$results = $wpdb->get_results( $wpdb->prepare( $query, $page, $per_page ) );
 		if ( ! empty( $results ) ) {
 			foreach ( $results as $result ) {
-				$lists[] = new Rule( $result->rule_id );
+				$rule    = new Rule( $result->rule_id );
+				$lists[] = $rule->to_html();
 			}
 		}
 		Cache::set_cache( 'rules_' . $type , $lists, 'list' );

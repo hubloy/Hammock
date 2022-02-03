@@ -225,6 +225,32 @@ class Rule {
 		$this->rule_id = 0;
 	}
 
+	/**
+	 * Render values to readable strings
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array
+	 */
+	public function to_html() {
+		return apply_filters(
+			'hammock_membership_rule_to_html',
+			array(
+				'rule_id'             => $this->rule_id,
+				'memberships'         => $this->memberships,
+				'date_created'        => $this->date_created,
+				'date_updated'        => $this->date_updated,
+				'status'              => $this->status,
+				'object_type'         => $this->object_type,
+				'object_id'           => $this->object_id,
+				'time_limit'          => $this->time_limit,
+				'time_duration'       => $this->time_duration,
+				'desc'                => ''
+			),
+			$this
+		);
+	}
+
 
 	/**
 	 * Get rules by type

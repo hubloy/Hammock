@@ -170,7 +170,7 @@ class Rule {
 	 * @param int    $id - the object id
 	 * @param string $type - the object type
 	 * @param array  $memberships The memberships
-	 * @param string $stats The rule status
+	 * @param string $status The rule status
 	 * 
 	 * @since 1.0.0
 	 */
@@ -239,10 +239,11 @@ class Rule {
 	 *
 	 * @param array $memberships Array of memberships
 	 * @param int $item_id the item id to apply the rules to
+	 * @param string $status The rule status
 	 * 
 	 * @since 1.0.0
 	 */
-	public function save_rule( $memberships, $item_id ) {
+	public function save_rule( $memberships, $item_id, $status ) {
 
 	}
 
