@@ -21,53 +21,7 @@ As mentioned above: Only directly edit the branch `master`. Other branches shoul
 
 Important: Do not let your IDE change the **source order** of the code. Fixing up formatting is fine, but moving code blocks around is not! It will confuse grunt and produce problems.
 
-## Implement version differences
-
-As mentioned, we will only update the master branch with all changes, even if those changes only relate to a specific product (like Premium version). There are two ways to add code that is specific to a single product only:
-
-1. Put the code into a product directory (prefered).
-2. Wrap code in product conditions.
-
-### Product directories
-
-The prefered way to implement different code is to move pro code into the subfolder `/premium`. Code in the other directories is supposed to be core-plugin code (i.e. free plugin).
-
-### Product conditions
-
-There are special comments in the `master` branch will make sure some code only end up on the pro plugin and some code only end up in the free plugin.
-
-Those are:
-
-```
-#!php 
-/* start:pro */
-echo 'This is only in m2-pro';  
-/* end:pro */
-  
-/* start:free */
-echo 'This is only in m2-free';  
-/* end:free */
-```
-
-
 ## Working with the branches
-
-### Cloning
-
-M2 uses submodules, so use the `--recursive` flag if you clone from command line:  
-
-```
-#!bash 
-$ git clone git@bitbucket.org:incsub/membership-2.git --recursive  
-```
-
-If you already have a cloned repo, you will need to *init* the submodule.  
-
-```
-#!bash 
-$ git submodule init --
-$ git submodule update  
-```
 
 ### JS and CSS files
 
@@ -106,7 +60,6 @@ See notes below on how to correctly set up and use grunt.
 
 Many tasks as well as basic quality control are done via grunt. Below is a list of supported tasks.
 
-**Important**: Before making a pull-request to the master branch always run the task `grunt` - this ensures that all .php, .js and .css files are validated and existing unit tests pass. If an problems are reported then fix those problems before submitting the pull request.
 
 ### Grunt Task Runner  
 
