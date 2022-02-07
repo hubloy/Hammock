@@ -148,7 +148,7 @@ class Rules {
 		global $wpdb;
 		$where = '';
 		if ( 'all' !== $type ) {
-			$where = "WHERE `object_type` = %s";
+			$where = $wpdb->prepare( "WHERE `object_type` = %s", $type );
 		}
 		$count = Cache::get_cache( 'rules_' . $type, 'counts' );
 		if ( false !== $count ) {
@@ -176,7 +176,7 @@ class Rules {
 		$per_page = $args['per_page'];
 		$where    = '';
 		if ( 'all' !== $type ) {
-			$where = "WHERE `object_type` = %s";
+			$where = $wpdb->prepare( "WHERE `object_type` = %s", $type );
 		}
 		$lists = Cache::get_cache( 'rules_' . $type, 'list' );
 		if ( false !== $lists ) {
