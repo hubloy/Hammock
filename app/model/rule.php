@@ -245,7 +245,7 @@ class Rule {
 				'object_id'           => $this->object_id,
 				'time_limit'          => $this->time_limit,
 				'time_duration'       => $this->time_duration,
-				'desc'                => ''
+				'desc'                => sprintf( __( '%d memberships have access to this', 'hammock' ), count( $this->memberships ) )
 			),
 			$this
 		);
