@@ -117,10 +117,32 @@ class Rule {
 	 * @return array
 	 */
 	public function register_rule( $rules ) {
-		if ( ! isset( $rules[$this->id] ) ) {
-			$rules[$this->id] = $this->name;
+		if ( ! isset( $rules[ $this->id ] ) ) {
+			$rules[ $this->id ] = $this->name;
 		}
 		return $rules;
+	}
+
+	/**
+	 * Get the rule name
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return string
+	 */
+	public function get_name() {
+		return $this->name;
+	}
+
+	/**
+	 * Get the rule id
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return string
+	 */
+	public function get_id() {
+		return $this->id;
 	}
 
 	/**

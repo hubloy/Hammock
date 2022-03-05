@@ -86,6 +86,7 @@ class Rules extends Controller {
 	 */
 	public function init() {
 		$this->add_ajax_action( 'hammock_update_rule', 'update_rule' );
+		$this->add_filter( 'hammock_rule_type_name', 'get_rule_name' );
 	}
 
 	/**
@@ -199,5 +200,17 @@ class Rules extends Controller {
 			wp_send_json_error( $response->get_error_message() );
 		}
 		wp_send_json_success( $response['message'] );
+	}
+
+	/**
+	 * Get rule type
+	 */
+	public function get_rule_name( $type ) {
+		$service = new \Hammock\Services\Rules();
+		$rule    = $service->get_rule_by_type( $type );
+		if ( ! $rule ) {
+			return $type;
+		}
+		return $rule->get_name();
 	}
 }

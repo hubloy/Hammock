@@ -233,6 +233,7 @@ class Rule {
 	 * @return array
 	 */
 	public function to_html() {
+		$membership_count = count( $this->memberships );
 		return apply_filters(
 			'hammock_membership_rule_to_html',
 			array(
@@ -241,11 +242,13 @@ class Rule {
 				'date_created'        => $this->date_created,
 				'date_updated'        => $this->date_updated,
 				'status'              => $this->status,
+				'status_name'         => ucfirst( $this->status ),
 				'object_type'         => $this->object_type,
 				'object_id'           => $this->object_id,
+				'object_name'         => apply_filters( 'hammock_rule_type_name', $this->object_type ),
 				'time_limit'          => $this->time_limit,
 				'time_duration'       => $this->time_duration,
-				'desc'                => sprintf( __( '%d memberships have access to this', 'hammock' ), count( $this->memberships ) )
+				'desc'                => sprintf( _n( '%s membership has access to this', '%s memberships have access to this', $membership_count, 'hammock' ), number_format_i18n( $membership_count ) )
 			),
 			$this
 		);

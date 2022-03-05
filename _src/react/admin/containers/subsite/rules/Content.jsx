@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import fetchWP from 'utils/fetchWP';
+import { Link } from 'react-router-dom';
 import {PaginationUI} from 'ui/admin/form';
 
 
@@ -73,8 +74,8 @@ export default class Table extends Component {
 							<table className="uk-table uk-background-default">
 								<thead>
 									<tr>
-										<th><input className="uk-checkbox hammock-top-checkbox" type="checkbox" /></th>
-										<th className="uk-width-auto">{strings.dashboard.table.id}</th>
+										<th className='uk-table-shrink'><input className="uk-checkbox hammock-top-checkbox" type="checkbox" /></th>
+										<th className="uk-width-small">{strings.dashboard.table.id}</th>
 										<th>{strings.dashboard.table.desc}</th>
 										<th>{strings.dashboard.table.status}</th>
 										<th>{strings.dashboard.table.type}</th>
@@ -88,28 +89,22 @@ export default class Table extends Component {
 											<td>
 												{item.rule_id}
 												<div id={"rule-hover-"+ item.rule_id}>
-													<a uk-tooltip={hammock.common.buttons.edit} title={hammock.common.buttons.edit} className="uk-text-primary">{hammock.common.buttons.edit}</a>
+													<Link uk-tooltip={hammock.common.buttons.edit} title={hammock.common.buttons.edit} className="uk-text-primary" to={'/edit/' + item.rule_id}>{hammock.common.buttons.edit}</Link>
 													{' '}|{' '}
 													<a href="#" data-id={item.rule_id} uk-tooltip={hammock.common.buttons.delete} title={hammock.common.buttons.delete} className="uk-text-danger" onClick={ e => this.handleRowAction(e, item.id, 'delete')}>{hammock.common.buttons.delete}</a>
 												</div>
 											</td>
-											<td>{item.status_name} <span dangerouslySetInnerHTML={{ __html: item.is_overdue ? '<span class="hammock-text-small uk-label uk-label-warning">' + strings.labels.overdue + '</span>' : ''}}/></td>
-											<td>{item.gateway_name}</td>
-											<td><span dangerouslySetInnerHTML={{ __html: item.amount_formated }}></span></td>
-											<td>
-												<a href={item.member_user.edit_url} title={item.member_user.user_info.name} target="_blank">
-													{item.member_user.user_info.name}
-												</a>
-											</td>
+											<td><span dangerouslySetInnerHTML={{ __html: item.desc}}/></td>
+											<td>{item.status_name}</td>
+											<td><span dangerouslySetInnerHTML={{ __html: item.object_name }}></span></td>
 											<td>{item.date_created}</td>
-											<td>{item.due_date}</td>
 										</tr>
 									)}
 								</tbody>
 								<tfoot>
 									<tr>
-										<th><input className="uk-checkbox hammock-top-checkbox" type="checkbox" /></th>
-										<th className="uk-width-auto">{strings.dashboard.table.id}</th>
+										<th className='uk-table-shrink'><input className="uk-checkbox hammock-top-checkbox" type="checkbox" /></th>
+										<th className="uk-width-small">{strings.dashboard.table.id}</th>
 										<th>{strings.dashboard.table.desc}</th>
 										<th>{strings.dashboard.table.status}</th>
 										<th>{strings.dashboard.table.type}</th>

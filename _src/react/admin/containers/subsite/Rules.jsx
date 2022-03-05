@@ -13,11 +13,12 @@ export default class Rules extends Component {
 
 	render() {
 		var hammock = this.props.hammock,
+			strings = hammock.strings,
 		    active_nav = this.props.match.params.section !== undefined ? this.props.match.params.section : 'all',
 			page = this.props.match.params.page !== undefined ? this.props.match.params.page : 0;
 			
 		return (
-			<Dashboard hammock={hammock}>
+			<Dashboard hammock={hammock} button={<Link className="uk-button uk-button-primary uk-button-small" to="/add">{strings.dashboard.add_new.button}</Link>}>
 				<div className="hammock-settings uk-width-expand">
 					<LazyLoad>
 						<Nav hammock={hammock} active_nav={active_nav}/>

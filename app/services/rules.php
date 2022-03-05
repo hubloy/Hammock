@@ -235,7 +235,7 @@ class Rules {
 	 * 
 	 * @return bool|object
 	 */
-	private function get_rule_by_type( $type ) {
+	public function get_rule_by_type( $type ) {
 		$types  = $this->list_rule_types();
 		$type   = strtolower( $type );
 		if ( ! isset( $types[$type] ) ) {
