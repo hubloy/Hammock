@@ -234,6 +234,7 @@ class Rule {
 	 */
 	public function to_html() {
 		$membership_count = count( $this->memberships );
+		$item_title       = apply_filters( 'hammock_rule_title_name', $this->object_type, $this->object_id );
 		return apply_filters(
 			'hammock_membership_rule_to_html',
 			array(
@@ -246,9 +247,10 @@ class Rule {
 				'object_type'         => $this->object_type,
 				'object_id'           => $this->object_id,
 				'object_name'         => apply_filters( 'hammock_rule_type_name', $this->object_type ),
+				'title'               => $item_title,
 				'time_limit'          => $this->time_limit,
 				'time_duration'       => $this->time_duration,
-				'desc'                => sprintf( _n( '%s membership has access to this', '%s memberships have access to this', $membership_count, 'hammock' ), number_format_i18n( $membership_count ) )
+				'desc'                => sprintf( _n( '%s membership has access to %s', '%s memberships have access to %s', $membership_count, 'hammock' ), number_format_i18n( $membership_count ), "<strong>$item_title</strong>" )
 			),
 			$this
 		);

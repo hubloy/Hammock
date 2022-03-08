@@ -234,6 +234,29 @@ class Post extends Rule {
 	}
 
 	/**
+	 * Get the protected items name
+	 * 
+	 * @param int $id The item id.
+	 * @param bool $edit_link Set to true to return a clickable title admin edit link.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return string
+	 */
+	public function get_protected_item_name( $id, $edit_link = false ) {
+		$post = get_post( $id );
+		if ( ! $post ) {
+			return '';
+		}
+		$title = $post->post_title;
+		if ( $edit_link ) {
+			$link = get_edit_post_link( $id );
+			return $this->make_clickable( $link, $title );
+		}
+		return $title;
+	}
+
+	/**
 	 * Set initial protection for front-end.
 	 *
 	 * To be overridden by children classes.

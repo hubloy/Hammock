@@ -146,6 +146,34 @@ class Rule {
 	}
 
 	/**
+	 * Get the protected items name
+	 * 
+	 * @param int $id The item id.
+	 * @param bool $edit_link Set to true to return a clickable title admin edit link.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return string
+	 */
+	public function get_protected_item_name( $id, $edit_link = false ) {
+		return '';
+	}
+
+	/**
+	 * Make title clickable and edit.
+	 *
+	 * @param string $link The link as a url.
+	 * @param string $title The link name.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @return string 
+	 */
+	protected function make_clickable( $link, $title ) {
+		return "<a href='" . esc_url( $link ) . "' title='" . __( 'Edit', 'hammock' ) . "' target='_blank'>" . esc_attr( $title ) . "</a>";
+	}
+
+	/**
 	 * Set initial protection for front-end.
 	 *
 	 * To be overridden by child classes.

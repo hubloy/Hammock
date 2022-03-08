@@ -87,6 +87,7 @@ class Rules extends Controller {
 	public function init() {
 		$this->add_ajax_action( 'hammock_update_rule', 'update_rule' );
 		$this->add_filter( 'hammock_rule_type_name', 'get_rule_name' );
+		$this->add_filter( 'hammock_rule_title_name', 'get_rule_title', 10, 2 );
 	}
 
 	/**
@@ -212,5 +213,17 @@ class Rules extends Controller {
 			return $type;
 		}
 		return $rule->get_name();
+	}
+
+	/**
+	 * Get rule title
+	 */
+	public function get_rule_title( $type, $id ) {
+		$service = new \Hammock\Services\Rules();
+		$rule    = $service->get_rule_by_type( $type );
+		if ( ! $rule ) {
+			return $type;
+		}
+		return $rule->get_protected_item_name( $id, true );
 	}
 }

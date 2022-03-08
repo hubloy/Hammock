@@ -75,7 +75,7 @@ export default class Table extends Component {
 								<thead>
 									<tr>
 										<th className='uk-table-shrink'><input className="uk-checkbox hammock-top-checkbox" type="checkbox" /></th>
-										<th className="uk-width-small">{strings.dashboard.table.id}</th>
+										<th className="uk-table-shrink">{strings.dashboard.table.id}</th>
 										<th>{strings.dashboard.table.desc}</th>
 										<th>{strings.dashboard.table.status}</th>
 										<th>{strings.dashboard.table.type}</th>
@@ -86,15 +86,15 @@ export default class Table extends Component {
 									{items.map(item =>
 										<tr key={item.rule_id}>
 											<td><input className="uk-checkbox" type="checkbox" value={item.rule_id} /></td>
+											<td>{item.rule_id}</td>
 											<td>
-												{item.rule_id}
+												<span dangerouslySetInnerHTML={{ __html: item.desc}}/>
 												<div id={"rule-hover-"+ item.rule_id}>
 													<Link uk-tooltip={hammock.common.buttons.edit} title={hammock.common.buttons.edit} className="uk-text-primary" to={'/edit/' + item.rule_id}>{hammock.common.buttons.edit}</Link>
 													{' '}|{' '}
 													<a href="#" data-id={item.rule_id} uk-tooltip={hammock.common.buttons.delete} title={hammock.common.buttons.delete} className="uk-text-danger" onClick={ e => this.handleRowAction(e, item.id, 'delete')}>{hammock.common.buttons.delete}</a>
 												</div>
 											</td>
-											<td><span dangerouslySetInnerHTML={{ __html: item.desc}}/></td>
 											<td>{item.status_name}</td>
 											<td><span dangerouslySetInnerHTML={{ __html: item.object_name }}></span></td>
 											<td>{item.date_created}</td>
@@ -104,7 +104,7 @@ export default class Table extends Component {
 								<tfoot>
 									<tr>
 										<th className='uk-table-shrink'><input className="uk-checkbox hammock-top-checkbox" type="checkbox" /></th>
-										<th className="uk-width-small">{strings.dashboard.table.id}</th>
+										<th className="uk-table-shrink">{strings.dashboard.table.id}</th>
 										<th>{strings.dashboard.table.desc}</th>
 										<th>{strings.dashboard.table.status}</th>
 										<th>{strings.dashboard.table.type}</th>
