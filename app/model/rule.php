@@ -250,7 +250,7 @@ class Rule {
 				'title'               => $item_title,
 				'time_limit'          => $this->time_limit,
 				'time_duration'       => $this->time_duration,
-				'desc'                => sprintf( _n( '%s membership has access to %s', '%s memberships have access to %s', $membership_count, 'hammock' ), number_format_i18n( $membership_count ), "<strong>$item_title</strong>" )
+				'desc'                => sprintf( _n( '%s membership has access to %s', '%s memberships have access to %s', $membership_count, 'hammock' ), number_format_i18n( $membership_count ), $item_title )
 			),
 			$this
 		);

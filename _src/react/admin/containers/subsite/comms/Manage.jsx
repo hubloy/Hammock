@@ -15,7 +15,7 @@ export default class Manage extends Component {
 		super(props);
 
 		this.comm_setting = React.createRef();
-
+		this.handleSubmit = this.handleSubmit.bind(this);
 		this.state = {
 			item : {},
 			id : this.props.match.params.id
@@ -77,7 +77,7 @@ export default class Manage extends Component {
 								<h2 className="uk-heading-divider">{this.state.item.title}</h2>
 							</div>
 							<div className="hammock-membership hammock-membership-comms">
-								<form className="uk-form-horizontal uk-margin-large" onSubmit={this.handleSubmit.bind(this)} ref={this.comm_setting}>
+								<form className="uk-form-horizontal uk-margin-large" onSubmit={this.handleSubmit} ref={this.comm_setting}>
 									<InputUI name={`id`} type={`hidden`} value={this.state.item.id}/>
 									<div dangerouslySetInnerHTML={{ __html: this.state.item.form }} />
 									<div className="uk-margin">
