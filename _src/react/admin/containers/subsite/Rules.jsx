@@ -18,7 +18,7 @@ export default class Rules extends Component {
 			page = this.props.match.params.page !== undefined ? this.props.match.params.page : 0;
 			
 		return (
-			<Dashboard hammock={hammock} button={<Link className="uk-button uk-button-primary uk-button-small" to="/add">{strings.dashboard.add_new.button}</Link>}>
+			<Dashboard hammock={hammock} button={<a className="uk-button uk-button-primary uk-button-small" href="#hammock-add-rule" uk-toggle="">{strings.dashboard.add_new.button}</a>}>
 				<div className="hammock-settings uk-width-expand">
 					<LazyLoad>
 						<Nav hammock={hammock} active_nav={active_nav}/>

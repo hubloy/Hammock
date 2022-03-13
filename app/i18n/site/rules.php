@@ -10,6 +10,11 @@ return array(
 	'dashboard' => array(
 		'add_new'        => array(
 			'button' => __( 'Create Rule', 'hammock' ),
+			'modal'  => array(
+				'title'      => __( 'New Rule', 'hammock' ),
+				'rule'       => __( 'Select Rule', 'hammock' ),
+				'membership' => __( 'Membership', 'hammock' ),
+			),
 		),
 		'table'          => array(
 			'id'      => __( 'ID', 'hammock' ),

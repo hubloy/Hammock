@@ -270,4 +270,13 @@ class Rules {
 		}
 		return $rule;
 	}
+
+	public function get_rule_membership_select( $rule ) {
+		$view = new \Hammock\View\Backend\Rules\Access();
+		$membership = new Memberships();
+		$memberships = $membership->list_simple_memberships( 0, false );
+		if ( $rule ) {
+
+		}
+	}
 }
