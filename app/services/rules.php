@@ -271,12 +271,20 @@ class Rules {
 		return $rule;
 	}
 
+	/**
+	 * Get select drop down fr rules.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @return string
+	 */
 	public function get_rule_membership_select( $rule ) {
 		$view = new \Hammock\View\Backend\Rules\Access();
 		$membership = new Memberships();
 		$memberships = $membership->list_simple_memberships( 0, false );
-		if ( $rule ) {
-
-		}
+		$view->data = array(
+			'rule' => $rule,
+		);
+		return $view->render( true );
 	}
 }

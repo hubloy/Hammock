@@ -24,7 +24,6 @@ class Access extends View {
 	 */
 	protected function to_html() {
 		$rule        = $this->data['rule'];
-		$id          = $this->data['id'];
 		$memberships = $this->data['memberships'];
 		ob_start();
 		?>

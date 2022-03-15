@@ -91,6 +91,18 @@ class Rules extends Rest {
 				),
 			)
 		);
+
+		register_rest_route(
+			$namespace,
+			self::BASE_API_ROUTE . 'dropdown/(?P<type>[\w-]+)',
+			array(
+				array(
+					'methods'             => \WP_REST_Server::READABLE,
+					'callback'            => array( $this, 'get_dropdown' ),
+					'permission_callback' => array( $this, 'validate_request' ),
+				),
+			)
+		);
 	}
 
 	/**
@@ -116,5 +128,17 @@ class Rules extends Rest {
 			'type'   => $type,
 			'paged'  => $request->get_param( 'page' )
 		) ) );
+	}
+
+	/**
+	 * Get dropdown
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return string
+	 */
+	public function get_dropdown( $request ) {
+		$type  = $request['type'];
+		return rest_ensure_response( $this->service->get_rule_membership_select( $type ) );
 	}
 }
