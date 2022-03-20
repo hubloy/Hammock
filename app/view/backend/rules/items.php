@@ -24,7 +24,17 @@ class Items extends View {
 	 */
 	protected function to_html() {
 		$rule = $this->data['rule'];
-		$url  = wp_nonce_url( add_query_arg( 'action', 'hammock_rule_items', admin_url( 'admin-ajax.php' ) ), 'hammock_rule_items' );
+		$type = $this->data['type'];
+		$url  = wp_nonce_url(
+			add_query_arg(
+				array(
+					'action' => 'hammock_rule_items',
+					'type'   => $type,
+				), 
+				admin_url( 'admin-ajax.php' )
+			),
+			'hammock_rule_items'
+		);
 		ob_start();
 		?>
 		<select data-placeholder="<?php esc_html_e( 'Select Item', 'hammock' ); ?>" class="uk-select hammock-select2-ajax" data-url="<?php echo esc_url( $url ); ?>">

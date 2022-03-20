@@ -117,7 +117,7 @@ class Rules extends Rest {
 
 		register_rest_route(
 			$namespace,
-			self::BASE_API_ROUTE . 'items',
+			self::BASE_API_ROUTE . 'items/(?P<type>[\w-]+)',
 			array(
 				array(
 					'methods'             => \WP_REST_Server::READABLE,
@@ -181,7 +181,8 @@ class Rules extends Rest {
 	 * @return string
 	 */
 	public function get_items( $request ) {
-		$id  = $request->get_param( 'id' );
-		return rest_ensure_response( $this->service->get_rule_items_select( $id ) );
+		$id   = $request->get_param( 'id' );
+		$type = $request['type'];
+		return rest_ensure_response( $this->service->get_rule_items_select( $id, $type ) );
 	}
 }

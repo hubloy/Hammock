@@ -272,15 +272,11 @@ class Rules {
 	}
 
 	public function search_rule_items( $type, $param ) {
-		$rule   = $this->get_rule_by_type( $type);
-		$data   = array(
-			'results' => array(),
-		);
+		$rule = $this->get_rule_by_type( $type);
 		if ( ! $rule ) {
-			return $data;
+			return array();
 		}
-		$data['results'] = $rule->search( $param );
-		return $data;
+		return $rule->search( $param );
 	}
 
 	/**
@@ -313,11 +309,12 @@ class Rules {
 	 * 
 	 * @return string
 	 */
-	public function get_rule_items_select( $id ) {
+	public function get_rule_items_select( $id, $type ) {
 		$rule        = new Rule( $id );
 		$view        = new \Hammock\View\Backend\Rules\Items();
 		$view->data  = array(
 			'rule' => $rule,
+			'type' => $type,
 		);
 		return $view->render( true );
 	}

@@ -186,7 +186,7 @@ class Rules extends Controller {
 	public function rule_items() {
 		$this->verify_nonce( 'hammock_rule_items', 'GET' );
 		$type     = sanitize_text_field( $_GET['type'] );
-		$term     = sanitize_text_field( $_GET['term'] );
+		$term     = isset( $_GET['term'] ) ? sanitize_text_field( $_GET['term'] ) : '';
 		$service  = new \Hammock\Services\Rules();
 		$response = $service->search_rule_items( $type, $term );
 		wp_send_json_success( $response );

@@ -594,7 +594,10 @@ class Rule {
 			return results;
 		}
 		foreach ( $query->posts as $post ) {
-			$results[ $post->ID ] = $post->post_title;
+			$results[] = array(
+				'id'   => $post->ID,
+				'text' => $post->post_title
+			);
 		}
 		return $results;
 	}
