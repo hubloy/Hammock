@@ -287,7 +287,8 @@ class Rules {
 		$memberships = $membership->list_simple_memberships( 0, false );
 		$view->data  = array(
 			'rule'        => $rule,
-			'memberships' => $memberships
+			'memberships' => $memberships,
+			'id'          => false,
 		);
 		return $view->render( true );
 	}
@@ -306,6 +307,7 @@ class Rules {
 		$view        = new \Hammock\View\Backend\Rules\Items();
 		$view->data  = array(
 			'rule' => $rule,
+			'id'   => false,
 		);
 		return $view->render( true );
 	}

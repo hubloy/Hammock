@@ -237,6 +237,22 @@ class Rule {
 	}
 
 	/**
+	 * Get protected item
+	 * 
+	 * @param int $id The item id.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
+	public function get_protected_item( $id ) {
+		return array(
+			'name' => '',
+			'id'   => $id
+		);
+	}
+
+	/**
 	 * List memberships
 	 * 
 	 * @since 1.0.0

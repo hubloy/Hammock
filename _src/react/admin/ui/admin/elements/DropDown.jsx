@@ -13,7 +13,6 @@ export class DropDownUI extends PureComponent{
 
 	handleChangeEvent(e) {
 		this.setState({ value: e.target.value });
-        console.log('hi');
 		if(typeof this.props.action !== 'undefined' && typeof this.props.action === 'function') {
 			var action = this.props.action;
 			action( e.target, e.target.value );

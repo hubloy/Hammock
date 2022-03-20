@@ -25,11 +25,12 @@ class Memberships extends View {
 	protected function to_html() {
 		$rule        = $this->data['rule'];
 		$memberships = $this->data['memberships'];
+		$id          = $this->data['id'];
 		ob_start();
 		?>
 		<select data-placeholder="<?php esc_html_e( 'Select Membership', 'hammock' ); ?>" multiple="multiple" class="hammock-select2">
 			<?php
-				$rule_memberships = $rule ? $rule->memberships : array();
+				$rule_memberships = ( $rule && $id ) ? $rule->memberships : array();
 				foreach ( $memberships as $id => $name ) {
 					$selected = in_array( $id, $rule_memberships, true );
 					?><option value="<?php echo esc_attr( $id ); ?>" <?php echo $selected ? 'selected="selected"' : ''; ?>><?php echo esc_html( $name ); ?></option><?php
