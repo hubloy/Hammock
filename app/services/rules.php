@@ -279,10 +279,10 @@ class Rules {
 	 * @return string
 	 */
 	public function get_rule_membership_select( $rule ) {
-		$view = new \Hammock\View\Backend\Rules\Access();
-		$membership = new Memberships();
+		$view        = new \Hammock\View\Backend\Rules\Memberships();
+		$membership  = new Memberships();
 		$memberships = $membership->list_simple_memberships( 0, false );
-		$view->data = array(
+		$view->data  = array(
 			'rule' => $rule,
 		);
 		return $view->render( true );

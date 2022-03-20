@@ -8,12 +8,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 use Hammock\Base\View;
 
 /**
- * Access view
- * Manages rule access settings.
+ * Memberships view
+ * Manages rule membership settings.
  * 
  * @since 1.0.0
  */
-class Access extends View {
+class Memberships extends View {
 
 	/**
 	 * Builds template and return it as string.
@@ -27,7 +27,7 @@ class Access extends View {
 		$memberships = $this->data['memberships'];
 		ob_start();
 		?>
-		<select data-placeholder="<?php esc_html_e( 'Select Membership', 'hammock' ); ?>" multiple class="hammock-chosen-select">
+		<select data-placeholder="<?php esc_html_e( 'Select Membership', 'hammock' ); ?>" multiple="multiple" class="hammock-select2">
 			<?php
 				$rule_memberships = $rule ? $rule->memberships : array();
 				foreach ( $memberships as $id => $name ) {

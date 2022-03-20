@@ -36,16 +36,7 @@ export default class CreateRuleModal extends Component {
 	}
 
 	load_items = async ( type ) => {
-		this.fetchWP.get( 'rules/list' )
-			.then( (json) => this.setState({
-				items : json,
-				loading : false
-			}), (err) => this.setState({ loading : false })
-		);
-	}
-
-	memberships = async () => {
-		this.fetchWP.get( 'rules/list' )
+		this.fetchWP.get( 'rules/items' )
 			.then( (json) => this.setState({
 				items : json,
 				loading : false

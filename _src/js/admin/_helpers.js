@@ -110,6 +110,6 @@ hammock.helper = {
 	},
 
 	select2 : function() {
-		jQuery(".hammock-chosen-select").chosen({ no_results_text: hammock.no_results, width: "95%" });
+		jQuery(".hammock-select2").select2();
 	}
 };

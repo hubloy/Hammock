@@ -252,8 +252,6 @@ class Plugin extends Controller {
 	 */
 	public function enqueue_plugin_styles( $hook ) {
 		$screen = get_current_screen();
-		// Load on all screens as we need the multi select
-		wp_enqueue_style( 'hammock-jquery-chosen' );
 		$load_resources = apply_filters( 'hammock_load_admin_resouces', strpos( $screen->id, self::MENU_SLUG ) );
 		if ( $load_resources !== false ) {
 			wp_enqueue_style( 'hammock-uikit' );
@@ -261,6 +259,7 @@ class Plugin extends Controller {
 			wp_enqueue_style( 'hammock-jquery-ui' );
 			wp_enqueue_style( 'hammock-jquery-tags' );
 			wp_enqueue_style( 'hammock-styled-notifications' );
+			wp_enqueue_style( 'hammock-select2' );
 			wp_enqueue_style( 'hammock-admin' );
 
 			$enabled_text = __( 'Enabled', 'hammock' );
@@ -298,10 +297,6 @@ class Plugin extends Controller {
 	 */
 	public function enqueue_plugin_scripts( $hook ) {
 		$screen = get_current_screen();
-		// Load on all screens as we need the multi select
-		wp_enqueue_script( 'hammock-jquery-chosen' );
-		$footer_script = $this->footer_common_scripts();
-		wp_add_inline_script( 'hammock-jquery-chosen', $footer_script );
 		$load_resources = apply_filters( 'hammock_load_admin_resouces', strpos( $screen->id, self::MENU_SLUG ) );
 		if ( $load_resources !== false ) {
 			wp_enqueue_script( 'hammock-uikit' );
@@ -312,6 +307,7 @@ class Plugin extends Controller {
 			wp_enqueue_script( 'jquery-ui-datepicker' );
 			wp_enqueue_script( 'hammock-jquery-tags' );
 			wp_enqueue_script( 'hammock-styled-notifications' );
+			wp_enqueue_script( 'hammock-select2' );
 			wp_enqueue_script( 'hammock-admin' );
 			wp_enqueue_script( 'hammock-admin-react' );
 			wp_enqueue_script( 'hammock-wizard-react' );
@@ -319,22 +315,6 @@ class Plugin extends Controller {
 		}
 	}
 
-	/**
-	 * Common scripts in footer
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return string
-	 */
-	public function footer_common_scripts() {
-		ob_start();
-		?>
-		jQuery(function($) {
-			$(".hammock-multi-select").chosen({ no_results_text: '<?php _e( 'Ooops, no results found', 'hammock' ); ?>', width: "95%" });
-		});
-		<?php
-		return ob_get_clean();
-	}
 
 	/**
 	 * Front styles

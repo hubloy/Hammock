@@ -55,15 +55,6 @@ class Resource {
 			true
 		);
 
-		// Jquery chosen
-		wp_register_script(
-			'hammock-jquery-chosen',
-			HAMMOCK_ASSETS_URL . '/vendor/chosen/chosen.jquery.min.js',
-			array( 'jquery' ),
-			'1.8.7',
-			true
-		);
-
 		// Jquery tags
 		wp_register_script(
 			'hammock-jquery-tags',
@@ -79,6 +70,15 @@ class Resource {
 			HAMMOCK_ASSETS_URL . '/vendor/styled-notifications/notifications.js',
 			array( 'jquery' ),
 			'1.0.1',
+			true
+		);
+
+		// Select 2
+		wp_register_script(
+			'hammock-select2',
+			HAMMOCK_ASSETS_URL . '/vendor/select2/js/select2.min.js',
+			array( 'jquery' ),
+			'4.1.0',
 			true
 		);
 
@@ -279,14 +279,6 @@ class Resource {
 			'1.12.1'
 		);
 
-		// Jquery chosen
-		wp_register_style(
-			'hammock-jquery-chosen',
-			HAMMOCK_ASSETS_URL . '/vendor/chosen/chosen.min.css',
-			null,
-			'1.8.7'
-		);
-
 		// Jquery tags
 		wp_register_style(
 			'hammock-jquery-tags',
@@ -302,6 +294,15 @@ class Resource {
 			null,
 			'1.0.1'
 		);
+
+		// Select 2
+		wp_register_style(
+			'hammock-select2',
+			HAMMOCK_ASSETS_URL . '/vendor/select2/css/select2.min.css',
+			null,
+			'4.1.0'
+		);
+
 
 		// Admin CSS
 		wp_register_style(
