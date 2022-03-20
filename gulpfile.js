@@ -57,11 +57,13 @@ gulp.task('watch', function() {
 });
 
 gulp.task('watch-js', gulp.parallel('admin-scripts', function() {
-	watch(jsFiles, gulp.series('admin-scripts'));
+	watch(adminJsFiles, gulp.series('admin-scripts'));
+	watch(frontJsFiles, gulp.series('front-scripts'));
 }) );
 
 // Register tasks to 'gulp' command
 gulp.task('default', gulp.parallel('styles', 'watch', 'admin-scripts', 'front-scripts', 'watch-js'));
 gulp.task('scripts', gulp.parallel('admin-scripts', 'front-scripts'));
 gulp.task('js', gulp.parallel('admin-scripts', 'watch-js'));
+gulp.task('watch-all', gulp.parallel('watch', 'watch-js'));
 gulp.task('build', gulp.parallel('admin-scripts', 'front-scripts', 'styles'));

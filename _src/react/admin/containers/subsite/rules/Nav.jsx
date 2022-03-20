@@ -12,7 +12,7 @@ export default class Nav extends PureComponent {
                         <li className={active_nav === '' ? 'uk-active' : '' } uk-filter-control=""><Link to={"/"}><span>{hammock.common.general.all}</span></Link></li>
                         {Object.keys(rules).map(item =>
                             <li className={active_nav === item ? 'uk-active' : '' } key={item}>
-                                <Link to={"/" + item}><span>{items[item]}</span></Link>
+                                <Link to={"/" + item}><span>{rules[item]}</span></Link>
                             </li>
                         )}
                     </ul>

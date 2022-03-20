@@ -13,11 +13,11 @@ export default class CreateRuleModal extends Component {
 
 		this.state = {
 			type : false,
-			items : [],
-			loading : true,
+			items : '',
+			loading : false,
 			error : false,
 			membership : '',
-			membership_loading : true
+			membership_loading : false
 		};
 		this.fetchWP = new fetchWP({
 			api_url: this.props.hammock.api_url,
@@ -32,11 +32,11 @@ export default class CreateRuleModal extends Component {
 	}
 
 	async componentDidUpdate( prevProps ) {
-		this.setState({ type : false, membership : '', membership_loading : false, loading : false, items : [], error : false });
+		this.setState({ type : false, membership : '', membership_loading : false, loading : false, items : '', error : false });
 	}
 
 	load_items = async ( type ) => {
-		this.fetchWP.get( 'rules/items' )
+		this.fetchWP.get( 'rules/items/' + type )
 			.then( (json) => this.setState({
 				items : json,
 				loading : false
@@ -45,7 +45,7 @@ export default class CreateRuleModal extends Component {
 	}
 
 	load_memberships = async ( type ) => {
-		this.fetchWP.get( 'rules/dropdown/' + type )
+		this.fetchWP.get( 'rules/memberships/' + type )
 			.then( (json) => this.setState({
 				membership : json,
 				membership_loading : false
@@ -80,7 +80,7 @@ export default class CreateRuleModal extends Component {
 							<div className="uk-margin">
 								<legend className="uk-form-label">{strings.rule}</legend>
 								<div className="uk-form-controls">
-									<DropDownUI name={`type`} values={self.props.rules} value={self.state.type} action={self.handleTypeSelect}/>
+									<DropDownUI name={`type`} values={self.props.rules} value={self.state.type} action={self.handleTypeSelect} blank={true}/>
 								</div>
 							</div>
 							{self.state.loading ? (
@@ -88,9 +88,7 @@ export default class CreateRuleModal extends Component {
 							) : (
 								<div className="uk-margin">
 									<legend className="uk-form-label">{strings.item}</legend>
-									<div className="uk-form-controls">
-										<DropDownUI name={`id`} values={self.state.items} value={''}/>
-									</div>
+									<div className="uk-form-controls" dangerouslySetInnerHTML={{ __html: self.state.items }}></div>
 								</div>
 							)}
 							{self.state.membership_loading ? (

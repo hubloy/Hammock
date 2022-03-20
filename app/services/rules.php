@@ -273,15 +273,37 @@ class Rules {
 
 	/**
 	 * Get select drop down fr rules.
+	 * 
+	 * @param string $type The rule type.
 	 *
 	 * @since 1.0.0
 	 * 
 	 * @return string
 	 */
-	public function get_rule_membership_select( $rule ) {
+	public function get_rule_membership_select( $type ) {
+		$rule        = $this->get_rule_by_type( $type );
 		$view        = new \Hammock\View\Backend\Rules\Memberships();
 		$membership  = new Memberships();
 		$memberships = $membership->list_simple_memberships( 0, false );
+		$view->data  = array(
+			'rule'        => $rule,
+			'memberships' => $memberships
+		);
+		return $view->render( true );
+	}
+
+	/**
+	 * Render rule drop down item select.
+	 * 
+	 * @param string $type The rule type.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return string
+	 */
+	public function get_rule_items_select( $type ) {
+		$rule        = $this->get_rule_by_type( $type );
+		$view        = new \Hammock\View\Backend\Rules\Items();
 		$view->data  = array(
 			'rule' => $rule,
 		);

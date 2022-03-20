@@ -144,6 +144,7 @@ class Resource {
 						'settings'  => __( 'Settings', 'hammock' ),
 						'configure' => __( 'Configure', 'hammock' ),
 						'filter'    => __( 'Filter', 'hammock' ),
+						'select'    => __( 'Select', 'hammock' ),
 						'actions'   => __( 'Actions', 'hammock' ),
 						'all'       => __( 'All', 'hammock' ),
 					),

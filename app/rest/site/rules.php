@@ -94,11 +94,24 @@ class Rules extends Rest {
 
 		register_rest_route(
 			$namespace,
-			self::BASE_API_ROUTE . 'dropdown/(?P<type>[\w-]+)',
+			self::BASE_API_ROUTE . 'memberships/(?P<type>[\w-]+)',
 			array(
 				array(
 					'methods'             => \WP_REST_Server::READABLE,
-					'callback'            => array( $this, 'get_dropdown' ),
+					'callback'            => array( $this, 'get_memberships' ),
+					'permission_callback' => array( $this, 'validate_request' ),
+				),
+			)
+		);
+
+
+		register_rest_route(
+			$namespace,
+			self::BASE_API_ROUTE . 'items/(?P<type>[\w-]+)',
+			array(
+				array(
+					'methods'             => \WP_REST_Server::READABLE,
+					'callback'            => array( $this, 'get_items' ),
 					'permission_callback' => array( $this, 'validate_request' ),
 				),
 			)
@@ -131,14 +144,26 @@ class Rules extends Rest {
 	}
 
 	/**
-	 * Get dropdown
+	 * Get memberships
 	 * 
 	 * @since 1.0.0
 	 * 
 	 * @return string
 	 */
-	public function get_dropdown( $request ) {
+	public function get_memberships( $request ) {
 		$type  = $request['type'];
 		return rest_ensure_response( $this->service->get_rule_membership_select( $type ) );
+	}
+
+	/**
+	 * Get items select
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return string
+	 */
+	public function get_items( $request ) {
+		$type  = $request['type'];
+		return rest_ensure_response( $this->service->get_rule_items_select( $type ) );
 	}
 }

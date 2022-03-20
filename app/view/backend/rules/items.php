@@ -24,14 +24,13 @@ class Items extends View {
 	 */
 	protected function to_html() {
 		$rule  = $this->data['rule'];
-		$items = $this->data['items'];
 		ob_start();
 		?>
-		<select data-placeholder="<?php esc_html_e( 'Select Item', 'hammock' ); ?>" class="hammock-select2">
+		<select data-placeholder="<?php esc_html_e( 'Select Item', 'hammock' ); ?>" class="hammock-select2-ajax" data-url="">
 			<?php
-				$rule_item_id = $rule ? $rule->object_id : '';
-				foreach ( $items as $id => $name ) {
-					?><option value="<?php echo esc_attr( $id ); ?>" <?php selected( $rule_item_id, $id ); ?>><?php echo esc_html( $name ); ?></option><?php
+				if ( $rule ) {
+					$content = $rule->to_html();
+					?><option value="<?php echo esc_attr( $content['object_id'] ); ?>" <?php selected( $rule->object_id, $content['object_id'] ); ?>><?php echo esc_html( $content['object_name'] ); ?></option><?php
 				}
 			?>
 		</select>

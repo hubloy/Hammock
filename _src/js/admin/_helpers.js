@@ -111,5 +111,11 @@ hammock.helper = {
 
 	select2 : function() {
 		jQuery(".hammock-select2").select2();
+		jQuery(".hammock-select2-ajax").select2({
+			ajax: {
+				url: jQuery( this ).attr( 'data-url' ),
+				dataType: 'json'
+			}
+		});
 	}
 };
