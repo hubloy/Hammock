@@ -27,7 +27,7 @@ class Items extends View {
 		$id    = $this->data['id'];
 		ob_start();
 		?>
-		<select data-placeholder="<?php esc_html_e( 'Select Item', 'hammock' ); ?>" class="hammock-select2-ajax" data-url="">
+		<select data-placeholder="<?php esc_html_e( 'Select Item', 'hammock' ); ?>" class="uk-select hammock-select2-ajax" data-url="">
 			<?php
 				if ( $rule && $id  ) {
 					$content = $rule->get_protected_item( $id );

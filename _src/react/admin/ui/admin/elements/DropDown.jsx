@@ -44,7 +44,7 @@ export class DropDownUI extends PureComponent{
         return(
             <select name={self.props.name} value={value} className={"uk-select " + class_name } id="form-horizontal-select" {...data} onChange={self.handleChangeEvent} onSelect={self.handleChangeEvent} required={required}>
                 {blank &&
-                    <option value=''>{hammock.common.general.select}</option>
+                    <option value='0'>{hammock.common.general.select}</option>
                 }
                 {dropdown}
             </select>

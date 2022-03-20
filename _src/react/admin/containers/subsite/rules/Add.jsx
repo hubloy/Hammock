@@ -26,29 +26,32 @@ export default class CreateRuleModal extends Component {
 
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.load_memberships = this.load_memberships.bind(this);
+		this.handleTypeSelect = this.handleTypeSelect.bind(this);
 		this.load_items = this.load_items.bind(this);
 		this.rule_form = React.createRef();
 	}
 
-	async componentDidUpdate( prevProps ) {
-		this.setState({ type : false, membership : '', membership_loading : false, loading : false, items : '', error : false });
-	}
-
 	load_items = async ( type ) => {
 		this.fetchWP.get( 'rules/items/' + type )
-			.then( (json) => this.setState({
-				items : json,
-				loading : false
-			}), (err) => this.setState({ loading : false })
+			.then( (json) => {
+				this.setState({
+					items : json,
+					loading : false
+				});
+				hammock.helper.select2();
+			}, (err) => this.setState({ loading : false })
 		);
 	}
 
 	load_memberships = async ( type ) => {
 		this.fetchWP.get( 'rules/memberships/' + type )
-			.then( (json) => this.setState({
-				membership : json,
-				membership_loading : false
-			}), (err) => this.setState({ membership_loading : false })
+			.then( (json) => {
+				this.setState({
+					membership : json,
+					membership_loading : false
+				});
+				hammock.helper.select2();
+			}, (err) => this.setState({ membership_loading : false })
 		);
 	}
 
@@ -79,7 +82,7 @@ export default class CreateRuleModal extends Component {
 							<div className="uk-margin">
 								<legend className="uk-form-label">{strings.rule}</legend>
 								<div className="uk-form-controls">
-									<DropDownUI name={`type`} values={self.props.rules} value={self.state.type} action={this.handleTypeSelect.bind(this)} blank={true}/>
+									<DropDownUI name={`type`} values={self.props.rules} value={self.state.type} action={this.handleTypeSelect} blank={true}/>
 								</div>
 							</div>
 							{self.state.loading ? (
