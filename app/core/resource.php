@@ -341,7 +341,7 @@ class Resource {
 			'hammock-sweetalert',
 			HAMMOCK_ASSETS_URL . '/vendor/sweetalert/sweetalert2.all.min.js',
 			array( 'jquery' ),
-			'8.0.1',
+			'11.4.6',
 			true
 		);
 

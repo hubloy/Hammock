@@ -8,11 +8,12 @@ export class DropDownUI extends PureComponent{
         this.state = { 
 			value: ''
 		};
-		this.onChange = this.onChange.bind(this);
+        
 	}
 
-	onChange(e) {
+	handleChangeEvent(e) {
 		this.setState({ value: e.target.value });
+        console.log('Hi');
 		if(typeof this.props.action !== 'undefined' && typeof this.props.action === 'function') {
 			var action = this.props.action;
 			action( e.target, e.target.value );
@@ -22,7 +23,8 @@ export class DropDownUI extends PureComponent{
     render() {
         const value = ( typeof this.state.value === 'undefined' || ! this.state.value ) ? this.props.value : this.state.value,
             blank = ( typeof this.props.blank === 'undefined' || this.props.blank ),
-            hammock = window.hammock;
+            hammock = window.hammock,
+            class_name = ( typeof this.props.class_name === 'undefined' || ! this.props.class_name ) ? this.props.name + '-select' : this.props.class_name ;
         var data = Array(),
             dropdown = [],
             attributes = this.props.attributes,
@@ -40,7 +42,7 @@ export class DropDownUI extends PureComponent{
         }
         data = data.join(" ");
         return(
-            <select name={this.props.name} value={value} className={"uk-select " +this.props.class_name} id="form-horizontal-select" {...data} onChange={this.onChange} required={required}>
+            <select name={this.props.name} value={value} className={"uk-select " + class_name } id="form-horizontal-select" {...data} onChange={this.handleChangeEvent.bind(this)} required={required}>
                 {blank &&
                     <option value=''>{hammock.common.general.select}</option>
                 }

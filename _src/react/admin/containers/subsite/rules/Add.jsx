@@ -25,7 +25,6 @@ export default class CreateRuleModal extends Component {
 		});
 
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.handleTypeSelect = this.handleTypeSelect.bind(this);
 		this.load_memberships = this.load_memberships.bind(this);
 		this.load_items = this.load_items.bind(this);
 		this.rule_form = React.createRef();
@@ -80,7 +79,7 @@ export default class CreateRuleModal extends Component {
 							<div className="uk-margin">
 								<legend className="uk-form-label">{strings.rule}</legend>
 								<div className="uk-form-controls">
-									<DropDownUI name={`type`} values={self.props.rules} value={self.state.type} action={self.handleTypeSelect} blank={true}/>
+									<DropDownUI name={`type`} values={self.props.rules} value={self.state.type} action={this.handleTypeSelect.bind(this)} blank={true}/>
 								</div>
 							</div>
 							{self.state.loading ? (
