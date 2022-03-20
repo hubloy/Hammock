@@ -271,24 +271,35 @@ class Rules {
 		return $rule;
 	}
 
+	public function search_rule_items( $type, $param ) {
+		$rule   = $this->get_rule_by_type( $type);
+		$data   = array(
+			'results' => array(),
+		);
+		if ( ! $rule ) {
+			return $data;
+		}
+		$data['results'] = $rule->search( $param );
+		return $data;
+	}
+
 	/**
 	 * Get select drop down fr rules.
 	 * 
-	 * @param string $type The rule type.
+	 * @param string $id The rule id.
 	 *
 	 * @since 1.0.0
 	 * 
 	 * @return string
 	 */
-	public function get_rule_membership_select( $type ) {
-		$rule        = $this->get_rule_by_type( $type );
+	public function get_rule_membership_select( $id ) {
+		$rule        = new Rule( $id );
 		$view        = new \Hammock\View\Backend\Rules\Memberships();
 		$membership  = new Memberships();
 		$memberships = $membership->list_simple_memberships( 0, false );
 		$view->data  = array(
 			'rule'        => $rule,
 			'memberships' => $memberships,
-			'id'          => false,
 		);
 		return $view->render( true );
 	}
@@ -296,18 +307,17 @@ class Rules {
 	/**
 	 * Render rule drop down item select.
 	 * 
-	 * @param string $type The rule type.
+	 * @param int $id The rule id.
 	 * 
 	 * @since 1.0.0
 	 * 
 	 * @return string
 	 */
-	public function get_rule_items_select( $type ) {
-		$rule        = $this->get_rule_by_type( $type );
+	public function get_rule_items_select( $id ) {
+		$rule        = new Rule( $id );
 		$view        = new \Hammock\View\Backend\Rules\Items();
 		$view->data  = array(
 			'rule' => $rule,
-			'id'   => false,
 		);
 		return $view->render( true );
 	}

@@ -85,7 +85,7 @@ class Rules extends Controller {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$this->add_ajax_action( 'hammock_update_rule', 'update_rule' );
+		$this->add_ajax_action( 'hammock_rule_items', 'rule_items' );
 		$this->add_filter( 'hammock_rule_type_name', 'get_rule_name' );
 		$this->add_filter( 'hammock_rule_title_name', 'get_rule_title', 10, 2 );
 	}
@@ -179,28 +179,17 @@ class Rules extends Controller {
 	}
 
 	/**
-	 * Update rule
+	 * Get Rule items
 	 * 
 	 * @since 1.0.0
 	 */
-	public function update_rule() {
-		$this->verify_nonce();
-
-		$id       = sanitize_text_field( $_POST['id'] );
-		$item     = sanitize_text_field( $_POST['item'] );
-		$selected = array_map( 'absint', $_POST['selected'] );
+	public function rule_items() {
+		$this->verify_nonce( 'hammock_rule_items', 'GET' );
+		$type     = sanitize_text_field( $_GET['type'] );
+		$term     = sanitize_text_field( $_GET['term'] );
 		$service  = new \Hammock\Services\Rules();
-		$response = $service->save_rule(
-			array(
-				'type'        => $item,
-				'id'          => $id,
-				'memberships' => $selected,
-			)
-		);
-		if ( is_wp_error( $response ) ) {
-			wp_send_json_error( $response->get_error_message() );
-		}
-		wp_send_json_success( $response['message'] );
+		$response = $service->search_rule_items( $type, $term );
+		wp_send_json_success( $response );
 	}
 
 	/**

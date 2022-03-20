@@ -23,15 +23,15 @@ class Items extends View {
 	 * @return string
 	 */
 	protected function to_html() {
-		$rule  = $this->data['rule'];
-		$id    = $this->data['id'];
+		$rule = $this->data['rule'];
+		$url  = wp_nonce_url( add_query_arg( 'action', 'hammock_rule_items', admin_url( 'admin-ajax.php' ) ), 'hammock_rule_items' );
 		ob_start();
 		?>
-		<select data-placeholder="<?php esc_html_e( 'Select Item', 'hammock' ); ?>" class="uk-select hammock-select2-ajax" data-url="">
+		<select data-placeholder="<?php esc_html_e( 'Select Item', 'hammock' ); ?>" class="uk-select hammock-select2-ajax" data-url="<?php echo esc_url( $url ); ?>">
 			<?php
-				if ( $rule && $id  ) {
-					$content = $rule->get_protected_item( $id );
-					?><option value="<?php echo esc_attr( $content['id'] ); ?>" <?php selected( $rule->object_id, $content['id'] ); ?>><?php echo esc_html( $content['name'] ); ?></option><?php
+				if ( $rule ) {
+					$content = $rule->to_html();
+					?><option value="<?php echo esc_attr( $content['object_id'] ); ?>" <?php selected( $rule->object_id, $content['object_id'] ); ?>><?php echo esc_html( $content['object_name'] ); ?></option><?php
 				}
 			?>
 		</select>

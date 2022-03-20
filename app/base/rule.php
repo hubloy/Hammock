@@ -237,22 +237,6 @@ class Rule {
 	}
 
 	/**
-	 * Get protected item
-	 * 
-	 * @param int $id The item id.
-	 *
-	 * @since 1.0.0
-	 * 
-	 * @return array
-	 */
-	public function get_protected_item( $id ) {
-		return array(
-			'name' => '',
-			'id'   => $id
-		);
-	}
-
-	/**
 	 * List memberships
 	 * 
 	 * @since 1.0.0
@@ -286,6 +270,19 @@ class Rule {
 	 * @return array
 	 */
 	public function list_items( $args = array() ) {
+		return array();
+	}
+
+	/**
+	 * Search items
+	 * 
+	 * @param string $param The search param.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
+	public function search( $param ) {
 		return array();
 	}
 
@@ -570,6 +567,109 @@ class Rule {
 			wp_redirect( esc_url( get_permalink( $page_id ) ) );
 			exit;
 		}
+	}
+
+	/**
+	 * Search items
+	 * 
+	 * @param string $post_type The post type.
+	 * @param string $param The search param.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
+	protected function search_post_type( $post_type, $param ) {
+		$results = array();
+		$query   = new \WP_Query(
+			array(
+				'post_type' 		=> 'post',
+				'posts_per_page' 	=> 10,
+				'post_status'       => 'publish',
+				'orderby' 			=> 'title',
+				's' 				=> $param
+			)
+		);
+		if ( ! $query->have_posts() ) {
+			return results;
+		}
+		foreach ( $query->posts as $post ) {
+			$results[ $post->ID ] = $post->post_title;
+		}
+		return $results;
+	}
+
+	/**
+	 * Count items to protect
+	 *
+	 * @param string $post_type The post type.
+	 * @param array $args Optional arguments.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return int
+	 */
+	public function count_post_type_items( $post_type, $args = array() ) {
+		global $wpdb;
+		$count = Cache::get_cache( 'count_' . $post_type, 'counts' );
+		if ( false !== $count ) {
+			return $count;
+		}
+		$query = "SELECT COUNT( * ) FROM {$wpdb->posts} WHERE post_type = %s";
+		$count = $wpdb->get_var( $wpdb->prepare( $query, $post_type ) );
+		Cache::set_cache( 'count_' . $post_type, $count, 'counts' );
+		return $count;
+	}
+
+	/**
+	 * list items to protect
+	 *
+	 * @param string $post_type The post type.
+	 * @param array $args Optional arguments.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array
+	 */
+	protected function list_post_type_items( $post_type, $args = array() ) {
+		$args['posts_per_page']      = isset( $args['number'] ) ? ( int ) $args['number'] : 10;
+		$args['ignore_sticky_posts'] = true;
+		$args['public']              = true;
+		$args['post_status']         = 'publish';
+		$args['post_type']           = $post_type;
+		$args['order']               = 'ASC';
+		$args['orderby']             = 'title';
+		$query                       = new \WP_Query( $args );
+		$data                        = array();
+		if ( ! $query->have_posts() ) {
+			return array();
+		}
+		$memberships = $this->list_memberships();
+		foreach ( $query->posts as $post ) {
+			$access         = new Access();
+			$rule           = $this->get_rule( $post->ID, 'page' );
+			$edit_link      = get_edit_post_link( $post->ID );
+			$view_link      = get_permalink( $post->ID );
+			$access->data   = array(
+				'rule'        => $rule,
+				'item'        => $this->id,
+				'id'          => $post->ID,
+				'memberships' => $memberships,
+			);
+			$content        = array(
+				'id'        => $post->ID,
+				'type'      => $post->post_type,
+				'title'     => $post->post_title,
+				'edit_link' => $edit_link,
+				'edit_html' => sprintf( __( '%sEdit%s', 'hammock' ), '<a href="' . $edit_link . '" target="_blank">', '</a>' ),
+				'view_link' => $view_link,
+				'view_html' => sprintf( __( '%sView%s', 'hammock' ), '<a href="' . $view_link . '" target="_blank">', '</a>' ),
+				'access'    => $access->render( true ),
+			);
+			$data[ $post->ID ] = $content;
+		}
+		wp_reset_postdata();
+		return $data;
 	}
 }
 

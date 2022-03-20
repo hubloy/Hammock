@@ -31,8 +31,8 @@ export default class CreateRuleModal extends Component {
 		this.rule_form = React.createRef();
 	}
 
-	load_items = async ( type ) => {
-		this.fetchWP.get( 'rules/items/' + type )
+	load_items = async () => {
+		this.fetchWP.get( 'rules/items' )
 			.then( (json) => {
 				this.setState({
 					items : json,
@@ -43,8 +43,8 @@ export default class CreateRuleModal extends Component {
 		);
 	}
 
-	load_memberships = async ( type ) => {
-		this.fetchWP.get( 'rules/memberships/' + type )
+	load_memberships = async () => {
+		this.fetchWP.get( 'rules/memberships' )
 			.then( (json) => {
 				this.setState({
 					membership : json,
@@ -57,7 +57,7 @@ export default class CreateRuleModal extends Component {
 
 	handleTypeSelect( target, value ) {
 		this.setState({ type : value, membership_loading : true, loading : true });
-		Promise.all([this.load_items( value ), this.load_memberships( value )]);
+		Promise.all([this.load_items(), this.load_memberships()]);
 	}
 
 	handleSubmit(event) {

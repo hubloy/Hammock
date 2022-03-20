@@ -85,6 +85,7 @@ class Rules extends Rest {
 							'required'          => true,
 							'sanitize_callback' => 'absint',
 							'type'              => 'integer',
+							'default'           => 0,
 							'description'       => __( 'The current page', 'hammock' ),
 						),
 					),
@@ -94,12 +95,21 @@ class Rules extends Rest {
 
 		register_rest_route(
 			$namespace,
-			self::BASE_API_ROUTE . 'memberships/(?P<type>[\w-]+)',
+			self::BASE_API_ROUTE . 'memberships',
 			array(
 				array(
 					'methods'             => \WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_memberships' ),
 					'permission_callback' => array( $this, 'validate_request' ),
+					'args'                => array(
+						'id'     => array(
+							'required'          => false,
+							'sanitize_callback' => 'absint',
+							'type'              => 'integer',
+							'default'           => 0,
+							'description'       => __( 'The rule id', 'hammock' ),
+						),
+					),
 				),
 			)
 		);
@@ -107,12 +117,20 @@ class Rules extends Rest {
 
 		register_rest_route(
 			$namespace,
-			self::BASE_API_ROUTE . 'items/(?P<type>[\w-]+)',
+			self::BASE_API_ROUTE . 'items',
 			array(
 				array(
 					'methods'             => \WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_items' ),
 					'permission_callback' => array( $this, 'validate_request' ),
+					'args'                => array(
+						'id'     => array(
+							'required'          => false,
+							'sanitize_callback' => 'absint',
+							'type'              => 'integer',
+							'description'       => __( 'The rule id', 'hammock' ),
+						),
+					),
 				),
 			)
 		);
@@ -151,8 +169,8 @@ class Rules extends Rest {
 	 * @return string
 	 */
 	public function get_memberships( $request ) {
-		$type  = $request['type'];
-		return rest_ensure_response( $this->service->get_rule_membership_select( $type ) );
+		$id  = $request->get_param( 'id' );
+		return rest_ensure_response( $this->service->get_rule_membership_select( $id ) );
 	}
 
 	/**
@@ -163,7 +181,7 @@ class Rules extends Rest {
 	 * @return string
 	 */
 	public function get_items( $request ) {
-		$type  = $request['type'];
-		return rest_ensure_response( $this->service->get_rule_items_select( $type ) );
+		$id  = $request->get_param( 'id' );
+		return rest_ensure_response( $this->service->get_rule_items_select( $id ) );
 	}
 }
