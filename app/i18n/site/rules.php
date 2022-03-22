@@ -13,6 +13,7 @@ return array(
 			'modal'  => array(
 				'title'      => __( 'New Rule', 'hammock' ),
 				'rule'       => __( 'Select Rule', 'hammock' ),
+				'item'       => __( 'Select Item to protect', 'hammock' ),
 				'membership' => __( 'Membership', 'hammock' ),
 			),
 		),

@@ -271,6 +271,16 @@ class Rules {
 		return $rule;
 	}
 
+	/**
+	 * Search rule items
+	 * 
+	 * @param string $type The rule type.
+	 * @param string $param The search param
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
 	public function search_rule_items( $type, $param ) {
 		$rule = $this->get_rule_by_type( $type);
 		if ( ! $rule ) {
