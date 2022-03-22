@@ -50,7 +50,11 @@ export default class Table extends Component {
 
 	handleRowAction(event, id, action ) {
 		event.preventDefault();
-		console.log( id + ' ' + action );
+		if ( 'edit' == action ) {
+
+		} else if ( 'delete' == action ) {
+
+		}
 		return false;
 	}
 
@@ -90,9 +94,9 @@ export default class Table extends Component {
 											<td>
 												<span dangerouslySetInnerHTML={{ __html: item.desc}}/>
 												<div id={"rule-hover-"+ item.rule_id}>
-													<Link uk-tooltip={hammock.common.buttons.edit} title={hammock.common.buttons.edit} className="uk-text-primary" to={'/edit/' + item.rule_id}>{hammock.common.buttons.edit}</Link>
+													<a href="#" uk-tooltip={hammock.common.buttons.edit} title={hammock.common.buttons.edit} className="uk-text-primary" onClick={ e => this.handleRowAction(e, item.rule_id, 'edit')}>{hammock.common.buttons.edit}</a>
 													{' '}|{' '}
-													<a href="#" data-id={item.rule_id} uk-tooltip={hammock.common.buttons.delete} title={hammock.common.buttons.delete} className="uk-text-danger" onClick={ e => this.handleRowAction(e, item.id, 'delete')}>{hammock.common.buttons.delete}</a>
+													<a href="#" uk-tooltip={hammock.common.buttons.delete} title={hammock.common.buttons.delete} className="uk-text-danger" onClick={ e => this.handleRowAction(e, item.rule_id, 'delete')}>{hammock.common.buttons.delete}</a>
 												</div>
 											</td>
 											<td>{item.status_name}</td>
