@@ -6,6 +6,8 @@ import { DropDownUI } from 'ui/admin/form';
 
 import fetchWP from 'utils/fetchWP';
 
+import { toast } from 'react-toastify';
+
 export default class CreateRuleModal extends Component {
 
 	constructor(props) {
@@ -30,6 +32,10 @@ export default class CreateRuleModal extends Component {
 		this.handleTypeSelect = this.handleTypeSelect.bind(this);
 		this.load_items = this.load_items.bind(this);
 		this.rule_form = React.createRef();
+	}
+
+	notify(type, message) {
+		toast[type](message, {toastId: 'rule-create-toast'});
 	}
 
 	onChange(e) {
@@ -71,7 +77,34 @@ export default class CreateRuleModal extends Component {
 
 	handleSubmit(event) {
 		event.preventDefault();
+		var self = this,
+			$form = jQuery(self.rule_form.current),
+			$button = $form.find('button'),
+			$btn_txt = $button.text(),
+			form = $form.serialize();
+			
 
+		$button.attr('disabled', 'disabled');
+		$button.html("<div uk-spinner></div>");
+
+		this.fetchWP.post( 'rule/save', form, true )
+			.then( (json) => {
+				if ( json.status ) {
+					self.notify( json.message, 'success' );
+					setTimeout(function(){
+						window.location.reload();
+					}, 1000);
+				} else {
+					self.notify( json.message, 'warning' );
+				}
+				$button.removeAttr('disabled');
+				$button.html($btn_txt);
+			}, (err) => {
+				$button.removeAttr('disabled');
+				$button.html($btn_txt);
+				self.notify( this.props.hammock.error, 'error' );
+			}
+		);
 	}
 
 	render() {

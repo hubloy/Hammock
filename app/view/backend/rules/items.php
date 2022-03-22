@@ -37,7 +37,7 @@ class Items extends View {
 		);
 		ob_start();
 		?>
-		<select data-placeholder="<?php esc_html_e( 'Select Item', 'hammock' ); ?>" class="uk-select hammock-select2-ajax" data-url="<?php echo esc_url( $url ); ?>">
+		<select name="item" data-placeholder="<?php esc_html_e( 'Select Item', 'hammock' ); ?>" class="uk-select hammock-select2-ajax" data-url="<?php echo esc_url( $url ); ?>">
 			<?php
 				if ( $rule ) {
 					$content = $rule->to_html();

@@ -134,6 +134,16 @@ class Rules extends Rest {
 				),
 			)
 		);
+
+		register_rest_route(
+			$namespace,
+			self::BASE_API_ROUTE . 'save',
+			array(
+				'methods'             => \WP_REST_Server::CREATABLE,
+				'callback'            => array( $this, 'save_rule' ),
+				'permission_callback' => array( $this, 'validate_request' ),
+			)
+		);
 	}
 
 	/**
@@ -184,5 +194,36 @@ class Rules extends Rest {
 		$id   = $request->get_param( 'id' );
 		$type = $request['type'];
 		return rest_ensure_response( $this->service->get_rule_items_select( $id, $type ) );
+	}
+
+	/**
+	 * Save a new rule
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return string
+	 */
+	public function save_rule( $request ) {
+		$type     		= sanitize_text_field( $request['type'] );
+		$item     		= ( int ) sanitize_text_field( $request['item'] );
+		$memberships 	= array_map( 'absint', $request['memberships'] );
+		$enabled  		= isset( $request['enabled'] ) ? intval( sanitize_text_field( $request['enabled'] ) ) : 0;
+		$status         = $enabled ? \Hammock\Services\Rules::STATUS_ENABLED : \Hammock\Services\Rules::STATUS_DISABLED;
+		$data           = array(
+			'type'        => $type,
+			'id'          => $item,
+			'status'      => $status,
+			'memberships' => $memberships,
+		);
+		$response       = $this->service->save_rule( $data );
+		if ( is_wp_error( $response ) ) {
+			return rest_ensure_response(
+				array(
+					'status'  => false,
+					'message' => $result->get_error_message(),
+				)
+			);
+		}
+		return rest_ensure_response( $response );
 	}
 }

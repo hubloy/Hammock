@@ -222,7 +222,8 @@ class Rules {
 
 		$rule->save_rule( $args['memberships'], $args['id'], $args['status'] );
 		return array(
-			'message' => __( 'Rule saved', 'hammock' )
+			'status'  => true,
+			'message' => __( 'Rule saved', 'hammock' ),
 		);
 	}
 

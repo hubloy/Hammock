@@ -25,8 +25,7 @@ export default class CreateMembership extends PureComponent {
 			$form = jQuery(self.membership_create.current),
 			$button = $form.find('button'),
 			$btn_txt = $button.text(),
-			form = $form.serialize(),
-			helper = window.hammock.helper;
+			form = $form.serialize();
 			
 
 		$button.attr('disabled', 'disabled');
