@@ -17,7 +17,7 @@ export class Create extends PureComponent {
         });
 	}
 
-	notify(type, message) {
+	notify(message, type) {
 		toast[type](message, {toastId: 'members-create-toast'});
 	}
 

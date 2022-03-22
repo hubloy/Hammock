@@ -233,7 +233,7 @@ class Rule {
 	 * @return array
 	 */
 	public function to_html() {
-		$membership_count = count( $this->memberships );
+		$membership_count = is_array( $this->memberships ) ? count( $this->memberships ) : 0;
 		$item_title       = apply_filters( 'hammock_rule_title_name', $this->object_type, $this->object_id );
 		return apply_filters(
 			'hammock_membership_rule_to_html',

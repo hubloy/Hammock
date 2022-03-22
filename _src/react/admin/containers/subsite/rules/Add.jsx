@@ -34,7 +34,7 @@ export default class CreateRuleModal extends Component {
 		this.rule_form = React.createRef();
 	}
 
-	notify(type, message) {
+	notify(message,type) {
 		toast[type](message, {toastId: 'rule-create-toast'});
 	}
 
@@ -87,7 +87,7 @@ export default class CreateRuleModal extends Component {
 		$button.attr('disabled', 'disabled');
 		$button.html("<div uk-spinner></div>");
 
-		this.fetchWP.post( 'rule/save', form, true )
+		this.fetchWP.post( 'rules/save', form, true )
 			.then( (json) => {
 				if ( json.status ) {
 					self.notify( json.message, 'success' );

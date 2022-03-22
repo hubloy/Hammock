@@ -206,7 +206,7 @@ class Rules extends Rest {
 	public function save_rule( $request ) {
 		$type     		= sanitize_text_field( $request['type'] );
 		$item     		= ( int ) sanitize_text_field( $request['item'] );
-		$memberships 	= array_map( 'absint', $request['memberships'] );
+		$memberships 	= is_array( $request['memberships'] ) ? array_map( 'absint', $request['memberships'] ) : array( absint( $request['memberships'] ) );
 		$enabled  		= isset( $request['enabled'] ) ? intval( sanitize_text_field( $request['enabled'] ) ) : 0;
 		$status         = $enabled ? \Hammock\Services\Rules::STATUS_ENABLED : \Hammock\Services\Rules::STATUS_DISABLED;
 		$data           = array(

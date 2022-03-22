@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 use Hammock\Model\Settings;
 use Hammock\Services\Members;
 use Hammock\Services\Memberships;
+use Hammock\Helper\Pages;
 
 /**
  * Protection rules
@@ -205,13 +206,24 @@ class Rule {
 	/**
 	 * Get rule by id and type.
 	 * 
-	 * @param int    $id - the object id
-	 * @param string $type - the object type
+	 * @param int $id - the object id
 	 * 
 	 * @return bool|object
 	 */
-	public function get_rule( $id, $type ) {
-		return \Hammock\Model\Rule::get_rules( $type, $id );;
+	public function get_rule( $id ) {
+		return \Hammock\Model\Rule::get_rules( $this->id, $id );;
+	}
+
+	/**
+	 * Check if item has rule
+	 * 
+	 * @param int $id - the object id
+	 * 
+	 * @return bool
+	 */
+	public function has_rule( $id ) {
+		$rule = $this->get_rule( $id );
+		return is_object( $rule );
 	}
 
 	/**
@@ -583,7 +595,7 @@ class Rule {
 		$results = array();
 		$query   = new \WP_Query(
 			array(
-				'post_type' 		=> 'post',
+				'post_type' 		=> $post_type,
 				'posts_per_page' 	=> 10,
 				'post_status'       => 'publish',
 				'orderby' 			=> 'title',
@@ -594,6 +606,12 @@ class Rule {
 			return results;
 		}
 		foreach ( $query->posts as $post ) {
+			if ( Pages::is_membership_page( $post->ID ) ) {
+				continue;
+			}
+			if ( $this->has_rule( $post->ID ) ) {
+				continue;
+			}
 			$results[] = array(
 				'id'   => $post->ID,
 				'text' => $post->post_title
@@ -649,6 +667,9 @@ class Rule {
 		}
 		$memberships = $this->list_memberships();
 		foreach ( $query->posts as $post ) {
+			if ( Pages::is_membership_page( $post->ID ) ) {
+				continue;
+			}
 			$access         = new Access();
 			$rule           = $this->get_rule( $post->ID, 'page' );
 			$edit_link      = get_edit_post_link( $post->ID );
