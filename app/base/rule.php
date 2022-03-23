@@ -517,9 +517,12 @@ class Rule {
 	 */
 	protected function get_all_restricted() {
 		global $wpdb;
-		$output = array();
+		static $output = array();
+		if ( !empty( $output ) ) {
+			return $output;
+		}
 		$sql    = false;
-		if ( $this->id === 'post' ) {
+		if ( $this->id === 'post' || $this->id === 'page' ) {
 			$sql = "SELECT `post_id` as item_id, `meta_value` FROM {$wpdb->postmeta} WHERE `meta_key` = %s";
 		} elseif ( $this->id === 'term' ) {
 			$sql = "SELECT `term_id` as item_id, `meta_value` FROM {$wpdb->termmeta} WHERE `meta_key` = %s";
@@ -529,8 +532,21 @@ class Rule {
 			$results = $wpdb->get_results( $wpdb->prepare( $sql, '_hammock_mebership_access' ) );
 			foreach ( $results as $result ) {
 				$value    = is_array( $result->meta_value ) ? array_map( 'maybe_unserialize', $result->meta_value ) : maybe_unserialize( $result->meta_value );
-				$output[] = array(
+				$output[$result->item_id] = array(
 					'id'    => $result->item_id,
+					'value' => $value,
+				);
+			}
+		}
+		$rule_items = \Hammock\Model\Rule::get_restricted_items( $this->id );
+		foreach ( $rule_items as $item ) {
+			$value    = is_array( $item->memberships ) ? array_map( 'maybe_unserialize', $item->memberships ) : maybe_unserialize( $item->memberships );
+			if ( isset( $output[ $item->object_id ] ) ) {
+				$value = array_merge( $output[ $item->object_id ]['value'], $value );
+				$output[ $item->object_id ]['value'] = $value;
+			} else {
+				$output[] = array(
+					'id'    => $item->object_id,
 					'value' => $value,
 				);
 			}

@@ -340,7 +340,7 @@ class Protection {
 						return false;
 					}
 				}
-				$access = $this->post_has_rule( $object->ID );
+				$access = ! $this->post_has_rule( $object->ID );
 			} elseif ( $object instanceof \WP_Term && $this->category_rule != null ) {
 				$restricted = $this->category_rule->get_member_restricted_content_ids();
 				if ( ! empty( $restricted ) ) {
@@ -348,7 +348,7 @@ class Protection {
 						return false;
 					}
 				}
-				$access = $this->term_has_rule( $object->term_id );
+				$access = ! $this->term_has_rule( $object->term_id );
 			}
 		}
 		return $access;
@@ -375,7 +375,7 @@ class Protection {
 						return false;
 					}
 				}
-				$access = $this->post_has_rule( $object->ID );
+				$access = ! $this->post_has_rule( $object->ID );
 			} elseif ( $object instanceof \WP_Term && $this->category_rule != null ) {
 				$restricted = $this->category_rule->get_member_restricted_content_ids();
 				if ( ! empty( $restricted ) ) {
@@ -383,7 +383,7 @@ class Protection {
 						return false;
 					}
 				}
-				$access = $this->term_has_rule( $object->term_id );
+				$access = ! $this->term_has_rule( $object->term_id );
 			}
 		}
 		return $access;
@@ -409,7 +409,7 @@ class Protection {
 						return false;
 					}
 				}
-				$access = $this->post_has_rule( $object->ID );
+				$access = ! $this->post_has_rule( $object->ID );
 			} elseif ( $object instanceof \WP_Term && $this->category_rule != null ) {
 				$restricted = $this->category_rule->get_member_restricted_content_ids();
 				if ( ! empty( $restricted ) ) {
@@ -417,7 +417,7 @@ class Protection {
 						return false;
 					}
 				}
-				$access = $this->term_has_rule( $object->term_id );
+				$access = ! $this->term_has_rule( $object->term_id );
 			}
 		}
 		return $access;

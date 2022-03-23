@@ -310,4 +310,26 @@ class Rule {
 		}
 		return false;
 	}
+
+	/**
+	 * Get restricted items by type.
+	 * 
+	 * @param string $type The rule type
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
+	public static function get_restricted_items( $type ) {
+		global $wpdb;
+		$items   = Cache::get_cache( 'get_restricted_' . $type, 'rule' );
+		if ( is_array( $items ) ) {
+			return $items;
+		}
+		$table_name = Database::get_table_name( Database::MEMBERSHIP_RULES );
+		$sql        = "SELECT `object_id`, `memberships` FROM {$table_name} WHERE `object_type` = %s AND `status` = %s";
+		$items      = $wpdb->get_results( $wpdb->prepare( $sql, $type, 'enabled' ) );
+		Cache::set_cache( 'get_restricted_' . $type, $items, 'rule' );
+		return $items;
+	}
 }
