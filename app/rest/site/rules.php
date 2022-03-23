@@ -144,6 +144,16 @@ class Rules extends Rest {
 				'permission_callback' => array( $this, 'validate_request' ),
 			)
 		);
+
+		register_rest_route(
+			$namespace,
+			self::BASE_API_ROUTE . 'delete',
+			array(
+				'methods'             => \WP_REST_Server::CREATABLE,
+				'callback'            => array( $this, 'delete_rule' ),
+				'permission_callback' => array( $this, 'validate_request' ),
+			)
+		);
 	}
 
 	/**
@@ -201,7 +211,7 @@ class Rules extends Rest {
 	 * 
 	 * @since 1.0.0
 	 * 
-	 * @return string
+	 * @return array
 	 */
 	public function save_rule( $request ) {
 		$type     		= sanitize_text_field( $request['type'] );
@@ -225,5 +235,17 @@ class Rules extends Rest {
 			);
 		}
 		return rest_ensure_response( $response );
+	}
+
+	/**
+	 * Delete a rule
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
+	public function delete_rule( $request ) {
+		$rule = ( int ) sanitize_text_field( $request['rule'] );
+		return rest_ensure_response( $this->service->delete_rule( $rule ) );
 	}
 }

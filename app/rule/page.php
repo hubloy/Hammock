@@ -60,7 +60,7 @@ class Page extends Rule {
 	 * @return int
 	 */
 	public function count_items( $args = array() ) {
-		return $this->count_post_type_items( 'page', $args );
+		return $this->count_post_type_items( $this->id, $args );
 	}
 
 	/**
@@ -73,7 +73,7 @@ class Page extends Rule {
 	 * @return array
 	 */
 	public function list_items( $args = array() ) {
-		return $this->list_post_type_items( 'page', $args );
+		return $this->list_post_type_items( $this->id, $args );
 	}
 
 	/**
@@ -86,7 +86,7 @@ class Page extends Rule {
 	 * @return array
 	 */
 	public function search( $param ) {
-		return $this->search_post_type( 'page', $param );
+		return $this->search_post_type( $this->id, $param );
 	}
 
 	/**
@@ -120,7 +120,7 @@ class Page extends Rule {
 		if ( ! $post ) {
 			return;
 		}
-		$this->update_rule( $item_id, 'page', $memberships, $status );
+		$this->update_rule( $item_id, $this->id, $memberships, $status );
 	}
 
 	/**

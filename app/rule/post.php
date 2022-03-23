@@ -111,7 +111,7 @@ class Post extends Rule {
 	 * @return array
 	 */
 	public function list_items( $args = array() ) {
-		return $this->list_post_type_items( 'post', $args );
+		return $this->list_post_type_items( $this->id, $args );
 	}
 
 	/**
@@ -124,7 +124,7 @@ class Post extends Rule {
 	 * @return array
 	 */
 	public function search( $param ) {
-		return $this->search_post_type( 'post', $param );
+		return $this->search_post_type( $this->id, $param );
 	}
 
 
@@ -159,7 +159,7 @@ class Post extends Rule {
 		if ( ! $post ) {
 			return;
 		}
-		$this->update_rule( $item_id, 'post', $memberships, $status );
+		$this->update_rule( $item_id, $this->id, $memberships, $status );
 	}
 
 	/**

@@ -23,6 +23,9 @@ return array(
 			'status'  => __( 'Status', 'hammock' ),
 			'type'    => __( 'Type', 'hammock' ),
 			'date'    => __( 'Date Created', 'hammock' ),
+			'delete'  => array(
+				'prompt' => __( 'Are you sure you want to delete this rule?', 'hammock' ),
+			),
 		),
 	),
 );

@@ -236,11 +236,11 @@ class Rule {
 	 * 
 	 * @since 1.0.0
 	 */
-	public function update_rule( $id, $type, $memberships, $status ) {
-		$rule = $this->get_rule( $id, $type );
+	public function update_rule( $id, $memberships, $status ) {
+		$rule = $this->get_rule( $id, $this->id );
 		if ( ! $rule ) {
 			$rule = new \Hammock\Model\Rule();
-			$rule->object_type = $type;
+			$rule->object_type = $this->id;
 			$rule->object_id   = $id;
 		}
 		$rule->memberships = $memberships;
@@ -319,7 +319,7 @@ class Rule {
 	 * @since 1.0.0
 	 */
 	public function save_rule( $memberships, $item_id, $status ) {
-
+		$this->update_rule( $item_id, $memberships, $status );
 	}
 
 	/**

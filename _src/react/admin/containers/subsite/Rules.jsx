@@ -52,7 +52,7 @@ export default class Rules extends Component {
 								<Nav hammock={hammock} active_nav={active_nav} rules={this.state.rules}/>
 							</LazyLoad>
 							<div className="hammock-protection-rules uk-background-default uk-padding-small">
-								<Content hammock={hammock} type={active_nav} page={page}/>
+								<Content hammock={hammock} type={active_nav} page={page} rules={this.state.rules}/>
 							</div>
 							<AddContent hammock={hammock} active_nav={active_nav} rules={this.state.rules} />
 						</React.Fragment>

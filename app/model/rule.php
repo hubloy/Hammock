@@ -246,7 +246,7 @@ class Rule {
 				'status_name'         => ucfirst( $this->status ),
 				'object_type'         => $this->object_type,
 				'object_id'           => $this->object_id,
-				'object_name'         => apply_filters( 'hammock_rule_type_name', $this->object_type ),
+				'rule_name'           => apply_filters( 'hammock_rule_type_name', $this->object_type ),
 				'title'               => $item_title,
 				'time_limit'          => $this->time_limit,
 				'time_duration'       => $this->time_duration,

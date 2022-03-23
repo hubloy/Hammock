@@ -27,7 +27,7 @@ class Memberships extends View {
 		$memberships = $this->data['memberships'];
 		ob_start();
 		?>
-		<select name="memberships" data-placeholder="<?php esc_html_e( 'Select Membership', 'hammock' ); ?>" multiple="multiple" class="uk-select hammock-select2">
+		<select name="memberships" data-placeholder="<?php esc_html_e( 'Select Membership', 'hammock' ); ?>" multiple="multiple" class="uk-select hammock-select2" style="width: 100%">
 			<?php
 				$rule_memberships = ( $rule ) ? $rule->memberships : array();
 				foreach ( $memberships as $id => $name ) {

@@ -228,6 +228,30 @@ class Rules {
 	}
 
 	/**
+	 * Delete rule by id.
+	 * 
+	 * @param int $id The rule id
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
+	public function delete_rule( $id ) {
+		$rule = new Rule( $id );
+		if ( 0 === $rule->rule_id ) {
+			return array(
+				'status'  => false,
+				'message' => __( 'Rule does not exist', 'hammock' ),
+			);
+		}
+		$rule->delete();
+		return array(
+			'status'  => true,
+			'message' => __( 'Rule deleted', 'hammock' ),
+		);
+	}
+
+	/**
 	 * Get rule by type.
 	 * 
 	 * @param string $type The rule type id

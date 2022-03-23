@@ -37,11 +37,11 @@ class Items extends View {
 		);
 		ob_start();
 		?>
-		<select name="item" data-placeholder="<?php esc_html_e( 'Select Item', 'hammock' ); ?>" class="uk-select hammock-select2-ajax" data-url="<?php echo esc_url( $url ); ?>">
+		<select name="item" data-placeholder="<?php esc_html_e( 'Select Item', 'hammock' ); ?>" class="uk-select hammock-select2-ajax" data-url="<?php echo esc_url( $url ); ?>" style="width: 100%">
 			<?php
 				if ( $rule ) {
 					$content = $rule->to_html();
-					?><option value="<?php echo esc_attr( $content['object_id'] ); ?>" <?php selected( $rule->object_id, $content['object_id'] ); ?>><?php echo esc_html( $content['object_name'] ); ?></option><?php
+					?><option value="<?php echo esc_attr( $content['object_id'] ); ?>" <?php selected( $rule->object_id, $content['object_id'] ); ?>><?php echo esc_html( wp_strip_all_tags( $content['title'] ) ); ?></option><?php
 				}
 			?>
 		</select>
