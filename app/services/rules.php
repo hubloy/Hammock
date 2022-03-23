@@ -86,6 +86,17 @@ class Rules {
 	}
 
 	/**
+	 * List rule types with settings.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
+	public function list_rule_types_with_setting() {
+		return apply_filters( 'hammock_protection_setting_rules', array() );
+	}
+
+	/**
 	 * Get rule type data. This gets data specific to the rules to show in the admin.
 	 *
 	 * @param $args The rule data. This expects

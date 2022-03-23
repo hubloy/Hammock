@@ -162,7 +162,7 @@ class Rules extends Rest {
 	 * @since 1.0.0
 	 */
 	public function list_rules() {
-		return rest_ensure_response( $this->service->list_rule_types() );
+		return rest_ensure_response( $this->service->list_rule_types_with_setting() );
 	}
 
 

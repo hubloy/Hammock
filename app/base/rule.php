@@ -44,6 +44,15 @@ class Rule {
 	 */
 	protected $enabled = false;
 
+	/**
+	 * Set to true if the rule is configrable and has items.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @var bool
+	 */
+	protected $has_setting = false;
+
 
 	/**
 	 * Settings object
@@ -81,6 +90,7 @@ class Rule {
 
 		// Register the rule.
 		add_filter( 'hammock_protection_rules', array( $this, 'register_rule' ) );
+		add_filter( 'hammock_protection_setting_rules', array( $this, 'register_setting_rule' ) );
 
 		if ( $this->enabled ) {
 			add_filter( 'hammock_' . $this->id . '_content_has_access', array( $this, 'has_access' ), 10, 3 );
@@ -119,6 +129,22 @@ class Rule {
 	 */
 	public function register_rule( $rules ) {
 		if ( ! isset( $rules[ $this->id ] ) ) {
+			$rules[ $this->id ] = $this->name;
+		}
+		return $rules;
+	}
+
+	/**
+	 * Register the rules with settings.
+	 *
+	 * @param array $rules The current rules.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array
+	 */
+	public function register_setting_rule( $rules ) {
+		if ( ! isset( $rules[ $this->id ] ) && $this->has_setting ) {
 			$rules[ $this->id ] = $this->name;
 		}
 		return $rules;

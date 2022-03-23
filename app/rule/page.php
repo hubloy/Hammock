@@ -41,8 +41,9 @@ class Page extends Rule {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$this->id   = 'page';
-		$this->name = __( 'Pages', 'hammock' );
+		$this->id          = 'page';
+		$this->name        = __( 'Pages', 'hammock' );
+		$this->has_setting = true;
 
 		add_filter( 'pre_trash_post', array( $this, 'pre_trash_post' ), 10, 2 );
 		add_filter( 'pre_delete_post', array( $this, 'pre_delete_post' ), 10, 3 );
