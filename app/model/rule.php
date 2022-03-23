@@ -161,6 +161,22 @@ class Rule {
 	}
 
 	/**
+	 * Check if a rule has a membership.
+	 *
+	 * @param int $membership_id The membership id
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return bool
+	 */
+	public function has_membership( $membership_id ) {
+		if ( ! is_array( $this->memberships ) || empty( $this->memberships ) ) {
+			return false;
+		}
+		return in_array( $membership_id, $this->memberships, true );
+	}
+
+	/**
 	 * Save or update a rule
 	 *
 	 * @since 1.0.0

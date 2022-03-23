@@ -253,6 +253,22 @@ class Rule {
 	}
 
 	/**
+	 * Check if rule applies to current item and membership
+	 * 
+	 * @param int $id - the object id
+	 * @param int $membership_id The membership id.
+	 * 
+	 * @return bool
+	 */
+	public function rule_applies( $id, $membership_id ) {
+		$rule = $this->get_rule( $id );
+		if ( $rule && $rule->exists() ) {
+			return $rule->has_membership( $membership_id );
+		}
+		return false;
+	}
+
+	/**
 	 * Update rule
 	 * 
 	 * @param int    $id - the object id

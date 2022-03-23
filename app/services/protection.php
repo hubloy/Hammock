@@ -262,13 +262,10 @@ class Protection {
 		if ( ! empty( $plans ) ) {
 			if ( $object instanceof \WP_Post ) {
 				$post_meta = get_post_meta( $object->ID, '_hammock_mebership_access', true );
-				if ( $post_meta && is_array( $post_meta ) && ! empty( $post_meta ) ) {
-					foreach ( $plans as $plan_id ) {
-						if ( hammock_is_member_plan_active( $plan_id ) ) {
-							if ( in_array( $plan_id, $post_meta ) ) {
-								$access = true;
-							}
-						}
+				foreach ( $plans as $plan_id ) {
+					if ( hammock_is_member_plan_active( $plan_id ) ) {
+						$has_access = $this->check_member_post_access( $object->ID, $plan_id, $post_meta );
+						return $has_access;
 					}
 				}
 			} elseif ( $object instanceof \WP_Term ) {
@@ -277,7 +274,7 @@ class Protection {
 					foreach ( $plans as $plan_id ) {
 						if ( hammock_is_member_plan_active( $plan_id ) ) {
 							if ( in_array( $plan_id, $term_meta ) ) {
-								$access = true;
+								return true;
 							}
 						}
 					}
@@ -285,6 +282,24 @@ class Protection {
 			}
 		}
 		return $access;
+	}
+
+	/**
+	 * Check member post access
+	 * 
+	 * @param int $post_id The post or page id
+	 * @param int $plan_id The membership id
+	 * @param mixed $post_meta The post meta
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return bool
+	 */
+	private function check_member_post_access( $post_id, $plan_id, $post_meta ) {
+		if ( $post_meta && is_array( $post_meta ) && ! empty( $post_meta ) ) {
+			return in_array( $post_id, $post_meta, true );
+		}
+		return $this->page_rule->rule_applies( $post_id, $plan_id ) || $this->post_rule->rule_applies( $post_id, $plan_id );
 	}
 
 	/**
@@ -305,14 +320,14 @@ class Protection {
 				$restricted = $this->post_rule->get_member_restricted_content_ids();
 				if ( ! empty( $restricted ) ) {
 					if ( in_array( $object->ID, $restricted ) ) {
-						$access = false;
+						return false;
 					}
 				}
 			} elseif ( $object instanceof \WP_Term && $this->category_rule != null ) {
 				$restricted = $this->category_rule->get_member_restricted_content_ids();
 				if ( ! empty( $restricted ) ) {
 					if ( in_array( $object->term_id, $restricted ) ) {
-						$access = false;
+						return false;
 					}
 				}
 			}
@@ -338,14 +353,14 @@ class Protection {
 				$restricted = $this->post_rule->get_member_restricted_content_ids();
 				if ( ! empty( $restricted ) ) {
 					if ( in_array( $object->ID, $restricted ) ) {
-						$access = false;
+						return false;
 					}
 				}
 			} elseif ( $object instanceof \WP_Term && $this->category_rule != null ) {
 				$restricted = $this->category_rule->get_member_restricted_content_ids();
 				if ( ! empty( $restricted ) ) {
 					if ( in_array( $object->term_id, $restricted ) ) {
-						$access = false;
+						return false;
 					}
 				}
 			}
@@ -370,14 +385,14 @@ class Protection {
 				$restricted = $this->post_rule->get_member_restricted_content_ids();
 				if ( ! empty( $restricted ) ) {
 					if ( in_array( $object->ID, $restricted ) ) {
-						$access = false;
+						return false;
 					}
 				}
 			} elseif ( $object instanceof \WP_Term && $this->category_rule != null ) {
 				$restricted = $this->category_rule->get_member_restricted_content_ids();
 				if ( ! empty( $restricted ) ) {
 					if ( in_array( $object->term_id, $restricted ) ) {
-						$access = false;
+						return false;
 					}
 				}
 			}
