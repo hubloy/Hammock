@@ -478,9 +478,9 @@ class Rule {
 		$content_ids = array();
 		foreach ( $restricted as $key => $item ) {
 			// Check if there are any memberships
+			
 			if ( ! empty( $item['value'] ) ) {
-				$content_type = $this->get_content_type( $item['id'] );
-				if ( ! $this->does_content_have_protection( $item['id'], $content_type ) ) {
+				if ( ! $this->has_active_rule( $item['id'] ) ) {
 					unset( $restricted[ $key ] );
 				} else {
 					$content_ids[ $item['id'] ] = $item['id'];
@@ -489,7 +489,6 @@ class Rule {
 				unset( $restricted[ $key ] );
 			}
 		}
-
 		if ( $logged_in ) {
 			if ( $member ) {
 				$plans = $member->get_plans();
@@ -505,7 +504,7 @@ class Rule {
 				}
 			}
 		}
-		return ! empty( $content_ids ) ? array_values( $content_ids ) : array();
+		return ! empty( $content_ids ) ? array_keys( $content_ids ) : array();
 	}
 
 	/**
@@ -603,7 +602,7 @@ class Rule {
 	 * @return bool
 	 */
 	protected function does_content_have_protection( $item_id, $content_type ) {
-		return false;
+		return $this->has_active_rule( $item_id );
 	}
 
 	/**

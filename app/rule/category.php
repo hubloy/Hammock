@@ -314,26 +314,6 @@ class Category extends Rule {
 		$result = $wpdb->get_var( $wpdb->prepare( $sql, $item_id ) );
 		return $result;
 	}
-
-	/**
-	 * Check if content has protection
-	 *
-	 * @param int    $item_id - the item id
-	 * @param string $content_type - the content type
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return bool
-	 */
-	protected function does_content_have_protection( $item_id, $content_type ) {
-		$settings  = $this->settings->get_addon_setting( 'category' );
-		$protected = isset( $settings['protected'] ) ? $settings['protected'] : array();
-		if ( in_array( $content_type, $protected ) ) {
-			return true;
-		}
-		return false;
-	}
-
 }
 
 

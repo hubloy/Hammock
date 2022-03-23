@@ -185,4 +185,16 @@ class Page extends Rule {
 		}
 		return $title;
 	}
+
+	/**
+	 * Get content type
+	 */
+	protected function get_content_type( $item_id ) {
+		$post = get_post( $item_id );
+		if ( ! $post ) {
+			return '';
+		}
+		return $post->post_type;
+	}
+
 }

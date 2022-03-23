@@ -320,13 +320,13 @@ class Post extends Rule {
 		$protection_level = $this->settings->get_general_setting( 'protection_level' );
 		if ( 'hide' === $protection_level ) {
 			$restricted = $this->get_member_restricted_content_ids();
-			if ( ! empty( $restricted ) ) {
+			if ( is_array( $restricted ) && ! empty( $restricted ) && is_array( $wp_query->get( 'post__not_in' ) ) ) {
 				$wp_query->set(
 					'post__not_in',
 					array_unique(
 						array_merge(
 							$wp_query->get( 'post__not_in' ),
-							reset( $restricted )
+							$restricted
 						)
 					)
 				);
@@ -644,27 +644,15 @@ class Post extends Rule {
 		}
 	}
 
-
 	/**
-	 * Check if content has protection
-	 *
-	 * @param int    $item_id - the item id
-	 * @param string $content_type - the content type
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return bool
+	 * Get content type
 	 */
-	protected function does_content_have_protection( $item_id, $content_type ) {
-		$settings        = $this->settings->get_addon_setting( 'category' );
-		$post_categories = wp_get_post_categories( $item_id, array( 'fields' => 'id=>slug' ) );
-		$protected       = isset( $settings['protected'] ) ? $settings['protected'] : array();
-		foreach ( $post_categories as $id => $slug ) {
-			if ( in_array( $slug, $protected ) ) {
-				return true;
-			}
+	protected function get_content_type( $item_id ) {
+		$post = get_post( $item_id );
+		if ( ! $post ) {
+			return '';
 		}
-		return false;
+		return $post->post_type;
 	}
 }
 
