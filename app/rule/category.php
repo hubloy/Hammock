@@ -143,7 +143,7 @@ class Category extends Rule {
 	 * @return string
 	 */
 	public function get_protected_item_name( $id, $edit_link = false ) {
-		$term = get_term( $item_id, $this->term );
+		$term = get_term( $id, $this->term );
 		if ( ! $term ) {
 			return '';
 		}
