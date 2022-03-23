@@ -181,7 +181,7 @@ class Rule {
 					'status'        => $this->status,
 					'time_limit'    => $this->time_limit,
 					'time_duration' => $this->time_duration,
-					'due_date'      => ! empty( $this->due_date ) ? date_i18n( 'Y-m-d H:i:s', strtotime( $this->due_date ) ) : '',
+					'date_updated'  => ! empty( $this->date_updated ) ? date_i18n( 'Y-m-d H:i:s', strtotime( $this->date_updated ) ) : '',
 				),
 				array( 'rule_id' => $this->rule_id )
 			);

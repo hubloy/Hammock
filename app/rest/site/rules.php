@@ -217,13 +217,15 @@ class Rules extends Rest {
 		$type     		= sanitize_text_field( $request['type'] );
 		$item     		= ( int ) sanitize_text_field( $request['item'] );
 		$memberships 	= is_array( $request['memberships'] ) ? array_map( 'absint', $request['memberships'] ) : array( absint( $request['memberships'] ) );
-		$enabled  		= isset( $request['enabled'] ) ? intval( sanitize_text_field( $request['enabled'] ) ) : 0;
+		$enabled  		= isset( $request['enabled'] );
+		$is_update      = isset( $request['id'] );
 		$status         = $enabled ? \Hammock\Services\Rules::STATUS_ENABLED : \Hammock\Services\Rules::STATUS_DISABLED;
 		$data           = array(
 			'type'        => $type,
 			'id'          => $item,
 			'status'      => $status,
 			'memberships' => $memberships,
+			'is_update'   => $is_update,
 		);
 		$response       = $this->service->save_rule( $data );
 		if ( is_wp_error( $response ) ) {

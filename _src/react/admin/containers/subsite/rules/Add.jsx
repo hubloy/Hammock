@@ -79,7 +79,7 @@ export default class CreateRuleModal extends Component {
 		event.preventDefault();
 		var self = this,
 			$form = jQuery(self.rule_form.current),
-			$button = $form.find('button'),
+			$button = $form.find('.save-button'),
 			$btn_txt = $button.text(),
 			form = $form.serialize();
 			

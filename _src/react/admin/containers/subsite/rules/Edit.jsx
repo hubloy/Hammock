@@ -85,7 +85,7 @@ export default class EditRuleModal extends Component {
 		event.preventDefault();
 		var self = this,
 			$form = jQuery(self.rule_form.current),
-			$button = $form.find('button'),
+			$button = $form.find('.save-button'),
 			$btn_txt = $button.text(),
 			form = $form.serialize();
 			
@@ -93,7 +93,7 @@ export default class EditRuleModal extends Component {
 		$button.attr('disabled', 'disabled');
 		$button.html("<div uk-spinner></div>");
 
-		this.fetchWP.post( 'rules/update', form, true )
+		this.fetchWP.post( 'rules/save', form, true )
 			.then( (json) => {
 				if ( json.status ) {
 					self.notify( json.message, 'success' );

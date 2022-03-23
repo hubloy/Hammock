@@ -237,7 +237,7 @@ class Rule {
 	 * @since 1.0.0
 	 */
 	public function update_rule( $id, $memberships, $status ) {
-		$rule = $this->get_rule( $id, $this->id );
+		$rule = $this->get_rule( $id );
 		if ( ! $rule ) {
 			$rule = new \Hammock\Model\Rule();
 			$rule->object_type = $this->id;
@@ -310,6 +310,19 @@ class Rule {
 	}
 
 	/**
+	 * Check if is a valid item
+	 * 
+	 * @param int $item_id The item id
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return bool
+	 */
+	public function is_valid_item( $item_id ) {
+		return true;
+	}
+
+	/**
 	 * Save rule
 	 *
 	 * @param array $memberships Array of memberships
@@ -319,7 +332,12 @@ class Rule {
 	 * @since 1.0.0
 	 */
 	public function save_rule( $memberships, $item_id, $status ) {
+		$valid = $this->is_valid_item( $item_id );
+		if ( ! $valid ) {
+			return false;
+		}
 		$this->update_rule( $item_id, $memberships, $status );
+		return true;
 	}
 
 	/**

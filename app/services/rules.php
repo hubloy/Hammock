@@ -213,6 +213,7 @@ class Rules {
 			'id'          => 0,
 			'status'      => self::STATUS_ENABLED,
 			'memberships' => array(),
+			'is_update'   => false,
 		);
 		$args   = wp_parse_args( $args, $defaults );
 		$rule   = $this->get_rule_by_type( $args['type'] );
@@ -223,7 +224,7 @@ class Rules {
 		$rule->save_rule( $args['memberships'], $args['id'], $args['status'] );
 		return array(
 			'status'  => true,
-			'message' => __( 'Rule saved', 'hammock' ),
+			'message' => $args['is_update'] ? __( 'Rule updated', 'hammock' ) :  __( 'Rule saved', 'hammock' ),
 		);
 	}
 

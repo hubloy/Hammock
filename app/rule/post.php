@@ -146,20 +146,20 @@ class Post extends Rule {
 	}
 
 	/**
-	 * Save rule
-	 *
-	 * @param array $memberships Array of memberships
-	 * @param int $item_id the item id to apply the rules to
-	 * @param string $status The rule status
+	 * Check if is a valid item
+	 * 
+	 * @param int $item_id The item id
 	 * 
 	 * @since 1.0.0
+	 * 
+	 * @return bool
 	 */
-	public function save_rule( $memberships, $item_id, $status ) {
+	public function is_valid_item( $item_id ) {
 		$post = get_post( $item_id );
 		if ( ! $post ) {
-			return;
+			return false;
 		}
-		$this->update_rule( $item_id, $this->id, $memberships, $status );
+		return true;
 	}
 
 	/**
