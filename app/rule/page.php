@@ -132,7 +132,7 @@ class Page extends Rule {
 	 * @return bool|null
 	 */
 	public function pre_trash_post( $check, $post ) {
-		if ( 'post' !== $post->post_type ) {
+		if ( $this->id !== $post->post_type ) {
 			return $check;
 		}
 		Cache::delete_cache( 'count_page', 'counts' );
@@ -157,7 +157,7 @@ class Page extends Rule {
 	 * @since 1.0.0
 	 */
 	public function save_post( $post_id, $post, $update ) {
-		if ( 'page' !== $post->post_type ) {
+		if ( $this->id !== $post->post_type ) {
 			return;
 		}
 		Cache::delete_cache( 'count_page', 'counts' );

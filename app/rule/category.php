@@ -10,6 +10,15 @@ use Hammock\Base\Rule;
 class Category extends Rule {
 
 	/**
+	 * The taxonomy type
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @var string
+	 */
+	public $term = 'category';
+
+	/**
 	 * Singletone instance of the plugin.
 	 *
 	 * @since  1.0.0
@@ -42,6 +51,108 @@ class Category extends Rule {
 		$this->id          = 'term';
 		$this->name        = __( 'Categories', 'hammock' );
 		$this->has_setting = true;
+	}
+
+	/**
+	 * Count items to protect
+	 *
+	 * @param array $args Optional arguments.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return int
+	 */
+	public function count_items( $args = array() ) {
+		return wp_count_terms( array( 'taxonomy' => $this->term ) );
+	}
+
+	/**
+	 * list items to protect
+	 *
+	 * @param array $args Optional arguments.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array
+	 */
+	public function list_items( $args = array() ) {
+		$args['offset']      = isset( $args['number'] ) ? ( int ) $args['number'] : 10;
+		$args['hide_empty']  = false;
+		$args['taxonomy']    = $this->term;
+		$args['order']       = 'ASC';
+		$args['orderby']     = 'name';
+		return get_terms( $args );
+	}
+
+	/**
+	 * Search items
+	 * 
+	 * @param string $param The search param.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
+	public function search( $param ) {
+		$results = array();
+		$query   = new \WP_Term_Query(
+			array(
+				'taxonomy'  => $this->term,
+				'number' 	=> 10,
+				'orderby'	=> 'name',
+				'search'	=> $param
+			)
+		);
+		foreach ( $query->get_terms() as $term ) {
+			if ( $this->has_rule( $term->term_id ) ) {
+				continue;
+			}
+			$results[] = array(
+				'id'   => $term->term_id,
+				'text' => $term->name
+			);
+		}
+		return $results;
+	}
+
+	/**
+	 * Check if is a valid item
+	 * 
+	 * @param int $item_id The item id
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return bool
+	 */
+	public function is_valid_item( $item_id ) {
+		$term = get_term( $item_id, $this->term );
+		if ( ! $term ) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Get the protected items name
+	 * 
+	 * @param int $id The item id.
+	 * @param bool $edit_link Set to true to return a clickable title admin edit link.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return string
+	 */
+	public function get_protected_item_name( $id, $edit_link = false ) {
+		$term = get_term( $item_id, $this->term );
+		if ( ! $term ) {
+			return '';
+		}
+		$title = $term->name;
+		if ( $edit_link ) {
+			$link = get_edit_term_link( $id );
+			return $this->make_clickable( $link, $title );
+		}
+		return $title;
 	}
 
 	/**

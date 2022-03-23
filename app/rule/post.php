@@ -99,7 +99,7 @@ class Post extends Rule {
 	 * @return int
 	 */
 	public function count_items( $args = array() ) {
-		return $this->count_post_type_items( 'post', $args );
+		return $this->count_post_type_items( $this->id, $args );
 	}
 
 	/**
@@ -171,7 +171,7 @@ class Post extends Rule {
 	 * @return bool|null
 	 */
 	public function pre_trash_post( $check, $post ) {
-		if ( 'post' !== $post->post_type ) {
+		if ( $this->id !== $post->post_type ) {
 			return $check;
 		}
 		Cache::delete_cache( 'count_post', 'counts' );
@@ -196,7 +196,7 @@ class Post extends Rule {
 	 * @since 1.0.0
 	 */
 	public function save_post( $post_id, $post, $update ) {
-		if ( 'post' !== $post->post_type ) {
+		if ( $this->id !== $post->post_type ) {
 			return;
 		}
 		Cache::delete_cache( 'count_post', 'counts' );

@@ -647,7 +647,7 @@ class Rule {
 			)
 		);
 		if ( ! $query->have_posts() ) {
-			return results;
+			return $results;
 		}
 		foreach ( $query->posts as $post ) {
 			if ( Pages::is_membership_page( $post->ID ) ) {
