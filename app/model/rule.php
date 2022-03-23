@@ -177,6 +177,17 @@ class Rule {
 	}
 
 	/**
+	 * Check if is enabled
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return bool
+	 */
+	public function is_enabled() {
+		return ( 'enabled' === $this->status );
+	}
+
+	/**
 	 * Save or update a rule
 	 *
 	 * @since 1.0.0

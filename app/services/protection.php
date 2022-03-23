@@ -270,15 +270,14 @@ class Protection {
 				}
 			} elseif ( $object instanceof \WP_Term ) {
 				$term_meta = get_term_meta( $object->term_id, '_hammock_mebership_access', true );
-				if ( $term_meta && is_array( $term_meta ) && ! empty( $term_meta ) ) {
-					foreach ( $plans as $plan_id ) {
-						if ( hammock_is_member_plan_active( $plan_id ) ) {
-							if ( in_array( $plan_id, $term_meta ) ) {
-								return true;
-							}
-						}
+				foreach ( $plans as $plan_id ) {
+					if ( hammock_is_member_plan_active( $plan_id ) ) {
+						$has_access = $this->check_member_term_access( $object->term_id, $plan_id, $term_meta );
+						return $has_access;
 					}
 				}
+			} else {
+				return apply_filter( 'hammock_check_enabled_member_has_access', $access, $member, $object, $content_type, $plans );
 			}
 		}
 		return $access;
@@ -303,6 +302,24 @@ class Protection {
 	}
 
 	/**
+	 * Check member term access
+	 * 
+	 * @param int $term_id The term id
+	 * @param int $plan_id The membership id
+	 * @param mixed $term_meta The term meta
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return bool
+	 */
+	private function check_member_term_access( $term_id, $plan_id, $term_meta ) {
+		if ( $term_meta && is_array( $term_meta ) && ! empty( $term_meta ) ) {
+			return in_array( $term_id, $term_meta, true );
+		}
+		return $this->category_rule->rule_applies( $term_id, $plan_id );
+	}
+
+	/**
 	 * Filter to check if disabled member has access
 	 *
 	 * @param bool   $access
@@ -323,6 +340,7 @@ class Protection {
 						return false;
 					}
 				}
+				$access = $this->post_has_rule( $object->ID );
 			} elseif ( $object instanceof \WP_Term && $this->category_rule != null ) {
 				$restricted = $this->category_rule->get_member_restricted_content_ids();
 				if ( ! empty( $restricted ) ) {
@@ -330,6 +348,7 @@ class Protection {
 						return false;
 					}
 				}
+				$access = $this->term_has_rule( $object->term_id );
 			}
 		}
 		return $access;
@@ -356,6 +375,7 @@ class Protection {
 						return false;
 					}
 				}
+				$access = $this->post_has_rule( $object->ID );
 			} elseif ( $object instanceof \WP_Term && $this->category_rule != null ) {
 				$restricted = $this->category_rule->get_member_restricted_content_ids();
 				if ( ! empty( $restricted ) ) {
@@ -363,6 +383,7 @@ class Protection {
 						return false;
 					}
 				}
+				$access = $this->term_has_rule( $object->term_id );
 			}
 		}
 		return $access;
@@ -388,6 +409,7 @@ class Protection {
 						return false;
 					}
 				}
+				$access = $this->post_has_rule( $object->ID );
 			} elseif ( $object instanceof \WP_Term && $this->category_rule != null ) {
 				$restricted = $this->category_rule->get_member_restricted_content_ids();
 				if ( ! empty( $restricted ) ) {
@@ -395,9 +417,37 @@ class Protection {
 						return false;
 					}
 				}
+				$access = $this->term_has_rule( $object->term_id );
 			}
 		}
 		return $access;
+	}
+
+	/**
+	 * Check if a post or page has an active rule
+	 * 
+	 * @param int $post_id The post id
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return bool
+	 */
+	private function post_has_rule( $post_id ) {
+		return $this->page_rule->has_active_rule( $post_id ) || $this->post_rule->has_active_rule( $post_id );
+	}
+
+
+	/**
+	 * Check if a term has an active rule
+	 * 
+	 * @param int $term_id The term id
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return bool
+	 */
+	private function term_has_rule( $term_id ) {
+		return $this->category_rule->has_active_rule( $term_id );
 	}
 
 	/**

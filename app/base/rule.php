@@ -262,8 +262,23 @@ class Rule {
 	 */
 	public function rule_applies( $id, $membership_id ) {
 		$rule = $this->get_rule( $id );
-		if ( $rule && $rule->exists() ) {
+		if ( $rule && $rule->exists() && $rule->is_enabled() ) {
 			return $rule->has_membership( $membership_id );
+		}
+		return false;
+	}
+
+	/**
+	 * Check if has active rule
+	 * 
+	 * @param int $id - the object id
+	 * 
+	 * @return bool
+	 */
+	public function has_active_rule( $id ) {
+		$rule = $this->get_rule( $id );
+		if ( $rule && $rule->exists() && $rule->is_enabled() ) {
+			return true;
 		}
 		return false;
 	}
