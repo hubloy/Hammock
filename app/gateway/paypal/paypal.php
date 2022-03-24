@@ -1,5 +1,5 @@
 <?php
-namespace Hammock\Gateway\Manual;
+namespace Hammock\Gateway\Paypal;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -7,26 +7,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use Hammock\Base\Gateway;
 
-/**
- * Manual gateway
- *
- * @since 1.0.0
- */
-class Manual extends Gateway {
-
+class PayPal extends Gateway {
 
 	/**
 	 * What type of transactions are supported
 	 * This tells the frontend what to show depending on the plan purchased
 	 *
 	 * single - single payments, non-recurring
+	 * recurring - subscription payments
 	 *
 	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
 	public $supports = array(
-		'single',
+		'single', 'recurring',
 	);
 
 	/**
@@ -51,12 +46,13 @@ class Manual extends Gateway {
 		return self::$instance;
 	}
 
+
 	/**
 	 * Gateway init
 	 * Used to load any required classes
 	 */
 	public function init() {
-		$this->id = 'manual';
+		$this->id = 'paypal';
 	}
 
 	/**
@@ -70,9 +66,10 @@ class Manual extends Gateway {
 	 * @return array
 	 */
 	public function register( $gateways ) {
-		if ( ! isset( $gateways['manual'] ) ) {
-			$gateways['manual'] = array(
-				'name' => __( 'Manual Gateway', 'hammock' ),
+		if ( ! isset( $gateways['paypal'] ) ) {
+			$gateways['paypal'] = array(
+				'name' => __( 'PayPal Standard Gateway', 'hammock' ),
+				'logo' => HAMMOCK_ASSETS_URL . '/img/gateways/paypal.png',
 			);
 		}
 		return $gateways;
@@ -96,7 +93,7 @@ class Manual extends Gateway {
 	 * @return string
 	 */
 	public function settings( $data = '' ) {
-		$view       = new \Hammock\View\Backend\Gateways\Manual();
+		$view       = new \Hammock\View\Backend\Gateways\PayPal();
 		$settings   = $this->settings->get_gateway_setting( $this->id );
 		$view->data = array(
 			'settings' => $settings,
@@ -115,13 +112,17 @@ class Manual extends Gateway {
 	 * @return array
 	 */
 	public function update_settings( $response = array(), $data ) {
-		$settings                        = $this->settings->get_gateway_setting( $this->id );
-		$settings['enabled']             = isset( $data[ $this->id ] ) ? true : false;
-		$settings['manual_title']        = sanitize_text_field( $data['manual_title'] );
-		$settings['manual_instructions'] = sanitize_text_field( $data['manual_instructions'] );
+		$settings                     		= $this->settings->get_gateway_setting( $this->id );
+		$settings['enabled']          		= isset( $data[ $this->id ] ) ? true : false;
+		$settings['mode']             		= sanitize_text_field( $data['paypal_mode'] );
+		$settings['paypal_username']  		= sanitize_text_field( $data['paypal_username'] );
+		$settings['paypal_password']  		= sanitize_text_field( $data['paypal_password'] );
+		$settings['paypal_signature'] 		= sanitize_text_field( $data['paypal_signature'] );
+		$settings['test_paypal_username']  	= sanitize_text_field( $data['test_paypal_username'] );
+		$settings['test_paypal_password']  	= sanitize_text_field( $data['test_paypal_password'] );
+		$settings['test_paypal_signature'] 	= sanitize_text_field( $data['test_paypal_signature'] );
 		$this->settings->set_gateway_setting( $this->id, $settings );
 		$this->settings->save();
 		return $settings;
 	}
 }
-

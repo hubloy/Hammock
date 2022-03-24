@@ -61,7 +61,7 @@ class Gateway extends Controller {
 	 */
 	function load_gateways() {
 		\Hammock\Gateway\Manual\Manual::instance();
-
+		\Hammock\Gateway\Paypal\Paypal::instance();
 		do_action( 'hammock_load_gateways' );
 	}
 

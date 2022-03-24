@@ -27,7 +27,7 @@ export default class GatewaySetting extends PureComponent {
 		this.setState({ checked: !!e.target.checked });
 	}
 
-	notify(type, message) {
+	notify(message, type) {
 		toast[type](message, {toastId: 'site-gateway-toast'});
 	}
 
