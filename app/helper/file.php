@@ -65,6 +65,23 @@ class File {
 	}
 
 	/**
+	 * Read a file
+	 * 
+	 * @param string $file The file
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return string
+	 */
+	public function read_file( $file ) {
+		if ( $this->has_permission ) {
+			global $wp_filesystem;
+			return $wp_filesystem->get_contents( $file );
+		}
+		return '';
+	}
+
+	/**
 	 * Create directory
 	 *
 	 * @param string $directory The full directory path.
@@ -76,21 +93,52 @@ class File {
 	public function create_directory( $directory ) {
 		if ( $this->has_permission ) {
 			global $wp_filesystem;
+			if ( ! $wp_filesystem->exists( $directory ) ) {
+				$wp_filesystem->mkdir( $directory, $this->chmod_dir );
+			}
 			$index_php_path  = trailingslashit( $directory ) . 'index.php';
 			$index_html_path = trailingslashit( $directory ) . 'index.html';
 			$htaccess_file   = trailingslashit( $directory ) . '.htaccess';
-			if ( $wp_filesystem->mkdir( $directory, $this->chmod_dir ) ) {
+			$dirs_exist = $wp_filesystem->is_dir( $directory );
+			if ( $dirs_exist ) {
 				$wp_filesystem->put_contents( $index_php_path, "<?php\n// Silence is golden.\n?>", $this->chmod_file );
 				$wp_filesystem->put_contents( $index_html_path, '', $this->chmod_file );
 				$wp_filesystem->put_contents( $htaccess_file, 'deny from all', $this->chmod_file );
-			} else {
-				$dirs_exist = $wp_filesystem->is_dir( $directory );
-				if ( $dirs_exist ) {
-					$wp_filesystem->put_contents( $index_php_path, "<?php\n// Silence is golden.\n?>", $this->chmod_file );
-					$wp_filesystem->put_contents( $index_html_path, '', $this->chmod_file );
-					$wp_filesystem->put_contents( $htaccess_file, 'deny from all', $this->chmod_file );
-				}
 			}
+		}
+		return false;
+	}
+
+	/**
+	 * Check if a file or directory exists.
+	 * 
+	 * @param string $file_or_dir The full file or directory path
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return bool
+	 */
+	public function exists( $file_or_dir ) {
+		if ( $this->has_permission ) {
+			global $wp_filesystem;
+			return $wp_filesystem->exists( $file_or_dir );
+		}
+		return false;
+	}
+
+	/**
+	 * Check if a directory is writable.
+	 * 
+	 * @param string $directory The full directory path
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return bool
+	 */
+	public function is_writable( $directory ) {
+		if ( $this->has_permission ) {
+			global $wp_filesystem;
+			return $wp_filesystem->is_writable( $directory );
 		}
 		return false;
 	}
@@ -103,7 +151,6 @@ class File {
 	 */
 	private function check_permission() {
 		$creds = $this->get_creds();
-
 		$this->has_permission = true;
 		if ( empty( $creds ) || ! WP_Filesystem( $creds ) ) {
 			$this->has_permission = false;

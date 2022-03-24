@@ -50,7 +50,7 @@ if ( $total > $per_page ) {
 		endif;
 		$dots = false;
 		for ( $i = 1; $i <= $total_pages; $i ++ ) :
-			$class = ( $page_number == $i ) ? 'uk-active' : '';
+			$class = ( $page_number === $i ) ? 'uk-active' : '';
 			$url   = esc_url( add_query_arg( 'paged', ( $i ), $current_url ) );
 			if ( ( $i <= $end_size || ( $current && $i >= $current - $mid_size && $i <= $current + $mid_size ) || $i > $total_pages - $end_size ) ) {
 				?>
