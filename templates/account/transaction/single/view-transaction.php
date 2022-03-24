@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<div class="hammock-account-transaction--view-transaction hammock-account-transaction-<?php echo $invoice->id; ?>">
+<div class="hammock-account-transaction--view-transaction hammock-account-transaction-<?php echo esc_attr( $invoice->id ); ?>">
 	<?php do_action( 'hammock_account_transaction_before_table', $invoice ); ?>
 	
 	<?php do_action( 'hammock_account_transaction_after_table', $invoice ); ?>

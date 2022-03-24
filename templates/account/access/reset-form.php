@@ -51,7 +51,7 @@ $extra_classes = apply_filters( 'hammock_account_access_reset_form_extra_classes
 		?>
 	</form>
 	<p id="nav">
-		<a href="#" class="hammock-link-switch" data-target=".hammock-account-access-login" data-container=".hammock-account-access"><?php _e( 'Login' ); ?></a>&nbsp;&nbsp;<a href="#" class="hammock-link-switch" data-target=".hammock-account-access-register" data-container=".hammock-account-access"><?php _e( 'Register' ); ?></a>
+		<a href="#" class="hammock-link-switch" data-target=".hammock-account-access-login" data-container=".hammock-account-access"><?php esc_html_e( 'Login' ); ?></a>&nbsp;&nbsp;<a href="#" class="hammock-link-switch" data-target=".hammock-account-access-register" data-container=".hammock-account-access"><?php _e( 'Register' ); ?></a>
 	</p>
 </div>
 

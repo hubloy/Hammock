@@ -15,13 +15,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! $invoice ) {
-	_e( 'Invalid invoice id', 'hammock' );
+	esc_html_e( 'Invalid invoice id', 'hammock' );
 } else {
 	?>
 	<p>
 	<?php
 		printf(
-			__( '# %1$s', 'hammock' ),
+			esc_html__( '# %1$s', 'hammock' ),
 			'<strong>' . esc_html( $invoice->invoice_id ) . '</strong>'
 		);
 	?>

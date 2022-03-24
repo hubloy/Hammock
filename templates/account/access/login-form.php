@@ -25,10 +25,10 @@ do_action( 'hammock_before_account_login_form' );
  *
  * @return string
  */
-$extra_classes = apply_filters( 'hammock_account_access_login_form_extra_classes', '' );
+$extra_classes = apply_filters( 'hammock_account_access_login_form_extra_classes', 'login' );
 ?>
 
-<div class="hammock-account-access-login <?php echo $extra_classes; ?>">
+<div class="hammock-account-access-login <?php echo esc_attr( $extra_classes ); ?>">
 	<h4><?php _e( 'Login to your account', 'hammock' ); ?></h4>
 	<form name="loginform" class="hammock-ajax-form" id="loginform">
 		<?php wp_nonce_field( 'hammock_account_login_nonce' ); ?>
@@ -58,7 +58,7 @@ $extra_classes = apply_filters( 'hammock_account_access_login_form_extra_classes
 		?>
 	</form>
 	<p id="nav">
-		<a href="#" class="hammock-link-switch" data-target=".hammock-account-access-reset" data-container=".hammock-account-access"><?php _e( 'Lost your password?' ); ?></a>&nbsp;&nbsp;<a href="#" class="hammock-link-switch" data-target=".hammock-account-access-register" data-container=".hammock-account-access"><?php _e( 'Register' ); ?></a>
+		<a href="#" class="hammock-link-switch" data-target=".hammock-account-access-reset" data-container=".hammock-account-access"><?php _e( 'Lost your password?' ); ?></a>&nbsp;&nbsp;<a href="#" class="hammock-link-switch" data-target=".hammock-account-access-register" data-container=".hammock-account-access"><?php esc_html_e( 'Register', 'hammock' ); ?></a>
 	</p>
 </div>
 

@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<tr class="hammock-account-transaction hammock-account-transaction-<?php echo $transaction->id; ?>">
+<tr class="hammock-account-transaction hammock-account-transaction-<?php echo esc_attr( $transaction->id ); ?>">
 	<?php
 		hammock_get_template(
 			'account/transaction/list/view-transaction.php',

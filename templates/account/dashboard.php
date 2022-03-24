@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <p>
 <?php
 	printf(
-		__( 'Hello %1$s (not %1$s? <a href="%2$s">Log out</a>)', 'hammock' ),
+		esc_html__( 'Hello %1$s (not %1$s? <a href="%2$s">Log out</a>)', 'hammock' ),
 		'<strong>' . esc_html( $current_user->name ) . '</strong>',
 		esc_url( hammock_logout_url() )
 	);

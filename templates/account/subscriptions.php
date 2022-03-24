@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! hammock_current_user_can_subscribe() ) {
-	_e( 'Subscriptions are not enabled for your account', 'hammock' );
+	esc_html_e( 'Subscriptions are not enabled for your account', 'hammock' );
 } else {
 	if ( $member ) {
 		if ( count( $member->get_plan_ids() ) > 0 ) {
@@ -25,8 +25,8 @@ if ( ! hammock_current_user_can_subscribe() ) {
 						<?php
 						foreach ( hammock_view_subscription_list_table_columns() as $key => $value ) {
 							?>
-								<th class="<?php echo $key; ?>"><?php echo $value; ?></th>
-								<?php
+								<th class="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $value ); ?></th>
+							<?php
 						}
 						?>
 					</tr>
@@ -49,8 +49,8 @@ if ( ! hammock_current_user_can_subscribe() ) {
 						<?php
 						foreach ( hammock_view_subscription_list_table_columns() as $key => $value ) {
 							?>
-								<th class="<?php echo $key; ?>"><?php echo $value; ?></th>
-								<?php
+								<th class="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $value ); ?></th>
+							<?php
 						}
 						?>
 					</tr>
@@ -59,9 +59,9 @@ if ( ! hammock_current_user_can_subscribe() ) {
 			</table>
 			<?php
 		} else {
-			printf( __( 'No subscription plans found. Click %1$shere%2$s to sign up', 'hammock' ), '<a href="' . hammock_get_page_permalink( 'membership_list' ) . '">', '</a>' );
+			printf( esc_html__( 'No subscription plans found. Click %1$shere%2$s to sign up', 'hammock' ), '<a href="' . esc_url( hammock_get_page_permalink( 'membership_list' ) ) . '">', '</a>' );
 		}
 	} else {
-		_e( 'You have no subscriptions in your account', 'hammock' );
+		esc_html_e( 'You have no subscriptions in your account', 'hammock' );
 	}
 }

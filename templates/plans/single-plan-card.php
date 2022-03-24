@@ -20,26 +20,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 		
 		<?php
 		if ( $plan->trial_enabled ) {
-			echo hammock_format_currency( $plan->trial_price );
+			echo esc_html( hammock_format_currency( $plan->trial_price ) );
 			?>
 				<span class="hammock-account-membership-plan--price-description">
 				<?php
 					$trial_text   = $plan->get_readable_trial_text();
 					$normal_price = hammock_format_currency( $plan->price );
 					$sub_text     = $plan->get_readable_type();
-					echo sprintf( __( '%1$s then %2$s %3$s', 'hammock' ), $trial_text, $normal_price, $sub_text );
+					echo sprintf( esc_html__( '%1$s then %2$s %3$s', 'hammock' ), esc_attr( $trial_text ), esc_attr( $normal_price ), esc_attr( $sub_text ) );
 				?>
 				</span>
 				<?php
 		} else {
 			if ( $plan->is_recurring() && $plan->signup_price > 0 ) {
-				echo hammock_format_currency( $plan->signup_price );
+				echo esc_html( hammock_format_currency( $plan->signup_price ) );
 				?>
 					<span class="hammock-account-membership-plan--price-description">
 					<?php
 						$normal_price = hammock_format_currency( $plan->price );
 						$sub_text     = $plan->get_readable_type();
-						echo sprintf( __( 'then %1$s %2$s', 'hammock' ), $normal_price, $sub_text );
+						echo sprintf( esc_html__( 'then %1$s %2$s', 'hammock' ), esc_attr( $normal_price ), esc_attr( $sub_text ) );
 					?>
 					</span>
 					<?php
@@ -48,7 +48,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				?>
 					<span class="hammock-account-membership-plan--price-description">
 					<?php
-						echo $plan->get_readable_type();
+						echo esc_html( $plan->get_readable_type() );
 					?>
 					</span>
 					<?php
@@ -63,14 +63,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<a class="button hammock-account-membership-plan--price--can-join" href="<?php echo esc_url( hammock_get_account_page_links( 'view-plan', $plan->membership_id ) ); ?>">
 				<?php
 				if ( $plan->trial_enabled ) {
-					_e( 'Begin Trial', 'hammock' );
+					esc_html_e( 'Begin Trial', 'hammock' );
 				} else {
-					_e( 'Join Membership', 'hammock' );
+					esc_html_e( 'Join Membership', 'hammock' );
 				}
 				?>
 			</a>
 		<?php else : ?>
-			<p class="hammock-account-membership-plan--price--cant-join"><?php echo $can_join['message']; ?></p>
+			<p class="hammock-account-membership-plan--price--cant-join"><?php echo esc_html( $can_join['message'] ); ?></p>
 		<?php endif; ?>
 	</p>
 	

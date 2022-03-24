@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			);
 		}
 	} else {
-		_e( 'No membership plans to subscribe to', 'hammock' );
+		esc_html_e( 'No membership plans to subscribe to', 'hammock' );
 	}
 	?>
 </div>

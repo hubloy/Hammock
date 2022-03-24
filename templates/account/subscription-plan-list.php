@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<tr class="hammock-account-membership-plan hammock-account-membership-plan-<?php echo $plan->id; ?>">
+<tr class="hammock-account-membership-plan hammock-account-membership-plan-<?php echo esc_attr( $plan->id ); ?>">
 	<?php
 		hammock_get_template(
 			'account/plan/list/view-plan.php',

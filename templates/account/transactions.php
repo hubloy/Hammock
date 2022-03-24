@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! hammock_current_user_can_subscribe() ) {
-	_e( 'No transactions, Subscriptions are not enabled for your account.', 'hammock' );
+	esc_html_e( 'No transactions, Subscriptions are not enabled for your account.', 'hammock' );
 } else {
 	if ( $member ) {
 		$page               = hammock_get_current_page();
@@ -23,14 +23,14 @@ if ( ! hammock_current_user_can_subscribe() ) {
 		if ( $total_transactions <= 0 ) {
 			?>
 			<div class="hammock-notification hammock-notification--warning">
-				<?php _e( 'No transactions found', 'hammock' ); ?>
+				<?php esc_html_e( 'No transactions found', 'hammock' ); ?>
 			</div>
 			<?php
 		} else {
 			$transactions = hammock_list_member_transactions( $member_id, $per_page, $page, $status );
 			?>
 			<div class="hammock-list-header">
-				<h3><?php printf( __( '%d transactions', 'hammock' ), $total_transactions ); ?></h3>
+				<h3><?php printf( esc_html__( '%d transactions', 'hammock' ), esc_attr( $total_transactions ) ); ?></h3>
 			</div>
 			<table class="hammock-account-transactions hammock-list-table">
 				<thead>
@@ -38,8 +38,8 @@ if ( ! hammock_current_user_can_subscribe() ) {
 						<?php
 						foreach ( hammock_view_transaction_list_table_columns() as $key => $value ) {
 							?>
-								<th class="<?php echo $key; ?>"><?php echo $value; ?></th>
-								<?php
+								<th class="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $value ); ?></th>
+							<?php
 						}
 						?>
 					</tr>
@@ -62,8 +62,8 @@ if ( ! hammock_current_user_can_subscribe() ) {
 						<?php
 						foreach ( hammock_view_transaction_list_table_columns() as $key => $value ) {
 							?>
-								<th class="<?php echo $key; ?>"><?php echo $value; ?></th>
-								<?php
+								<th class="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $value ); ?></th>
+							<?php
 						}
 						?>
 					</tr>
@@ -72,6 +72,6 @@ if ( ! hammock_current_user_can_subscribe() ) {
 			<?php
 		}
 	} else {
-		_e( 'You have no subscriptions in your account', 'hammock' );
+		esc_html_e( 'You have no subscriptions in your account', 'hammock' );
 	}
 }
