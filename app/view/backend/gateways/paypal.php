@@ -44,15 +44,15 @@ class Paypal extends View {
 			</div>
 		</div>
 		<div class="uk-margin hammock-paypal paypal-live" <?php echo $mode != 'live' ? 'style="display:none"' : ''; ?>>
-			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Live API Username', 'hammock-paypal' ); ?></label>
+			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Live Business Email', 'hammock' ); ?></label>
 			<div class="uk-form-controls">
 				<?php
 					$this->ui->render(
 						'input',
 						array(
-							'name'        => 'paypal_username',
+							'name'        => 'paypal_email',
 							'class'       => 'uk-input',
-							'value'       => isset( $settings['paypal_username'] ) ? $settings['paypal_username'] : '',
+							'value'       => isset( $settings['paypal_email'] ) ? $settings['paypal_email'] : '',
 							'placeholder' => '',
 						)
 					);
@@ -60,32 +60,16 @@ class Paypal extends View {
 			</div>
 		</div>
 		<div class="uk-margin hammock-paypal paypal-live" <?php echo $mode != 'live' ? 'style="display:none"' : ''; ?>>
-			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Live API Password', 'hammock-paypal' ); ?></label>
+			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Live Merchant ID', 'hammock' ); ?></label>
 			<div class="uk-form-controls">
 				<?php
 					$this->ui->render(
 						'input',
 						array(
-							'name'        => 'paypal_password',
+							'name'        => 'paypal_merchant_id',
 							'class'       => 'uk-input',
 							'type'        => 'password',
-							'value'       => isset( $settings['paypal_password'] ) ? $settings['paypal_password'] : '',
-							'placeholder' => '',
-						)
-					);
-				?>
-			</div>
-		</div>
-		<div class="uk-margin hammock-paypal paypal-live" <?php echo $mode != 'live' ? 'style="display:none"' : ''; ?>>
-			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Live API Signature', 'hammock-paypal' ); ?></label>
-			<div class="uk-form-controls">
-				<?php
-					$this->ui->render(
-						'input',
-						array(
-							'name'        => 'paypal_signature',
-							'class'       => 'uk-input',
-							'value'       => isset( $settings['paypal_signature'] ) ? $settings['paypal_signature'] : '',
+							'value'       => isset( $settings['paypal_merchant_id'] ) ? $settings['paypal_merchant_id'] : '',
 							'placeholder' => '',
 						)
 					);
@@ -93,15 +77,15 @@ class Paypal extends View {
 			</div>
 		</div>
 		<div class="uk-margin hammock-paypal paypal-test" <?php echo $mode != 'test' ? 'style="display:none"' : ''; ?>>
-			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Sandbox API Username', 'hammock-paypal' ); ?></label>
+			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Sandbox Business Email', 'hammock' ); ?></label>
 			<div class="uk-form-controls">
 				<?php
 					$this->ui->render(
 						'input',
 						array(
-							'name'        => 'test_paypal_username',
+							'name'        => 'test_paypal_email',
 							'class'       => 'uk-input',
-							'value'       => isset( $settings['test_paypal_username'] ) ? $settings['test_paypal_username'] : '',
+							'value'       => isset( $settings['test_paypal_email'] ) ? $settings['test_paypal_email'] : '',
 							'placeholder' => '',
 						)
 					);
@@ -109,32 +93,16 @@ class Paypal extends View {
 			</div>
 		</div>
 		<div class="uk-margin hammock-paypal paypal-test" <?php echo $mode != 'test' ? 'style="display:none"' : ''; ?>>
-			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Sandbox API Password', 'hammock-paypal' ); ?></label>
+			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Sandbox Merchant ID', 'hammock' ); ?></label>
 			<div class="uk-form-controls">
 				<?php
 					$this->ui->render(
 						'input',
 						array(
-							'name'        => 'test_paypal_password',
+							'name'        => 'test_paypal_merchant_id',
 							'class'       => 'uk-input',
 							'type'        => 'password',
-							'value'       => isset( $settings['test_paypal_password'] ) ? $settings['test_paypal_password'] : '',
-							'placeholder' => '',
-						)
-					);
-				?>
-			</div>
-		</div>
-		<div class="uk-margin hammock-paypal paypal-test" <?php echo $mode != 'test' ? 'style="display:none"' : ''; ?>>
-			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Sandbox API Signature', 'hammock-paypal' ); ?></label>
-			<div class="uk-form-controls">
-				<?php
-					$this->ui->render(
-						'input',
-						array(
-							'name'        => 'test_paypal_signature',
-							'class'       => 'uk-input',
-							'value'       => isset( $settings['test_paypal_signature'] ) ? $settings['test_paypal_signature'] : '',
+							'value'       => isset( $settings['test_paypal_merchant_id'] ) ? $settings['test_paypal_merchant_id'] : '',
 							'placeholder' => '',
 						)
 					);

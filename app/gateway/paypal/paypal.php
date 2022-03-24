@@ -10,21 +10,6 @@ use Hammock\Base\Gateway;
 class PayPal extends Gateway {
 
 	/**
-	 * What type of transactions are supported
-	 * This tells the frontend what to show depending on the plan purchased
-	 *
-	 * single - single payments, non-recurring
-	 * recurring - subscription payments
-	 *
-	 * @since 1.0.0
-	 *
-	 * @var array
-	 */
-	public $supports = array(
-		'single', 'recurring',
-	);
-
-	/**
 	 * Singletone instance of the addon.
 	 *
 	 * @since  1.0.0
@@ -112,17 +97,151 @@ class PayPal extends Gateway {
 	 * @return array
 	 */
 	public function update_settings( $response = array(), $data ) {
-		$settings                     		= $this->settings->get_gateway_setting( $this->id );
-		$settings['enabled']          		= isset( $data[ $this->id ] ) ? true : false;
-		$settings['mode']             		= sanitize_text_field( $data['paypal_mode'] );
-		$settings['paypal_username']  		= sanitize_text_field( $data['paypal_username'] );
-		$settings['paypal_password']  		= sanitize_text_field( $data['paypal_password'] );
-		$settings['paypal_signature'] 		= sanitize_text_field( $data['paypal_signature'] );
-		$settings['test_paypal_username']  	= sanitize_text_field( $data['test_paypal_username'] );
-		$settings['test_paypal_password']  	= sanitize_text_field( $data['test_paypal_password'] );
-		$settings['test_paypal_signature'] 	= sanitize_text_field( $data['test_paypal_signature'] );
+		$settings                     		 = $this->settings->get_gateway_setting( $this->id );
+		$settings['enabled']          		 = isset( $data[ $this->id ] ) ? true : false;
+		$settings['mode']             		 = sanitize_text_field( $data['paypal_mode'] );
+		$settings['paypal_email']  			 = sanitize_text_field( $data['paypal_email'] );
+		$settings['paypal_merchant_id']  	 = sanitize_text_field( $data['paypal_merchant_id'] );
+		$settings['test_paypal_email']  	 = sanitize_text_field( $data['test_paypal_email'] );
+		$settings['test_paypal_merchant_id'] = sanitize_text_field( $data['test_paypal_merchant_id'] );
 		$this->settings->set_gateway_setting( $this->id, $settings );
 		$this->settings->save();
 		return $settings;
 	}
+
+	/**
+	 * Check if currency is supported
+	 * 
+	 * @param string $currency The current site currency code.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return bool
+	 */
+	public function is_currency_supported( $currency ) {
+		return in_array(
+            $currency,
+			array(
+				'AUD', 'BRL', 'CAD', 'CZK', 'DKK', 'EUR', 'HKD', 'HUF', 'ILS', 'JPY', 'MYR', 'MXN', 'NOK',
+				'NZD', 'PHP', 'PLN', 'GBP', 'RUB', 'SGD', 'SEK', 'CHF', 'TWD', 'THB', 'TRY', 'USD',
+			)
+        );
+	}
+
+	/**
+	 * Handle the ipn callbacks
+	 *
+	 * @since 1.0.0
+	 */
+	public function ipn_notify() {
+
+	}
+
+	/**
+	 * Render the payment form
+	 *
+	 * @param \Hammock\Model\Invoice $invoice - the invoice model
+	 *
+	 * @return string
+	 */
+	public function render_payment_form( $invoice ) {
+		return '';
+	}
+
+	/**
+	 * Render the subscription payment update form
+	 *
+	 * @param \Hammock\Model\Plan $plan - the plan model
+	 *
+	 * @return string
+	 */
+	public function render_payment_update_form( $plan ) {
+		return '';
+	}
+
+	/**
+	 * Process Payment
+	 *
+	 * @param \Hammock\Model\Invoice $invoice - the invoice model
+	 *
+	 * @since 1.0.0
+	 */
+	public function process_payment( $invoice ) {
+		$invoice->status = Transactions::STATUS_PAID;
+		$invoice->save();
+	}
+
+	/**
+	 * Process Refund
+	 *
+	 * @param \Hammock\Model\Invoice $invoice - the invoice model
+	 * @param \Hammock\Model\Plan    $plan - the plan model
+	 * @param double                 $amount - the amount
+	 *
+	 * @since 1.0.0
+	 */
+	public function process_refund( $invoice, $plan, $amount ) {
+
+	}
+
+
+	/**
+	 * Process Cancel
+	 * Called when a plan is cancelled
+	 *
+	 * @param \Hammock\Model\Plan $plan - the plan model
+	 *
+	 * @since 1.0.0
+	 */
+	public function process_cancel( $plan ) {
+
+	}
+
+	/**
+	 * Process Pause
+	 * Called when a plan is paused
+	 *
+	 * @param \Hammock\Model\Plan $plan - the plan model
+	 *
+	 * @since 1.0.0
+	 */
+	public function process_pause( $plan ) {
+
+	}
+
+	/**
+	 * Process Resume
+	 * Called when a plan is resumed
+	 *
+	 * @param \Hammock\Model\Plan $plan - the plan model
+	 *
+	 * @since 1.0.0
+	 */
+	public function process_resume( $plan ) {
+
+	}
+
+	/**
+	 * Handle payment return
+	 * This is called after a payment gateway redirects
+	 *
+	 * @param \Hammock\Model\Invoice $invoice - the invoice model
+	 *
+	 * @since 1.0.0
+	 */
+	public function handle_return( $invoice ) {
+
+	}
+
+	/**
+	 * Handle member delete
+	 *
+	 * @param object $member - the current member
+	 *
+	 * @since 1.0.0
+	 */
+	public function handle_member_delete( $member ) {
+
+	}
 }
+

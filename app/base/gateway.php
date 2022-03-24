@@ -150,6 +150,19 @@ class Gateway extends Component {
 		return $settings['enabled'];
 	}
 
+	/**
+	 * Check if currency is supported
+	 * 
+	 * @param string $currency The current site currency code.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return bool
+	 */
+	public function is_currency_supported( $currency ) {
+		return true;
+	}
+
 
 	/**
 	 * Gateway settings
