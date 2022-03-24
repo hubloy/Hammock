@@ -129,6 +129,30 @@ class PayPal extends Gateway {
 	}
 
 	/**
+	 * Get the credentials
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
+	public function get_credentials() {
+		$settings = $this->settings->get_gateway_setting( $this->id );
+		if ( 'test' === $settings['mode'] ) {
+			return array(
+				'url' 			=> 'https://www.sandbox.paypal.com/cgi-bin/webscr?test_ipn=1&',
+				'email' 		=> $settings['test_paypal_email'],
+				'merchant_id' 	=> $settings['test_paypal_merchant_id']
+			);
+		} else {
+			return array(
+				'url' 			=> 'https://www.paypal.com/cgi-bin/webscr?',
+				'email' 		=> $settings['paypal_email'],
+				'merchant_id' 	=> $settings['paypal_merchant_id']
+			);
+		}
+	}
+
+	/**
 	 * Handle the ipn callbacks
 	 *
 	 * @since 1.0.0
@@ -167,8 +191,26 @@ class PayPal extends Gateway {
 	 * @since 1.0.0
 	 */
 	public function process_payment( $invoice ) {
+		$plan = $invoice->get_plan();
+		$membership = $plan->get_memebership();
+		if ( $membership->is_recurring() ) {
+			$this->process_recurring( $invoice, $plan, $membership );
+		}
 		$invoice->status = Transactions::STATUS_PAID;
 		$invoice->save();
+	}
+
+	/**
+	 * Process recurring payment
+	 * 
+	 * @param \Hammock\Model\Invoice $invoice The current invoice.
+	 * @param \Hammock\Model\Plan $plan The current plan.
+	 * @param \Hammock\Model\Membership $membership The plan membership.
+	 * 
+	 * @since 1.0.0
+	 */
+	private function process_recurring( $invoice, $plan, $membership ) {
+
 	}
 
 	/**

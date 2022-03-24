@@ -428,6 +428,16 @@ class Invoice {
 		return false;
 	}
 
+	/**
+	 * Get plan
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return Plan
+	 */
+	public function get_plan() {
+		return new Plan( $this->plan_id );
+	}
 
 	/**
 	 * Get Custom data value
@@ -505,7 +515,7 @@ class Invoice {
 				'member_id'       => $this->member_id,
 				'member_user'     => new Member( $this->member_id ),
 				'plan_id'         => $this->plan_id,
-				'plan'            => new Plan( $this->plan_id ),
+				'plan'            => $this->get_plan(),
 				'invoice_id'      => $this->invoice_id,
 				'amount'          => $this->amount,
 				'amount_formated' => $code . '' . $this->amount,
