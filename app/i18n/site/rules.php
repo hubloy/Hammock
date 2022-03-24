@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 return array(
 	'dashboard' => array(
-		'add_new'        => array(
+		'add_new' => array(
 			'button' => __( 'Create Rule', 'hammock' ),
 			'modal'  => array(
 				'title'      => __( 'New Rule', 'hammock' ),
@@ -17,13 +17,13 @@ return array(
 				'membership' => __( 'Membership', 'hammock' ),
 			),
 		),
-		'table'          => array(
-			'id'      => __( 'ID', 'hammock' ),
-			'desc'    => __( 'Description', 'hammock' ),
-			'status'  => __( 'Status', 'hammock' ),
-			'type'    => __( 'Type', 'hammock' ),
-			'date'    => __( 'Date Created', 'hammock' ),
-			'delete'  => array(
+		'table'   => array(
+			'id'     => __( 'ID', 'hammock' ),
+			'desc'   => __( 'Description', 'hammock' ),
+			'status' => __( 'Status', 'hammock' ),
+			'type'   => __( 'Type', 'hammock' ),
+			'date'   => __( 'Date Created', 'hammock' ),
+			'delete' => array(
 				'prompt' => __( 'Are you sure you want to delete this rule?', 'hammock' ),
 			),
 		),

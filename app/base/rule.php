@@ -39,16 +39,16 @@ class Rule {
 	 * Check if the rule is enabled.
 	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var bool
 	 */
 	protected $enabled = false;
 
 	/**
 	 * Set to true if the rule is configrable and has items.
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var bool
 	 */
 	protected $has_setting = false;
@@ -85,7 +85,7 @@ class Rule {
 		$this->members_service    = new Members();
 		$this->membership_service = new Memberships();
 		// Enabled defaults to content protection. Rules can define their own enabled state in init
-		$this->enabled         = $this->settings->get_general_setting( 'content_protection' );
+		$this->enabled = $this->settings->get_general_setting( 'content_protection' );
 		$this->init();
 
 		// Register the rule.
@@ -152,9 +152,9 @@ class Rule {
 
 	/**
 	 * Get the rule name
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function get_name() {
@@ -163,9 +163,9 @@ class Rule {
 
 	/**
 	 * Get the rule id
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function get_id() {
@@ -174,12 +174,12 @@ class Rule {
 
 	/**
 	 * Get the protected items name
-	 * 
-	 * @param int $id The item id.
+	 *
+	 * @param int  $id The item id.
 	 * @param bool $edit_link Set to true to return a clickable title admin edit link.
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function get_protected_item_name( $id, $edit_link = false ) {
@@ -193,11 +193,11 @@ class Rule {
 	 * @param string $title The link name.
 	 *
 	 * @since 1.0.0
-	 * 
-	 * @return string 
+	 *
+	 * @return string
 	 */
 	protected function make_clickable( $link, $title ) {
-		return "<a href='" . esc_url( $link ) . "' title='" . __( 'Edit', 'hammock' ) . "' target='_blank'>" . esc_attr( $title ) . "</a>";
+		return "<a href='" . esc_url( $link ) . "' title='" . __( 'Edit', 'hammock' ) . "' target='_blank'>" . esc_attr( $title ) . '</a>';
 	}
 
 	/**
@@ -231,20 +231,21 @@ class Rule {
 
 	/**
 	 * Get rule by id and type.
-	 * 
+	 *
 	 * @param int $id - the object id
-	 * 
+	 *
 	 * @return bool|object
 	 */
 	public function get_rule( $id ) {
-		return \Hammock\Model\Rule::get_rules( $this->id, $id );;
+		return \Hammock\Model\Rule::get_rules( $this->id, $id );
+
 	}
 
 	/**
 	 * Check if item has rule
-	 * 
+	 *
 	 * @param int $id - the object id
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function has_rule( $id ) {
@@ -254,10 +255,10 @@ class Rule {
 
 	/**
 	 * Check if rule applies to current item and membership
-	 * 
+	 *
 	 * @param int $id - the object id
 	 * @param int $membership_id The membership id.
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function rule_applies( $id, $membership_id ) {
@@ -270,9 +271,9 @@ class Rule {
 
 	/**
 	 * Check if has active rule
-	 * 
+	 *
 	 * @param int $id - the object id
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function has_active_rule( $id ) {
@@ -285,18 +286,18 @@ class Rule {
 
 	/**
 	 * Update rule
-	 * 
+	 *
 	 * @param int    $id - the object id
 	 * @param string $type - the object type
 	 * @param array  $memberships The memberships
 	 * @param string $status The rule status
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function update_rule( $id, $memberships, $status ) {
 		$rule = $this->get_rule( $id );
 		if ( ! $rule ) {
-			$rule = new \Hammock\Model\Rule();
+			$rule              = new \Hammock\Model\Rule();
 			$rule->object_type = $this->id;
 			$rule->object_id   = $id;
 		}
@@ -307,9 +308,9 @@ class Rule {
 
 	/**
 	 * List memberships
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function list_memberships() {
@@ -318,11 +319,11 @@ class Rule {
 
 	/**
 	 * Count items to protect
-	 * 
+	 *
 	 * @param array $args Optional arguments.
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return int
 	 */
 	public function count_items( $args = array() ) {
@@ -331,11 +332,11 @@ class Rule {
 
 	/**
 	 * list items to protect
-	 * 
+	 *
 	 * @param array $args Optional arguments.
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function list_items( $args = array() ) {
@@ -344,11 +345,11 @@ class Rule {
 
 	/**
 	 * Search items
-	 * 
+	 *
 	 * @param string $param The search param.
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function search( $param ) {
@@ -357,9 +358,9 @@ class Rule {
 
 	/**
 	 * Get the view columns
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function get_view_columns() {
@@ -368,11 +369,11 @@ class Rule {
 
 	/**
 	 * Check if is a valid item
-	 * 
+	 *
 	 * @param int $item_id The item id
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function is_valid_item( $item_id ) {
@@ -382,10 +383,10 @@ class Rule {
 	/**
 	 * Save rule
 	 *
-	 * @param array $memberships Array of memberships
-	 * @param int $item_id the item id to apply the rules to
+	 * @param array  $memberships Array of memberships
+	 * @param int    $item_id the item id to apply the rules to
 	 * @param string $status The rule status
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function save_rule( $memberships, $item_id, $status ) {
@@ -478,7 +479,7 @@ class Rule {
 		$content_ids = array();
 		foreach ( $restricted as $key => $item ) {
 			// Check if there are any memberships
-			
+
 			if ( ! empty( $item['value'] ) ) {
 				if ( ! $this->has_active_rule( $item['id'] ) ) {
 					unset( $restricted[ $key ] );
@@ -517,10 +518,10 @@ class Rule {
 	protected function get_all_restricted() {
 		global $wpdb;
 		static $output = array();
-		if ( !empty( $output ) ) {
+		if ( ! empty( $output ) ) {
 			return $output;
 		}
-		$sql    = false;
+		$sql = false;
 		if ( $this->id === 'post' || $this->id === 'page' ) {
 			$sql = "SELECT `post_id` as item_id, `meta_value` FROM {$wpdb->postmeta} WHERE `meta_key` = %s";
 		} elseif ( $this->id === 'term' ) {
@@ -530,8 +531,8 @@ class Rule {
 		if ( $sql ) {
 			$results = $wpdb->get_results( $wpdb->prepare( $sql, '_hammock_mebership_access' ) );
 			foreach ( $results as $result ) {
-				$value    = is_array( $result->meta_value ) ? array_map( 'maybe_unserialize', $result->meta_value ) : maybe_unserialize( $result->meta_value );
-				$output[$result->item_id] = array(
+				$value                      = is_array( $result->meta_value ) ? array_map( 'maybe_unserialize', $result->meta_value ) : maybe_unserialize( $result->meta_value );
+				$output[ $result->item_id ] = array(
 					'id'    => $result->item_id,
 					'value' => $value,
 				);
@@ -539,9 +540,9 @@ class Rule {
 		}
 		$rule_items = \Hammock\Model\Rule::get_restricted_items( $this->id );
 		foreach ( $rule_items as $item ) {
-			$value    = is_array( $item->memberships ) ? array_map( 'maybe_unserialize', $item->memberships ) : maybe_unserialize( $item->memberships );
+			$value = is_array( $item->memberships ) ? array_map( 'maybe_unserialize', $item->memberships ) : maybe_unserialize( $item->memberships );
 			if ( isset( $output[ $item->object_id ] ) ) {
-				$value = array_merge( $output[ $item->object_id ]['value'], $value );
+				$value                               = array_merge( $output[ $item->object_id ]['value'], $value );
 				$output[ $item->object_id ]['value'] = $value;
 			} else {
 				$output[] = array(
@@ -673,23 +674,23 @@ class Rule {
 
 	/**
 	 * Search items
-	 * 
+	 *
 	 * @param string $post_type The post type.
 	 * @param string $param The search param.
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	protected function search_post_type( $post_type, $param ) {
 		$results = array();
 		$query   = new \WP_Query(
 			array(
-				'post_type' 		=> $post_type,
-				'posts_per_page' 	=> 10,
-				'post_status'       => 'publish',
-				'orderby' 			=> 'title',
-				's' 				=> $param
+				'post_type'      => $post_type,
+				'posts_per_page' => 10,
+				'post_status'    => 'publish',
+				'orderby'        => 'title',
+				's'              => $param,
 			)
 		);
 		if ( ! $query->have_posts() ) {
@@ -704,7 +705,7 @@ class Rule {
 			}
 			$results[] = array(
 				'id'   => $post->ID,
-				'text' => $post->post_title
+				'text' => $post->post_title,
 			);
 		}
 		return $results;
@@ -714,7 +715,7 @@ class Rule {
 	 * Count items to protect
 	 *
 	 * @param string $post_type The post type.
-	 * @param array $args Optional arguments.
+	 * @param array  $args Optional arguments.
 	 *
 	 * @since 1.0.0
 	 *
@@ -736,14 +737,14 @@ class Rule {
 	 * list items to protect
 	 *
 	 * @param string $post_type The post type.
-	 * @param array $args Optional arguments.
+	 * @param array  $args Optional arguments.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
 	protected function list_post_type_items( $post_type, $args = array() ) {
-		$args['posts_per_page']      = isset( $args['number'] ) ? ( int ) $args['number'] : 10;
+		$args['posts_per_page']      = isset( $args['number'] ) ? (int) $args['number'] : 10;
 		$args['ignore_sticky_posts'] = true;
 		$args['public']              = true;
 		$args['post_status']         = 'publish';
@@ -760,24 +761,24 @@ class Rule {
 			if ( Pages::is_membership_page( $post->ID ) ) {
 				continue;
 			}
-			$access         = new Access();
-			$rule           = $this->get_rule( $post->ID, 'page' );
-			$edit_link      = get_edit_post_link( $post->ID );
-			$view_link      = get_permalink( $post->ID );
-			$access->data   = array(
+			$access            = new Access();
+			$rule              = $this->get_rule( $post->ID, 'page' );
+			$edit_link         = get_edit_post_link( $post->ID );
+			$view_link         = get_permalink( $post->ID );
+			$access->data      = array(
 				'rule'        => $rule,
 				'item'        => $this->id,
 				'id'          => $post->ID,
 				'memberships' => $memberships,
 			);
-			$content        = array(
+			$content           = array(
 				'id'        => $post->ID,
 				'type'      => $post->post_type,
 				'title'     => $post->post_title,
 				'edit_link' => $edit_link,
-				'edit_html' => sprintf( __( '%sEdit%s', 'hammock' ), '<a href="' . $edit_link . '" target="_blank">', '</a>' ),
+				'edit_html' => sprintf( __( '%1$sEdit%2$s', 'hammock' ), '<a href="' . $edit_link . '" target="_blank">', '</a>' ),
 				'view_link' => $view_link,
-				'view_html' => sprintf( __( '%sView%s', 'hammock' ), '<a href="' . $view_link . '" target="_blank">', '</a>' ),
+				'view_html' => sprintf( __( '%1$sView%2$s', 'hammock' ), '<a href="' . $view_link . '" target="_blank">', '</a>' ),
 				'access'    => $access->render( true ),
 			);
 			$data[ $post->ID ] = $content;

@@ -11,9 +11,9 @@ class Category extends Rule {
 
 	/**
 	 * The taxonomy type
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var string
 	 */
 	public $term = 'category';
@@ -76,31 +76,31 @@ class Category extends Rule {
 	 * @return array
 	 */
 	public function list_items( $args = array() ) {
-		$args['offset']      = isset( $args['number'] ) ? ( int ) $args['number'] : 10;
-		$args['hide_empty']  = false;
-		$args['taxonomy']    = $this->term;
-		$args['order']       = 'ASC';
-		$args['orderby']     = 'name';
+		$args['offset']     = isset( $args['number'] ) ? (int) $args['number'] : 10;
+		$args['hide_empty'] = false;
+		$args['taxonomy']   = $this->term;
+		$args['order']      = 'ASC';
+		$args['orderby']    = 'name';
 		return get_terms( $args );
 	}
 
 	/**
 	 * Search items
-	 * 
+	 *
 	 * @param string $param The search param.
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function search( $param ) {
 		$results = array();
 		$query   = new \WP_Term_Query(
 			array(
-				'taxonomy'  => $this->term,
-				'number' 	=> 10,
-				'orderby'	=> 'name',
-				'search'	=> $param
+				'taxonomy' => $this->term,
+				'number'   => 10,
+				'orderby'  => 'name',
+				'search'   => $param,
 			)
 		);
 		foreach ( $query->get_terms() as $term ) {
@@ -109,7 +109,7 @@ class Category extends Rule {
 			}
 			$results[] = array(
 				'id'   => $term->term_id,
-				'text' => $term->name
+				'text' => $term->name,
 			);
 		}
 		return $results;
@@ -117,11 +117,11 @@ class Category extends Rule {
 
 	/**
 	 * Check if is a valid item
-	 * 
+	 *
 	 * @param int $item_id The item id
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function is_valid_item( $item_id ) {
@@ -134,12 +134,12 @@ class Category extends Rule {
 
 	/**
 	 * Get the protected items name
-	 * 
-	 * @param int $id The item id.
+	 *
+	 * @param int  $id The item id.
 	 * @param bool $edit_link Set to true to return a clickable title admin edit link.
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function get_protected_item_name( $id, $edit_link = false ) {

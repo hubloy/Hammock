@@ -304,7 +304,6 @@ class Resource {
 			'4.1.0'
 		);
 
-
 		// Admin CSS
 		wp_register_style(
 			'hammock-admin',

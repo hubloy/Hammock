@@ -26,9 +26,9 @@ class Plugin extends Controller {
 
 	/**
 	 * The admin core object
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var object
 	 */
 	private $admin = null;
@@ -236,7 +236,7 @@ class Plugin extends Controller {
 	 * Get the content sub-pages
 	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function content_pages() {
@@ -251,7 +251,7 @@ class Plugin extends Controller {
 	 * @return void
 	 */
 	public function enqueue_plugin_styles( $hook ) {
-		$screen = get_current_screen();
+		$screen         = get_current_screen();
 		$load_resources = apply_filters( 'hammock_load_admin_resouces', strpos( $screen->id, self::MENU_SLUG ) );
 		if ( $load_resources !== false ) {
 			wp_enqueue_style( 'hammock-uikit' );
@@ -296,7 +296,7 @@ class Plugin extends Controller {
 	 * @return void
 	 */
 	public function enqueue_plugin_scripts( $hook ) {
-		$screen = get_current_screen();
+		$screen         = get_current_screen();
 		$load_resources = apply_filters( 'hammock_load_admin_resouces', strpos( $screen->id, self::MENU_SLUG ) );
 		if ( $load_resources !== false ) {
 			wp_enqueue_script( 'hammock-uikit' );
@@ -409,9 +409,9 @@ class Plugin extends Controller {
 
 	/**
 	 * Register content sub page
-	 * 
+	 *
 	 * @param array $args
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function register_content_page( $args ) {

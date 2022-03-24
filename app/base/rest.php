@@ -24,7 +24,7 @@ class Rest extends Component {
 
 	/**
 	 * Initialize from sub-class
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	protected function init() {

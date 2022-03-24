@@ -34,9 +34,9 @@ class Settings extends Controller {
 
 	/**
 	 * The admin core object
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var object
 	 */
 	private $admin = null;
@@ -121,7 +121,7 @@ class Settings extends Controller {
 	 * Get the setting sub-pages
 	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function setting_pages() {
@@ -203,9 +203,9 @@ class Settings extends Controller {
 
 	/**
 	 * Register setting sub page
-	 * 
+	 *
 	 * @param array $args
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function register_setting_page( $args ) {

@@ -453,15 +453,15 @@ class Membership {
 
 	/**
 	 * Type price.
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function get_type_price() {
 		$price = hammock_format_currency( $this->price );
 		$type  = $this->get_readable_type();
-		return $price . ' ' .strtolower( $type );
+		return $price . ' ' . strtolower( $type );
 	}
 
 

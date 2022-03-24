@@ -117,11 +117,11 @@ class Post extends Rule {
 
 	/**
 	 * Search items
-	 * 
+	 *
 	 * @param string $param The search param.
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function search( $param ) {
@@ -131,9 +131,9 @@ class Post extends Rule {
 
 	/**
 	 * Get the view columns
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function get_view_columns() {
@@ -148,11 +148,11 @@ class Post extends Rule {
 
 	/**
 	 * Check if is a valid item
-	 * 
+	 *
 	 * @param int $item_id The item id
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function is_valid_item( $item_id ) {
@@ -204,12 +204,12 @@ class Post extends Rule {
 
 	/**
 	 * Get the protected items name
-	 * 
-	 * @param int $id The item id.
+	 *
+	 * @param int  $id The item id.
 	 * @param bool $edit_link Set to true to return a clickable title admin edit link.
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function get_protected_item_name( $id, $edit_link = false ) {

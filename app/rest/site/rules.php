@@ -25,9 +25,9 @@ class Rules extends Rest {
 
 	/**
 	 * The rules service.
-	 * 
+	 *
 	 * @var object
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	private $service = null;
@@ -81,7 +81,7 @@ class Rules extends Rest {
 					'callback'            => array( $this, 'get_rule_data' ),
 					'permission_callback' => array( $this, 'validate_request' ),
 					'args'                => array(
-						'page'     => array(
+						'page' => array(
 							'required'          => true,
 							'sanitize_callback' => 'absint',
 							'type'              => 'integer',
@@ -102,7 +102,7 @@ class Rules extends Rest {
 					'callback'            => array( $this, 'get_memberships' ),
 					'permission_callback' => array( $this, 'validate_request' ),
 					'args'                => array(
-						'id'     => array(
+						'id' => array(
 							'required'          => false,
 							'sanitize_callback' => 'absint',
 							'type'              => 'integer',
@@ -114,7 +114,6 @@ class Rules extends Rest {
 			)
 		);
 
-
 		register_rest_route(
 			$namespace,
 			self::BASE_API_ROUTE . 'items/(?P<type>[\w-]+)',
@@ -124,7 +123,7 @@ class Rules extends Rest {
 					'callback'            => array( $this, 'get_items' ),
 					'permission_callback' => array( $this, 'validate_request' ),
 					'args'                => array(
-						'id'     => array(
+						'id' => array(
 							'required'          => false,
 							'sanitize_callback' => 'absint',
 							'type'              => 'integer',
@@ -158,7 +157,7 @@ class Rules extends Rest {
 
 	/**
 	 * List rules
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function list_rules() {
@@ -174,30 +173,34 @@ class Rules extends Rest {
 	 * @return array
 	 */
 	public function get_rule_data( $request ) {
-		$type  = $request['type'];
-		return rest_ensure_response( $this->service->get_rule_type_data( array(
-			'type'   => $type,
-			'paged'  => $request->get_param( 'page' )
-		) ) );
+		$type = $request['type'];
+		return rest_ensure_response(
+			$this->service->get_rule_type_data(
+				array(
+					'type'  => $type,
+					'paged' => $request->get_param( 'page' ),
+				)
+			)
+		);
 	}
 
 	/**
 	 * Get memberships
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function get_memberships( $request ) {
-		$id  = $request->get_param( 'id' );
+		$id = $request->get_param( 'id' );
 		return rest_ensure_response( $this->service->get_rule_membership_select( $id ) );
 	}
 
 	/**
 	 * Get items select
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function get_items( $request ) {
@@ -208,26 +211,26 @@ class Rules extends Rest {
 
 	/**
 	 * Save a new rule
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function save_rule( $request ) {
-		$type     		= sanitize_text_field( $request['type'] );
-		$item     		= ( int ) sanitize_text_field( $request['item'] );
-		$memberships 	= is_array( $request['memberships'] ) ? array_map( 'absint', $request['memberships'] ) : array( absint( $request['memberships'] ) );
-		$enabled  		= isset( $request['enabled'] );
-		$is_update      = isset( $request['id'] );
-		$status         = $enabled ? \Hammock\Services\Rules::STATUS_ENABLED : \Hammock\Services\Rules::STATUS_DISABLED;
-		$data           = array(
+		$type        = sanitize_text_field( $request['type'] );
+		$item        = (int) sanitize_text_field( $request['item'] );
+		$memberships = is_array( $request['memberships'] ) ? array_map( 'absint', $request['memberships'] ) : array( absint( $request['memberships'] ) );
+		$enabled     = isset( $request['enabled'] );
+		$is_update   = isset( $request['id'] );
+		$status      = $enabled ? \Hammock\Services\Rules::STATUS_ENABLED : \Hammock\Services\Rules::STATUS_DISABLED;
+		$data        = array(
 			'type'        => $type,
 			'id'          => $item,
 			'status'      => $status,
 			'memberships' => $memberships,
 			'is_update'   => $is_update,
 		);
-		$response       = $this->service->save_rule( $data );
+		$response    = $this->service->save_rule( $data );
 		if ( is_wp_error( $response ) ) {
 			return rest_ensure_response(
 				array(
@@ -241,13 +244,13 @@ class Rules extends Rest {
 
 	/**
 	 * Delete a rule
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function delete_rule( $request ) {
-		$rule = ( int ) sanitize_text_field( $request['rule'] );
+		$rule = (int) sanitize_text_field( $request['rule'] );
 		return rest_ensure_response( $this->service->delete_rule( $rule ) );
 	}
 }

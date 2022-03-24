@@ -127,7 +127,7 @@ class Rules extends Controller {
 			$vars['active_page']               = 'rules';
 			$vars['strings']                   = $this->get_strings();
 			$vars['page_strings']              = array(
-				'types' => $this->get_rules()
+				'types' => $this->get_rules(),
 			);
 		}
 		return $vars;
@@ -180,7 +180,7 @@ class Rules extends Controller {
 
 	/**
 	 * Get Rule items
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function rule_items() {

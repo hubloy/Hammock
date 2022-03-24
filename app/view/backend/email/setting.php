@@ -153,7 +153,7 @@ class Setting extends View {
 							?>
 						</p>
 					<div class="uk-card uk-card-default uk-card-body uk-margin-small hammock-template-details" hidden>
-						<pre><?php echo esc_html( file_get_contents( $template_file ) ); ?></pre>
+						<pre><?php echo esc_html( file_get_contents( $template_file ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_file_get_contents ?></pre>
 					</div>
 				<?php else : ?>
 					<p><?php esc_html_e( 'File was not found.', 'hammock' ); ?></p>

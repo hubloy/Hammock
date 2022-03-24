@@ -153,7 +153,7 @@ class Protection {
 
 	/**
 	 * Initialize the rules
-	 * 
+	 *
 	 * @since  1.0.0
 	 */
 	private function init_rules() {
@@ -164,7 +164,7 @@ class Protection {
 		$this->media_rule        = \Hammock\Rule\Media::instance();
 		$this->menu_rule         = \Hammock\Rule\Menu::instance();
 		$this->custom_types_rule = \Hammock\Rule\Custom\Types::instance();
-		$this->custom_items_rule = \Hammock\Rule\Custom\Items::instance();	
+		$this->custom_items_rule = \Hammock\Rule\Custom\Items::instance();
 	}
 
 	/**
@@ -173,7 +173,7 @@ class Protection {
 	 * @since 1.0.0
 	 */
 	public function protect_content() {
-		$this->enabled       = $this->settings->get_general_setting( 'content_protection' );
+		$this->enabled = $this->settings->get_general_setting( 'content_protection' );
 		if ( $this->enabled ) {
 			add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
 
@@ -285,13 +285,13 @@ class Protection {
 
 	/**
 	 * Check member post access
-	 * 
-	 * @param int $post_id The post or page id
-	 * @param int $plan_id The membership id
+	 *
+	 * @param int   $post_id The post or page id
+	 * @param int   $plan_id The membership id
 	 * @param mixed $post_meta The post meta
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	private function check_member_post_access( $post_id, $plan_id, $post_meta ) {
@@ -303,13 +303,13 @@ class Protection {
 
 	/**
 	 * Check member term access
-	 * 
-	 * @param int $term_id The term id
-	 * @param int $plan_id The membership id
+	 *
+	 * @param int   $term_id The term id
+	 * @param int   $plan_id The membership id
 	 * @param mixed $term_meta The term meta
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	private function check_member_term_access( $term_id, $plan_id, $term_meta ) {
@@ -425,11 +425,11 @@ class Protection {
 
 	/**
 	 * Check if a post or page has an active rule
-	 * 
+	 *
 	 * @param int $post_id The post id
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	private function post_has_rule( $post_id ) {
@@ -439,11 +439,11 @@ class Protection {
 
 	/**
 	 * Check if a term has an active rule
-	 * 
+	 *
 	 * @param int $term_id The term id
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	private function term_has_rule( $term_id ) {
@@ -478,14 +478,14 @@ class Protection {
 	}
 
 	public function &__get( $key ) {
-        if ( method_exists( $this, 'get_' . $key ) ) {
-            $value = call_user_func( array( $this, 'get_' . $key ) );
-        } else {
-            $value = &$this->{$key};
-        }
+		if ( method_exists( $this, 'get_' . $key ) ) {
+			$value = call_user_func( array( $this, 'get_' . $key ) );
+		} else {
+			$value = &$this->{$key};
+		}
 
-        return $value;
-    }
+		return $value;
+	}
 
 
 	/**

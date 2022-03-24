@@ -14,18 +14,18 @@ class Admin {
 
 	/**
 	 * Content pages
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var array
 	 */
 	private $content = array();
 
 	/**
 	 * Setting pages
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var array
 	 */
 	private $settings = array();
@@ -35,7 +35,7 @@ class Admin {
 	 * Register content sub pages
 	 *
 	 * @param array $args The page arguments
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function register_content_sub_page( $args ) {
@@ -51,7 +51,7 @@ class Admin {
 	 * Register setting sub pages
 	 *
 	 * @param array $args The page arguments
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function register_setting_sub_page( $args ) {
@@ -67,7 +67,7 @@ class Admin {
 	 * Get the content pages.
 	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function get_content_pages() {
@@ -78,7 +78,7 @@ class Admin {
 	 * Get the settings pages.
 	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function get_setting_pages() {
@@ -89,19 +89,22 @@ class Admin {
 	 * Parse the arguments
 	 *
 	 * @param array $args The arguments
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	private function parse_args( $args ) {
-		$args = wp_parse_args( $args, array(
-			'id'    => '',
-			'name'  => '',
-			'icon'  => '',
-			'desc'  => '',
-			'class' => '',
-		) );
+		$args = wp_parse_args(
+			$args,
+			array(
+				'id'    => '',
+				'name'  => '',
+				'icon'  => '',
+				'desc'  => '',
+				'class' => '',
+			)
+		);
 
 		return $args;
 	}

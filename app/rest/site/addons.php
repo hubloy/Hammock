@@ -175,11 +175,13 @@ class Addons extends Rest {
 			$settings = new Settings();
 			$settings = $settings->get_addon_setting( $name );
 			$active   = apply_filters( 'hammock_get_addon_' . $name . '_active', true );
-			return rest_ensure_response( array(
-				'settings' => $settings,
-				'enabled'  => $settings['enabled'] && $active,
-				'active'   => $active,
-			) );
+			return rest_ensure_response(
+				array(
+					'settings' => $settings,
+					'enabled'  => $settings['enabled'] && $active,
+					'active'   => $active,
+				)
+			);
 		} else {
 			return new \WP_Error( 'rest_addon_invalid', esc_html__( 'The addon does not exist.', 'hammock' ), array( 'status' => 404 ) );
 		}

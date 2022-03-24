@@ -71,9 +71,9 @@ class Rule {
 
 	/**
 	 * The rule status
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @var string
 	 */
 	public $status = '';
@@ -164,9 +164,9 @@ class Rule {
 	 * Check if a rule has a membership.
 	 *
 	 * @param int $membership_id The membership id
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function has_membership( $membership_id ) {
@@ -178,9 +178,9 @@ class Rule {
 
 	/**
 	 * Check if is enabled
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function is_enabled() {
@@ -265,19 +265,19 @@ class Rule {
 		return apply_filters(
 			'hammock_membership_rule_to_html',
 			array(
-				'rule_id'             => $this->rule_id,
-				'memberships'         => $this->memberships,
-				'date_created'        => $this->date_created,
-				'date_updated'        => $this->date_updated,
-				'status'              => $this->status,
-				'status_name'         => ucfirst( $this->status ),
-				'object_type'         => $this->object_type,
-				'object_id'           => $this->object_id,
-				'rule_name'           => apply_filters( 'hammock_rule_type_name', $this->object_type ),
-				'title'               => $item_title,
-				'time_limit'          => $this->time_limit,
-				'time_duration'       => $this->time_duration,
-				'desc'                => sprintf( _n( '%s membership has access to %s', '%s memberships have access to %s', $membership_count, 'hammock' ), number_format_i18n( $membership_count ), $item_title )
+				'rule_id'       => $this->rule_id,
+				'memberships'   => $this->memberships,
+				'date_created'  => $this->date_created,
+				'date_updated'  => $this->date_updated,
+				'status'        => $this->status,
+				'status_name'   => ucfirst( $this->status ),
+				'object_type'   => $this->object_type,
+				'object_id'     => $this->object_id,
+				'rule_name'     => apply_filters( 'hammock_rule_type_name', $this->object_type ),
+				'title'         => $item_title,
+				'time_limit'    => $this->time_limit,
+				'time_duration' => $this->time_duration,
+				'desc'          => sprintf( _n( '%1$s membership has access to %2$s', '%1$s memberships have access to %2$s', $membership_count, 'hammock' ), number_format_i18n( $membership_count ), $item_title ),
 			),
 			$this
 		);
@@ -296,7 +296,7 @@ class Rule {
 	 */
 	public static function get_rules( $type, $id ) {
 		global $wpdb;
-		$rule   = Cache::get_cache( 'get_rule_' . $type . '_' . $id, 'rule' );
+		$rule = Cache::get_cache( 'get_rule_' . $type . '_' . $id, 'rule' );
 		if ( $rule && is_object( $rule ) ) {
 			return $rule;
 		}
@@ -313,16 +313,16 @@ class Rule {
 
 	/**
 	 * Get restricted items by type.
-	 * 
+	 *
 	 * @param string $type The rule type
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public static function get_restricted_items( $type ) {
 		global $wpdb;
-		$items   = Cache::get_cache( 'get_restricted_' . $type, 'rule' );
+		$items = Cache::get_cache( 'get_restricted_' . $type, 'rule' );
 		if ( is_array( $items ) ) {
 			return $items;
 		}

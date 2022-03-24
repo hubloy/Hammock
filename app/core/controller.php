@@ -30,7 +30,7 @@ class Controller {
 		\Hammock\Controller\Site\Activity::instance();
 		\Hammock\Controller\Site\Marketing::instance();
 		\Hammock\Controller\Site\Shortcodes::instance();
-		
+
 		\Hammock\Controller\Site\Transactions::instance();
 		\Hammock\Controller\Site\Communication::instance();
 
