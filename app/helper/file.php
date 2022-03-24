@@ -76,13 +76,19 @@ class File {
 	public function create_directory( $directory ) {
 		if ( $this->has_permission ) {
 			global $wp_filesystem;
-			$index_path = $directory . '/index.php';
+			$index_php_path  = trailingslashit( $directory ) . 'index.php';
+			$index_html_path = trailingslashit( $directory ) . 'index.html';
+			$htaccess_file   = trailingslashit( $directory ) . '.htaccess';
 			if ( $wp_filesystem->mkdir( $directory, $this->chmod_dir ) ) {
-				$wp_filesystem->put_contents( $index_path, "<?php\n// Silence is golden.\n?>", $this->chmod_file );
+				$wp_filesystem->put_contents( $index_php_path, "<?php\n// Silence is golden.\n?>", $this->chmod_file );
+				$wp_filesystem->put_contents( $index_html_path, '', $this->chmod_file );
+				$wp_filesystem->put_contents( $htaccess_file, 'deny from all', $this->chmod_file );
 			} else {
 				$dirs_exist = $wp_filesystem->is_dir( $directory );
 				if ( $dirs_exist ) {
-					$wp_filesystem->put_contents( $index_path, "<?php\n// Silence is golden.\n?>", $this->chmod_file );
+					$wp_filesystem->put_contents( $index_php_path, "<?php\n// Silence is golden.\n?>", $this->chmod_file );
+					$wp_filesystem->put_contents( $index_html_path, '', $this->chmod_file );
+					$wp_filesystem->put_contents( $htaccess_file, 'deny from all', $this->chmod_file );
 				}
 			}
 		}

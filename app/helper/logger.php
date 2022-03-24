@@ -53,32 +53,8 @@ class Logger {
 			wp_mkdir_p( HAMMOCK_LOG_DIR );
 		}
 
-		if ( ! is_file( trailingslashit( HAMMOCK_LOG_DIR ) . 'index.php' ) ) {
-			// create a blank index file
-			$file_handle = @fopen( trailingslashit( HAMMOCK_LOG_DIR ) . 'index.php', 'w' );
-			if ( $file_handle ) {
-				fwrite( $file_handle, '' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fwrite
-				fclose( $file_handle ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fclose
-			}
-		}
-
-		if ( ! is_file( trailingslashit( HAMMOCK_LOG_DIR ) . 'index.html' ) ) {
-			// create a blank index file
-			$file_handle = @fopen( trailingslashit( HAMMOCK_LOG_DIR ) . 'index.html', 'w' );
-			if ( $file_handle ) {
-				fwrite( $file_handle, '' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fwrite
-				fclose( $file_handle ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fclose
-			}
-		}
-
-		if ( ! is_file( trailingslashit( HAMMOCK_LOG_DIR ) . '.htaccess' ) ) {
-			// create a blank index file
-			$file_handle = @fopen( trailingslashit( HAMMOCK_LOG_DIR ) . '.htaccess', 'w' );
-			if ( $file_handle ) {
-				fwrite( $file_handle, 'deny from all' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fwrite
-				fclose( $file_handle ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fclose
-			}
-		}
+		$file_helper = new File();
+		$file_helper->create_directory( HAMMOCK_LOG_DIR );
 	}
 
 	/**
