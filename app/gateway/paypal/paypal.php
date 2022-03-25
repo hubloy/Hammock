@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Hammock\Base\Gateway;
+use Hammock\Helper\Duration;
 
 class PayPal extends Gateway {
 
@@ -120,12 +121,12 @@ class PayPal extends Gateway {
 	 */
 	public function is_currency_supported( $currency ) {
 		return in_array(
-            $currency,
+			$currency,
 			array(
 				'AUD', 'BRL', 'CAD', 'CZK', 'DKK', 'EUR', 'HKD', 'HUF', 'ILS', 'JPY', 'MYR', 'MXN', 'NOK',
 				'NZD', 'PHP', 'PLN', 'GBP', 'RUB', 'SGD', 'SEK', 'CHF', 'TWD', 'THB', 'TRY', 'USD',
 			)
-        );
+		);
 	}
 
 	/**
@@ -191,13 +192,42 @@ class PayPal extends Gateway {
 	 * @since 1.0.0
 	 */
 	public function process_payment( $invoice ) {
-		$plan = $invoice->get_plan();
-		$membership = $plan->get_memebership();
+		$credentials = $this->get_credentials();
+		$plan        = $invoice->get_plan();
+		$membership  = $plan->get_memebership();
 		if ( $membership->is_recurring() ) {
-			$this->process_recurring( $invoice, $plan, $membership );
+			return $this->process_recurring( $invoice, $plan, $membership, $credentials );
 		}
-		$invoice->status = Transactions::STATUS_PAID;
-		$invoice->save();
+		$user   = $invoice->get_user_details();
+		$paypal = array(
+			'cmd'           => '_cart',
+			'upload'        => '1',
+			'business'      => $credentials['email'],
+			'email'         => $user['email'],
+			'first_name'    => $user['fname'],
+			'last_name'     => $user['lname'],
+			'invoice'       => $invoice->invoice_id,
+			'no_shipping'   => '1',
+			'shipping'      => '0',
+			'currency_code' => hammock_get_currency_symbol(),
+			'charset'       => 'utf-8',
+			'no_note'       => '1',
+			'custom'        => json_encode( array( 'payment_id' => $invoice->invoice_id, 'plan_id' => $plan->id ) ),
+			'rm'            => '2',
+			'return'        => add_query_arg( 'gateway', $this->get_id(), $this->get_invoice_page( $invoice ) ),
+			'cancel_return' => $this->get_cancel_page( $invoice ),
+			'notify_url'    => $this->get_listener_url(),
+			'cbt'           => get_bloginfo( 'name' ),
+			'item_name_1'   => $membership->name,
+			'quantity_1'    => '1',
+			'amount_1'      => number_format( $invoice->amount, 2, '.', '' )
+		);
+
+		$url = $credentials['url'];
+		$url .= http_build_query( array_filter( $paypal ), '', '&' );
+		$url = str_replace( '&amp;', '&', $url );
+
+		return array( 'result' => 'success', 'redirect' => $url );
 	}
 
 	/**
@@ -206,11 +236,115 @@ class PayPal extends Gateway {
 	 * @param \Hammock\Model\Invoice $invoice The current invoice.
 	 * @param \Hammock\Model\Plan $plan The current plan.
 	 * @param \Hammock\Model\Membership $membership The plan membership.
+	 * @param array $credentials The gateway credentials
 	 * 
 	 * @since 1.0.0
 	 */
-	private function process_recurring( $invoice, $plan, $membership ) {
+	private function process_recurring( $invoice, $plan, $membership, $credentials ) {
+		$total = $payment->amount;
+		list( $t_n, $p_n ) = $this->get_subscription_period_vars( $membership->duration );
 
+		$paypal = array(
+			'business'      => $credentials['email'],
+			'email'         => $user['email'],
+			'first_name'    => $user['fname'],
+			'last_name'     => $user['lname'],
+			'invoice'       => $invoice->invoice_id,
+			'no_shipping'   => '1',
+			'shipping'      => '0',
+			'no_note'       => '1',
+			'currency_code' => hammock_get_currency_symbol(),
+			'charset'       => 'utf-8',
+			'custom'        => json_encode( array( 'payment_id' => $invoice->invoice_id, 'plan_id' => $plan->id ) ),
+			'rm'            => '2',
+			'return'        => add_query_arg( 'gateway', $this->get_id(), $this->get_invoice_page( $invoice ) ),
+			'cancel_return' => $this->get_cancel_page( $invoice ),
+			'notify_url'    => $this->get_listener_url(),
+			'cbt'           => get_bloginfo( 'name' ),
+			'sra'           => '1',
+			'src'           => '1',
+			'cmd'           => '_xclick-subscriptions',
+			'item_name'     => $membership->name
+		);
+
+		// Regular subscription price and interval.
+		$paypal = array_merge( $paypal, array(
+			'a3' => $invoice->amount,
+			'p3' => $p_n,
+			't3' => $t_n
+		) );
+
+		// If there was a discount, apply it as a "trial" period.
+		if ( $membership->trial_enabled ) {
+			list( $t_n, $p_n ) = $this->get_subscription_period_vars( $membership->trial_duration, $membership->trial_period );
+			$paypal = array_merge( $paypal, array(
+				'a1' => $membership->trial_price,
+				'p1' => $p_n,
+				't1' => $t_n
+			) );
+		}
+
+		$url = $credentials['url'];
+		$url .= http_build_query( $paypal );
+		$url = str_replace( '&amp;', '&', $url );
+
+		return array( 'result' => 'success', 'redirect' => $url );
+	}
+
+	/**
+	 * Get subscription period variables
+	 * 
+	 * @param string $duration
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
+	private function get_subscription_period_vars( $duration, $period = 1 ) {
+
+		$periods = array(
+			'D' => array( 'days' => 1, 'limit' => 90 ),
+			'W' => array( 'days' => 7, 'limit' => 52 ),
+			'M' => array( 'days' => 30, 'limit' => 24 ),
+			'Y' => array( 'days' => 365, 'limit' => 5 )
+		);
+
+		$best_match = false;
+
+		$days = Duration::get_period_in_days( $period, $duration );
+
+		foreach ( $periods as $period => $_ ) {
+			$days_in_period = $_['days'];
+
+			$r = $days % $days_in_period;
+			$d = round( $days / $days_in_period, 0 );
+
+			if ( $d > $_['limit'] ) {
+				continue;
+			}
+
+			if ( 0 == $r ) {
+				$best_match = array( $period, $d );
+				break;
+			}
+
+			if ( ! $best_match ) {
+				$best_match = array( $period, $d );
+			} else {
+				$d1 = $periods[ $best_match[0] ]['days'] * $best_match[1];
+				$d2 = $d * $days_in_period;
+
+				if ( abs( $days - $d1 ) > abs( $days -$d2 ) ) {
+					$best_match = array( $period, $d );
+				}
+			}
+		}
+
+		if ( ! $best_match ) {
+			wp_die( __( 'Can not create a valid PayPal subscription configuration from plan.', 'hammock' ) );
+		}
+
+		return $best_match;
 	}
 
 	/**

@@ -515,7 +515,9 @@ class Members {
 	public static function user_details( $member_id, $to_object = false ) {
 		$user = get_userdata( $member_id );
 		if ( $user && ! is_wp_error( $user ) ) {
-			$name = $user->user_login;
+			$name  = $user->user_login;
+			$fname = '';
+			$lname = '';
 			if ( ! empty( $user->last_name ) && ! empty( $user->first_name ) ) {
 				/**
 				 * Filter to allow changing name order
@@ -524,10 +526,14 @@ class Members {
 				 * @since 1.0.0
 				 */
 				$name = apply_filters( 'hammock_full_user_names', $user->first_name . ' ' . $user->last_name, $user );
+				$fname = $user->first_name;
+				$lname = $user->last_name;
 			} elseif ( ! empty( $user->last_name ) ) {
 				$name = $user->last_name;
+				$lname = $user->last_name;
 			} elseif ( ! empty( $user->first_name ) ) {
-				$name = $user->first_name;
+				$name  = $user->first_name;
+				$fname = $user->first_name;
 			} elseif ( ! empty( $user->display_name ) ) {
 				$name = trim( $user->display_name );
 			}
@@ -536,6 +542,8 @@ class Members {
 				'email'    => $user->user_email,
 				'username' => $user->user_login,
 				'name'     => $name,
+				'lname'    => $lname,
+				'fname'    => $fname,
 				'picture'  => get_avatar_url( $user->ID, array( 'size' => 256 ) ),
 			);
 		} else {
@@ -544,6 +552,8 @@ class Members {
 				'name'     => __( 'N/A', 'hammock' ),
 				'email'    => __( 'N/A', 'hammock' ),
 				'username' => __( 'N/A', 'hammock' ),
+				'lname'    => '',
+				'fname'    => '',
 				'picture'  => '',
 			);
 		}

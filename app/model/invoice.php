@@ -440,6 +440,17 @@ class Invoice {
 	}
 
 	/**
+	 * Get user details
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return array
+	 */
+	public function get_user_details() {
+		return Members::user_details( $this->user_id );
+	}
+
+	/**
 	 * Get Custom data value
 	 *
 	 * @param string $meta_key - the meta key
@@ -521,7 +532,7 @@ class Invoice {
 				'amount_formated' => $code . '' . $this->amount,
 				'custom_data'     => $this->custom_data,
 				'user_id'         => $this->user_id,
-				'user_data'       => Members::user_details( $this->user_id ),
+				'user_data'       => $this->get_user_details(),
 				'due'             => ! empty( $this->due_date ) ? date_i18n( 'Y-m-d', strtotime( $this->due_date ) ) : '',
 				'due_date'        => ! empty( $this->due_date ) ? $this->due_date : __( 'N/A', 'hammock' ),
 				'date_created'    => $this->date_created,

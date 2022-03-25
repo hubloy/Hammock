@@ -318,7 +318,7 @@ class Transactions {
 		$invoice->amount      = Currency::format_price( $amount );
 		$invoice->custom_data = $custom_data;
 		$invoice->due_date    = $due_date;
-		$invoice->invoice_id  = $invoice_id ? $invoice_id : date( 'YmdHis' );
+		$invoice->invoice_id  = $invoice_id ? $invoice_id : strtolower( sha1( $plan->id . date( 'Y-m-d H:i:s' ) . ( defined( 'AUTH_KEY' ) ? AUTH_KEY : '' ) . uniqid( 'hammock', true ) ) );
 		if ( $amount == 0 ) {
 			$invoice->status = self::STATUS_PAID;
 		}

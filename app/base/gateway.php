@@ -108,6 +108,17 @@ class Gateway extends Component {
 
 	}
 
+	/**
+	 * Get the gateway id
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return string
+	 */
+	public function get_id() {
+		return $this->id;
+	}
+
 
 	/**
 	 * Register gateway
@@ -214,6 +225,60 @@ class Gateway extends Component {
 	}
 
 	/**
+	 * Get the invoice page url
+	 * 
+	 * @param \Hammock\Model\Invoice $invoice The current invoice
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return string
+	 */
+	public function get_invoice_page( $invoice ) {
+		return esc_url( hammock_get_account_page_links( 'view-transaction', $invoice->invoice_id ) );
+	}
+
+	/**
+	 * Get the invoice cancel url
+	 * 
+	 * @param \Hammock\Model\Invoice $invoice The current invoice
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return string
+	 */
+	public function get_cancel_page( $invoice ) {
+		return esc_url( add_query_arg( 'cancel', 'cenceled', hammock_get_account_page_links( 'view-transaction', $invoice->invoice_id ) ) );
+	}
+
+	/**
+	 * Get the payment return
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return string
+	 */
+	public function get_return_url() {
+		return esc_url( add_query_arg( array(
+			'hm-api'  => 'handle_return',
+			'gateway' => $this->get_id()
+		), home_url( 'index.php' ) ) );
+	}
+
+	/**
+	 * Get the IPN listener URL
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return string
+	 */
+	public function get_listener_url() {
+		return esc_url( add_query_arg( array(
+			'hm-api'  => 'ipn_notify',
+			'gateway' => $this->get_id()
+		), home_url( 'index.php' ) ) );
+	}
+
+	/**
 	 * Action called when a membership is created.
 	 * This is mainly to sync to the payment gateway
 	 * Most gateways require
@@ -281,6 +346,7 @@ class Gateway extends Component {
 	public function process_payment( $invoice ) {
 		$invoice->status = Transactions::STATUS_PAID;
 		$invoice->save();
+		return array( 'result' => 'success', 'redirect' => $this->get_invoice_page( $invoice ) );
 	}
 
 	/**
