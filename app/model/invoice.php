@@ -231,6 +231,23 @@ class Invoice {
 	}
 
 	/**
+	 * Get by gateway identifier
+	 *
+	 * @param string $gateway_identifier
+	 *
+	 * @since 1.0.0
+	 */
+	public function get_by_gateway_identifier( $gateway_identifier ) {
+		global $wpdb;
+		$sql    = "SELECT `gateway`, `status`, `member_id`, `plan_id`, `id`, `invoice_id`, `amount`, `tax_rate`, `gateway_identifier`, `notes`, `custom_data`, `user_id`, `due_date`, `date_created`, `last_updated` FROM {$this->table_name} WHERE `gateway_identifier` = %s";
+		$result = $wpdb->get_row( $wpdb->prepare( $sql, $gateway_identifier ) );
+		if ( $result ) {
+			$this->populate( $result );
+		}
+	}
+
+
+	/**
 	 * Populate the invoice variables
 	 *
 	 * @param object $result - the database result object
@@ -365,6 +382,17 @@ class Invoice {
 		);
 	}
 
+	/**
+	 * If invoice is valid
+	 * This checks if the id is greater than 0
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return bool
+	 */
+	public function is_valid() {
+		return $this->id > 0;
+	}
 
 	/**
 	 * Delete invoice
