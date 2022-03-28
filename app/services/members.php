@@ -1041,7 +1041,14 @@ class Members {
 		return $members;
 	}
 
-	public function cancel_plan( $plan ) {
+	/**
+	 * Cancel member plan
+	 * 
+	 * @param \Hammock\Model\Plan $plan The current plan
+	 * 
+	 * @since 1.0.0
+	 */
+	public static function cancel_plan( $plan ) {
 		$plan->cancel();
 		/**
 		 * Action called after a new payment is recorded
