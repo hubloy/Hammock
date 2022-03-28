@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use Hammock\Base\Controller;
 use Hammock\Model\Membership;
+use Hammock\Model\Plan;
 use Hammock\Services\Members;
 use Hammock\Services\Memberships;
 use Hammock\Services\Transactions;
@@ -84,6 +85,8 @@ class Signup extends Controller {
 		$this->transaction_service = new Transactions();
 
 		$this->add_ajax_action( 'hammock_purchase_plan', 'purchase_plan', true, true );
+		$this->add_ajax_action( 'hammock_deactivate_plan', 'deactivate_plan' );
+		$this->add_ajax_action( 'hammock_activate_plan', 'activate_plan' );
 	}
 
 
@@ -161,6 +164,61 @@ class Signup extends Controller {
 			}
 		}
 		wp_send_json_error( __( 'Error adding plan to your account. Please try again', 'hammock' ) );
+	}
+
+	/**
+	 * Deactivate plan
+	 * 
+	 * @since 1.0.0
+	 */
+	public function deactivate_plan() {
+		$plan_id = absint( sanitize_text_field( $_POST['plan_id'] ) );
+		$this->verify_nonce( 'hammock_membership_plan_' . $plan_id );
+
+		$plan = $this->get_user_plan( $plan_id );
+		if ( $plan ) {
+			$plan->cancel();
+			
+		}
+		wp_send_json_error( __( 'Plan is not linked to your account', 'hammock' ) );
+	}
+
+	/**
+	 * Activate or purchase plan
+	 * 
+	 * @since 1.0.0
+	 */
+	public function activate_plan() {
+		$plan_id = absint( sanitize_text_field( $_POST['plan_id'] ) );
+		$this->verify_nonce( 'hammock_membership_plan_' . $plan_id );
+
+		$plan = $this->get_user_plan( $plan_id );
+		if ( $plan ) {
+
+		}
+		wp_send_json_error( __( 'Plan is not linked to your account', 'hammock' ) );
+	}
+
+	/**
+	 * Get user plan
+	 * 
+	 * @param int $plan_id The plan id
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return bool|object
+	 */
+	private function get_user_plan( $plan_id ) {
+		$user_id = get_current_user_id();
+		$member  = $this->member_service->get_member_by_user_id( $user_id );
+		if ( ! $member || ! $member->exists() ) {
+			return false;
+		}
+		$plan = Plan::get_plan( $member->id, $plan_id );
+		if ( ! $plan || ! $plan->exists() ) {
+			return false;
+		}
+		return $plan;
 	}
 }
 

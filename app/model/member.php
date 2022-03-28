@@ -388,6 +388,10 @@ class Member {
 				}
 
 				$new_plan->save();
+				
+				$user_email = $this->get_user_info( 'email' );
+				$this->sub_log_service->save_log( $this->id, $user_email, $membership->trial_enabled, $membership->id, $this->user_id );
+
 				do_action( 'hammock_member_after_add_plan', $membership, $new_plan, $this );
 				return $new_plan;
 			} else {

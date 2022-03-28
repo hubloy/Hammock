@@ -114,7 +114,7 @@ function hammock_get_plan_by_id( $plan_id ) {
 function hammock_get_member_plan_subscription( $user_id, $plan_id ) {
 	$member_service = new \Hammock\Services\Members();
 	$member         = $member_service->get_member_by_user_id( $user_id );
-	if ( $member && $member->id > 0 ) {
+	if ( $member && $member->exists() ) {
 		$plan = \Hammock\Model\Plan::get_plan( $member->id, $plan_id );
 		return $plan;
 	}

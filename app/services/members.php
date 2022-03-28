@@ -1040,5 +1040,17 @@ class Members {
 		}
 		return $members;
 	}
+
+	public function cancel_plan( $plan ) {
+		$plan->cancel();
+		/**
+		 * Action called after a new payment is recorded
+		 * 
+		 * @param \Hammock\Model\Plan The current plan
+		 * 
+		 * @since 1.0.0
+		 */
+		do_action( 'hammock_user_deactivate_plan', $plan );
+	}
 }
 

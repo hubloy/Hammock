@@ -266,6 +266,19 @@ class Plan {
 	}
 
 	/**
+	 * Checks if the plan exists
+	 * This validates the id is greater than 0
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return bool
+	 */
+	public function exists() {
+		return $this->id > 0;
+	}
+
+
+	/**
 	 * Delete plan
 	 *
 	 * @since 1.0.0
