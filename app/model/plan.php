@@ -464,23 +464,24 @@ class Plan {
 	 * This sets the membership status and the correct dates
 	 *
 	 * @param Membership $membership - the membership
+	 * @param bool $change_start Set to true to change the start date
 	 *
 	 * @since 1.0.0
 	 */
-	public function set_active_membership( $membership ) {
+	public function set_active_membership( $membership, $change_start = true ) {
 		$this->status = Members::STATUS_ACTIVE;
-		if ( $membership->type === Memberships::PAYMENT_TYPE_PERMANENT ) {
+		if ( $change_start ) {
 			$this->start_date = date_i18n( 'Y-m-d H:i:s' );
+		}
+		if ( $membership->type === Memberships::PAYMENT_TYPE_PERMANENT ) {
 			$this->end_date   = '';
 		} elseif ( $membership->type === Memberships::PAYMENT_TYPE_DATE_RANGE ) {
 			$days = $membership->get_meta_value( 'membership_days' );
 			if ( $days ) {
 				$end_date         = Duration::add_interval( $days, Duration::PERIOD_TYPE_DAYS );
-				$this->start_date = date_i18n( 'Y-m-d H:i:s' );
 				$this->end_date   = $end_date;
 			}
 		} elseif ( $membership->type === Memberships::PAYMENT_TYPE_RECURRING ) {
-			$this->start_date = date_i18n( 'Y-m-d H:i:s' );
 			$end_date         = Duration::add_interval( 1, $membership->duration );
 			$this->end_date   = $end_date;
 		}
@@ -521,16 +522,19 @@ class Plan {
 	 * @since 1.0.0
 	 */
 	public function record_payment( $invoice ) {
+		$membership = $this->get_memebership();
+		$this->set_active_membership( $membership );
 		$this->save();
-	}
 
-	/**
-	 * Process plan renew
-	 *
-	 * @since 1.0.0
-	 */
-	public function renew() {
-
+		/**
+		 * Action called after a new payment is recorded
+		 * 
+		 * @param \Hammock\Model\Plan The current plan
+		 * @param \Hammock\Model\Invoice The invoice
+		 * 
+		 * @since 1.0.0
+		 */
+		do_action( 'hammock_plan_record_payment', $this, $invoice );
 	}
 
 	/**

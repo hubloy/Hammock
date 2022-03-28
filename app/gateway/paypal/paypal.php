@@ -347,7 +347,6 @@ class PayPal extends Gateway {
 		$invoice->amount = sanitize_text_field( $_POST['mc_gross'] );
 
 		$plan->record_payment( $invoice );
-		$plan->renew();
 	}
 
 	/**
