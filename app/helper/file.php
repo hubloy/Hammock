@@ -66,11 +66,11 @@ class File {
 
 	/**
 	 * Read a file
-	 * 
+	 *
 	 * @param string $file The file
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function read_file( $file ) {
@@ -99,7 +99,7 @@ class File {
 			$index_php_path  = trailingslashit( $directory ) . 'index.php';
 			$index_html_path = trailingslashit( $directory ) . 'index.html';
 			$htaccess_file   = trailingslashit( $directory ) . '.htaccess';
-			$dirs_exist = $wp_filesystem->is_dir( $directory );
+			$dirs_exist      = $wp_filesystem->is_dir( $directory );
 			if ( $dirs_exist ) {
 				$wp_filesystem->put_contents( $index_php_path, "<?php\n// Silence is golden.\n?>", $this->chmod_file );
 				$wp_filesystem->put_contents( $index_html_path, '', $this->chmod_file );
@@ -111,11 +111,11 @@ class File {
 
 	/**
 	 * Check if a file or directory exists.
-	 * 
+	 *
 	 * @param string $file_or_dir The full file or directory path
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function exists( $file_or_dir ) {
@@ -128,11 +128,11 @@ class File {
 
 	/**
 	 * Check if a directory is writable.
-	 * 
+	 *
 	 * @param string $directory The full directory path
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function is_writable( $directory ) {
@@ -150,7 +150,7 @@ class File {
 	 * @since 1.0.0
 	 */
 	private function check_permission() {
-		$creds = $this->get_creds();
+		$creds                = $this->get_creds();
 		$this->has_permission = true;
 		if ( empty( $creds ) || ! WP_Filesystem( $creds ) ) {
 			$this->has_permission = false;

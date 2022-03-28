@@ -98,6 +98,15 @@ class Plan {
 	public $gateway = '';
 
 	/**
+	 * The gateway subscription id
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var string
+	 */
+	public $gateway_subscription_id = '';
+
+	/**
 	 * The subscription start date
 	 *
 	 * @since 1.0.0
@@ -219,13 +228,14 @@ class Plan {
 			$wpdb->update(
 				$this->table_name,
 				array(
-					'membership_id' => $this->membership_id,
-					'enabled'       => $this->enabled,
-					'status'        => $this->status,
-					'gateway'       => $this->gateway,
-					'start_date'    => ! empty( $this->start_date ) ? date_i18n( 'Y-m-d H:i:s', strtotime( $this->start_date ) ) : '',
-					'end_date'      => ! empty( $this->end_date ) ? date_i18n( 'Y-m-d H:i:s', strtotime( $this->end_date ) ) : '',
-					'date_updated'  => date_i18n( 'Y-m-d H:i:s' ),
+					'membership_id'           => $this->membership_id,
+					'enabled'                 => $this->enabled,
+					'status'                  => $this->status,
+					'gateway'                 => $this->gateway,
+					'gateway_subscription_id' => $this->gateway_subscription_id,
+					'start_date'              => ! empty( $this->start_date ) ? date_i18n( 'Y-m-d H:i:s', strtotime( $this->start_date ) ) : '',
+					'end_date'                => ! empty( $this->end_date ) ? date_i18n( 'Y-m-d H:i:s', strtotime( $this->end_date ) ) : '',
+					'date_updated'            => date_i18n( 'Y-m-d H:i:s' ),
 				),
 				array( 'id' => $this->id )
 			);
@@ -233,15 +243,16 @@ class Plan {
 			$result = $wpdb->insert(
 				$this->table_name,
 				array(
-					'plan_id'       => $this->plan_id,
-					'member_id'     => $this->member_id,
-					'membership_id' => $this->membership_id,
-					'enabled'       => $this->enabled,
-					'status'        => $this->status,
-					'gateway'       => $this->gateway,
-					'start_date'    => ! empty( $this->start_date ) ? date_i18n( 'Y-m-d H:i:s', strtotime( $this->start_date ) ) : '',
-					'end_date'      => ! empty( $this->end_date ) ? date_i18n( 'Y-m-d H:i:s', strtotime( $this->end_date ) ) : '',
-					'date_created'  => date_i18n( 'Y-m-d H:i:s' ),
+					'plan_id'                 => $this->plan_id,
+					'member_id'               => $this->member_id,
+					'membership_id'           => $this->membership_id,
+					'enabled'                 => $this->enabled,
+					'status'                  => $this->status,
+					'gateway'                 => $this->gateway,
+					'gateway_subscription_id' => $this->gateway_subscription_id,
+					'start_date'              => ! empty( $this->start_date ) ? date_i18n( 'Y-m-d H:i:s', strtotime( $this->start_date ) ) : '',
+					'end_date'                => ! empty( $this->end_date ) ? date_i18n( 'Y-m-d H:i:s', strtotime( $this->end_date ) ) : '',
+					'date_created'            => date_i18n( 'Y-m-d H:i:s' ),
 				)
 			);
 
@@ -322,6 +333,26 @@ class Plan {
 		return false;
 	}
 
+	/**
+	 * Get plan by member and membership id
+	 *
+	 * @param string $gateway_subscription_id The gateway subscription id
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return object|bool
+	 */
+	public static function get_plan_by_gateway_subscription_id( $gateway_subscription_id ) {
+		global $wpdb;
+		$table_name = Database::get_table_name( Database::PLANS );
+		$sql        = "SELECT `id` FROM {$table_name} WHERE `gateway_subscription_id` = %s";
+		$item       = $wpdb->get_row( $wpdb->prepare( $sql, $gateway_subscription_id ) );
+		if ( $item ) {
+			return new Plan( $item->id );
+		}
+		return false;
+	}
+
 
 	/**
 	 * Get one by id
@@ -333,26 +364,27 @@ class Plan {
 	 */
 	public function get_one( $id ) {
 		global $wpdb;
-		$sql  = "SELECT `plan_id`, `date_created`, `date_updated`, `member_id`, `membership_id`, `enabled`, `status`, `gateway`, `start_date`, `end_date` FROM {$this->table_name} WHERE `id` = %d";
+		$sql  = "SELECT `plan_id`, `date_created`, `date_updated`, `member_id`, `membership_id`, `enabled`, `status`, `gateway`, `gateway_subscription_id`, `start_date`, `end_date` FROM {$this->table_name} WHERE `id` = %d";
 		$item = $wpdb->get_row( $wpdb->prepare( $sql, $id ) );
 		if ( $item ) {
-			$date_format                = get_option( 'date_format' );
-			$this->id                   = $id;
-			$this->plan_id              = $item->plan_id;
-			$this->date_created         = date_i18n( $date_format, strtotime( $item->date_created ) );
-			$this->date_updated         = ! empty( $item->date_updated ) ? date_i18n( $date_format, strtotime( $item->date_updated ) ) : '';
-			$this->start_date           = ! empty( $item->start_date ) ? date_i18n( $date_format, strtotime( $item->start_date ) ) : '';
-			$this->end_date             = ! empty( $item->end_date ) ? date_i18n( $date_format, strtotime( $item->end_date ) ) : '';
-			$this->start_date_timestamp = ! empty( $item->start_date ) ? strtotime( $item->start_date ) : 0;
-			$this->end_date_timestamp   = ! empty( $item->end_date ) ? strtotime( $item->end_date ) : 0;
-			$this->member_id            = $item->member_id;
-			$this->membership_id        = $item->membership_id;
-			$this->membership           = $this->get_memebership();
-			$this->enabled              = ( $item->enabled == 1 );
-			$this->status               = $item->status;
-			$this->status_detail        = Members::get_status( $item->status );
-			$this->gateway              = $item->gateway;
-			$this->meta                 = Meta::get_all( $id, 'plan' );
+			$date_format                   = get_option( 'date_format' );
+			$this->id                      = $id;
+			$this->plan_id                 = $item->plan_id;
+			$this->date_created            = date_i18n( $date_format, strtotime( $item->date_created ) );
+			$this->date_updated            = ! empty( $item->date_updated ) ? date_i18n( $date_format, strtotime( $item->date_updated ) ) : '';
+			$this->start_date              = ! empty( $item->start_date ) ? date_i18n( $date_format, strtotime( $item->start_date ) ) : '';
+			$this->end_date                = ! empty( $item->end_date ) ? date_i18n( $date_format, strtotime( $item->end_date ) ) : '';
+			$this->start_date_timestamp    = ! empty( $item->start_date ) ? strtotime( $item->start_date ) : 0;
+			$this->end_date_timestamp      = ! empty( $item->end_date ) ? strtotime( $item->end_date ) : 0;
+			$this->member_id               = $item->member_id;
+			$this->membership_id           = $item->membership_id;
+			$this->membership              = $this->get_memebership();
+			$this->enabled                 = ( $item->enabled == 1 );
+			$this->status                  = $item->status;
+			$this->status_detail           = Members::get_status( $item->status );
+			$this->gateway                 = $item->gateway;
+			$this->gateway_subscription_id = $item->gateway_subscription_id;
+			$this->meta                    = Meta::get_all( $id, 'plan' );
 		}
 	}
 
@@ -478,6 +510,37 @@ class Plan {
 			return $this->meta[ $meta_key ]['meta_value'];
 		}
 		return false;
+	}
+
+	/**
+	 * Record the payment and manage the plan.
+	 * Continue or dicontinue a plan.
+	 *
+	 * @param \Hammock\Model\Invoice The invoice
+	 *
+	 * @since 1.0.0
+	 */
+	public function record_payment( $invoice ) {
+		$this->save();
+	}
+
+	/**
+	 * Process plan renew
+	 *
+	 * @since 1.0.0
+	 */
+	public function renew() {
+
+	}
+
+	/**
+	 * Cancel subscription
+	 *
+	 * @since 1.0.0
+	 */
+	public function cancel() {
+		$this->status = Members::STATUS_CANCELED;
+		$this->save();
 	}
 
 	/**

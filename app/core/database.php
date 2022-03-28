@@ -197,6 +197,7 @@ class Database {
 				`enabled` tinyint(1) NOT NULL DEFAULT '0',
 				`status` varchar($max_index_length) NOT NULL,
 				`gateway` varchar($max_index_length) DEFAULT NULL,
+				`gateway_subscription_id` varchar($max_index_length) DEFAULT NULL,
 				`start_date` datetime DEFAULT NULL,
 				`end_date` datetime DEFAULT NULL,
 				`date_created` datetime NOT NULL default '0000-00-00 00:00:00',
@@ -205,6 +206,7 @@ class Database {
 				UNIQUE KEY `unique_plan_id` (`plan_id` ASC),
 				KEY `plan_member_id` (`member_id` ASC),
 				KEY `plan_membership` (`membership_id` ASC ),
+				KEY `plan_gateway_subscription_id` (`gateway_subscription_id` ASC ),
                 KEY `plan_member_membership` (`member_id` ASC, `membership_id` ASC ),
 				KEY `plan_member_membership_plan` (`member_id` ASC, `membership_id` ASC, `plan_id` ASC ))
 				$charset_collate;";

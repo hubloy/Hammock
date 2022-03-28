@@ -458,9 +458,9 @@ class Invoice {
 
 	/**
 	 * Get plan
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return Plan
 	 */
 	public function get_plan() {
@@ -469,9 +469,9 @@ class Invoice {
 
 	/**
 	 * Get user details
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return array
 	 */
 	public function get_user_details() {

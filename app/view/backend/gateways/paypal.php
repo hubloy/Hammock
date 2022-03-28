@@ -28,13 +28,13 @@ class Paypal extends View {
 					$this->ui->render(
 						'dropdown',
 						array(
-							'name'     	=> 'paypal_mode',
-							'selected' 	=> $mode,
-							'class'     => 'hammock-mode-select',
-							'attributes'=> array(
+							'name'       => 'paypal_mode',
+							'selected'   => $mode,
+							'class'      => 'hammock-mode-select',
+							'attributes' => array(
 								'data-target' => 'paypal',
 							),
-							'values'   => array(
+							'values'     => array(
 								'live' => __( 'Live', 'hammock' ),
 								'test' => __( 'Sandbox', 'hammock' ),
 							),

@@ -62,10 +62,10 @@ class Template {
 	public static function save_template( $template_code, $template_path ) {
 		$saved = false;
 		if ( ! empty( $template_code ) && ! empty( $template_path ) ) {
-			$file 			= self::get_theme_template_file( $template_path );
-			$code 			= wp_unslash( $template_code );
-			$file_helper 	= new File();
-			$saved 			= $file_helper->create_file( $file, $code );
+			$file        = self::get_theme_template_file( $template_path );
+			$code        = wp_unslash( $template_code );
+			$file_helper = new File();
+			$saved       = $file_helper->create_file( $file, $code );
 		}
 		return $saved;
 	}

@@ -228,7 +228,7 @@ class PayPal extends Gateway {
 			return;
 		}
 
-		if ( ! $invoice->gateway_tx_id && ! empty( $_POST['txn_id'] ) ) {
+		if ( ! $invoice->gateway_identifier && ! empty( $_POST['txn_id'] ) ) {
 			$invoice->gateway_identifier = sanitize_text_field( $_POST['txn_id'] );
 			$invoice->save(); // Save txn id.
 		}
@@ -242,14 +242,19 @@ class PayPal extends Gateway {
 		}
 	}
 
+	/**
+	 * Default callback for non-supported actions
+	 *
+	 * @since 1.0.0
+	 */
 	private function process_postback_default( $invoice ) {
-		$paypal_status = strtolower( $_POST['payment_status'] );
+		$paypal_status = strtolower( sanitize_text_field( $_POST['payment_status'] ) );
 
 		if ( in_array( $paypal_status, array( 'refunded', 'reversed' ) ) ) {
 			return $this->process_postback_refund( $invoice );
 		}
 
-		if ( 'completed' == $invoice->status ) {
+		if ( Transactions::STATUS_PAID === $invoice->status ) {
 			return;
 		}
 
@@ -270,51 +275,65 @@ class PayPal extends Gateway {
 			$invoice->status = Transactions::STATUS_PAID;
 		} elseif ( 'pending' === $paypal_status && ! empty( $_POST['pending_reason'] ) ) {
 			$invoice->status = Transactions::STATUS_PENDING;
-			$invoice->add_note( sprintf( __( 'PayPal has the payment on hold. Reason given: %s', 'hammck' ), $_POST['pending_reason'] ) );
+			$invoice->add_note( sprintf( __( 'PayPal has the payment on hold. Reason given: %s', 'hammock' ), sanitize_text_field( $_POST['pending_reason'] ) ) );
 		} else {
 			$invoice->status = Transactions::STATUS_FAILED;
-			$invoice->add_note( sprintf( __( 'PayPal rejected the payment. PayPal Status: %s', 'hammck' ), $paypal_status ) );
+			$invoice->add_note( sprintf( __( 'PayPal rejected the payment. PayPal Status: %s', 'hammock' ), $paypal_status ) );
 		}
 
 		$invoice->save();
 	}
 
-	private function process_postback_subscr_signup( $payment ) {
-		if ( 'completed' == $payment->status ) {
+	/**
+	 * Process subscription sign up
+	 *
+	 * @since 1.0.0
+	 */
+	private function process_postback_subscr_signup( $invoice ) {
+		if ( Transactions::STATUS_PAID === $invoice->status ) {
 			return;
 		}
+		$subscr_id       = sanitize_text_field( $_POST['subscr_id'] );
+		$invoice->status = Transactions::STATUS_PAID;
+		$invoice->add_note( sprintf( __( 'PayPal Subscription ID: %s', 'hammock' ), $subscr_id ) );
+		$invoice->save();
 
-		$payment->status = 'completed';
-		$payment->log( sprintf( __( 'PayPal Subscription ID: %s', 'hammck' ), $_POST['subscr_id'] ) );
-		$payment->save();
-
+		$plan = $invoice->get_plan();
+		if ( ! $plan ) {
+			return;
+		}
 		// Register subscription.
-		$subscription = $payment->get_listing()->get_subscription();
-		$subscription->set_subscription_id( $_POST['subscr_id'] );
-		$subscription->record_payment( $payment );
+		$plan->gateway_subscription_id = $subscr_id;
+		$plan->record_payment( $invoice );
 	}
 
-	private function process_postback_subscr_payment( $payment ) {
-		$listing = wpbdp_get_listing( $payment->listing_id );
-
-		if ( ! $listing || ! $listing->has_subscription() ) {
+	/**
+	 * Process subscription payment return
+	 *
+	 * @since 1.0.0
+	 */
+	private function process_postback_subscr_payment( $invoice ) {
+		$plan = $invoice->get_plan();
+		if ( ! $plan ) {
+			return;
+		}
+		$membership = $plan->get_memebership();
+		if ( ! $membership->is_recurring() ) {
 			return;
 		}
 
-		$subscription = $payment->get_listing()->get_subscription();
-
-		$date1         = date( 'Y-n-d', strtotime( $payment->created_at ) );
+		$date1         = date( 'Y-n-d', strtotime( $invoice->date_created ) );
 		$date2         = date( 'Y-n-d', strtotime( $_POST['payment_date'] ) );
 		$same_day      = $date1 == $date2;
-		$first_payment = ( $subscription->get_subscription_id() ? false : true );
+		$first_payment = $plan->gateway_subscription_id ? false : true;
 
 		if ( $first_payment ) {
-			if ( empty( $payment->gateway_tx_id ) ) {
-				$payment->gateway_tx_id = $_POST['txn_id'];
-				$payment->save();
+			if ( empty( $invoice->gateway_identifier ) ) {
+				$invoice->gateway_identifier = sanitize_text_field( $_POST['txn_id'] );
+				$invoice->save();
 			}
 
-			if ( 'completed' != $payment->status ) {
+			if ( Transactions::STATUS_PAID !== $invoice->status ) {
 				$this->process_postback_subscr_signup( $payment );
 				return;
 			}
@@ -325,23 +344,32 @@ class PayPal extends Gateway {
 			return;
 		}
 
-		$subscription->record_payment(
-			array(
-				'gateway_tx_id' => $_POST['txn_id'],
-				'amount'        => $_POST['mc_gross'],
-			)
-		);
-		$subscription->renew();
+		$invoice->amount = sanitize_text_field( $_POST['mc_gross'] );
+
+		$plan->record_payment( $invoice );
+		$plan->renew();
 	}
 
-	private function process_postback_subscr_cancel( $payment ) {
-		return $this->process_postback_subscr_eot( $payment );
+	/**
+	 * Process subscription cancel
+	 *
+	 * @since 1.0.0
+	 */
+	private function process_postback_subscr_cancel( $invoice ) {
+		return $this->process_postback_subscr_eot( $invoice );
 	}
 
-	private function process_postback_subscr_eot( $payment ) {
-		$listing      = $payment->get_listing();
-		$subscription = $listing->get_subscription();
-		$subscription->cancel();
+	/**
+	 * Process subscription cancel at the end of time.
+	 *
+	 * @since 1.0.0
+	 */
+	private function process_postback_subscr_eot( $invoice ) {
+		$plan = $invoice->get_plan();
+		if ( ! $plan ) {
+			return;
+		}
+		$plan->cancel();
 	}
 
 	private function process_postback_subscr_failed( $payment ) {

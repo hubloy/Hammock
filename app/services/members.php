@@ -525,11 +525,11 @@ class Members {
 				 *
 				 * @since 1.0.0
 				 */
-				$name = apply_filters( 'hammock_full_user_names', $user->first_name . ' ' . $user->last_name, $user );
+				$name  = apply_filters( 'hammock_full_user_names', $user->first_name . ' ' . $user->last_name, $user );
 				$fname = $user->first_name;
 				$lname = $user->last_name;
 			} elseif ( ! empty( $user->last_name ) ) {
-				$name = $user->last_name;
+				$name  = $user->last_name;
 				$lname = $user->last_name;
 			} elseif ( ! empty( $user->first_name ) ) {
 				$name  = $user->first_name;
