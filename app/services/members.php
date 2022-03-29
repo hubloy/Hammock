@@ -704,7 +704,7 @@ class Members {
 					if ( ! username_exists( $email_name[0] ) ) {
 						$username = $email_name[0];
 					} else {
-						$username = uniqid( $email_name[0], false );
+						$username = wp_unique_id( $email_name[0] );
 					}
 					$username = wp_slash( $username );
 				}
