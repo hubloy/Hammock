@@ -22,11 +22,24 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function hammock_get_account_page_links( $endpoint = 'base', $value = '' ) {
 	$base_url = hammock_get_page_permalink( 'account_page' );
-	if ( $endpoint == 'base' || $endpoint == 'dashboard' ) {
+	if ( 'base' === $endpoint || 'dashboard' === $endpoint ) {
 		return $base_url;
 	} else {
 		return hammock_get_page_endpoint_url( $base_url, $endpoint, $value );
 	}
+}
+
+/**
+ * Get invoice link
+ * 
+ * @param string $invoice_id The invoice id
+ * 
+ * @since 1.0.0
+ * 
+ * @return string
+ */
+function hammock_get_invoice_link( $invoice_id ) {
+	return hammock_get_account_page_links( 'view-transaction', $invoice_id );
 }
 
 /**

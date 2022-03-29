@@ -29,7 +29,7 @@ if ( $subscription->is_active() ) {
 				 * Active plan action.
 				 * Used to hook or override actions in this section. Some gateways might have an option to pause.
 				 * 
-				 * @param \Hammock\Model\Plan $subscription The subscription
+				 * @param \Hammock\Model\Plan $subscription The subscription plan
 				 * 
 				 * @since 1.0.0
 				 */

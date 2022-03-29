@@ -157,7 +157,7 @@ class Signup extends Controller {
 					wp_send_json_success(
 						array(
 							'message' => __( 'Plan joined. Proceeding to payments', 'hammock' ),
-							'reload'  => true,
+							'url'     => hammock_get_invoice_link( $invoice_id ),
 						)
 					);
 				}
@@ -177,7 +177,24 @@ class Signup extends Controller {
 
 		$plan = $this->get_user_plan( $plan_id );
 		if ( $plan ) {
+
+			/**
+			 * Action called before plan is deactivated
+			 * 
+			 * @param \Hammock\Model\Plan $plan The subscription plan
+			 * 
+			 * @since 1.0.0
+			 */
+			do_action( 'hammock_account_before_deactivate_plan', $plan );
+
 			$plan->cancel();
+
+			wp_send_json_success(
+				array(
+					'message' => __( 'Plan canceled', 'hammock' ),
+					'reload'  => true,
+				)
+			);
 			
 		}
 		wp_send_json_error( __( 'Plan is not linked to your account', 'hammock' ) );
@@ -194,7 +211,16 @@ class Signup extends Controller {
 
 		$plan = $this->get_user_plan( $plan_id );
 		if ( $plan ) {
-
+			$plan->set_pending();
+			$invoice_id = $this->transaction_service->get_pending_invoice( $plan );
+			if ( $invoice_id ) {
+				wp_send_json_success(
+					array(
+						'message' => __( 'Plan joined. Proceeding to payments', 'hammock' ),
+						'url'     => hammock_get_invoice_link( $invoice_id ),
+					)
+				);
+			}
 		}
 		wp_send_json_error( __( 'Plan is not linked to your account', 'hammock' ) );
 	}

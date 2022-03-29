@@ -234,7 +234,7 @@ class Gateway extends Component {
 	 * @return string
 	 */
 	public function get_invoice_page( $invoice ) {
-		return esc_url( hammock_get_account_page_links( 'view-transaction', $invoice->invoice_id ) );
+		return esc_url( hammock_get_invoice_link( $invoice->invoice_id ) );
 	}
 
 	/**
@@ -247,7 +247,7 @@ class Gateway extends Component {
 	 * @return string
 	 */
 	public function get_cancel_page( $invoice ) {
-		return esc_url( add_query_arg( 'cancel', 'cenceled', hammock_get_account_page_links( 'view-transaction', $invoice->invoice_id ) ) );
+		return esc_url( add_query_arg( 'cancel', 'cenceled', hammock_get_invoice_link( $invoice->invoice_id ) ) );
 	}
 
 	/**

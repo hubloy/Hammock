@@ -561,6 +561,16 @@ class Plan {
 	}
 
 	/**
+	 * Set status to pending.
+	 * 
+	 * @since 1.0.0
+	 */
+	public function set_pending() {
+		$this->status = Members::STATUS_PENDING;
+		$this->save();
+	}
+
+	/**
 	 * Render values to readable strings
 	 *
 	 * @since 1.0.0

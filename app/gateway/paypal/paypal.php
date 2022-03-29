@@ -9,7 +9,6 @@ use Hammock\Base\Gateway;
 use Hammock\Helper\Duration;
 use Hammock\Model\Invoice;
 use Hammock\Service\Transactions;
-use Hammock\Service\Members;
 
 class PayPal extends Gateway {
 
@@ -369,7 +368,8 @@ class PayPal extends Gateway {
 		if ( ! $plan ) {
 			return;
 		}
-		Members::cancel_plan( $plan );
+		// Use direct cancel action to prevent gateway loop.
+		$plan->cancel();
 	}
 
 	private function process_postback_subscr_failed( $payment ) {

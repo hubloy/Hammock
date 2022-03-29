@@ -347,7 +347,7 @@ class Transactions {
 			 */
 			do_action( 'hammock_invoice_saved_' . $status, $invoice, $member, $plan );
 
-			return $invoice->id;
+			return $invoice->invoice_id;
 		}
 		return false;
 	}
@@ -423,5 +423,23 @@ class Transactions {
 		}
 		return $members;
 	}
-}
 
+	/**
+	 * Get any pending invoice or create a new one.
+	 *
+	 * @param \Hammock\Model\Plan $plan The subscription plan
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return string $invoice_id The invoice id
+	 */
+	public function get_pending_invoice( $plan ) {
+		global $wpdb;
+		$sql        = "SELECT `invoice_id` FROM {$this->table_name} WHERE `status` = %s AND `plan_id` = %d ORDER BY `id` DESC LIMIT 1";
+		$invoice_id = $wpdb->get_var( $wpdb->prepare( $sql, self::STATUS_PENDING, $plan->id ) );
+		if ( ! $invoice_id ) {
+
+		}
+		return $invoice_id;
+	}
+}
