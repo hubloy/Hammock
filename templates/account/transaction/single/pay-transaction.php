@@ -13,23 +13,29 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <div class="hammock-account-transaction--pay-transaction hammock-account-transaction-<?php echo esc_attr( $invoice->id ); ?>">
-	<form>
+	<form method="POST" class="hammock-ajax-form">
+		<?php wp_nonce_field( 'hammock_purchase_subscription' ); ?>
+		<input type="hidden" name="action" value="hammock_purchase_subscription" />
+		<input type="hidden" name="invoice" value="<?php echo esc_attr( $invoice->id ); ?>" />
 		<?php do_action( 'hammock_account_pay_single_transaction_before', $invoice ); ?>
 		<table class="hammock-account-transaction--pay-transaction-details">
-			<tr class="status">
-				<td><?php esc_html_e( 'Invoice status:', 'hammock' ); ?></td>
-				<td><?php echo esc_html( $invoice->get_status_name() ); ?></td>
+			<tr class="details">
+				<td><?php esc_html_e( 'Details:', 'hammock' ); ?></td>
+				<td>
+					<?php
+						hammock_get_template(
+							'account/plan/single/payment-price.php',
+							array(
+								'plan' => $invoice->get_plan(),
+							)
+						);
+					?>
+				</td>
 			</tr>
 			<tr class="total">
 				<td><?php esc_html_e( 'Total:', 'hammock' ); ?></td>
 				<td><?php echo wp_kses_post( $invoice->get_amount_formated() ); ?></td>
 			</tr>
-			<?php if ( $invoice->gateway ) : ?>
-			<tr class="method">
-				<td><?php esc_html_e( 'Payment method:', 'hammock' ); ?></td>
-				<td><?php echo wp_kses_post( $invoice->gateway_name() ); ?></td>
-			</tr>
-			<?php endif; ?>
 			<?php if ( $invoice->is_owner() ) : ?>
 			<tr class="gateway">
 				<td><?php esc_html_e( 'Payment gateway:', 'hammock' ); ?></td>

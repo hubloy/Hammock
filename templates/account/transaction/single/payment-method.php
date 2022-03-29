@@ -2,7 +2,7 @@
 /**
  * Account payment method
  *
- * This template can be overridden by copying it to yourtheme/hammock/account/transaction/single/pay-transaction.php.
+ * This template can be overridden by copying it to yourtheme/hammock/account/transaction/single/payment-method.php.
  *
  * @package Hammock/Templates/Account/Transaction/Single/Pay
  * @version 1.0.0
