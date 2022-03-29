@@ -54,7 +54,7 @@ class Pages {
 				'protected-content' => apply_filters( 'hammock_protected_content_endpoint', 'protected-content' ),
 				'account'           => apply_filters( 'hammock_account_endpoint', 'account' ),
 				'edit-account'      => apply_filters( 'hammock_edit_account_endpoint', 'edit-account' ),
-				'transactions'      => apply_filters( 'hammock_ttransactions_endpoint', 'transactions' ),
+				'transactions'      => apply_filters( 'hammock_transactions_endpoint', 'transactions' ),
 				'subscriptions'     => apply_filters( 'hammock_subscriptions_endpoint', 'subscriptions' ),
 				'lost-password'     => apply_filters( 'hammock_lost_password_endpoint', 'lost-password' ),
 				'member-logout'     => apply_filters( 'hammock_member_logout_endpoint', 'member-logout' ),

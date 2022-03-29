@@ -479,6 +479,44 @@ class Invoice {
 	}
 
 	/**
+	 * Check if the current user is the invoice owner
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return bool
+	 */
+	public function is_owner() {
+		if ( ! is_user_logged_in() ) {
+			return false;
+		}
+		$current_user_id = get_current_user_id();
+		$is_owner = ( $this->user_id === $current_user_id );
+		return apply_filters( 'hammock_current_user_is_invoice_owner', $is_owner, $this->id );
+	}
+
+	/**
+	 * Get hte status name
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return string
+	 */
+	public function get_status_name() {
+		return Transactions::get_transaction_status( $this->status );
+	}
+
+	/**
+	 * Get the amount formatted
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return string
+	 */
+	public function get_amount_formated() {
+		return hammock_format_currency( $this->amount );
+	}
+
+	/**
 	 * Get Custom data value
 	 *
 	 * @param string $meta_key - the meta key
@@ -541,7 +579,6 @@ class Invoice {
 	 * @return array
 	 */
 	public function to_html() {
-		$code = \Hammock\Helper\Currency::get_membership_currency();
 		return apply_filters(
 			'hammock_invoice_to_html',
 			array(
@@ -549,7 +586,7 @@ class Invoice {
 				'gateway'         => $this->gateway,
 				'gateway_name'    => $this->gateway_name(),
 				'status'          => $this->status,
-				'status_name'     => Transactions::get_transaction_status( $this->status ),
+				'status_name'     => $this->get_status_name(),
 				'is_overdue'      => $this->is_overdue(),
 				'member_id'       => $this->member_id,
 				'member_user'     => new Member( $this->member_id ),
@@ -557,7 +594,7 @@ class Invoice {
 				'plan'            => $this->get_plan(),
 				'invoice_id'      => $this->invoice_id,
 				'amount'          => $this->amount,
-				'amount_formated' => $code . '' . $this->amount,
+				'amount_formated' => $this->get_amount_formated(),
 				'custom_data'     => $this->custom_data,
 				'user_id'         => $this->user_id,
 				'user_data'       => $this->get_user_details(),

@@ -48,7 +48,7 @@ function hammock_page_id( $page_key ) {
 function hammock_format_currency( $price, $cude_position = 'left' ) {
 	$code  = hammock_get_currency_symbol();
 	$price = hammock_format_price( $price );
-	if ( $cude_position === 'left' ) {
+	if ( 'left' === $cude_position ) {
 		$output = $code . '' . $price;
 	} else {
 		$output = $price . ' ' . $code;
@@ -67,8 +67,7 @@ function hammock_format_currency( $price, $cude_position = 'left' ) {
  * @return string
  */
 function hammock_format_price( $price ) {
-	$price = \Hammock\Helper\Currency::format_price( $price );
-	return apply_filters( 'hammock_format_price', $price );
+	return \Hammock\Helper\Currency::format_price( $price );
 }
 
 
@@ -81,7 +80,6 @@ function hammock_format_price( $price ) {
  * @return string
  */
 function hammock_get_currency_symbol() {
-	$code = \Hammock\Helper\Currency::get_membership_currency();
-	return apply_filters( 'hammock_get_currency_symbol', $code );
+	return \Hammock\Helper\Currency::get_membership_currency();
 }
 

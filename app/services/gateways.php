@@ -20,7 +20,7 @@ class Gateways {
 	 *
 	 * @return array
 	 */
-	static function load_gateways() {
+	public static function load_gateways() {
 		$gateways = apply_filters( 'hammock_register_gateways', array() );
 		ksort( $gateways );
 		return $gateways;
@@ -38,7 +38,7 @@ class Gateways {
 	 *
 	 * @return array
 	 */
-	static function list_simple_gateways( $include_select = true ) {
+	public static function list_simple_gateways( $include_select = true ) {
 		$gateways = self::load_gateways();
 		if ( $include_select ) {
 			$drop_down = array(
@@ -60,7 +60,7 @@ class Gateways {
 	 *
 	 * @return array
 	 */
-	static function list_active_gateways() {
+	public static function list_active_gateways() {
 		$gateways        = self::load_gateways();
 		$active_gateways = array();
 		foreach ( $gateways as $key => $value ) {

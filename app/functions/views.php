@@ -49,4 +49,3 @@ function hammock_view_transaction_list_table_columns() {
 		)
 	);
 }
-

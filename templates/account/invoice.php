@@ -27,7 +27,7 @@ if ( ! $invoice ) {
 	?>
 	</p>
 	<?php
-	if ( $invoice->is_paid() ) {
+	if ( ! $invoice->is_owner() || $invoice->is_paid() ) {
 		hammock_get_template(
 			'account/transaction/single/view-transaction.php',
 			array(
