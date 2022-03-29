@@ -317,7 +317,7 @@ class PayPal extends Gateway {
 		if ( ! $plan ) {
 			return;
 		}
-		$membership = $plan->get_memebership();
+		$membership = $plan->get_membership();
 		if ( ! $membership->is_recurring() ) {
 			return;
 		}
@@ -408,7 +408,7 @@ class PayPal extends Gateway {
 	public function process_payment( $invoice ) {
 		$credentials = $this->get_credentials();
 		$plan        = $invoice->get_plan();
-		$membership  = $plan->get_memebership();
+		$membership  = $plan->get_membership();
 		if ( $membership->is_recurring() ) {
 			return $this->process_recurring( $invoice, $plan, $membership, $credentials );
 		}

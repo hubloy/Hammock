@@ -321,8 +321,19 @@ class Plan {
 	 *
 	 * @return object
 	 */
-	public function get_memebership() {
+	public function get_membership() {
 		return new Membership( $this->membership_id );
+	}
+
+	/**
+	 * Get member
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return object
+	 */
+	public function get_member() {
+		return new Member( $this->member_id );
 	}
 
 	/**
@@ -391,7 +402,7 @@ class Plan {
 			$this->end_date_timestamp      = ! empty( $item->end_date ) ? strtotime( $item->end_date ) : 0;
 			$this->member_id               = $item->member_id;
 			$this->membership_id           = $item->membership_id;
-			$this->membership              = $this->get_memebership();
+			$this->membership              = $this->get_membership();
 			$this->enabled                 = ( $item->enabled == 1 );
 			$this->status                  = $item->status;
 			$this->status_detail           = Members::get_status( $item->status );
@@ -535,7 +546,7 @@ class Plan {
 	 * @since 1.0.0
 	 */
 	public function record_payment( $invoice ) {
-		$membership = $this->get_memebership();
+		$membership = $this->get_membership();
 		$this->set_active_membership( $membership );
 		$this->save();
 

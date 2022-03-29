@@ -438,7 +438,9 @@ class Transactions {
 		$sql        = "SELECT `invoice_id` FROM {$this->table_name} WHERE `status` = %s AND `plan_id` = %d ORDER BY `id` DESC LIMIT 1";
 		$invoice_id = $wpdb->get_var( $wpdb->prepare( $sql, self::STATUS_PENDING, $plan->id ) );
 		if ( ! $invoice_id ) {
-
+			$member     = $plan->get_member();
+			$membership = $plan->get_membership();
+			return $this->save_transaction( $plan->gateway, self::STATUS_PENDING, $member, $plan, $membership->get_price() );
 		}
 		return $invoice_id;
 	}

@@ -87,6 +87,8 @@ class Signup extends Controller {
 		$this->add_ajax_action( 'hammock_purchase_plan', 'purchase_plan', true, true );
 		$this->add_ajax_action( 'hammock_deactivate_plan', 'deactivate_plan' );
 		$this->add_ajax_action( 'hammock_activate_plan', 'activate_plan' );
+
+		$this->add_ajax_action( 'hammock_purchase_subscription', 'purchase_subscription' );
 	}
 
 
@@ -223,6 +225,15 @@ class Signup extends Controller {
 			}
 		}
 		wp_send_json_error( __( 'Plan is not linked to your account', 'hammock' ) );
+	}
+
+	/**
+	 * Process subscription purchase
+	 * 
+	 * @since 1.0.0
+	 */
+	public function purchase_subscription() {
+		$this->verify_nonce( 'hammock_purchase_subscription' );
 	}
 
 	/**
