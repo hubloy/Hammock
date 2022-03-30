@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <div class="hammock-account-transaction--pay-transaction hammock-account-transaction-<?php echo esc_attr( $invoice->id ); ?>">
-	<form method="POST" class="hammock-ajax-form">
+	<form method="POST" class="hammock-checkout-form">
 		<?php wp_nonce_field( 'hammock_purchase_subscription' ); ?>
 		<input type="hidden" name="action" value="hammock_purchase_subscription" />
 		<input type="hidden" name="invoice" value="<?php echo esc_attr( $invoice->id ); ?>" />
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<td>
 					<?php
 						hammock_get_template(
-							'account/plan/single/payment-price.php',
+							'account/plan/single/plan-price.php',
 							array(
 								'plan' => $invoice->get_plan(),
 							)

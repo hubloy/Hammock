@@ -444,4 +444,20 @@ class Transactions {
 		}
 		return $invoice_id;
 	}
+
+	/**
+	 * Process transaction
+	 * 
+	 * @param int $invoice_id The invoice id
+	 * @param string $gateway_id The gateway id
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return json
+	 */
+	public function process_transaction( $invoice_id, $gateway_id ) {
+		if ( ! Gateways::gateway_exists( $gateway_id ) ) {
+			wp_send_json_error( __( 'Invalid payment gateway selected', 'hammock' ) );
+		}
+	}
 }

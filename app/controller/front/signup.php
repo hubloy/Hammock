@@ -178,28 +178,27 @@ class Signup extends Controller {
 		$this->verify_nonce( 'hammock_membership_plan_' . $plan_id );
 
 		$plan = $this->get_user_plan( $plan_id );
-		if ( $plan ) {
-
-			/**
-			 * Action called before plan is deactivated
-			 * 
-			 * @param \Hammock\Model\Plan $plan The subscription plan
-			 * 
-			 * @since 1.0.0
-			 */
-			do_action( 'hammock_account_before_deactivate_plan', $plan );
-
-			$plan->cancel();
-
-			wp_send_json_success(
-				array(
-					'message' => __( 'Plan canceled', 'hammock' ),
-					'reload'  => true,
-				)
-			);
-			
+		if ( ! $plan ) {
+			wp_send_json_error( __( 'Plan is not linked to your account', 'hammock' ) );
 		}
-		wp_send_json_error( __( 'Plan is not linked to your account', 'hammock' ) );
+
+		/**
+		 * Action called before plan is deactivated
+		 * 
+		 * @param \Hammock\Model\Plan $plan The subscription plan
+		 * 
+		 * @since 1.0.0
+		 */
+		do_action( 'hammock_account_before_deactivate_plan', $plan );
+
+		$plan->cancel();
+
+		wp_send_json_success(
+			array(
+				'message' => __( 'Plan canceled', 'hammock' ),
+				'reload'  => true,
+			)
+		);
 	}
 
 	/**
@@ -212,19 +211,20 @@ class Signup extends Controller {
 		$this->verify_nonce( 'hammock_membership_plan_' . $plan_id );
 
 		$plan = $this->get_user_plan( $plan_id );
-		if ( $plan ) {
-			$plan->set_pending();
-			$invoice_id = $this->transaction_service->get_pending_invoice( $plan );
-			if ( $invoice_id ) {
-				wp_send_json_success(
-					array(
-						'message' => __( 'Plan joined. Proceeding to payments', 'hammock' ),
-						'url'     => hammock_get_invoice_link( $invoice_id ),
-					)
-				);
-			}
+		if ( ! $plan ) {
+			wp_send_json_error( __( 'Plan is not linked to your account', 'hammock' ) );
 		}
-		wp_send_json_error( __( 'Plan is not linked to your account', 'hammock' ) );
+
+		$plan->set_pending();
+		$invoice_id = $this->transaction_service->get_pending_invoice( $plan );
+		if ( $invoice_id ) {
+			wp_send_json_success(
+				array(
+					'message' => __( 'Plan joined. Proceeding to payments', 'hammock' ),
+					'url'     => hammock_get_invoice_link( $invoice_id ),
+				)
+			);
+		}
 	}
 
 	/**
@@ -234,6 +234,10 @@ class Signup extends Controller {
 	 */
 	public function purchase_subscription() {
 		$this->verify_nonce( 'hammock_purchase_subscription' );
+		$invoice_id     = absint( sanitize_text_field( $_POST['invoice'] ) );
+		$payment_method = sanitize_text_field( $_POST['payment_method'] );
+
+		$this->transaction_service->process_transaction( $invoice_id, $payment_method );
 	}
 
 	/**

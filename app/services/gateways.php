@@ -71,5 +71,18 @@ class Gateways {
 		}
 		return $active_gateways;
 	}
-}
 
+	/**
+	 * Check if the selected gate3way exists
+	 * 
+	 * @param string $gateway_id The gateway id
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return bool
+	 */
+	public static function gateway_exists( $gateway_id ) {
+		$gateways = array_keys( self::load_gateways() );
+		return in_array( $gateway_id, $gateways, true );
+	}
+}
