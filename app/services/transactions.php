@@ -459,5 +459,10 @@ class Transactions {
 		if ( ! Gateways::gateway_exists( $gateway_id ) ) {
 			wp_send_json_error( __( 'Invalid payment gateway selected', 'hammock' ) );
 		}
+		$invoice = new Invoice();
+		$invoice->get_by_invoice_id( $invoice_id );
+		if ( ! $invoice->is_valid() || ! $invoice->is_owner() ) {
+			wp_send_json_error( __( 'Invalid invoice selected', 'hammock' ) );
+		}
 	}
 }
