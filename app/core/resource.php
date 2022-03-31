@@ -84,7 +84,7 @@ class Resource {
 
 		wp_register_script(
 			'hubloy_membership-admin',
-			HUBMEMB_ASSETS_URL . '/js/hubloy_membership-admin.min.js',
+			HUBMEMB_ASSETS_URL . '/js/hubloy-membership-admin.min.js',
 			array( 'jquery' ),
 			HUBMEMB_VERSION,
 			true
@@ -163,7 +163,7 @@ class Resource {
 			)
 		);
 
-		wp_localize_script( 'hubloy_membership-admin', 'hubloy-membership', $vars );
+		wp_localize_script( 'hubloy_membership-admin', 'hubloy_membership', $vars );
 
 		wp_register_script(
 			'hubloy_membership-addons-react',
@@ -307,7 +307,7 @@ class Resource {
 		// Admin CSS
 		wp_register_style(
 			'hubloy_membership-admin',
-			HUBMEMB_ASSETS_URL . '/css/hubloy_membership-admin.min.css',
+			HUBMEMB_ASSETS_URL . '/css/hubloy-membership-admin.min.css',
 			null,
 			HUBMEMB_VERSION
 		);
@@ -322,7 +322,7 @@ class Resource {
 	public static function register_front_styles() {
 		wp_register_style(
 			'hubloy_membership-front',
-			HUBMEMB_ASSETS_URL . '/css/hubloy_membership-front.min.css',
+			HUBMEMB_ASSETS_URL . '/css/hubloy-membership-front.min.css',
 			null,
 			HUBMEMB_VERSION
 		);
@@ -346,7 +346,7 @@ class Resource {
 
 		wp_register_script(
 			'hubloy_membership-front',
-			HUBMEMB_ASSETS_URL . '/js/hubloy_membership-front.min.js',
+			HUBMEMB_ASSETS_URL . '/js/hubloy-membership-front.min.js',
 			array( 'jquery' ),
 			HUBMEMB_VERSION,
 			true
@@ -374,7 +374,7 @@ class Resource {
 			)
 		);
 
-		wp_localize_script( 'hubloy_membership-front', 'hubloy-membership', $vars );
+		wp_localize_script( 'hubloy_membership-front', 'hubloy_membership', $vars );
 	}
 }
 
