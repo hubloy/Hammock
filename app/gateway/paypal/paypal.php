@@ -446,9 +446,11 @@ class PayPal extends Gateway {
 		$url .= http_build_query( array_filter( $paypal ), '', '&' );
 		$url  = str_replace( '&amp;', '&', $url );
 
-		return array(
-			'result'   => 'success',
-			'redirect' => $url,
+		wp_send_json_success(
+			array(
+				'message' => __( 'Redirecting to PayPal', 'hammock' ),
+				'url'     => $url,
+			)
 		);
 	}
 
@@ -521,9 +523,11 @@ class PayPal extends Gateway {
 		$url .= http_build_query( $paypal );
 		$url  = str_replace( '&amp;', '&', $url );
 
-		return array(
-			'result'   => 'success',
-			'redirect' => $url,
+		wp_send_json_success(
+			array(
+				'message' => __( 'Redirecting to PayPal', 'hammock' ),
+				'url'     => $url,
+			)
 		);
 	}
 

@@ -356,9 +356,11 @@ class Gateway extends Component {
 	public function process_payment( $invoice ) {
 		$invoice->status = Transactions::STATUS_PAID;
 		$invoice->save();
-		return array(
-			'result'   => 'success',
-			'redirect' => $this->get_invoice_page( $invoice ),
+		wp_send_json_success(
+			array(
+				'url'      => $this->get_invoice_page( $invoice ),
+				'message'  => __( 'Payment Successful', 'hammock' ),
+			) 
 		);
 	}
 
@@ -372,7 +374,7 @@ class Gateway extends Component {
 	 * @since 1.0.0
 	 */
 	public function process_refund( $invoice, $plan, $amount ) {
-
+		wp_send_json_error( __( 'Not supported', 'hammock' ) );
 	}
 
 

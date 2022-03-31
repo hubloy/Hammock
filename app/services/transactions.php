@@ -464,5 +464,19 @@ class Transactions {
 		if ( ! $invoice->is_valid() || ! $invoice->is_owner() ) {
 			wp_send_json_error( __( 'Invalid invoice selected', 'hammock' ) );
 		}
+		$invoice->gateway = $gateway_id;
+		$invoice->status  = self::STATUS_PENDING;
+		$invoice->save();
+
+		do_action( 'hammock_before_process_payment', $invoice, $gateway_id );
+
+		/**
+		 * Process transaction
+		 * 
+		 * @see \Hammock\Base\Gateway
+		 * 
+		 * @since 1.0.0
+		 */
+		do_action( 'hammock_gateway_' . $gateway_id . '_process_payment', $invoice );
 	}
 }

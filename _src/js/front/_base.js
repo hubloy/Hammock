@@ -75,8 +75,8 @@ jQuery(function ($) {
 				$( document.body ).trigger( 'hammock_checkout_success', [ response ] );
 				if (typeof response.data.message !== 'undefined') {
 					hammock.helper.notify(response.data.message, 'success');
-					if (typeof response.data.link !== 'undefined') {
-						window.location.href = response.data.link;
+					if (typeof response.data.url !== 'undefined') {
+						window.location.href = response.data.url;
 					}
 				} else {
 					hammock.helper.notify(response.data, 'success');
