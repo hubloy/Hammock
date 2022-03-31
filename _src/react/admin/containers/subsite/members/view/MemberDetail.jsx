@@ -10,8 +10,8 @@ export default class MemberDetail extends Component {
 	constructor(props) {
 		super(props);
 		this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
 		this.delete = this.delete.bind(this);
 	}
@@ -22,9 +22,9 @@ export default class MemberDetail extends Component {
 			$btn_txt = $button.text(),
 			id = $button.attr('data-id'),
 			prompt = $button.attr('data-prompt'),
-			helper = window.hammock.helper,
+			helper = window.hubloy_membership.helper,
 			self = this,
-			error = self.props.hammock.error,
+			error = self.props.hubloy_membership.error,
 			fetchWP = self.fetchWP;
 		
 		helper.confirm( prompt, 'warning', function() {
@@ -55,8 +55,8 @@ export default class MemberDetail extends Component {
 	}
 
 	render() {
-		var hammock = this.props.hammock,
-			strings = hammock.strings,
+		var hubloy_membership = this.props.hubloy_membership,
+			strings = hubloy_membership.strings,
 			member = this.props.member;
 		return (
 			<div>
@@ -69,7 +69,7 @@ export default class MemberDetail extends Component {
 							<li><strong>{member.user_info.name}</strong></li>
 							<li><a href={"mailto:" + member.user_info.email}>{member.user_info.email}</a></li>
 							<li>{strings.labels.member_id} : <code>{member.member_id}</code></li>
-							<li>{strings.edit.details.status} : {member.enabled ? hammock.common.status.enabled : hammock.common.status.disabled}</li>
+							<li>{strings.edit.details.status} : {member.enabled ? hubloy_membership.common.status.enabled : hubloy_membership.common.status.disabled}</li>
 							<li>{strings.edit.details.since} : {member.date_created}</li>
 							<li><a href={member.user_edit_url} target="_blank" className="uk-text-primary">{strings.labels.profile_url}</a></li>
 							<li><a href="#" data-id={member.id} data-prompt={strings.edit.details.delete.prompt} onClick={this.delete} className="uk-text-danger delete-button">{strings.edit.details.delete.title}</a></li>
@@ -83,5 +83,5 @@ export default class MemberDetail extends Component {
 }
 
 MemberDetail.propTypes = {
-	hammock: PropTypes.object
+	hubloy_membership: PropTypes.object
 };

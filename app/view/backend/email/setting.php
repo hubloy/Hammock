@@ -1,13 +1,13 @@
 <?php
-namespace Hammock\View\Backend\Email;
+namespace HubloyMembership\View\Backend\Email;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Base\View;
-use Hammock\Helper\Template;
-use Hammock\Helper\File;
+use HubloyMembership\Base\View;
+use HubloyMembership\Helper\Template;
+use HubloyMembership\Helper\File;
 
 class Setting extends View {
 
@@ -29,25 +29,25 @@ class Setting extends View {
 		?>
 		<div class="uk-margin">
 			<label class="uk-form-label uk-text-bold" for="enabled">
-				<?php esc_html_e( 'Enabled', 'hammock' ); ?>
+				<?php esc_html_e( 'Enabled', 'hubloy-membership' ); ?>
 			</label>
-			<div class="uk-form-controls hammock-input">
+			<div class="uk-form-controls hubloy-membership-input">
 				<?php
 				$this->ui->render(
 					'switch',
 					array(
-						'title'  => __( 'Enabled', 'hammock' ),
+						'title'  => __( 'Enabled', 'hubloy-membership' ),
 						'name'   => 'enabled',
 						'value'  => 1,
 						'option' => $params['enabled'],
 					)
 				);
 				?>
-				<p class="uk-text-meta"><?php esc_html_e( 'Enable or disable email', 'hammock' ); ?></p>
+				<p class="uk-text-meta"><?php esc_html_e( 'Enable or disable email', 'hubloy-membership' ); ?></p>
 			</div>
 		</div>
 		<div class="uk-margin">
-			<label class="uk-form-label" for="subject"><?php esc_html_e( 'Email Subject', 'hammock' ); ?></label>
+			<label class="uk-form-label" for="subject"><?php esc_html_e( 'Email Subject', 'hubloy-membership' ); ?></label>
 			<div class="uk-form-controls">
 				<?php
 					$this->ui->render(
@@ -61,12 +61,12 @@ class Setting extends View {
 					);
 				?>
 				<p class="uk-text-meta">
-					<?php echo sprintf( esc_html__( 'Use the follwing placeholders %s', 'hammock' ), '<strong>' . implode( '</strong>, <strong>', $place_holders ) . '</strong>' ); ?>
+					<?php echo sprintf( esc_html__( 'Use the follwing placeholders %s', 'hubloy-membership' ), '<strong>' . implode( '</strong>, <strong>', $place_holders ) . '</strong>' ); ?>
 				</p>
 			</div>
 		</div>
 		<div class="uk-margin">
-			<label class="uk-form-label" for="heading"><?php esc_html_e( 'Email Heading', 'hammock' ); ?></label>
+			<label class="uk-form-label" for="heading"><?php esc_html_e( 'Email Heading', 'hubloy-membership' ); ?></label>
 			<div class="uk-form-controls">
 				<?php
 					$this->ui->render(
@@ -85,7 +85,7 @@ class Setting extends View {
 		if ( $is_admin ) {
 			?>
 				<div class="uk-margin">
-					<label class="uk-form-label" for="recipient"><?php esc_html_e( 'Recipient', 'hammock' ); ?></label>
+					<label class="uk-form-label" for="recipient"><?php esc_html_e( 'Recipient', 'hubloy-membership' ); ?></label>
 					<div class="uk-form-controls">
 					<?php
 						$this->ui->render(
@@ -104,30 +104,30 @@ class Setting extends View {
 		}
 		if ( current_user_can( 'edit_themes' ) && ( ! empty( $template ) ) ) {
 			?>
-			<h4 class="uk-heading-small uk-heading-divider"><?php esc_html_e( 'Email Template', 'hammock' ); ?></h4>
+			<h4 class="uk-heading-small uk-heading-divider"><?php esc_html_e( 'Email Template', 'hubloy-membership' ); ?></h4>
 			<?php
 			$local_file    = Template::get_theme_template_file( $template );
-			$template_file = HAMMOCK_TEMPLATE_DIR . $template;
+			$template_file = HUBMEMB_TEMPLATE_DIR . $template;
 			$template_dir  = Template::template_directory();
 			?>
 			<div class="template">
 				<?php if ( $file_service->exists( $local_file ) ) : ?>
-					<button class="uk-button uk-button-default uk-button-small" type="button" uk-toggle="target: .hammock-template-details; animation: uk-animation-fade"><?php esc_html_e( 'View', 'hammock' ); ?></button>
+					<button class="uk-button uk-button-default uk-button-small" type="button" uk-toggle="target: .hubloy-membership-template-details; animation: uk-animation-fade"><?php esc_html_e( 'View', 'hubloy-membership' ); ?></button>
 					<?php if ( $file_service->is_writable( $local_file ) ) : ?>
-						<a href="#" class="hammock-ajax-click uk-button uk-button-default" data-action="hammock_email_delete_theme" data-nonce="<?php echo wp_create_nonce( 'hammock_email_delete_theme' ); ?>" data-id="<?php echo $id; ?>">
-							<?php esc_html_e( 'Delete template file', 'hammock' ); ?>
+						<a href="#" class="hubloy-membership-ajax-click uk-button uk-button-default" data-action="hubloy-membership_email_delete_theme" data-nonce="<?php echo wp_create_nonce( 'hubloy-membership_email_delete_theme' ); ?>" data-id="<?php echo $id; ?>">
+							<?php esc_html_e( 'Delete template file', 'hubloy-membership' ); ?>
 						</a>
 					<?php endif; ?>
 					<p>
 					<?php
-						printf( esc_html__( 'This template has been overridden by your theme and can be found in: %s.', 'hammock' ), '<code>' . esc_html( trailingslashit( basename( get_stylesheet_directory() ) ) . $template_dir . '/' . $template ) . '</code>' );
+						printf( esc_html__( 'This template has been overridden by your theme and can be found in: %s.', 'hubloy-membership' ), '<code>' . esc_html( trailingslashit( basename( get_stylesheet_directory() ) ) . $template_dir . '/' . $template ) . '</code>' );
 					?>
 					</p>
-					<div class="uk-card uk-card-default uk-card-body uk-margin-small hammock-template-details" hidden>
+					<div class="uk-card uk-card-default uk-card-body uk-margin-small hubloy-membership-template-details" hidden>
 						<pre><?php echo esc_html( $file_service->read_file( $local_file ) ); ?></pre>
 					</div>
 				<?php elseif ( $file_service->exists( $template_file ) ) : ?>
-					<button class="uk-button uk-button-default uk-button-small" type="button" uk-toggle="target: .hammock-template-details; animation: uk-animation-fade"><?php esc_html_e( 'View', 'hammock' ); ?></button>
+					<button class="uk-button uk-button-default uk-button-small" type="button" uk-toggle="target: .hubloy-membership-template-details; animation: uk-animation-fade"><?php esc_html_e( 'View', 'hubloy-membership' ); ?></button>
 					<?php
 						$emails_dir    = get_stylesheet_directory() . '/' . $template_dir . '/emails';
 						$templates_dir = get_stylesheet_directory() . '/' . $template_dir;
@@ -143,22 +143,22 @@ class Setting extends View {
 
 					if ( $file_service->is_writable( $target_dir ) ) : // phpcs:ignore WordPress.VIP.FileSystemWritesDisallow.file_ops_is_writable
 						?>
-							<a href="#" class="uk-button uk-button-default uk-button-small hammock-ajax-click" data-action="hammock_email_copy_theme" data-nonce="<?php echo wp_create_nonce( 'hammock_email_copy_theme' ); ?>" data-id="<?php echo $id; ?>">
-							<?php esc_html_e( 'Copy file to theme', 'hammock' ); ?>
+							<a href="#" class="uk-button uk-button-default uk-button-small hubloy-membership-ajax-click" data-action="hubloy-membership_email_copy_theme" data-nonce="<?php echo wp_create_nonce( 'hubloy-membership_email_copy_theme' ); ?>" data-id="<?php echo $id; ?>">
+							<?php esc_html_e( 'Copy file to theme', 'hubloy-membership' ); ?>
 							</a>
 						<?php
 						endif;
 					?>
 						<p>
 							<?php
-								printf( esc_html__( 'To override and edit this email template copy %1$s to your theme folder: %2$s.', 'hammock' ), '<code>' . esc_html( plugin_basename( $template_file ) ) . '</code>', '<code>' . esc_html( trailingslashit( basename( get_stylesheet_directory() ) ) . $template_dir . '/' . $template ) . '</code>' );
+								printf( esc_html__( 'To override and edit this email template copy %1$s to your theme folder: %2$s.', 'hubloy-membership' ), '<code>' . esc_html( plugin_basename( $template_file ) ) . '</code>', '<code>' . esc_html( trailingslashit( basename( get_stylesheet_directory() ) ) . $template_dir . '/' . $template ) . '</code>' );
 							?>
 						</p>
-					<div class="uk-card uk-card-default uk-card-body uk-margin-small hammock-template-details" hidden>
+					<div class="uk-card uk-card-default uk-card-body uk-margin-small hubloy-membership-template-details" hidden>
 						<pre><?php echo esc_html( $file_service->read_file( $template_file ) ); ?></pre>
 					</div>
 				<?php else : ?>
-					<p><?php esc_html_e( 'File was not found.', 'hammock' ); ?></p>
+					<p><?php esc_html_e( 'File was not found.', 'hubloy-membership' ); ?></p>
 				<?php endif; ?>
 			</div>
 			<?php

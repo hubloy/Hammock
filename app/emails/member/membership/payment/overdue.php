@@ -1,7 +1,7 @@
 <?php
-namespace Hammock\Emails\Member\Membership\Payment;
+namespace HubloyMembership\Emails\Member\Membership\Payment;
 
-use Hammock\Base\Email;
+use HubloyMembership\Base\Email;
 
 /**
  * User card expire
@@ -36,7 +36,7 @@ class Overdue extends Email {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$type                = \Hammock\Services\Emails::COMM_TYPE_AFTER_PAYMENT_DUE;
+		$type                = \HubloyMembership\Services\Emails::COMM_TYPE_AFTER_PAYMENT_DUE;
 		$this->id            = 'member-' . $type;
 		$this->template_html = 'emails/membership/payment/overdue.php';
 		$this->placeholders  = array(
@@ -53,10 +53,10 @@ class Overdue extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Payment overdue', 'hammock' ),
-			'description' => __( 'Sent to a member when payment is overdue', 'hammock' ),
-			'heading'     => __( 'Payment overdue', 'hammock' ),
-			'subject'     => sprintf( __( 'Your %s membership payment is overdue', 'hammock' ), '{membership_name}' ),
+			'title'       => __( 'Payment overdue', 'hubloy-membership' ),
+			'description' => __( 'Sent to a member when payment is overdue', 'hubloy-membership' ),
+			'heading'     => __( 'Payment overdue', 'hubloy-membership' ),
+			'subject'     => sprintf( __( 'Your %s membership payment is overdue', 'hubloy-membership' ), '{membership_name}' ),
 			'recipient'   => '',
 			'enabled'     => false,
 		);

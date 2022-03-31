@@ -1,16 +1,16 @@
 <?php
-namespace Hammock\Model;
+namespace HubloyMembership\Model;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Core\Database;
-use Hammock\Services\Memberships;
-use Hammock\Services\Members;
-use Hammock\Services\Activity;
-use Hammock\Services\Sublogs;
-use Hammock\Helper\Duration;
+use HubloyMembership\Core\Database;
+use HubloyMembership\Services\Memberships;
+use HubloyMembership\Services\Members;
+use HubloyMembership\Services\Activity;
+use HubloyMembership\Services\Sublogs;
+use HubloyMembership\Helper\Duration;
 
 /**
  * Member model
@@ -259,11 +259,11 @@ class Member {
 		$old_plan = Plan::get_plan( $this->id, $old_membership_id );
 		if ( $old_plan ) {
 			// Delete
-			do_action( 'hammock_member_before_remove_old_plan', $old_plan, $old_membership_id, $this );
+			do_action( 'hubloy-membership_member_before_remove_old_plan', $old_plan, $old_membership_id, $this );
 
 			$old_plan->delete();
 
-			do_action( 'hammock_member_after_remove_old_plan', $old_membership_id, $this );
+			do_action( 'hubloy-membership_member_after_remove_old_plan', $old_membership_id, $this );
 
 			return true;
 		}
@@ -278,7 +278,7 @@ class Member {
 	public function drop_all_plans() {
 		$plans = $this->get_plan_ids();
 
-		do_action( 'hammock_member_before_drop_all_plans', $plans, $this );
+		do_action( 'hubloy-membership_member_before_drop_all_plans', $plans, $this );
 
 		foreach ( $plans as $plan_id ) {
 			$plan = new Plan( $plan_id );
@@ -287,7 +287,7 @@ class Member {
 			}
 		}
 
-		do_action( 'hammock_member_after_drop_all_plans', $plans );
+		do_action( 'hubloy-membership_member_after_drop_all_plans', $plans );
 	}
 
 
@@ -300,7 +300,7 @@ class Member {
 	public function delete() {
 		global $wpdb;
 
-		do_action( 'hammock_member_before_delete_member', $this );
+		do_action( 'hubloy-membership_member_before_delete_member', $this );
 
 		$this->drop_all_plans();
 
@@ -312,7 +312,7 @@ class Member {
 		$sql = "DELETE FROM {$this->table_name} WHERE `id` = %d";
 		$wpdb->query( $wpdb->prepare( $sql, $this->id ) );
 
-		do_action( 'hammock_member_after_delete_member', $this->id );
+		do_action( 'hubloy-membership_member_after_delete_member', $this->id );
 
 		$this->id = 0;
 	}
@@ -337,7 +337,7 @@ class Member {
 		}
 
 		if ( $membership->id > 0 ) {
-			do_action( 'hammock_member_before_add_plan', $membership, $this );
+			do_action( 'hubloy-membership_member_before_add_plan', $membership, $this );
 			$old_plan = Plan::get_plan( $this->id, $membership->id );
 			if ( ! $old_plan ) {
 				$plan_id                 = wp_generate_password( 8, false );
@@ -345,8 +345,8 @@ class Member {
 				$new_plan->member_id     = $this->id;
 				$new_plan->plan_id       = 'HM-' . $plan_id;
 				$new_plan->membership_id = $membership->id;
-				$new_plan->enabled       = apply_filters( 'hammock_new_plan_enabled', true, $membership );
-				$new_plan->status        = apply_filters( 'hammock_new_plan_status', Members::STATUS_PENDING, $membership );
+				$new_plan->enabled       = apply_filters( 'hubloy-membership_new_plan_enabled', true, $membership );
+				$new_plan->status        = apply_filters( 'hubloy-membership_new_plan_status', Members::STATUS_PENDING, $membership );
 				if ( isset( $args['status'] ) ) {
 					if ( $args['status'] == Members::STATUS_TRIAL ) {
 						// Set the trial period
@@ -392,7 +392,7 @@ class Member {
 				$user_email = $this->get_user_info( 'email' );
 				$this->sub_log_service->save_log( $this->id, $user_email, $membership->trial_enabled, $membership->id, $this->user_id );
 
-				do_action( 'hammock_member_after_add_plan', $membership, $new_plan, $this );
+				do_action( 'hubloy-membership_member_after_add_plan', $membership, $new_plan, $this );
 				return $new_plan;
 			} else {
 				if ( isset( $args['status'] ) ) {
@@ -425,7 +425,7 @@ class Member {
 					}
 				}
 				$old_plan->save();
-				do_action( 'hammock_member_after_update_plan', $membership, $old_plan, $this );
+				do_action( 'hubloy-membership_member_after_update_plan', $membership, $old_plan, $this );
 				return $old_plan;
 			}
 		}
@@ -445,9 +445,9 @@ class Member {
 	 */
 	public function move_plan( $old_membership_id, $new_membership_id ) {
 
-		do_action( 'hammock_member_before_move_plan', $old_membership_id, $new_membership_id, $this );
+		do_action( 'hubloy-membership_member_before_move_plan', $old_membership_id, $new_membership_id, $this );
 		$this->drop_plan( $old_membership_id );
-		do_action( 'hammock_member_after_move_plan', $old_membership_id, $new_membership_id, $this );
+		do_action( 'hubloy-membership_member_after_move_plan', $old_membership_id, $new_membership_id, $this );
 
 		return $this->add_plan( $new_membership_id );
 	}
@@ -460,7 +460,7 @@ class Member {
 	 * @return string
 	 */
 	public function edit_url() {
-		return admin_url( 'admin.php?page=hammock-members#/member/' . $this->id );
+		return admin_url( 'admin.php?page=hubloy-membership-members#/member/' . $this->id );
 	}
 
 	/**
@@ -475,7 +475,7 @@ class Member {
 	 * @return bool
 	 */
 	public function can_trial( $membership_id ) {
-		if ( hammock_user_can_subscribe( $this->user_id ) ) {
+		if ( hubloy-membership_user_can_subscribe( $this->user_id ) ) {
 			$can_trial = $this->sub_log_service->can_trial( $this, $membership_id );
 			return $can_trial;
 		}
@@ -493,7 +493,7 @@ class Member {
 	 * @return bool
 	 */
 	public function has_subscribed_before( $membership_id ) {
-		if ( hammock_user_can_subscribe( $this->user_id ) ) {
+		if ( hubloy-membership_user_can_subscribe( $this->user_id ) ) {
 			$has_subscribed = $this->sub_log_service->has_subscribed( $this, $membership_id );
 			return $has_subscribed;
 		}
@@ -543,7 +543,7 @@ class Member {
 	 */
 	public function to_html() {
 		return apply_filters(
-			'hammock_member_to_html',
+			'hubloy-membership_member_to_html',
 			array(
 				'id'            => $this->id,
 				'date_created'  => $this->date_created,
@@ -554,7 +554,7 @@ class Member {
 				'user_edit_url' => $this->user_edit_url,
 				'user_info'     => $this->user_info,
 				'enabled'       => $this->enabled,
-				'status'        => $this->enabled ? __( 'Enabled', 'hammock' ) : __( 'Disabled', 'hammock' ),
+				'status'        => $this->enabled ? __( 'Enabled', 'hubloy-membership' ) : __( 'Disabled', 'hubloy-membership' ),
 				'plans'         => count( $this->plans ),
 			),
 			$this

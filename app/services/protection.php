@@ -1,12 +1,12 @@
 <?php
-namespace Hammock\Services;
+namespace HubloyMembership\Services;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Model\Settings;
-use Hammock\Helper\Pages;
+use HubloyMembership\Model\Settings;
+use HubloyMembership\Helper\Pages;
 
 /**
  * Protection service
@@ -157,14 +157,14 @@ class Protection {
 	 * @since  1.0.0
 	 */
 	private function init_rules() {
-		$this->page_rule         = \Hammock\Rule\Page::instance();
-		$this->post_rule         = \Hammock\Rule\Post::instance();
-		$this->category_rule     = \Hammock\Rule\Category::instance();
-		$this->content_rule      = \Hammock\Rule\Content::instance();
-		$this->media_rule        = \Hammock\Rule\Media::instance();
-		$this->menu_rule         = \Hammock\Rule\Menu::instance();
-		$this->custom_types_rule = \Hammock\Rule\Custom\Types::instance();
-		$this->custom_items_rule = \Hammock\Rule\Custom\Items::instance();
+		$this->page_rule         = \HubloyMembership\Rule\Page::instance();
+		$this->post_rule         = \HubloyMembership\Rule\Post::instance();
+		$this->category_rule     = \HubloyMembership\Rule\Category::instance();
+		$this->content_rule      = \HubloyMembership\Rule\Content::instance();
+		$this->media_rule        = \HubloyMembership\Rule\Media::instance();
+		$this->menu_rule         = \HubloyMembership\Rule\Menu::instance();
+		$this->custom_types_rule = \HubloyMembership\Rule\Custom\Types::instance();
+		$this->custom_items_rule = \HubloyMembership\Rule\Custom\Items::instance();
 	}
 
 	/**
@@ -182,7 +182,7 @@ class Protection {
 			 *
 			 * @since 1.0.0
 			 */
-			do_action( 'hammock_load_protection_rule' );
+			do_action( 'hubloy-membership_load_protection_rule' );
 		}
 
 		/**
@@ -192,10 +192,10 @@ class Protection {
 		 *
 		 * @since 1.0.0
 		 */
-		add_filter( 'hammock_enabled_member_has_access', array( $this, 'enabled_member_access' ), 10, 4 );
-		add_filter( 'hammock_disabled_member_has_access', array( $this, 'disabled_member_access' ), 10, 4 );
-		add_filter( 'hammock_non_member_has_access', array( $this, 'non_member_access' ), 10, 4 );
-		add_filter( 'hammock_guest_has_access', array( $this, 'guest_access' ), 10, 3 );
+		add_filter( 'hubloy-membership_enabled_member_has_access', array( $this, 'enabled_member_access' ), 10, 4 );
+		add_filter( 'hubloy-membership_disabled_member_has_access', array( $this, 'disabled_member_access' ), 10, 4 );
+		add_filter( 'hubloy-membership_non_member_has_access', array( $this, 'non_member_access' ), 10, 4 );
+		add_filter( 'hubloy-membership_guest_has_access', array( $this, 'guest_access' ), 10, 3 );
 	}
 
 	/**
@@ -227,8 +227,8 @@ class Protection {
 		}
 
 		add_meta_box(
-			'hammock-content-protection',
-			__( 'Memberships', 'hammock' ),
+			'hubloy-membership-content-protection',
+			__( 'Memberships', 'hubloy-membership' ),
 			array( $this, 'render_meta_box' ),
 			$screen->id,
 			'normal',
@@ -261,23 +261,23 @@ class Protection {
 		$plans = $member->get_plans();
 		if ( ! empty( $plans ) ) {
 			if ( $object instanceof \WP_Post ) {
-				$post_meta = get_post_meta( $object->ID, '_hammock_mebership_access', true );
+				$post_meta = get_post_meta( $object->ID, '_hubloy-membership_mebership_access', true );
 				foreach ( $plans as $plan_id ) {
-					if ( hammock_is_member_plan_active( $plan_id ) ) {
+					if ( hubloy-membership_is_member_plan_active( $plan_id ) ) {
 						$has_access = $this->check_member_post_access( $object->ID, $plan_id, $post_meta );
 						return $has_access;
 					}
 				}
 			} elseif ( $object instanceof \WP_Term ) {
-				$term_meta = get_term_meta( $object->term_id, '_hammock_mebership_access', true );
+				$term_meta = get_term_meta( $object->term_id, '_hubloy-membership_mebership_access', true );
 				foreach ( $plans as $plan_id ) {
-					if ( hammock_is_member_plan_active( $plan_id ) ) {
+					if ( hubloy-membership_is_member_plan_active( $plan_id ) ) {
 						$has_access = $this->check_member_term_access( $object->term_id, $plan_id, $term_meta );
 						return $has_access;
 					}
 				}
 			} else {
-				return apply_filter( 'hammock_check_enabled_member_has_access', $access, $member, $object, $content_type, $plans );
+				return apply_filter( 'hubloy-membership_check_enabled_member_has_access', $access, $member, $object, $content_type, $plans );
 			}
 		}
 		return $access;
@@ -472,7 +472,7 @@ class Protection {
 		}
 
 		if ( in_array( $post_type, self::get_custom_post_types() ) ) {
-			return apply_filters( 'hammock_post_content_has_access', true, $post, $post_type );
+			return apply_filters( 'hubloy-membership_post_content_has_access', true, $post, $post_type );
 		}
 		return false;
 	}
@@ -500,7 +500,7 @@ class Protection {
 	public static function get_excluded_content() {
 
 		return apply_filters(
-			'hammock_content_get_excluded_content',
+			'hubloy-membership_content_get_excluded_content',
 			array(
 				'post',
 				'page',
@@ -522,7 +522,7 @@ class Protection {
 	 */
 	public static function get_custom_post_types() {
 		$args     = apply_filters(
-			'hammock_get_post_types_args',
+			'hubloy-membership_get_post_types_args',
 			array(
 				'public'   => true,
 				'_builtin' => false,
@@ -532,7 +532,7 @@ class Protection {
 		$excluded = self::get_excluded_content();
 
 		return apply_filters(
-			'hammock_get_custom_post_types',
+			'hubloy-membership_get_custom_post_types',
 			array_diff( $cpts, $excluded )
 		);
 	}
@@ -571,7 +571,7 @@ class Protection {
 			 * @param array $post_types List of post types to exclude
 			 */
 			$excluded_post_types = apply_filters(
-				'hammock_content_restriction_excluded_post_types',
+				'hubloy-membership_content_restriction_excluded_post_types',
 				array(
 					'attachment',
 					'wc_product_tab',

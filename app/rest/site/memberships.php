@@ -1,13 +1,13 @@
 <?php
-namespace Hammock\Rest\Site;
+namespace HubloyMembership\Rest\Site;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Base\Rest;
-use Hammock\Core\Util;
-use Hammock\Helper\Pagination;
+use HubloyMembership\Base\Rest;
+use HubloyMembership\Core\Util;
+use HubloyMembership\Helper\Pagination;
 
 /**
  * Memberships rest route
@@ -63,14 +63,14 @@ class Memberships extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
-						'description'       => __( 'The current page', 'hammock' ),
+						'description'       => __( 'The current page', 'hubloy-membership' ),
 					),
 					'per_page' => array(
 						'required'          => false,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
 						'default'           => 10,
-						'description'       => __( 'Items per page', 'hammock' ),
+						'description'       => __( 'Items per page', 'hubloy-membership' ),
 					),
 				),
 			)
@@ -99,7 +99,7 @@ class Memberships extends Rest {
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
 						'default'           => 0,
-						'description'       => __( 'The member id', 'hammock' ),
+						'description'       => __( 'The member id', 'hubloy-membership' ),
 					),
 				),
 			)
@@ -117,7 +117,7 @@ class Memberships extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
-						'description'       => __( 'The membership id', 'hammock' ),
+						'description'       => __( 'The membership id', 'hubloy-membership' ),
 					),
 				),
 			)
@@ -158,7 +158,7 @@ class Memberships extends Rest {
 		$per_page = $request->get_param( 'per_page' );
 
 		$current_page = $page - 1;
-		$service      = new \Hammock\Services\Memberships();
+		$service      = new \HubloyMembership\Services\Memberships();
 		$total        = $service->count_memberships();
 		$pages        = Pagination::generate_pages( $total, $per_page, $page );
 		$items        = $service->list_html_memberships( $per_page, $current_page );
@@ -181,7 +181,7 @@ class Memberships extends Rest {
 	 * @return array
 	 */
 	public function count_memberships( $request ) {
-		$service = new \Hammock\Services\Memberships();
+		$service = new \HubloyMembership\Services\Memberships();
 		$total   = $service->count_memberships();
 		return array(
 			'total' => $total,
@@ -196,7 +196,7 @@ class Memberships extends Rest {
 	 * @return array
 	 */
 	public function list_simple_memberships( $request ) {
-		$service = new \Hammock\Services\Memberships();
+		$service = new \HubloyMembership\Services\Memberships();
 		$member  = $request->get_param( 'member' );
 		return $service->list_simple_memberships( $member );
 	}
@@ -210,7 +210,7 @@ class Memberships extends Rest {
 	 */
 	public function get_membership( $request ) {
 		$id         = $request->get_param( 'id' );
-		$membership = new \Hammock\Model\Membership( $id );
+		$membership = new \HubloyMembership\Model\Membership( $id );
 		return $membership;
 	}
 
@@ -236,7 +236,7 @@ class Memberships extends Rest {
 			$duration = sanitize_text_field( $request['recurring_duration'] );
 		}
 
-		$service = new \Hammock\Services\Memberships();
+		$service = new \HubloyMembership\Services\Memberships();
 		$id      = $service->save( $name, '', $enabled, $type, $price );
 		if ( $id ) {
 			if ( $days ) {
@@ -249,13 +249,13 @@ class Memberships extends Rest {
 
 			return array(
 				'status'  => true,
-				'message' => __( 'Membership Saved', 'hammock' ),
+				'message' => __( 'Membership Saved', 'hubloy-membership' ),
 				'id'      => $id,
 			);
 		} else {
 			return array(
 				'status'  => false,
-				'message' => __( 'Error saving membership', 'hammock' ),
+				'message' => __( 'Error saving membership', 'hubloy-membership' ),
 			);
 		}
 	}
@@ -271,8 +271,8 @@ class Memberships extends Rest {
 	public function update_membership( $request ) {
 		$method     = $request['method'];
 		$id         = (int) $request['id'];
-		$membership = new \Hammock\Model\Membership( $id );
-		$service    = new \Hammock\Services\Memberships();
+		$membership = new \HubloyMembership\Model\Membership( $id );
+		$service    = new \HubloyMembership\Services\Memberships();
 		if ( $membership->id > 0 ) {
 			switch ( $method ) {
 				case 'general':
@@ -321,14 +321,14 @@ class Memberships extends Rest {
 				default:
 					return array(
 						'status'  => false,
-						'message' => sprintf( __( 'Action %s not supported', 'hammock' ), $method ),
+						'message' => sprintf( __( 'Action %s not supported', 'hubloy-membership' ), $method ),
 					);
 				break;
 			}
 		} else {
 			return array(
 				'status'  => false,
-				'message' => __( 'Membership not found', 'hammock' ),
+				'message' => __( 'Membership not found', 'hubloy-membership' ),
 			);
 		}
 	}
@@ -346,10 +346,10 @@ class Memberships extends Rest {
 	 */
 	private function return_success( $id, $method ) {
 		// We must load membership again with updated data
-		$membership = new \Hammock\Model\Membership( $id );
+		$membership = new \HubloyMembership\Model\Membership( $id );
 		return array(
 			'status'     => true,
-			'message'    => sprintf( __( '%s settings updated', 'hammock' ), ucfirst( $method ) ),
+			'message'    => sprintf( __( '%s settings updated', 'hubloy-membership' ), ucfirst( $method ) ),
 			'membership' => $membership,
 		);
 	}

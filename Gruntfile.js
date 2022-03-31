@@ -30,13 +30,13 @@ module.exports = function( grunt ) {
 
 		// Concatenate those JS files into a single file (target: [source, source, ...]).
 		js_files_concat: {
-			'{js}/hammock-admin.js': [
+			'{js}/hubloy-membership-admin.js': [
 				'_src/js/admin/_helpers.js',
 				'_src/js/admin/_base.js',
 				'_src/js/admin/_membership.js',
 				'_src/js/admin/_addons.js'
 			],
-			'{js}/hammock-front.js': [
+			'{js}/hubloy-membership-front.js': [
 				'_src/js/front/_helpers.js',
 				'_src/js/front/_base.js',
 			]
@@ -44,8 +44,8 @@ module.exports = function( grunt ) {
 
 		// SASS files to process. Resulting CSS files will be minified as well.
 		css_files_compile: {
-			'{css}/hammock-admin.css':   '_src/scss/hammock-admin.scss',
-			'{css}/hammock-front.css':   '_src/scss/hammock-front.scss'
+			'{css}/hubloy-membership-admin.css':   '_src/scss/hubloy-membership-admin.scss',
+			'{css}/hubloy-membership-front.css':   '_src/scss/hubloy-membership-front.scss'
 		},
 
 		// BUILD branches.
@@ -113,11 +113,11 @@ module.exports = function( grunt ) {
 				'docs/.*',      // API Documentation.
 			],
 			pot_dir: 'languages/', // With trailing slash.
-			textdomain: 'hammock',
+			textdomain: 'hubloy-membership',
 		},
 
-		plugin_dir: 'hammock/',
-		plugin_file: 'hammock.php',
+		plugin_dir: 'hubloy-membership/',
+		plugin_file: 'hubloy-membership.php',
 	};
 	// -------------------------------------------------------------------------
 	var key, ind, newkey, newval;

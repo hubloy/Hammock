@@ -1,13 +1,13 @@
 <?php
-namespace Hammock\Controller\Site;
+namespace HubloyMembership\Controller\Site;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Controller;
-use Hammock\Services\Addons;
-use Hammock\Model\Membership;
+use HubloyMembership\Base\Controller;
+use HubloyMembership\Services\Addons;
+use HubloyMembership\Model\Membership;
 
 /**
  * Activity
@@ -22,7 +22,7 @@ class Activity extends Controller {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @var \Hammock\Services\Activity
+	 * @var \HubloyMembership\Services\Activity
 	 */
 	private $service = null;
 
@@ -59,20 +59,20 @@ class Activity extends Controller {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$this->service = new \Hammock\Services\Activity();
+		$this->service = new \HubloyMembership\Services\Activity();
 		/**
 		 * General action to log activities
 		 * This can be called anywhere
 		 */
-		$this->add_action( 'hammock_log_activity', 'log_activity', 10, 5 );
+		$this->add_action( 'hubloy-membership_log_activity', 'log_activity', 10, 5 );
 
 		// Member
-		$this->add_action( 'hammock_members_save_member', 'log_save_member', 10, 2 );
+		$this->add_action( 'hubloy-membership_members_save_member', 'log_save_member', 10, 2 );
 
 		// Plans
-		$this->add_action( 'hammock_member_after_add_plan', 'log_add_plan', 10, 3 );
-		$this->add_action( 'hammock_member_plan_update_plan', 'log_update_plan', 10, 3 );
-		$this->add_action( 'hammock_member_after_delete_plan', 'log_delete_plan', 10, 2 );
+		$this->add_action( 'hubloy-membership_member_after_add_plan', 'log_add_plan', 10, 3 );
+		$this->add_action( 'hubloy-membership_member_plan_update_plan', 'log_update_plan', 10, 3 );
+		$this->add_action( 'hubloy-membership_member_after_delete_plan', 'log_delete_plan', 10, 2 );
 	}
 
 	/**
@@ -106,7 +106,7 @@ class Activity extends Controller {
 	 * @since 1.0.0
 	 */
 	public function log_save_member( $member_id, $user_id ) {
-		$this->service->log_member( $member_id, __( 'New member saved', 'hammock' ), 'member', 'member', $member_id );
+		$this->service->log_member( $member_id, __( 'New member saved', 'hubloy-membership' ), 'member', 'member', $member_id );
 	}
 
 	/**
@@ -119,7 +119,7 @@ class Activity extends Controller {
 	 * @since 1.0.0
 	 */
 	public function log_add_plan( $membership, $new_plan, $member ) {
-		$this->service->log_member( $member->id, __( 'New plan added', 'hammock' ), 'plan', $membership->name, $new_plan->id );
+		$this->service->log_member( $member->id, __( 'New plan added', 'hubloy-membership' ), 'plan', $membership->name, $new_plan->id );
 	}
 
 	/**
@@ -133,7 +133,7 @@ class Activity extends Controller {
 	 */
 	public function log_update_plan( $old_status, $status, $plan ) {
 		if ( $old_status !== $status ) {
-			$this->service->log_member( $plan->member_id, __( 'Plan updated', 'hammock' ), 'plan', $membership->name, $plan->id );
+			$this->service->log_member( $plan->member_id, __( 'Plan updated', 'hubloy-membership' ), 'plan', $membership->name, $plan->id );
 		}
 	}
 
@@ -148,7 +148,7 @@ class Activity extends Controller {
 	public function log_delete_plan( $member_id, $membership_id ) {
 		$membership = new Membership( $membership_id, false );
 		if ( $membership->id > 0 ) {
-			$this->service->log_member( $member_id, __( 'Plan deleted', 'hammock' ), 'plan', $membership->name, 0 );
+			$this->service->log_member( $member_id, __( 'Plan deleted', 'hubloy-membership' ), 'plan', $membership->name, 0 );
 		}
 	}
 }

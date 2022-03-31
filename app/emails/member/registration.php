@@ -1,7 +1,7 @@
 <?php
-namespace Hammock\Emails\Member;
+namespace HubloyMembership\Emails\Member;
 
-use Hammock\Base\Email;
+use HubloyMembership\Base\Email;
 
 /**
  * User account registration
@@ -36,7 +36,7 @@ class Registration extends Email {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$type                = \Hammock\Services\Emails::COMM_TYPE_REGISTRATION;
+		$type                = \HubloyMembership\Services\Emails::COMM_TYPE_REGISTRATION;
 		$this->id            = 'member-' . $type;
 		$this->template_html = 'emails/member-new-account.php';
 		$this->placeholders  = array();
@@ -51,10 +51,10 @@ class Registration extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Account Registration', 'hammock' ),
-			'description' => __( 'Sent once an account is created', 'hammock' ),
-			'heading'     => sprintf( __( 'Welcome to %s', 'hammock' ), '{site_title}' ),
-			'subject'     => sprintf( __( 'Your %s account has been created!', 'hammock' ), '{site_title}' ),
+			'title'       => __( 'Account Registration', 'hubloy-membership' ),
+			'description' => __( 'Sent once an account is created', 'hubloy-membership' ),
+			'heading'     => sprintf( __( 'Welcome to %s', 'hubloy-membership' ), '{site_title}' ),
+			'subject'     => sprintf( __( 'Your %s account has been created!', 'hubloy-membership' ), '{site_title}' ),
 			'recipient'   => '',
 			'enabled'     => false,
 		);

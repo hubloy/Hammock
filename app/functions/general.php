@@ -3,7 +3,7 @@
  * General functions
  * These functions can be used within themes or external resources
  *
- * @package Hammock/Functions
+ * @package HubloyMembership/Functions
  * @since 1.0.0
  */
 if ( ! defined( 'ABSPATH' ) ) {
@@ -17,12 +17,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @param string $template_name Template name.
  * @param array  $args          Arguments. (default: array).
  *
- * @see \Hammock\Helper\Template::get_template
+ * @see \HubloyMembership\Helper\Template::get_template
  *
  * @since 1.0.0
  */
-function hammock_get_template( $template_name, $args = array() ) {
-	\Hammock\Helper\Template::get_template( $template_name, $args );
+function hubloy-membership_get_template( $template_name, $args = array() ) {
+	\HubloyMembership\Helper\Template::get_template( $template_name, $args );
 }
 
 /**
@@ -32,8 +32,8 @@ function hammock_get_template( $template_name, $args = array() ) {
  *
  * @return array
  */
-function hammock_list_active_gateways() {
-	return \Hammock\Services\Gateways::list_active_gateways();
+function hubloy-membership_list_active_gateways() {
+	return \HubloyMembership\Services\Gateways::list_active_gateways();
 }
 
 /**
@@ -43,7 +43,7 @@ function hammock_list_active_gateways() {
  *
  * @return int
  */
-function hammock_get_current_page() {
+function hubloy-membership_get_current_page() {
 	$paged = 0;
 	if ( get_query_var( 'page' ) ) {
 		$paged = intval( get_query_var( 'page' ) ) - 1;
@@ -58,7 +58,7 @@ function hammock_get_current_page() {
  *
  * @return string
  */
-function hammock_get_current_status() {
+function hubloy-membership_get_current_status() {
 	$status = 'all';
 	if ( get_query_var( 'status' ) ) {
 		$status = sanitize_text_field( get_query_var( 'status' ) );

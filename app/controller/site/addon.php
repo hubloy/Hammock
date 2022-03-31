@@ -1,12 +1,12 @@
 <?php
-namespace Hammock\Controller\Site;
+namespace HubloyMembership\Controller\Site;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Controller;
-use Hammock\Services\Addons;
+use HubloyMembership\Base\Controller;
+use HubloyMembership\Services\Addons;
 
 /**
  * Addon controller
@@ -79,7 +79,7 @@ class Addon extends Controller {
 		$this->load_addons();
 		$this->init_addons();
 
-		$this->add_ajax_action( 'hammock_addon_settings', 'addon_settings' );
+		$this->add_ajax_action( 'hubloy-membership_addon_settings', 'addon_settings' );
 	}
 
 	/**
@@ -89,15 +89,15 @@ class Addon extends Controller {
 	 * @since 1.0.0
 	 */
 	public function load_addons() {
-		\Hammock\Addon\Media\Media::instance();
-		\Hammock\Addon\Coupon\Coupon::instance();
-		\Hammock\Addon\Prorate\Prorate::instance();
-		\Hammock\Addon\Redirect\Redirect::instance();
-		\Hammock\Addon\Category\Category::instance();
-		\Hammock\Addon\Mailchimp\Mailchimp::instance();
-		\Hammock\Addon\Invitation\Invitation::instance();
+		\HubloyMembership\Addon\Media\Media::instance();
+		\HubloyMembership\Addon\Coupon\Coupon::instance();
+		\HubloyMembership\Addon\Prorate\Prorate::instance();
+		\HubloyMembership\Addon\Redirect\Redirect::instance();
+		\HubloyMembership\Addon\Category\Category::instance();
+		\HubloyMembership\Addon\Mailchimp\Mailchimp::instance();
+		\HubloyMembership\Addon\Invitation\Invitation::instance();
 
-		do_action( 'hammock_load_addons' );
+		do_action( 'hubloy-membership_load_addons' );
 	}
 
 	/**
@@ -107,7 +107,7 @@ class Addon extends Controller {
 	 */
 	private function init_addons() {
 		// Action called by addon to initiate it
-		do_action( 'hammock_init_addon' );
+		do_action( 'hubloy-membership_init_addon' );
 	}
 
 	/**
@@ -123,8 +123,8 @@ class Addon extends Controller {
 		$this->_cap     = $cap;
 		add_submenu_page(
 			$slug,
-			__( 'Addons', 'hammock' ),
-			__( 'Addons', 'hammock' ),
+			__( 'Addons', 'hubloy-membership' ),
+			__( 'Addons', 'hubloy-membership' ),
 			$this->_cap,
 			$this->_page_id,
 			array( $this, 'render' )
@@ -142,7 +142,7 @@ class Addon extends Controller {
 	 */
 	function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'addons' ) ) {
-			$vars['common']['string']['title'] = __( 'Addons', 'hammock' );
+			$vars['common']['string']['title'] = __( 'Addons', 'hubloy-membership' );
 			$vars['active_page']               = 'addon';
 		}
 		return $vars;
@@ -154,7 +154,7 @@ class Addon extends Controller {
 	 * @since 1.0.0
 	 */
 	public function controller_scripts() {
-		wp_enqueue_script( 'hammock-addons-react' );
+		wp_enqueue_script( 'hubloy-membership-addons-react' );
 	}
 
 	/**
@@ -164,7 +164,7 @@ class Addon extends Controller {
 	 */
 	public function render() {
 		?>
-		<div id="hammock-addon-container"></div>
+		<div id="hubloy-membership-addon-container"></div>
 		<?php
 	}
 
@@ -178,7 +178,7 @@ class Addon extends Controller {
 
 		$addon_id = sanitize_text_field( $_POST['id'] );
 
-		$view = apply_filters( 'hammock_addon_' . $addon_id . '_settings', __( 'Not implemented', 'hammock' ) );
+		$view = apply_filters( 'hubloy-membership_addon_' . $addon_id . '_settings', __( 'Not implemented', 'hubloy-membership' ) );
 		wp_send_json_success(
 			array(
 				'view' => $view,

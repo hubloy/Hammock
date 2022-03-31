@@ -1,5 +1,5 @@
 <?php
-namespace Hammock\Helper;
+namespace HubloyMembership\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -33,7 +33,7 @@ class Template {
 	 * @return string
 	 */
 	public static function template_directory() {
-		return apply_filters( 'hammock_template_directory', 'hammock' );
+		return apply_filters( 'hubloy-membership_template_directory', 'hubloy-membership' );
 	}
 
 	/**
@@ -46,7 +46,7 @@ class Template {
 	 * @return string
 	 */
 	public static function get_theme_template_file( $template ) {
-		return get_stylesheet_directory() . '/' . apply_filters( 'hammock_template_directory', 'hammock', $template ) . '/' . $template;
+		return get_stylesheet_directory() . '/' . apply_filters( 'hubloy-membership_template_directory', 'hubloy-membership', $template ) . '/' . $template;
 	}
 
 	/**
@@ -82,7 +82,7 @@ class Template {
 	public static function copy_to_theme( $template ) {
 		$theme_file = self::get_theme_template_file( $template );
 		if ( wp_mkdir_p( dirname( $theme_file ) ) && ! file_exists( $theme_file ) ) {
-			$core_file = HAMMOCK_TEMPLATE_DIR . '/' . $template;
+			$core_file = HUBMEMB_TEMPLATE_DIR . '/' . $template;
 			// Copy template file.
 			copy( $core_file, $theme_file );
 
@@ -116,8 +116,8 @@ class Template {
 	 * @since 1.0.0
 	 */
 	public static function get_template_part( $slug, $name = '' ) {
-		$cache_key = sanitize_key( implode( '-', array( 'template-part', $slug, $name, HAMMOCK_VERSION ) ) );
-		$template  = (string) wp_cache_get( $cache_key, 'hammock' );
+		$cache_key = sanitize_key( implode( '-', array( 'template-part', $slug, $name, HUBMEMB_VERSION ) ) );
+		$template  = (string) wp_cache_get( $cache_key, 'hubloy-membership' );
 
 		if ( ! $template ) {
 			if ( $name ) {
@@ -129,13 +129,13 @@ class Template {
 				);
 
 				if ( ! $template ) {
-					$fallback = HAMMOCK_TEMPLATE_DIR . "/{$slug}-{$name}.php";
+					$fallback = HUBMEMB_TEMPLATE_DIR . "/{$slug}-{$name}.php";
 					$template = file_exists( $fallback ) ? $fallback : '';
 				}
 			}
 
 			if ( ! $template ) {
-				// If template file doesn't exist, look in yourtheme/slug.php and yourtheme/hammock/slug.php.
+				// If template file doesn't exist, look in yourtheme/slug.php and yourtheme/hubloy-membership/slug.php.
 				$template = locate_template(
 					array(
 						"{$slug}.php",
@@ -144,11 +144,11 @@ class Template {
 				);
 			}
 
-			wp_cache_set( $cache_key, $template, 'hammock' );
+			wp_cache_set( $cache_key, $template, 'hubloy-membership' );
 		}
 
 		// Allow 3rd party plugins to filter template file from their plugin.
-		$template = apply_filters( 'hammock_get_template_part', $template, $slug, $name );
+		$template = apply_filters( 'hubloy-membership_get_template_part', $template, $slug, $name );
 
 		if ( $template ) {
 			load_template( $template, false );
@@ -164,20 +164,20 @@ class Template {
 	 * @param string $default_path  Default path. (default: '').
 	 */
 	public static function get_template( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
-		$cache_key = sanitize_key( implode( '-', array( 'template', $template_name, $template_path, $default_path, HAMMOCK_VERSION ) ) );
-		$template  = (string) wp_cache_get( $cache_key, 'hammock' );
+		$cache_key = sanitize_key( implode( '-', array( 'template', $template_name, $template_path, $default_path, HUBMEMB_VERSION ) ) );
+		$template  = (string) wp_cache_get( $cache_key, 'hubloy-membership' );
 
 		if ( ! $template ) {
 			$template = self::locate_template( $template_name, $template_path, $default_path );
-			wp_cache_set( $cache_key, $template, 'hammock' );
+			wp_cache_set( $cache_key, $template, 'hubloy-membership' );
 		}
 
 		// Allow 3rd party plugin filter template file from their plugin.
-		$filter_template = apply_filters( 'hammock_get_template', $template, $template_name, $args, $template_path, $default_path );
+		$filter_template = apply_filters( 'hubloy-membership_get_template', $template, $template_name, $args, $template_path, $default_path );
 
 		if ( $filter_template !== $template ) {
 			if ( ! file_exists( $filter_template ) ) {
-				_doing_it_wrong( __METHOD__, sprintf( __( '%s does not exist.', 'hammock' ), '<code>' . $template . '</code>' ), '2.1' );
+				_doing_it_wrong( __METHOD__, sprintf( __( '%s does not exist.', 'hubloy-membership' ), '<code>' . $template . '</code>' ), '2.1' );
 				return;
 			}
 			$template = $filter_template;
@@ -194,11 +194,11 @@ class Template {
 			extract( $args );
 		}
 
-		do_action( 'hammock_before_template_part', $action_args['template_name'], $action_args['template_path'], $action_args['located'], $action_args['args'] );
+		do_action( 'hubloy-membership_before_template_part', $action_args['template_name'], $action_args['template_path'], $action_args['located'], $action_args['args'] );
 
 		include $action_args['located'];
 
-		do_action( 'hammock_after_template_part', $action_args['template_name'], $action_args['template_path'], $action_args['located'], $action_args['args'] );
+		do_action( 'hubloy-membership_after_template_part', $action_args['template_name'], $action_args['template_path'], $action_args['located'], $action_args['args'] );
 	}
 
 	/**
@@ -242,7 +242,7 @@ class Template {
 		}
 
 		if ( ! $default_path ) {
-			$default_path = HAMMOCK_TEMPLATE_DIR . '/';
+			$default_path = HUBMEMB_TEMPLATE_DIR . '/';
 		}
 
 		// Look within passed path within the theme - this is priority.
@@ -259,7 +259,7 @@ class Template {
 		}
 
 		// Return what we found.
-		return apply_filters( 'hammock_locate_template', $template, $template_name, $template_path );
+		return apply_filters( 'hubloy-membership_locate_template', $template, $template_name, $template_path );
 	}
 }
 

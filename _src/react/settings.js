@@ -6,10 +6,10 @@ import NotFound from './admin/containers/NotFound';
 import SiteSettings from './admin/containers/subsite/Settings';
 
 document.addEventListener('DOMContentLoaded', function () {
-	const hammockContainer = document.getElementById( 'hammock-settings-container' );
-	if ( hammockContainer !== null ) {
-		const DefaultView = (props) => <NotFound hammock={window.hammock} {...props}/>
-		const SettingsPage = (props) => <SiteSettings hammock={window.hammock} {...props}/>
+	const hubloy_membershipContainer = document.getElementById( 'hubloy_membership-settings-container' );
+	if ( hubloy_membershipContainer !== null ) {
+		const DefaultView = (props) => <NotFound hubloy_membership={window.hubloy_membership} {...props}/>
+		const SettingsPage = (props) => <SiteSettings hubloy_membership={window.hubloy_membership} {...props}/>
 		const routing = (
 			<HashRouter>
 				<Switch>
@@ -18,6 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				</Switch>
 			</HashRouter>
 		);
-		ReactDOM.render(routing, hammockContainer);
+		ReactDOM.render(routing, hubloy_membershipContainer);
 	}
 });

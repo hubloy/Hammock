@@ -1,5 +1,5 @@
 <?php
-namespace Hammock\Core;
+namespace HubloyMembership\Core;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -19,28 +19,28 @@ class Resource {
 	 * @since 1.0.0
 	 */
 	public static function register_admin_scripts() {
-		$code = \Hammock\Helper\Currency::get_membership_currency();
+		$code = \HubloyMembership\Helper\Currency::get_membership_currency();
 
 		// UIkit js
 		wp_register_script(
-			'hammock-uikit',
-			HAMMOCK_ASSETS_URL . '/vendor/uikit/js/uikit.min.js',
+			'hubloy-membership-uikit',
+			HUBMEMB_ASSETS_URL . '/vendor/uikit/js/uikit.min.js',
 			array( 'jquery' ),
-			HAMMOCK_UIKIT_VERSION,
+			HUBMEMB_UIKIT_VERSION,
 			true
 		);
 		wp_register_script(
-			'hammock-uikit-icons',
-			HAMMOCK_ASSETS_URL . '/vendor/uikit/js/uikit-icons.min.js',
+			'hubloy-membership-uikit-icons',
+			HUBMEMB_ASSETS_URL . '/vendor/uikit/js/uikit-icons.min.js',
 			array( 'jquery' ),
-			HAMMOCK_UIKIT_VERSION,
+			HUBMEMB_UIKIT_VERSION,
 			true
 		);
 
 		// Tool tip helper
 		wp_register_script(
-			'hammock-tiptip',
-			HAMMOCK_ASSETS_URL . '/vendor/tiptip/jquery.tipTip.minified.js',
+			'hubloy-membership-tiptip',
+			HUBMEMB_ASSETS_URL . '/vendor/tiptip/jquery.tipTip.minified.js',
 			array( 'jquery' ),
 			'1.3',
 			true
@@ -48,8 +48,8 @@ class Resource {
 
 		// SWAL
 		wp_register_script(
-			'hammock-sweetalert',
-			HAMMOCK_ASSETS_URL . '/vendor/sweetalert/sweetalert2.all.min.js',
+			'hubloy-membership-sweetalert',
+			HUBMEMB_ASSETS_URL . '/vendor/sweetalert/sweetalert2.all.min.js',
 			array( 'jquery' ),
 			'8.0.1',
 			true
@@ -57,8 +57,8 @@ class Resource {
 
 		// Jquery tags
 		wp_register_script(
-			'hammock-jquery-tags',
-			HAMMOCK_ASSETS_URL . '/vendor/tags/jquery.tagsinput.min.js',
+			'hubloy-membership-jquery-tags',
+			HUBMEMB_ASSETS_URL . '/vendor/tags/jquery.tagsinput.min.js',
 			array( 'jquery' ),
 			'1.3.6',
 			true
@@ -66,8 +66,8 @@ class Resource {
 
 		// notifications
 		wp_register_script(
-			'hammock-styled-notifications',
-			HAMMOCK_ASSETS_URL . '/vendor/styled-notifications/notifications.js',
+			'hubloy-membership-styled-notifications',
+			HUBMEMB_ASSETS_URL . '/vendor/styled-notifications/notifications.js',
 			array( 'jquery' ),
 			'1.0.1',
 			true
@@ -75,178 +75,178 @@ class Resource {
 
 		// Select 2
 		wp_register_script(
-			'hammock-select2',
-			HAMMOCK_ASSETS_URL . '/vendor/select2/js/select2.min.js',
+			'hubloy-membership-select2',
+			HUBMEMB_ASSETS_URL . '/vendor/select2/js/select2.min.js',
 			array( 'jquery' ),
 			'4.1.0',
 			true
 		);
 
 		wp_register_script(
-			'hammock-admin',
-			HAMMOCK_ASSETS_URL . '/js/hammock-admin.min.js',
+			'hubloy-membership-admin',
+			HUBMEMB_ASSETS_URL . '/js/hubloy-membership-admin.min.js',
 			array( 'jquery' ),
-			HAMMOCK_VERSION,
+			HUBMEMB_VERSION,
 			true
 		);
 		$vars = apply_filters(
-			'hammock_admin_vars',
+			'hubloy-membership_admin_vars',
 			array(
-				'error'        => __( 'An error occured', 'hammock' ),
-				'no_results'   => __( 'Ooops, no results found', 'hammock' ),
-				'no_data'      => __( 'Ooops, no data found', 'hammock' ),
+				'error'        => __( 'An error occured', 'hubloy-membership' ),
+				'no_results'   => __( 'Ooops, no results found', 'hubloy-membership' ),
+				'no_data'      => __( 'Ooops, no data found', 'hubloy-membership' ),
 				'base_api_url' => rest_url( 'wp/v2/' ),
-				'api_url'      => rest_url( HAMMOCK_REST_NAMESPACE ),
+				'api_url'      => rest_url( HUBMEMB_REST_NAMESPACE ),
 				'api_nonce'    => wp_create_nonce( 'wp_rest' ),
 				'ajax_url'     => admin_url( 'admin-ajax.php' ),
-				'ajax_nonce'   => wp_create_nonce( 'hammock_rest_nonce' ),
-				'assets_url'   => HAMMOCK_ASSETS_URL,
+				'ajax_nonce'   => wp_create_nonce( 'hubloy-membership_rest_nonce' ),
+				'assets_url'   => HUBMEMB_ASSETS_URL,
 				'is_multisite' => is_multisite(),
 				'active_page'  => 'dashboard',
 				'common'       => array(
 					'buttons'       => array(
-						'save'     => __( 'Save', 'hammock' ),
-						'continue' => __( 'Save and Continue', 'hammock' ),
-						'update'   => __( 'Update', 'hammock' ),
-						'edit'     => __( 'Edit', 'hammock' ),
-						'delete'   => __( 'Delete', 'hammock' ),
-						'manage'   => __( 'Manage', 'hammock' ),
-						'ok'       => __( 'Okay', 'hammock' ),
-						'cancel'   => __( 'Cancel', 'hammock' ),
-						'back'     => __( 'Back', 'hammock' ),
-						'reminder' => __( 'Send Reminder', 'hammock' ),
+						'save'     => __( 'Save', 'hubloy-membership' ),
+						'continue' => __( 'Save and Continue', 'hubloy-membership' ),
+						'update'   => __( 'Update', 'hubloy-membership' ),
+						'edit'     => __( 'Edit', 'hubloy-membership' ),
+						'delete'   => __( 'Delete', 'hubloy-membership' ),
+						'manage'   => __( 'Manage', 'hubloy-membership' ),
+						'ok'       => __( 'Okay', 'hubloy-membership' ),
+						'cancel'   => __( 'Cancel', 'hubloy-membership' ),
+						'back'     => __( 'Back', 'hubloy-membership' ),
+						'reminder' => __( 'Send Reminder', 'hubloy-membership' ),
 					),
 					'string'        => array(
-						'dashboard' => __( 'Dashboard', 'hammock' ),
-						'not_found' => __( "Sorry, we couldn't find what you are looking for", 'hammock' ),
-						'title'     => __( 'Dashboard', 'hammock' ),
+						'dashboard' => __( 'Dashboard', 'hubloy-membership' ),
+						'not_found' => __( "Sorry, we couldn't find what you are looking for", 'hubloy-membership' ),
+						'title'     => __( 'Dashboard', 'hubloy-membership' ),
 						'search'    => array(
 							'users'   => array(
-								'select'    => __( 'Search for user', 'hammock' ),
-								'not_found' => __( 'User not found', 'hammock' ),
+								'select'    => __( 'Search for user', 'hubloy-membership' ),
+								'not_found' => __( 'User not found', 'hubloy-membership' ),
 							),
 							'members' => array(
-								'select'    => __( 'Search for member', 'hammock' ),
-								'not_found' => __( 'Member not found', 'hammock' ),
+								'select'    => __( 'Search for member', 'hubloy-membership' ),
+								'not_found' => __( 'Member not found', 'hubloy-membership' ),
 							),
 						),
 					),
 					'status'        => array(
-						'enabled'  => __( 'Enabled', 'hammock' ),
-						'disabled' => __( 'Disabled', 'hammock' ),
-						'status'   => __( 'Status', 'hammock' ),
-						'expired'  => __( 'Expired', 'hammock' ),
-						'loading'  => __( 'Loading...', 'hammock' ),
-						'success'  => __( 'Success', 'hammock' ),
-						'error'    => __( 'Error', 'hammock' ),
+						'enabled'  => __( 'Enabled', 'hubloy-membership' ),
+						'disabled' => __( 'Disabled', 'hubloy-membership' ),
+						'status'   => __( 'Status', 'hubloy-membership' ),
+						'expired'  => __( 'Expired', 'hubloy-membership' ),
+						'loading'  => __( 'Loading...', 'hubloy-membership' ),
+						'success'  => __( 'Success', 'hubloy-membership' ),
+						'error'    => __( 'Error', 'hubloy-membership' ),
 					),
 					'general'       => array(
-						'settings'  => __( 'Settings', 'hammock' ),
-						'configure' => __( 'Configure', 'hammock' ),
-						'filter'    => __( 'Filter', 'hammock' ),
-						'select'    => __( 'Select', 'hammock' ),
-						'actions'   => __( 'Actions', 'hammock' ),
-						'all'       => __( 'All', 'hammock' ),
+						'settings'  => __( 'Settings', 'hubloy-membership' ),
+						'configure' => __( 'Configure', 'hubloy-membership' ),
+						'filter'    => __( 'Filter', 'hubloy-membership' ),
+						'select'    => __( 'Select', 'hubloy-membership' ),
+						'actions'   => __( 'Actions', 'hubloy-membership' ),
+						'all'       => __( 'All', 'hubloy-membership' ),
 					),
 					'urls'          => array(
-						'dash_url' => is_multisite() ? network_admin_url( 'admin.php?page=hammock' ) : admin_url( 'admin.php?page=hammock' ),
-						'settings' => is_multisite() ? network_admin_url( 'admin.php?page=hammock-settings' ) : admin_url( 'admin.php?page=hammock-settings' ),
+						'dash_url' => is_multisite() ? network_admin_url( 'admin.php?page=hubloy-membership' ) : admin_url( 'admin.php?page=hubloy-membership' ),
+						'settings' => is_multisite() ? network_admin_url( 'admin.php?page=hubloy-membership-settings' ) : admin_url( 'admin.php?page=hubloy-membership-settings' ),
 					),
 					'currency_code' => esc_html( $code ),
 				),
 				'page_strings' => array(),
 				'strings'      => array(),
 				'assets'       => array(
-					'spinner' => HAMMOCK_ASSETS_URL . '/img/spinner.gif',
+					'spinner' => HUBMEMB_ASSETS_URL . '/img/spinner.gif',
 				),
 
 			)
 		);
 
-		wp_localize_script( 'hammock-admin', 'hammock', $vars );
+		wp_localize_script( 'hubloy-membership-admin', 'hubloy_membership', $vars );
 
 		wp_register_script(
-			'hammock-addons-react',
-			HAMMOCK_ASSETS_URL . '/js/react/addon.min.js',
+			'hubloy-membership-addons-react',
+			HUBMEMB_ASSETS_URL . '/js/react/addon.min.js',
 			array( 'jquery' ),
-			HAMMOCK_VERSION
+			HUBMEMB_VERSION
 		);
 
 		wp_register_script(
-			'hammock-admin-react',
-			HAMMOCK_ASSETS_URL . '/js/react/admin.min.js',
+			'hubloy-membership-admin-react',
+			HUBMEMB_ASSETS_URL . '/js/react/admin.min.js',
 			array( 'jquery' ),
-			HAMMOCK_VERSION
+			HUBMEMB_VERSION
 		);
 
 		wp_register_script(
-			'hammock-comms-react',
-			HAMMOCK_ASSETS_URL . '/js/react/comms.min.js',
+			'hubloy-membership-comms-react',
+			HUBMEMB_ASSETS_URL . '/js/react/comms.min.js',
 			array( 'jquery' ),
-			HAMMOCK_VERSION
+			HUBMEMB_VERSION
 		);
 
 		wp_register_script(
-			'hammock-members-react',
-			HAMMOCK_ASSETS_URL . '/js/react/members.min.js',
+			'hubloy-membership-members-react',
+			HUBMEMB_ASSETS_URL . '/js/react/members.min.js',
 			array( 'jquery' ),
-			HAMMOCK_VERSION
+			HUBMEMB_VERSION
 		);
 
 		wp_register_script(
-			'hammock-memberships-react',
-			HAMMOCK_ASSETS_URL . '/js/react/memberships.min.js',
+			'hubloy-membership-memberships-react',
+			HUBMEMB_ASSETS_URL . '/js/react/memberships.min.js',
 			array( 'jquery' ),
-			HAMMOCK_VERSION
+			HUBMEMB_VERSION
 		);
 
 		wp_register_script(
-			'hammock-settings-react',
-			HAMMOCK_ASSETS_URL . '/js/react/settings.min.js',
+			'hubloy-membership-settings-react',
+			HUBMEMB_ASSETS_URL . '/js/react/settings.min.js',
 			array( 'jquery' ),
-			HAMMOCK_VERSION
+			HUBMEMB_VERSION
 		);
 
 		wp_register_script(
-			'hammock-transactions-react',
-			HAMMOCK_ASSETS_URL . '/js/react/transactions.min.js',
+			'hubloy-membership-transactions-react',
+			HUBMEMB_ASSETS_URL . '/js/react/transactions.min.js',
 			array( 'jquery' ),
-			HAMMOCK_VERSION
+			HUBMEMB_VERSION
 		);
 
 		wp_register_script(
-			'hammock-coupons-react',
-			HAMMOCK_ASSETS_URL . '/js/react/coupons.min.js',
+			'hubloy-membership-coupons-react',
+			HUBMEMB_ASSETS_URL . '/js/react/coupons.min.js',
 			array( 'jquery' ),
-			HAMMOCK_VERSION
+			HUBMEMB_VERSION
 		);
 
 		wp_register_script(
-			'hammock-marketing-react',
-			HAMMOCK_ASSETS_URL . '/js/react/marketing.min.js',
+			'hubloy-membership-marketing-react',
+			HUBMEMB_ASSETS_URL . '/js/react/marketing.min.js',
 			array( 'jquery' ),
-			HAMMOCK_VERSION
+			HUBMEMB_VERSION
 		);
 
 		wp_register_script(
-			'hammock-invites-react',
-			HAMMOCK_ASSETS_URL . '/js/react/invites.min.js',
+			'hubloy-membership-invites-react',
+			HUBMEMB_ASSETS_URL . '/js/react/invites.min.js',
 			array( 'jquery' ),
-			HAMMOCK_VERSION
+			HUBMEMB_VERSION
 		);
 
 		wp_register_script(
-			'hammock-rules-react',
-			HAMMOCK_ASSETS_URL . '/js/react/rules.min.js',
+			'hubloy-membership-rules-react',
+			HUBMEMB_ASSETS_URL . '/js/react/rules.min.js',
 			array( 'jquery' ),
-			HAMMOCK_VERSION
+			HUBMEMB_VERSION
 		);
 
 		wp_register_script(
-			'hammock-wizard-react',
-			HAMMOCK_ASSETS_URL . '/js/react/wizard.min.js',
+			'hubloy-membership-wizard-react',
+			HUBMEMB_ASSETS_URL . '/js/react/wizard.min.js',
 			array( 'jquery' ),
-			HAMMOCK_VERSION
+			HUBMEMB_VERSION
 		);
 	}
 
@@ -258,58 +258,58 @@ class Resource {
 	public static function register_admin_styles() {
 		// UIkit css
 		wp_register_style(
-			'hammock-uikit',
-			HAMMOCK_ASSETS_URL . '/vendor/uikit/css/uikit.min.css',
+			'hubloy-membership-uikit',
+			HUBMEMB_ASSETS_URL . '/vendor/uikit/css/uikit.min.css',
 			null,
-			HAMMOCK_UIKIT_VERSION
+			HUBMEMB_UIKIT_VERSION
 		);
 
 		// tiptip
 		wp_register_style(
-			'hammock-tiptip',
-			HAMMOCK_ASSETS_URL . '/vendor/tiptip/tipTip.css',
+			'hubloy-membership-tiptip',
+			HUBMEMB_ASSETS_URL . '/vendor/tiptip/tipTip.css',
 			null,
 			'1.2'
 		);
 
 		// Jquery UI
 		wp_register_style(
-			'hammock-jquery-ui',
-			HAMMOCK_ASSETS_URL . '/vendor/jquery-ui/jquery-ui.min.css',
+			'hubloy-membership-jquery-ui',
+			HUBMEMB_ASSETS_URL . '/vendor/jquery-ui/jquery-ui.min.css',
 			null,
 			'1.12.1'
 		);
 
 		// Jquery tags
 		wp_register_style(
-			'hammock-jquery-tags',
-			HAMMOCK_ASSETS_URL . '/vendor/tags/jquery.tagsinput.min.css',
+			'hubloy-membership-jquery-tags',
+			HUBMEMB_ASSETS_URL . '/vendor/tags/jquery.tagsinput.min.css',
 			null,
 			'1.8.7'
 		);
 
 		// Notifications
 		wp_register_style(
-			'hammock-styled-notifications',
-			HAMMOCK_ASSETS_URL . '/vendor/styled-notifications/notifications.css',
+			'hubloy-membership-styled-notifications',
+			HUBMEMB_ASSETS_URL . '/vendor/styled-notifications/notifications.css',
 			null,
 			'1.0.1'
 		);
 
 		// Select 2
 		wp_register_style(
-			'hammock-select2',
-			HAMMOCK_ASSETS_URL . '/vendor/select2/css/select2.min.css',
+			'hubloy-membership-select2',
+			HUBMEMB_ASSETS_URL . '/vendor/select2/css/select2.min.css',
 			null,
 			'4.1.0'
 		);
 
 		// Admin CSS
 		wp_register_style(
-			'hammock-admin',
-			HAMMOCK_ASSETS_URL . '/css/hammock-admin.min.css',
+			'hubloy-membership-admin',
+			HUBMEMB_ASSETS_URL . '/css/hubloy-membership-admin.min.css',
 			null,
-			HAMMOCK_VERSION
+			HUBMEMB_VERSION
 		);
 	}
 
@@ -321,10 +321,10 @@ class Resource {
 	 */
 	public static function register_front_styles() {
 		wp_register_style(
-			'hammock-front',
-			HAMMOCK_ASSETS_URL . '/css/hammock-front.min.css',
+			'hubloy-membership-front',
+			HUBMEMB_ASSETS_URL . '/css/hubloy-membership-front.min.css',
 			null,
-			HAMMOCK_VERSION
+			HUBMEMB_VERSION
 		);
 	}
 
@@ -337,44 +337,44 @@ class Resource {
 
 		// Swal
 		wp_register_script(
-			'hammock-sweetalert',
-			HAMMOCK_ASSETS_URL . '/vendor/sweetalert/sweetalert2.all.min.js',
+			'hubloy-membership-sweetalert',
+			HUBMEMB_ASSETS_URL . '/vendor/sweetalert/sweetalert2.all.min.js',
 			array( 'jquery' ),
 			'11.4.6',
 			true
 		);
 
 		wp_register_script(
-			'hammock-front',
-			HAMMOCK_ASSETS_URL . '/js/hammock-front.min.js',
+			'hubloy-membership-front',
+			HUBMEMB_ASSETS_URL . '/js/hubloy-membership-front.min.js',
 			array( 'jquery' ),
-			HAMMOCK_VERSION,
+			HUBMEMB_VERSION,
 			true
 		);
 		$vars = apply_filters(
-			'hammock_front_vars',
+			'hubloy-membership_front_vars',
 			array(
-				'error'      => __( 'An error occured', 'hammock' ),
+				'error'      => __( 'An error occured', 'hubloy-membership' ),
 				'ajax_url'   => admin_url( 'admin-ajax.php' ),
-				'no_results' => __( 'Ooops, no results found', 'hammock' ),
+				'no_results' => __( 'Ooops, no results found', 'hubloy-membership' ),
 				'assets'     => array(
-					'spinner' => HAMMOCK_ASSETS_URL . '/img/spinner.gif',
+					'spinner' => HUBMEMB_ASSETS_URL . '/img/spinner.gif',
 				),
 				'common'     => array(
 					'buttons' => array(
-						'save'   => __( 'Save', 'hammock' ),
-						'update' => __( 'Update', 'hammock' ),
-						'edit'   => __( 'Edit', 'hammock' ),
-						'delete' => __( 'Delete', 'hammock' ),
-						'ok'     => __( 'Okay', 'hammock' ),
-						'cancel' => __( 'Cancel', 'hammock' ),
-						'back'   => __( 'Back', 'hammock' ),
+						'save'   => __( 'Save', 'hubloy-membership' ),
+						'update' => __( 'Update', 'hubloy-membership' ),
+						'edit'   => __( 'Edit', 'hubloy-membership' ),
+						'delete' => __( 'Delete', 'hubloy-membership' ),
+						'ok'     => __( 'Okay', 'hubloy-membership' ),
+						'cancel' => __( 'Cancel', 'hubloy-membership' ),
+						'back'   => __( 'Back', 'hubloy-membership' ),
 					),
 				),
 			)
 		);
 
-		wp_localize_script( 'hammock-front', 'hammock', $vars );
+		wp_localize_script( 'hubloy-membership-front', 'hubloy_membership', $vars );
 	}
 }
 

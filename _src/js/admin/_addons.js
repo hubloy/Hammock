@@ -3,18 +3,18 @@
 /*global $:false */
 /*global window:false */
 /*global document:false */
-/*global hammock:false */
+/*global hubloy_membership:false */
 
 jQuery(function($) {
 
 
-	$(document).on('click','.hammock-addon-toggle-setting', function() {
+	$(document).on('click','.hubloy_membership-addon-toggle-setting', function() {
 		var $item = $(this),
 			$id = $item.attr('data-id'),
 			$name = $item.attr('data-name'),
 			$nonce = $item.attr('data-nonce'),
 			$canvas = $('#addons-settings'),
-			$content = $canvas.find('.hammock-canvas-content'),
+			$content = $canvas.find('.hubloy_membership-canvas-content'),
 			$title = $content.find('.addon-title'),
 			$form = $content.find('.addon-content'),
 			$id_field = $content.find('.addon_id');
@@ -29,7 +29,7 @@ jQuery(function($) {
 
 		$.post(
 			window.ajaxurl,
-			{ 'id' : $id, '_wpnonce' : $nonce, 'action' : 'hammock_addon_settings' }
+			{ 'id' : $id, '_wpnonce' : $nonce, 'action' : 'hubloy_membership_addon_settings' }
 		).done( function( response ) {
 			if(response.success){
 				$form.html(response.data.view);
@@ -37,7 +37,7 @@ jQuery(function($) {
 				$form.html(response.data);
 			}
 		}).fail(function(xhr, status, error) {
-			hammock.helper.notify(hammock.error, 'error');
+			hubloy_membership.helper.notify(hubloy_membership.error, 'error');
 		});
 	});
 });

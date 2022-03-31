@@ -8,12 +8,12 @@ import InviteAddonCreate from './admin/containers/subsite/codes/forms/CreateCode
 import InviteAddonEdit from './admin/containers/subsite/codes/forms/EditCode'
 
 document.addEventListener('DOMContentLoaded', function () {
-	const hammockContainer = document.getElementById( 'hammock-invites-container' );
-	if ( hammockContainer !== null ) {
-		const DefaultView = (props) => <NotFound hammock={window.hammock} {...props}/>
-		const InvitesPage = (props) => <InviteAddonSetting hammock={window.hammock} {...props} />
-		const InvitesCreatePage = (props) => <InviteAddonCreate type={`invitation`} hammock={window.hammock} {...props} />
-		const InvitesEditPage = (props) => <InviteAddonEdit type={`invitation`} hammock={window.hammock} {...props} />
+	const hubloy_membershipContainer = document.getElementById( 'hubloy_membership-invites-container' );
+	if ( hubloy_membershipContainer !== null ) {
+		const DefaultView = (props) => <NotFound hubloy_membership={window.hubloy_membership} {...props}/>
+		const InvitesPage = (props) => <InviteAddonSetting hubloy_membership={window.hubloy_membership} {...props} />
+		const InvitesCreatePage = (props) => <InviteAddonCreate type={`invitation`} hubloy_membership={window.hubloy_membership} {...props} />
+		const InvitesEditPage = (props) => <InviteAddonEdit type={`invitation`} hubloy_membership={window.hubloy_membership} {...props} />
 		const routing = (
 			<HashRouter>
 				<Switch>
@@ -24,6 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				</Switch>
 			</HashRouter>
 		);
-		ReactDOM.render(routing, hammockContainer);
+		ReactDOM.render(routing, hubloy_membershipContainer);
 	}
 });

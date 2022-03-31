@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Rule;
+namespace HubloyMembership\Rule;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Rule;
+use HubloyMembership\Base\Rule;
 
 class Menu extends Rule {
 
@@ -40,6 +40,6 @@ class Menu extends Rule {
 	 */
 	public function init() {
 		$this->id   = 'menu';
-		$this->name = __( 'Menu Items', 'hammock' );
+		$this->name = __( 'Menu Items', 'hubloy-membership' );
 	}
 }

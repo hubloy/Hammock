@@ -3,7 +3,7 @@
  * Account functions
  * These functions can be used within themes or external resources
  *
- * @package Hammock/Functions
+ * @package HubloyMembership/Functions
  * @since 1.0.0
  */
 if ( ! defined( 'ABSPATH' ) ) {
@@ -19,8 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @return bool
  */
-function hammock_is_member_plan_active( $plan_id ) {
-	$plan = new \Hammock\Model\Plan( $plan_id );
+function hubloy-membership_is_member_plan_active( $plan_id ) {
+	$plan = new \HubloyMembership\Model\Plan( $plan_id );
 	if ( $plan->id > 0 ) {
 		return $plan->is_active();
 	}
@@ -30,14 +30,14 @@ function hammock_is_member_plan_active( $plan_id ) {
 /**
  * Account member navigation menu
  */
-function hammock_account_member_navigation_labels() {
-	$endpoints = \Hammock\Services\Pages::account_page_endpoits();
+function hubloy-membership_account_member_navigation_labels() {
+	$endpoints = \HubloyMembership\Services\Pages::account_page_endpoits();
 	$labels    = array(
-		'dashboard'     => __( 'Dashboard', 'hammock' ),
-		'transactions'  => __( 'Transactions', 'hammock' ),
-		'edit-account'  => __( 'Edit Account', 'hammock' ),
-		'subscriptions' => __( 'Subscriptions', 'hammock' ),
-		'member-logout' => __( 'Logout', 'hammock' ),
+		'dashboard'     => __( 'Dashboard', 'hubloy-membership' ),
+		'transactions'  => __( 'Transactions', 'hubloy-membership' ),
+		'edit-account'  => __( 'Edit Account', 'hubloy-membership' ),
+		'subscriptions' => __( 'Subscriptions', 'hubloy-membership' ),
+		'member-logout' => __( 'Logout', 'hubloy-membership' ),
 	);
 
 	foreach ( $endpoints as $endpoint_id => $endpoint ) {
@@ -46,7 +46,7 @@ function hammock_account_member_navigation_labels() {
 		}
 	}
 
-	return apply_filters( 'hammock_account_member_navigation_labels', $labels, $endpoints );
+	return apply_filters( 'hubloy-membership_account_member_navigation_labels', $labels, $endpoints );
 }
 
 /**
@@ -58,11 +58,11 @@ function hammock_account_member_navigation_labels() {
  *
  * @return string
  */
-function hammock_account_member_navigation_link_class( $endpoint ) {
+function hubloy-membership_account_member_navigation_link_class( $endpoint ) {
 	global $wp;
 
 	$classes = array(
-		'hammock-member-account-navigation-' . $endpoint,
+		'hubloy-membership-member-account-navigation-' . $endpoint,
 	);
 
 	// Set current item class.
@@ -79,7 +79,7 @@ function hammock_account_member_navigation_link_class( $endpoint ) {
 		$classes[] = 'is-active';
 	}
 
-	$classes = apply_filters( 'hammock_account_member_navigation_link_class', $classes, $endpoint );
+	$classes = apply_filters( 'hubloy-membership_account_member_navigation_link_class', $classes, $endpoint );
 
 	return implode( ' ', array_map( 'sanitize_html_class', $classes ) );
 }
@@ -93,8 +93,8 @@ function hammock_account_member_navigation_link_class( $endpoint ) {
  *
  * @return string
  */
-function hammock_logout_url( $redirect = '' ) {
-	$redirect = $redirect ? $redirect : apply_filters( 'hammock_logout_url', hammock_get_page_permalink( 'account_page' ) );
+function hubloy-membership_logout_url( $redirect = '' ) {
+	$redirect = $redirect ? $redirect : apply_filters( 'hubloy-membership_logout_url', hubloy-membership_get_page_permalink( 'account_page' ) );
 	return wp_logout_url( $redirect );
 }
 
@@ -105,10 +105,10 @@ function hammock_logout_url( $redirect = '' ) {
  *
  * @return bool
  */
-function hammock_current_user_can_subscribe() {
+function hubloy-membership_current_user_can_subscribe() {
 	if ( is_user_logged_in() ) {
 		$user_id = get_current_user_id();
-		return hammock_user_can_subscribe( $user_id );
+		return hubloy-membership_user_can_subscribe( $user_id );
 	}
 	return false;
 }
@@ -122,11 +122,11 @@ function hammock_current_user_can_subscribe() {
  *
  * @return bool
  */
-function hammock_user_can_subscribe( $user_id ) {
+function hubloy-membership_user_can_subscribe( $user_id ) {
 	if ( user_can( $user_id, 'editor' ) || user_can( $user_id, 'administrator' ) ) {
-		return apply_filters( 'hammock_admin_can_subscribe', false, $user_id );
+		return apply_filters( 'hubloy-membership_admin_can_subscribe', false, $user_id );
 	} else {
-		return apply_filters( 'hammock_user_can_subscribe', true, $user_id );
+		return apply_filters( 'hubloy-membership_user_can_subscribe', true, $user_id );
 	}
 }
 
@@ -134,16 +134,16 @@ function hammock_user_can_subscribe( $user_id ) {
 /**
  * Get the current member
  *
- * @see hammock_user_is_member
+ * @see hubloy-membership_user_is_member
  *
  * @since 1.0.0
  *
  * @return bool|object
  */
-function hammock_get_current_member() {
+function hubloy-membership_get_current_member() {
 	if ( is_user_logged_in() ) {
 		$user_id = get_current_user_id();
-		return hammock_user_is_member( $user_id );
+		return hubloy-membership_user_is_member( $user_id );
 	}
 	return false;
 }
@@ -159,8 +159,8 @@ function hammock_get_current_member() {
  *
  * @return mixed
  */
-function hammock_user_is_member( $user_id ) {
-	$service = new \Hammock\Services\Members();
+function hubloy-membership_user_is_member( $user_id ) {
+	$service = new \HubloyMembership\Services\Members();
 	$member  = $service->get_member_by_user_id( $user_id );
 	return $member;
 }
@@ -174,8 +174,8 @@ function hammock_user_is_member( $user_id ) {
  *
  * @return mixed
  */
-function hammock_user_has_plans( $user_id ) {
-	$member = hammock_user_is_member( $user_id );
+function hubloy-membership_user_has_plans( $user_id ) {
+	$member = hubloy-membership_user_is_member( $user_id );
 	if ( $member ) {
 		return count( $member->get_plan_ids() );
 	}

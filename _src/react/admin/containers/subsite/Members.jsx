@@ -17,8 +17,8 @@ export default class Members extends Component {
 		};
 		
 		this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
 	}
 
@@ -36,21 +36,21 @@ export default class Members extends Component {
     }
 
 	render() {
-		var strings = this.props.hammock.strings;
+		var strings = this.props.hubloy_membership.strings;
 		return (
-			<Dashboard hammock={this.props.hammock} button={<a className="uk-button uk-button-primary uk-button-small" href="#hammock-add-member" uk-toggle="">{strings.dashboard.add_new.button}</a>}>
+			<Dashboard hubloy_membership={this.props.hubloy_membership} button={<a className="uk-button uk-button-primary uk-button-small" href="#hubloy_membership-add-member" uk-toggle="">{strings.dashboard.add_new.button}</a>}>
 				{!this.state.loading && this.state.total > 0 && 
 					<Filter strings={strings}/>
 				}
 				<div className="uk-container uk-padding-small uk-margin-top uk-width-1-1 uk-background-default">
-					<Table hammock={this.props.hammock} load_counts={this.count_members.bind(this)}/>
+					<Table hubloy_membership={this.props.hubloy_membership} load_counts={this.count_members.bind(this)}/>
 				</div>
-				<Create hammock={this.props.hammock} />
+				<Create hubloy_membership={this.props.hubloy_membership} />
 			</Dashboard>
 		)
 	}
 }
 
 Members.propTypes = {
-	hammock: PropTypes.object
+	hubloy_membership: PropTypes.object
 };

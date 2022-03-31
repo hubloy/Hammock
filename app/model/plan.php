@@ -1,14 +1,14 @@
 <?php
-namespace Hammock\Model;
+namespace HubloyMembership\Model;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Core\Database;
-use Hammock\Services\Memberships;
-use Hammock\Services\Members;
-use Hammock\Helper\Duration;
+use HubloyMembership\Core\Database;
+use HubloyMembership\Services\Memberships;
+use HubloyMembership\Services\Members;
+use HubloyMembership\Helper\Duration;
 
 /**
  * Member subscription plan
@@ -297,7 +297,7 @@ class Plan {
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( 'hammock_member_before_delete_plan', $this, $member_id, $membership_id );
+		do_action( 'hubloy-membership_member_before_delete_plan', $this, $member_id, $membership_id );
 
 		Meta::remove_all( $this->id, 'plan' );
 		$sql = "DELETE FROM {$this->table_name} WHERE `id` = %d";
@@ -311,7 +311,7 @@ class Plan {
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( 'hammock_member_after_delete_plan', $member_id, $membership_id );
+		do_action( 'hubloy-membership_member_after_delete_plan', $member_id, $membership_id );
 	}
 
 	/**
@@ -430,7 +430,7 @@ class Plan {
 		} else {
 			$is_active = $this->has_trial();
 		}
-		return apply_filters( 'hammock_plan_is_active', $is_active, $this );
+		return apply_filters( 'hubloy-membership_plan_is_active', $is_active, $this );
 	}
 
 	/**
@@ -466,7 +466,7 @@ class Plan {
 				$has_trial = true;
 			}
 		}
-		return apply_filters( 'hammock_plan_has_trial', $has_trial, $this );
+		return apply_filters( 'hubloy-membership_plan_has_trial', $has_trial, $this );
 	}
 
 	/**
@@ -541,7 +541,7 @@ class Plan {
 	 * Record the payment and manage the plan.
 	 * Continue or dicontinue a plan.
 	 *
-	 * @param \Hammock\Model\Invoice The invoice
+	 * @param \HubloyMembership\Model\Invoice The invoice
 	 *
 	 * @since 1.0.0
 	 */
@@ -553,12 +553,12 @@ class Plan {
 		/**
 		 * Action called after a new payment is recorded
 		 * 
-		 * @param \Hammock\Model\Plan The current plan
-		 * @param \Hammock\Model\Invoice The invoice
+		 * @param \HubloyMembership\Model\Plan The current plan
+		 * @param \HubloyMembership\Model\Invoice The invoice
 		 * 
 		 * @since 1.0.0
 		 */
-		do_action( 'hammock_plan_record_payment', $this, $invoice );
+		do_action( 'hubloy-membership_plan_record_payment', $this, $invoice );
 	}
 
 	/**
@@ -588,14 +588,14 @@ class Plan {
 	 */
 	public function to_html() {
 		return apply_filters(
-			'hammock_plan_to_html',
+			'hubloy-membership_plan_to_html',
 			array(
 				'id'              => $this->id,
 				'plan_id'         => $this->plan_id,
 				'date_created'    => $this->date_created,
 				'date_updated'    => $this->date_updated,
 				'start_date'      => $this->start_date,
-				'end_date'        => empty( $this->end_date ) ? __( 'N/A', 'hammock' ) : $this->end_date,
+				'end_date'        => empty( $this->end_date ) ? __( 'N/A', 'hubloy-membership' ) : $this->end_date,
 				'start_date_edit' => date_i18n( 'Y-m-d', $this->start_date_timestamp ),
 				'end_date_edit'   => $this->end_date_timestamp > 0 ? date_i18n( 'Y-m-d', $this->end_date_timestamp ) : '',
 				'member_id'       => $this->member_id,
@@ -603,7 +603,7 @@ class Plan {
 				'enabled'         => $this->enabled,
 				'status'          => $this->status_detail,
 				'status_simple'   => $this->status,
-				'gateway'         => empty( $this->gateway ) ? __( 'N/A', 'hammock' ) : $this->gateway,
+				'gateway'         => empty( $this->gateway ) ? __( 'N/A', 'hubloy-membership' ) : $this->gateway,
 				'is_active'       => $this->is_active(),
 				'has_trial'       => $this->has_trial(),
 			),

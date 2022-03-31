@@ -1,12 +1,12 @@
 <?php
-namespace Hammock\Controller\Site;
+namespace HubloyMembership\Controller\Site;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Controller;
-use Hammock\Helper\Template;
+use HubloyMembership\Base\Controller;
+use HubloyMembership\Helper\Template;
 
 /**
  * Communication controller
@@ -86,11 +86,11 @@ class Communication extends Controller {
 	public function init() {
 		$this->load_comms();
 
-		$this->add_action( 'hammock_email_header', 'email_header' );
-		$this->add_action( 'hammock_email_footer', 'email_footer' );
+		$this->add_action( 'hubloy-membership_email_header', 'email_header' );
+		$this->add_action( 'hubloy-membership_email_footer', 'email_footer' );
 
-		$this->add_ajax_action( 'hammock_email_copy_theme', 'copy_theme' );
-		$this->add_ajax_action( 'hammock_email_delete_theme', 'delete_theme' );
+		$this->add_ajax_action( 'hubloy-membership_email_copy_theme', 'copy_theme' );
+		$this->add_ajax_action( 'hubloy-membership_email_delete_theme', 'delete_theme' );
 	}
 
 	/**
@@ -100,30 +100,30 @@ class Communication extends Controller {
 	 */
 	private function load_comms() {
 		// Load admin email types first
-		\Hammock\Emails\Admin\Invoice::instance();
-		\Hammock\Emails\Admin\Signup::instance();
+		\HubloyMembership\Emails\Admin\Invoice::instance();
+		\HubloyMembership\Emails\Admin\Signup::instance();
 
 		// Load user type emails
-		\Hammock\Emails\Member\Account::instance();
-		\Hammock\Emails\Member\Invoice::instance();
-		\Hammock\Emails\Member\Registration::instance();
-		\Hammock\Emails\Member\Reset::instance();
-		\Hammock\Emails\Member\Verify::instance();
+		\HubloyMembership\Emails\Member\Account::instance();
+		\HubloyMembership\Emails\Member\Invoice::instance();
+		\HubloyMembership\Emails\Member\Registration::instance();
+		\HubloyMembership\Emails\Member\Reset::instance();
+		\HubloyMembership\Emails\Member\Verify::instance();
 
-		\Hammock\Emails\Member\Membership\Cancelled::instance();
-		\Hammock\Emails\Member\Membership\Renew::instance();
-		\Hammock\Emails\Member\Membership\Signup::instance();
-		\Hammock\Emails\Member\Membership\Trial::instance();
+		\HubloyMembership\Emails\Member\Membership\Cancelled::instance();
+		\HubloyMembership\Emails\Member\Membership\Renew::instance();
+		\HubloyMembership\Emails\Member\Membership\Signup::instance();
+		\HubloyMembership\Emails\Member\Membership\Trial::instance();
 
-		\Hammock\Emails\Member\Membership\Payment\Due::instance();
-		\Hammock\Emails\Member\Membership\Payment\Failed::instance();
-		\Hammock\Emails\Member\Membership\Payment\Overdue::instance();
+		\HubloyMembership\Emails\Member\Membership\Payment\Due::instance();
+		\HubloyMembership\Emails\Member\Membership\Payment\Failed::instance();
+		\HubloyMembership\Emails\Member\Membership\Payment\Overdue::instance();
 
-		\Hammock\Emails\Member\Membership\Status\After::instance();
-		\Hammock\Emails\Member\Membership\Status\Before::instance();
-		\Hammock\Emails\Member\Membership\Status\Finished::instance();
+		\HubloyMembership\Emails\Member\Membership\Status\After::instance();
+		\HubloyMembership\Emails\Member\Membership\Status\Before::instance();
+		\HubloyMembership\Emails\Member\Membership\Status\Finished::instance();
 
-		do_action( 'hammock_load_comms' );
+		do_action( 'hubloy-membership_load_comms' );
 	}
 
 	/**
@@ -139,8 +139,8 @@ class Communication extends Controller {
 		$this->_cap     = $cap;
 		add_submenu_page(
 			$slug,
-			__( 'Communication', 'hammock' ),
-			__( 'Communication', 'hammock' ),
+			__( 'Communication', 'hubloy-membership' ),
+			__( 'Communication', 'hubloy-membership' ),
 			$this->_cap,
 			$this->_page_id,
 			array( $this, 'render' )
@@ -158,7 +158,7 @@ class Communication extends Controller {
 	 */
 	function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'comms' ) ) {
-			$vars['common']['string']['title'] = __( 'Communication', 'hammock' );
+			$vars['common']['string']['title'] = __( 'Communication', 'hubloy-membership' );
 			$vars['active_page']               = 'comms';
 			$vars['strings']                   = $this->get_strings();
 		}
@@ -173,7 +173,7 @@ class Communication extends Controller {
 	 */
 	private function get_strings() {
 		if ( empty( $this->strings ) ) {
-			$this->strings = include HAMMOCK_LOCALE_DIR . '/site/comms.php';
+			$this->strings = include HUBMEMB_LOCALE_DIR . '/site/comms.php';
 		}
 		return $this->strings;
 	}
@@ -184,7 +184,7 @@ class Communication extends Controller {
 	 * @since 1.0.0
 	 */
 	public function controller_scripts() {
-		wp_enqueue_script( 'hammock-comms-react' );
+		wp_enqueue_script( 'hubloy-membership-comms-react' );
 	}
 
 	/**
@@ -195,7 +195,7 @@ class Communication extends Controller {
 	public function render() {
 
 		?>
-		<div id="hammock-comms-container"></div>
+		<div id="hubloy-membership-comms-container"></div>
 		<?php
 	}
 
@@ -228,12 +228,12 @@ class Communication extends Controller {
 	 * @return application/json
 	 */
 	public function copy_theme() {
-		$this->verify_nonce( 'hammock_email_copy_theme' );
+		$this->verify_nonce( 'hubloy-membership_email_copy_theme' );
 		$id = sanitize_text_field( $_POST['id'] );
 
-		do_action( 'hammock_email_copy_theme_' . $id );
+		do_action( 'hubloy-membership_email_copy_theme_' . $id );
 
-		wp_send_json_error( __( 'Action not implemented', 'hammock' ) );
+		wp_send_json_error( __( 'Action not implemented', 'hubloy-membership' ) );
 	}
 
 
@@ -245,12 +245,12 @@ class Communication extends Controller {
 	 * @return application/json
 	 */
 	public function delete_theme() {
-		$this->verify_nonce( 'hammock_email_delete_theme' );
+		$this->verify_nonce( 'hubloy-membership_email_delete_theme' );
 		$id = sanitize_text_field( $_POST['id'] );
 
-		do_action( 'hammock_email_delete_theme_' . $id );
+		do_action( 'hubloy-membership_email_delete_theme_' . $id );
 
-		wp_send_json_error( __( 'Action not implemented', 'hammock' ) );
+		wp_send_json_error( __( 'Action not implemented', 'hubloy-membership' ) );
 	}
 }
 ?>

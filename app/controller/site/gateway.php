@@ -1,12 +1,12 @@
 <?php
-namespace Hammock\Controller\Site;
+namespace HubloyMembership\Controller\Site;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Controller;
-use Hammock\Services\Gateways;
+use HubloyMembership\Base\Controller;
+use HubloyMembership\Services\Gateways;
 
 /**
  * Gateway controller
@@ -60,9 +60,9 @@ class Gateway extends Controller {
 	 * @since 1.0.0
 	 */
 	function load_gateways() {
-		\Hammock\Gateway\Manual\Manual::instance();
-		\Hammock\Gateway\Paypal\Paypal::instance();
-		do_action( 'hammock_load_gateways' );
+		\HubloyMembership\Gateway\Manual\Manual::instance();
+		\HubloyMembership\Gateway\Paypal\Paypal::instance();
+		do_action( 'hubloy-membership_load_gateways' );
 	}
 
 	/**
@@ -71,7 +71,7 @@ class Gateway extends Controller {
 	 * @since 1.0.0
 	 */
 	function init_gateways() {
-		do_action( 'hammock_init_gateway' );
+		do_action( 'hubloy-membership_init_gateway' );
 	}
 }
 

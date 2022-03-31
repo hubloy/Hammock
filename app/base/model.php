@@ -1,5 +1,5 @@
 <?php
-namespace Hammock\Base;
+namespace HubloyMembership\Base;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -59,7 +59,7 @@ class Model extends Component {
 		 * @since  1.0.0
 		 * @param object $this The Model object.
 		 */
-		do_action( 'hammock_base_model_construct', $this );
+		do_action( 'hubloy-membership_base_model_construct', $this );
 	}
 
 	/**
@@ -122,7 +122,7 @@ class Model extends Component {
 	 * @since  1.0.0
 	 */
 	public function before_save() {
-		do_action( 'hammock_base_model_before_save', $this );
+		do_action( 'hubloy-membership_base_model_before_save', $this );
 	}
 
 	/**
@@ -140,7 +140,7 @@ class Model extends Component {
 	 * @since  1.0.0
 	 */
 	public function after_save() {
-		do_action( 'hammock_base_model_after_save', $this );
+		do_action( 'hubloy-membership_base_model_after_save', $this );
 	}
 
 	/**

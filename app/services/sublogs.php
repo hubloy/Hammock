@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Services;
+namespace HubloyMembership\Services;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Core\Database;
+use HubloyMembership\Core\Database;
 
 /**
  * Subscription  Logs Class
@@ -71,7 +71,7 @@ class Sublogs {
 	/**
 	 * Check if the current member is eligible for a trial on a membership
 	 *
-	 * @param \Hammock\Model\Member $member - the member object
+	 * @param \HubloyMembership\Model\Member $member - the member object
 	 * @param int                   $membership_id - the membership id
 	 *
 	 * @since 1.0.0
@@ -92,7 +92,7 @@ class Sublogs {
 	 * This will not check if a member has had a trial,trial will not be
 	 * counted as a subscription
 	 *
-	 * @param \Hammock\Model\Member $member - the member object
+	 * @param \HubloyMembership\Model\Member $member - the member object
 	 * @param int                   $membership_id - the membership id
 	 *
 	 * @since 1.0.0

@@ -1,5 +1,5 @@
 <?php
-namespace Hammock\Addon\Mailchimp;
+namespace HubloyMembership\Addon\Mailchimp;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -210,10 +210,10 @@ class Api {
 			)
 		);
 
-		$error = __( 'Something went wrong, please compare your Opt-in fields with MailChimp fields and add any missing fields.', 'hammock' );
+		$error = __( 'Something went wrong, please compare your Opt-in fields with MailChimp fields and add any missing fields.', 'hubloy-membership' );
 
 		if ( ! is_wp_error( $res ) ) {
-			return __( 'Successful subscription', 'hammock' );
+			return __( 'Successful subscription', 'hubloy-membership' );
 		} else {
 			throw new \Exception( $error );
 		}
@@ -236,10 +236,10 @@ class Api {
 				'body' => $data,
 			)
 		);
-		$error     = __( 'This email address has already subscribed', 'hammock' );
+		$error     = __( 'This email address has already subscribed', 'hubloy-membership' );
 
 		if ( ! is_wp_error( $res ) ) {
-			return __( 'You have been added to the new group', 'hammock' );
+			return __( 'You have been added to the new group', 'hubloy-membership' );
 		} else {
 			throw new \Exception( $error );
 		}
@@ -277,9 +277,9 @@ class Api {
 			)
 		);
 
-		$error = __( "Couldn't update the user", 'hammock' );
+		$error = __( "Couldn't update the user", 'hubloy-membership' );
 		if ( ! is_wp_error( $res ) ) {
-			return __( 'User updated', 'hammock' );
+			return __( 'User updated', 'hubloy-membership' );
 		} else {
 			throw new Exception( $error );
 		}

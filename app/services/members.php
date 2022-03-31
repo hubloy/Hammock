@@ -1,16 +1,16 @@
 <?php
-namespace Hammock\Services;
+namespace HubloyMembership\Services;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Core\Database;
-use Hammock\Model\Member;
-use Hammock\Model\Membership;
-use Hammock\Model\Plan;
-use Hammock\Model\Meta;
-use Hammock\Helper\Duration;
+use HubloyMembership\Core\Database;
+use HubloyMembership\Model\Member;
+use HubloyMembership\Model\Membership;
+use HubloyMembership\Model\Plan;
+use HubloyMembership\Model\Meta;
+use HubloyMembership\Helper\Duration;
 
 /**
  * Members service
@@ -194,30 +194,30 @@ class Members {
 	public static function get_status_types( $change = false ) {
 		if ( $change ) {
 			$status_types = array(
-				self::STATUS_PENDING     => __( 'Pending', 'hammock' ),
-				self::STATUS_ACTIVE      => __( 'Active', 'hammock' ),
-				self::STATUS_PAUSED      => __( 'Paused', 'hammock' ),
-				self::STATUS_EXPIRED     => __( 'Expired', 'hammock' ),
-				self::STATUS_DEACTIVATED => __( 'Deactivated', 'hammock' ),
-				self::STATUS_CANCELED    => __( 'Canceled', 'hammock' ),
+				self::STATUS_PENDING     => __( 'Pending', 'hubloy-membership' ),
+				self::STATUS_ACTIVE      => __( 'Active', 'hubloy-membership' ),
+				self::STATUS_PAUSED      => __( 'Paused', 'hubloy-membership' ),
+				self::STATUS_EXPIRED     => __( 'Expired', 'hubloy-membership' ),
+				self::STATUS_DEACTIVATED => __( 'Deactivated', 'hubloy-membership' ),
+				self::STATUS_CANCELED    => __( 'Canceled', 'hubloy-membership' ),
 			);
 		} else {
 			$status_types = array(
-				self::STATUS_CREATED       => __( 'Created', 'hammock' ),
-				self::STATUS_PENDING       => __( 'Pending', 'hammock' ),
-				self::STATUS_ACTIVE        => __( 'Active', 'hammock' ),
-				self::STATUS_PAUSED        => __( 'Paused', 'hammock' ),
-				self::STATUS_TRIAL         => __( 'Trial', 'hammock' ),
-				self::STATUS_TRIAL_EXPIRED => __( 'Trial Expired', 'hammock' ),
-				self::STATUS_EXPIRED       => __( 'Expired', 'hammock' ),
-				self::STATUS_DEACTIVATED   => __( 'Deactivated', 'hammock' ),
-				self::STATUS_CANCELED      => __( 'Canceled', 'hammock' ),
-				self::STATUS_WAITING       => __( 'Not yet active', 'hammock' ),
+				self::STATUS_CREATED       => __( 'Created', 'hubloy-membership' ),
+				self::STATUS_PENDING       => __( 'Pending', 'hubloy-membership' ),
+				self::STATUS_ACTIVE        => __( 'Active', 'hubloy-membership' ),
+				self::STATUS_PAUSED        => __( 'Paused', 'hubloy-membership' ),
+				self::STATUS_TRIAL         => __( 'Trial', 'hubloy-membership' ),
+				self::STATUS_TRIAL_EXPIRED => __( 'Trial Expired', 'hubloy-membership' ),
+				self::STATUS_EXPIRED       => __( 'Expired', 'hubloy-membership' ),
+				self::STATUS_DEACTIVATED   => __( 'Deactivated', 'hubloy-membership' ),
+				self::STATUS_CANCELED      => __( 'Canceled', 'hubloy-membership' ),
+				self::STATUS_WAITING       => __( 'Not yet active', 'hubloy-membership' ),
 			);
 		}
 
 		return apply_filters(
-			'hammock_member_subscription_status_type',
+			'hubloy-membership_member_subscription_status_type',
 			$status_types
 		);
 	}
@@ -233,8 +233,8 @@ class Members {
 	 */
 	public static function get_status( $status ) {
 		$types  = self::get_status_types();
-		$return = isset( $types[ $status ] ) ? $types[ $status ] : __( 'N/A', 'hammock' );
-		return apply_filters( 'hammock_member_subscription_get_status', $return, $status );
+		$return = isset( $types[ $status ] ) ? $types[ $status ] : __( 'N/A', 'hubloy-membership' );
+		return apply_filters( 'hubloy-membership_member_subscription_get_status', $return, $status );
 	}
 
 
@@ -440,7 +440,7 @@ class Members {
 				}
 			}
 		}
-		return apply_filters( 'hammock_members_generate_where', $where, $args );
+		return apply_filters( 'hubloy-membership_members_generate_where', $where, $args );
 	}
 
 
@@ -525,7 +525,7 @@ class Members {
 				 *
 				 * @since 1.0.0
 				 */
-				$name  = apply_filters( 'hammock_full_user_names', $user->first_name . ' ' . $user->last_name, $user );
+				$name  = apply_filters( 'hubloy-membership_full_user_names', $user->first_name . ' ' . $user->last_name, $user );
 				$fname = $user->first_name;
 				$lname = $user->last_name;
 			} elseif ( ! empty( $user->last_name ) ) {
@@ -549,9 +549,9 @@ class Members {
 		} else {
 			$return = array(
 				'id'       => false,
-				'name'     => __( 'N/A', 'hammock' ),
-				'email'    => __( 'N/A', 'hammock' ),
-				'username' => __( 'N/A', 'hammock' ),
+				'name'     => __( 'N/A', 'hubloy-membership' ),
+				'email'    => __( 'N/A', 'hubloy-membership' ),
+				'username' => __( 'N/A', 'hubloy-membership' ),
 				'lname'    => '',
 				'fname'    => '',
 				'picture'  => '',
@@ -593,7 +593,7 @@ class Members {
 		if ( empty( $this->roles ) ) {
 			global $wp_roles;
 			$exclude = apply_filters(
-				'hammock_roles_list_exclude',
+				'hubloy-membership_roles_list_exclude',
 				array( 'administrator' )
 			);
 
@@ -634,7 +634,7 @@ class Members {
 			}
 		}
 
-		$args  = apply_filters( 'hammock_list_non_members', $args, $search );
+		$args  = apply_filters( 'hubloy-membership_list_non_members', $args, $search );
 		$query = new \WP_User_Query( $args );
 		$users = $query->get_results();
 		foreach ( $users as $user ) {
@@ -646,7 +646,7 @@ class Members {
 				 *
 				 * @since 1.0.0
 				 */
-				$name = apply_filters( 'hammock_full_user_names', $user->first_name . ' ' . $user->last_name, $user );
+				$name = apply_filters( 'hubloy-membership_full_user_names', $user->first_name . ' ' . $user->last_name, $user );
 			} elseif ( ! empty( $user->last_name ) ) {
 				$name = $user->last_name;
 			} elseif ( ! empty( $user->first_name ) ) {
@@ -683,20 +683,20 @@ class Members {
 		if ( ! is_email( $email ) ) {
 			return array(
 				'status'  => false,
-				'message' => __( 'The email address is not valid.', 'hammock' ),
+				'message' => __( 'The email address is not valid.', 'hubloy-membership' ),
 			);
 		} else {
 			if ( email_exists( $email ) ) {
 				return array(
 					'status'  => false,
-					'message' => __( 'An account with the email address exists.', 'hammock' ),
+					'message' => __( 'An account with the email address exists.', 'hubloy-membership' ),
 				);
 			} else {
 				if ( ! empty( $username ) ) {
 					if ( username_exists( $username ) ) {
 						return array(
 							'status'  => false,
-							'message' => sprintf( __( 'User with username %s exists', 'hammock' ), $username ),
+							'message' => sprintf( __( 'User with username %s exists', 'hubloy-membership' ), $username ),
 						);
 					}
 				} else {
@@ -727,14 +727,14 @@ class Members {
 					} else {
 						return array(
 							'status'  => true,
-							'message' => __( 'User saved', 'hammock' ),
+							'message' => __( 'User saved', 'hubloy-membership' ),
 							'user_id' => $user_id,
 						);
 					}
 				} else {
 					return array(
 						'status'  => false,
-						'message' => sprintf( __( 'Error saving user %s', 'hammock' ), $user_id->get_error_message() ),
+						'message' => sprintf( __( 'Error saving user %s', 'hubloy-membership' ), $user_id->get_error_message() ),
 					);
 				}
 			}
@@ -766,7 +766,7 @@ class Members {
 		if ( ! $result ) {
 			return array(
 				'status'  => false,
-				'message' => __( 'Error saving member', 'hammock' ),
+				'message' => __( 'Error saving member', 'hubloy-membership' ),
 			);
 		} else {
 			$id = (int) $wpdb->insert_id;
@@ -777,11 +777,11 @@ class Members {
 			 * @param int $id - the member id
 			 * @param int $user_id - the user id
 			 */
-			do_action( 'hammock_members_save_member', $id, $user_id );
+			do_action( 'hubloy-membership_members_save_member', $id, $user_id );
 
 			return array(
 				'status'  => true,
-				'message' => __( 'Member saved', 'hammock' ),
+				'message' => __( 'Member saved', 'hubloy-membership' ),
 				'id'      => $id,
 				'user_id' => $user_id,
 			);
@@ -844,7 +844,7 @@ class Members {
 					 *
 					 * @return $due_date
 					 */
-					$due_date = apply_filters( 'hammock_admin_new_plan_invoice_due_date', $due_date, $member, $membership, $plan );
+					$due_date = apply_filters( 'hubloy-membership_admin_new_plan_invoice_due_date', $due_date, $member, $membership, $plan );
 
 					/**
 					 * Save transaction
@@ -854,19 +854,19 @@ class Members {
 				}
 				return array(
 					'status'  => true,
-					'message' => __( 'Plan saved', 'hammock' ),
+					'message' => __( 'Plan saved', 'hubloy-membership' ),
 					'plan_id' => $plan->id,
 				);
 			} else {
 				return array(
 					'status'  => false,
-					'message' => __( 'Error adding plan to member', 'hammock' ),
+					'message' => __( 'Error adding plan to member', 'hubloy-membership' ),
 				);
 			}
 		} else {
 			return array(
 				'status'  => false,
-				'message' => __( 'Member does not exist', 'hammock' ),
+				'message' => __( 'Member does not exist', 'hubloy-membership' ),
 			);
 		}
 	}
@@ -903,15 +903,15 @@ class Members {
 			 * @param string $status - the new status
 			 * @param object $plan - the plan
 			 */
-			do_action( 'hammock_member_plan_update_plan', $old_status, $status, $plan );
+			do_action( 'hubloy-membership_member_plan_update_plan', $old_status, $status, $plan );
 			return array(
 				'status'  => true,
-				'message' => __( 'Plan updated', 'hammock' ),
+				'message' => __( 'Plan updated', 'hubloy-membership' ),
 			);
 		} else {
 			return array(
 				'status'  => false,
-				'message' => __( 'Selected plan does not exist', 'hammock' ),
+				'message' => __( 'Selected plan does not exist', 'hubloy-membership' ),
 			);
 		}
 	}
@@ -936,17 +936,17 @@ class Members {
 				$member->delete();
 				return array(
 					'status'  => true,
-					'message' => __( 'Member and plan removed', 'hammock' ),
+					'message' => __( 'Member and plan removed', 'hubloy-membership' ),
 				);
 			}
 			return array(
 				'status'  => true,
-				'message' => __( 'Plan removed', 'hammock' ),
+				'message' => __( 'Plan removed', 'hubloy-membership' ),
 			);
 		} else {
 			return array(
 				'status'  => false,
-				'message' => __( 'Selected plan does not exist', 'hammock' ),
+				'message' => __( 'Selected plan does not exist', 'hubloy-membership' ),
 			);
 		}
 	}
@@ -967,12 +967,12 @@ class Members {
 			$member->delete();
 			return array(
 				'status'  => true,
-				'message' => __( 'Member deleted', 'hammock' ),
+				'message' => __( 'Member deleted', 'hubloy-membership' ),
 			);
 		} else {
 			return array(
 				'status'  => false,
-				'message' => __( 'Member does not exist', 'hammock' ),
+				'message' => __( 'Member does not exist', 'hubloy-membership' ),
 			);
 		}
 	}
@@ -1044,7 +1044,7 @@ class Members {
 	/**
 	 * Cancel member plan
 	 * 
-	 * @param \Hammock\Model\Plan $plan The current plan
+	 * @param \HubloyMembership\Model\Plan $plan The current plan
 	 * 
 	 * @since 1.0.0
 	 */
@@ -1053,11 +1053,11 @@ class Members {
 		/**
 		 * Action called after a new payment is recorded
 		 * 
-		 * @param \Hammock\Model\Plan The current plan
+		 * @param \HubloyMembership\Model\Plan The current plan
 		 * 
 		 * @since 1.0.0
 		 */
-		do_action( 'hammock_user_deactivate_plan', $plan );
+		do_action( 'hubloy-membership_user_deactivate_plan', $plan );
 	}
 }
 

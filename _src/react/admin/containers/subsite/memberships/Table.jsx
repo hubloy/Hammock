@@ -18,8 +18,8 @@ export default class Table extends Component {
         };
 
         this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
     }
 
@@ -56,8 +56,8 @@ export default class Table extends Component {
 
     render() {
         const { pager, items } = this.state;
-        var hammock = this.props.hammock;
-        var strings = hammock.strings;
+        var hubloy_membership = this.props.hubloy_membership;
+        var strings = hubloy_membership.strings;
         if ( this.state.loading) {
             return (
                 <div className="uk-container uk-padding-small uk-margin-top uk-width-1-1 uk-background-default">
@@ -67,18 +67,18 @@ export default class Table extends Component {
         } else {
 			if ( this.state.error) {
 				return (
-					<h3 className="uk-text-center uk-text-danger">{hammock.error}</h3>
+					<h3 className="uk-text-center uk-text-danger">{hubloy_membership.error}</h3>
 				)
 			} else {
 				return (
 					<React.Fragment>
 						{items.length <= 0 ? (
-							<ToggleInfoBox title={strings.dashboard.table.not_found} icon={'album'} linkText={strings.dashboard.add_new.button} linkTo={'#hammock-add-membership'}/>
+							<ToggleInfoBox title={strings.dashboard.table.not_found} icon={'album'} linkText={strings.dashboard.add_new.button} linkTo={'#hubloy_membership-add-membership'}/>
 						) : (
 							<table className="uk-table">
 								<thead>
 									<tr>
-										<th><input className="uk-checkbox hammock-top-checkbox" type="checkbox" /></th>
+										<th><input className="uk-checkbox hubloy_membership-top-checkbox" type="checkbox" /></th>
 										<th>{strings.dashboard.table.name}</th>
 										<th>{strings.dashboard.table.active}</th>
 										<th>{strings.dashboard.table.members}</th>
@@ -88,7 +88,7 @@ export default class Table extends Component {
 								</thead>
 								<tfoot>
 									<tr>
-										<th><input className="uk-checkbox hammock-bottom-checkbox" type="checkbox" /></th>
+										<th><input className="uk-checkbox hubloy_membership-bottom-checkbox" type="checkbox" /></th>
 										<th>{strings.dashboard.table.name}</th>
 										<th>{strings.dashboard.table.active}</th>
 										<th>{strings.dashboard.table.members}</th>
@@ -103,7 +103,7 @@ export default class Table extends Component {
 											<td>
 												{item.name}
 												<div id={"membership-hover-"+ item.id}>
-													<Link className="uk-text-primary" to={"/edit/" + item.id}>{hammock.common.buttons.edit}</Link>{' '}|{' '}<a href="#" className="uk-text-danger">{hammock.common.buttons.delete}</a>
+													<Link className="uk-text-primary" to={"/edit/" + item.id}>{hubloy_membership.common.buttons.edit}</Link>{' '}|{' '}<a href="#" className="uk-text-danger">{hubloy_membership.common.buttons.delete}</a>
 												</div>
 											</td>
 											<td>{item.enabled}</td>

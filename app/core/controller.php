@@ -1,5 +1,5 @@
 <?php
-namespace Hammock\Core;
+namespace HubloyMembership\Core;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -18,26 +18,26 @@ class Controller {
 	 * @since 1.0.0
 	 */
 	public static function load_controllers() {
-		\Hammock\Controller\Site\Users::instance();
-		\Hammock\Controller\Site\Memberships::instance();
-		\Hammock\Controller\Site\Members::instance();
-		\Hammock\Controller\Site\Addon::instance();
-		\Hammock\Controller\Site\Rules::instance();
-		\Hammock\Controller\Site\Gateway::instance();
-		\Hammock\Controller\Site\Coupons::instance();
-		\Hammock\Controller\Site\Invites::instance();
-		\Hammock\Controller\Site\Settings::instance();
-		\Hammock\Controller\Site\Activity::instance();
-		\Hammock\Controller\Site\Marketing::instance();
-		\Hammock\Controller\Site\Shortcodes::instance();
+		\HubloyMembership\Controller\Site\Users::instance();
+		\HubloyMembership\Controller\Site\Memberships::instance();
+		\HubloyMembership\Controller\Site\Members::instance();
+		\HubloyMembership\Controller\Site\Addon::instance();
+		\HubloyMembership\Controller\Site\Rules::instance();
+		\HubloyMembership\Controller\Site\Gateway::instance();
+		\HubloyMembership\Controller\Site\Coupons::instance();
+		\HubloyMembership\Controller\Site\Invites::instance();
+		\HubloyMembership\Controller\Site\Settings::instance();
+		\HubloyMembership\Controller\Site\Activity::instance();
+		\HubloyMembership\Controller\Site\Marketing::instance();
+		\HubloyMembership\Controller\Site\Shortcodes::instance();
 
-		\Hammock\Controller\Site\Transactions::instance();
-		\Hammock\Controller\Site\Communication::instance();
+		\HubloyMembership\Controller\Site\Transactions::instance();
+		\HubloyMembership\Controller\Site\Communication::instance();
 
-		\Hammock\Controller\Front\Auth::instance();
-		\Hammock\Controller\Front\Signup::instance();
-		\Hammock\Controller\Front\Account::instance();
-		\Hammock\Controller\Front\Transaction::instance();
+		\HubloyMembership\Controller\Front\Auth::instance();
+		\HubloyMembership\Controller\Front\Signup::instance();
+		\HubloyMembership\Controller\Front\Account::instance();
+		\HubloyMembership\Controller\Front\Transaction::instance();
 	}
 
 	/**
@@ -46,18 +46,18 @@ class Controller {
 	 * @since 1.0.0
 	 */
 	public static function load_routes() {
-		\Hammock\Rest\Site\Codes::instance();
-		\Hammock\Rest\Site\Rules::instance();
-		\Hammock\Rest\Site\Wizard::instance();
-		\Hammock\Rest\Site\Emails::instance();
-		\Hammock\Rest\Site\Addons::instance();
-		\Hammock\Rest\Site\Members::instance();
-		\Hammock\Rest\Site\Activity::instance();
-		\Hammock\Rest\Site\Settings::instance();
-		\Hammock\Rest\Site\Gateways::instance();
-		\Hammock\Rest\Site\Dashboard::instance();
-		\Hammock\Rest\Site\Memberships::instance();
-		\Hammock\Rest\Site\Transactions::instance();
+		\HubloyMembership\Rest\Site\Codes::instance();
+		\HubloyMembership\Rest\Site\Rules::instance();
+		\HubloyMembership\Rest\Site\Wizard::instance();
+		\HubloyMembership\Rest\Site\Emails::instance();
+		\HubloyMembership\Rest\Site\Addons::instance();
+		\HubloyMembership\Rest\Site\Members::instance();
+		\HubloyMembership\Rest\Site\Activity::instance();
+		\HubloyMembership\Rest\Site\Settings::instance();
+		\HubloyMembership\Rest\Site\Gateways::instance();
+		\HubloyMembership\Rest\Site\Dashboard::instance();
+		\HubloyMembership\Rest\Site\Memberships::instance();
+		\HubloyMembership\Rest\Site\Transactions::instance();
 	}
 }
 

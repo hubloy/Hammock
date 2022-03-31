@@ -12,8 +12,8 @@ export class Users extends Component {
 		super(props);
 
 		this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
 		});
 
 		this.state = {
@@ -50,7 +50,7 @@ export class Users extends Component {
 		this.fetchWP.get('members/non_members?search=' + searchText)
 			.then((json) => this.setState({
 				filteredOptions: json
-			}), (err) => this.notify(this.props.hammock.error, 'error')
+			}), (err) => this.notify(this.props.hubloy_membership.error, 'error')
 			);
 	}
 
@@ -109,7 +109,7 @@ export class Users extends Component {
 			state: { activeOption, filteredOptions, showOptions, userInput, userId }
 		} = this;
 		let optionList;
-		var strings = this.props.hammock;
+		var strings = this.props.hubloy_membership;
 		if (showOptions && userInput) {
 			var objectLength = Object.keys(filteredOptions).length;
 			if ( filteredOptions.length || objectLength ) {
@@ -118,11 +118,11 @@ export class Users extends Component {
 					userList = Object.keys(filteredOptions).map(i => filteredOptions[i]);
 				}
 				optionList = (
-					<ul className="hammock-suggestions">
+					<ul className="hubloy_membership-suggestions">
 						{userList.map((user, index) => {
 							let className;
 							if (index === activeOption) {
-								className = 'hammock-suggestions-active';
+								className = 'hubloy_membership-suggestions-active';
 							}
 							return (
 								<li className={className} key={index} data-id={user.id} onClick={this.onClick.bind(this)}>
@@ -134,14 +134,14 @@ export class Users extends Component {
 				);
 			} else {
 				optionList = (
-					<div className="hammock-no-suggestions">
+					<div className="hubloy_membership-no-suggestions">
 						<em>{strings.common.string.search.users.not_found}</em>
 					</div>
 				);
 			}
 		}
 		return (
-			<div className="hammock-input">
+			<div className="hubloy_membership-input">
 				<InputUI name={`user_id`} type={`hidden`} value={userId} required={true}/>
 				<input
 					type="text"

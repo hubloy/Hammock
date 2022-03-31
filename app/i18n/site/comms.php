@@ -10,17 +10,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 return array(
 	'tabs'  => array(
-		'admin' => __( 'Admin Emails', 'hammock' ),
-		'user'  => __( 'Member Emails', 'hammock' ),
+		'admin' => __( 'Admin Emails', 'hubloy-membership' ),
+		'user'  => __( 'Member Emails', 'hubloy-membership' ),
 	),
 	'table' => array(
-		'status'      => __( 'Status', 'hammock' ),
-		'email'       => __( 'Email', 'hammock' ),
-		'description' => __( 'Description', 'hammock' ),
-		'recipient'   => __( 'Recipient(s)', 'hammock' ),
-		'customer'    => __( 'Customer', 'hammock' ),
+		'status'      => __( 'Status', 'hubloy-membership' ),
+		'email'       => __( 'Email', 'hubloy-membership' ),
+		'description' => __( 'Description', 'hubloy-membership' ),
+		'recipient'   => __( 'Recipient(s)', 'hubloy-membership' ),
+		'customer'    => __( 'Customer', 'hubloy-membership' ),
 	),
 	'edit'  => array(
-		'back' => __( 'Back To List', 'hammock' ),
+		'back' => __( 'Back To List', 'hubloy-membership' ),
 	),
 );

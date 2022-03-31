@@ -1,5 +1,5 @@
 <?php
-namespace Hammock\Base;
+namespace HubloyMembership\Base;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -58,7 +58,7 @@ class Shortcode {
 	 * @since 1.0.0
 	 */
 	public function output( $atts ) {
-		_e( 'Shortcode', 'hammock' );
+		_e( 'Shortcode', 'hubloy-membership' );
 	}
 
 	/**
@@ -72,7 +72,7 @@ class Shortcode {
 	 * @return string
 	 */
 	public function get_template( $template, $args = array() ) {
-		\Hammock\Helper\Template::get_template( $template, $args );
+		\HubloyMembership\Helper\Template::get_template( $template, $args );
 	}
 }
 

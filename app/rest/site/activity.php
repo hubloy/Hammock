@@ -1,12 +1,12 @@
 <?php
-namespace Hammock\Rest\Site;
+namespace HubloyMembership\Rest\Site;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Base\Rest;
-use Hammock\Helper\Pagination;
+use HubloyMembership\Base\Rest;
+use HubloyMembership\Helper\Pagination;
 
 /**
  * Activity rest endpoint
@@ -59,26 +59,26 @@ class Activity extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
-						'description'       => __( 'The current page', 'hammock' ),
+						'description'       => __( 'The current page', 'hubloy-membership' ),
 					),
 					'per_page' => array(
 						'required'          => false,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
 						'default'           => 10,
-						'description'       => __( 'Items per page', 'hammock' ),
+						'description'       => __( 'Items per page', 'hubloy-membership' ),
 					),
 					'ref_id'   => array(
 						'required'          => true,
 						'sanitize_callback' => 'absint',
 						'type'              => 'string',
-						'description'       => __( 'Reference id', 'hammock' ),
+						'description'       => __( 'Reference id', 'hubloy-membership' ),
 					),
 					'ref_type' => array(
 						'required'          => true,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
-						'description'       => __( 'Reference type', 'hammock' ),
+						'description'       => __( 'Reference type', 'hubloy-membership' ),
 					),
 				),
 			)
@@ -98,7 +98,7 @@ class Activity extends Rest {
 		$ref_id       = $request->get_param( 'ref_id' );
 		$ref_type     = $request->get_param( 'ref_type' );
 		$current_page = $page - 1;
-		$service      = new \Hammock\Services\Activity();
+		$service      = new \HubloyMembership\Services\Activity();
 
 		$total = $service->count_activities( $ref_id, $ref_type );
 		$pages = Pagination::generate_pages( $total, $per_page, $page );

@@ -2,9 +2,9 @@
 /**
  * Membership list
  *
- * This template can be overridden by copying it to yourtheme/hammock/membership-list.php.
+ * This template can be overridden by copying it to yourtheme/hubloy-membership/membership-list.php.
  *
- * @package Hammock/Templates
+ * @package HubloyMembership/Templates
  * @version 1.0.0
  */
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,14 +12,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 ?>
-<div class="hammock-membership-list">
+<div class="hubloy-membership-membership-list">
 
 	<?php
-		$plans = hammock_get_plans_to_join();
+		$plans = hubloy-membership_get_plans_to_join();
 
 	if ( ! empty( $plans ) ) {
 		foreach ( $plans as $plan ) {
-			hammock_get_template(
+			hubloy-membership_get_template(
 				'plans/single-plan-card.php',
 				array(
 					'plan' => $plan,
@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			);
 		}
 	} else {
-		esc_html_e( 'No membership plans to subscribe to', 'hammock' );
+		esc_html_e( 'No membership plans to subscribe to', 'hubloy-membership' );
 	}
 	?>
 </div>

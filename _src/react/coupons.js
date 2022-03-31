@@ -8,12 +8,12 @@ import CouponAddonCreate from './admin/containers/subsite/codes/forms/CreateCode
 import CouponAddonEdit from './admin/containers/subsite/codes/forms/EditCode'
 
 document.addEventListener('DOMContentLoaded', function () {
-	const hammockContainer = document.getElementById( 'hammock-coupons-container' );
-	if ( hammockContainer !== null ) {
-		const DefaultView = (props) => <NotFound hammock={window.hammock} {...props}/>
-		const CouponsPage = (props) => <CouponAddonSetting hammock={window.hammock} {...props} />
-		const CouponsCreatePage = (props) => <CouponAddonCreate type={`coupons`} hammock={window.hammock} {...props} />
-		const CouponsEditPage = (props) => <CouponAddonEdit type={`coupons`} hammock={window.hammock} {...props} />
+	const hubloy_membershipContainer = document.getElementById( 'hubloy_membership-coupons-container' );
+	if ( hubloy_membershipContainer !== null ) {
+		const DefaultView = (props) => <NotFound hubloy_membership={window.hubloy_membership} {...props}/>
+		const CouponsPage = (props) => <CouponAddonSetting hubloy_membership={window.hubloy_membership} {...props} />
+		const CouponsCreatePage = (props) => <CouponAddonCreate type={`coupons`} hubloy_membership={window.hubloy_membership} {...props} />
+		const CouponsEditPage = (props) => <CouponAddonEdit type={`coupons`} hubloy_membership={window.hubloy_membership} {...props} />
 		const routing = (
 			<HashRouter>
 				<Switch>
@@ -24,6 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				</Switch>
 			</HashRouter>
 		);
-		ReactDOM.render(routing, hammockContainer);
+		ReactDOM.render(routing, hubloy_membershipContainer);
 	}
 });

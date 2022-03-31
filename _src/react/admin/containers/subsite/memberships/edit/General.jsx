@@ -18,8 +18,8 @@ export default class General extends PureComponent {
         };
 		
         this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
 
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -82,7 +82,7 @@ export default class General extends PureComponent {
 		this.fetchWP.get( 'codes/dropdown/invitation' )
 			.then( (json) => this.setState({
 				invites : json,
-			}), (err) => self.notify( this.props.hammock.error, 'error' )
+			}), (err) => self.notify( this.props.hubloy_membership.error, 'error' )
 		);
 	}
 
@@ -115,7 +115,7 @@ export default class General extends PureComponent {
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				self.notify( self.props.hammock.error, 'error' );
+				self.notify( self.props.hubloy_membership.error, 'error' );
 			}
 		);
 	}
@@ -126,7 +126,7 @@ export default class General extends PureComponent {
 	 * @param {bool} checked 
 	 */
 	toggle_invites( checked ) {
-		var access = document.getElementsByClassName('hammock-membership-invite-list');
+		var access = document.getElementsByClassName('hubloy_membership-membership-invite-list');
 		access = access[0];
 		if ( checked ) {
 			access.style.display = "block";
@@ -136,7 +136,7 @@ export default class General extends PureComponent {
 	}
 
 	toggle_setup_price( target, value ) {
-		var access = document.getElementsByClassName('hammock-membership-recurring');
+		var access = document.getElementsByClassName('hubloy_membership-membership-recurring');
 		access = access[0];
 		if ( value === 'recurring' ) {
 			access.style.display = "block";
@@ -163,8 +163,8 @@ export default class General extends PureComponent {
 
 	render() {
 		const membership = this.state.membership;
-		var hammock = this.props.hammock;
-		var strings = hammock.strings;
+		var hubloy_membership = this.props.hubloy_membership;
+		var strings = hubloy_membership.strings;
 		const invite_only = typeof membership.meta.invite_only === 'undefined' ? 0 : membership.meta.invite_only.meta_value,
 			invite_only_list = typeof membership.meta.invite_list === 'undefined' ? [] : membership.meta.invite_list.meta_value;
 		return (
@@ -187,38 +187,38 @@ export default class General extends PureComponent {
 				<div className="uk-margin">
 					<legend className="uk-form-label">{strings.labels.status}</legend>
 					<div className="uk-form-controls">
-						<div className="hammock-input">
-							<SwitchUI name={`membership_enabled`} checked={membership.enabled} class_name={`membership_enabled`} title={this.props.hammock.common.status.disabled} enabled_title={this.props.hammock.common.status.enabled} value={`1`} />
+						<div className="hubloy_membership-input">
+							<SwitchUI name={`membership_enabled`} checked={membership.enabled} class_name={`membership_enabled`} title={this.props.hubloy_membership.common.status.disabled} enabled_title={this.props.hubloy_membership.common.status.enabled} value={`1`} />
 						</div>
 					</div>
 				</div>
 				<div className="uk-margin">
 					<legend className="uk-form-label">{strings.labels.type}</legend>
 					<div className="uk-form-controls">
-						<DropDownUI name={`membership_type`} values={hammock.page_strings.type} value={membership.type} class_name={`hammock-membership-type`} action={this.toggle_setup_price.bind(this)}/>
+						<DropDownUI name={`membership_type`} values={hubloy_membership.page_strings.type} value={membership.type} class_name={`hubloy_membership-membership-type`} action={this.toggle_setup_price.bind(this)}/>
 					</div>
 				</div>
-				<div className="uk-margin hammock-membership-date" style={{display: ( membership.type === 'date-range' ? 'block' : 'none' )}}>
+				<div className="uk-margin hubloy_membership-membership-date" style={{display: ( membership.type === 'date-range' ? 'block' : 'none' )}}>
 					<legend className="uk-form-label">{strings.labels.days}</legend>
 					<div className="uk-form-controls">
 						<InputUI name={`membership_days`} type={`number`} value={typeof membership.meta.membership_days === 'undefined' ? '' : membership.meta.membership_days.meta_value}/>
 					</div>
 				</div>
-				<div className="uk-margin hammock-membership-recurring" style={{display: ( membership.type === 'recurring' ? 'block' : 'none' )}}>
+				<div className="uk-margin hubloy_membership-membership-recurring" style={{display: ( membership.type === 'recurring' ? 'block' : 'none' )}}>
 					<legend className="uk-form-label">{strings.labels.recurring_duration}</legend>
 					<div className="uk-form-controls">
-						<DropDownUI name={`recurring_duration`} values={hammock.page_strings.duration} value={membership.duration}/>
+						<DropDownUI name={`recurring_duration`} values={hubloy_membership.page_strings.duration} value={membership.duration}/>
 					</div>
 				</div>
 				<div className="uk-margin">
 					<legend className="uk-form-label">{strings.labels.limit_access}</legend>
 					<div className="uk-form-controls">
-						<div className="hammock-input">
-							<SwitchUI name={`limit_spaces`} checked={membership.limit_spaces} class_name={`hammock-limit_spaces`} title={this.props.hammock.common.status.disabled} enabled_title={this.props.hammock.common.status.enabled} value={`1`} />
+						<div className="hubloy_membership-input">
+							<SwitchUI name={`limit_spaces`} checked={membership.limit_spaces} class_name={`hubloy_membership-limit_spaces`} title={this.props.hubloy_membership.common.status.disabled} enabled_title={this.props.hubloy_membership.common.status.enabled} value={`1`} />
 						</div>
 					</div>
 				</div>
-				<div className="uk-margin hammock-membership-limited" style={{display: ( membership.limit_spaces ? 'block' : 'none' )}}>
+				<div className="uk-margin hubloy_membership-membership-limited" style={{display: ( membership.limit_spaces ? 'block' : 'none' )}}>
 					<legend className="uk-form-label">{strings.labels.total_available}</legend>
 					<div className="uk-form-controls">
 						<InputUI type={`number`} name={`total_available`} placeholder={`0`} required={true} value={membership.total_available}/>
@@ -232,12 +232,12 @@ export default class General extends PureComponent {
 						<div className="uk-margin">
 							<legend className="uk-form-label">{strings.labels.invite_only}</legend>
 							<div className="uk-form-controls">
-								<div className="hammock-input">
-									<SwitchUI name={`invite_only`} checked={invite_only} class_name={`membership_invite_only`} title={this.props.hammock.common.status.disabled} enabled_title={this.props.hammock.common.status.enabled} value={`1`} action={this.toggle_invites.bind(this)}/>
+								<div className="hubloy_membership-input">
+									<SwitchUI name={`invite_only`} checked={invite_only} class_name={`membership_invite_only`} title={this.props.hubloy_membership.common.status.disabled} enabled_title={this.props.hubloy_membership.common.status.enabled} value={`1`} action={this.toggle_invites.bind(this)}/>
 								</div>
 							</div>
 						</div>
-						<div className="uk-margin hammock-membership-invite-list" style={{display: ( invite_only ? 'block' : 'none' )}}>
+						<div className="uk-margin hubloy_membership-membership-invite-list" style={{display: ( invite_only ? 'block' : 'none' )}}>
 							<legend className="uk-form-label">{strings.labels.invite_list}</legend>
 							<div className="uk-form-controls">
 								<Multiselect options={this.state.invites} placeholder={strings.edit.invites.select} emptyRecordMsg={strings.edit.invites.empty} id={`invite_list`} selectedValues={membership.invite_list} displayValue="name" onSelect={this.on_invite_select.bind(this)} onRemove={this.on_invite_remove.bind(this)}/>
@@ -246,7 +246,7 @@ export default class General extends PureComponent {
 					</React.Fragment>
 				}
 				<div className="uk-margin ">
-					<button className="uk-button uk-button-primary update-button">{hammock.common.buttons.update}</button>
+					<button className="uk-button uk-button-primary update-button">{hubloy_membership.common.buttons.update}</button>
 				</div>
 			</form>
 		)

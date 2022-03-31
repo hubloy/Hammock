@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 import SiteWizard from './admin/containers/subsite/Wizard';
 
 document.addEventListener('DOMContentLoaded', function () {
-	const hammockWizardContainer = document.getElementById( 'hammock-wizard-container' );
-	if ( hammockWizardContainer !== null ) {
-		ReactDOM.render(<SiteWizard hammock={window.hammock} />, hammockWizardContainer);
+	const hubloy_membershipWizardContainer = document.getElementById( 'hubloy_membership-wizard-container' );
+	if ( hubloy_membershipWizardContainer !== null ) {
+		ReactDOM.render(<SiteWizard hubloy_membership={window.hubloy_membership} />, hubloy_membershipWizardContainer);
 	}
 });

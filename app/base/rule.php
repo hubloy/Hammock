@@ -1,14 +1,14 @@
 <?php
-namespace Hammock\Base;
+namespace HubloyMembership\Base;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Model\Settings;
-use Hammock\Services\Members;
-use Hammock\Services\Memberships;
-use Hammock\Helper\Pages;
+use HubloyMembership\Model\Settings;
+use HubloyMembership\Services\Members;
+use HubloyMembership\Services\Memberships;
+use HubloyMembership\Helper\Pages;
 
 /**
  * Protection rules
@@ -89,11 +89,11 @@ class Rule {
 		$this->init();
 
 		// Register the rule.
-		add_filter( 'hammock_protection_rules', array( $this, 'register_rule' ) );
-		add_filter( 'hammock_protection_setting_rules', array( $this, 'register_setting_rule' ) );
+		add_filter( 'hubloy-membership_protection_rules', array( $this, 'register_rule' ) );
+		add_filter( 'hubloy-membership_protection_setting_rules', array( $this, 'register_setting_rule' ) );
 
 		if ( $this->enabled ) {
-			add_filter( 'hammock_' . $this->id . '_content_has_access', array( $this, 'has_access' ), 10, 3 );
+			add_filter( 'hubloy-membership_' . $this->id . '_content_has_access', array( $this, 'has_access' ), 10, 3 );
 			if ( ! is_super_admin() && ! current_user_can( 'manage_options' ) ) {
 				if ( is_admin() || is_network_admin() ) {
 					$this->protect_admin_content();
@@ -197,7 +197,7 @@ class Rule {
 	 * @return string
 	 */
 	protected function make_clickable( $link, $title ) {
-		return "<a href='" . esc_url( $link ) . "' title='" . __( 'Edit', 'hammock' ) . "' target='_blank'>" . esc_attr( $title ) . '</a>';
+		return "<a href='" . esc_url( $link ) . "' title='" . __( 'Edit', 'hubloy-membership' ) . "' target='_blank'>" . esc_attr( $title ) . '</a>';
 	}
 
 	/**
@@ -209,7 +209,7 @@ class Rule {
 	 */
 	public function protect_content() {
 		do_action(
-			'hammock_protect_content',
+			'hubloy-membership_protect_content',
 			$this
 		);
 	}
@@ -224,7 +224,7 @@ class Rule {
 	 */
 	public function protect_admin_content() {
 		do_action(
-			'hammock_protect_admin_content',
+			'hubloy-membership_protect_admin_content',
 			$this
 		);
 	}
@@ -237,7 +237,7 @@ class Rule {
 	 * @return bool|object
 	 */
 	public function get_rule( $id ) {
-		return \Hammock\Model\Rule::get_rules( $this->id, $id );
+		return \HubloyMembership\Model\Rule::get_rules( $this->id, $id );
 
 	}
 
@@ -297,7 +297,7 @@ class Rule {
 	public function update_rule( $id, $memberships, $status ) {
 		$rule = $this->get_rule( $id );
 		if ( ! $rule ) {
-			$rule              = new \Hammock\Model\Rule();
+			$rule              = new \HubloyMembership\Model\Rule();
 			$rule->object_type = $this->id;
 			$rule->object_id   = $id;
 		}
@@ -414,24 +414,24 @@ class Rule {
 			return true;
 		}
 
-		$access = apply_filters( 'hammock_guest_has_access', true, $object, $content_type );
+		$access = apply_filters( 'hubloy-membership_guest_has_access', true, $object, $content_type );
 
 		if ( is_user_logged_in() ) {
 			$user_id = get_current_user_id();
 			$member  = $this->members_service->get_member_by_user_id( $user_id );
 			if ( $member && $member->id > 0 ) {
 				if ( $member->enabled ) {
-					$access = apply_filters( 'hammock_enabled_member_has_access', true, $member, $object, $content_type );
+					$access = apply_filters( 'hubloy-membership_enabled_member_has_access', true, $member, $object, $content_type );
 				} else {
-					$access = apply_filters( 'hammock_disabled_member_has_access', false, $member, $object, $content_type );
+					$access = apply_filters( 'hubloy-membership_disabled_member_has_access', false, $member, $object, $content_type );
 				}
 			} else {
-				$access = apply_filters( 'hammock_non_member_has_access', true, $user_id, $object, $content_type );
+				$access = apply_filters( 'hubloy-membership_non_member_has_access', true, $user_id, $object, $content_type );
 			}
 		}
 
 		return apply_filters(
-			'hammock_rule_has_access',
+			'hubloy-membership_rule_has_access',
 			$access,
 			$object,
 			$content_type,
@@ -496,7 +496,7 @@ class Rule {
 				foreach ( $restricted as $key => $item ) {
 					$values = is_array( $item['value'] ) ? $item['value'] : array();
 					foreach ( $plans as $plan_id ) {
-						if ( hammock_is_member_plan_active( $plan_id ) ) {
+						if ( hubloy-membership_is_member_plan_active( $plan_id ) ) {
 							if ( in_array( $plan_id, $values ) ) {
 								unset( $content_ids[ $item['id'] ] );
 							}
@@ -529,7 +529,7 @@ class Rule {
 		}
 
 		if ( $sql ) {
-			$results = $wpdb->get_results( $wpdb->prepare( $sql, '_hammock_mebership_access' ) );
+			$results = $wpdb->get_results( $wpdb->prepare( $sql, '_hubloy-membership_mebership_access' ) );
 			foreach ( $results as $result ) {
 				$value                      = is_array( $result->meta_value ) ? array_map( 'maybe_unserialize', $result->meta_value ) : maybe_unserialize( $result->meta_value );
 				$output[ $result->item_id ] = array(
@@ -538,7 +538,7 @@ class Rule {
 				);
 			}
 		}
-		$rule_items = \Hammock\Model\Rule::get_restricted_items( $this->id );
+		$rule_items = \HubloyMembership\Model\Rule::get_restricted_items( $this->id );
 		foreach ( $rule_items as $item ) {
 			$value = is_array( $item->memberships ) ? array_map( 'maybe_unserialize', $item->memberships ) : maybe_unserialize( $item->memberships );
 			if ( isset( $output[ $item->object_id ] ) ) {
@@ -635,7 +635,7 @@ class Rule {
 			if ( (int) $object_id === $page_id ) {
 				$restricted = false; // the restricted content page cannot be itself restricted
 			} else {
-				$restricted = hammock_is_post_protected();
+				$restricted = hubloy-membership_is_post_protected();
 			}
 		} elseif ( 'taxonomy' === $object_type ) {
 
@@ -644,7 +644,7 @@ class Rule {
 
 			foreach ( $terms as $term_id ) {
 
-				$restricted = hammock_is_term_protected( $term_id, $taxonomy );
+				$restricted = hubloy-membership_is_term_protected( $term_id, $taxonomy );
 
 				if ( $restricted ) {
 
@@ -776,9 +776,9 @@ class Rule {
 				'type'      => $post->post_type,
 				'title'     => $post->post_title,
 				'edit_link' => $edit_link,
-				'edit_html' => sprintf( __( '%1$sEdit%2$s', 'hammock' ), '<a href="' . $edit_link . '" target="_blank">', '</a>' ),
+				'edit_html' => sprintf( __( '%1$sEdit%2$s', 'hubloy-membership' ), '<a href="' . $edit_link . '" target="_blank">', '</a>' ),
 				'view_link' => $view_link,
-				'view_html' => sprintf( __( '%1$sView%2$s', 'hammock' ), '<a href="' . $view_link . '" target="_blank">', '</a>' ),
+				'view_html' => sprintf( __( '%1$sView%2$s', 'hubloy-membership' ), '<a href="' . $view_link . '" target="_blank">', '</a>' ),
 				'access'    => $access->render( true ),
 			);
 			$data[ $post->ID ] = $content;

@@ -1,5 +1,5 @@
-.hammock-account-page {
-	.hammock-member-account {
+.hubloy-membership-account-page {
+	.hubloy_membership-member-account {
 		display: flex;
 		max-width: 1600px;
 		min-width: 100%;
@@ -28,7 +28,7 @@
 		}
 	}
 
-	.hammock-account-subscription{
+	.hubloy-membership-account-subscription{
 		td, th {
 			border: 1px solid $light-gray-color;
   			padding: 8px;

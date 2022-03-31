@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Controller\Site;
+namespace HubloyMembership\Controller\Site;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Controller;
+use HubloyMembership\Base\Controller;
 
 /**
  * Transactions controller
@@ -90,8 +90,8 @@ class Transactions extends Controller {
 		$this->_cap     = $cap;
 		add_submenu_page(
 			$slug,
-			__( 'Transactions', 'hammock' ),
-			__( 'Transactions', 'hammock' ),
+			__( 'Transactions', 'hubloy-membership' ),
+			__( 'Transactions', 'hubloy-membership' ),
 			$this->_cap,
 			$this->_page_id,
 			array( $this, 'render' )
@@ -109,12 +109,12 @@ class Transactions extends Controller {
 	 */
 	function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'transactions' ) ) {
-			$vars['common']['string']['title'] = __( 'Transactions', 'hammock' );
+			$vars['common']['string']['title'] = __( 'Transactions', 'hubloy-membership' );
 			$vars['active_page']               = 'transactions';
 			$vars['strings']                   = $this->get_strings();
 			$vars['page_strings']              = array(
-				'status'   => \Hammock\Services\Transactions::transaction_status(),
-				'gateways' => \Hammock\Services\Gateways::list_simple_gateways(),
+				'status'   => \HubloyMembership\Services\Transactions::transaction_status(),
+				'gateways' => \HubloyMembership\Services\Gateways::list_simple_gateways(),
 			);
 		}
 		return $vars;
@@ -128,7 +128,7 @@ class Transactions extends Controller {
 	 */
 	private function get_strings() {
 		if ( empty( $this->strings ) ) {
-			$this->strings = include HAMMOCK_LOCALE_DIR . '/site/transactions.php';
+			$this->strings = include HUBMEMB_LOCALE_DIR . '/site/transactions.php';
 		}
 		return $this->strings;
 	}
@@ -139,7 +139,7 @@ class Transactions extends Controller {
 	 * @since 1.0.0
 	 */
 	public function controller_scripts() {
-		wp_enqueue_script( 'hammock-transactions-react' );
+		wp_enqueue_script( 'hubloy-membership-transactions-react' );
 	}
 
 	/**
@@ -150,7 +150,7 @@ class Transactions extends Controller {
 	public function render() {
 
 		?>
-		<div id="hammock-transactions-container"></div>
+		<div id="hubloy-membership-transactions-container"></div>
 		<?php
 	}
 }

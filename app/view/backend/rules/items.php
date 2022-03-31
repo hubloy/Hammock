@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\View\Backend\Rules;
+namespace HubloyMembership\View\Backend\Rules;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Base\View;
+use HubloyMembership\Base\View;
 
 /**
  * Items view
@@ -28,16 +28,16 @@ class Items extends View {
 		$url  = wp_nonce_url(
 			add_query_arg(
 				array(
-					'action' => 'hammock_rule_items',
+					'action' => 'hubloy-membership_rule_items',
 					'type'   => $type,
 				),
 				admin_url( 'admin-ajax.php' )
 			),
-			'hammock_rule_items'
+			'hubloy-membership_rule_items'
 		);
 		ob_start();
 		?>
-		<select name="item" data-placeholder="<?php esc_html_e( 'Select Item', 'hammock' ); ?>" class="uk-select hammock-select2-ajax" data-url="<?php echo esc_url( $url ); ?>" style="width: 100%">
+		<select name="item" data-placeholder="<?php esc_html_e( 'Select Item', 'hubloy-membership' ); ?>" class="uk-select hubloy-membership-select2-ajax" data-url="<?php echo esc_url( $url ); ?>" style="width: 100%">
 			<?php
 			if ( $rule ) {
 				$content = $rule->to_html();

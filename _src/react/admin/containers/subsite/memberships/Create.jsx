@@ -10,8 +10,8 @@ export default class CreateMembership extends PureComponent {
 		super(props);
 		this.membership_create = React.createRef();
         this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
 	}
 
@@ -36,7 +36,7 @@ export default class CreateMembership extends PureComponent {
 				if ( json.status ) {
 					self.notify( json.message, 'success' );
 					setTimeout(function(){
-						UIkit.modal(jQuery('#hammock-add-membership')).hide();
+						UIkit.modal(jQuery('#hubloy_membership-add-membership')).hide();
 						if ( typeof json.id !== 'undefined' ) {
 							window.location.hash = "#/edit/" + json.id;
 						}
@@ -49,16 +49,16 @@ export default class CreateMembership extends PureComponent {
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				self.notify( this.props.hammock.error, 'error' );
+				self.notify( this.props.hubloy_membership.error, 'error' );
 			}
 		);
 	}
 
 	render() {
-		const { hammock } = this.props;
-		var strings = hammock.strings;
+		const { hubloy_membership } = this.props;
+		var strings = hubloy_membership.strings;
 		return (
-			<div id="hammock-add-membership" uk-modal="">
+			<div id="hubloy_membership-add-membership" uk-modal="">
 				<div className="uk-modal-dialog">
 					<button className="uk-modal-close-default" type="button" uk-close=""></button>
 					<div className="uk-modal-header">
@@ -75,40 +75,40 @@ export default class CreateMembership extends PureComponent {
 							<div className="uk-margin">
 								<legend className="uk-form-label">{strings.labels.status}</legend>
 								<div className="uk-form-controls">
-									<div className="hammock-input">
-										<SwitchUI name={`membership_enabled`} class_name={`membership_enabled`} title={hammock.common.status.disabled} enabled_title={hammock.common.status.enabled} value={`1`} />
+									<div className="hubloy_membership-input">
+										<SwitchUI name={`membership_enabled`} class_name={`membership_enabled`} title={hubloy_membership.common.status.disabled} enabled_title={hubloy_membership.common.status.enabled} value={`1`} />
 									</div>
 								</div>
 							</div>
 							<div className="uk-margin">
 								<legend className="uk-form-label">{strings.labels.type}</legend>
 								<div className="uk-form-controls">
-									<DropDownUI name={`membership_type`} values={hammock.page_strings.type} class_name={`hammock-membership-type`}/>
+									<DropDownUI name={`membership_type`} values={hubloy_membership.page_strings.type} class_name={`hubloy_membership-membership-type`}/>
 								</div>
 							</div>
-							<div className="uk-margin hammock-membership-date">
+							<div className="uk-margin hubloy_membership-membership-date">
 								<legend className="uk-form-label">{strings.labels.days}</legend>
 								<div className="uk-form-controls">
 									<InputUI name={`membership_days`} type={`number`}/>
 								</div>
 							</div>
-							<div className="uk-margin hammock-membership-recurring">
+							<div className="uk-margin hubloy_membership-membership-recurring">
 								<legend className="uk-form-label">{strings.labels.recurring_duration}</legend>
 								<div className="uk-form-controls">
-									<DropDownUI name={`recurring_duration`} values={hammock.page_strings.duration} />
+									<DropDownUI name={`recurring_duration`} values={hubloy_membership.page_strings.duration} />
 								</div>
 							</div>
 							<div className="uk-margin">
 								<legend className="uk-form-label">{strings.labels.price}</legend>
 								<div className="uk-form-controls">
 									<div className="uk-inline">
-										<span className="uk-form-icon" dangerouslySetInnerHTML={{ __html: hammock.common.currency_code }} />
+										<span className="uk-form-icon" dangerouslySetInnerHTML={{ __html: hubloy_membership.common.currency_code }} />
 										<InputUI name={`membership_price`} placeholder={`0.00`} required={true}/>
 									</div>
 								</div>
 							</div>
 							<div className="uk-margin ">
-								<button className="uk-button uk-button-primary save-button">{hammock.common.buttons.save}</button>
+								<button className="uk-button uk-button-primary save-button">{hubloy_membership.common.buttons.save}</button>
 							</div>
 						</form>
 					</div>

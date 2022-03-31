@@ -17,8 +17,8 @@ export default class CreateCode extends Component {
 		this.coupon_create_code = React.createRef();
 
 		this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
 	}
 
@@ -27,8 +27,8 @@ export default class CreateCode extends Component {
 	}
 
 	async componentDidMount() {
-		window.hammock.helper.bind_date_range();
-        jQuery('.hammock-email-tags').tagsInput({width:'98%',  defaultText : this.props.hammock.strings.select_email});
+		window.hubloy_membership.helper.bind_date_range();
+        jQuery('.hubloy_membership-email-tags').tagsInput({width:'98%',  defaultText : this.props.hubloy_membership.strings.select_email});
     }
 
 	handleSubmit( event ) {
@@ -58,7 +58,7 @@ export default class CreateCode extends Component {
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				self.notify( self.props.hammock.error, 'error' );
+				self.notify( self.props.hubloy_membership.error, 'error' );
 			}
 		);
 	}
@@ -95,14 +95,14 @@ export default class CreateCode extends Component {
 				<div className="uk-margin">
 					<legend className="uk-form-label">{strings.create.coupons.expire.title}</legend>
 					<div className="uk-form-controls">
-						<InputUI name={`expire`} class_name={`hammock-from-date`} placeholder={``} required={false}/>
+						<InputUI name={`expire`} class_name={`hubloy_membership-from-date`} placeholder={``} required={false}/>
 						<p className="uk-text-meta">{strings.create.coupons.expire.description}</p>
 					</div>
 				</div>
 				<div className="uk-margin">
 					<legend className="uk-form-label">{strings.create.coupons.restrict.title}</legend>
 					<div className="uk-form-controls">
-						<InputUI name={`restrict`} class_name={`hammock-email-tags`} placeholder={``} required={false}/>
+						<InputUI name={`restrict`} class_name={`hubloy_membership-email-tags`} placeholder={``} required={false}/>
 						<p className="uk-text-meta">{strings.create.coupons.restrict.description}</p>
 					</div>
 				</div>
@@ -136,14 +136,14 @@ export default class CreateCode extends Component {
 				<div className="uk-margin">
 					<legend className="uk-form-label">{strings.create.invites.expire.title}</legend>
 					<div className="uk-form-controls">
-						<InputUI name={`expire`} class_name={`hammock-from-date`} placeholder={``} required={false}/>
+						<InputUI name={`expire`} class_name={`hubloy_membership-from-date`} placeholder={``} required={false}/>
 						<p className="uk-text-meta">{strings.create.invites.expire.description}</p>
 					</div>
 				</div>
 				<div className="uk-margin">
 					<legend className="uk-form-label">{strings.create.invites.restrict.title}</legend>
 					<div className="uk-form-controls">
-						<InputUI name={`restrict`} class_name={`hammock-email-tags`} placeholder={``} required={false}/>
+						<InputUI name={`restrict`} class_name={`hubloy_membership-email-tags`} placeholder={``} required={false}/>
 						<p className="uk-text-meta">{strings.create.invites.restrict.description}</p>
 					</div>
 				</div>
@@ -153,12 +153,12 @@ export default class CreateCode extends Component {
 
 	render() {
 		const type = this.props.type,
-			hammock = this.props.hammock,
-			strings = hammock.strings,
-			page_strings = hammock.page_strings;
+			hubloy_membership = this.props.hubloy_membership,
+			strings = hubloy_membership.strings,
+			page_strings = hubloy_membership.page_strings;
 		return (
-			<Dashboard hammock={hammock} title={type === 'coupons' ? strings.add.coupon : strings.add.invite}>
-				<div className={"uk-background-default uk-padding-small uk-margin-small-top hammock-settings-" + type}>
+			<Dashboard hubloy_membership={hubloy_membership} title={type === 'coupons' ? strings.add.coupon : strings.add.invite}>
+				<div className={"uk-background-default uk-padding-small uk-margin-small-top hubloy_membership-settings-" + type}>
 					<form className="uk-form-horizontal uk-margin-large" onSubmit={this.handleSubmit.bind(this)} ref={this.coupon_create_code}>
 						{type === 'coupons' ? (
 							this.renderCouponForm( strings, page_strings )
@@ -166,8 +166,8 @@ export default class CreateCode extends Component {
 							this.renderInviteForm( strings, page_strings )
 						)}
 						<div className="uk-margin uk-button-group">
-							<button className="uk-button uk-button-primary save-button">{hammock.common.buttons.save}</button>
-							<Link to={'/'} className="uk-button uk-button-secondary uk-margin-small-left">{hammock.common.buttons.back}</Link>
+							<button className="uk-button uk-button-primary save-button">{hubloy_membership.common.buttons.save}</button>
+							<Link to={'/'} className="uk-button uk-button-secondary uk-margin-small-left">{hubloy_membership.common.buttons.back}</Link>
 						</div>
 					</form>
 				</div>
@@ -177,5 +177,5 @@ export default class CreateCode extends Component {
 
 }
 CreateCode.propTypes = {
-	hammock: PropTypes.object
+	hubloy_membership: PropTypes.object
 };

@@ -1,5 +1,5 @@
 <?php
-namespace Hammock\Services;
+namespace HubloyMembership\Services;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -40,9 +40,9 @@ class Codes {
 	 */
 	public function __construct( $type ) {
 		if ( $type === 'coupons' ) {
-			$this->model = new \Hammock\Model\Codes\Coupons();
+			$this->model = new \HubloyMembership\Model\Codes\Coupons();
 		} else {
-			$this->model = new \Hammock\Model\Codes\Invites();
+			$this->model = new \HubloyMembership\Model\Codes\Invites();
 		}
 	}
 
@@ -55,12 +55,12 @@ class Codes {
 	 */
 	public static function get_code_statuses() {
 		$status = array(
-			self::STATUS_ENABLED  => __( 'Enabled', 'hammock' ),
-			self::STATUS_DISABLED => __( 'Disabled', 'hammock' ),
-			self::STATUS_EXPIRED  => __( 'Expired', 'hammock' ),
-			self::STATUS_CANCELED => __( 'Canceled', 'hammock' ),
+			self::STATUS_ENABLED  => __( 'Enabled', 'hubloy-membership' ),
+			self::STATUS_DISABLED => __( 'Disabled', 'hubloy-membership' ),
+			self::STATUS_EXPIRED  => __( 'Expired', 'hubloy-membership' ),
+			self::STATUS_CANCELED => __( 'Canceled', 'hubloy-membership' ),
 		);
-		return apply_filters( 'hammock_codes_get_code_statuses', $status );
+		return apply_filters( 'hubloy-membership_codes_get_code_statuses', $status );
 	}
 
 	/**
@@ -72,10 +72,10 @@ class Codes {
 	 */
 	public static function get_code_amount_types() {
 		$types = array(
-			self::TYPE_FIXED      => __( 'Fixed discount', 'hammock' ),
-			self::TYPE_PRECENTAGE => __( 'Percentage discount', 'hammock' ),
+			self::TYPE_FIXED      => __( 'Fixed discount', 'hubloy-membership' ),
+			self::TYPE_PRECENTAGE => __( 'Percentage discount', 'hubloy-membership' ),
 		);
-		return apply_filters( 'hammock_codes_get_code_amount_types', $types );
+		return apply_filters( 'hubloy-membership_codes_get_code_amount_types', $types );
 	}
 
 	/**
@@ -89,8 +89,8 @@ class Codes {
 	 */
 	public static function get_code_status( $status ) {
 		$statuses = self::get_code_statuses();
-		$return   = isset( $statuses[ $status ] ) ? $statuses[ $status ] : __( 'N\A', 'hammock' );
-		return apply_filters( 'hammock_codes_get_code_status', $return, $status );
+		$return   = isset( $statuses[ $status ] ) ? $statuses[ $status ] : __( 'N\A', 'hubloy-membership' );
+		return apply_filters( 'hubloy-membership_codes_get_code_status', $return, $status );
 	}
 
 	/**
@@ -104,8 +104,8 @@ class Codes {
 	 */
 	public static function get_code_amount_type( $type ) {
 		$types  = self::get_code_amount_types();
-		$return = isset( $types[ $type ] ) ? $types[ $type ] : __( 'N\A', 'hammock' );
-		return apply_filters( 'hammock_codes_get_code_amount_type', $return, $type );
+		$return = isset( $types[ $type ] ) ? $types[ $type ] : __( 'N\A', 'hubloy-membership' );
+		return apply_filters( 'hubloy-membership_codes_get_code_amount_type', $return, $type );
 	}
 
 	/**
@@ -158,18 +158,18 @@ class Codes {
 				return array(
 					'status'  => true,
 					'id'      => $model_id,
-					'message' => __( 'Saved successfully', 'hammock' ),
+					'message' => __( 'Saved successfully', 'hubloy-membership' ),
 				);
 			} else {
 				return array(
 					'status'  => false,
-					'message' => __( 'Error saving model', 'hammock' ),
+					'message' => __( 'Error saving model', 'hubloy-membership' ),
 				);
 			}
 		} else {
 			return array(
 				'status'  => false,
-				'message' => __( 'Selected Code exists', 'hammock' ),
+				'message' => __( 'Selected Code exists', 'hubloy-membership' ),
 			);
 		}
 	}
@@ -218,18 +218,18 @@ class Codes {
 				$model->save();
 				return array(
 					'status'  => true,
-					'message' => __( 'Updated successfully', 'hammock' ),
+					'message' => __( 'Updated successfully', 'hubloy-membership' ),
 				);
 			} else {
 				return array(
 					'status'  => false,
-					'message' => __( 'Selected Code exists', 'hammock' ),
+					'message' => __( 'Selected Code exists', 'hubloy-membership' ),
 				);
 			}
 		} else {
 			return array(
 				'status'  => false,
-				'message' => __( 'Selected Code does not exist', 'hammock' ),
+				'message' => __( 'Selected Code does not exist', 'hubloy-membership' ),
 			);
 		}
 	}
@@ -255,7 +255,7 @@ class Codes {
 		}
 
 		$random_coupon = implode( '-', str_split( strtoupper( $random_coupon ), 4 ) );
-		return apply_filters( 'hammock_generate_code', $random_coupon );
+		return apply_filters( 'hubloy-membership_generate_code', $random_coupon );
 	}
 
 	/**

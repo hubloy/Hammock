@@ -1,12 +1,12 @@
 <?php
-namespace Hammock\Controller\Front;
+namespace HubloyMembership\Controller\Front;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Controller;
-use Hammock\Services\Transactions;
+use HubloyMembership\Base\Controller;
+use HubloyMembership\Services\Transactions;
 
 /**
  * Transaction controller
@@ -59,8 +59,8 @@ class Transaction extends Controller {
 	 */
 	public function init() {
 		$this->transaction_service = new Transactions();
-		$this->add_action( 'hammock_api_ipn_notify', 'ipn_notify' );
-		$this->add_action( 'hammock_api_handle_return', 'handle_return' );
+		$this->add_action( 'hubloy-membership_api_ipn_notify', 'ipn_notify' );
+		$this->add_action( 'hubloy-membership_api_handle_return', 'handle_return' );
 	}
 
 	/**

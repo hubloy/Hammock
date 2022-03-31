@@ -11,8 +11,8 @@ export default class SubSiteGateways extends Component {
         super(props);
         
         this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
         
         this.state = {
@@ -46,17 +46,17 @@ export default class SubSiteGateways extends Component {
 		} else {
             if ( this.state.error) {
 				return (
-					<h3 className="uk-text-center uk-text-danger">{this.props.hammock.error}</h3>
+					<h3 className="uk-text-center uk-text-danger">{this.props.hubloy_membership.error}</h3>
 				)
 			} else {
                 const { items } = this.state;
-                var hammock = this.props.hammock;
+                var hubloy_membership = this.props.hubloy_membership;
                 return (
                     <div className="uk-padding-small">
                         <ul uk-accordion="">
                             {Object.keys(items).map(item =>
                                 <React.Fragment key={item}>
-                                    <GatewaySetting hammock={hammock} id={item} item={items[item]} key={item} />
+                                    <GatewaySetting hubloy_membership={hubloy_membership} id={item} item={items[item]} key={item} />
                                 </React.Fragment>
                             )}
                         </ul>
@@ -68,5 +68,5 @@ export default class SubSiteGateways extends Component {
     }
 }
 SubSiteGateways.propTypes = {
-	hammock: PropTypes.object
+	hubloy_membership: PropTypes.object
 };

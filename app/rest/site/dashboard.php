@@ -1,15 +1,15 @@
 <?php
-namespace Hammock\Rest\Site;
+namespace HubloyMembership\Rest\Site;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Base\Rest;
-use Hammock\Core\Util;
-use Hammock\Services\Members;
-use Hammock\Services\Memberships;
-use Hammock\Services\Transactions;
+use HubloyMembership\Base\Rest;
+use HubloyMembership\Core\Util;
+use HubloyMembership\Services\Members;
+use HubloyMembership\Services\Memberships;
+use HubloyMembership\Services\Transactions;
 
 /**
  * Dashboard rest controller

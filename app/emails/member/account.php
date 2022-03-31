@@ -1,7 +1,7 @@
 <?php
-namespace Hammock\Emails\Member;
+namespace HubloyMembership\Emails\Member;
 
-use Hammock\Base\Email;
+use HubloyMembership\Base\Email;
 
 /**
  * User card expire
@@ -36,7 +36,7 @@ class Account extends Email {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$type                = \Hammock\Services\Emails::COMM_TYPE_INFO_UPDATE;
+		$type                = \HubloyMembership\Services\Emails::COMM_TYPE_INFO_UPDATE;
 		$this->id            = 'member-' . $type;
 		$this->template_html = 'emails/member-account-update.php';
 		$this->placeholders  = array();
@@ -51,10 +51,10 @@ class Account extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Account Update', 'hammock' ),
-			'description' => __( 'Sent when a member updates any personal information (e.g. credit card, name, address details etc.)', 'hammock' ),
-			'heading'     => __( 'Your billing details have been changed.', 'hammock' ),
-			'subject'     => sprintf( __( '%s: Your billing details have been changed', 'hammock' ), '[{site_title}]' ),
+			'title'       => __( 'Account Update', 'hubloy-membership' ),
+			'description' => __( 'Sent when a member updates any personal information (e.g. credit card, name, address details etc.)', 'hubloy-membership' ),
+			'heading'     => __( 'Your billing details have been changed.', 'hubloy-membership' ),
+			'subject'     => sprintf( __( '%s: Your billing details have been changed', 'hubloy-membership' ), '[{site_title}]' ),
 			'recipient'   => '',
 			'enabled'     => true,
 		);

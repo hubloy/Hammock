@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\View\Backend\Rules;
+namespace HubloyMembership\View\Backend\Rules;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Base\View;
+use HubloyMembership\Base\View;
 
 /**
  * Memberships view
@@ -27,7 +27,7 @@ class Memberships extends View {
 		$memberships = $this->data['memberships'];
 		ob_start();
 		?>
-		<select name="memberships" data-placeholder="<?php esc_html_e( 'Select Membership', 'hammock' ); ?>" multiple="multiple" class="uk-select hammock-select2" style="width: 100%">
+		<select name="memberships" data-placeholder="<?php esc_html_e( 'Select Membership', 'hubloy-membership' ); ?>" multiple="multiple" class="uk-select hubloy-membership-select2" style="width: 100%">
 			<?php
 				$rule_memberships = ( $rule && is_array( $rule->memberships ) ) ? $rule->memberships : array();
 			foreach ( $memberships as $id => $name ) {

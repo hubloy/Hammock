@@ -1,5 +1,5 @@
 <?php
-namespace Hammock\Helper;
+namespace HubloyMembership\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -49,12 +49,12 @@ class Logger {
 	 * @since 1.0.0
 	 */
 	public static function init_directory() {
-		if ( ! is_dir( HAMMOCK_LOG_DIR ) ) {
-			wp_mkdir_p( HAMMOCK_LOG_DIR );
+		if ( ! is_dir( HUBMEMB_LOG_DIR ) ) {
+			wp_mkdir_p( HUBMEMB_LOG_DIR );
 		}
 
 		$file_helper = new File();
-		$file_helper->create_directory( HAMMOCK_LOG_DIR );
+		$file_helper->create_directory( HUBMEMB_LOG_DIR );
 	}
 
 	/**
@@ -119,7 +119,7 @@ class Logger {
 		if ( $this->is_enabled() ) {
 			$log_time = date( "Y-m-d\tH:i:s\t" );
 			$log_file = date( 'Y-m-d' );
-			$log_file = trailingslashit( HAMMOCK_LOG_DIR ) . $log_file . '_hammock.log';
+			$log_file = trailingslashit( HUBMEMB_LOG_DIR ) . $log_file . '_hubloy-membership.log';
 			foreach ( func_get_args() as $param ) {
 				if ( is_scalar( $param ) ) {
 					$dump = $param;

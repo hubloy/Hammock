@@ -20,8 +20,8 @@ export default class MailChimpSettings extends Component {
         };
         
         this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
 
 		this.mailchimp_settings = React.createRef();
@@ -65,11 +65,11 @@ export default class MailChimpSettings extends Component {
 					this.setState({ lists : json.lists, loading_lists : false });
                 } else {
 					this.setState({ lists : [], loading_lists : false });
-					this.notify( this.props.hammock.error, 'error' );
+					this.notify( this.props.hubloy_membership.error, 'error' );
                 }
 			}, (err) => {
 				this.setState({ lists : [], loading_lists : false });
-				this.notify( this.props.hammock.error, 'error' );
+				this.notify( this.props.hubloy_membership.error, 'error' );
 			}
 		);
 	}
@@ -82,7 +82,7 @@ export default class MailChimpSettings extends Component {
 			$button = $form.find('.submit-button'),
 			$btn_txt = $button.text(),
 			form = $form.serialize(),
-			hammock = this.props.hammock;
+			hubloy_membership = this.props.hubloy_membership;
 		$button.attr('disabled', 'disabled');
 		$button.html("<div uk-spinner></div>");
 		this.fetchWP.post( 'addons/settings/update', form, true )
@@ -98,7 +98,7 @@ export default class MailChimpSettings extends Component {
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				self.notify( 'error', hammock.error );
+				self.notify( 'error', hubloy_membership.error );
 			}
 		);
 	}
@@ -111,7 +111,7 @@ export default class MailChimpSettings extends Component {
 			apikey = form.querySelectorAll('.apikey')[0],
 			content = $button.innerHTML,
 			self = this,
-			hammock = self.props.hammock;
+			hubloy_membership = self.props.hubloy_membership;
 		$button.disabled = true;
 		$button.innerHTML = "<div uk-spinner></div>";
 		this.fetchWP.post( 'addons/action', { id: 'mailchimp', action : 'check_status', apikey : apikey.value } )
@@ -128,7 +128,7 @@ export default class MailChimpSettings extends Component {
 			}, (err) => {
 				$button.disabled = false;
                 $button.innerHTML = content;
-				self.notify( 'error', hammock.error );
+				self.notify( 'error', hubloy_membership.error );
 				self.setState({ valid : false });
 			}
 		);
@@ -148,28 +148,28 @@ export default class MailChimpSettings extends Component {
 		} else {
             if ( this.state.error) {
 				return (
-					<h3 className="uk-text-center uk-text-danger">{this.props.hammock.error}</h3>
+					<h3 className="uk-text-center uk-text-danger">{this.props.hubloy_membership.error}</h3>
 				)
 			} else {
-				var hammock = this.props.hammock;
+				var hubloy_membership = this.props.hubloy_membership;
 				var data = this.state.settings,
 					enabled = this.state.enabled,
 					lists = this.state.lists,
 					loading_lists = this.state.loading_lists;
 				return (
-					<form name="hammock-settings-form" className="uk-form-horizontal uk-margin-small" method="POST" onSubmit={this.handleSubmit} ref={this.mailchimp_settings}>
+					<form name="hubloy_membership-settings-form" className="uk-form-horizontal uk-margin-small" method="POST" onSubmit={this.handleSubmit} ref={this.mailchimp_settings}>
 						<InputUI name={`id`} class_name={`addon_id`} type={`hidden`} value='mailchimp'/>
 						<div className="uk-margin">
-							<label className="uk-form-label" htmlFor="apikey">{hammock.strings.mailchimp.title}</label>
-							<div className="uk-form-controls hammock-input">
-								<SwitchUI name={`enabled`} action={this.showOptions} value={`1`} checked={enabled} enabled_title={hammock.common.status.enabled} title={hammock.common.status.disabled}/>
-								<p className="uk-text-meta">{hammock.strings.mailchimp.desc}</p>
+							<label className="uk-form-label" htmlFor="apikey">{hubloy_membership.strings.mailchimp.title}</label>
+							<div className="uk-form-controls hubloy_membership-input">
+								<SwitchUI name={`enabled`} action={this.showOptions} value={`1`} checked={enabled} enabled_title={hubloy_membership.common.status.enabled} title={hubloy_membership.common.status.disabled}/>
+								<p className="uk-text-meta">{hubloy_membership.strings.mailchimp.desc}</p>
 							</div>
 						</div>
 						{enabled &&
 							<React.Fragment>
 								<div className="uk-margin">
-									<label className="uk-form-label" htmlFor="apikey">{hammock.strings.mailchimp.apikey}</label>
+									<label className="uk-form-label" htmlFor="apikey">{hubloy_membership.strings.mailchimp.apikey}</label>
 									<div className="uk-form-controls">
 										<div className="uk-grid-collapse uk-child-width-expand@s uk-text-center" uk-grid="">
 											<div className="uk-width-expand">
@@ -181,39 +181,39 @@ export default class MailChimpSettings extends Component {
 												</div>
 											</div>
 											<div className="uk-width-auto uk-margin-small-left">
-												<a className="uk-button uk-button-primary validation-button" onClick={this.validateApiKey}>{hammock.strings.mailchimp.validate}</a>
+												<a className="uk-button uk-button-primary validation-button" onClick={this.validateApiKey}>{hubloy_membership.strings.mailchimp.validate}</a>
 											</div>
 										</div>
-										<p className="uk-text-meta" dangerouslySetInnerHTML={{ __html: hammock.strings.mailchimp.info }} />
+										<p className="uk-text-meta" dangerouslySetInnerHTML={{ __html: hubloy_membership.strings.mailchimp.info }} />
 									</div>
 								</div>
 								{data.valid &&
 									<React.Fragment>
 										<div className="uk-margin">
-											<label className="uk-form-label" htmlFor="double_optin">{hammock.strings.mailchimp.opt_in.label}</label>
+											<label className="uk-form-label" htmlFor="double_optin">{hubloy_membership.strings.mailchimp.opt_in.label}</label>
 											<div className="uk-form-controls">
-												<div className="hammock-input">
+												<div className="hubloy_membership-input">
 													<SwitchUI name={`double_optin`} class_name={`double_optin`} title={''} value={`1`} selected={data.double_optin} checked={data.double_optin == 1}/>
-													<p className="uk-text-meta">{hammock.strings.mailchimp.opt_in.description}</p>
+													<p className="uk-text-meta">{hubloy_membership.strings.mailchimp.opt_in.description}</p>
 												</div>
 											</div>
 										</div>
 										{!loading_lists &&
 											<React.Fragment>
 												<div className="uk-margin">
-													<label className="uk-form-label" htmlFor="registered_list">{hammock.strings.mailchimp.lists.registered}</label>
+													<label className="uk-form-label" htmlFor="registered_list">{hubloy_membership.strings.mailchimp.lists.registered}</label>
 													<div className="uk-form-controls">
 														<DropDownUI name={`registered_list`} values={lists} value={data.registered_list} />
 													</div>
 												</div>
 												<div className="uk-margin">
-													<label className="uk-form-label" htmlFor="subscriber_list">{hammock.strings.mailchimp.lists.subscriber}</label>
+													<label className="uk-form-label" htmlFor="subscriber_list">{hubloy_membership.strings.mailchimp.lists.subscriber}</label>
 													<div className="uk-form-controls">
 														<DropDownUI name={`subscriber_list`} values={lists} value={data.subscriber_list} />
 													</div>
 												</div>
 												<div className="uk-margin">
-													<label className="uk-form-label" htmlFor="unsubscriber_list">{hammock.strings.mailchimp.lists.unsubscriber}</label>
+													<label className="uk-form-label" htmlFor="unsubscriber_list">{hubloy_membership.strings.mailchimp.lists.unsubscriber}</label>
 													<div className="uk-form-controls">
 														<DropDownUI name={`unsubscriber_list`} values={lists} value={data.unsubscriber_list} />
 													</div>
@@ -225,7 +225,7 @@ export default class MailChimpSettings extends Component {
 							</React.Fragment>
 						}
 						<div className="uk-margin ">
-							<button className="uk-button uk-button-primary submit-button">{hammock.common.buttons.save}</button>
+							<button className="uk-button uk-button-primary submit-button">{hubloy_membership.common.buttons.save}</button>
 						</div>
 					</form>
 				)

@@ -1,5 +1,5 @@
 <?php
-namespace Hammock\Base;
+namespace HubloyMembership\Base;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -19,7 +19,7 @@ class Rest extends Component {
 	 */
 	public function __construct() {
 		$this->init();
-		$this->add_action( 'hammock_register_rest_route', 'register_rest_route' );
+		$this->add_action( 'hubloy-membership_register_rest_route', 'register_rest_route' );
 	}
 
 	/**
@@ -37,7 +37,7 @@ class Rest extends Component {
 	 * @since 1.0.0
 	 */
 	public function register_rest_route() {
-		$this->set_up_route( untrailingslashit( HAMMOCK_REST_NAMESPACE ) );
+		$this->set_up_route( untrailingslashit( HUBMEMB_REST_NAMESPACE ) );
 	}
 
 
@@ -60,11 +60,11 @@ class Rest extends Component {
 	 * @return bool|WP_Error
 	 */
 	public function validate_request( $request ) {
-		$can_view = apply_filters( 'hammock_default_rest_check', current_user_can( 'manage_options' ), $request );
+		$can_view = apply_filters( 'hubloy-membership_default_rest_check', current_user_can( 'manage_options' ), $request );
 		if ( ! $can_view ) {
 			return new \WP_Error(
 				'rest_user_cannot_view',
-				__( 'Invalid request, you are not allowed to make this request', 'hammock' ),
+				__( 'Invalid request, you are not allowed to make this request', 'hubloy-membership' ),
 				array( 'status' => rest_authorization_required_code() )
 			);
 		}

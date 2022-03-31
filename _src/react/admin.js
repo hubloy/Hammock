@@ -5,12 +5,12 @@ import NetworkAdmin from './admin/containers/network/Admin';
 import SiteAdmin from './admin/containers/subsite/Admin';
 
 document.addEventListener('DOMContentLoaded', function () {
-	const hammockContainer = document.getElementById( 'hammock-admin-container' );
-	if ( hammockContainer !== null ) {
-		if ( window.hammock.is_multisite ) {
-			ReactDOM.render(<NetworkAdmin hammock={window.hammock} />, hammockContainer);
+	const hubloy_membershipContainer = document.getElementById( 'hubloy_membership-admin-container' );
+	if ( hubloy_membershipContainer !== null ) {
+		if ( window.hubloy_membership.is_multisite ) {
+			ReactDOM.render(<NetworkAdmin hubloy_membership={window.hubloy_membership} />, hubloy_membershipContainer);
 		} else {
-			ReactDOM.render(<SiteAdmin hammock={window.hammock} />, hammockContainer);
+			ReactDOM.render(<SiteAdmin hubloy_membership={window.hubloy_membership} />, hubloy_membershipContainer);
 		}
 	}
 });

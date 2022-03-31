@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Services;
+namespace HubloyMembership\Services;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Model\Email;
+use HubloyMembership\Model\Email;
 
 /**
  * Emails Service
@@ -67,7 +67,7 @@ class Emails {
 			'member-' . self::COMM_TYPE_AFTER_PAYMENT_DUE,
 		);
 		return apply_filters(
-			'hammock_email_types',
+			'hubloy-membership_email_types',
 			array(
 				'admin'  => $admin_emails,
 				'member' => $user_emails,
@@ -84,7 +84,7 @@ class Emails {
 	 */
 	public static function get_email_senders() {
 		return apply_filters(
-			'hammock_get_email_senders',
+			'hubloy-membership_get_email_senders',
 			array(
 				'admin'  => array(),
 				'member' => array(),

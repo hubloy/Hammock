@@ -1,5 +1,5 @@
 <?php
-namespace Hammock\Model;
+namespace HubloyMembership\Model;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -30,7 +30,7 @@ class Activity {
 		$action      = self::render( 'action', $activity );
 		$description = self::render( 'description', $activity );
 		return apply_filters(
-			'hammock_activity_to_html',
+			'hubloy-membership_activity_to_html',
 			array(
 				'ref_id'      => $activity->ref_id,
 				'date'        => $date,
@@ -65,8 +65,8 @@ class Activity {
 			case 'author':
 				$return = sprintf(
 					'%s <span class="author-name">%s</span>',
-					__( 'by', 'hammock' ),
-					__( 'N/A', 'hammock' )
+					__( 'by', 'hubloy-membership' ),
+					__( 'N/A', 'hubloy-membership' )
 				);
 
 				if ( ! empty( $activity->user_id ) && 0 !== (int) $activity->user_id ) {
@@ -74,7 +74,7 @@ class Activity {
 					if ( $user instanceof \WP_User && 0 !== $user->ID ) {
 						$return = sprintf(
 							'%s <a href="%s" target="_blank"><span class="author-name">%s</span></a>',
-							__( 'by', 'hammock' ),
+							__( 'by', 'hubloy-membership' ),
 							get_edit_user_link( $user->ID ),
 							$user->display_name
 						);
@@ -83,7 +83,7 @@ class Activity {
 				break;
 			case 'role':
 				global $wp_roles;
-				$return = isset( $activity->caps ) && isset( $wp_roles->role_names[ $activity->caps ] ) ? $wp_roles->role_names[ $activity->caps ] : __( 'Unknown', 'hammock' );
+				$return = isset( $activity->caps ) && isset( $wp_roles->role_names[ $activity->caps ] ) ? $wp_roles->role_names[ $activity->caps ] : __( 'Unknown', 'hubloy-membership' );
 				break;
 			case 'type':
 				$return = ucfirst( $activity->object_type );
@@ -96,7 +96,7 @@ class Activity {
 				break;
 
 		}
-		return apply_filters( 'hammock_activity_default_column', $return, $name, $activity );
+		return apply_filters( 'hubloy-membership_activity_default_column', $return, $name, $activity );
 	}
 
 	/**
@@ -117,7 +117,7 @@ class Activity {
 				case 'member':
 					$item = new Member( $activity->object_id );
 					if ( $item->id > 0 ) {
-						$url  = admin_url( 'admin.php?page=hammock-members#/member/' . $item->id );
+						$url  = admin_url( 'admin.php?page=hubloy-membership-members#/member/' . $item->id );
 						$name = $item->user_info['name'];
 					}
 					break;
@@ -125,7 +125,7 @@ class Activity {
 				case 'transaction':
 					$item = new Invoice( $activity->object_id );
 					if ( $item->id > 0 ) {
-						$url  = admin_url( 'admin.php?page=hammock-transactions#/transaction/' . $item->id );
+						$url  = admin_url( 'admin.php?page=hubloy-membership-transactions#/transaction/' . $item->id );
 						$name = $item->invoice_id;
 					}
 					break;
@@ -135,7 +135,7 @@ class Activity {
 					if ( $item->id > 0 ) {
 						$membership = new Membership( $item->membership_id );
 						if ( $membership->id > 0 ) {
-							$url  = admin_url( 'admin.php?page=hammock-memberships#/edit/' . $membership->id );
+							$url  = admin_url( 'admin.php?page=hubloy-membership-memberships#/edit/' . $membership->id );
 							$name = $membership->name;
 						}
 					}
@@ -146,7 +146,7 @@ class Activity {
 			}
 		}
 		$return = sprintf( '<a href="%s" target="_blank">%s</a>', $url, esc_html( $name ) );
-		return apply_filters( 'hammock_activity_render_description', $return, $activity );
+		return apply_filters( 'hubloy-membership_activity_render_description', $return, $activity );
 	}
 }
 

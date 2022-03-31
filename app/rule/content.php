@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Rule;
+namespace HubloyMembership\Rule;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Rule;
+use HubloyMembership\Base\Rule;
 
 class Content extends Rule {
 
@@ -40,6 +40,6 @@ class Content extends Rule {
 	 */
 	public function init() {
 		$this->id   = 'content';
-		$this->name = __( 'Comments & More Tag', 'hammock' );
+		$this->name = __( 'Comments & More Tag', 'hubloy-membership' );
 	}
 }

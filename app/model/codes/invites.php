@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Model\Codes;
+namespace HubloyMembership\Model\Codes;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Model\Codes;
+use HubloyMembership\Model\Codes;
 
 /**
  * Invite codes

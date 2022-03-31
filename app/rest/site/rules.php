@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Rest\Site;
+namespace HubloyMembership\Rest\Site;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Base\Rest;
+use HubloyMembership\Base\Rest;
 
 /**
  * Rules rest route
@@ -51,7 +51,7 @@ class Rules extends Rest {
 	 * Initialize
 	 */
 	protected function init() {
-		$this->service = new \Hammock\Services\Rules();
+		$this->service = new \HubloyMembership\Services\Rules();
 	}
 
 	/**
@@ -86,7 +86,7 @@ class Rules extends Rest {
 							'sanitize_callback' => 'absint',
 							'type'              => 'integer',
 							'default'           => 0,
-							'description'       => __( 'The current page', 'hammock' ),
+							'description'       => __( 'The current page', 'hubloy-membership' ),
 						),
 					),
 				),
@@ -107,7 +107,7 @@ class Rules extends Rest {
 							'sanitize_callback' => 'absint',
 							'type'              => 'integer',
 							'default'           => 0,
-							'description'       => __( 'The rule id', 'hammock' ),
+							'description'       => __( 'The rule id', 'hubloy-membership' ),
 						),
 					),
 				),
@@ -127,7 +127,7 @@ class Rules extends Rest {
 							'required'          => false,
 							'sanitize_callback' => 'absint',
 							'type'              => 'integer',
-							'description'       => __( 'The rule id', 'hammock' ),
+							'description'       => __( 'The rule id', 'hubloy-membership' ),
 						),
 					),
 				),
@@ -222,7 +222,7 @@ class Rules extends Rest {
 		$memberships = is_array( $request['memberships'] ) ? array_map( 'absint', $request['memberships'] ) : array( absint( $request['memberships'] ) );
 		$enabled     = isset( $request['enabled'] );
 		$is_update   = isset( $request['id'] );
-		$status      = $enabled ? \Hammock\Services\Rules::STATUS_ENABLED : \Hammock\Services\Rules::STATUS_DISABLED;
+		$status      = $enabled ? \HubloyMembership\Services\Rules::STATUS_ENABLED : \HubloyMembership\Services\Rules::STATUS_DISABLED;
 		$data        = array(
 			'type'        => $type,
 			'id'          => $item,

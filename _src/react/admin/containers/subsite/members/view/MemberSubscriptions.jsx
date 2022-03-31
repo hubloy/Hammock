@@ -28,8 +28,8 @@ export default class MemberSubscriptions extends Component {
 			id : this.props.id
         };
         this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
 
 		this.toggle_membership_fields = this.toggle_membership_fields.bind(this);
@@ -50,7 +50,7 @@ export default class MemberSubscriptions extends Component {
 	}
 
 	componentDidUpdate() {
-		window.hammock.helper.bind_date_range();
+		window.hubloy_membership.helper.bind_date_range();
 	}
 
 	handleAssignMembership(event) {
@@ -68,7 +68,7 @@ export default class MemberSubscriptions extends Component {
 				if ( json.status ) {
 					self.notify( json.message, 'success' );
 					setTimeout(function(){
-						UIkit.modal(jQuery('#hammock-add-subscription')).hide();
+						UIkit.modal(jQuery('#hubloy_membership-add-subscription')).hide();
 						self.load_member_plans();
 					}, 1000);
 				} else {
@@ -79,7 +79,7 @@ export default class MemberSubscriptions extends Component {
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				self.notify( self.props.hammock.error, 'error' );
+				self.notify( self.props.hubloy_membership.error, 'error' );
 			}
 		);
 	}
@@ -95,7 +95,7 @@ export default class MemberSubscriptions extends Component {
 				plans : json
 			}), (err) => {
 				this.setState({ loading : false, error : true });
-				this.notify( self.props.hammock.error, 'error' );
+				this.notify( self.props.hubloy_membership.error, 'error' );
 			}
 		);
 	}
@@ -109,7 +109,7 @@ export default class MemberSubscriptions extends Component {
 				error : false
 			}), (err) => {
 				this.setState({ loading : false, error : true });
-				this.notify( self.props.hammock.error, 'error' );
+				this.notify( self.props.hubloy_membership.error, 'error' );
 			}
 		);
 	}
@@ -118,7 +118,7 @@ export default class MemberSubscriptions extends Component {
 		this.fetchWP.get( 'members/list/status' )
 			.then( (json) => this.setState({
 				statuses : json,
-			}), (err) => this.notify( self.props.hammock.error, 'error' )
+			}), (err) => this.notify( self.props.hubloy_membership.error, 'error' )
 		);
 	}
 
@@ -127,7 +127,7 @@ export default class MemberSubscriptions extends Component {
 			.then( (json) => this.setState({ new_sub : {
 				membership : id,
 				object : json
-			} }), (err) => this.notify( self.props.hammock.error, 'error' )
+			} }), (err) => this.notify( self.props.hubloy_membership.error, 'error' )
 		);
 	}
 
@@ -142,7 +142,7 @@ export default class MemberSubscriptions extends Component {
 	}
 
 	toggle_trial_enabled( checked ) {
-		var access = document.getElementsByClassName('hammock-membership-member-access');
+		var access = document.getElementsByClassName('hubloy_membership-membership-member-access');
 		access = access[0];
 		if ( checked ) {
 			access.style.display = "none";
@@ -156,11 +156,11 @@ export default class MemberSubscriptions extends Component {
 		this.setState( {selected_access : value});
 	}
 
-	addSubscription( hammock, strings, id ) {
+	addSubscription( hubloy_membership, strings, id ) {
 		const selected_membership = ( this.state.new_sub.membership > 0 && typeof this.state.new_sub.object !== "undefined" ) ? this.state.new_sub.object : false;
 		const selected_access = this.state.selected_access;
 		return(
-			<div id="hammock-add-subscription" className="uk-flex-top" uk-modal="">
+			<div id="hubloy_membership-add-subscription" className="uk-flex-top" uk-modal="">
 				<div className="uk-modal-dialog uk-margin-auto-vertical">
 					<div className="uk-modal-header">
 						<h2 className="uk-modal-title">{strings.edit.details.subscription.create.modal.title}</h2>
@@ -172,7 +172,7 @@ export default class MemberSubscriptions extends Component {
 							<div className="uk-margin">
 								<legend className="uk-form-label">{strings.edit.details.subscription.create.modal.membership}</legend>
 								<div className="uk-form-controls">
-									<DropDownUI name={`membership`} values={this.state.memberships} class_name={`hammock-membership-list`} action={this.toggle_membership_fields}/>
+									<DropDownUI name={`membership`} values={this.state.memberships} class_name={`hubloy_membership-membership-list`} action={this.toggle_membership_fields}/>
 								</div>
 							</div>
 							{selected_membership &&
@@ -181,14 +181,14 @@ export default class MemberSubscriptions extends Component {
 										<React.Fragment>
 											<div className="uk-margin">
 												<div className="uk-form-controls">
-													<div className="hammock-input">
+													<div className="hubloy_membership-input">
 														<SwitchUI name={`enable_trial`} class_name={`enable_trial`} title={strings.edit.details.subscription.create.modal.enable_trial + selected_membership.trial_period + ' ' + selected_membership.trial_duration_text} value={`1`} action={this.toggle_trial_enabled} />
 													</div>
 												</div>
 											</div>
 										</React.Fragment>
 									}
-									<div className="hammock-membership-member-access">
+									<div className="hubloy_membership-membership-member-access">
 										<div className="uk-margin">
 											<legend className="uk-form-label">{strings.edit.details.subscription.create.modal.grant.title}</legend>
 											<div className="uk-margin uk-grid-small uk-child-width-auto uk-grid">
@@ -200,18 +200,18 @@ export default class MemberSubscriptions extends Component {
 										<div className="uk-margin" style={{display: ( selected_access === 'date' ? 'block' : 'none' )}}>
 											<legend className="uk-form-label">{strings.labels.start_date}</legend>
 											<div className="uk-form-controls">
-												<InputUI name={`membership_start`} class_name={`hammock-from-date`} placeholder={strings.labels.start_date}/>
+												<InputUI name={`membership_start`} class_name={`hubloy_membership-from-date`} placeholder={strings.labels.start_date}/>
 											</div>
 										</div>
 										<div className="uk-margin" style={{display: ( selected_access === 'date' ? 'block' : 'none' )}}>
 											<legend className="uk-form-label">{strings.labels.end_date}</legend>
 											<div className="uk-form-controls">
-												<InputUI name={`membership_end`} class_name={`hammock-to-date`} placeholder={strings.labels.end_date}/>
+												<InputUI name={`membership_end`} class_name={`hubloy_membership-to-date`} placeholder={strings.labels.end_date}/>
 											</div>
 										</div>
 									</div>
 									<div className="uk-margin ">
-										<button className="uk-button uk-button-primary uk-button-small save-button">{hammock.common.buttons.save}</button>
+										<button className="uk-button uk-button-primary uk-button-small save-button">{hubloy_membership.common.buttons.save}</button>
 									</div>
 								</React.Fragment>
 							}
@@ -223,25 +223,25 @@ export default class MemberSubscriptions extends Component {
 	}
 
 	subscriptionDetail() {
-		var hammock = this.props.hammock,
-			strings = hammock.strings,
+		var hubloy_membership = this.props.hubloy_membership,
+			strings = hubloy_membership.strings,
 			member = this.props.member;
 		return (
 			<div>
-				<div className="uk-background-default uk-padding-small uk-margin-small-top hammock-margin-left-negative-40 uk-margin-remove-left">
+				<div className="uk-background-default uk-padding-small uk-margin-small-top hubloy_membership-margin-left-negative-40 uk-margin-remove-left">
 					{this.state.plans.total > 0 &&
-						<a className="uk-margin-small-left uk-button uk-button-primary uk-button-small" href="#hammock-add-subscription" uk-toggle="">{strings.edit.details.subscription.create.title}</a>
+						<a className="uk-margin-small-left uk-button uk-button-primary uk-button-small" href="#hubloy_membership-add-subscription" uk-toggle="">{strings.edit.details.subscription.create.title}</a>
 					}
 					{this.state.plans.total > 0 ? (
-							<PlanList plans={this.state.plans} hammock={hammock} action={this.refresh_member_plans}/>
+							<PlanList plans={this.state.plans} hubloy_membership={hubloy_membership} action={this.refresh_member_plans}/>
 						) : (
 							<div className="uk-text-center">
-								<a className="uk-button uk-button-primary uk-button-small" href="#hammock-add-subscription" uk-toggle="">{strings.edit.details.subscription.create.title}</a>
+								<a className="uk-button uk-button-primary uk-button-small" href="#hubloy_membership-add-subscription" uk-toggle="">{strings.edit.details.subscription.create.title}</a>
 							</div>
 						)
 					}
 				</div>
-				{this.addSubscription( hammock, strings, member.id )}
+				{this.addSubscription( hubloy_membership, strings, member.id )}
 			</div>
 		)
 	}
@@ -256,7 +256,7 @@ export default class MemberSubscriptions extends Component {
 		} else {
 			if ( this.state.error) {
 				return (
-					<h3 className="uk-text-center uk-text-danger">{this.props.hammock.error}</h3>
+					<h3 className="uk-text-center uk-text-danger">{this.props.hubloy_membership.error}</h3>
 				)
 			} else {
 				return this.subscriptionDetail();
@@ -266,5 +266,5 @@ export default class MemberSubscriptions extends Component {
 }
 
 MemberSubscriptions.propTypes = {
-	hammock: PropTypes.object
+	hubloy_membership: PropTypes.object
 };

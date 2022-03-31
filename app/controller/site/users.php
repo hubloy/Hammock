@@ -1,12 +1,12 @@
 <?php
-namespace Hammock\Controller\Site;
+namespace HubloyMembership\Controller\Site;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Controller;
-use Hammock\Model\Settings;
+use HubloyMembership\Base\Controller;
+use HubloyMembership\Model\Settings;
 
 /**
  * Users controller
@@ -85,17 +85,17 @@ class Users extends Controller {
 		$columns_4   = array_slice( $columns, 0, 5 );
 		$columns_5   = array_slice( $columns, 5 );
 
-		$membership_column = array( 'membership' => __( 'Is Member', 'hammock' ) );
+		$membership_column = array( 'membership' => __( 'Is Member', 'hubloy-membership' ) );
 		if ( $this->settings->get_general_setting( 'account_verification' ) === 1 ) {
 			$membership_column = array(
-				'membership' => __( 'Is Member', 'hammock' ),
-				'verified'   => __( 'Verified', 'hammock' ),
+				'membership' => __( 'Is Member', 'hubloy-membership' ),
+				'verified'   => __( 'Verified', 'hubloy-membership' ),
 			);
 		}
 
 		$new_columns = $columns_4 + $membership_column + $columns_5;
 
-		return apply_filters( 'hammock_manage_users_columns', $new_columns, $columns );
+		return apply_filters( 'hubloy-membership_manage_users_columns', $new_columns, $columns );
 	}
 
 
@@ -112,30 +112,30 @@ class Users extends Controller {
 	 */
 	public function manage_users_custom_column( $value, $column_name, $user_id ) {
 		if ( 'membership' == $column_name ) {
-			if ( ! hammock_user_can_subscribe( $user_id ) ) {
-				$value = '<span style="font-weight:bold;">' . __( 'No (Not allowed)', 'hammock' ) . '</span>';
+			if ( ! hubloy-membership_user_can_subscribe( $user_id ) ) {
+				$value = '<span style="font-weight:bold;">' . __( 'No (Not allowed)', 'hubloy-membership' ) . '</span>';
 			} else {
-				if ( hammock_user_is_member( $user_id ) ) {
-					$plans = hammock_user_has_plans( $user_id );
-					$value = sprintf( __( '%d plans', 'hammock' ), $plans );
+				if ( hubloy-membership_user_is_member( $user_id ) ) {
+					$plans = hubloy-membership_user_has_plans( $user_id );
+					$value = sprintf( __( '%d plans', 'hubloy-membership' ), $plans );
 				} else {
-					$value = __( 'No', 'hammock' );
+					$value = __( 'No', 'hubloy-membership' );
 				}
 			}
 		} elseif ( 'verified' == $column_name ) {
 			if ( is_super_admin( $user_id ) ) {
-				$value = '<span style="font-weight:bold;">' . __( 'No (Admin)', 'hammock' ) . '</span>';
+				$value = '<span style="font-weight:bold;">' . __( 'No (Admin)', 'hubloy-membership' ) . '</span>';
 			} else {
-				$user_activation_status = get_user_meta( $user_id, '_hammock_activation_status', true );
-				$value                  = __( 'Not Verified', 'hammock' );
+				$user_activation_status = get_user_meta( $user_id, '_hubloy-membership_activation_status', true );
+				$value                  = __( 'Not Verified', 'hubloy-membership' );
 				if ( $user_activation_status ) {
 					if ( intval( $user_activation_status ) === 3 ) {
-						$value = __( 'Verified', 'hammock' );
+						$value = __( 'Verified', 'hubloy-membership' );
 					}
 				}
 			}
 		}
-		return apply_filters( 'hammock_manage_users_custom_column', $value, $column_name, $user_id );
+		return apply_filters( 'hubloy-membership_manage_users_custom_column', $value, $column_name, $user_id );
 	}
 
 	/**
@@ -149,9 +149,9 @@ class Users extends Controller {
 	 */
 	public function add_verify_bulk_action( $actions ) {
 
-		$actions['hammock_bulk_approve']    = __( 'Approve', 'hammock' );
-		$actions['hammock_bulk_disapprove'] = __( 'Disapprove', 'hammock' );
-		$actions['hammock_bulk_resend']     = __( 'Resend Verification Email', 'hammock' );
+		$actions['hubloy-membership_bulk_approve']    = __( 'Approve', 'hubloy-membership' );
+		$actions['hubloy-membership_bulk_disapprove'] = __( 'Disapprove', 'hubloy-membership' );
+		$actions['hubloy-membership_bulk_resend']     = __( 'Resend Verification Email', 'hubloy-membership' );
 
 		return $actions;
 	}
@@ -170,38 +170,38 @@ class Users extends Controller {
 	public function handle_verify_bulk_action( $redirect_to, $doaction, $items ) {
 
 		switch ( $doaction ) {
-			case 'hammock_bulk_approve':
+			case 'hubloy-membership_bulk_approve':
 				foreach ( $items as $user_id ) {
-					if ( hammock_user_can_subscribe( $user_id ) ) {
-						update_user_meta( $user_id, '_hammock_activation_status', 3 );
+					if ( hubloy-membership_user_can_subscribe( $user_id ) ) {
+						update_user_meta( $user_id, '_hubloy-membership_activation_status', 3 );
 					}
 				}
 				$redirect_to = admin_url( 'users.php' );
-				$redirect_to = add_query_arg( '_hammock_approved', count( $items ), $redirect_to );
+				$redirect_to = add_query_arg( '_hubloy-membership_approved', count( $items ), $redirect_to );
 				break;
 
-			case 'hammock_bulk_disapprove':
+			case 'hubloy-membership_bulk_disapprove':
 				foreach ( $items as $user_id ) {
-					if ( hammock_user_can_subscribe( $user_id ) ) {
-						update_user_meta( $user_id, '_hammock_activation_status', 2 );
+					if ( hubloy-membership_user_can_subscribe( $user_id ) ) {
+						update_user_meta( $user_id, '_hubloy-membership_activation_status', 2 );
 					}
 				}
 				$redirect_to = admin_url( 'users.php' );
-				$redirect_to = add_query_arg( '_hammock_disapproved', count( $items ), $redirect_to );
+				$redirect_to = add_query_arg( '_hubloy-membership_disapproved', count( $items ), $redirect_to );
 				break;
 
-			case 'hammock_bulk_resend':
+			case 'hubloy-membership_bulk_resend':
 				foreach ( $items as $user_id ) {
-					if ( hammock_user_can_subscribe( $user_id ) ) {
+					if ( hubloy-membership_user_can_subscribe( $user_id ) ) {
 						// Send mail
 						// Find better way to process and queue bulk emails. Maybe a cron
 						$user = get_user_by( 'ID', $user_id );
 						if ( $user ) {
-							$type       = \Hammock\Services\Emails::COMM_TYPE_REGISTRATION_VERIFY;
+							$type       = \HubloyMembership\Services\Emails::COMM_TYPE_REGISTRATION_VERIFY;
 							$verify_key = wp_generate_password( 20, false );
 
-							update_user_meta( $user_id, '_hammock_activation_status', 2 );
-							update_user_meta( $user_id, '_hammock_activation_key', $verify_key );
+							update_user_meta( $user_id, '_hubloy-membership_activation_status', 2 );
+							update_user_meta( $user_id, '_hubloy-membership_activation_key', $verify_key );
 
 							$user_object = (object) array(
 								'user_login' => $user->user_login,
@@ -209,12 +209,12 @@ class Users extends Controller {
 								'verify_key' => $verify_key,
 							);
 							// Send verification email
-							do_action( 'hammock_send_email_member-' . $type, array(), $user_object, $user->user_email, array(), array() );
+							do_action( 'hubloy-membership_send_email_member-' . $type, array(), $user_object, $user->user_email, array(), array() );
 						}
 					}
 				}
 				$redirect_to = admin_url( 'users.php' );
-				$redirect_to = add_query_arg( '_hammock_resend', count( $items ), $redirect_to );
+				$redirect_to = add_query_arg( '_hubloy-membership_resend', count( $items ), $redirect_to );
 				break;
 		}
 
@@ -227,25 +227,25 @@ class Users extends Controller {
 	 * @since 1.1.3
 	 */
 	public function handle_verify_bulk_message() {
-		if ( isset( $_REQUEST['_hammock_approved'] ) ) {
-			$user_count = intval( $_REQUEST['_hammock_approved'] );
+		if ( isset( $_REQUEST['_hubloy-membership_approved'] ) ) {
+			$user_count = intval( $_REQUEST['_hubloy-membership_approved'] );
 			?>
 			<div class="notice notice-success is-dismissible">
-				<p><?php echo sprintf( __( '%d user accounts approved', 'hammock' ), $user_count ); ?></p>
+				<p><?php echo sprintf( __( '%d user accounts approved', 'hubloy-membership' ), $user_count ); ?></p>
 			</div>
 			<?php
-		} elseif ( isset( $_REQUEST['_hammock_disapproved'] ) ) {
-			$user_count = intval( $_REQUEST['_hammock_disapproved'] );
+		} elseif ( isset( $_REQUEST['_hubloy-membership_disapproved'] ) ) {
+			$user_count = intval( $_REQUEST['_hubloy-membership_disapproved'] );
 			?>
 			<div class="notice notice-success is-dismissible">
-				<p><?php echo sprintf( __( '%d user accounts disapproved', 'hammock' ), $user_count ); ?></p>
+				<p><?php echo sprintf( __( '%d user accounts disapproved', 'hubloy-membership' ), $user_count ); ?></p>
 			</div>
 			<?php
-		} elseif ( isset( $_REQUEST['_hammock_resend'] ) ) {
-			$user_count = intval( $_REQUEST['_hammock_resend'] );
+		} elseif ( isset( $_REQUEST['_hubloy-membership_resend'] ) ) {
+			$user_count = intval( $_REQUEST['_hubloy-membership_resend'] );
 			?>
 			<div class="notice notice-success is-dismissible">
-				<p><?php echo sprintf( __( '%d user accounts resent emails', 'hammock' ), $user_count ); ?></p>
+				<p><?php echo sprintf( __( '%d user accounts resent emails', 'hubloy-membership' ), $user_count ); ?></p>
 			</div>
 			<?php
 		}

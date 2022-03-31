@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Base;
+namespace HubloyMembership\Base;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Helper\Template;
+use HubloyMembership\Helper\Template;
 
 /**
  * Email base class
@@ -141,7 +141,7 @@ class Email extends Component {
 	 * @since  1.0.0
 	 */
 	public function __construct() {
-		$this->config = new \Hammock\Model\Email();
+		$this->config = new \HubloyMembership\Model\Email();
 		$this->init();
 
 		$this->settings = $this->config->get_setting( $this->id );
@@ -160,14 +160,14 @@ class Email extends Component {
 		$this->subject   = $this->get_setting( 'subject' );
 		$this->recipient = $this->get_setting( 'recipient' );
 
-		$this->add_action( 'hammock_email_copy_theme_' . $this->id, 'copy_theme' );
-		$this->add_action( 'hammock_email_delete_theme_' . $this->id, 'delete_theme' );
+		$this->add_action( 'hubloy-membership_email_copy_theme_' . $this->id, 'copy_theme' );
+		$this->add_action( 'hubloy-membership_email_delete_theme_' . $this->id, 'delete_theme' );
 
-		$this->add_filter( 'hammock_get_email_senders', 'register' );
-		$this->add_filter( 'hammock_email_sender_' . $this->id . '_get_setting_form', 'setting_form' );
-		$this->add_action( 'hammock_email_sender_' . $this->id . '_enabled_sender', 'enable_sender' );
-		$this->add_action( 'hammock_email_sender_' . $this->id . '_update_settings', 'update_setting' );
-		$this->add_action( 'hammock_send_email_' . $this->id, 'send_email', 10, 5 );
+		$this->add_filter( 'hubloy-membership_get_email_senders', 'register' );
+		$this->add_filter( 'hubloy-membership_email_sender_' . $this->id . '_get_setting_form', 'setting_form' );
+		$this->add_action( 'hubloy-membership_email_sender_' . $this->id . '_enabled_sender', 'enable_sender' );
+		$this->add_action( 'hubloy-membership_email_sender_' . $this->id . '_update_settings', 'update_setting' );
+		$this->add_action( 'hubloy-membership_send_email_' . $this->id, 'send_email', 10, 5 );
 	}
 
 	/**
@@ -189,7 +189,7 @@ class Email extends Component {
 	 * @return array
 	 */
 	public function email_types() {
-		$types = \Hammock\Services\Emails::email_types();
+		$types = \HubloyMembership\Services\Emails::email_types();
 		return $types;
 	}
 
@@ -238,11 +238,11 @@ class Email extends Component {
 	 */
 	public function copy_theme() {
 		if ( ! current_user_can( 'edit_themes' ) ) {
-			wp_send_json_error( __( "You don't have permission to do this.", 'hammock' ) );
+			wp_send_json_error( __( "You don't have permission to do this.", 'hubloy-membership' ) );
 		}
 		$success = Template::copy_to_theme( $this->template_html );
 		if ( $success ) {
-			wp_send_json_success( __( 'Template file copied to theme', 'hammock' ) );
+			wp_send_json_success( __( 'Template file copied to theme', 'hubloy-membership' ) );
 		}
 	}
 
@@ -256,11 +256,11 @@ class Email extends Component {
 	 */
 	public function delete_theme() {
 		if ( ! current_user_can( 'edit_themes' ) ) {
-			wp_send_json_error( __( "You don't have permission to do this.", 'hammock' ) );
+			wp_send_json_error( __( "You don't have permission to do this.", 'hubloy-membership' ) );
 		}
 		$success = Template::remove_template( $this->template_html );
 		if ( $success ) {
-			wp_send_json_success( __( 'Template file deleted from theme', 'hammock' ) );
+			wp_send_json_success( __( 'Template file deleted from theme', 'hubloy-membership' ) );
 		}
 	}
 
@@ -272,7 +272,7 @@ class Email extends Component {
 	 * @return array
 	 */
 	public function setting_form( $form ) {
-		$view       = new \Hammock\View\Backend\Email\Setting();
+		$view       = new \HubloyMembership\View\Backend\Email\Setting();
 		$params     = $this->get_parameters();
 		$view->data = array(
 			'params'        => $params,
@@ -427,7 +427,7 @@ class Email extends Component {
 	 */
 	public function email_from() {
 		$admin_email = get_option( 'admin_email' );
-		return apply_filters( 'hammock_email_from_email', $admin_email, $this->id );
+		return apply_filters( 'hubloy-membership_email_from_email', $admin_email, $this->id );
 	}
 
 	/**
@@ -438,7 +438,7 @@ class Email extends Component {
 	 * @return string
 	 */
 	public function email_from_name() {
-		return apply_filters( 'hammock_email_from_name', $this->get_blogname(), $this->id );
+		return apply_filters( 'hubloy-membership_email_from_name', $this->get_blogname(), $this->id );
 	}
 
 	/**
@@ -461,7 +461,7 @@ class Email extends Component {
 
 		$string = str_replace( $find, $replace, $string );
 
-		return apply_filters( 'hammock_email_format_string', $string, $this->id );
+		return apply_filters( 'hubloy-membership_email_format_string', $string, $this->id );
 	}
 
 	/**
@@ -473,7 +473,7 @@ class Email extends Component {
 	 */
 	public function default_headers() {
 		return apply_filters(
-			'hammock_email_default_headers',
+			'hubloy-membership_email_default_headers',
 			array(
 				'From: ' . $this->email_from() . ' <' . $this->email_from_name() . '>',
 				'Content-Type: text/html; charset=UTF-8',
@@ -491,7 +491,7 @@ class Email extends Component {
 	 */
 	public function default_multipart_headers() {
 		return apply_filters(
-			'hammock_email_default_multipart_headers',
+			'hubloy-membership_email_default_multipart_headers',
 			array(
 				'From: ' . $this->email_from() . ' <' . $this->email_from_name() . '>',
 				'Content-Type: multipart/alternative; charset=UTF-8',

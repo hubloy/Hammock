@@ -1,12 +1,12 @@
 <?php
-namespace Hammock\Rest\Site;
+namespace HubloyMembership\Rest\Site;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Rest;
-use Hammock\Model\Settings;
+use HubloyMembership\Base\Rest;
+use HubloyMembership\Model\Settings;
 
 /**
  * Gateways rest endpoint
@@ -80,7 +80,7 @@ class Gateways extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
-						'description'       => __( 'The gateway unique key', 'hammock' ),
+						'description'       => __( 'The gateway unique key', 'hubloy-membership' ),
 					),
 				),
 			)
@@ -109,7 +109,7 @@ class Gateways extends Rest {
 	 * @return array
 	 */
 	public function list_gateways( $request ) {
-		$gateways = \Hammock\Services\Gateways::load_gateways();
+		$gateways = \HubloyMembership\Services\Gateways::load_gateways();
 		return $gateways;
 	}
 
@@ -123,7 +123,7 @@ class Gateways extends Rest {
 	 * @return array
 	 */
 	public function list_simple_gateways( $request ) {
-		$gateways = \Hammock\Services\Gateways::list_simple_gateways();
+		$gateways = \HubloyMembership\Services\Gateways::list_simple_gateways();
 		return $gateways;
 	}
 
@@ -138,17 +138,17 @@ class Gateways extends Rest {
 	 */
 	public function get_settings( $request ) {
 		$name     = $request['id'];
-		$gateways = \Hammock\Services\Gateways::load_gateways();
+		$gateways = \HubloyMembership\Services\Gateways::load_gateways();
 		if ( isset( $gateways[ $name ] ) ) {
 			$settings = new Settings();
 			$settings = $settings->get_gateway_setting( $name );
-			$form     = apply_filters( 'hammock_gateway_' . $name . '_settings', __( 'Not implemented', 'hammock' ) );
+			$form     = apply_filters( 'hubloy-membership_gateway_' . $name . '_settings', __( 'Not implemented', 'hubloy-membership' ) );
 			return array(
 				'settings' => $settings,
 				'form'     => $form,
 			);
 		} else {
-			return new \WP_Error( 'rest_gateway_invalid', esc_html__( 'The gateway does not exist.', 'hammock' ), array( 'status' => 404 ) );
+			return new \WP_Error( 'rest_gateway_invalid', esc_html__( 'The gateway does not exist.', 'hubloy-membership' ), array( 'status' => 404 ) );
 		}
 	}
 
@@ -163,16 +163,16 @@ class Gateways extends Rest {
 	 */
 	public function update_gateway( $request ) {
 		$id       = sanitize_text_field( $request['id'] );
-		$gateways = \Hammock\Services\Gateways::load_gateways();
+		$gateways = \HubloyMembership\Services\Gateways::load_gateways();
 		if ( isset( $gateways[ $id ] ) ) {
-			$response = apply_filters( 'hammock_gateway_' . $id . '_update_settings', array(), $request );
+			$response = apply_filters( 'hubloy-membership_gateway_' . $id . '_update_settings', array(), $request );
 			return array(
 				'status'   => true,
-				'message'  => __( 'Gateway updated', 'hammock' ),
+				'message'  => __( 'Gateway updated', 'hubloy-membership' ),
 				'settings' => $response,
 			);
 		} else {
-			return new \WP_Error( 'rest_gateway_invalid', esc_html__( 'The gateway does not exist.', 'hammock' ), array( 'status' => 404 ) );
+			return new \WP_Error( 'rest_gateway_invalid', esc_html__( 'The gateway does not exist.', 'hubloy-membership' ), array( 'status' => 404 ) );
 		}
 	}
 }

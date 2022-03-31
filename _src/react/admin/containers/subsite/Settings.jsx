@@ -16,16 +16,16 @@ export default class SiteSettings extends Component {
 	render() {
 		var section = this.props.match.params.section !== undefined ? this.props.match.params.section : 'general';
 		return (
-			<Dashboard hammock={this.props.hammock}>
-				<div className="hammock-settings uk-width-expand">
+			<Dashboard hubloy_membership={this.props.hubloy_membership}>
+				<div className="hubloy_membership-settings uk-width-expand">
 					<LazyLoad>
-						<Nav hammock={this.props.hammock} active_nav={section}/>
+						<Nav hubloy_membership={this.props.hubloy_membership} active_nav={section}/>
 					</LazyLoad>
-					<div className="hammock-settings-settings uk-background-default uk-padding-small">
+					<div className="hubloy_membership-settings-settings uk-background-default uk-padding-small">
 						{
 							{
-								'gateways': <SubSiteGateways hammock={this.props.hammock} />,
-								'general': <SubSiteSettings hammock={this.props.hammock}/>
+								'gateways': <SubSiteGateways hubloy_membership={this.props.hubloy_membership} />,
+								'general': <SubSiteSettings hubloy_membership={this.props.hubloy_membership}/>
 							}[section]
 						}
 					</div>
@@ -36,5 +36,5 @@ export default class SiteSettings extends Component {
 }
 
 SiteSettings.propTypes = {
-	hammock: PropTypes.object
+	hubloy_membership: PropTypes.object
 };

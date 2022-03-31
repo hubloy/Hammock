@@ -1,13 +1,13 @@
 <?php
-namespace Hammock\Rule;
+namespace HubloyMembership\Rule;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Rule;
-use Hammock\Helper\Cache;
-use Hammock\View\Backend\Rules\Access;
+use HubloyMembership\Base\Rule;
+use HubloyMembership\Helper\Cache;
+use HubloyMembership\View\Backend\Rules\Access;
 
 class Page extends Rule {
 
@@ -42,7 +42,7 @@ class Page extends Rule {
 	 */
 	public function init() {
 		$this->id          = 'page';
-		$this->name        = __( 'Pages', 'hammock' );
+		$this->name        = __( 'Pages', 'hubloy-membership' );
 		$this->has_setting = true;
 
 		add_filter( 'pre_trash_post', array( $this, 'pre_trash_post' ), 10, 2 );
@@ -99,11 +99,11 @@ class Page extends Rule {
 	 */
 	public function get_view_columns() {
 		return array(
-			'id'        => __( 'ID', 'hammock' ),
-			'title'     => __( 'Title', 'hammock' ),
-			'access'    => __( 'Who has access', 'hammock' ),
-			'edit_html' => __( 'Edit', 'hammock' ),
-			'view_html' => __( 'View', 'hammock' ),
+			'id'        => __( 'ID', 'hubloy-membership' ),
+			'title'     => __( 'Title', 'hubloy-membership' ),
+			'access'    => __( 'Who has access', 'hubloy-membership' ),
+			'edit_html' => __( 'Edit', 'hubloy-membership' ),
+			'view_html' => __( 'View', 'hubloy-membership' ),
 		);
 	}
 

@@ -1,7 +1,7 @@
 <?php
-namespace Hammock\Emails\Member\Membership\Status;
+namespace HubloyMembership\Emails\Member\Membership\Status;
 
-use Hammock\Base\Email;
+use HubloyMembership\Base\Email;
 
 /**
  * User card expire
@@ -36,7 +36,7 @@ class After extends Email {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$type                = \Hammock\Services\Emails::COMM_TYPE_AFTER_FINISHES;
+		$type                = \HubloyMembership\Services\Emails::COMM_TYPE_AFTER_FINISHES;
 		$this->id            = 'member-' . $type;
 		$this->template_html = 'emails/membership/status/after.php';
 		$this->placeholders  = array(
@@ -53,10 +53,10 @@ class After extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Membership Finished', 'hammock' ),
-			'description' => __( 'Sent to a member after the membership finishes', 'hammock' ),
-			'heading'     => __( 'Membership Finished', 'hammock' ),
-			'subject'     => sprintf( __( 'Reminder: your %s membership has ended', 'hammock' ), '{membership_name}' ),
+			'title'       => __( 'Membership Finished', 'hubloy-membership' ),
+			'description' => __( 'Sent to a member after the membership finishes', 'hubloy-membership' ),
+			'heading'     => __( 'Membership Finished', 'hubloy-membership' ),
+			'subject'     => sprintf( __( 'Reminder: your %s membership has ended', 'hubloy-membership' ), '{membership_name}' ),
 			'recipient'   => '',
 			'enabled'     => false,
 		);

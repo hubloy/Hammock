@@ -1,5 +1,5 @@
 <?php
-namespace Hammock\Services;
+namespace HubloyMembership\Services;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -14,14 +14,14 @@ class Addons {
 
 	/**
 	 * Load addons
-	 * The return filter is completed in each addon class and initiated in the `hammock_init_addon` hook
+	 * The return filter is completed in each addon class and initiated in the `hubloy-membership_init_addon` hook
 	 *
 	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
 	static function load_addons() {
-		$addons = apply_filters( 'hammock_register_addons', array() );
+		$addons = apply_filters( 'hubloy-membership_register_addons', array() );
 		ksort( $addons );
 		return $addons;
 	}
@@ -36,7 +36,7 @@ class Addons {
 	 * @return array
 	 */
 	static function addon_settings_links() {
-		return apply_filters( 'hammock_register_addon_setting_link', array() );
+		return apply_filters( 'hubloy-membership_register_addon_setting_link', array() );
 	}
 }
 

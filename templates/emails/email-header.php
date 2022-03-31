@@ -2,9 +2,9 @@
 /**
  * Email Header
  *
- * This template can be overridden by copying it to yourtheme/hammock/emails/email-header.php.
+ * This template can be overridden by copying it to yourtheme/hubloy-membership/emails/email-header.php.
  *
- * @package Hammock/Templates/Emails
+ * @package HubloyMembership/Templates/Emails
  * @version 1.0.0
  */
 

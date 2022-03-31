@@ -3,33 +3,33 @@
 /*global $:false */
 /*global window:false */
 /*global document:false */
-/*global hammock:false */
+/*global hubloy_membership:false */
 
 jQuery(function($) {
 
 	//Show hide date range on modal
-	$('body').on('change', '.hammock-membership-type', function(e){
+	$('body').on('change', '.hubloy_membership-membership-type', function(e){
 		var $val = $(this).val();
-		$('.hammock-membership-date').hide();
-		$('.hammock-membership-recurring').hide();
+		$('.hubloy_membership-membership-date').hide();
+		$('.hubloy_membership-membership-recurring').hide();
 		if ( $val === 'date-range' ) {
-			$('.hammock-membership-date').show();
+			$('.hubloy_membership-membership-date').show();
 		} else if ( $val === 'recurring' ) {
-			$('.hammock-membership-recurring').show();
+			$('.hubloy_membership-membership-recurring').show();
 		}
 	});
 
-	$('body').on('click', '.hammock-trial_enabled', function(e){
-		$('.hammock-membership-trial').hide();
+	$('body').on('click', '.hubloy_membership-trial_enabled', function(e){
+		$('.hubloy_membership-membership-trial').hide();
 		if ( this.checked ) {
-			$('.hammock-membership-trial').show();
+			$('.hubloy_membership-membership-trial').show();
 		}
 	});
 
-	$('body').on('click', '.hammock-limit_spaces', function(e){
-		$('.hammock-membership-limited').hide();
+	$('body').on('click', '.hubloy_membership-limit_spaces', function(e){
+		$('.hubloy_membership-membership-limited').hide();
 		if ( this.checked ) {
-			$('.hammock-membership-limited').show();
+			$('.hubloy_membership-membership-limited').show();
 		}
 	});
 });

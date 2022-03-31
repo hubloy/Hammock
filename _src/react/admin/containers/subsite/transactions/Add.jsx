@@ -23,8 +23,8 @@ export default class AddTransaction extends Component {
 		};
 		
 		this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
 	}
 
@@ -92,25 +92,25 @@ export default class AddTransaction extends Component {
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				self.notify( self.props.hammock.error, 'error' );
+				self.notify( self.props.hubloy_membership.error, 'error' );
 			}
 		);
 	}
 
 	componentDidUpdate() {
-		window.hammock.helper.bind_date_range();
+		window.hubloy_membership.helper.bind_date_range();
 	}
 
-	render_form( hammock ) {
-		var strings = hammock.strings;
+	render_form( hubloy_membership ) {
+		var strings = hubloy_membership.strings;
 		return (
-			<Dashboard hammock={hammock} title={strings.create.title}>
-				<div className="hammock-transaction uk-background-default uk-padding-small">
+			<Dashboard hubloy_membership={hubloy_membership} title={strings.create.title}>
+				<div className="hubloy_membership-transaction uk-background-default uk-padding-small">
 					<form className="uk-form-horizontal uk-margin-large" onSubmit={this.handleSubmit.bind(this)} ref={this.add_transaction}>
 						<div className="uk-margin">
 							<label className="uk-form-label">{strings.create.form.member}</label>
 							<div className="uk-form-controls">
-								<Members hammock={hammock}/>
+								<Members hubloy_membership={hubloy_membership}/>
 							</div>
 						</div>
 						<div className="uk-margin">
@@ -134,11 +134,11 @@ export default class AddTransaction extends Component {
 						<div className="uk-margin">
 							<label className="uk-form-label">{strings.create.form.date}</label>
 							<div className="uk-form-controls">
-								<InputUI name={`due_date`} class_name={`hammock-from-date`} />
+								<InputUI name={`due_date`} class_name={`hubloy_membership-from-date`} />
 							</div>
 						</div>
 						<div className="uk-margin ">
-							<button className="uk-button uk-button-primary save-button">{hammock.common.buttons.save}</button>
+							<button className="uk-button uk-button-primary save-button">{hubloy_membership.common.buttons.save}</button>
 						</div>
 					</form>
 				</div>
@@ -147,7 +147,7 @@ export default class AddTransaction extends Component {
 	}
 
 	render() {
-		const hammock = this.props.hammock;
+		const hubloy_membership = this.props.hubloy_membership;
 		if ( this.state.loading) {
 			return (
                 <div className="uk-container uk-padding-small uk-margin-top uk-width-1-1 uk-background-default">
@@ -157,10 +157,10 @@ export default class AddTransaction extends Component {
 		} else {
 			if ( this.state.error) {
 				return (
-					<h3 className="uk-text-center uk-text-danger">{hammock.error}</h3>
+					<h3 className="uk-text-center uk-text-danger">{hubloy_membership.error}</h3>
 				)
 			} else {
-				return this.render_form( hammock );
+				return this.render_form( hubloy_membership );
 			}
 		}
 		
@@ -168,5 +168,5 @@ export default class AddTransaction extends Component {
 }
 
 AddTransaction.propTypes = {
-	hammock: PropTypes.object
+	hubloy_membership: PropTypes.object
 };

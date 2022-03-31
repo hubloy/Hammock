@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Addon\Mailchimp;
+namespace HubloyMembership\Addon\Mailchimp;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Addon;
+use HubloyMembership\Base\Addon;
 
 class Mailchimp extends Addon {
 
@@ -60,10 +60,10 @@ class Mailchimp extends Addon {
 	public function register( $addons ) {
 		if ( ! isset( $addons['mailchimp'] ) ) {
 			$addons['mailchimp'] = array(
-				'name'        => __( 'MailChimp Integration', 'hammock' ),
-				'description' => __( 'MailChimp integration.', 'hammock' ),
+				'name'        => __( 'MailChimp Integration', 'hubloy-membership' ),
+				'description' => __( 'MailChimp integration.', 'hubloy-membership' ),
 				'icon'        => 'dashicons dashicons-email',
-				'url'         => admin_url( 'admin.php?page=hammock-marketing' ),
+				'url'         => admin_url( 'admin.php?page=hubloy-membership-marketing' ),
 			);
 		}
 		return $addons;
@@ -86,7 +86,7 @@ class Mailchimp extends Addon {
 	 * @return string
 	 */
 	public function settings_page() {
-		$view       = new \Hammock\View\Backend\Addons\Mailchimp();
+		$view       = new \HubloyMembership\View\Backend\Addons\Mailchimp();
 		$settings   = $this->settings();
 		$view->data = array(
 			'settings' => $settings,
@@ -124,7 +124,7 @@ class Mailchimp extends Addon {
 		$this->settings->save();
 		return array(
 			'status'  => true,
-			'message' => __( 'MailChimp Settings Saved', 'hammock' ),
+			'message' => __( 'MailChimp Settings Saved', 'hubloy-membership' ),
 		);
 	}
 
@@ -148,7 +148,7 @@ class Mailchimp extends Addon {
 				if ( is_wp_error( $lists ) ) {
 					return array(
 						'error'   => true,
-						'message' => sprintf( __( 'Error: %s', 'hammock' ), $lists->get_error_message() ),
+						'message' => sprintf( __( 'Error: %s', 'hubloy-membership' ), $lists->get_error_message() ),
 					);
 				}
 				// Set the api key
@@ -161,7 +161,7 @@ class Mailchimp extends Addon {
 
 				return array(
 					'success' => true,
-					'message' => __( 'Valid API key', 'hammock' ),
+					'message' => __( 'Valid API key', 'hubloy-membership' ),
 					'lists'   => $lists,
 				);
 			break;
@@ -175,7 +175,7 @@ class Mailchimp extends Addon {
 				if ( is_wp_error( $lists ) ) {
 					return array(
 						'error'   => true,
-						'message' => sprintf( __( 'Error: %s', 'hammock' ), $lists->get_error_message() ),
+						'message' => sprintf( __( 'Error: %s', 'hubloy-membership' ), $lists->get_error_message() ),
 					);
 				} else {
 					return array(
@@ -187,7 +187,7 @@ class Mailchimp extends Addon {
 		}
 		return array(
 			'success' => true,
-			'message' => __( 'Action executed', 'hammock' ),
+			'message' => __( 'Action executed', 'hubloy-membership' ),
 		);
 	}
 
@@ -204,7 +204,7 @@ class Mailchimp extends Addon {
 			return $response;
 		}
 		$lists  = array(
-			'' => __( 'Select List', 'hammock' ),
+			'' => __( 'Select List', 'hubloy-membership' ),
 		);
 		$_lists = $response->lists;
 		$total  = $response->total_items;

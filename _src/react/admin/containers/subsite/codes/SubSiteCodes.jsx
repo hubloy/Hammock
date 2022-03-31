@@ -10,8 +10,8 @@ export default class SubSiteCodes extends Component {
         super(props);
         
         this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
         
         this.state = {
@@ -62,8 +62,8 @@ export default class SubSiteCodes extends Component {
 	render() {
 		const { pager, items } = this.state;
 		const type = this.props.type,
-			hammock = this.props.hammock,
-			strings = hammock.strings;
+			hubloy_membership = this.props.hubloy_membership,
+			strings = hubloy_membership.strings;
 		if ( this.state.loading) {
             return (
                 <div className="uk-container uk-padding-small uk-margin-top uk-width-1-1 uk-background-default">
@@ -73,7 +73,7 @@ export default class SubSiteCodes extends Component {
         } else {
             if ( this.state.error) {
 				return (
-					<h3 className="uk-text-center uk-text-danger">{hammock.error}</h3>
+					<h3 className="uk-text-center uk-text-danger">{hubloy_membership.error}</h3>
 				)
 			} else {
 				return (
@@ -85,7 +85,7 @@ export default class SubSiteCodes extends Component {
                                 <table className="uk-table uk-background-default">
                                     <thead>
                                         <tr>
-                                            <th className='uk-table-shrink'><input className="uk-checkbox hammock-top-checkbox" type="checkbox" /></th>
+                                            <th className='uk-table-shrink'><input className="uk-checkbox hubloy_membership-top-checkbox" type="checkbox" /></th>
                                             <th>{strings.table.code}</th>
                                             <th>{strings.table.status}</th>
                                             {type === 'coupons' && 
@@ -97,7 +97,7 @@ export default class SubSiteCodes extends Component {
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th className='uk-table-shrink'><input className="uk-checkbox hammock-bottom-checkbox" type="checkbox" /></th>
+                                            <th className='uk-table-shrink'><input className="uk-checkbox hubloy_membership-bottom-checkbox" type="checkbox" /></th>
                                             <th>{strings.table.code}</th>
                                             <th>{strings.table.status}</th>
                                             {type === 'coupons' && 
@@ -114,9 +114,9 @@ export default class SubSiteCodes extends Component {
                                             <td>
                                                 {item.code}
                                                 <div id={"code-hover-"+ item.id}>
-                                                    <Link uk-tooltip={hammock.common.buttons.edit} title={hammock.common.buttons.edit} className="uk-text-primary" to={"/edit/"+ item.id}>{hammock.common.buttons.edit}</Link>
+                                                    <Link uk-tooltip={hubloy_membership.common.buttons.edit} title={hubloy_membership.common.buttons.edit} className="uk-text-primary" to={"/edit/"+ item.id}>{hubloy_membership.common.buttons.edit}</Link>
                                                     {' '}|{' '}
-                                                    <a href="#" data-id={item.id} uk-tooltip={hammock.common.buttons.delete} title={hammock.common.buttons.delete} className="uk-text-danger" onClick={ e => this.handleRowAction(e, item.id, 'delete')}>{hammock.common.buttons.delete}</a>
+                                                    <a href="#" data-id={item.id} uk-tooltip={hubloy_membership.common.buttons.delete} title={hubloy_membership.common.buttons.delete} className="uk-text-danger" onClick={ e => this.handleRowAction(e, item.id, 'delete')}>{hubloy_membership.common.buttons.delete}</a>
                                                 </div>
                                             </td>
                                             <td>{item.status}</td>

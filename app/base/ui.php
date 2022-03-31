@@ -1,5 +1,5 @@
 <?php
-namespace Hammock\Base;
+namespace HubloyMembership\Base;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -73,7 +73,7 @@ class UI extends Component {
 			ob_start();
 		}
 		$ui_file       = $file;
-		$template_file = join( DIRECTORY_SEPARATOR, array( untrailingslashit( HAMMOCK_PLUGIN_DIR ), 'app', 'ui', $this->base, $ui_file . '.php' ) );
+		$template_file = join( DIRECTORY_SEPARATOR, array( untrailingslashit( HUBMEMB_PLUGIN_DIR ), 'app', 'ui', $this->base, $ui_file . '.php' ) );
 		if ( file_exists( $template_file ) ) {
 			include $template_file;
 		}

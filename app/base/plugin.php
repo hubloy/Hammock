@@ -1,12 +1,12 @@
 <?php
-namespace Hammock\Base;
+namespace HubloyMembership\Base;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
 /**
- * Primary Hammock Class
+ * Primary HubloyMembership Class
  *
  * Note: Even all properties are marked private, they are made public via the
  * magic __get() function.
@@ -62,7 +62,7 @@ class Plugin {
 			self::$instance = new self();
 
 			self::$instance = apply_filters(
-				'hammock_base_plugin_instance',
+				'hubloy-membership_base_plugin_instance',
 				self::$instance
 			);
 		}
@@ -81,27 +81,27 @@ class Plugin {
 	public function __construct() {
 
 		// Do action before plugin is initialized
-		do_action( 'hammock_base_plugin_init', $this );
+		do_action( 'hubloy-membership_base_plugin_init', $this );
 
 		// Plugin activation Hook.
 		register_activation_hook(
-			HAMMOCK_PLUGIN_FILE,
+			HUBMEMB_PLUGIN_FILE,
 			array( $this, 'plugin_activation' )
 		);
 
 		// Plugin deactivation hook
 		register_deactivation_hook(
-			HAMMOCK_PLUGIN_FILE,
+			HUBMEMB_PLUGIN_FILE,
 			array( $this, 'plugin_deactivation' )
 		);
 
 		add_filter(
-			'plugin_action_links_' . HAMMOCK_PLUGIN,
+			'plugin_action_links_' . HUBMEMB_PLUGIN,
 			array( $this, 'plugin_settings_link' )
 		);
 
 		add_filter(
-			'network_admin_plugin_action_links_' . HAMMOCK_PLUGIN,
+			'network_admin_plugin_action_links_' . HUBMEMB_PLUGIN,
 			array( $this, 'plugin_settings_link' )
 		);
 
@@ -120,10 +120,10 @@ class Plugin {
 		self::$instance = $this;
 
 		// Handle the wrong actions
-		add_action( 'hammock_doing_it_wrong', array( $this, 'doing_it_wrong' ) );
+		add_action( 'hubloy-membership_doing_it_wrong', array( $this, 'doing_it_wrong' ) );
 
 		// Do action afterp lugin is initialized
-		do_action( 'hammock_base_plugin_end', $this );
+		do_action( 'hubloy-membership_base_plugin_end', $this );
 	}
 
 
@@ -134,9 +134,9 @@ class Plugin {
 	 */
 	public function plugin_activation() {
 
-		\Hammock\Core\Init::activate();
+		\HubloyMembership\Core\Init::activate();
 
-		do_action( 'hammock_plugin_activation', $this );
+		do_action( 'hubloy-membership_plugin_activation', $this );
 	}
 
 	/**
@@ -145,17 +145,17 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function plugin_deactivation() {
-		\Hammock\Core\Init::deactivate();
+		\HubloyMembership\Core\Init::deactivate();
 
-		do_action( 'hammock_plugin_deactivation', $this );
+		do_action( 'hubloy-membership_plugin_deactivation', $this );
 	}
 
 	public function plugin_settings_link( $links ) {
 		if ( ! is_network_admin() ) {
-			$base_url      = 'admin.php?page=' . \Hammock\Controller\Plugin::MENU_SLUG;
+			$base_url      = 'admin.php?page=' . \HubloyMembership\Controller\Plugin::MENU_SLUG;
 			$settings_link = apply_filters(
-				'hammock_plugin_settings_link',
-				sprintf( '<a href="%s">%s</a>', admin_url( $base_url ), __( 'Settings', 'hammock' ) ),
+				'hubloy-membership_plugin_settings_link',
+				sprintf( '<a href="%s">%s</a>', admin_url( $base_url ), __( 'Settings', 'hubloy-membership' ) ),
 				$this
 			);
 			array_unshift( $links, $settings_link );
@@ -168,11 +168,11 @@ class Plugin {
 	 */
 	public function setup_controller() {
 
-		$this->controller = new \Hammock\Controller\Plugin();
-		\Hammock\Core\Controller::load_controllers();
-		\Hammock\Core\Controller::load_routes();
+		$this->controller = new \HubloyMembership\Controller\Plugin();
+		\HubloyMembership\Core\Controller::load_controllers();
+		\HubloyMembership\Core\Controller::load_routes();
 
-		do_action( 'hammock_setup_controller' );
+		do_action( 'hubloy-membership_setup_controller' );
 	}
 
 	/**
@@ -181,7 +181,7 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function translate_plugin() {
-		load_plugin_textdomain( 'hammock', false, HAMMOCK_LANG_DIR );
+		load_plugin_textdomain( 'hubloy-membership', false, HUBMEMB_LANG_DIR );
 	}
 
 	/**
@@ -243,19 +243,19 @@ class Plugin {
 	function cron_time_intervals( $schedules ) {
 		$schedules['weekly']     = array(
 			'interval' => 604800,
-			'display'  => __( 'Weekly', 'hammock' ),
+			'display'  => __( 'Weekly', 'hubloy-membership' ),
 		);
 		$schedules['monthly']    = array(
 			'interval' => 2635200,
-			'display'  => __( 'Monthly', 'hammock' ),
+			'display'  => __( 'Monthly', 'hubloy-membership' ),
 		);
 		$schedules['quarterly']  = array(
 			'interval' => 3 * 2635200,
-			'display'  => __( 'Every 3 Months', 'hammock' ),
+			'display'  => __( 'Every 3 Months', 'hubloy-membership' ),
 		);
 		$schedules['biannually'] = array(
 			'interval' => 6 * 2635200,
-			'display'  => __( 'Every 6 Months', 'hammock' ),
+			'display'  => __( 'Every 6 Months', 'hubloy-membership' ),
 		);
 		return $schedules;
 	}
@@ -267,15 +267,15 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	private function load_functions() {
-		include_once HAMMOCK_FUNCTIONS_DIR . 'views.php';
-		include_once HAMMOCK_FUNCTIONS_DIR . 'settings.php';
-		include_once HAMMOCK_FUNCTIONS_DIR . 'account.php';
-		include_once HAMMOCK_FUNCTIONS_DIR . 'protection.php';
-		include_once HAMMOCK_FUNCTIONS_DIR . 'pages.php';
-		include_once HAMMOCK_FUNCTIONS_DIR . 'conditionals.php';
-		include_once HAMMOCK_FUNCTIONS_DIR . 'general.php';
-		include_once HAMMOCK_FUNCTIONS_DIR . 'plans.php';
-		include_once HAMMOCK_FUNCTIONS_DIR . 'transactions.php';
+		include_once HUBMEMB_FUNCTIONS_DIR . 'views.php';
+		include_once HUBMEMB_FUNCTIONS_DIR . 'settings.php';
+		include_once HUBMEMB_FUNCTIONS_DIR . 'account.php';
+		include_once HUBMEMB_FUNCTIONS_DIR . 'protection.php';
+		include_once HUBMEMB_FUNCTIONS_DIR . 'pages.php';
+		include_once HUBMEMB_FUNCTIONS_DIR . 'conditionals.php';
+		include_once HUBMEMB_FUNCTIONS_DIR . 'general.php';
+		include_once HUBMEMB_FUNCTIONS_DIR . 'plans.php';
+		include_once HUBMEMB_FUNCTIONS_DIR . 'transactions.php';
 	}
 
 	/**

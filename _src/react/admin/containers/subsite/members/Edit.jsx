@@ -23,8 +23,8 @@ export default class MemberEdit extends Component {
 			error : false
         };
         this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
 	}
 
@@ -41,7 +41,7 @@ export default class MemberEdit extends Component {
 				error : false,
 			}), (err) => {
 				this.setState({ loading : false, error : true });
-				this.notify( self.props.hammock.error, 'error' );
+				this.notify( self.props.hubloy_membership.error, 'error' );
 			}
 		);
 	}
@@ -49,13 +49,13 @@ export default class MemberEdit extends Component {
 	render() {
 		
 		var self = this,
-			hammock = self.props.hammock,
+			hubloy_membership = self.props.hubloy_membership,
 			section = this.props.match.params.section !== undefined ? this.props.match.params.section : 'subs',
 			id = self.state.id,
-			strings = hammock.strings,
+			strings = hubloy_membership.strings,
 			member = this.state.member;
 		return (
-			<Dashboard hammock={hammock}>
+			<Dashboard hubloy_membership={hubloy_membership}>
 				{this.state.loading ? (
 					<div className="uk-container uk-padding-small uk-margin-top uk-width-1-1 uk-background-default">
 						<span className="uk-text-center" uk-spinner="ratio: 3"></span>
@@ -69,15 +69,15 @@ export default class MemberEdit extends Component {
 					) : (
 						<div uk-grid="">
 							<div className="uk-width-1-4 uk-height-medium">
-								<MemberDetail hammock={hammock} id={id} member={member} />
+								<MemberDetail hubloy_membership={hubloy_membership} id={id} member={member} />
 							</div>
 							<div className="uk-width-expand uk-margin-left uk-card uk-card-body uk-background-default uk-padding-small">
-								<Nav active_nav={section} hammock={hammock} member_id={id} />
+								<Nav active_nav={section} hubloy_membership={hubloy_membership} member_id={id} />
 								{
 									{
-										'subs': <MemberSubscriptions hammock={hammock} id={id} member={member} />,
-										'activity': <MemberActivity hammock={hammock} id={id} member={member}/>,
-										'transactions': <MemberTransactions hammock={hammock} id={id} member={member}/>
+										'subs': <MemberSubscriptions hubloy_membership={hubloy_membership} id={id} member={member} />,
+										'activity': <MemberActivity hubloy_membership={hubloy_membership} id={id} member={member}/>,
+										'transactions': <MemberTransactions hubloy_membership={hubloy_membership} id={id} member={member}/>
 									}[section]
 								}
 							</div>
@@ -90,5 +90,5 @@ export default class MemberEdit extends Component {
 	}
 }
 MemberEdit.propTypes = {
-	hammock: PropTypes.object
+	hubloy_membership: PropTypes.object
 };

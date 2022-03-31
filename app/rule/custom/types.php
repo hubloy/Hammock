@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Rule\Custom;
+namespace HubloyMembership\Rule\Custom;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Rule;
+use HubloyMembership\Base\Rule;
 
 class Types extends Rule {
 
@@ -40,6 +40,6 @@ class Types extends Rule {
 	 */
 	public function init() {
 		$this->id   = 'custom_types';
-		$this->name = __( 'Custom Post Types', 'hammock' );
+		$this->name = __( 'Custom Post Types', 'hubloy-membership' );
 	}
 }

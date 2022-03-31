@@ -1,12 +1,12 @@
 <?php
-namespace Hammock\Shortcode;
+namespace HubloyMembership\Shortcode;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Shortcode;
-use Hammock\Services\Memberships;
+use HubloyMembership\Base\Shortcode;
+use HubloyMembership\Services\Memberships;
 
 /**
  * Restricted shortcode manager

@@ -1,7 +1,7 @@
 <?php
-namespace Hammock\Emails\Member\Membership\Payment;
+namespace HubloyMembership\Emails\Member\Membership\Payment;
 
-use Hammock\Base\Email;
+use HubloyMembership\Base\Email;
 
 /**
  * User card expire
@@ -36,7 +36,7 @@ class Due extends Email {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$type                = \Hammock\Services\Emails::COMM_TYPE_BEFORE_PAYMENT_DUE;
+		$type                = \HubloyMembership\Services\Emails::COMM_TYPE_BEFORE_PAYMENT_DUE;
 		$this->id            = 'member-' . $type;
 		$this->template_html = 'emails/membership/payment/due.php';
 		$this->placeholders  = array(
@@ -53,10 +53,10 @@ class Due extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Before Payment is due', 'hammock' ),
-			'description' => __( 'Sent to a member before payment is due', 'hammock' ),
-			'heading'     => __( 'Payment is almost due', 'hammock' ),
-			'subject'     => sprintf( __( 'Your %s membership payment is due soon', 'hammock' ), '{membership_name}' ),
+			'title'       => __( 'Before Payment is due', 'hubloy-membership' ),
+			'description' => __( 'Sent to a member before payment is due', 'hubloy-membership' ),
+			'heading'     => __( 'Payment is almost due', 'hubloy-membership' ),
+			'subject'     => sprintf( __( 'Your %s membership payment is due soon', 'hubloy-membership' ), '{membership_name}' ),
 			'recipient'   => '',
 			'enabled'     => false,
 		);

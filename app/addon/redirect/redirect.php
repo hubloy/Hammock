@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Addon\Redirect;
+namespace HubloyMembership\Addon\Redirect;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Addon;
+use HubloyMembership\Base\Addon;
 
 class Redirect extends Addon {
 
@@ -51,8 +51,8 @@ class Redirect extends Addon {
 	public function register( $addons ) {
 		if ( ! isset( $addons['redirect'] ) ) {
 			$addons['redirect'] = array(
-				'name'        => __( 'Page Redirection', 'hammock' ),
-				'description' => __( 'Redirect users to specific pages based on certain rules', 'hammock' ),
+				'name'        => __( 'Page Redirection', 'hubloy-membership' ),
+				'description' => __( 'Redirect users to specific pages based on certain rules', 'hubloy-membership' ),
 				'icon'        => 'dashicons dashicons-redo',
 				'configure'   => true,
 			);

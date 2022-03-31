@@ -1,12 +1,12 @@
 <?php
-namespace Hammock\Model;
+namespace HubloyMembership\Model;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Core\Database;
-use Hammock\Services\Members;
+use HubloyMembership\Core\Database;
+use HubloyMembership\Services\Members;
 
 /**
  * Codes model
@@ -279,7 +279,7 @@ class Codes {
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( 'hammock_after_save_code_' . $this->code_type, $this );
+		do_action( 'hubloy-membership_after_save_code_' . $this->code_type, $this );
 
 		return $this->id;
 	}
@@ -295,7 +295,7 @@ class Codes {
 		if ( $this->amount_type === 'percentage' ) {
 			$value = $this->amount . '%';
 		} else {
-			$code  = \Hammock\Helper\Currency::get_membership_currency();
+			$code  = \HubloyMembership\Helper\Currency::get_membership_currency();
 			$value = $code . '' . $this->amount;
 		}
 		/**
@@ -308,7 +308,7 @@ class Codes {
 		 *
 		 * @return string
 		 */
-		return apply_filters( 'hammock_get_code_value_' . $this->code_type, $value, $this );
+		return apply_filters( 'hubloy-membership_get_code_value_' . $this->code_type, $value, $this );
 	}
 
 	/**
@@ -404,11 +404,11 @@ class Codes {
 	 */
 	public function to_html() {
 		return apply_filters(
-			'hammock_' . $this->code_type . '_code_to_html',
+			'hubloy-membership_' . $this->code_type . '_code_to_html',
 			array(
 				'id'           => $this->id,
 				'code'         => $this->code,
-				'status'       => \Hammock\Services\Codes::get_code_status( $this->status ),
+				'status'       => \HubloyMembership\Services\Codes::get_code_status( $this->status ),
 				'base_status'  => $this->status,
 				'amount'       => $this->amount,
 				'amount_type'  => $this->amount_type,

@@ -1,13 +1,13 @@
 <?php
-namespace Hammock\Rest\Site;
+namespace HubloyMembership\Rest\Site;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Base\Rest;
-use Hammock\Core\Util;
-use Hammock\Helper\Pagination;
+use HubloyMembership\Base\Rest;
+use HubloyMembership\Core\Util;
+use HubloyMembership\Helper\Pagination;
 
 /**
  * Members rest route
@@ -63,49 +63,49 @@ class Members extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
-						'description'       => __( 'The current page', 'hammock' ),
+						'description'       => __( 'The current page', 'hubloy-membership' ),
 					),
 					'per_page'   => array(
 						'required'          => false,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
 						'default'           => 10,
-						'description'       => __( 'Items per page', 'hammock' ),
+						'description'       => __( 'Items per page', 'hubloy-membership' ),
 					),
 					'membership' => array(
 						'required'          => false,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
 						'default'           => 0,
-						'description'       => __( 'The membership id', 'hammock' ),
+						'description'       => __( 'The membership id', 'hubloy-membership' ),
 					),
 					'status'     => array(
 						'required'          => false,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
 						'default'           => null,
-						'description'       => __( 'The subscription status', 'hammock' ),
+						'description'       => __( 'The subscription status', 'hubloy-membership' ),
 					),
 					'gateway'    => array(
 						'required'          => false,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
 						'default'           => null,
-						'description'       => __( 'The gateway id', 'hammock' ),
+						'description'       => __( 'The gateway id', 'hubloy-membership' ),
 					),
 					'start_date' => array(
 						'required'          => false,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
 						'default'           => null,
-						'description'       => __( 'The subscription start date', 'hammock' ),
+						'description'       => __( 'The subscription start date', 'hubloy-membership' ),
 					),
 					'end_date'   => array(
 						'required'          => false,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
 						'default'           => null,
-						'description'       => __( 'The subscription end date', 'hammock' ),
+						'description'       => __( 'The subscription end date', 'hubloy-membership' ),
 					),
 				),
 			)
@@ -133,7 +133,7 @@ class Members extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
-						'description'       => __( 'The member id', 'hammock' ),
+						'description'       => __( 'The member id', 'hubloy-membership' ),
 					),
 				),
 			)
@@ -151,7 +151,7 @@ class Members extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
-						'description'       => __( 'The member id', 'hammock' ),
+						'description'       => __( 'The member id', 'hubloy-membership' ),
 					),
 				),
 			)
@@ -179,7 +179,7 @@ class Members extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
-						'description'       => __( 'The search param', 'hammock' ),
+						'description'       => __( 'The search param', 'hubloy-membership' ),
 					),
 				),
 			)
@@ -197,7 +197,7 @@ class Members extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
-						'description'       => __( 'The search param', 'hammock' ),
+						'description'       => __( 'The search param', 'hubloy-membership' ),
 					),
 				),
 			)
@@ -312,7 +312,7 @@ class Members extends Rest {
 		}
 
 		$current_page = $page - 1;
-		$service      = new \Hammock\Services\Members();
+		$service      = new \HubloyMembership\Services\Members();
 		$total        = $service->count_members( $args );
 		$pages        = Pagination::generate_pages( $total, $per_page, $page );
 		$items        = $service->list_html_members( $per_page, $current_page, $args );
@@ -335,7 +335,7 @@ class Members extends Rest {
 	 * @return array
 	 */
 	public function count_members( $request ) {
-		$service = new \Hammock\Services\Members();
+		$service = new \HubloyMembership\Services\Members();
 		$total   = $service->count_members( array() );
 		return array(
 			'total' => $total,
@@ -351,7 +351,7 @@ class Members extends Rest {
 	 */
 	public function get_member( $request ) {
 		$id      = $request->get_param( 'id' );
-		$service = new \Hammock\Services\Members();
+		$service = new \HubloyMembership\Services\Members();
 		return $service->get_member_by_id( $id );
 	}
 
@@ -364,7 +364,7 @@ class Members extends Rest {
 	 */
 	public function get_member_plans( $request ) {
 		$member_id = $request->get_param( 'id' );
-		$service   = new \Hammock\Services\Members();
+		$service   = new \HubloyMembership\Services\Members();
 		$total     = $service->count_member_plans( $member_id );
 		$items     = $service->list_member_plans( $member_id );
 		return array(
@@ -381,7 +381,7 @@ class Members extends Rest {
 	 * @return array
 	 */
 	public function list_status( $request ) {
-		return \Hammock\Services\Members::get_status_types( true );
+		return \HubloyMembership\Services\Members::get_status_types( true );
 	}
 
 	/**
@@ -394,7 +394,7 @@ class Members extends Rest {
 	public function non_members( $request ) {
 		$search = $request->get_param( 'search' );
 		if ( ! empty( $search ) && strlen( $search ) >= 2 ) {
-			$service = new \Hammock\Services\Members();
+			$service = new \HubloyMembership\Services\Members();
 			$members = $service->search_members( $search );
 			return rest_ensure_response( $members );
 		} else {
@@ -412,7 +412,7 @@ class Members extends Rest {
 	public function existing_members( $request ) {
 		$search = $request->get_param( 'search' );
 		if ( ! empty( $search ) && strlen( $search ) >= 2 ) {
-			$service = new \Hammock\Services\Members();
+			$service = new \HubloyMembership\Services\Members();
 			$members = $service->search_members( $search, true );
 			return rest_ensure_response( $members );
 		} else {
@@ -434,12 +434,12 @@ class Members extends Rest {
 			$password  = isset( $request['password'] ) ? sanitize_text_field( $request['password'] ) : false;
 			$firstname = isset( $request['firstname'] ) ? sanitize_text_field( $request['firstname'] ) : '';
 			$lastname  = isset( $request['lastname'] ) ? sanitize_text_field( $request['lastname'] ) : '';
-			$service   = new \Hammock\Services\Members();
+			$service   = new \HubloyMembership\Services\Members();
 			return $service->save_new_user( $email, $firstname, $lastname, '', $password );
 		} else {
 			return array(
 				'status'  => false,
-				'message' => __( 'Invalid email', 'hammock' ),
+				'message' => __( 'Invalid email', 'hubloy-membership' ),
 			);
 		}
 	}
@@ -455,12 +455,12 @@ class Members extends Rest {
 	public function save_existing_member( $request ) {
 		$user_id = absint( sanitize_text_field( $request['user_id'] ) );
 		if ( $user_id > 0 ) {
-			$service = new \Hammock\Services\Members();
+			$service = new \HubloyMembership\Services\Members();
 			return $service->save_member( $user_id );
 		} else {
 			return array(
 				'status'  => false,
-				'message' => __( 'Invalid user id', 'hammock' ),
+				'message' => __( 'Invalid user id', 'hubloy-membership' ),
 			);
 		}
 	}
@@ -480,13 +480,13 @@ class Members extends Rest {
 			$access       = isset( $request['access'] ) ? sanitize_text_field( $request['access'] ) : '';
 			$start_date   = isset( $request['membership_start'] ) ? sanitize_text_field( $request['membership_start'] ) : '';
 			$end_date     = isset( $request['membership_end'] ) ? sanitize_text_field( $request['membership_end'] ) : '';
-			$service      = new \Hammock\Services\Members();
+			$service      = new \HubloyMembership\Services\Members();
 			$response     = $service->admin_set_plan( $membership, $member, $access, $start_date, $end_date, $enable_trial );
 			return $response;
 		} else {
 			return array(
 				'status'  => false,
-				'message' => __( 'Invalid membership id', 'hammock' ),
+				'message' => __( 'Invalid membership id', 'hubloy-membership' ),
 			);
 		}
 	}
@@ -504,7 +504,7 @@ class Members extends Rest {
 		$start_date = sanitize_text_field( $request['membership_start'] );
 		$end_date   = sanitize_text_field( $request['membership_end'] );
 		$enabled    = isset( $request['enabled'] );
-		$service    = new \Hammock\Services\Members();
+		$service    = new \HubloyMembership\Services\Members();
 		$response   = $service->admin_update_plan( $plan_id, $status, $start_date, $end_date, $enabled );
 
 		return $response;
@@ -521,7 +521,7 @@ class Members extends Rest {
 	public function remove_member_plan( $request ) {
 		$plan_id     = absint( sanitize_text_field( $request['plan'] ) );
 		$delete_user = isset( $request['delete_user'] );
-		$service     = new \Hammock\Services\Members();
+		$service     = new \HubloyMembership\Services\Members();
 		$response    = $service->admin_remove_plan( $plan_id, $delete_user );
 		return $response;
 	}
@@ -535,7 +535,7 @@ class Members extends Rest {
 	 */
 	public function remove_member( $request ) {
 		$member_id = absint( sanitize_text_field( $request['member'] ) );
-		$service   = new \Hammock\Services\Members();
+		$service   = new \HubloyMembership\Services\Members();
 		$response  = $service->remove_member( $member_id );
 		return $response;
 	}

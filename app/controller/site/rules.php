@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Controller\Site;
+namespace HubloyMembership\Controller\Site;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Controller;
+use HubloyMembership\Base\Controller;
 
 /**
  * Rules controller
@@ -85,9 +85,9 @@ class Rules extends Controller {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$this->add_ajax_action( 'hammock_rule_items', 'rule_items' );
-		$this->add_filter( 'hammock_rule_type_name', 'get_rule_name' );
-		$this->add_filter( 'hammock_rule_title_name', 'get_rule_title', 10, 2 );
+		$this->add_ajax_action( 'hubloy-membership_rule_items', 'rule_items' );
+		$this->add_filter( 'hubloy-membership_rule_type_name', 'get_rule_name' );
+		$this->add_filter( 'hubloy-membership_rule_title_name', 'get_rule_title', 10, 2 );
 	}
 
 	/**
@@ -103,8 +103,8 @@ class Rules extends Controller {
 		$this->_cap     = $cap;
 		add_submenu_page(
 			$slug,
-			__( 'Protection Rules', 'hammock' ),
-			__( 'Protection Rules', 'hammock' ),
+			__( 'Protection Rules', 'hubloy-membership' ),
+			__( 'Protection Rules', 'hubloy-membership' ),
 			$this->_cap,
 			$this->_page_id,
 			array( $this, 'render' )
@@ -123,7 +123,7 @@ class Rules extends Controller {
 	 */
 	function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'rules' ) ) {
-			$vars['common']['string']['title'] = __( 'Membership Rules', 'hammock' );
+			$vars['common']['string']['title'] = __( 'Membership Rules', 'hubloy-membership' );
 			$vars['active_page']               = 'rules';
 			$vars['strings']                   = $this->get_strings();
 			$vars['page_strings']              = array(
@@ -141,7 +141,7 @@ class Rules extends Controller {
 	 */
 	private function get_strings() {
 		if ( empty( $this->strings ) ) {
-			$this->strings = include HAMMOCK_LOCALE_DIR . '/site/rules.php';
+			$this->strings = include HUBMEMB_LOCALE_DIR . '/site/rules.php';
 		}
 		return $this->strings;
 	}
@@ -154,7 +154,7 @@ class Rules extends Controller {
 	 * @return array
 	 */
 	public function get_rules() {
-		return apply_filters( 'hammock_protection_rules', array() );
+		return apply_filters( 'hubloy-membership_protection_rules', array() );
 	}
 
 	/**
@@ -163,7 +163,7 @@ class Rules extends Controller {
 	 * @since 1.0.0
 	 */
 	public function controller_scripts() {
-		wp_enqueue_script( 'hammock-rules-react' );
+		wp_enqueue_script( 'hubloy-membership-rules-react' );
 	}
 
 	/**
@@ -174,7 +174,7 @@ class Rules extends Controller {
 	public function render() {
 
 		?>
-		<div id="hammock-rules-container"></div>
+		<div id="hubloy-membership-rules-container"></div>
 		<?php
 	}
 
@@ -184,10 +184,10 @@ class Rules extends Controller {
 	 * @since 1.0.0
 	 */
 	public function rule_items() {
-		$this->verify_nonce( 'hammock_rule_items', 'GET' );
+		$this->verify_nonce( 'hubloy-membership_rule_items', 'GET' );
 		$type     = sanitize_text_field( $_GET['type'] );
 		$term     = isset( $_GET['term'] ) ? sanitize_text_field( $_GET['term'] ) : '';
-		$service  = new \Hammock\Services\Rules();
+		$service  = new \HubloyMembership\Services\Rules();
 		$response = $service->search_rule_items( $type, $term );
 		wp_send_json_success( $response );
 	}
@@ -196,7 +196,7 @@ class Rules extends Controller {
 	 * Get rule type
 	 */
 	public function get_rule_name( $type ) {
-		$service = new \Hammock\Services\Rules();
+		$service = new \HubloyMembership\Services\Rules();
 		$rule    = $service->get_rule_by_type( $type );
 		if ( ! $rule ) {
 			return $type;
@@ -208,7 +208,7 @@ class Rules extends Controller {
 	 * Get rule title
 	 */
 	public function get_rule_title( $type, $id ) {
-		$service = new \Hammock\Services\Rules();
+		$service = new \HubloyMembership\Services\Rules();
 		$rule    = $service->get_rule_by_type( $type );
 		if ( ! $rule ) {
 			return $type;

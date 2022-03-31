@@ -1,12 +1,12 @@
 <?php
-namespace Hammock\Rest\Site;
+namespace HubloyMembership\Rest\Site;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Base\Rest;
-use Hammock\Model\Settings;
+use HubloyMembership\Base\Rest;
+use HubloyMembership\Model\Settings;
 
 /**
  * Emails rest endpoint
@@ -70,7 +70,7 @@ class Emails extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
-						'description'       => __( 'The email id', 'hammock' ),
+						'description'       => __( 'The email id', 'hubloy-membership' ),
 					),
 				),
 			)
@@ -101,7 +101,7 @@ class Emails extends Rest {
 	 * @return array
 	 */
 	public function list_senders( $request ) {
-		$emails = \Hammock\Services\Emails::get_email_senders();
+		$emails = \HubloyMembership\Services\Emails::get_email_senders();
 		return $emails;
 	}
 
@@ -116,7 +116,7 @@ class Emails extends Rest {
 	 */
 	public function get_sender( $request ) {
 		$id       = $request['id'];
-		$response = apply_filters( 'hammock_email_sender_' . $id . '_get_setting_form', array(), $request );
+		$response = apply_filters( 'hubloy-membership_email_sender_' . $id . '_get_setting_form', array(), $request );
 		return $response;
 	}
 
@@ -131,10 +131,10 @@ class Emails extends Rest {
 	 */
 	public function update_sender( $request ) {
 		$id = $request['id'];
-		do_action( 'hammock_email_sender_' . $id . '_update_settings', $request );
+		do_action( 'hubloy-membership_email_sender_' . $id . '_update_settings', $request );
 		return array(
 			'status'  => true,
-			'message' => __( 'Settings updated', 'hammock' ),
+			'message' => __( 'Settings updated', 'hubloy-membership' ),
 		);
 	}
 

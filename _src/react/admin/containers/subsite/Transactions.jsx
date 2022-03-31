@@ -11,13 +11,13 @@ export default class Transactions extends Component {
 	}
 
 	render() {
-		var hammock = this.props.hammock;
+		var hubloy_membership = this.props.hubloy_membership;
 		var page = this.props.match.params.page !== undefined ? this.props.match.params.page : 0;
 		return (
-			<Dashboard hammock={hammock} button={<Link className="uk-button uk-button-primary uk-button-small" to={"/add"}>{hammock.strings.dashboard.add_new.button}</Link>}>
-				<Filter hammock={hammock} />
+			<Dashboard hubloy_membership={hubloy_membership} button={<Link className="uk-button uk-button-primary uk-button-small" to={"/add"}>{hubloy_membership.strings.dashboard.add_new.button}</Link>}>
+				<Filter hubloy_membership={hubloy_membership} />
 				<div className="uk-container uk-padding-small uk-margin-top uk-width-1-1">
-					<Table hammock={this.props.hammock} page={page}/>
+					<Table hubloy_membership={this.props.hubloy_membership} page={page}/>
 				</div>
 			</Dashboard>
 		)
@@ -25,5 +25,5 @@ export default class Transactions extends Component {
 }
 
 Transactions.propTypes = {
-	hammock: PropTypes.object
+	hubloy_membership: PropTypes.object
 };

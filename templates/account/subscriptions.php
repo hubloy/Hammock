@@ -3,9 +3,9 @@
  * Account subscriptions method page
  * Manage users subscriptions
  *
- * This template can be overridden by copying it to yourtheme/hammock/account/subscriptions.php.
+ * This template can be overridden by copying it to yourtheme/hubloy-membership/account/subscriptions.php.
  *
- * @package Hammock/Templates/Account
+ * @package HubloyMembership/Templates/Account
  * @version 1.0.0
  */
 
@@ -13,17 +13,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! hammock_current_user_can_subscribe() ) {
-	esc_html_e( 'Subscriptions are not enabled for your account', 'hammock' );
+if ( ! hubloy-membership_current_user_can_subscribe() ) {
+	esc_html_e( 'Subscriptions are not enabled for your account', 'hubloy-membership' );
 } else {
 	if ( $member ) {
 		if ( count( $member->get_plan_ids() ) > 0 ) {
 			?>
-			<table class="hammock-account-subscription hammock-list-table">
+			<table class="hubloy-membership-account-subscription hubloy-membership-list-table">
 				<thead>
 					<tr>
 						<?php
-						foreach ( hammock_view_subscription_list_table_columns() as $key => $value ) {
+						foreach ( hubloy-membership_view_subscription_list_table_columns() as $key => $value ) {
 							?>
 								<th class="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $value ); ?></th>
 							<?php
@@ -34,7 +34,7 @@ if ( ! hammock_current_user_can_subscribe() ) {
 				<tbody>
 					<?php
 					foreach ( $member->get_plans() as $plan ) {
-						hammock_get_template(
+						hubloy-membership_get_template(
 							'account/subscription-plan-list.php',
 							array(
 								'plan'   => $plan,
@@ -47,7 +47,7 @@ if ( ! hammock_current_user_can_subscribe() ) {
 				<tfoot>
 					<tr>
 						<?php
-						foreach ( hammock_view_subscription_list_table_columns() as $key => $value ) {
+						foreach ( hubloy-membership_view_subscription_list_table_columns() as $key => $value ) {
 							?>
 								<th class="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $value ); ?></th>
 							<?php
@@ -59,9 +59,9 @@ if ( ! hammock_current_user_can_subscribe() ) {
 			</table>
 			<?php
 		} else {
-			printf( esc_html__( 'No subscription plans found. Click %1$shere%2$s to sign up', 'hammock' ), '<a href="' . esc_url( hammock_get_page_permalink( 'membership_list' ) ) . '">', '</a>' );
+			printf( esc_html__( 'No subscription plans found. Click %1$shere%2$s to sign up', 'hubloy-membership' ), '<a href="' . esc_url( hubloy-membership_get_page_permalink( 'membership_list' ) ) . '">', '</a>' );
 		}
 	} else {
-		esc_html_e( 'You have no subscriptions in your account', 'hammock' );
+		esc_html_e( 'You have no subscriptions in your account', 'hubloy-membership' );
 	}
 }

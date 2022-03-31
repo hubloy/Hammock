@@ -1,17 +1,17 @@
 <?php
-namespace Hammock\Services;
+namespace HubloyMembership\Services;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Core\Database;
-use Hammock\Model\Invoice;
-use Hammock\Model\Member;
-use Hammock\Model\Membership;
-use Hammock\Model\Settings;
-use Hammock\Helper\Currency;
-use Hammock\Helper\Duration;
+use HubloyMembership\Core\Database;
+use HubloyMembership\Model\Invoice;
+use HubloyMembership\Model\Member;
+use HubloyMembership\Model\Membership;
+use HubloyMembership\Model\Settings;
+use HubloyMembership\Helper\Currency;
+use HubloyMembership\Helper\Duration;
 /**
  * Transactions service
  *
@@ -81,13 +81,13 @@ class Transactions {
 	 */
 	public static function transaction_status() {
 		$transaction_status = array(
-			self::STATUS_PAID     => __( 'Paid', 'hammock' ),
-			self::STATUS_PENDING  => __( 'Pending', 'hammock' ),
-			self::STATUS_CANCELED => __( 'Canceled', 'hammock' ),
-			self::STATUS_REFUNDED => __( 'Refunded', 'hammock' ),
-			self::STATUS_FAILED   => __( 'Failed', 'hammock' ),
+			self::STATUS_PAID     => __( 'Paid', 'hubloy-membership' ),
+			self::STATUS_PENDING  => __( 'Pending', 'hubloy-membership' ),
+			self::STATUS_CANCELED => __( 'Canceled', 'hubloy-membership' ),
+			self::STATUS_REFUNDED => __( 'Refunded', 'hubloy-membership' ),
+			self::STATUS_FAILED   => __( 'Failed', 'hubloy-membership' ),
 		);
-		return apply_filters( 'hammock_transaction_status', $transaction_status );
+		return apply_filters( 'hubloy-membership_transaction_status', $transaction_status );
 	}
 
 	/**
@@ -225,7 +225,7 @@ class Transactions {
 				}
 			}
 		}
-		return apply_filters( 'hammock_transactions_generate_where', $where, $params );
+		return apply_filters( 'hubloy-membership_transactions_generate_where', $where, $params );
 	}
 
 	/**
@@ -264,25 +264,25 @@ class Transactions {
 				if ( $invoice_id ) {
 					return array(
 						'status'  => true,
-						'message' => __( 'Invoice saved', 'hammock' ),
+						'message' => __( 'Invoice saved', 'hubloy-membership' ),
 						'id'      => $invoice_id,
 					);
 				} else {
 					return array(
 						'status'  => false,
-						'message' => __( 'Error saving invoice', 'hammock' ),
+						'message' => __( 'Error saving invoice', 'hubloy-membership' ),
 					);
 				}
 			} else {
 				return array(
 					'status'  => false,
-					'message' => __( 'Error adding plan to member', 'hammock' ),
+					'message' => __( 'Error adding plan to member', 'hubloy-membership' ),
 				);
 			}
 		} else {
 			return array(
 				'status'  => false,
-				'message' => __( 'Member does not exist', 'hammock' ),
+				'message' => __( 'Member does not exist', 'hubloy-membership' ),
 			);
 		}
 	}
@@ -318,7 +318,7 @@ class Transactions {
 		$invoice->amount      = Currency::format_price( $amount );
 		$invoice->custom_data = $custom_data;
 		$invoice->due_date    = $due_date;
-		$invoice->invoice_id  = $invoice_id ? $invoice_id : strtolower( sha1( $plan->id . date( 'Y-m-d H:i:s' ) . ( defined( 'AUTH_KEY' ) ? AUTH_KEY : '' ) . wp_unique_id( 'hammock' ) ) );
+		$invoice->invoice_id  = $invoice_id ? $invoice_id : strtolower( sha1( $plan->id . date( 'Y-m-d H:i:s' ) . ( defined( 'AUTH_KEY' ) ? AUTH_KEY : '' ) . wp_unique_id( 'hubloy-membership' ) ) );
 		if ( $amount == 0 ) {
 			$invoice->status = self::STATUS_PAID;
 		}
@@ -334,7 +334,7 @@ class Transactions {
 			 *
 			 * @since 1.0.0
 			 */
-			do_action( 'hammock_invoice_saved', $invoice, $member, $plan );
+			do_action( 'hubloy-membership_invoice_saved', $invoice, $member, $plan );
 
 			/**
 			 * Action called when invoice is successfully saved based on status
@@ -345,7 +345,7 @@ class Transactions {
 			 *
 			 * @since 1.0.0
 			 */
-			do_action( 'hammock_invoice_saved_' . $status, $invoice, $member, $plan );
+			do_action( 'hubloy-membership_invoice_saved_' . $status, $invoice, $member, $plan );
 
 			return $invoice->invoice_id;
 		}
@@ -385,7 +385,7 @@ class Transactions {
 			 *
 			 * @since 1.0.0
 			 */
-			do_action( 'hammock_invoice_updated', $invoice );
+			do_action( 'hubloy-membership_invoice_updated', $invoice );
 
 			/**
 			 * Action called when invoice is successfully saved based on status
@@ -394,7 +394,7 @@ class Transactions {
 			 *
 			 * @since 1.0.0
 			 */
-			do_action( 'hammock_invoice_updated_' . $status, $invoice );
+			do_action( 'hubloy-membership_invoice_updated_' . $status, $invoice );
 			return true;
 		} else {
 			return false;
@@ -427,7 +427,7 @@ class Transactions {
 	/**
 	 * Get any pending invoice or create a new one.
 	 *
-	 * @param \Hammock\Model\Plan $plan The subscription plan
+	 * @param \HubloyMembership\Model\Plan $plan The subscription plan
 	 * 
 	 * @since 1.0.0
 	 * 
@@ -457,11 +457,11 @@ class Transactions {
 	 */
 	public function process_transaction( $invoice_id, $gateway_id ) {
 		if ( ! Gateways::gateway_exists( $gateway_id ) ) {
-			wp_send_json_error( __( 'Invalid payment gateway selected', 'hammock' ) );
+			wp_send_json_error( __( 'Invalid payment gateway selected', 'hubloy-membership' ) );
 		}
 		$invoice = new Invoice( $invoice_id );
 		if ( ! $invoice->is_valid() || ! $invoice->is_owner() ) {
-			wp_send_json_error( __( 'Invalid invoice selected', 'hammock' ) );
+			wp_send_json_error( __( 'Invalid invoice selected', 'hubloy-membership' ) );
 		}
 		$invoice->gateway = $gateway_id;
 		$invoice->status  = self::STATUS_PENDING;
@@ -470,23 +470,23 @@ class Transactions {
 		/**
 		 * Action called before trasnaction is processed
 		 * 
-		 * @param \Hammock\Model\Invoice $invoice The current invoice to be paid.
+		 * @param \HubloyMembership\Model\Invoice $invoice The current invoice to be paid.
 		 * @param string $gateway_id The associated gateway.
 		 * 
 		 * @since 1.0.0 
 		 */
-		do_action( 'hammock_before_process_payment', $invoice, $gateway_id );
+		do_action( 'hubloy-membership_before_process_payment', $invoice, $gateway_id );
 
 		/**
 		 * Process transaction
 		 * 
-		 * @see \Hammock\Base\Gateway
+		 * @see \HubloyMembership\Base\Gateway
 		 * 
-		 * @param \Hammock\Model\Invoice $invoice The current invoice to be paid.
+		 * @param \HubloyMembership\Model\Invoice $invoice The current invoice to be paid.
 		 * 
 		 * @since 1.0.0
 		 */
-		do_action( 'hammock_gateway_' . $gateway_id . '_process_payment', $invoice );
+		do_action( 'hubloy-membership_gateway_' . $gateway_id . '_process_payment', $invoice );
 	}
 
 	/**
@@ -501,11 +501,11 @@ class Transactions {
 		/**
 		 * Process IPN Notification
 		 * 
-		 * @see \Hammock\Base\Gateway
+		 * @see \HubloyMembership\Base\Gateway
 		 * 
 		 * @since 1.0.0
 		 */
-		do_action( 'hammock_gateway_' . $gateway_id . '_ipn_notify' );
+		do_action( 'hubloy-membership_gateway_' . $gateway_id . '_ipn_notify' );
 	}
 
 	/**
@@ -521,9 +521,9 @@ class Transactions {
 			if ( $invoice->is_valid() ) {
 				if ( isset( $_REQUEST['cancel'] ) ) {
 					$invoice->status  = self::STATUS_CANCELED;
-					$invoice->add_note( __( 'Payment canceled by subscriber', 'hammock' ) );
+					$invoice->add_note( __( 'Payment canceled by subscriber', 'hubloy-membership' ) );
 					$invoice->save();
-					wp_safe_redirect( hammock_get_invoice_link( $invoice->invoice_id ) );
+					wp_safe_redirect( hubloy-membership_get_invoice_link( $invoice->invoice_id ) );
 					exit;
 				}
 				$gateway = $invoice->gateway;
@@ -534,14 +534,14 @@ class Transactions {
 				/**
 				 * Process payment return
 				 * 
-				 * @see \Hammock\Base\Gateway
+				 * @see \HubloyMembership\Base\Gateway
 				 * 
 				 * @since 1.0.0
 				 */
-				do_action( 'hammock_gateway_' . $gateway_id . '_handle_return', $invoice );
+				do_action( 'hubloy-membership_gateway_' . $gateway_id . '_handle_return', $invoice );
 			}
 		}
-		wp_safe_redirect( hammock_get_account_page_links() );
+		wp_safe_redirect( hubloy-membership_get_account_page_links() );
 		exit;
 	}
 }

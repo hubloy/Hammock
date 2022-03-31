@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\View\Backend\Addons;
+namespace HubloyMembership\View\Backend\Addons;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Base\View;
+use HubloyMembership\Base\View;
 
 /**
  * Mailchimp Settings view
@@ -32,7 +32,7 @@ class Mailchimp extends View {
 		ob_start();
 		?>
 		<div class="uk-margin">
-			<label class="uk-form-label" for="apikey"><?php _e( 'MailChimp API Key', 'hammock' ); ?></label>
+			<label class="uk-form-label" for="apikey"><?php _e( 'MailChimp API Key', 'hubloy-membership' ); ?></label>
 			<div class="uk-form-controls uk-grid-small" uk-grid>
 				<div class="uk-width-3-4">
 					<?php
@@ -47,11 +47,11 @@ class Mailchimp extends View {
 						);
 					?>
 					<p class="uk-text-meta">
-						<?php echo sprintf( __( 'Visit <a href="%s" target="_blank">your API dashboard</a> to create an API Key.', 'hammock' ), 'http://admin.mailchimp.com/account/api' ); ?>
+						<?php echo sprintf( __( 'Visit <a href="%s" target="_blank">your API dashboard</a> to create an API Key.', 'hubloy-membership' ), 'http://admin.mailchimp.com/account/api' ); ?>
 					</p>
 				</div>
 				<div class="uk-width-1-4">
-					<a class="uk-button uk-button-secondary uk-button-small"><?php _e( 'Validate', 'hammock' ); ?></a>
+					<a class="uk-button uk-button-secondary uk-button-small"><?php _e( 'Validate', 'hubloy-membership' ); ?></a>
 				</div>
 			</div>
 		</div>

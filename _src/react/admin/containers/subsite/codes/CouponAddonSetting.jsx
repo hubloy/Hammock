@@ -11,15 +11,15 @@ export default class CouponAddonSetting extends Component {
 	}
 
 	render() {
-		var hammock = this.props.hammock;
+		var hubloy_membership = this.props.hubloy_membership;
 		return (
-			<Dashboard hammock={hammock} button={<Link className="uk-button uk-button-primary uk-button-small" to={"/new"}>{hammock.strings.add.coupon}</Link>}>
-				<SubSiteCodes type={`coupons`} hammock={hammock}/>
+			<Dashboard hubloy_membership={hubloy_membership} button={<Link className="uk-button uk-button-primary uk-button-small" to={"/new"}>{hubloy_membership.strings.add.coupon}</Link>}>
+				<SubSiteCodes type={`coupons`} hubloy_membership={hubloy_membership}/>
 			</Dashboard>
 		)
 	}
 }
 
 CouponAddonSetting.propTypes = {
-	hammock: PropTypes.object
+	hubloy_membership: PropTypes.object
 };

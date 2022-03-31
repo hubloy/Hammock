@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\View\Backend\Gateways;
+namespace HubloyMembership\View\Backend\Gateways;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Base\View;
+use HubloyMembership\Base\View;
 
 class Manual extends View {
 
@@ -21,7 +21,7 @@ class Manual extends View {
 		ob_start();
 		?>
 		<div class="uk-margin">
-			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Payment Title', 'hammock' ); ?></label>
+			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Payment Title', 'hubloy-membership' ); ?></label>
 			<div class="uk-form-controls">
 				<?php
 					$this->ui->render(
@@ -35,13 +35,13 @@ class Manual extends View {
 					);
 				?>
 				<p class="uk-text-meta">
-					<?php esc_html_e( 'All transactions with this gateway will be manually approved', 'hammock' ); ?>
+					<?php esc_html_e( 'All transactions with this gateway will be manually approved', 'hubloy-membership' ); ?>
 				</p>
 			</div>
 			
 		</div>
 		<div class="uk-margin">
-			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Payment Instructions', 'hammock' ); ?></label>
+			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Payment Instructions', 'hubloy-membership' ); ?></label>
 			<div class="uk-form-controls">
 				<textarea class="uk-textarea" name="manual_instructions"><?php echo isset( $settings['manual_instructions'] ) ? esc_html( $settings['manual_instructions'] ) : ''; ?></textarea>
 			</div>

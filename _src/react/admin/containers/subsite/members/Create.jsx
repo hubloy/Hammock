@@ -12,8 +12,8 @@ export class Create extends PureComponent {
 		this.save_existing_member = React.createRef();
 		this.save_new_member = React.createRef();
 		this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
 	}
 
@@ -60,16 +60,16 @@ export class Create extends PureComponent {
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				self.notify( self.props.hammock.error, 'error' );
+				self.notify( self.props.hubloy_membership.error, 'error' );
 			}
 		);
 	}
 
 	render() {
-		const { hammock } = this.props;
-		var strings = hammock.strings;
+		const { hubloy_membership } = this.props;
+		var strings = hubloy_membership.strings;
 		return (
-			<div id="hammock-add-member" uk-modal="">
+			<div id="hubloy_membership-add-member" uk-modal="">
 				<div className="uk-modal-dialog">
 					<button className="uk-modal-close-default" type="button" uk-close=""></button>
 					<div className="uk-modal-header">
@@ -77,13 +77,13 @@ export class Create extends PureComponent {
 					</div>
 					<div className="uk-modal-body">
 						<div className="uk-margin">
-							<select className="uk-select hammock-mode-select" data-target="member-type">
+							<select className="uk-select hubloy_membership-mode-select" data-target="member-type">
 								<option value="existing">{strings.dashboard.add_new.modal.select.existing}</option>
 								<option value="new">{strings.dashboard.add_new.modal.select.new}</option>
 							</select>
 						</div>
 						<hr/>
-						<div className="hammock-member-type member-type-new" style={{display : "none"}}>
+						<div className="hubloy_membership-member-type member-type-new" style={{display : "none"}}>
 							<form className="uk-form-stacked" onSubmit={this.handleSubmitNew.bind(this)} ref={this.save_new_member}>
 								<div className="uk-margin">
 									<legend className="uk-form-label">{strings.labels.email}</legend>
@@ -110,20 +110,20 @@ export class Create extends PureComponent {
 									</div>
 								</div>
 								<div className="uk-margin ">
-									<button className="uk-button uk-button-primary save-button">{hammock.common.buttons.save}</button>
+									<button className="uk-button uk-button-primary save-button">{hubloy_membership.common.buttons.save}</button>
 								</div>
 							</form>
 						</div>
-						<div className="hammock-member-type member-type-existing">
+						<div className="hubloy_membership-member-type member-type-existing">
 							<form className="uk-form-stacked" onSubmit={this.handleSubmitExisting.bind(this)} ref={this.save_existing_member}>
 								<div className="uk-margin">
 									<label className="uk-form-label">{strings.dashboard.add_new.modal.select_user}</label>
 									<div className="uk-form-controls">
-										<Users hammock={hammock}/>
+										<Users hubloy_membership={hubloy_membership}/>
 									</div>
 								</div>
 								<div className="uk-margin ">
-									<button className="uk-button uk-button-primary save-button">{hammock.common.buttons.save}</button>
+									<button className="uk-button uk-button-primary save-button">{hubloy_membership.common.buttons.save}</button>
 								</div>
 							</form>
 						</div>

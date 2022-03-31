@@ -1,5 +1,5 @@
 <?php
-namespace Hammock\Helper;
+namespace HubloyMembership\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -30,36 +30,36 @@ class Duration {
 	 */
 	public static function list_days() {
 		$days = array(
-			1  => __( 'One Day', 'hammock' ),
-			2  => __( 'Two Days', 'hammock' ),
-			3  => __( 'Three Days', 'hammock' ),
-			4  => __( 'Four Days', 'hammock' ),
-			5  => __( 'Five Days', 'hammock' ),
-			6  => __( 'Six Days', 'hammock' ),
-			7  => __( 'Seven Days', 'hammock' ),
-			8  => __( 'Eight Days', 'hammock' ),
-			9  => __( 'Nine Days', 'hammock' ),
-			10 => __( 'Ten Days', 'hammock' ),
-			11 => __( 'Eleven Days', 'hammock' ),
-			12 => __( 'Twelve Days', 'hammock' ),
-			13 => __( 'Thirteen Days', 'hammock' ),
-			14 => __( 'Fourteen Days', 'hammock' ),
-			15 => __( 'Fifteen Days', 'hammock' ),
-			16 => __( 'Sixteen Days', 'hammock' ),
-			17 => __( 'Seventeen Days', 'hammock' ),
-			18 => __( 'Eighteen Days', 'hammock' ),
-			19 => __( 'Nineteen Days', 'hammock' ),
-			20 => __( 'Twenty Days', 'hammock' ),
-			21 => __( 'Twenty-one Days', 'hammock' ),
-			22 => __( 'Twenty-two Days', 'hammock' ),
-			23 => __( 'Twenty-three Days', 'hammock' ),
-			24 => __( 'Twenty-four Days', 'hammock' ),
-			25 => __( 'Twenty-five Days', 'hammock' ),
-			26 => __( 'Twenty-six Days', 'hammock' ),
-			27 => __( 'Twenty-seven Days', 'hammock' ),
-			28 => __( 'Twenty-eight Days', 'hammock' ),
+			1  => __( 'One Day', 'hubloy-membership' ),
+			2  => __( 'Two Days', 'hubloy-membership' ),
+			3  => __( 'Three Days', 'hubloy-membership' ),
+			4  => __( 'Four Days', 'hubloy-membership' ),
+			5  => __( 'Five Days', 'hubloy-membership' ),
+			6  => __( 'Six Days', 'hubloy-membership' ),
+			7  => __( 'Seven Days', 'hubloy-membership' ),
+			8  => __( 'Eight Days', 'hubloy-membership' ),
+			9  => __( 'Nine Days', 'hubloy-membership' ),
+			10 => __( 'Ten Days', 'hubloy-membership' ),
+			11 => __( 'Eleven Days', 'hubloy-membership' ),
+			12 => __( 'Twelve Days', 'hubloy-membership' ),
+			13 => __( 'Thirteen Days', 'hubloy-membership' ),
+			14 => __( 'Fourteen Days', 'hubloy-membership' ),
+			15 => __( 'Fifteen Days', 'hubloy-membership' ),
+			16 => __( 'Sixteen Days', 'hubloy-membership' ),
+			17 => __( 'Seventeen Days', 'hubloy-membership' ),
+			18 => __( 'Eighteen Days', 'hubloy-membership' ),
+			19 => __( 'Nineteen Days', 'hubloy-membership' ),
+			20 => __( 'Twenty Days', 'hubloy-membership' ),
+			21 => __( 'Twenty-one Days', 'hubloy-membership' ),
+			22 => __( 'Twenty-two Days', 'hubloy-membership' ),
+			23 => __( 'Twenty-three Days', 'hubloy-membership' ),
+			24 => __( 'Twenty-four Days', 'hubloy-membership' ),
+			25 => __( 'Twenty-five Days', 'hubloy-membership' ),
+			26 => __( 'Twenty-six Days', 'hubloy-membership' ),
+			27 => __( 'Twenty-seven Days', 'hubloy-membership' ),
+			28 => __( 'Twenty-eight Days', 'hubloy-membership' ),
 		);
-		return apply_filters( 'hammock_helper_duration_list_days', $days );
+		return apply_filters( 'hubloy-membership_helper_duration_list_days', $days );
 	}
 
 	/**
@@ -92,7 +92,7 @@ class Duration {
 		}
 
 		return apply_filters(
-			'hammock_duration_add_interval',
+			'hubloy-membership_duration_add_interval',
 			$result,
 			$period_unit,
 			$period_type,
@@ -131,7 +131,7 @@ class Duration {
 		$date_format = get_option( 'date_format' );
 
 		return apply_filters(
-			'hammock_subtract_interval',
+			'hubloy-membership_subtract_interval',
 			date_i18n( $date_format, $result )
 		);
 	}
@@ -190,7 +190,7 @@ class Duration {
 		}
 
 		return apply_filters(
-			'hammock_duration_subtract_dates',
+			'hubloy-membership_duration_subtract_dates',
 			$result
 		);
 	}
@@ -251,7 +251,7 @@ class Duration {
 		}
 
 		return apply_filters(
-			'hammock_duration_get_period_in_days',
+			'hubloy-membership_duration_get_period_in_days',
 			$days,
 			$type
 		);

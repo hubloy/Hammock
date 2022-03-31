@@ -8,13 +8,13 @@ export default class Addon extends Component {
 
 	render() {
 		return (
-			<Dashboard hammock={this.props.hammock}>
-				<List hammock={this.props.hammock}/>
+			<Dashboard hubloy_membership={this.props.hubloy_membership}>
+				<List hubloy_membership={this.props.hubloy_membership}/>
 			</Dashboard>
 		)
 	}
 }
 
 Addon.propTypes = {
-	hammock: PropTypes.object
+	hubloy_membership: PropTypes.object
 };

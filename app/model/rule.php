@@ -1,12 +1,12 @@
 <?php
-namespace Hammock\Model;
+namespace HubloyMembership\Model;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Core\Database;
-use Hammock\Helper\Cache;
+use HubloyMembership\Core\Database;
+use HubloyMembership\Helper\Cache;
 
 /**
  * Membership rule
@@ -243,12 +243,12 @@ class Rule {
 	public function delete() {
 		global $wpdb;
 
-		do_action( 'hammock_rule_before_delete_rule', $this->rule_id );
+		do_action( 'hubloy-membership_rule_before_delete_rule', $this->rule_id );
 
 		$sql = "DELETE FROM {$this->table_name} WHERE `rule_id` = %d";
 		$wpdb->query( $wpdb->prepare( $sql, $this->rule_id ) );
 
-		do_action( 'hammock_rule_after_delete_rule', $this->rule_id );
+		do_action( 'hubloy-membership_rule_after_delete_rule', $this->rule_id );
 		$this->rule_id = 0;
 	}
 
@@ -261,9 +261,9 @@ class Rule {
 	 */
 	public function to_html() {
 		$membership_count = is_array( $this->memberships ) ? count( $this->memberships ) : 0;
-		$item_title       = apply_filters( 'hammock_rule_title_name', $this->object_type, $this->object_id );
+		$item_title       = apply_filters( 'hubloy-membership_rule_title_name', $this->object_type, $this->object_id );
 		return apply_filters(
-			'hammock_membership_rule_to_html',
+			'hubloy-membership_membership_rule_to_html',
 			array(
 				'rule_id'       => $this->rule_id,
 				'memberships'   => $this->memberships,
@@ -273,11 +273,11 @@ class Rule {
 				'status_name'   => ucfirst( $this->status ),
 				'object_type'   => $this->object_type,
 				'object_id'     => $this->object_id,
-				'rule_name'     => apply_filters( 'hammock_rule_type_name', $this->object_type ),
+				'rule_name'     => apply_filters( 'hubloy-membership_rule_type_name', $this->object_type ),
 				'title'         => $item_title,
 				'time_limit'    => $this->time_limit,
 				'time_duration' => $this->time_duration,
-				'desc'          => sprintf( _n( '%1$s membership has access to %2$s', '%1$s memberships have access to %2$s', $membership_count, 'hammock' ), number_format_i18n( $membership_count ), $item_title ),
+				'desc'          => sprintf( _n( '%1$s membership has access to %2$s', '%1$s memberships have access to %2$s', $membership_count, 'hubloy-membership' ), number_format_i18n( $membership_count ), $item_title ),
 			),
 			$this
 		);

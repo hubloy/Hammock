@@ -1,14 +1,14 @@
 <?php
-namespace Hammock\Services;
+namespace HubloyMembership\Services;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Core\Database;
-use Hammock\Model\Rule;
-use Hammock\Helper\Cache;
-use Hammock\Helper\Pagination;
+use HubloyMembership\Core\Database;
+use HubloyMembership\Model\Rule;
+use HubloyMembership\Helper\Cache;
+use HubloyMembership\Helper\Pagination;
 
 /**
  * Rules service
@@ -82,7 +82,7 @@ class Rules {
 	 * @return array
 	 */
 	public function list_rule_types() {
-		return apply_filters( 'hammock_protection_rules', array() );
+		return apply_filters( 'hubloy-membership_protection_rules', array() );
 	}
 
 	/**
@@ -93,7 +93,7 @@ class Rules {
 	 * @return array
 	 */
 	public function list_rule_types_with_setting() {
-		return apply_filters( 'hammock_protection_setting_rules', array() );
+		return apply_filters( 'hubloy-membership_protection_setting_rules', array() );
 	}
 
 	/**
@@ -230,13 +230,13 @@ class Rules {
 		$args     = wp_parse_args( $args, $defaults );
 		$rule     = $this->get_rule_by_type( $args['type'] );
 		if ( ! $rule ) {
-			return new \WP_Error( 'not_found', __( 'Rule type not found', 'hammock' ) );
+			return new \WP_Error( 'not_found', __( 'Rule type not found', 'hubloy-membership' ) );
 		}
 
 		$rule->save_rule( $args['memberships'], $args['id'], $args['status'] );
 		return array(
 			'status'  => true,
-			'message' => $args['is_update'] ? __( 'Rule updated', 'hammock' ) : __( 'Rule saved', 'hammock' ),
+			'message' => $args['is_update'] ? __( 'Rule updated', 'hubloy-membership' ) : __( 'Rule saved', 'hubloy-membership' ),
 		);
 	}
 
@@ -254,13 +254,13 @@ class Rules {
 		if ( 0 === $rule->rule_id ) {
 			return array(
 				'status'  => false,
-				'message' => __( 'Rule does not exist', 'hammock' ),
+				'message' => __( 'Rule does not exist', 'hubloy-membership' ),
 			);
 		}
 		$rule->delete();
 		return array(
 			'status'  => true,
-			'message' => __( 'Rule deleted', 'hammock' ),
+			'message' => __( 'Rule deleted', 'hubloy-membership' ),
 		);
 	}
 
@@ -338,7 +338,7 @@ class Rules {
 	 */
 	public function get_rule_membership_select( $id ) {
 		$rule        = new Rule( $id );
-		$view        = new \Hammock\View\Backend\Rules\Memberships();
+		$view        = new \HubloyMembership\View\Backend\Rules\Memberships();
 		$membership  = new Memberships();
 		$memberships = $membership->list_simple_memberships( 0, false );
 		$view->data  = array(
@@ -359,7 +359,7 @@ class Rules {
 	 */
 	public function get_rule_items_select( $id, $type ) {
 		$rule       = new Rule( $id );
-		$view       = new \Hammock\View\Backend\Rules\Items();
+		$view       = new \HubloyMembership\View\Backend\Rules\Items();
 		$view->data = array(
 			'rule' => $rule,
 			'type' => $type,

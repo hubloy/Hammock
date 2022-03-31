@@ -3,9 +3,9 @@
  * Account subscription plan page
  * renders a users subsscription plan
  *
- * This template can be overridden by copying it to yourtheme/hammock/account/subscription-plan.php.
+ * This template can be overridden by copying it to yourtheme/hubloy-membership/account/subscription-plan.php.
  *
- * @package Hammock/Templates/Account
+ * @package HubloyMembership/Templates/Account
  * @version 1.0.0
  */
 
@@ -13,40 +13,40 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<div class="hammock-account-membership-plan hammock-account-membership-plan-card hammock-account-membership-plan-<?php echo $plan->id; ?>">
-	<h4 class="hammock-account-membership-plan--title"><?php echo $plan->name; ?></h4>
-	<span class="hammock-account-membership-plan--details"><?php echo $plan->details; ?></span>
-	<p class="hammock-account-membership-plan--price">
+<div class="hubloy-membership-account-membership-plan hubloy-membership-account-membership-plan-card hubloy-membership-account-membership-plan-<?php echo $plan->id; ?>">
+	<h4 class="hubloy-membership-account-membership-plan--title"><?php echo $plan->name; ?></h4>
+	<span class="hubloy-membership-account-membership-plan--details"><?php echo $plan->details; ?></span>
+	<p class="hubloy-membership-account-membership-plan--price">
 		
 		<?php
 		if ( $plan->trial_enabled ) {
-			echo esc_html( hammock_format_currency( $plan->trial_price ) );
+			echo esc_html( hubloy-membership_format_currency( $plan->trial_price ) );
 			?>
-				<span class="hammock-account-membership-plan--price-description">
+				<span class="hubloy-membership-account-membership-plan--price-description">
 				<?php
 					$trial_text   = $plan->get_readable_trial_text();
-					$normal_price = hammock_format_currency( $plan->price );
+					$normal_price = hubloy-membership_format_currency( $plan->price );
 					$sub_text     = $plan->get_readable_type();
-					echo sprintf( esc_html__( '%1$s then %2$s %3$s', 'hammock' ), esc_attr( $trial_text ), esc_attr( $normal_price ), esc_attr( $sub_text ) );
+					echo sprintf( esc_html__( '%1$s then %2$s %3$s', 'hubloy-membership' ), esc_attr( $trial_text ), esc_attr( $normal_price ), esc_attr( $sub_text ) );
 				?>
 				</span>
 				<?php
 		} else {
 			if ( $plan->is_recurring() && $plan->signup_price > 0 ) {
-				echo esc_html( hammock_format_currency( $plan->signup_price ) );
+				echo esc_html( hubloy-membership_format_currency( $plan->signup_price ) );
 				?>
-					<span class="hammock-account-membership-plan--price-description">
+					<span class="hubloy-membership-account-membership-plan--price-description">
 					<?php
-						$normal_price = hammock_format_currency( $plan->price );
+						$normal_price = hubloy-membership_format_currency( $plan->price );
 						$sub_text     = $plan->get_readable_type();
-						echo sprintf( esc_html__( 'then %1$s %2$s', 'hammock' ), esc_attr( $normal_price ), esc_attr( $sub_text ) );
+						echo sprintf( esc_html__( 'then %1$s %2$s', 'hubloy-membership' ), esc_attr( $normal_price ), esc_attr( $sub_text ) );
 					?>
 					</span>
 					<?php
 			} else {
-				echo hammock_format_currency( $plan->price );
+				echo hubloy-membership_format_currency( $plan->price );
 				?>
-					<span class="hammock-account-membership-plan--price-description">
+					<span class="hubloy-membership-account-membership-plan--price-description">
 					<?php
 						echo esc_html( $plan->get_readable_type() );
 					?>
@@ -57,20 +57,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 		?>
 
 		<?php
-		$can_join = hammock_can_user_join_plan( $plan->id );
+		$can_join = hubloy-membership_can_user_join_plan( $plan->id );
 		if ( $can_join['status'] ) :
 			?>
-			<a class="button hammock-account-membership-plan--price--can-join" href="<?php echo esc_url( hammock_get_account_page_links( 'view-plan', $plan->membership_id ) ); ?>">
+			<a class="button hubloy-membership-account-membership-plan--price--can-join" href="<?php echo esc_url( hubloy-membership_get_account_page_links( 'view-plan', $plan->membership_id ) ); ?>">
 				<?php
 				if ( $plan->trial_enabled ) {
-					esc_html_e( 'Begin Trial', 'hammock' );
+					esc_html_e( 'Begin Trial', 'hubloy-membership' );
 				} else {
-					esc_html_e( 'Join Membership', 'hammock' );
+					esc_html_e( 'Join Membership', 'hubloy-membership' );
 				}
 				?>
 			</a>
 		<?php else : ?>
-			<p class="hammock-account-membership-plan--price--cant-join"><?php echo esc_html( $can_join['message'] ); ?></p>
+			<p class="hubloy-membership-account-membership-plan--price--cant-join"><?php echo esc_html( $can_join['message'] ); ?></p>
 		<?php endif; ?>
 	</p>
 	

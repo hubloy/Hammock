@@ -1,7 +1,7 @@
 body {
 	height: auto !important;
 }
-.hammock-dashboard {
+.hubloy-membership-dashboard {
 
 	.Toastify__toast-container--top-center {
 		top:5em !important;
@@ -22,7 +22,7 @@ body {
 		padding-left: 0px;
 	}
 
-	.hammock-container {
+	.hubloy-membership-container {
 		height: 100%;
 		min-height: calc( 100vh - 170px );
 		margin: 0 auto;
@@ -31,14 +31,14 @@ body {
 		padding: 1.5rem;
 		background: #f1f1f1;
 
-		.hammock-nav {
+		.hubloy-membership-nav {
 			left: 19px;
 			width: 100%;
 		}
 	}
 
 	
-	.hammock-dashboard {
+	.hubloy-membership-dashboard {
 		.dashboard-heading {
 			z-index: 9;
 			position: relative;
@@ -71,7 +71,7 @@ body {
 		display: block;
 	}
 
-	.hammock-switcher-nav {
+	.hubloy-membership-switcher-nav {
 		padding-left: 0px;
 	}
 
@@ -125,7 +125,7 @@ body {
 		}
 	}
 	
-	.hammock-preloader{
+	.hubloy-membership-preloader{
 		position: absolute;
 		text-align: center;
 		overflow: show;
@@ -143,7 +143,7 @@ body {
 		}
 	}
 
-	.hammock-center {
+	.hubloy-membership-center {
 		position: absolute;
 		text-align: center;
 		overflow: show;
@@ -163,7 +163,7 @@ body {
 		}
 	}
 
-	.hammock-background-contain {
+	.hubloy-membership-background-contain {
 		background-position: center;
 		background-size: contain;
 		background-repeat: no-repeat;
@@ -173,7 +173,7 @@ body {
 		font-size: .8rem;
 	}
 
-	.hammock-navbar {
+	.hubloy-membership-navbar {
 		> *:focus {
 			outline: none;
 		}
@@ -194,13 +194,13 @@ body {
 	}
 }
 
-.hammock-check {
+.hubloy-membership-check {
 	color: $teal-color;
 }
-.hammock-question {
+.hubloy-membership-question {
 	color: $blue-color;
 }
-.hammock-warning {
+.hubloy-membership-warning {
 	color: $red-color;
 }
 
@@ -212,7 +212,7 @@ body {
 	float: left;
 }
 
-.hammock-offcanvas-flip {
+.hubloy-membership-offcanvas-flip {
 	min-width: 50%;
 	.uk-offcanvas-close {
 		top: 50px;
@@ -254,11 +254,11 @@ body {
 	}
 }
 
-.hammock-pointer {
+.hubloy-membership-pointer {
 	cursor: pointer;
 }
 
-.hammock-badge {
+.hubloy-membership-badge {
 	
 	&-circle{
 		background-color: $background-gray;
@@ -275,7 +275,7 @@ body {
 		color: $text-color;
 	}
 }
-.hammock-membership-comms {
+.hubloy-membership-membership-comms {
 	h4 {
 		font-size: 1.25rem;
 	}

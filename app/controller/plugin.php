@@ -1,15 +1,15 @@
 <?php
-namespace Hammock\Controller;
+namespace HubloyMembership\Controller;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Controller;
-use Hammock\Core\Resource;
-use Hammock\Helper\Pages;
-use Hammock\Core\Util;
-use Hammock\Core\Admin;
+use HubloyMembership\Base\Controller;
+use HubloyMembership\Core\Resource;
+use HubloyMembership\Helper\Pages;
+use HubloyMembership\Core\Util;
+use HubloyMembership\Core\Admin;
 
 class Plugin extends Controller {
 
@@ -76,11 +76,11 @@ class Plugin extends Controller {
 
 		$this->add_filter( 'single_post_title', 'custom_page_titles', 10, 2 );
 
-		$this->add_filter( 'hammock_admin_register_content_sub_page', 'register_content_page' );
+		$this->add_filter( 'hubloy-membership_admin_register_content_sub_page', 'register_content_page' );
 
 		// Set up content protection
 		// This checks if its enabled
-		\Hammock\Services\Protection::instance();
+		\HubloyMembership\Services\Protection::instance();
 	}
 
 	/**
@@ -89,7 +89,7 @@ class Plugin extends Controller {
 	 * @return string
 	 */
 	public static function get_cap() {
-		return apply_filters( 'hammock_admin_cap', 'manage_options' );
+		return apply_filters( 'hubloy-membership_admin_cap', 'manage_options' );
 	}
 
 	/**
@@ -131,10 +131,10 @@ class Plugin extends Controller {
 	public function post_states( $states, $post ) {
 		if ( 'page' == $post->post_type ) {
 			if ( Pages::is_membership_page( $post->ID ) ) {
-				$url               = admin_url( 'admin.php?page=hammock-settings#/' );
-				$states['hammock'] = sprintf(
+				$url               = admin_url( 'admin.php?page=hubloy-membership-settings#/' );
+				$states['hubloy-membership'] = sprintf(
 					'<a style="%2$s" href="%3$s">%1$s</a>',
-					__( 'Membership Page', 'hammock' ),
+					__( 'Membership Page', 'hubloy-membership' ),
 					'background:#aaa;color:#fff;padding:1px 4px;border-radius:4px;font-size:0.8em',
 					$url
 				);
@@ -151,25 +151,25 @@ class Plugin extends Controller {
 		$cap = self::get_cap();
 
 		add_menu_page(
-			__( 'Memberships', 'hammock' ),
-			__( 'Memberships', 'hammock' ),
+			__( 'Memberships', 'hubloy-membership' ),
+			__( 'Memberships', 'hubloy-membership' ),
 			$cap,
 			self::MENU_SLUG,
 			null,
 			'dashicons-lock',
-			HAMMOCK_MENU_LOCATION
+			HUBMEMB_MENU_LOCATION
 		);
 
 		add_submenu_page(
 			self::MENU_SLUG,
-			__( 'Membership Content', 'hammock' ),
-			__( 'Membership Content', 'hammock' ),
+			__( 'Membership Content', 'hubloy-membership' ),
+			__( 'Membership Content', 'hubloy-membership' ),
 			$cap,
 			self::MENU_SLUG,
 			array( $this, 'render' )
 		);
 
-		$installed = Util::get_option( 'hammock_installed' );
+		$installed = Util::get_option( 'hubloy-membership_installed' );
 
 		// Flag to check if wizard has run for first use
 		if ( $installed == 1 ) {
@@ -183,7 +183,7 @@ class Plugin extends Controller {
 			 *
 			 * @since 1.0.0
 			 */
-			do_action( 'hammock_admin_menu_page', self::MENU_SLUG, $cap );
+			do_action( 'hubloy-membership_admin_menu_page', self::MENU_SLUG, $cap );
 		}
 	}
 
@@ -196,25 +196,25 @@ class Plugin extends Controller {
 		$cap = self::get_cap();
 
 		add_menu_page(
-			__( 'Memberships', 'hammock' ),
-			__( 'Memberships', 'hammock' ),
+			__( 'Memberships', 'hubloy-membership' ),
+			__( 'Memberships', 'hubloy-membership' ),
 			$cap,
 			self::MENU_SLUG,
 			null,
 			'dashicons-lock',
-			HAMMOCK_MENU_LOCATION
+			HUBMEMB_MENU_LOCATION
 		);
 
 		add_submenu_page(
 			self::MENU_SLUG,
-			__( 'Membership Content', 'hammock' ),
-			__( 'Membership Content', 'hammock' ),
+			__( 'Membership Content', 'hubloy-membership' ),
+			__( 'Membership Content', 'hubloy-membership' ),
 			$cap,
 			self::MENU_SLUG,
 			array( $this, 'network_render' )
 		);
 
-		$installed = Util::get_option( 'hammock_installed' );
+		$installed = Util::get_option( 'hubloy-membership_installed' );
 
 		// Flag to check if wizard has run for first use
 		if ( $installed == 1 ) {
@@ -228,7 +228,7 @@ class Plugin extends Controller {
 			 *
 			 * @since 1.0.0
 			 */
-			do_action( 'hammock_network_admin_menu_page', self::MENU_SLUG, $cap );
+			do_action( 'hubloy-membership_network_admin_menu_page', self::MENU_SLUG, $cap );
 		}
 	}
 
@@ -240,7 +240,7 @@ class Plugin extends Controller {
 	 * @return array
 	 */
 	public function content_pages() {
-		return apply_filters( 'hammock_admin_register_content_sub_page', $this->admin->get_content_pages() );
+		return apply_filters( 'hubloy-membership_admin_register_content_sub_page', $this->admin->get_content_pages() );
 	}
 
 	/**
@@ -252,22 +252,22 @@ class Plugin extends Controller {
 	 */
 	public function enqueue_plugin_styles( $hook ) {
 		$screen         = get_current_screen();
-		$load_resources = apply_filters( 'hammock_load_admin_resouces', strpos( $screen->id, self::MENU_SLUG ) );
+		$load_resources = apply_filters( 'hubloy-membership_load_admin_resouces', strpos( $screen->id, self::MENU_SLUG ) );
 		if ( $load_resources !== false ) {
-			wp_enqueue_style( 'hammock-uikit' );
-			wp_enqueue_style( 'hammock-tiptip' );
-			wp_enqueue_style( 'hammock-jquery-ui' );
-			wp_enqueue_style( 'hammock-jquery-tags' );
-			wp_enqueue_style( 'hammock-styled-notifications' );
-			wp_enqueue_style( 'hammock-select2' );
-			wp_enqueue_style( 'hammock-admin' );
+			wp_enqueue_style( 'hubloy-membership-uikit' );
+			wp_enqueue_style( 'hubloy-membership-tiptip' );
+			wp_enqueue_style( 'hubloy-membership-jquery-ui' );
+			wp_enqueue_style( 'hubloy-membership-jquery-tags' );
+			wp_enqueue_style( 'hubloy-membership-styled-notifications' );
+			wp_enqueue_style( 'hubloy-membership-select2' );
+			wp_enqueue_style( 'hubloy-membership-admin' );
 
-			$enabled_text = __( 'Enabled', 'hammock' );
+			$enabled_text = __( 'Enabled', 'hubloy-membership' );
 			$custom_css   = "
-				.hammock-input .switch-checkbox .switch .knobs::after {
+				.hubloy-membership-input .switch-checkbox .switch .knobs::after {
                     content: '{$enabled_text}';
                 }";
-			wp_add_inline_style( 'hammock-admin', $custom_css );
+			wp_add_inline_style( 'hubloy-membership-admin', $custom_css );
 
 			// Add body classes
 			add_filter( 'admin_body_class', array( $this, 'add_body_class' ) );
@@ -285,7 +285,7 @@ class Plugin extends Controller {
 	 * @return string $classes
 	 */
 	public function add_body_class( $admin_body_classes ) {
-		return "$admin_body_classes hammock-dashboard";
+		return "$admin_body_classes hubloy-membership-dashboard";
 	}
 
 	/**
@@ -297,21 +297,21 @@ class Plugin extends Controller {
 	 */
 	public function enqueue_plugin_scripts( $hook ) {
 		$screen         = get_current_screen();
-		$load_resources = apply_filters( 'hammock_load_admin_resouces', strpos( $screen->id, self::MENU_SLUG ) );
+		$load_resources = apply_filters( 'hubloy-membership_load_admin_resouces', strpos( $screen->id, self::MENU_SLUG ) );
 		if ( $load_resources !== false ) {
-			wp_enqueue_script( 'hammock-uikit' );
-			wp_enqueue_script( 'hammock-uikit-icons' );
-			wp_enqueue_script( 'hammock-tiptip' );
-			wp_enqueue_script( 'hammock-sweetalert' );
+			wp_enqueue_script( 'hubloy-membership-uikit' );
+			wp_enqueue_script( 'hubloy-membership-uikit-icons' );
+			wp_enqueue_script( 'hubloy-membership-tiptip' );
+			wp_enqueue_script( 'hubloy-membership-sweetalert' );
 			// Date picker
 			wp_enqueue_script( 'jquery-ui-datepicker' );
-			wp_enqueue_script( 'hammock-jquery-tags' );
-			wp_enqueue_script( 'hammock-styled-notifications' );
-			wp_enqueue_script( 'hammock-select2' );
-			wp_enqueue_script( 'hammock-admin' );
-			wp_enqueue_script( 'hammock-admin-react' );
-			wp_enqueue_script( 'hammock-wizard-react' );
-			do_action( 'hammock_controller_scripts' );
+			wp_enqueue_script( 'hubloy-membership-jquery-tags' );
+			wp_enqueue_script( 'hubloy-membership-styled-notifications' );
+			wp_enqueue_script( 'hubloy-membership-select2' );
+			wp_enqueue_script( 'hubloy-membership-admin' );
+			wp_enqueue_script( 'hubloy-membership-admin-react' );
+			wp_enqueue_script( 'hubloy-membership-wizard-react' );
+			do_action( 'hubloy-membership_controller_scripts' );
 		}
 	}
 
@@ -320,9 +320,9 @@ class Plugin extends Controller {
 	 * Front styles
 	 */
 	public function enqueue_front_styles() {
-		wp_enqueue_style( 'hammock-front' );
-		wp_enqueue_script( 'hammock-sweetalert' );
-		wp_enqueue_script( 'hammock-front' );
+		wp_enqueue_style( 'hubloy-membership-front' );
+		wp_enqueue_script( 'hubloy-membership-sweetalert' );
+		wp_enqueue_script( 'hubloy-membership-front' );
 	}
 
 	/**
@@ -335,16 +335,16 @@ class Plugin extends Controller {
 	 * @return array
 	 */
 	public function front_body_class( $classes ) {
-		if ( hammock_is_account_page() ) {
-			return array_merge( $classes, array( 'hammock-account-page' ) );
-		} elseif ( hammock_is_membership_page() ) {
-			return array_merge( $classes, array( 'hammock-memberhsip-page' ) );
-		} elseif ( hammock_is_protected_content_page() ) {
-			return array_merge( $classes, array( 'hammock-protected-content-page' ) );
-		} elseif ( hammock_is_registration_page() ) {
-			return array_merge( $classes, array( 'hammock-registration-page' ) );
-		} elseif ( hammock_is_thank_you_page() ) {
-			return array_merge( $classes, array( 'hammock-thank-you-page' ) );
+		if ( hubloy-membership_is_account_page() ) {
+			return array_merge( $classes, array( 'hubloy-membership-account-page' ) );
+		} elseif ( hubloy-membership_is_membership_page() ) {
+			return array_merge( $classes, array( 'hubloy-membership-memberhsip-page' ) );
+		} elseif ( hubloy-membership_is_protected_content_page() ) {
+			return array_merge( $classes, array( 'hubloy-membership-protected-content-page' ) );
+		} elseif ( hubloy-membership_is_registration_page() ) {
+			return array_merge( $classes, array( 'hubloy-membership-registration-page' ) );
+		} elseif ( hubloy-membership_is_thank_you_page() ) {
+			return array_merge( $classes, array( 'hubloy-membership-thank-you-page' ) );
 		}
 		return $classes;
 	}
@@ -355,11 +355,11 @@ class Plugin extends Controller {
 	 * @since 1.0.0
 	 */
 	public function admin_bar_menu( $admin_bar ) {
-		if ( ! defined( 'HAMMOCK_HIDE_TOP_BAR' ) ) {
+		if ( ! defined( 'HUBMEMB_HIDE_TOP_BAR' ) ) {
 			$args = array(
-				'id'    => 'hammock',
-				'title' => __( 'Memberships', 'hammock' ),
-				'href'  => is_multisite() ? esc_url( network_admin_url( 'admin.php?page=hammock' ) ) : esc_url( admin_url( 'admin.php?page=hammock' ) ),
+				'id'    => 'hubloy-membership',
+				'title' => __( 'Memberships', 'hubloy-membership' ),
+				'href'  => is_multisite() ? esc_url( network_admin_url( 'admin.php?page=hubloy-membership' ) ) : esc_url( admin_url( 'admin.php?page=hubloy-membership' ) ),
 			);
 			$admin_bar->add_node( $args );
 		}
@@ -376,31 +376,31 @@ class Plugin extends Controller {
 	public function custom_page_titles( $title, $post ) {
 		global $wp;
 
-		if ( hammock_is_account_page() ) {
-			$endpoint = hammock()->get_query()->get_current_endpoint();
-			$sep      = apply_filters( 'hammock_account_title_separator', '|' );
+		if ( hubloy-membership_is_account_page() ) {
+			$endpoint = hubloy-membership()->get_query()->get_current_endpoint();
+			$sep      = apply_filters( 'hubloy-membership_account_title_separator', '|' );
 			switch ( $endpoint ) {
 				case 'view-plan':
 					$plan_id = $wp->query_vars['view-plan'];
 					if ( ! empty( $plan_id ) ) {
-						$membership = hammock_get_plan_by_id( $plan_id );
+						$membership = hubloy-membership_get_plan_by_id( $plan_id );
 						if ( $membership ) {
-							$title = sprintf( __( 'Membership Plan %1$s  %2$s', 'hammock' ), $sep, $membership->name );
+							$title = sprintf( __( 'Membership Plan %1$s  %2$s', 'hubloy-membership' ), $sep, $membership->name );
 						}
 					}
 
 					break;
 
 				case 'edit-account':
-					$title .= sprintf( __( ' %s details', 'hammock' ), $sep );
+					$title .= sprintf( __( ' %s details', 'hubloy-membership' ), $sep );
 					break;
 
 				case 'transactions':
-					$title .= sprintf( __( ' %s Transactions', 'hammock' ), $sep );
+					$title .= sprintf( __( ' %s Transactions', 'hubloy-membership' ), $sep );
 					break;
 
 				case 'subscriptions':
-					$title .= sprintf( __( ' %s Subscriptions', 'hammock' ), $sep );
+					$title .= sprintf( __( ' %s Subscriptions', 'hubloy-membership' ), $sep );
 					break;
 			}
 		}
@@ -426,12 +426,12 @@ class Plugin extends Controller {
 	 * @return String
 	 */
 	public function render() {
-		$installed = Util::get_option( 'hammock_installed' );
+		$installed = Util::get_option( 'hubloy-membership_installed' );
 
 		// Flag to check if wizard has run for first use
 		if ( $installed == 1 ) {
 			?>
-			<div id="hammock-admin-container"></div>
+			<div id="hubloy-membership-admin-container"></div>
 			<?php
 		} else {
 			$this->show_wizard_page();
@@ -447,12 +447,12 @@ class Plugin extends Controller {
 	 * @return string
 	 */
 	function network_render() {
-		$installed = Util::get_option( 'hammock_installed' );
+		$installed = Util::get_option( 'hubloy-membership_installed' );
 
 		// Flag to check if wizard has run for first use
 		if ( $installed == 1 ) {
 			?>
-			<div id="hammock-admin-container"></div>
+			<div id="hubloy-membership-admin-container"></div>
 			<?php
 		} else {
 			$this->show_wizard_page();
@@ -465,7 +465,7 @@ class Plugin extends Controller {
 	 * @since 1.0.0
 	 */
 	function register_routes() {
-		do_action( 'hammock_register_rest_route' );
+		do_action( 'hubloy-membership_register_rest_route' );
 	}
 
 	/**
@@ -475,7 +475,7 @@ class Plugin extends Controller {
 	 */
 	public function show_wizard_page() {
 		?>
-		<div id="hammock-wizard-container"></div>
+		<div id="hubloy-membership-wizard-container"></div>
 		<?php
 	}
 
@@ -489,8 +489,8 @@ class Plugin extends Controller {
 	 * @return array
 	 */
 	function admin_js_vars( $vars ) {
-		if ( $this->is_page( 'hammock' ) ) {
-			$vars['common']['string']['title'] = __( 'Dashboard', 'hammock' );
+		if ( $this->is_page( 'hubloy-membership' ) ) {
+			$vars['common']['string']['title'] = __( 'Dashboard', 'hubloy-membership' );
 			$vars['active_page']               = 'dashboard';
 			$vars['strings']['dashboard']      = $this->get_strings();
 		}
@@ -505,7 +505,7 @@ class Plugin extends Controller {
 	 */
 	private function get_strings() {
 		if ( empty( $this->strings ) ) {
-			$this->strings = include HAMMOCK_LOCALE_DIR . '/site/dashboard.php';
+			$this->strings = include HUBMEMB_LOCALE_DIR . '/site/dashboard.php';
 		}
 		return $this->strings;
 	}

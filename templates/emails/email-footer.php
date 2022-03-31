@@ -2,9 +2,9 @@
 /**
  * Email Footer
  *
- * This template can be overridden by copying it to yourtheme/hammock/emails/email-footer.php.
+ * This template can be overridden by copying it to yourtheme/hubloy-membership/emails/email-footer.php.
  *
- * @package Hammock/Templates/Emails
+ * @package HubloyMembership/Templates/Emails
  * @version 1.0.0
  */
 
@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 									<table border="0" cellpadding="10" cellspacing="0" width="100%">
 										<tr>
 											<td colspan="2" valign="middle" id="credit">
-												<?php echo wp_kses_post( wpautop( wptexturize( apply_filters( 'hammock_email_footer_text', get_bloginfo( 'name', 'display' ) ) ) ) ); ?>
+												<?php echo wp_kses_post( wpautop( wptexturize( apply_filters( 'hubloy-membership_email_footer_text', get_bloginfo( 'name', 'display' ) ) ) ) ); ?>
 											</td>
 										</tr>
 									</table>

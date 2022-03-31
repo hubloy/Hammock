@@ -2,9 +2,9 @@
 /**
  * Membership Sign Up
  *
- * This template can be overridden by copying it to yourtheme/hammock/membership-sign-up.php.
+ * This template can be overridden by copying it to yourtheme/hubloy-membership/membership-sign-up.php.
  *
- * @package Hammock/Templates
+ * @package HubloyMembership/Templates
  * @version 1.0.0
  */
 if ( ! defined( 'ABSPATH' ) ) {

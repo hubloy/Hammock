@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="Hammock">
-	<description>A custom set of rules to check for WPMUDEV plugin projects</description>
+<ruleset name="HubloyMembership">
+	<description>A custom set of rules to check for Hubloy Membership plugin</description>
 
 	<!-- Exclude the Composer Vendor directory. -->
 	<exclude-pattern>/vendor/*</exclude-pattern>
@@ -121,7 +121,7 @@
 	<rule ref="WordPress.WP.I18n">
 		<properties>
 			<property name="text_domain" type="array">
-				<element value="hammock"/>
+				<element value="hubloy-membership"/>
 			</property>
 		</properties>
 	</rule>

@@ -1,14 +1,14 @@
 <?php
-namespace Hammock\Model;
+namespace HubloyMembership\Model;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Core\Database;
-use Hammock\Services\Memberships;
-use Hammock\Services\Members;
-use Hammock\Helper\Duration;
+use HubloyMembership\Core\Database;
+use HubloyMembership\Services\Memberships;
+use HubloyMembership\Services\Members;
+use HubloyMembership\Helper\Duration;
 
 /**
  * Membership model
@@ -381,7 +381,7 @@ class Membership {
 	public function get_invite_codes() {
 		$codes = $this->get_meta_value( 'invite_list' );
 		if ( $codes ) {
-			$service = new \Hammock\Services\Codes( 'invitation' );
+			$service = new \HubloyMembership\Services\Codes( 'invitation' );
 			return $service->drop_down( $codes );
 		}
 		return array();
@@ -398,17 +398,17 @@ class Membership {
 	public function get_readable_type() {
 		switch ( $this->type ) {
 			case Memberships::PAYMENT_TYPE_PERMANENT:
-				return __( 'one time', 'hammock' );
+				return __( 'one time', 'hubloy-membership' );
 			break;
 			case Memberships::PAYMENT_TYPE_DATE_RANGE:
 				$days = $this->get_meta_value( 'membership_days' );
-				return sprintf( __( 'for %d days', 'hammock' ), $days );
+				return sprintf( __( 'for %d days', 'hubloy-membership' ), $days );
 			break;
 			case Memberships::PAYMENT_TYPE_RECURRING:
 				return Memberships::get_payment_duration( $this->duration );
 			break;
 			default:
-				return apply_filters( 'hammock_membership_get_readable_type', '', $this );
+				return apply_filters( 'hubloy-membership_membership_get_readable_type', '', $this );
 			break;
 		}
 	}
@@ -434,9 +434,9 @@ class Membership {
 	public function get_readable_trial_text() {
 		$trial_text = '';
 		if ( $this->trial_enabled ) {
-			$trial_text = sprintf( __( 'Free trial for %1$s %2$s', 'hammock' ), $this->trial_period, strtolower( $this->trial_duration_text ) );
+			$trial_text = sprintf( __( 'Free trial for %1$s %2$s', 'hubloy-membership' ), $this->trial_period, strtolower( $this->trial_duration_text ) );
 		}
-		return apply_filters( 'hammock_membership_get_readable_trial_text', $trial_text, $this );
+		return apply_filters( 'hubloy-membership_membership_get_readable_trial_text', $trial_text, $this );
 	}
 
 	/**
@@ -459,7 +459,7 @@ class Membership {
 	 * @return string
 	 */
 	public function get_type_price() {
-		$price = hammock_format_currency( $this->price );
+		$price = hubloy-membership_format_currency( $this->price );
 		$type  = $this->get_readable_type();
 		return $price . ' ' . strtolower( $type );
 	}
@@ -474,7 +474,7 @@ class Membership {
 	 */
 	public function to_html() {
 		return apply_filters(
-			'hammock_membership_to_html',
+			'hubloy-membership_membership_to_html',
 			array(
 				'id'                  => $this->id,
 				'membership_id'       => $this->membership_id,
@@ -482,15 +482,15 @@ class Membership {
 				'date_updated'        => $this->date_updated,
 				'name'                => $this->name,
 				'details'             => $this->details,
-				'enabled'             => $this->enabled ? __( 'Active', 'hammock' ) : __( 'Inactive', 'hammock' ),
-				'trial_enabled'       => $this->trial_enabled ? __( 'Trial Enabled', 'hammock' ) : __( 'No Trial', 'hammock' ),
-				'limit_spaces'        => $this->limit_spaces ? __( 'Limited Registration', 'hammock' ) : __( 'Open Registration', 'hammock' ),
+				'enabled'             => $this->enabled ? __( 'Active', 'hubloy-membership' ) : __( 'Inactive', 'hubloy-membership' ),
+				'trial_enabled'       => $this->trial_enabled ? __( 'Trial Enabled', 'hubloy-membership' ) : __( 'No Trial', 'hubloy-membership' ),
+				'limit_spaces'        => $this->limit_spaces ? __( 'Limited Registration', 'hubloy-membership' ) : __( 'Open Registration', 'hubloy-membership' ),
 				'type'                => Memberships::get_type( $this->type ),
 				'duration'            => $this->duration,
-				'signup_price'        => hammock_format_currency( $this->signup_price ),
-				'price'               => hammock_format_currency( $this->price ),
+				'signup_price'        => hubloy-membership_format_currency( $this->signup_price ),
+				'price'               => hubloy-membership_format_currency( $this->price ),
 				'price_name'          => $this->get_type_price(),
-				'trial_price'         => hammock_format_currency( $this->trial_price ),
+				'trial_price'         => hubloy-membership_format_currency( $this->trial_price ),
 				'trial_period'        => $this->trial_period,
 				'trial_duration'      => $this->trial_duration,
 				'trial_duration_text' => $this->trial_duration_text,

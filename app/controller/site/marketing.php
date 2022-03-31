@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Controller\Site;
+namespace HubloyMembership\Controller\Site;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Controller;
+use HubloyMembership\Base\Controller;
 
 /**
  * Marketing controller
@@ -91,8 +91,8 @@ class Marketing extends Controller {
 		$this->_cap     = $cap;
 		add_submenu_page(
 			$slug,
-			__( 'Marketing', 'hammock' ),
-			__( 'Marketing', 'hammock' ),
+			__( 'Marketing', 'hubloy-membership' ),
+			__( 'Marketing', 'hubloy-membership' ),
 			$this->_cap,
 			$this->_page_id,
 			array( $this, 'render' )
@@ -111,7 +111,7 @@ class Marketing extends Controller {
 	 */
 	function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'marketing' ) ) {
-			$vars['common']['string']['title'] = __( 'Marketing', 'hammock' );
+			$vars['common']['string']['title'] = __( 'Marketing', 'hubloy-membership' );
 			$vars['active_page']               = 'marketing';
 			$vars['strings']                   = $this->get_strings();
 		}
@@ -127,7 +127,7 @@ class Marketing extends Controller {
 	 */
 	private function get_strings() {
 		if ( empty( $this->strings ) ) {
-			$this->strings = include HAMMOCK_LOCALE_DIR . '/site/marketing.php';
+			$this->strings = include HUBMEMB_LOCALE_DIR . '/site/marketing.php';
 		}
 		return $this->strings;
 	}
@@ -139,7 +139,7 @@ class Marketing extends Controller {
 	 * @since 1.0.0
 	 */
 	public function controller_scripts() {
-		wp_enqueue_script( 'hammock-marketing-react' );
+		wp_enqueue_script( 'hubloy-membership-marketing-react' );
 	}
 
 	/**
@@ -150,7 +150,7 @@ class Marketing extends Controller {
 	public function render() {
 
 		?>
-		<div id="hammock-marketing-container"></div>
+		<div id="hubloy-membership-marketing-container"></div>
 		<?php
 	}
 }

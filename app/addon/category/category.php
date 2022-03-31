@@ -1,12 +1,12 @@
 <?php
-namespace Hammock\Addon\Category;
+namespace HubloyMembership\Addon\Category;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Addon;
-use Hammock\Services\Memberships;
+use HubloyMembership\Base\Addon;
+use HubloyMembership\Services\Memberships;
 
 class Category extends Addon {
 
@@ -62,13 +62,13 @@ class Category extends Addon {
 	public function register( $addons ) {
 		if ( ! isset( $addons['category'] ) ) {
 			$addons['category'] = array(
-				'name'        => __( 'Category Protection', 'hammock' ),
-				'description' => __( 'Protect your posts by category.', 'hammock' ),
+				'name'        => __( 'Category Protection', 'hubloy-membership' ),
+				'description' => __( 'Protect your posts by category.', 'hubloy-membership' ),
 				'icon'        => 'dashicons dashicons-category',
 				'settings'    => true,
 			);
 			if ( ! $this->plugin_active() ) {
-				$addons['category']['message'] = __( 'Content protection is currently disabled', 'hammock' );
+				$addons['category']['message'] = __( 'Content protection is currently disabled', 'hubloy-membership' );
 			}
 		}
 		return $addons;
@@ -100,7 +100,7 @@ class Category extends Addon {
 	 * @return array
 	 */
 	public function protection_column( $columns ) {
-		$columns['hammock'] = __( 'Access', 'hammock' );
+		$columns['hubloy-membership'] = __( 'Access', 'hubloy-membership' );
 		return $columns;
 	}
 
@@ -116,12 +116,12 @@ class Category extends Addon {
 	 * @return string
 	 */
 	public function protection_column_content( $value, $column_name, $tax_id ) {
-		if ( $column_name === 'hammock' ) {
-			$access = get_term_meta( $tax_id, '_hammock_mebership_access', true );
+		if ( $column_name === 'hubloy-membership' ) {
+			$access = get_term_meta( $tax_id, '_hubloy-membership_mebership_access', true );
 			if ( ! is_array( $access ) ) {
 				$access = array();
 			}
-			return empty( $access ) ? __( 'All', 'hammock' ) : sprintf( __( '%d membership(s)', 'hammock' ), count( $access ) );
+			return empty( $access ) ? __( 'All', 'hubloy-membership' ) : sprintf( __( '%d membership(s)', 'hubloy-membership' ), count( $access ) );
 		}
 		return $value;
 	}
@@ -137,7 +137,7 @@ class Category extends Addon {
 	 * @return string
 	 */
 	public function term_protection_fields( $tag, $taxonomy ) {
-		$access      = get_term_meta( $tag->term_id, '_hammock_mebership_access', true );
+		$access      = get_term_meta( $tag->term_id, '_hubloy-membership_mebership_access', true );
 		$memberships = $this->membership_service->list_simple_memberships( 0, false );
 		if ( ! is_array( $access ) ) {
 			$access = array();
@@ -145,10 +145,10 @@ class Category extends Addon {
 		?>
 		<tr class="form-field">
 			<th scope="row" valign="top">
-				<label for="membership"><?php _e( 'Membership Access', 'hammock' ); ?></label>
+				<label for="membership"><?php _e( 'Membership Access', 'hubloy-membership' ); ?></label>
 			</th>
 			<td>
-				<select name="hammock_membership[]" data-placeholder="<?php _e( 'Select Memberships', 'hammock' ); ?>" multiple class="hammock-multi-select">
+				<select name="hubloy-membership_membership[]" data-placeholder="<?php _e( 'Select Memberships', 'hubloy-membership' ); ?>" multiple class="hubloy-membership-multi-select">
 					<?php
 					foreach ( $memberships as $id => $name ) {
 						?>
@@ -158,7 +158,7 @@ class Category extends Addon {
 					?>
 					
 				</select>
-				<p class='description'><?php _e( 'Membership access to items under this category', 'hammock' ); ?></p>
+				<p class='description'><?php _e( 'Membership access to items under this category', 'hubloy-membership' ); ?></p>
 			</td>
 		</tr>
 		<?php
@@ -173,11 +173,11 @@ class Category extends Addon {
 	 * @since 1.0.0
 	 */
 	public function term_protection_update( $term_id, $tt_id ) {
-		if ( isset( $_POST['hammock_membership'] ) ) {
-			$memberships = array_map( 'sanitize_text_field', wp_unslash( $_POST['hammock_membership'] ) );
-			update_term_meta( $term_id, '_hammock_mebership_access', $memberships );
+		if ( isset( $_POST['hubloy-membership_membership'] ) ) {
+			$memberships = array_map( 'sanitize_text_field', wp_unslash( $_POST['hubloy-membership_membership'] ) );
+			update_term_meta( $term_id, '_hubloy-membership_mebership_access', $memberships );
 		} else {
-			update_term_meta( $term_id, '_hammock_mebership_access', array() );
+			update_term_meta( $term_id, '_hubloy-membership_mebership_access', array() );
 		}
 	}
 
@@ -189,7 +189,7 @@ class Category extends Addon {
 	 * @return string
 	 */
 	public function settings_page() {
-		$view       = new \Hammock\View\Backend\Addons\Category();
+		$view       = new \HubloyMembership\View\Backend\Addons\Category();
 		$settings   = $this->settings();
 		$view->data = array(
 			'settings' => $settings,
@@ -217,7 +217,7 @@ class Category extends Addon {
 		$this->settings->save();
 		return array(
 			'status'  => true,
-			'message' => __( 'Category Setting updated', 'hammock' ),
+			'message' => __( 'Category Setting updated', 'hubloy-membership' ),
 		);
 	}
 

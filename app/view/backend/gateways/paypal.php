@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\View\Backend\Gateways;
+namespace HubloyMembership\View\Backend\Gateways;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Base\View;
+use HubloyMembership\Base\View;
 
 class Paypal extends View {
 
@@ -22,7 +22,7 @@ class Paypal extends View {
 		ob_start();
 		?>
 		<div class="uk-margin">
-			<label class="uk-form-label" for="form-stacked-text"><?php esc_html_e( 'Mode', 'hammock' ); ?></label>
+			<label class="uk-form-label" for="form-stacked-text"><?php esc_html_e( 'Mode', 'hubloy-membership' ); ?></label>
 			<div class="uk-form-controls">
 				<?php
 					$this->ui->render(
@@ -30,21 +30,21 @@ class Paypal extends View {
 						array(
 							'name'       => 'paypal_mode',
 							'selected'   => $mode,
-							'class'      => 'hammock-mode-select',
+							'class'      => 'hubloy-membership-mode-select',
 							'attributes' => array(
 								'data-target' => 'paypal',
 							),
 							'values'     => array(
-								'live' => __( 'Live', 'hammock' ),
-								'test' => __( 'Sandbox', 'hammock' ),
+								'live' => __( 'Live', 'hubloy-membership' ),
+								'test' => __( 'Sandbox', 'hubloy-membership' ),
 							),
 						)
 					);
 				?>
 			</div>
 		</div>
-		<div class="uk-margin hammock-paypal paypal-live" <?php echo $mode != 'live' ? 'style="display:none"' : ''; ?>>
-			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Live Business Email', 'hammock' ); ?></label>
+		<div class="uk-margin hubloy-membership-paypal paypal-live" <?php echo $mode != 'live' ? 'style="display:none"' : ''; ?>>
+			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Live Business Email', 'hubloy-membership' ); ?></label>
 			<div class="uk-form-controls">
 				<?php
 					$this->ui->render(
@@ -59,8 +59,8 @@ class Paypal extends View {
 				?>
 			</div>
 		</div>
-		<div class="uk-margin hammock-paypal paypal-live" <?php echo $mode != 'live' ? 'style="display:none"' : ''; ?>>
-			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Live Merchant ID', 'hammock' ); ?></label>
+		<div class="uk-margin hubloy-membership-paypal paypal-live" <?php echo $mode != 'live' ? 'style="display:none"' : ''; ?>>
+			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Live Merchant ID', 'hubloy-membership' ); ?></label>
 			<div class="uk-form-controls">
 				<?php
 					$this->ui->render(
@@ -76,8 +76,8 @@ class Paypal extends View {
 				?>
 			</div>
 		</div>
-		<div class="uk-margin hammock-paypal paypal-test" <?php echo $mode != 'test' ? 'style="display:none"' : ''; ?>>
-			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Sandbox Business Email', 'hammock' ); ?></label>
+		<div class="uk-margin hubloy-membership-paypal paypal-test" <?php echo $mode != 'test' ? 'style="display:none"' : ''; ?>>
+			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Sandbox Business Email', 'hubloy-membership' ); ?></label>
 			<div class="uk-form-controls">
 				<?php
 					$this->ui->render(
@@ -92,8 +92,8 @@ class Paypal extends View {
 				?>
 			</div>
 		</div>
-		<div class="uk-margin hammock-paypal paypal-test" <?php echo $mode != 'test' ? 'style="display:none"' : ''; ?>>
-			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Sandbox Merchant ID', 'hammock' ); ?></label>
+		<div class="uk-margin hubloy-membership-paypal paypal-test" <?php echo $mode != 'test' ? 'style="display:none"' : ''; ?>>
+			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Sandbox Merchant ID', 'hubloy-membership' ); ?></label>
 			<div class="uk-form-controls">
 				<?php
 					$this->ui->render(

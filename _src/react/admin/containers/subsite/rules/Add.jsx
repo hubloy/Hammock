@@ -23,8 +23,8 @@ export default class CreateRuleModal extends Component {
 			checked: false
 		};
 		this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
 		});
 		this.onChange = this.onChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -49,7 +49,7 @@ export default class CreateRuleModal extends Component {
 					items : json,
 					loading : false
 				});
-				hammock.helper.select2();
+				hubloy_membership.helper.select2();
 			}, (err) => this.setState({ loading : false })
 		);
 	}
@@ -61,7 +61,7 @@ export default class CreateRuleModal extends Component {
 					membership : json,
 					membership_loading : false
 				});
-				hammock.helper.select2();
+				hubloy_membership.helper.select2();
 			}, (err) => this.setState({ membership_loading : false })
 		);
 	}
@@ -102,7 +102,7 @@ export default class CreateRuleModal extends Component {
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				self.notify( this.props.hammock.error, 'error' );
+				self.notify( this.props.hubloy_membership.error, 'error' );
 			}
 		);
 	}
@@ -110,10 +110,10 @@ export default class CreateRuleModal extends Component {
 	render() {
 		
 		var self = this,
-			hammock = self.props.hammock,
-			strings = hammock.strings.dashboard.add_new.modal;
+			hubloy_membership = self.props.hubloy_membership,
+			strings = hubloy_membership.strings.dashboard.add_new.modal;
 		return (
-			<div id="hammock-add-rule" uk-modal="">
+			<div id="hubloy_membership-add-rule" uk-modal="">
 				<div className="uk-modal-dialog">
 					<button className="uk-modal-close-default" type="button" uk-close=""></button>
 					<div className="uk-modal-header">
@@ -150,9 +150,9 @@ export default class CreateRuleModal extends Component {
 							{self.state.type &&
 								<React.Fragment>
 									<div className="uk-margin">
-										<legend className="uk-form-label">{hammock.common.status.status}</legend>
+										<legend className="uk-form-label">{hubloy_membership.common.status.status}</legend>
 										<div className="uk-form-controls">
-											<div className="hammock-input">
+											<div className="hubloy_membership-input">
 												<section className="slider-checkbox">
 													<input
 														type="checkbox"
@@ -161,7 +161,7 @@ export default class CreateRuleModal extends Component {
 														value={`1`} 
 														onChange={this.onChange}/>
 													<label className='label' htmlFor={'enabled'}>
-														{this.state.checked ? hammock.common.status.enabled : hammock.common.status.disabled }
+														{this.state.checked ? hubloy_membership.common.status.enabled : hubloy_membership.common.status.disabled }
 													</label>
 												</section>
 											</div>
@@ -172,7 +172,7 @@ export default class CreateRuleModal extends Component {
 											{self.state.loading || self.state.membership_loading ? (
 												<div uk-spinner=""></div>
 											) : (
-												hammock.common.buttons.save
+												hubloy_membership.common.buttons.save
 											)}
 										</button>
 									</div>

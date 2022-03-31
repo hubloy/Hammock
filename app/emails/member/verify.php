@@ -1,8 +1,8 @@
 <?php
-namespace Hammock\Emails\Member;
+namespace HubloyMembership\Emails\Member;
 
-use Hammock\Base\Email;
-use Hammock\Model\Settings;
+use HubloyMembership\Base\Email;
+use HubloyMembership\Model\Settings;
 
 /**
  * User email verification
@@ -47,7 +47,7 @@ class Verify extends Email {
 	 */
 	public function init() {
 		$this->settings      = new Settings();
-		$type                = \Hammock\Services\Emails::COMM_TYPE_REGISTRATION_VERIFY;
+		$type                = \HubloyMembership\Services\Emails::COMM_TYPE_REGISTRATION_VERIFY;
 		$this->id            = 'member-' . $type;
 		$this->template_html = 'emails/member-verify-account.php';
 		$this->placeholders  = array();
@@ -62,10 +62,10 @@ class Verify extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Account Verification', 'hammock' ),
-			'description' => __( 'Sent to customers to verify their account emails', 'hammock' ),
-			'heading'     => __( 'Account Verification', 'hammock' ),
-			'subject'     => sprintf( __( 'Verify your account on %s', 'hammock' ), '{site_title}' ),
+			'title'       => __( 'Account Verification', 'hubloy-membership' ),
+			'description' => __( 'Sent to customers to verify their account emails', 'hubloy-membership' ),
+			'heading'     => __( 'Account Verification', 'hubloy-membership' ),
+			'subject'     => sprintf( __( 'Verify your account on %s', 'hubloy-membership' ), '{site_title}' ),
 			'recipient'   => '',
 			'enabled'     => false,
 		);

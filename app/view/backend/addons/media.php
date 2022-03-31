@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\View\Backend\Addons;
+namespace HubloyMembership\View\Backend\Addons;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Base\View;
+use HubloyMembership\Base\View;
 
 /**
  * Media Settings view

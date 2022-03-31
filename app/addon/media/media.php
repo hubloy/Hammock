@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Addon\Media;
+namespace HubloyMembership\Addon\Media;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Addon;
+use HubloyMembership\Base\Addon;
 
 class Media extends Addon {
 
@@ -51,8 +51,8 @@ class Media extends Addon {
 	public function register( $addons ) {
 		if ( ! isset( $addons['media'] ) ) {
 			$addons['media'] = array(
-				'name'        => __( 'Media File Protection', 'hammock' ),
-				'description' => __( 'Protect direct access to media files', 'hammock' ),
+				'name'        => __( 'Media File Protection', 'hubloy-membership' ),
+				'description' => __( 'Protect direct access to media files', 'hubloy-membership' ),
 				'icon'        => 'dashicons dashicons-admin-media',
 				'settings'    => true,
 			);
@@ -77,7 +77,7 @@ class Media extends Addon {
 	 * @return string
 	 */
 	public function settings_page( $data = '' ) {
-		$view       = new \Hammock\View\Backend\Addons\Media();
+		$view       = new \HubloyMembership\View\Backend\Addons\Media();
 		$settings   = $this->settings();
 		$view->data = array(
 			'settings' => $settings,

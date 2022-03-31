@@ -18,8 +18,8 @@ export default class GatewaySetting extends PureComponent {
 		this.onChange = this.onChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
         this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
 	}
 
@@ -68,24 +68,24 @@ export default class GatewaySetting extends PureComponent {
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				self.notify( this.props.hammock.error, 'error' );
+				self.notify( this.props.hubloy_membership.error, 'error' );
 			}
 		);
 	}
 
 	render() {
 		const enabled = this.state.settings.enabled !== 'undefined' ? this.state.settings.enabled : false;
-		var hammock = this.props.hammock;
+		var hubloy_membership = this.props.hubloy_membership;
 		return (
 			<li className="uk-background-default uk-box-shadow-small uk-padding-small" key={this.props.id}>
-				<span className="uk-accordion-title hammock-pointer" href="#">{this.props.item.name} <span className={ "uk-label uk-text-uppercase uk-text-small hammock-gateway-status " + (enabled ? 'uk-label-success' : '') }>{enabled ? hammock.common.status.enabled : hammock.common.status.disabled}</span></span>
+				<span className="uk-accordion-title hubloy_membership-pointer" href="#">{this.props.item.name} <span className={ "uk-label uk-text-uppercase uk-text-small hubloy_membership-gateway-status " + (enabled ? 'uk-label-success' : '') }>{enabled ? hubloy_membership.common.status.enabled : hubloy_membership.common.status.disabled}</span></span>
 				<div className="uk-accordion-content">
 					<form className="uk-form-horizontal uk-margin-large" onSubmit={this.handleSubmit.bind(this)} ref={this.gateway_setting}>
 						<InputUI name={`id`} type={`hidden`} value={this.props.id}/>
 						<div className="uk-margin">
-							<legend className="uk-form-label">{hammock.common.status.status}</legend>
+							<legend className="uk-form-label">{hubloy_membership.common.status.status}</legend>
 							<div className="uk-form-controls">
-								<div className="hammock-input">
+								<div className="hubloy_membership-input">
 									<section className="slider-checkbox">
 										<input
 											type="checkbox"
@@ -95,15 +95,15 @@ export default class GatewaySetting extends PureComponent {
 											onChange={this.onChange}
 										/>
 										<label className='label' htmlFor={this.props.id}>
-											{this.state.checked ? hammock.common.status.enabled : hammock.common.status.disabled }
+											{this.state.checked ? hubloy_membership.common.status.enabled : hubloy_membership.common.status.disabled }
 										</label>
 									</section>
 								</div>
 							</div>
 						</div>
-						<div className="hammock-gateway-settings" dangerouslySetInnerHTML={{ __html: this.state.item }}></div>
+						<div className="hubloy_membership-gateway-settings" dangerouslySetInnerHTML={{ __html: this.state.item }}></div>
 						<div className="uk-margin">
-							<button className="uk-button uk-button-primary update-button">{hammock.common.buttons.update}</button>
+							<button className="uk-button uk-button-primary update-button">{hubloy_membership.common.buttons.update}</button>
 						</div>
 					</form>
 				</div>

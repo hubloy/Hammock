@@ -1,15 +1,15 @@
 <?php
-namespace Hammock\Controller\Site;
+namespace HubloyMembership\Controller\Site;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Controller;
-use Hammock\Shortcode\Account;
-use Hammock\Shortcode\Memberships;
-use Hammock\Shortcode\Restricted;
-use Hammock\Shortcode\Single;
+use HubloyMembership\Base\Controller;
+use HubloyMembership\Shortcode\Account;
+use HubloyMembership\Shortcode\Memberships;
+use HubloyMembership\Shortcode\Restricted;
+use HubloyMembership\Shortcode\Single;
 
 /**
  * Shortcodes controller
@@ -54,9 +54,9 @@ class Shortcodes extends Controller {
 	 */
 	public function init() {
 
-		add_shortcode( 'hammock_membership_list', array( $this, 'membership_list' ) );
-		add_shortcode( 'hammock_protected_content', array( $this, 'protected_content' ) );
-		add_shortcode( 'hammock_account_page', array( $this, 'account_page' ) );
+		add_shortcode( 'hubloy-membership_membership_list', array( $this, 'membership_list' ) );
+		add_shortcode( 'hubloy-membership_protected_content', array( $this, 'protected_content' ) );
+		add_shortcode( 'hubloy-membership_account_page', array( $this, 'account_page' ) );
 	}
 
 	/**

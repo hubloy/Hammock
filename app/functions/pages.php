@@ -3,7 +3,7 @@
  * Page Settings
  * These functions can be used within themes or external resources
  *
- * @package Hammock/Functions
+ * @package HubloyMembership/Functions
  * @since 1.0.0
  */
 if ( ! defined( 'ABSPATH' ) ) {
@@ -20,12 +20,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @return string
  */
-function hammock_get_account_page_links( $endpoint = 'base', $value = '' ) {
-	$base_url = hammock_get_page_permalink( 'account_page' );
+function hubloy-membership_get_account_page_links( $endpoint = 'base', $value = '' ) {
+	$base_url = hubloy-membership_get_page_permalink( 'account_page' );
 	if ( 'base' === $endpoint || 'dashboard' === $endpoint ) {
 		return $base_url;
 	} else {
-		return hammock_get_page_endpoint_url( $base_url, $endpoint, $value );
+		return hubloy-membership_get_page_endpoint_url( $base_url, $endpoint, $value );
 	}
 }
 
@@ -38,8 +38,8 @@ function hammock_get_account_page_links( $endpoint = 'base', $value = '' ) {
  * 
  * @return string
  */
-function hammock_get_invoice_link( $invoice_id ) {
-	return hammock_get_account_page_links( 'view-transaction', $invoice_id );
+function hubloy-membership_get_invoice_link( $invoice_id ) {
+	return hubloy-membership_get_account_page_links( 'view-transaction', $invoice_id );
 }
 
 /**
@@ -53,8 +53,8 @@ function hammock_get_invoice_link( $invoice_id ) {
  *
  * @return string
  */
-function hammock_get_page_endpoint_url( $path, $endpoint, $value = '' ) {
-	$query_vars = hammock()->get_query()->get_query_vars();
+function hubloy-membership_get_page_endpoint_url( $path, $endpoint, $value = '' ) {
+	$query_vars = hubloy-membership()->get_query()->get_query_vars();
 	$endpoint   = ! empty( $query_vars[ $endpoint ] ) ? $query_vars[ $endpoint ] : $endpoint;
 
 	if ( get_option( 'permalink_structure' ) ) {
@@ -77,7 +77,7 @@ function hammock_get_page_endpoint_url( $path, $endpoint, $value = '' ) {
 		$url = add_query_arg( $endpoint, $value, $path );
 	}
 
-	return apply_filters( 'hammock_get_page_endpoint_url', $url, $endpoint, $path, $value );
+	return apply_filters( 'hubloy-membership_get_page_endpoint_url', $url, $endpoint, $path, $value );
 }
 
 /**
@@ -87,8 +87,8 @@ function hammock_get_page_endpoint_url( $path, $endpoint, $value = '' ) {
  *
  * @return string
  */
-function hammock_get_page_permalink( $page_key ) {
-	$page_id  = hammock_page_id( $page_key );
+function hubloy-membership_get_page_permalink( $page_key ) {
+	$page_id  = hubloy-membership_page_id( $page_key );
 	$page_url = get_permalink( $page_id );
-	return apply_filters( 'hammock_get_page_permalink', $page_url, $page_id );
+	return apply_filters( 'hubloy-membership_get_page_permalink', $page_url, $page_id );
 }

@@ -8,11 +8,11 @@ import MemberEdit from './admin/containers/subsite/members/Edit';
 
 
 document.addEventListener('DOMContentLoaded', function () {
-	const hammockContainer = document.getElementById( 'hammock-members-container' );
-	if ( hammockContainer !== null ) {
-		const DefaultView = (props) => <NotFound hammock={window.hammock} {...props}/>
-		const MembersPage = (props) => <SiteMembers hammock={window.hammock} {...props} />
-		const MemberViewPage = (props) => <MemberEdit hammock={window.hammock} {...props} />
+	const hubloy_membershipContainer = document.getElementById( 'hubloy_membership-members-container' );
+	if ( hubloy_membershipContainer !== null ) {
+		const DefaultView = (props) => <NotFound hubloy_membership={window.hubloy_membership} {...props}/>
+		const MembersPage = (props) => <SiteMembers hubloy_membership={window.hubloy_membership} {...props} />
+		const MemberViewPage = (props) => <MemberEdit hubloy_membership={window.hubloy_membership} {...props} />
 		const routing = (
 			<HashRouter>
 				<Switch>
@@ -22,6 +22,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				</Switch>
 			</HashRouter>
 		);
-		ReactDOM.render(routing, hammockContainer);
+		ReactDOM.render(routing, hubloy_membershipContainer);
 	}
 });

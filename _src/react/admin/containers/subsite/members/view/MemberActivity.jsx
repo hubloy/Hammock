@@ -20,8 +20,8 @@ export default class MemberActivity extends Component {
 			error : false
         };
         this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
 	}
 
@@ -44,7 +44,7 @@ export default class MemberActivity extends Component {
 				    error : false,
                 }), (err) => {
 					this.setState({ loading : false, error : true });
-					this.notify( self.props.hammock.error, 'error' );
+					this.notify( self.props.hubloy_membership.error, 'error' );
 				}
             );
         }
@@ -52,7 +52,7 @@ export default class MemberActivity extends Component {
 
 	memberActivities() {
 		const { pager, items } = this.state;
-        var strings = this.props.hammock.strings;
+        var strings = this.props.hubloy_membership.strings;
 		return (
 			<React.Fragment>
 				<div>
@@ -91,7 +91,7 @@ export default class MemberActivity extends Component {
 		} else {
 			if ( this.state.error) {
 				return (
-					<h3 className="uk-text-center uk-text-danger">{this.props.hammock.error}</h3>
+					<h3 className="uk-text-center uk-text-danger">{this.props.hubloy_membership.error}</h3>
 				)
 			} else {
 				return this.memberActivities();
@@ -101,5 +101,5 @@ export default class MemberActivity extends Component {
 }
 
 MemberActivity.propTypes = {
-	hammock: PropTypes.object
+	hubloy_membership: PropTypes.object
 };

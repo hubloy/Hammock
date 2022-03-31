@@ -1,12 +1,12 @@
 <?php
-namespace Hammock\Controller\Site;
+namespace HubloyMembership\Controller\Site;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Controller;
-use Hammock\Core\Admin;
+use HubloyMembership\Base\Controller;
+use HubloyMembership\Core\Admin;
 /**
  * Settings controller
  * Manages all settings
@@ -91,8 +91,8 @@ class Settings extends Controller {
 	public function init() {
 		$this->admin = new Admin();
 		// Ajax to create missing pages
-		$this->add_ajax_action( 'hammock_settings_create_page', 'create_page' );
-		$this->add_filter( 'hammock_admin_register_setting_sub_page', 'register_setting_page' );
+		$this->add_ajax_action( 'hubloy-membership_settings_create_page', 'create_page' );
+		$this->add_filter( 'hubloy-membership_admin_register_setting_sub_page', 'register_setting_page' );
 	}
 
 	/**
@@ -108,8 +108,8 @@ class Settings extends Controller {
 		$this->_cap     = $cap;
 		add_submenu_page(
 			$slug,
-			__( 'Settings', 'hammock' ),
-			__( 'Settings', 'hammock' ),
+			__( 'Settings', 'hubloy-membership' ),
+			__( 'Settings', 'hubloy-membership' ),
 			$this->_cap,
 			$this->_page_id,
 			array( $this, 'render' )
@@ -125,7 +125,7 @@ class Settings extends Controller {
 	 * @return array
 	 */
 	public function setting_pages() {
-		return apply_filters( 'hammock_admin_register_setting_sub_page', $this->admin->get_setting_pages() );
+		return apply_filters( 'hubloy-membership_admin_register_setting_sub_page', $this->admin->get_setting_pages() );
 	}
 
 	/**
@@ -139,13 +139,13 @@ class Settings extends Controller {
 	 */
 	function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'settings' ) ) {
-			$vars['common']['string']['title'] = __( 'Settings', 'hammock' );
+			$vars['common']['string']['title'] = __( 'Settings', 'hubloy-membership' );
 			$vars['active_page']               = 'settings';
 			$vars['strings']                   = $this->get_strings();
 			$vars['page_strings']              = array(
 				'tabs' => array(
-					'general'  => __( 'General', 'hammock' ),
-					'gateways' => __( 'Gateways', 'hammock' ),
+					'general'  => __( 'General', 'hubloy-membership' ),
+					'gateways' => __( 'Gateways', 'hubloy-membership' ),
 				),
 
 			);
@@ -162,7 +162,7 @@ class Settings extends Controller {
 	 */
 	private function get_strings() {
 		if ( empty( $this->strings ) ) {
-			$this->strings = include HAMMOCK_LOCALE_DIR . '/site/settings.php';
+			$this->strings = include HUBMEMB_LOCALE_DIR . '/site/settings.php';
 		}
 		return $this->strings;
 	}
@@ -173,7 +173,7 @@ class Settings extends Controller {
 	 * @since 1.0.0
 	 */
 	public function controller_scripts() {
-		wp_enqueue_script( 'hammock-settings-react' );
+		wp_enqueue_script( 'hubloy-membership-settings-react' );
 	}
 
 	/**
@@ -184,7 +184,7 @@ class Settings extends Controller {
 	public function render() {
 
 		?>
-		<div id="hammock-settings-container"></div>
+		<div id="hubloy-membership-settings-container"></div>
 		<?php
 	}
 

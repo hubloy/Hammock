@@ -1,13 +1,13 @@
 <?php
-namespace Hammock\Controller\Site;
+namespace HubloyMembership\Controller\Site;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Controller;
-use Hammock\Model\Settings;
-use Hammock\Services\Codes;
+use HubloyMembership\Base\Controller;
+use HubloyMembership\Model\Settings;
+use HubloyMembership\Services\Codes;
 
 /**
  * Coupons controller
@@ -115,8 +115,8 @@ class Coupons extends Controller {
 		if ( $enabled ) {
 			add_submenu_page(
 				$slug,
-				__( 'Coupons', 'hammock' ),
-				__( 'Coupons', 'hammock' ),
+				__( 'Coupons', 'hubloy-membership' ),
+				__( 'Coupons', 'hubloy-membership' ),
 				$this->_cap,
 				$this->_page_id,
 				array( $this, 'render' )
@@ -135,7 +135,7 @@ class Coupons extends Controller {
 	 */
 	function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'coupons' ) ) {
-			$vars['common']['string']['title'] = __( 'Coupons', 'hammock' );
+			$vars['common']['string']['title'] = __( 'Coupons', 'hubloy-membership' );
 			$vars['active_page']               = 'coupons';
 			$vars['strings']                   = $this->get_strings();
 			$vars['page_strings']              = array(
@@ -154,7 +154,7 @@ class Coupons extends Controller {
 	 */
 	private function get_strings() {
 		if ( empty( $this->strings ) ) {
-			$this->strings = include HAMMOCK_LOCALE_DIR . '/site/codes.php';
+			$this->strings = include HUBMEMB_LOCALE_DIR . '/site/codes.php';
 		}
 		return $this->strings;
 	}
@@ -165,7 +165,7 @@ class Coupons extends Controller {
 	 * @since 1.0.0
 	 */
 	public function controller_scripts() {
-		wp_enqueue_script( 'hammock-coupons-react' );
+		wp_enqueue_script( 'hubloy-membership-coupons-react' );
 	}
 
 	/**
@@ -176,7 +176,7 @@ class Coupons extends Controller {
 	public function render() {
 
 		?>
-		<div id="hammock-coupons-container"></div>
+		<div id="hubloy-membership-coupons-container"></div>
 		<?php
 	}
 }

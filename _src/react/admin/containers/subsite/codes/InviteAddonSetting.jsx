@@ -11,15 +11,15 @@ export default class InviteAddonSetting extends Component {
 	}
 
 	render() {
-		var hammock = this.props.hammock;
+		var hubloy_membership = this.props.hubloy_membership;
 		return (
-			<Dashboard hammock={hammock} button={<Link className="uk-button uk-button-primary uk-button-small" to={"/new"}>{hammock.strings.add.invite}</Link>}>
-				<SubSiteCodes type={`invitation`} hammock={hammock}/>
+			<Dashboard hubloy_membership={hubloy_membership} button={<Link className="uk-button uk-button-primary uk-button-small" to={"/new"}>{hubloy_membership.strings.add.invite}</Link>}>
+				<SubSiteCodes type={`invitation`} hubloy_membership={hubloy_membership}/>
 			</Dashboard>
 		)
 	}
 }
 
 InviteAddonSetting.propTypes = {
-	hammock: PropTypes.object
+	hubloy_membership: PropTypes.object
 };

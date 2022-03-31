@@ -19,7 +19,7 @@ export class CheckBox extends PureComponent {
 
 	render() {
 		const checked = typeof this.state.checked === 'undefined' ? this.props.checked : this.state.checked;
-		var disabled = window.hammock.common.status.disabled;
+		var disabled = window.hubloy_membership.common.status.disabled;
 		return (
 			<div className="switch-checkbox">
 				<div className="switch b2">

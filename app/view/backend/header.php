@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\View\Backend;
+namespace HubloyMembership\View\Backend;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Base\View;
+use HubloyMembership\Base\View;
 
 class Header extends View {
 
@@ -17,7 +17,7 @@ class Header extends View {
 	 * @return string
 	 */
 	protected function to_html() {
-		$url = is_multisite() ? network_admin_url( 'admin.php?page=hammock' ) : admin_url( 'admin.php?page=hammock' );
+		$url = is_multisite() ? network_admin_url( 'admin.php?page=hubloy-membership' ) : admin_url( 'admin.php?page=hubloy-membership' );
 		ob_start();
 		$this->ui->render( 'header', array( 'url' => $url ) );
 		return ob_get_clean();

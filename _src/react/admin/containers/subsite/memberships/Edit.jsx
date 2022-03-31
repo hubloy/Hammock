@@ -19,8 +19,8 @@ export default class Edit extends Component {
 			error : false
         };
         this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
 	}
 	
@@ -39,7 +39,7 @@ export default class Edit extends Component {
 	}
 
 	render() {
-		var hammock = this.props.hammock;
+		var hubloy_membership = this.props.hubloy_membership;
 		if ( this.state.loading ) {
 			return (
 				<div className="uk-container uk-padding-small uk-margin-top uk-width-1-1 uk-background-default">
@@ -49,27 +49,27 @@ export default class Edit extends Component {
 		} else {
 			if ( this.state.error) {
 				return (
-					<h3 className="uk-text-center uk-text-danger">{hammock.error}</h3>
+					<h3 className="uk-text-center uk-text-danger">{hubloy_membership.error}</h3>
 				)
 			} else {
 				var membership = this.state.membership;
 				var section = this.props.match.params.section !== undefined ? this.props.match.params.section : 'general';
 				return (
-					<Dashboard hammock={hammock} title={hammock.strings.edit.title}>
+					<Dashboard hubloy_membership={hubloy_membership} title={hubloy_membership.strings.edit.title}>
 						{membership.id > 0 ? (
-							<div className="hammock-settings uk-width-expand">
-								<Nav hammock={hammock} active_nav={section} id={this.state.id}/>
-								<div className="hammock-membership uk-background-default uk-padding-small">
+							<div className="hubloy_membership-settings uk-width-expand">
+								<Nav hubloy_membership={hubloy_membership} active_nav={section} id={this.state.id}/>
+								<div className="hubloy_membership-membership uk-background-default uk-padding-small">
 									{
 										{
-											'price': <Price hammock={hammock} membership={membership}/>,
-											'general': <General hammock={hammock} membership={membership}/>
+											'price': <Price hubloy_membership={hubloy_membership} membership={membership}/>,
+											'general': <General hubloy_membership={hubloy_membership} membership={membership}/>
 										}[section]
 									}
 								</div>
 							</div>
 						) : (
-							<h3 className="uk-text-center uk-text-danger">{hammock.strings.edit.not_found}</h3>
+							<h3 className="uk-text-center uk-text-danger">{hubloy_membership.strings.edit.not_found}</h3>
 						) }
 					</Dashboard>
 				)

@@ -1,13 +1,13 @@
 <?php
-namespace Hammock\Rest\Site;
+namespace HubloyMembership\Rest\Site;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Base\Rest;
-use Hammock\Core\Util;
-use Hammock\Helper\Pages;
+use HubloyMembership\Base\Rest;
+use HubloyMembership\Core\Util;
+use HubloyMembership\Helper\Pages;
 
 /**
  * Wizard rest route
@@ -89,7 +89,7 @@ class Wizard extends Rest {
 	 * @return array
 	 */
 	public function get_step( $request ) {
-		$step = Util::get_option( 'hammock_wizard_step' );
+		$step = Util::get_option( 'hubloy-membership_wizard_step' );
 		if ( ! $step || ! is_array( $step ) ) {
 			$step = array(
 				'value' => 10,
@@ -112,7 +112,7 @@ class Wizard extends Rest {
 		$protected_content = sanitize_text_field( $request['protected_content'] );
 		$account_page      = sanitize_text_field( $request['account_page'] );
 
-		$settings    = new \Hammock\Model\Settings();
+		$settings    = new \HubloyMembership\Model\Settings();
 		$pages       = $settings->get_general_setting( 'pages', array() );
 		$flush_rules = false;
 		if ( $membership_list == 'c' ) {
@@ -155,13 +155,13 @@ class Wizard extends Rest {
 		);
 
 		// Update wizard step
-		Util::update_option( 'hammock_wizard_step', $stage );
+		Util::update_option( 'hubloy-membership_wizard_step', $stage );
 
-		$code = \Hammock\Helper\Currency::get_membership_currency();
+		$code = \HubloyMembership\Helper\Currency::get_membership_currency();
 
 		return array(
 			'status'   => true,
-			'message'  => __( 'Settings updated', 'hammock' ),
+			'message'  => __( 'Settings updated', 'hubloy-membership' ),
 			'data'     => $stage,
 			'currency' => esc_html( $code ),
 		);
@@ -189,15 +189,15 @@ class Wizard extends Rest {
 			$duration = sanitize_text_field( $request['recurring_duration'] );
 		}
 
-		$service = new \Hammock\Services\Memberships();
+		$service = new \HubloyMembership\Services\Memberships();
 		$id      = $service->save( $name, '', $enabled, $type, $price );
 		if ( $id ) {
 
-			Util::update_option( 'hammock_installed', 1 );
+			Util::update_option( 'hubloy-membership_installed', 1 );
 
 			// Update wizard step
 			Util::update_option(
-				'hammock_wizard_step',
+				'hubloy-membership_wizard_step',
 				array(
 					'value' => 100,
 					'step'  => 'membership',
@@ -214,12 +214,12 @@ class Wizard extends Rest {
 
 			return array(
 				'status'  => true,
-				'message' => __( 'Membership Saved', 'hammock' ),
+				'message' => __( 'Membership Saved', 'hubloy-membership' ),
 			);
 		} else {
 			return array(
 				'status'  => false,
-				'message' => __( 'Error saving membership', 'hammock' ),
+				'message' => __( 'Error saving membership', 'hubloy-membership' ),
 			);
 		}
 

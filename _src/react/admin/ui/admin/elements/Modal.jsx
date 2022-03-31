@@ -9,7 +9,7 @@ export function ModalUI(props) {
                 <button className="uk-modal-close-full uk-close-large" type="button" uk-close></button>
                 <div className="uk-modal-header">
                     <h2 className="uk-modal-title">{title}</h2>
-                    <div className="uk-invisible hammock-message uk-padding-remove uk-margin-remove" uk-alert></div>
+                    <div className="uk-invisible hubloy_membership-message uk-padding-remove uk-margin-remove" uk-alert></div>
                 </div>
                 <div className="uk-modal-body">{content}</div>
             </div>

@@ -1,7 +1,7 @@
 <?php
-namespace Hammock\Emails\Member\Membership;
+namespace HubloyMembership\Emails\Member\Membership;
 
-use Hammock\Base\Email;
+use HubloyMembership\Base\Email;
 
 /**
  * User card expire
@@ -36,7 +36,7 @@ class Trial extends Email {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$type                = \Hammock\Services\Emails::COMM_TYPE_BEFORE_TRIAL_FINISHES;
+		$type                = \HubloyMembership\Services\Emails::COMM_TYPE_BEFORE_TRIAL_FINISHES;
 		$this->id            = 'member-' . $type;
 		$this->template_html = 'emails/membership/trial.php';
 		$this->placeholders  = array(
@@ -53,10 +53,10 @@ class Trial extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Before Trial Finishes', 'hammock' ),
-			'description' => __( 'Email sent to user before a trial is complete', 'hammock' ),
-			'heading'     => __( 'Trial about to end', 'hammock' ),
-			'subject'     => sprintf( __( 'Your %s membership trial will end soon', 'hammock' ), '{membership_name}' ),
+			'title'       => __( 'Before Trial Finishes', 'hubloy-membership' ),
+			'description' => __( 'Email sent to user before a trial is complete', 'hubloy-membership' ),
+			'heading'     => __( 'Trial about to end', 'hubloy-membership' ),
+			'subject'     => sprintf( __( 'Your %s membership trial will end soon', 'hubloy-membership' ), '{membership_name}' ),
 			'recipient'   => '',
 			'enabled'     => false,
 		);

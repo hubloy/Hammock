@@ -20,8 +20,8 @@ export default class SubSiteSettings extends Component {
         };
         
         this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
     }
 
@@ -83,13 +83,13 @@ export default class SubSiteSettings extends Component {
             }, (err) => {
                 $button.removeAttr('disabled');
                 $button.html($btn_txt);
-                self.notify( self.props.hammock.error, 'error' );
+                self.notify( self.props.hubloy_membership.error, 'error' );
             }
         );
     }
     
     toggle_protection( checked ) {
-		var access = document.getElementsByClassName('hammock-protection-access');
+		var access = document.getElementsByClassName('hubloy_membership-protection-access');
 		access = access[0];
 		if ( checked ) {
 			access.style.display = "block";
@@ -108,18 +108,18 @@ export default class SubSiteSettings extends Component {
 		} else {
             if ( this.state.error) {
 				return (
-					<h3 className="uk-text-center uk-text-danger">{this.props.hammock.error}</h3>
+					<h3 className="uk-text-center uk-text-danger">{this.props.hubloy_membership.error}</h3>
 				)
 			} else {
 				var pages = this.state.settings.pages,
-					strings = this.props.hammock.strings;
+					strings = this.props.hubloy_membership.strings;
 				return (
-					<form name="hammock-settings-form" className="uk-form-horizontal uk-margin-small" method="POST" onSubmit={this.saveSettings.bind(this)} ref={this.save_sub_site_setting}>
-						<div id="hammock-before-settings" className="hammock-before-settings"></div>
+					<form name="hubloy_membership-settings-form" className="uk-form-horizontal uk-margin-small" method="POST" onSubmit={this.saveSettings.bind(this)} ref={this.save_sub_site_setting}>
+						<div id="hubloy_membership-before-settings" className="hubloy_membership-before-settings"></div>
 						<div className="uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="">
 							<div>
 								<div className="uk-height-small uk-card uk-card-default uk-card-body uk-padding-small">
-									<div className="hammock-input">
+									<div className="hubloy_membership-input">
 										<SwitchUI name={`content_protection`} class_name={`content_protection`} title={strings.content_protection.title} value={`1`} selected={this.state.settings.content_protection} checked={this.state.settings.content_protection == 1} action={this.toggle_protection.bind(this)}/>
 										<p className="uk-text-meta">{strings.content_protection.description}</p>
 									</div>
@@ -127,7 +127,7 @@ export default class SubSiteSettings extends Component {
 							</div>
 							<div>
 								<div className="uk-height-small uk-card uk-card-default uk-card-body uk-padding-small">
-									<div className="hammock-input">
+									<div className="hubloy_membership-input">
 										<SwitchUI name={`admin_toolbar`} class_name={`admin_toolbar`} title={strings.admin_toolbar.title} value={`1`} selected={this.state.settings.admin_toolbar} checked={this.state.settings.admin_toolbar == 1}/>
 										<p className="uk-text-meta">{strings.admin_toolbar.description}</p>
 									</div>
@@ -135,7 +135,7 @@ export default class SubSiteSettings extends Component {
 							</div>
 							<div>
 								<div className="uk-height-small uk-card uk-card-default uk-card-body uk-padding-small">
-									<div className="hammock-input">
+									<div className="hubloy_membership-input">
 										<SwitchUI name={`account_verification`} class_name={`account_verification`} title={strings.account_verification.title} value={`1`} selected={this.state.settings.account_verification} checked={this.state.settings.account_verification == 1}/>
 										<p className="uk-text-meta">{strings.account_verification.description}</p>
 									</div>
@@ -159,7 +159,7 @@ export default class SubSiteSettings extends Component {
 								</div>
 							</div>
 						</div>
-						<div className="hammock-protection-access uk-child-width-1-1@s uk-child-width-1-1@m" uk-grid="" style={{display: ( this.state.settings.content_protection === 1 ? 'block' : 'none' )}}>
+						<div className="hubloy_membership-protection-access uk-child-width-1-1@s uk-child-width-1-1@m" uk-grid="" style={{display: ( this.state.settings.content_protection === 1 ? 'block' : 'none' )}}>
 							<div>
 								<div className="uk-height-small uk-card uk-card-default uk-card-body uk-padding-small">
 									<label>{strings.settings.protection.title}</label>
@@ -196,16 +196,16 @@ export default class SubSiteSettings extends Component {
 						<div className="uk-child-width-1-1" uk-grid="">
 							<div>
 								<div className="uk-height-small uk-card uk-card-default uk-card-body uk-padding-small">
-									<div className="hammock-input">
+									<div className="hubloy_membership-input">
 										<SwitchUI name={`delete_on_uninstall`} class_name={`delete_on_uninstall`} title={strings.data.delete_on_uninstall.title} value={`1`} selected={this.state.settings.delete_on_uninstall} checked={this.state.settings.delete_on_uninstall == 1}/>
 										<p className="uk-text-meta">{strings.data.delete_on_uninstall.description}</p>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div id="hammock-after-settings" className="hammock-after-settings"></div>
+						<div id="hubloy_membership-after-settings" className="hubloy_membership-after-settings"></div>
 						<div className="uk-margin ">
-							<button className="uk-button uk-button-primary save-button">{this.props.hammock.common.buttons.save}</button>
+							<button className="uk-button uk-button-primary save-button">{this.props.hubloy_membership.common.buttons.save}</button>
 						</div>
 					</form>
 				)
@@ -214,5 +214,5 @@ export default class SubSiteSettings extends Component {
     }
 }
 SubSiteSettings.propTypes = {
-	hammock: PropTypes.object
+	hubloy_membership: PropTypes.object
 };

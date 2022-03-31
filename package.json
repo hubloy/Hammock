@@ -1,9 +1,9 @@
 {
-	"name": "hammock",
-	"title": "Hammock ",
-	"description": "Hammock is a Membership plugin",
+	"name": "hubloy-membership",
+	"title": "Hubloy Membership",
+	"description": "Membership plugin",
 	"version": "1.0.0",
-	"homepage": "https://www.hammock-membership.com",
+	"homepage": "https://www.hubloymembership.com",
 	"license": "GPL-3.0",
 	"scripts": {
 		"build": "grunt build",

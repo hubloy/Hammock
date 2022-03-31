@@ -1,13 +1,13 @@
 <?php
-namespace Hammock\Rule;
+namespace HubloyMembership\Rule;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Rule;
-use Hammock\Helper\Cache;
-use Hammock\View\Backend\Rules\Access;
+use HubloyMembership\Base\Rule;
+use HubloyMembership\Helper\Cache;
+use HubloyMembership\View\Backend\Rules\Access;
 
 class Post extends Rule {
 
@@ -79,7 +79,7 @@ class Post extends Rule {
 	 */
 	public function init() {
 		$this->id          = 'post';
-		$this->name        = __( 'Posts', 'hammock' );
+		$this->name        = __( 'Posts', 'hubloy-membership' );
 		$this->has_setting = true;
 
 		add_filter( 'pre_trash_post', array( $this, 'pre_trash_post' ), 10, 2 );
@@ -138,11 +138,11 @@ class Post extends Rule {
 	 */
 	public function get_view_columns() {
 		return array(
-			'id'        => __( 'ID', 'hammock' ),
-			'title'     => __( 'Title', 'hammock' ),
-			'access'    => __( 'Who has access', 'hammock' ),
-			'edit_html' => __( 'Edit', 'hammock' ),
-			'view_html' => __( 'View', 'hammock' ),
+			'id'        => __( 'ID', 'hubloy-membership' ),
+			'title'     => __( 'Title', 'hubloy-membership' ),
+			'access'    => __( 'Who has access', 'hubloy-membership' ),
+			'edit_html' => __( 'Edit', 'hubloy-membership' ),
+			'view_html' => __( 'View', 'hubloy-membership' ),
 		);
 	}
 
@@ -251,7 +251,7 @@ class Post extends Rule {
 		add_filter( 'get_next_post_where', array( $this, 'exclude_restricted_adjacent_posts' ), 1, 5 );
 
 		do_action(
-			'hammock_protect_post_content',
+			'hubloy-membership_protect_post_content',
 			$this
 		);
 	}
@@ -308,7 +308,7 @@ class Post extends Rule {
 			$place_holders     = implode( ', ', array_fill( 0, count( $restricted ), '%d' ) );
 			$clauses['where'] .= $wpdb->prepare( " AND $wpdb->posts.ID NOT IN ($place_holders) ", $restricted );
 		}
-		$clauses['where'] .= apply_filters( 'hammock_post_rule_manage_posts_clauses', '' );
+		$clauses['where'] .= apply_filters( 'hubloy-membership_post_rule_manage_posts_clauses', '' );
 		return $clauses;
 	}
 
@@ -385,7 +385,7 @@ class Post extends Rule {
 		if ( 'hide' === $protection_level ) {
 
 			foreach ( $pages as $index => $page ) {
-				$restricted = hammock_is_post_protected( $page );
+				$restricted = hubloy-membership_is_post_protected( $page );
 				if ( $restricted ) {
 					unset( $pages[ $index ] );
 				}
@@ -415,7 +415,7 @@ class Post extends Rule {
 
 				$post_id = (int) $comment->comment_post_ID;
 
-				$restricted = hammock_is_post_protected( $post_id );
+				$restricted = hubloy-membership_is_post_protected( $post_id );
 
 				// if not, exclude this comment from the feed
 				if ( $restricted ) {
@@ -448,14 +448,14 @@ class Post extends Rule {
 		 *
 		 * @since 1.0.0
 		 */
-		$restrictable_comment_types = apply_filters( 'hammock_post_rule_exclude_restricted_comments_types', array( '', 'trackback', 'pingback', 'review', 'contribution_comment' ) );
+		$restrictable_comment_types = apply_filters( 'hubloy-membership_post_rule_exclude_restricted_comments_types', array( '', 'trackback', 'pingback', 'review', 'contribution_comment' ) );
 
 		if ( isset( $comment_query->query_vars['type'] ) && in_array( $comment_query->query_vars['type'], $restrictable_comment_types, true ) ) {
 
 			$the_post_id = ! empty( $comment_query->query_vars['post_id'] ) && is_numeric( $comment_query->query_vars['post_id'] ) ? (int) $comment_query->query_vars['post_id'] : 0;
 			$the_post_id = 0 === $the_post_id && ! empty( $comment_query->query_vars['parent__in'] ) && is_array( $comment_query->query_vars['parent__in'] ) && 1 === count( $comment_query->query_vars['parent__in'] ) ? current( $comment_query->query_vars['parent__in'] ) : $the_post_id;
 
-			$restricted = hammock_is_post_protected( $post );
+			$restricted = hubloy-membership_is_post_protected( $post );
 
 			if ( $restricted ) {
 
@@ -536,8 +536,8 @@ class Post extends Rule {
 	 */
 	public function restrict_post( $post ) {
 
-		if ( ! in_array( $post->ID, $this->content_restricted, false ) && hammock_is_post_protected( $post->ID ) ) {
-			$message = hammock_content_protected_message( $post->ID, 'post', $post->post_type );
+		if ( ! in_array( $post->ID, $this->content_restricted, false ) && hubloy-membership_is_post_protected( $post->ID ) ) {
+			$message = hubloy-membership_content_protected_message( $post->ID, 'post', $post->post_type );
 
 			$this->restrict_post_content( $post, $message );
 			$this->restrict_comments( $post );
@@ -618,7 +618,7 @@ class Post extends Rule {
 		$can_view = true;
 
 		if ( $enclosure && $post ) {
-			$can_view = hammock_is_post_protected( $post );
+			$can_view = hubloy-membership_is_post_protected( $post );
 		}
 
 		return $can_view ? $enclosure : '';
@@ -635,7 +635,7 @@ class Post extends Rule {
 
 		if ( $post ) {
 
-			$restricted = hammock_is_post_protected( $post );
+			$restricted = hubloy-membership_is_post_protected( $post );
 
 			if ( $restricted ) {
 				$wp_query->comment_count   = 0;

@@ -1,15 +1,15 @@
 <?php
-namespace Hammock\Rest\Site;
+namespace HubloyMembership\Rest\Site;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Base\Rest;
-use Hammock\Helper\Currency;
-use Hammock\Helper\Duration;
-use Hammock\Services\Addons;
-use Hammock\Helper\Pages;
+use HubloyMembership\Base\Rest;
+use HubloyMembership\Helper\Currency;
+use HubloyMembership\Helper\Duration;
+use HubloyMembership\Services\Addons;
+use HubloyMembership\Helper\Pages;
 
 /**
  * Settings rest route
@@ -121,7 +121,7 @@ class Settings extends Rest {
 	 * @return array
 	 */
 	public function get_settings( $request ) {
-		$settings = new \Hammock\Model\Settings();
+		$settings = new \HubloyMembership\Model\Settings();
 		return $settings->get_general_settings();
 	}
 
@@ -148,7 +148,7 @@ class Settings extends Rest {
 		// Data
 		$delete_on_uninstall = isset( $request['delete_on_uninstall'] ) ? intval( sanitize_text_field( $request['delete_on_uninstall'] ) ) : 0;
 
-		$settings    = new \Hammock\Model\Settings();
+		$settings    = new \HubloyMembership\Model\Settings();
 		$pages       = $settings->get_general_setting( 'pages', array() );
 		$flush_rules = false;
 		if ( $membership_list == 'c' ) {
@@ -182,9 +182,9 @@ class Settings extends Rest {
 		}
 
 		if ( $settings->get_general_setting( 'account_verification' ) !== $account_verification ) {
-			$type                = \Hammock\Services\Emails::COMM_TYPE_REGISTRATION_VERIFY;
+			$type                = \HubloyMembership\Services\Emails::COMM_TYPE_REGISTRATION_VERIFY;
 			$verifcation_enabled = ( $account_verification === 1 );
-			do_action( 'hammock_email_sender_member-' . $type, $verifcation_enabled );
+			do_action( 'hubloy-membership_email_sender_member-' . $type, $verifcation_enabled );
 		}
 
 		$settings->set_general_setting( 'content_protection', $content_protection );
@@ -199,7 +199,7 @@ class Settings extends Rest {
 
 		return array(
 			'status'  => true,
-			'message' => __( 'Settings updated', 'hammock' ),
+			'message' => __( 'Settings updated', 'hubloy-membership' ),
 		);
 	}
 
@@ -212,7 +212,7 @@ class Settings extends Rest {
 	 */
 	public function get_pages( $request ) {
 		$pages      = Pages::list_pages();
-		$pages['c'] = __( 'Create New Page', 'hammock' );
+		$pages['c'] = __( 'Create New Page', 'hubloy-membership' );
 		return $pages;
 	}
 

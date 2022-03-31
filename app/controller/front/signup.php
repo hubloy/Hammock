@@ -1,16 +1,16 @@
 <?php
-namespace Hammock\Controller\Front;
+namespace HubloyMembership\Controller\Front;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Controller;
-use Hammock\Model\Membership;
-use Hammock\Model\Plan;
-use Hammock\Services\Members;
-use Hammock\Services\Memberships;
-use Hammock\Services\Transactions;
+use HubloyMembership\Base\Controller;
+use HubloyMembership\Model\Membership;
+use HubloyMembership\Model\Plan;
+use HubloyMembership\Services\Members;
+use HubloyMembership\Services\Memberships;
+use HubloyMembership\Services\Transactions;
 
 /**
  * Signup controller
@@ -84,11 +84,11 @@ class Signup extends Controller {
 		$this->membership_service  = new Memberships();
 		$this->transaction_service = new Transactions();
 
-		$this->add_ajax_action( 'hammock_purchase_plan', 'purchase_plan', true, true );
-		$this->add_ajax_action( 'hammock_deactivate_plan', 'deactivate_plan' );
-		$this->add_ajax_action( 'hammock_activate_plan', 'activate_plan' );
+		$this->add_ajax_action( 'hubloy-membership_purchase_plan', 'purchase_plan', true, true );
+		$this->add_ajax_action( 'hubloy-membership_deactivate_plan', 'deactivate_plan' );
+		$this->add_ajax_action( 'hubloy-membership_activate_plan', 'activate_plan' );
 
-		$this->add_ajax_action( 'hammock_purchase_subscription', 'purchase_subscription' );
+		$this->add_ajax_action( 'hubloy-membership_purchase_subscription', 'purchase_subscription' );
 	}
 
 
@@ -99,12 +99,12 @@ class Signup extends Controller {
 	 */
 	public function purchase_plan() {
 		$plan_id = absint( sanitize_text_field( $_POST['plan_id'] ) );
-		$this->verify_nonce( 'hammock_membership_plan_' . $plan_id );
+		$this->verify_nonce( 'hubloy-membership_membership_plan_' . $plan_id );
 
 		$membership = new Membership( $plan_id );
 		if ( $membership->id > 0 ) {
 
-			$can_join = hammock_can_user_join_plan( $plan_id );
+			$can_join = hubloy-membership_can_user_join_plan( $plan_id );
 			if ( ! $can_join['status'] ) {
 				wp_send_json_error( $can_join['message'] );
 			}
@@ -121,7 +121,7 @@ class Signup extends Controller {
 			}
 
 			if ( ! $member || $member->id <= 0 ) {
-				wp_send_json_error( __( 'Error getting member profile. Please try again', 'hammock' ) );
+				wp_send_json_error( __( 'Error getting member profile. Please try again', 'hubloy-membership' ) );
 			}
 
 			$plan = $member->add_plan( $membership );
@@ -147,7 +147,7 @@ class Signup extends Controller {
 				 *
 				 * @return $due_date
 				 */
-				$due_date = apply_filters( 'hammock_new_plan_invoice_due_date', $due_date, $member, $membership, $plan );
+				$due_date = apply_filters( 'hubloy-membership_new_plan_invoice_due_date', $due_date, $member, $membership, $plan );
 
 				/**
 				 * Save transaction
@@ -158,14 +158,14 @@ class Signup extends Controller {
 				if ( $invoice_id ) {
 					wp_send_json_success(
 						array(
-							'message' => __( 'Plan joined. Proceeding to payments', 'hammock' ),
-							'url'     => hammock_get_invoice_link( $invoice_id ),
+							'message' => __( 'Plan joined. Proceeding to payments', 'hubloy-membership' ),
+							'url'     => hubloy-membership_get_invoice_link( $invoice_id ),
 						)
 					);
 				}
 			}
 		}
-		wp_send_json_error( __( 'Error adding plan to your account. Please try again', 'hammock' ) );
+		wp_send_json_error( __( 'Error adding plan to your account. Please try again', 'hubloy-membership' ) );
 	}
 
 	/**
@@ -175,27 +175,27 @@ class Signup extends Controller {
 	 */
 	public function deactivate_plan() {
 		$plan_id = absint( sanitize_text_field( $_POST['plan_id'] ) );
-		$this->verify_nonce( 'hammock_membership_plan_' . $plan_id );
+		$this->verify_nonce( 'hubloy-membership_membership_plan_' . $plan_id );
 
 		$plan = $this->get_user_plan( $plan_id );
 		if ( ! $plan ) {
-			wp_send_json_error( __( 'Plan is not linked to your account', 'hammock' ) );
+			wp_send_json_error( __( 'Plan is not linked to your account', 'hubloy-membership' ) );
 		}
 
 		/**
 		 * Action called before plan is deactivated
 		 * 
-		 * @param \Hammock\Model\Plan $plan The subscription plan
+		 * @param \HubloyMembership\Model\Plan $plan The subscription plan
 		 * 
 		 * @since 1.0.0
 		 */
-		do_action( 'hammock_account_before_deactivate_plan', $plan );
+		do_action( 'hubloy-membership_account_before_deactivate_plan', $plan );
 
 		$plan->cancel();
 
 		wp_send_json_success(
 			array(
-				'message' => __( 'Plan canceled', 'hammock' ),
+				'message' => __( 'Plan canceled', 'hubloy-membership' ),
 				'reload'  => true,
 			)
 		);
@@ -208,11 +208,11 @@ class Signup extends Controller {
 	 */
 	public function activate_plan() {
 		$plan_id = absint( sanitize_text_field( $_POST['plan_id'] ) );
-		$this->verify_nonce( 'hammock_membership_plan_' . $plan_id );
+		$this->verify_nonce( 'hubloy-membership_membership_plan_' . $plan_id );
 
 		$plan = $this->get_user_plan( $plan_id );
 		if ( ! $plan ) {
-			wp_send_json_error( __( 'Plan is not linked to your account', 'hammock' ) );
+			wp_send_json_error( __( 'Plan is not linked to your account', 'hubloy-membership' ) );
 		}
 
 		$plan->set_pending();
@@ -220,8 +220,8 @@ class Signup extends Controller {
 		if ( $invoice_id ) {
 			wp_send_json_success(
 				array(
-					'message' => __( 'Plan joined. Proceeding to payments', 'hammock' ),
-					'url'     => hammock_get_invoice_link( $invoice_id ),
+					'message' => __( 'Plan joined. Proceeding to payments', 'hubloy-membership' ),
+					'url'     => hubloy-membership_get_invoice_link( $invoice_id ),
 				)
 			);
 		}
@@ -233,7 +233,7 @@ class Signup extends Controller {
 	 * @since 1.0.0
 	 */
 	public function purchase_subscription() {
-		$this->verify_nonce( 'hammock_purchase_subscription' );
+		$this->verify_nonce( 'hubloy-membership_purchase_subscription' );
 		$invoice_id     = absint( sanitize_text_field( $_POST['invoice'] ) );
 		$payment_method = sanitize_text_field( $_POST['payment_method'] );
 

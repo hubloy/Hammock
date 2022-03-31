@@ -1,12 +1,12 @@
 <?php
-namespace Hammock\Rest\Site;
+namespace HubloyMembership\Rest\Site;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Base\Rest;
-use Hammock\Model\Settings;
+use HubloyMembership\Base\Rest;
+use HubloyMembership\Model\Settings;
 
 /**
  * Addons rest endpoint
@@ -71,7 +71,7 @@ class Addons extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
-						'description'       => __( 'The addon unique key', 'hammock' ),
+						'description'       => __( 'The addon unique key', 'hubloy-membership' ),
 					),
 				),
 			)
@@ -89,7 +89,7 @@ class Addons extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
-						'description'       => __( 'The addon unique key', 'hammock' ),
+						'description'       => __( 'The addon unique key', 'hubloy-membership' ),
 					),
 				),
 			)
@@ -108,13 +108,13 @@ class Addons extends Rest {
 							'required'          => true,
 							'sanitize_callback' => 'sanitize_text_field',
 							'type'              => 'string',
-							'description'       => __( 'The addon unique key', 'hammock' ),
+							'description'       => __( 'The addon unique key', 'hubloy-membership' ),
 						),
 						'enabled' => array(
 							'required'          => true,
 							'sanitize_callback' => 'absint',
 							'type'              => 'integer',
-							'description'       => __( 'Enabled status either 1 or 0', 'hammock' ),
+							'description'       => __( 'Enabled status either 1 or 0', 'hubloy-membership' ),
 						),
 					),
 				),
@@ -135,13 +135,13 @@ class Addons extends Rest {
 							'required'          => true,
 							'sanitize_callback' => 'sanitize_text_field',
 							'type'              => 'string',
-							'description'       => __( 'The addon unique key', 'hammock' ),
+							'description'       => __( 'The addon unique key', 'hubloy-membership' ),
 						),
 						'action' => array(
 							'required'          => true,
 							'sanitize_callback' => 'sanitize_text_field',
 							'type'              => 'string',
-							'description'       => __( 'The custom addon action to call', 'hammock' ),
+							'description'       => __( 'The custom addon action to call', 'hubloy-membership' ),
 						),
 					),
 				),
@@ -157,7 +157,7 @@ class Addons extends Rest {
 	 * @return array
 	 */
 	public function list_addons( $request ) {
-		$addons = \Hammock\Services\Addons::load_addons();
+		$addons = \HubloyMembership\Services\Addons::load_addons();
 		return rest_ensure_response( $addons );
 	}
 
@@ -170,11 +170,11 @@ class Addons extends Rest {
 	 */
 	public function get_settings( $request ) {
 		$name   = $request['name'];
-		$addons = \Hammock\Services\Addons::load_addons();
+		$addons = \HubloyMembership\Services\Addons::load_addons();
 		if ( isset( $addons[ $name ] ) ) {
 			$settings = new Settings();
 			$settings = $settings->get_addon_setting( $name );
-			$active   = apply_filters( 'hammock_get_addon_' . $name . '_active', true );
+			$active   = apply_filters( 'hubloy-membership_get_addon_' . $name . '_active', true );
 			return rest_ensure_response(
 				array(
 					'settings' => $settings,
@@ -183,7 +183,7 @@ class Addons extends Rest {
 				)
 			);
 		} else {
-			return new \WP_Error( 'rest_addon_invalid', esc_html__( 'The addon does not exist.', 'hammock' ), array( 'status' => 404 ) );
+			return new \WP_Error( 'rest_addon_invalid', esc_html__( 'The addon does not exist.', 'hubloy-membership' ), array( 'status' => 404 ) );
 		}
 	}
 
@@ -197,12 +197,12 @@ class Addons extends Rest {
 	public function update_settings( $request ) {
 		$id       = $request['id'];
 		$response = apply_filters(
-			'hammock_addon_' . $id . '_update_settings',
+			'hubloy-membership_addon_' . $id . '_update_settings',
 			array(
 				'status'  => false,
 				'message' => __(
 					'Addon not found',
-					'hammock'
+					'hubloy-membership'
 				),
 			),
 			$request
@@ -220,7 +220,7 @@ class Addons extends Rest {
 	public function toggle( $request ) {
 		$name    = $request['name'];
 		$enabled = $request['enabled'];
-		$addons  = \Hammock\Services\Addons::load_addons();
+		$addons  = \HubloyMembership\Services\Addons::load_addons();
 		if ( isset( $addons[ $name ] ) ) {
 			$settings                  = new Settings();
 			$addon_settings            = $settings->get_addon_setting( $name );
@@ -235,7 +235,7 @@ class Addons extends Rest {
 				200
 			);
 		} else {
-			return new \WP_Error( 'rest_addon_invalid', esc_html__( 'The addon does not exist.', 'hammock' ), array( 'status' => 404 ) );
+			return new \WP_Error( 'rest_addon_invalid', esc_html__( 'The addon does not exist.', 'hubloy-membership' ), array( 'status' => 404 ) );
 		}
 	}
 
@@ -249,12 +249,12 @@ class Addons extends Rest {
 	public function inner_action( $request ) {
 		$id       = $request['id'];
 		$response = apply_filters(
-			'hammock_addon_' . $id . '_action',
+			'hubloy-membership_addon_' . $id . '_action',
 			array(
 				'success' => true,
 				'message' => __(
 					'Action executed',
-					'hammock'
+					'hubloy-membership'
 				),
 			),
 			$request

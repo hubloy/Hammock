@@ -3,21 +3,21 @@
 /*global $:false */
 /*global window:false */
 /*global document:false */
-/*global hammock:false */
+/*global hubloy_membership:false */
 
 jQuery(function ($) {
 
 	/**
 	 * Form submit
 	 */
-	$('body').on('submit', 'form.hammock-ajax-form', function (e) {
+	$('body').on('submit', 'form.hubloy_membership-ajax-form', function (e) {
 		var $form = $(this),
 			$button = $form.find('button'),
 			$btn_txt = $button.text();
 		$button.attr('disabled', 'disabled');
-		$button.html("<img src='" + hammock.assets.spinner + "' />");
+		$button.html("<img src='" + hubloy_membership.assets.spinner + "' />");
 		$.post(
-			hammock.ajax_url,
+			hubloy_membership.ajax_url,
 			$form.serialize()
 		).done(function (response) {
 			$button.removeAttr('disabled');
@@ -25,7 +25,7 @@ jQuery(function ($) {
 			if (response.success === true) {
 				$form.trigger("reset");
 				if (typeof response.data.message !== 'undefined') {
-					hammock.helper.notify(response.data.message, 'success');
+					hubloy_membership.helper.notify(response.data.message, 'success');
 					if (typeof response.data.url !== 'undefined') {
 						window.location.href = response.data.url;
 					}
@@ -34,21 +34,21 @@ jQuery(function ($) {
 					}
 
 				} else {
-					hammock.helper.notify(response.data, 'success');
+					hubloy_membership.helper.notify(response.data, 'success');
 				}
 			} else {
-				hammock.helper.notify(response.data, 'warning');
+				hubloy_membership.helper.notify(response.data, 'warning');
 			}
 		}).fail(function (xhr, status, error) {
 			$button.removeAttr('disabled');
 			$button.html($btn_txt);
-			hammock.helper.notify(hammock.error, 'error');
+			hubloy_membership.helper.notify(hubloy_membership.error, 'error');
 		});
 		return false;
 	});
 
 	//Switch
-	$('body').on('click', '.hammock-link-switch', function (e) {
+	$('body').on('click', '.hubloy_membership-link-switch', function (e) {
 		e.preventDefault();
 		var $elem = $(this),
 			$target = $elem.attr('data-target'),
@@ -56,40 +56,40 @@ jQuery(function ($) {
 			$item = $container.find($target);
 
 		$container.children('div').each(function (i, obj) {
-			$(obj).addClass('hammock-hidden');
+			$(obj).addClass('hubloy_membership-hidden');
 		});
-		$item.removeClass('hammock-hidden');
+		$item.removeClass('hubloy_membership-hidden');
 	});
 
-	$('body').on('submit', 'form.hammock-checkout-form', function (e) {
+	$('body').on('submit', 'form.hubloy_membership-checkout-form', function (e) {
 		var $form = $(this),
 			$button = $form.find('button'),
 			$btn_txt = $button.text();
 		$button.attr('disabled', 'disabled');
-		$button.html("<img src='" + hammock.assets.spinner + "' />");
+		$button.html("<img src='" + hubloy_membership.assets.spinner + "' />");
 		$.post(
-			hammock.ajax_url,
+			hubloy_membership.ajax_url,
 			$form.serialize()
 		).done(function (response) {
 			if (response.success === true) {
-				$( document.body ).trigger( 'hammock_checkout_success', [ response ] );
+				$( document.body ).trigger( 'hubloy_membership_checkout_success', [ response ] );
 				if (typeof response.data.message !== 'undefined') {
-					hammock.helper.notify(response.data.message, 'success');
+					hubloy_membership.helper.notify(response.data.message, 'success');
 					if (typeof response.data.url !== 'undefined') {
 						window.location.href = response.data.url;
 					}
 				} else {
-					hammock.helper.notify(response.data, 'success');
+					hubloy_membership.helper.notify(response.data, 'success');
 				}
 			} else {
-				hammock.helper.notify(response.data, 'warning');
+				hubloy_membership.helper.notify(response.data, 'warning');
 			}
 			$button.removeAttr( 'disabled' );
 			$button.html( $btn_txt );
 		}).fail(function (xhr, status, error) {
 			$button.removeAttr('disabled');
 			$button.html($btn_txt);
-			hammock.helper.notify(hammock.error, 'error');
+			hubloy_membership.helper.notify(hubloy_membership.error, 'error');
 		});
 		return false;
 	});

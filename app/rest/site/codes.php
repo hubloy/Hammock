@@ -1,13 +1,13 @@
 <?php
-namespace Hammock\Rest\Site;
+namespace HubloyMembership\Rest\Site;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Base\Rest;
-use Hammock\Core\Util;
-use Hammock\Helper\Pagination;
+use HubloyMembership\Base\Rest;
+use HubloyMembership\Core\Util;
+use HubloyMembership\Helper\Pagination;
 
 /**
  * Codes rest controller
@@ -66,14 +66,14 @@ class Codes extends Rest {
 							'required'          => true,
 							'sanitize_callback' => 'absint',
 							'type'              => 'integer',
-							'description'       => __( 'The current page', 'hammock' ),
+							'description'       => __( 'The current page', 'hubloy-membership' ),
 						),
 						'per_page' => array(
 							'required'          => false,
 							'sanitize_callback' => 'absint',
 							'type'              => 'integer',
 							'default'           => 10,
-							'description'       => __( 'Items per page', 'hammock' ),
+							'description'       => __( 'Items per page', 'hubloy-membership' ),
 						),
 					),
 				),
@@ -112,7 +112,7 @@ class Codes extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
-						'description'       => __( 'The code id', 'hammock' ),
+						'description'       => __( 'The code id', 'hubloy-membership' ),
 					),
 				),
 			)
@@ -141,7 +141,7 @@ class Codes extends Rest {
 		$page         = $request->get_param( 'page' );
 		$per_page     = $request->get_param( 'per_page' );
 		$current_page = $page - 1;
-		$service      = new \Hammock\Services\Codes( $type );
+		$service      = new \HubloyMembership\Services\Codes( $type );
 		$model        = $service->get_model();
 		$total        = $model->count();
 		$pages        = Pagination::generate_pages( $total, $per_page, $page );
@@ -166,7 +166,7 @@ class Codes extends Rest {
 	 */
 	public function save_code( $request ) {
 		$type    = $request['type'];
-		$service = new \Hammock\Services\Codes( $type );
+		$service = new \HubloyMembership\Services\Codes( $type );
 		return $service->save_code( $request );
 	}
 
@@ -179,7 +179,7 @@ class Codes extends Rest {
 	 */
 	public function update_code( $request ) {
 		$type    = $request['type'];
-		$service = new \Hammock\Services\Codes( $type );
+		$service = new \HubloyMembership\Services\Codes( $type );
 		return $service->update_code( $request );
 	}
 
@@ -193,7 +193,7 @@ class Codes extends Rest {
 	public function get_code( $request ) {
 		$id      = $request->get_param( 'id' );
 		$type    = $request['type'];
-		$service = new \Hammock\Services\Codes( $type );
+		$service = new \HubloyMembership\Services\Codes( $type );
 		return $service->get_code( $id );
 	}
 
@@ -206,7 +206,7 @@ class Codes extends Rest {
 	 */
 	public function drop_down_list( $request ) {
 		$type    = $request['type'];
-		$service = new \Hammock\Services\Codes( $type );
+		$service = new \HubloyMembership\Services\Codes( $type );
 		return $service->drop_down();
 	}
 }

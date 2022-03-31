@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Addon\Coupon;
+namespace HubloyMembership\Addon\Coupon;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Addon;
+use HubloyMembership\Base\Addon;
 
 class Coupon extends Addon {
 
@@ -51,10 +51,10 @@ class Coupon extends Addon {
 	public function register( $addons ) {
 		if ( ! isset( $addons['coupons'] ) ) {
 			$addons['coupons'] = array(
-				'name'        => __( 'Coupon', 'hammock' ),
-				'description' => __( 'Discount coupons.', 'hammock' ),
+				'name'        => __( 'Coupon', 'hubloy-membership' ),
+				'description' => __( 'Discount coupons.', 'hubloy-membership' ),
 				'icon'        => 'dashicons dashicons-tickets-alt',
-				'url'         => admin_url( 'admin.php?page=hammock-coupons' ),
+				'url'         => admin_url( 'admin.php?page=hubloy-membership-coupons' ),
 			);
 		}
 		return $addons;
@@ -72,7 +72,7 @@ class Coupon extends Addon {
 	public function settings_link( $links ) {
 		if ( ! isset( $links['coupons'] ) ) {
 			$links['coupons'] = array(
-				'name'    => __( 'Coupons', 'hammock' ),
+				'name'    => __( 'Coupons', 'hubloy-membership' ),
 				'enabled' => $this->is_enabled(),
 			);
 		}

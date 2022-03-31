@@ -16,8 +16,8 @@ export default class PlanList extends PureComponent {
 			statuses : []
         };
         this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
 	}
 
@@ -37,14 +37,14 @@ export default class PlanList extends PureComponent {
 				error:false
 			}), (err) => {
 				this.setState({ loading : false, error : true });
-				this.notify( this.props.hammock.error, 'error' );
+				this.notify( this.props.hubloy_membership.error, 'error' );
 			}
 		);
 	}
 
 	toggle_membership_fields( target, selected ) {
 		var id = jQuery(target).parent().attr('data-id'),
-			item = jQuery('.hammock-plan-status-' + id);
+			item = jQuery('.hubloy_membership-plan-status-' + id);
 		item.hide();
 		if ( selected === 'active') {
 			item.show();
@@ -76,7 +76,7 @@ export default class PlanList extends PureComponent {
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				self.notify( this.props.hammock.error, 'error' );
+				self.notify( this.props.hubloy_membership.error, 'error' );
 			}
 		);
 	}
@@ -88,9 +88,9 @@ export default class PlanList extends PureComponent {
 			$btn_txt = $button.text(),
 			prompt = $button.attr('data-prompt'),
 			self = this,
-			hammock = self.props.hammock,
-			helper = hammock.helper,
-			error = hammock.error,
+			hubloy_membership = self.props.hubloy_membership,
+			helper = hubloy_membership.helper,
+			error = hubloy_membership.error,
 			action = false,
 			fetchWP = this.fetchWP;
 
@@ -124,8 +124,8 @@ export default class PlanList extends PureComponent {
 	}
 
 	render() {
-		const {plans, hammock} = this.props;
-		const strings = hammock.strings;
+		const {plans, hubloy_membership} = this.props;
+		const strings = hubloy_membership.strings;
 		return(
 			<React.Fragment>
 				<h5 className="uk-margin-remove uk-heading-divider">{plans.total}{' '}{strings.edit.details.subscription.plans}</h5>
@@ -162,25 +162,25 @@ export default class PlanList extends PureComponent {
 											<div className="uk-margin">
 												<legend className="uk-form-label">{strings.edit.details.subscription.list.enabled}</legend>
 												<div className="uk-form-controls">
-													<div className="hammock-input">
-														<SwitchUI name={`enabled`} checked={item.enabled} title={this.props.hammock.common.status.disabled} enabled_title={this.props.hammock.common.status.enabled} value={`1`} />
+													<div className="hubloy_membership-input">
+														<SwitchUI name={`enabled`} checked={item.enabled} title={this.props.hubloy_membership.common.status.disabled} enabled_title={this.props.hubloy_membership.common.status.enabled} value={`1`} />
 													</div>
 												</div>
 											</div>
-											<div className={"uk-margin hammock-plan-status-" + item.id } style={{display: ( item.status_simple === 'active' ? 'block' : 'none' )}}>
+											<div className={"uk-margin hubloy_membership-plan-status-" + item.id } style={{display: ( item.status_simple === 'active' ? 'block' : 'none' )}}>
 												<legend className="uk-form-label">{strings.edit.details.subscription.list.sub_date}</legend>
 												<div className="uk-form-controls">
-													<InputUI name={`membership_start`} value={item.start_date_edit} class_name={`hammock-from-date`} placeholder={strings.labels.start_date}/>
+													<InputUI name={`membership_start`} value={item.start_date_edit} class_name={`hubloy_membership-from-date`} placeholder={strings.labels.start_date}/>
 												</div>
 											</div>
-											<div className={"uk-margin hammock-plan-status-" + item.id } style={{display: ( item.status_simple === 'active' ? 'block' : 'none' )}}>
+											<div className={"uk-margin hubloy_membership-plan-status-" + item.id } style={{display: ( item.status_simple === 'active' ? 'block' : 'none' )}}>
 												<legend className="uk-form-label">{strings.edit.details.subscription.list.expire_date}</legend>
 												<div className="uk-form-controls">
-													<InputUI name={`membership_end`} value={item.end_date_edit} class_name={`hammock-to-date`} placeholder={strings.labels.end_date}/>
+													<InputUI name={`membership_end`} value={item.end_date_edit} class_name={`hubloy_membership-to-date`} placeholder={strings.labels.end_date}/>
 												</div>
 											</div>
 											<div className="uk-margin ">
-												<button className="uk-button uk-button-primary uk-button-small save-button">{hammock.common.buttons.update}</button>
+												<button className="uk-button uk-button-primary uk-button-small save-button">{hubloy_membership.common.buttons.update}</button>
 											</div>
 										</form>
 										<a className="uk-link-text uk-text-danger" data-id={item.id} data-prompt={strings.edit.details.subscription.list.delete.one.prompt} onClick={this.delete_one.bind(this)} href="#">{strings.edit.details.subscription.list.delete.one.title}</a>

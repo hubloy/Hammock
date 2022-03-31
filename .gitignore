@@ -14,3 +14,4 @@ docs
 /backup/*
 .diff
 .vscode
+package-lock.json

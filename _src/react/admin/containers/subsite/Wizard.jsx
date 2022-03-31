@@ -17,11 +17,11 @@ export default class Wizard extends Component {
         this.state = {
 			loading : true,
 			step : { value : 10, step : 'options' },
-			currency : this.props.hammock.common.currency_code
+			currency : this.props.hubloy_membership.common.currency_code
         };
         this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
 
         this.buttonClick = this.buttonClick.bind(this);
@@ -41,7 +41,7 @@ export default class Wizard extends Component {
                 step : json,
 				loading : false
             }), (err) => {
-				this.notify( this.props.hammock.error, 'error' );
+				this.notify( this.props.hubloy_membership.error, 'error' );
 				this.setState({loading : false});
 			}
         );
@@ -52,23 +52,23 @@ export default class Wizard extends Component {
     }
 
 	render() {
-        var hammock = this.props.hammock,
+        var hubloy_membership = this.props.hubloy_membership,
 			step = this.state.step;
 		return (
-			<Dashboard hammock={hammock}>
-				<h2 className="uk-text-center uk-heading-divider">{hammock.strings.dashboard.wizard.title}</h2>
+			<Dashboard hubloy_membership={hubloy_membership}>
+				<h2 className="uk-text-center uk-heading-divider">{hubloy_membership.strings.dashboard.wizard.title}</h2>
                 <div className="uk-background-default uk-align-center uk-width-2-3@l uk-width-1-2@m uk-width-1-1@s uk-margin-medium-top uk-padding-small">
 				    <progress className="uk-progress uk-width-1-2 uk-align-center" value={step.value} max="100"></progress>
 					{this.state.loading ? (
-						<div className="uk-container hammock-preloader uk-padding-small uk-align-center uk-margin-top uk-width-1-1 uk-background-default">
+						<div className="uk-container hubloy_membership-preloader uk-padding-small uk-align-center uk-margin-top uk-width-1-1 uk-background-default">
 							<span className="uk-text-center" uk-spinner="ratio: 3"></span>
 						</div>
 					) : (
 						<React.Fragment>
 							{
 								{
-									'options': <WizardSettings hammock={hammock} action={this.buttonClick}/>,
-									'membership': <WizardCreateMembership hammock={hammock} currency={this.state.currency} action={this.buttonClick}/>
+									'options': <WizardSettings hubloy_membership={hubloy_membership} action={this.buttonClick}/>,
+									'membership': <WizardCreateMembership hubloy_membership={hubloy_membership} currency={this.state.currency} action={this.buttonClick}/>
 								}[step.step]
 							}
 						</React.Fragment>
@@ -80,5 +80,5 @@ export default class Wizard extends Component {
 }
 
 Wizard.propTypes = {
-	hammock: PropTypes.object
+	hubloy_membership: PropTypes.object
 };

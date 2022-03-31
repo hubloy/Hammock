@@ -20,8 +20,8 @@ export default class WizardSettings extends PureComponent {
         this.setting_form = React.createRef();
 
         this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
 
         this.saveSettings = this.saveSettings.bind(this);
@@ -70,7 +70,7 @@ export default class WizardSettings extends PureComponent {
             $button = $form.find('button'),
 			$btn_txt = $button.text(),
 			form = $form.serialize(),
-            hammock = this.props.hammock,
+            hubloy_membership = this.props.hubloy_membership,
             action = self.props.action;
             
         $button.attr('disabled', 'disabled');
@@ -88,7 +88,7 @@ export default class WizardSettings extends PureComponent {
             }, (err) => {
                 $button.removeAttr('disabled');
                 $button.html($btn_txt);
-                self.notify( 'error', hammock.error );
+                self.notify( 'error', hubloy_membership.error );
             }
         );
     }
@@ -96,16 +96,16 @@ export default class WizardSettings extends PureComponent {
     render() {
         if (this.state.loading_settings) {
             return (
-				<div className="hammock-preloader uk-container uk-align-center uk-padding-small uk-margin-top uk-width-1-1 uk-background-default">
+				<div className="hubloy_membership-preloader uk-container uk-align-center uk-padding-small uk-margin-top uk-width-1-1 uk-background-default">
 					<span className="uk-text-center" uk-spinner="ratio: 3"></span>
 				</div>
 			)
         } else {
-            var hammock = this.props.hammock,
+            var hubloy_membership = this.props.hubloy_membership,
                 pages = this.state.settings.pages,
-                strings = hammock.strings.dashboard.wizard;
+                strings = hubloy_membership.strings.dashboard.wizard;
             return (
-                <form name="hammock-settings-form" className="uk-form-horizontal uk-margin-small" method="POST" onSubmit={this.saveSettings} ref={this.setting_form}>
+                <form name="hubloy_membership-settings-form" className="uk-form-horizontal uk-margin-small" method="POST" onSubmit={this.saveSettings} ref={this.setting_form}>
                     <h1 className="uk-heading-divider">{strings.settings.title}</h1>
                     <div className="uk-margin">
                         <label>{strings.settings.currency.title}</label>
@@ -129,7 +129,7 @@ export default class WizardSettings extends PureComponent {
                         <p className="uk-text-meta">{strings.pages.account_page.description}</p>
                     </div>
                     <div className="uk-margin ">
-                        <button className="uk-button uk-button-primary save-button">{hammock.common.buttons.continue}</button>
+                        <button className="uk-button uk-button-primary save-button">{hubloy_membership.common.buttons.continue}</button>
                     </div>
                 </form>
             )

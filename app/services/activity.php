@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Services;
+namespace HubloyMembership\Services;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Core\Database;
+use HubloyMembership\Core\Database;
 
 /**
  * Activity service
@@ -142,7 +142,7 @@ class Activity {
 		$activities = array();
 		if ( ! empty( $results ) ) {
 			foreach ( $results as $result ) {
-				$activities[] = \Hammock\Model\Activity::to_html( $result );
+				$activities[] = \HubloyMembership\Model\Activity::to_html( $result );
 			}
 		}
 		return $activities;

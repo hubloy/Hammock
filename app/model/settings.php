@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Model;
+namespace HubloyMembership\Model;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Core\Util;
+use HubloyMembership\Core\Util;
 
 /**
  * Settings model
@@ -132,7 +132,7 @@ class Settings {
 	 * @return string
 	 */
 	private function option_key() {
-		return 'hammock_settings';
+		return 'hubloy-membership_settings';
 	}
 
 	/**

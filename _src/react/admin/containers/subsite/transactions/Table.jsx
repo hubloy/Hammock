@@ -15,8 +15,8 @@ export default class Table extends Component {
 			error : false,
 		};
 		this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
 		});
 
 		this.handleRowAction = this.handleRowAction.bind(this);
@@ -47,7 +47,7 @@ export default class Table extends Component {
 	
 	render() {
 		const { pager, items } = this.state;
-		var strings = this.props.hammock.strings;
+		var strings = this.props.hubloy_membership.strings;
 		if ( this.state.loading) {
 			return (
 				<div className="uk-container uk-padding-small uk-margin-top uk-width-1-1">
@@ -57,7 +57,7 @@ export default class Table extends Component {
 		} else {
 			if ( this.state.error) {
 				return (
-					<h3 className="uk-text-center uk-text-danger">{hammock.error}</h3>
+					<h3 className="uk-text-center uk-text-danger">{hubloy_membership.error}</h3>
 				)
 			} else {
 				return (
@@ -68,7 +68,7 @@ export default class Table extends Component {
 							<table className="uk-table uk-background-default">
 								<thead>
 									<tr>
-										<th><input className="uk-checkbox hammock-top-checkbox" type="checkbox" /></th>
+										<th><input className="uk-checkbox hubloy_membership-top-checkbox" type="checkbox" /></th>
 										<th className="uk-width-auto">{strings.dashboard.table.id}</th>
 										<th>{strings.dashboard.table.status}</th>
 										<th>{strings.dashboard.table.gateway}</th>
@@ -80,7 +80,7 @@ export default class Table extends Component {
 								</thead>
 								<tfoot>
 									<tr>
-										<th><input className="uk-checkbox hammock-bottom-checkbox" type="checkbox" /></th>
+										<th><input className="uk-checkbox hubloy_membership-bottom-checkbox" type="checkbox" /></th>
 										<th className="uk-width-auto">{strings.dashboard.table.id}</th>
 										<th>{strings.dashboard.table.status}</th>
 										<th>{strings.dashboard.table.gateway}</th>
@@ -97,17 +97,17 @@ export default class Table extends Component {
 										<td>
 											{item.invoice_id}
 											<div id={"transaction-hover-"+ item.id}>
-												<Link uk-tooltip={hammock.common.buttons.edit} title={hammock.common.buttons.edit} className="uk-text-primary" to={"/transaction/" + item.id}>{hammock.common.buttons.edit}</Link>
+												<Link uk-tooltip={hubloy_membership.common.buttons.edit} title={hubloy_membership.common.buttons.edit} className="uk-text-primary" to={"/transaction/" + item.id}>{hubloy_membership.common.buttons.edit}</Link>
 												{' '}|{' '}
-												<a href="#" data-id={item.id} uk-tooltip={hammock.common.buttons.delete} title={hammock.common.buttons.delete} className="uk-text-danger" onClick={ e => this.handleRowAction(e, item.id, 'delete')}>{hammock.common.buttons.delete}</a>
+												<a href="#" data-id={item.id} uk-tooltip={hubloy_membership.common.buttons.delete} title={hubloy_membership.common.buttons.delete} className="uk-text-danger" onClick={ e => this.handleRowAction(e, item.id, 'delete')}>{hubloy_membership.common.buttons.delete}</a>
 												{item.is_overdue &&
 													<React.Fragment>
-														{' '}|{' '}<a href="#" data-id={item.id} uk-tooltip={hammock.common.buttons.reminder} title={hammock.common.buttons.reminder} className="uk-text-secondary" onClick={e =>  this.handleRowAction(e, item.id, 'remind')}>{hammock.common.buttons.reminder}</a>
+														{' '}|{' '}<a href="#" data-id={item.id} uk-tooltip={hubloy_membership.common.buttons.reminder} title={hubloy_membership.common.buttons.reminder} className="uk-text-secondary" onClick={e =>  this.handleRowAction(e, item.id, 'remind')}>{hubloy_membership.common.buttons.reminder}</a>
 													</React.Fragment>
 												}
 											</div>
 										</td>
-										<td>{item.status_name} <span dangerouslySetInnerHTML={{ __html: item.is_overdue ? '<span class="hammock-text-small uk-label uk-label-warning">' + strings.labels.overdue + '</span>' : ''}}/></td>
+										<td>{item.status_name} <span dangerouslySetInnerHTML={{ __html: item.is_overdue ? '<span class="hubloy_membership-text-small uk-label uk-label-warning">' + strings.labels.overdue + '</span>' : ''}}/></td>
 										<td>{item.gateway_name}</td>
 										<td><span dangerouslySetInnerHTML={{ __html: item.amount_formated }}></span></td>
 										<td>

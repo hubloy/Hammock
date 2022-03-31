@@ -1,24 +1,24 @@
 <?php
 /**
- * Plugin Name:         Hammock
- * Plugin URI:          https://www.hammock-membership.com
+ * Plugin Name:         HubloyMembership
+ * Plugin URI:          https://www.hubloymembership.com
  * Description:         Manage access to your WordPress site like a pro
  * Version:             1.0.0
  * Author:              Hubloy
  * Author URI:          https://www.hubloy.com
  * License:             GPLv2
  * License URI:         https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:         hammock
+ * Text Domain:         hubloy-membership
  * Domain Path:         /languages/
  *
- * @package Hammock
+ * @package HubloyMembership
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-if ( ! class_exists( 'Hammock' ) ) :
+if ( ! class_exists( 'HubloyMembership' ) ) :
 
 	/**
 	 * Main plugin class
@@ -29,7 +29,7 @@ if ( ! class_exists( 'Hammock' ) ) :
 	 *
 	 * @since 1.0.0
 	 */
-	final class Hammock {
+	final class HubloyMembership {
 
 		/**
 		 * Current plugin version.
@@ -93,16 +93,16 @@ if ( ! class_exists( 'Hammock' ) ) :
 			$this->auto_load();
 
 			// Initiate plugin.
-			\Hammock\Base\Plugin::instance();
+			\HubloyMembership\Base\Plugin::instance();
 
-			$this->query = new \Hammock\Core\Query();
-			$this->api   = new \Hammock\Core\Api();
+			$this->query = new \HubloyMembership\Core\Query();
+			$this->api   = new \HubloyMembership\Core\Api();
 
 			if ( defined( 'WP_CLI' ) && WP_CLI ) {
 				// Load wp_cli
 			}
 
-			do_action( 'hammock_loaded' );
+			do_action( 'hubloy-membership_loaded' );
 		}
 
 
@@ -114,24 +114,24 @@ if ( ! class_exists( 'Hammock' ) ) :
 		 */
 		protected function define_constants() {
 			$upload_dir = wp_upload_dir();
-			$this->define( 'HAMMOCK_MENU_LOCATION', '55.5' );
-			$this->define( 'HAMMOCK_REST_NAMESPACE', 'hammock/v1/' );
-			$this->define( 'HAMMOCK_VERSION', $this->version );
-			$this->define( 'HAMMOCK_UIKIT_VERSION', '3.2.6' );
-			$this->define( 'HAMMOCK_DEBUG', true );
-			$this->define( 'HAMMOCK_PLUGIN_FILE', __FILE__ );
-			$this->define( 'HAMMOCK_PLUGIN', plugin_basename( __FILE__ ) );
-			$this->define( 'HAMMOCK_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-			$this->define( 'HAMMOCK_PLUGIN_BASE_DIR', dirname( __FILE__ ) );
-			$this->define( 'HAMMOCK_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-			$this->define( 'HAMMOCK_LANG_DIR', HAMMOCK_PLUGIN_DIR . '/languages' );
-			$this->define( 'HAMMOCK_TEMPLATE_DIR', HAMMOCK_PLUGIN_DIR . '/templates/' );
-			$this->define( 'HAMMOCK_FUNCTIONS_DIR', HAMMOCK_PLUGIN_DIR . '/app/functions/' );
-			$this->define( 'HAMMOCK_LIB_DIR', HAMMOCK_PLUGIN_DIR . '/lib/' );
-			$this->define( 'HAMMOCK_LOCALE_DIR', HAMMOCK_PLUGIN_DIR . '/app/i18n' );
-			$this->define( 'HAMMOCK_ASSETS_URL', HAMMOCK_PLUGIN_URL . 'assets' );
-			$this->define( 'HAMMOCK_LOG_DIR', $upload_dir['basedir'] . '/hammock-logs/' );
-			$this->define( 'HAMMOCK_LOG_URL', $upload_dir['baseurl'] . '/hammock-logs/' );
+			$this->define( 'HUBMEMB_MENU_LOCATION', '55.5' );
+			$this->define( 'HUBMEMB_REST_NAMESPACE', 'hubloy-membership/v1/' );
+			$this->define( 'HUBMEMB_VERSION', $this->version );
+			$this->define( 'HUBMEMB_UIKIT_VERSION', '3.2.6' );
+			$this->define( 'HUBMEMB_DEBUG', true );
+			$this->define( 'HUBMEMB_PLUGIN_FILE', __FILE__ );
+			$this->define( 'HUBMEMB_PLUGIN', plugin_basename( __FILE__ ) );
+			$this->define( 'HUBMEMB_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+			$this->define( 'HUBMEMB_PLUGIN_BASE_DIR', dirname( __FILE__ ) );
+			$this->define( 'HUBMEMB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+			$this->define( 'HUBMEMB_LANG_DIR', HUBMEMB_PLUGIN_DIR . '/languages' );
+			$this->define( 'HUBMEMB_TEMPLATE_DIR', HUBMEMB_PLUGIN_DIR . '/templates/' );
+			$this->define( 'HUBMEMB_FUNCTIONS_DIR', HUBMEMB_PLUGIN_DIR . '/app/functions/' );
+			$this->define( 'HUBMEMB_LIB_DIR', HUBMEMB_PLUGIN_DIR . '/lib/' );
+			$this->define( 'HUBMEMB_LOCALE_DIR', HUBMEMB_PLUGIN_DIR . '/app/i18n' );
+			$this->define( 'HUBMEMB_ASSETS_URL', HUBMEMB_PLUGIN_URL . 'assets' );
+			$this->define( 'HUBMEMB_LOG_DIR', $upload_dir['basedir'] . '/hubloy-membership-logs/' );
+			$this->define( 'HUBMEMB_LOG_URL', $upload_dir['baseurl'] . '/hubloy-membership-logs/' );
 		}
 
 
@@ -169,7 +169,7 @@ if ( ! class_exists( 'Hammock' ) ) :
 			$base_path = __DIR__ . DIRECTORY_SEPARATOR;
 			$pools     = explode( '\\', $class );
 
-			if ( 'Hammock' !== $pools[0] ) {
+			if ( 'HubloyMembership' !== $pools[0] ) {
 				return;
 			}
 
@@ -212,13 +212,13 @@ if ( ! class_exists( 'Hammock' ) ) :
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return Hammock
+	 * @return HubloyMembership
 	 */
-	function hammock() {
-		return Hammock::instance();
+	function hubloy-membership() {
+		return HubloyMembership::instance();
 	}
 
-	hammock();
+	hubloy-membership();
 
 endif;
 

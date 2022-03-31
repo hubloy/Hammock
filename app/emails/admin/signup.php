@@ -1,7 +1,7 @@
 <?php
-namespace Hammock\Emails\Admin;
+namespace HubloyMembership\Emails\Admin;
 
-use Hammock\Base\Email;
+use HubloyMembership\Base\Email;
 
 /**
  * Admin membership registration
@@ -36,7 +36,7 @@ class Signup extends Email {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$type                = \Hammock\Services\Emails::COMM_TYPE_SIGNUP;
+		$type                = \HubloyMembership\Services\Emails::COMM_TYPE_SIGNUP;
 		$this->id            = 'admin-' . $type;
 		$this->is_admin      = true;
 		$this->template_html = 'emails/admin/signup.php';
@@ -54,10 +54,10 @@ class Signup extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Membership Sign-up', 'hammock' ),
-			'description' => __( 'Email sent to admin to notify a new user has registered', 'hammock' ),
-			'heading'     => sprintf( __( 'New sign-up %s', 'hammock' ), '{membership_name}' ),
-			'subject'     => sprintf( __( '%1$s: New sign-up %2$s', 'hammock' ), '[{site_title}]', '{membership_name}' ),
+			'title'       => __( 'Membership Sign-up', 'hubloy-membership' ),
+			'description' => __( 'Email sent to admin to notify a new user has registered', 'hubloy-membership' ),
+			'heading'     => sprintf( __( 'New sign-up %s', 'hubloy-membership' ), '{membership_name}' ),
+			'subject'     => sprintf( __( '%1$s: New sign-up %2$s', 'hubloy-membership' ), '[{site_title}]', '{membership_name}' ),
 			'recipient'   => get_option( 'admin_email' ),
 			'enabled'     => true,
 		);

@@ -1,14 +1,14 @@
 <?php
-namespace Hammock\Services;
+namespace HubloyMembership\Services;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Core\Database;
-use Hammock\Model\Meta;
-use Hammock\Model\Membership;
-use Hammock\Helper\Duration;
+use HubloyMembership\Core\Database;
+use HubloyMembership\Model\Meta;
+use HubloyMembership\Model\Membership;
+use HubloyMembership\Helper\Duration;
 
 /**
  * Memberships service
@@ -76,11 +76,11 @@ class Memberships {
 	 */
 	public static function payment_types() {
 		$payment_types = array(
-			self::PAYMENT_TYPE_PERMANENT  => __( 'One payment for permanent access', 'hammock' ),
-			self::PAYMENT_TYPE_DATE_RANGE => __( 'One payment for date range access', 'hammock' ),
-			self::PAYMENT_TYPE_RECURRING  => __( 'Recurring payment', 'hammock' ),
+			self::PAYMENT_TYPE_PERMANENT  => __( 'One payment for permanent access', 'hubloy-membership' ),
+			self::PAYMENT_TYPE_DATE_RANGE => __( 'One payment for date range access', 'hubloy-membership' ),
+			self::PAYMENT_TYPE_RECURRING  => __( 'Recurring payment', 'hubloy-membership' ),
 		);
-		return apply_filters( 'hammock_membership_payment_types', $payment_types );
+		return apply_filters( 'hubloy-membership_membership_payment_types', $payment_types );
 	}
 
 	/**
@@ -92,12 +92,12 @@ class Memberships {
 	 */
 	public static function payment_durations() {
 		return apply_filters(
-			'hammock_membership_payment_durations',
+			'hubloy-membership_membership_payment_durations',
 			array(
-				Duration::PERIOD_TYPE_DAYS   => __( 'Daily', 'hammock' ),
-				Duration::PERIOD_TYPE_WEEKS  => __( 'Weekly', 'hammock' ),
-				Duration::PERIOD_TYPE_MONTHS => __( 'Monthly', 'hammock' ),
-				Duration::PERIOD_TYPE_YEARS  => __( 'Annually', 'hammock' ),
+				Duration::PERIOD_TYPE_DAYS   => __( 'Daily', 'hubloy-membership' ),
+				Duration::PERIOD_TYPE_WEEKS  => __( 'Weekly', 'hubloy-membership' ),
+				Duration::PERIOD_TYPE_MONTHS => __( 'Monthly', 'hubloy-membership' ),
+				Duration::PERIOD_TYPE_YEARS  => __( 'Annually', 'hubloy-membership' ),
 			)
 		);
 	}
@@ -113,7 +113,7 @@ class Memberships {
 	 */
 	public static function get_payment_duration( $duration ) {
 		$durations = self::payment_durations();
-		return isset( $durations[ $duration ] ) ? $durations[ $duration ] : __( 'N/A', 'hammock' );
+		return isset( $durations[ $duration ] ) ? $durations[ $duration ] : __( 'N/A', 'hubloy-membership' );
 	}
 
 
@@ -127,12 +127,12 @@ class Memberships {
 	 */
 	public static function trial_duration() {
 		return apply_filters(
-			'hammock_membership_trial_duration',
+			'hubloy-membership_membership_trial_duration',
 			array(
-				Duration::PERIOD_TYPE_DAYS   => __( 'Day', 'hammock' ),
-				Duration::PERIOD_TYPE_WEEKS  => __( 'Week', 'hammock' ),
-				Duration::PERIOD_TYPE_MONTHS => __( 'Month', 'hammock' ),
-				Duration::PERIOD_TYPE_YEARS  => __( 'Year', 'hammock' ),
+				Duration::PERIOD_TYPE_DAYS   => __( 'Day', 'hubloy-membership' ),
+				Duration::PERIOD_TYPE_WEEKS  => __( 'Week', 'hubloy-membership' ),
+				Duration::PERIOD_TYPE_MONTHS => __( 'Month', 'hubloy-membership' ),
+				Duration::PERIOD_TYPE_YEARS  => __( 'Year', 'hubloy-membership' ),
 			)
 		);
 	}
@@ -148,7 +148,7 @@ class Memberships {
 	 */
 	public static function get_trial_duration( $duration ) {
 		$durations = self::trial_duration();
-		return isset( $durations[ $duration ] ) ? $durations[ $duration ] : __( 'N/A', 'hammock' );
+		return isset( $durations[ $duration ] ) ? $durations[ $duration ] : __( 'N/A', 'hubloy-membership' );
 	}
 
 	/**
@@ -162,7 +162,7 @@ class Memberships {
 	 */
 	public static function get_type( $type ) {
 		$types = self::payment_types();
-		return isset( $types[ $type ] ) ? $types[ $type ] : __( 'N/A', 'hammock' );
+		return isset( $types[ $type ] ) ? $types[ $type ] : __( 'N/A', 'hubloy-membership' );
 	}
 
 	/**
@@ -281,7 +281,7 @@ class Memberships {
 		$where = '';
 		if ( $include_select ) {
 			$memberships = array(
-				0 => __( 'Select Membership', 'hammock' ),
+				0 => __( 'Select Membership', 'hubloy-membership' ),
 			);
 		} else {
 			$memberships = array();
@@ -378,7 +378,7 @@ class Memberships {
 			 *
 			 * @since 1.0.0
 			 */
-			do_action( 'hammock_memberships_plan_created', $id );
+			do_action( 'hubloy-membership_memberships_plan_created', $id );
 			return $id;
 		}
 	}
@@ -419,7 +419,7 @@ class Memberships {
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( 'hammock_memberships_general_updated', $id );
+		do_action( 'hubloy-membership_memberships_general_updated', $id );
 
 		/**
 		 * General action for all updates on a membership
@@ -428,7 +428,7 @@ class Memberships {
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( 'hammock_memberships_updated', $id );
+		do_action( 'hubloy-membership_memberships_updated', $id );
 	}
 
 	/**
@@ -457,7 +457,7 @@ class Memberships {
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( 'hammock_memberships_duration_updated', $id );
+		do_action( 'hubloy-membership_memberships_duration_updated', $id );
 
 		/**
 		 * General action for all updates on a membership
@@ -466,7 +466,7 @@ class Memberships {
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( 'hammock_memberships_updated', $id );
+		do_action( 'hubloy-membership_memberships_updated', $id );
 	}
 
 	/**
@@ -505,7 +505,7 @@ class Memberships {
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( 'hammock_memberships_price_updated', $id );
+		do_action( 'hubloy-membership_memberships_price_updated', $id );
 
 		/**
 		 * General action for all updates on a membership
@@ -514,7 +514,7 @@ class Memberships {
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( 'hammock_memberships_updated', $id );
+		do_action( 'hubloy-membership_memberships_updated', $id );
 	}
 
 	/**

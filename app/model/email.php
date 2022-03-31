@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Model;
+namespace HubloyMembership\Model;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Core\Util;
+use HubloyMembership\Core\Util;
 
 /**
  * Email settings model
@@ -71,7 +71,7 @@ class Email {
 	 * @return string
 	 */
 	private function option_key() {
-		return apply_filters( 'hammock_email_settings_name_key', 'hammock_email_settings' );
+		return apply_filters( 'hubloy-membership_email_settings_name_key', 'hubloy-membership_email_settings' );
 	}
 
 	/**

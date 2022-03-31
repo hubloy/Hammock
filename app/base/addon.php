@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Base;
+namespace HubloyMembership\Base;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Model\Settings;
+use HubloyMembership\Model\Settings;
 
 class Addon extends Component {
 
@@ -35,15 +35,15 @@ class Addon extends Component {
 	public function __construct() {
 		$this->settings = new Settings();
 		$this->init();
-		$this->add_filter( 'hammock_register_addons', 'register' );
-		$this->add_filter( 'hammock_register_addon_setting_link', 'settings_link' );
-		$this->add_filter( 'hammock_get_addon_' . $this->id . '_active', 'plugin_active' );
-		$this->add_filter( 'hammock_addon_' . $this->id . '_action', 'addon_action', 10, 2 );
+		$this->add_filter( 'hubloy-membership_register_addons', 'register' );
+		$this->add_filter( 'hubloy-membership_register_addon_setting_link', 'settings_link' );
+		$this->add_filter( 'hubloy-membership_get_addon_' . $this->id . '_active', 'plugin_active' );
+		$this->add_filter( 'hubloy-membership_addon_' . $this->id . '_action', 'addon_action', 10, 2 );
 		if ( $this->is_enabled() ) {
-			$this->add_action( 'hammock_init_addon', 'init_addon' );
+			$this->add_action( 'hubloy-membership_init_addon', 'init_addon' );
 		}
-		$this->add_filter( 'hammock_addon_' . $this->id . '_settings', 'settings_page' );
-		$this->add_filter( 'hammock_addon_' . $this->id . '_update_settings', 'update_settings', 10, 2 );
+		$this->add_filter( 'hubloy-membership_addon_' . $this->id . '_settings', 'settings_page' );
+		$this->add_filter( 'hubloy-membership_addon_' . $this->id . '_update_settings', 'update_settings', 10, 2 );
 	}
 
 	/**
@@ -74,8 +74,8 @@ class Addon extends Component {
 	 * The addon must be registered as follows
 	 *
 	 * array(
-	 *          'name'          => __( 'Addon Name', 'hammock' ),
-	 *          'description'   => __( 'Addon Description', 'hammock' ),
+	 *          'name'          => __( 'Addon Name', 'hubloy-membership' ),
+	 *          'description'   => __( 'Addon Description', 'hubloy-membership' ),
 	 *          'icon'          => 'icon-class',
 	 *          'configure'     => true
 	 *      );

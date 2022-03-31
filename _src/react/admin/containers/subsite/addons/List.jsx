@@ -24,8 +24,8 @@ export default class List extends PureComponent {
 
 		this.handleUpdateAddonSetting = this.handleUpdateAddonSetting.bind(this);
 		this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
 	}
 
@@ -59,7 +59,7 @@ export default class List extends PureComponent {
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				self.notify( self.props.hammock.error, 'error' )
+				self.notify( self.props.hubloy_membership.error, 'error' )
 			}
 		);
 	}
@@ -76,7 +76,7 @@ export default class List extends PureComponent {
 
 	render() {
 		const { items } = this.state;
-		var hammock = this.props.hammock;
+		var hubloy_membership = this.props.hubloy_membership;
 		if ( this.state.loading) {
             return (
                 <div className="uk-container uk-padding-small uk-margin-top uk-width-1-1 uk-background-default">
@@ -86,7 +86,7 @@ export default class List extends PureComponent {
         } else {
 			if ( this.state.error) {
 				return (
-					<h3 className="uk-text-center uk-text-danger">{hammock.error}</h3>
+					<h3 className="uk-text-center uk-text-danger">{hubloy_membership.error}</h3>
 				)
 			} else {
 				return (
@@ -94,23 +94,23 @@ export default class List extends PureComponent {
 						<div uk-filter="target: .addon-filter">
 							<nav className="uk-navbar-container uk-navbar-transparent" uk-navbar="">
 								<div className="uk-navbar-left">
-									<ul className="uk-navbar-nav hammock-navbar">
-										<li className="uk-active" uk-filter-control=""><span>{hammock.common.general.all}</span></li>
-										<li uk-filter-control=".enabled"><span>{hammock.common.status.enabled}</span></li>
-										<li uk-filter-control=".disabled"><span>{hammock.common.status.disabled}</span></li>
+									<ul className="uk-navbar-nav hubloy_membership-navbar">
+										<li className="uk-active" uk-filter-control=""><span>{hubloy_membership.common.general.all}</span></li>
+										<li uk-filter-control=".enabled"><span>{hubloy_membership.common.status.enabled}</span></li>
+										<li uk-filter-control=".disabled"><span>{hubloy_membership.common.status.disabled}</span></li>
 									</ul>
 								</div>
 							</nav>
 
 							<ul className="addon-filter uk-child-width-1-2 uk-child-width-1-3@m uk-child-width-1-5@l uk-text-center" uk-grid="">
 								{Object.keys(items).map(item =>
-									<Card hammock={hammock} id={item} item={items[item]} key={item}/>
+									<Card hubloy_membership={hubloy_membership} id={item} item={items[item]} key={item}/>
 								)}
 							</ul>
 
 						</div>
 						<Canvas canvas_id={`addons-settings`}>
-							<h3 className="addon-title">{hammock.common.status.loading}</h3>
+							<h3 className="addon-title">{hubloy_membership.common.status.loading}</h3>
 							<div className="uk-container uk-padding-remove">
 								<form className="uk-form-horizontal uk-margin-large" onSubmit={this.handleUpdateAddonSetting} ref={this.addon_side_content}>
 									<InputUI name={`id`} class_name={`addon_id`} type={`hidden`} value=''/>
@@ -118,7 +118,7 @@ export default class List extends PureComponent {
 
 									</div>
 									<div className="uk-margin ">
-										<button className="uk-button uk-button-primary">{hammock.common.buttons.update}</button>
+										<button className="uk-button uk-button-primary">{hubloy_membership.common.buttons.update}</button>
 									</div>
 								</form>
 							</div>

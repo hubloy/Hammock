@@ -19,8 +19,8 @@ export default class Card extends PureComponent {
 		};
 		this.onChange = this.onChange.bind(this);
         this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
 	}
 
@@ -33,7 +33,7 @@ export default class Card extends PureComponent {
 		this.fetchWP.post( 'addons/toggle', { name: this.props.id, enabled : $checked } )
 			.then( (json) => this.setState({
 				checked : json.enabled
-			}), (err) => this.notify( this.props.hammock.error, 'error' )
+			}), (err) => this.notify( this.props.hubloy_membership.error, 'error' )
 		);
 	}
 
@@ -53,7 +53,7 @@ export default class Card extends PureComponent {
 	}
 
 	render() {
-		var hammock = this.props.hammock;
+		var hubloy_membership = this.props.hubloy_membership;
 		if ( this.state.loading) {
 			return (
                 <li>
@@ -70,7 +70,7 @@ export default class Card extends PureComponent {
 					<li>
 						<div className={"uk-card uk-card-body uk-card-hover uk-padding-remove addon-card"}>
 							<div className="uk-card-body uk-padding-remove-top">
-							<h3 className="uk-text-center uk-text-danger">{hammock.error}</h3>
+							<h3 className="uk-text-center uk-text-danger">{hubloy_membership.error}</h3>
 							</div>
 						</div>
 					</li>
@@ -95,7 +95,7 @@ export default class Card extends PureComponent {
 							<div className="uk-card-footer">
 								{ typeof this.props.item.settings !== 'undefined' && checked > 0 &&
 									<div className="uk-position-bottom-left uk-padding-small">
-										<a className="hammock-addon-toggle-setting" data-id={this.props.id} data-name={this.props.item.name} data-nonce={hammock.ajax_nonce}>{hammock.common.general.configure}</a>
+										<a className="hubloy_membership-addon-toggle-setting" data-id={this.props.id} data-name={this.props.item.name} data-nonce={hubloy_membership.ajax_nonce}>{hubloy_membership.common.general.configure}</a>
 									</div>
 								}
 								{ typeof this.props.item.message !== 'undefined' &&
@@ -105,12 +105,12 @@ export default class Card extends PureComponent {
 								}
 								{ typeof this.props.item.url !== 'undefined' && checked > 0 &&
 									<div className="uk-position-bottom-left uk-padding-small">
-										<a href={this.props.item.url}>{hammock.common.general.settings}</a>
+										<a href={this.props.item.url}>{hubloy_membership.common.general.settings}</a>
 									</div>
 								}
 								{ typeof this.state.active !== 'undefined' && this.state.active === true &&
 									<div className="uk-position-bottom-right uk-padding-small">
-										<div className="hammock-input">
+										<div className="hubloy_membership-input">
 											<section className="slider-checkbox">
 												<input
 													type="checkbox"
@@ -120,7 +120,7 @@ export default class Card extends PureComponent {
 													onChange={this.onChange}
 												/>
 												<label className='label' htmlFor={this.props.id}>
-													{checked ? hammock.common.status.enabled : hammock.common.status.disabled }
+													{checked ? hubloy_membership.common.status.enabled : hubloy_membership.common.status.disabled }
 												</label>
 											</section>
 										</div>

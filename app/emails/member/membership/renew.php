@@ -1,7 +1,7 @@
 <?php
-namespace Hammock\Emails\Member\Membership;
+namespace HubloyMembership\Emails\Member\Membership;
 
-use Hammock\Base\Email;
+use HubloyMembership\Base\Email;
 
 /**
  * User card expire
@@ -36,7 +36,7 @@ class Renew extends Email {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$type                = \Hammock\Services\Emails::COMM_TYPE_RENEWED;
+		$type                = \HubloyMembership\Services\Emails::COMM_TYPE_RENEWED;
 		$this->id            = 'member-' . $type;
 		$this->template_html = 'emails/membership/renew.php';
 		$this->placeholders  = array(
@@ -53,10 +53,10 @@ class Renew extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Membership Renewed', 'hammock' ),
-			'description' => __( 'Email sent to user after a membership subscription is renewed', 'hammock' ),
-			'heading'     => __( 'Membership Renewed', 'hammock' ),
-			'subject'     => sprintf( __( 'Membership %s has been renewed', 'hammock' ), '{membership_name}' ),
+			'title'       => __( 'Membership Renewed', 'hubloy-membership' ),
+			'description' => __( 'Email sent to user after a membership subscription is renewed', 'hubloy-membership' ),
+			'heading'     => __( 'Membership Renewed', 'hubloy-membership' ),
+			'subject'     => sprintf( __( 'Membership %s has been renewed', 'hubloy-membership' ), '{membership_name}' ),
 			'recipient'   => '',
 			'enabled'     => false,
 		);

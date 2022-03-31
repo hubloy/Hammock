@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export function Nav(props) {
-	const { active_nav, hammock, member_id } = props;
-	const strings = hammock.strings;
+	const { active_nav, hubloy_membership, member_id } = props;
+	const strings = hubloy_membership.strings;
     return (
         <nav className="uk-navbar-container uk-navbar-transparent" uk-navbar="">
             <div className="uk-navbar-left">
-                <ul className="uk-navbar-nav hammock-navbar">
+                <ul className="uk-navbar-nav hubloy_membership-navbar">
                     <li className={active_nav === 'subs' ? 'uk-active' : '' }>
                         <Link to={"/member/" + member_id}><span>{strings.edit.tabs.subs}</span></Link>
                     </li>

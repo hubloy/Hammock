@@ -17,8 +17,8 @@ export default class Rules extends Component {
 			loading : true
 		};
 		this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
 		});
 	}
 
@@ -36,25 +36,25 @@ export default class Rules extends Component {
 	}
 
 	render() {
-		var hammock = this.props.hammock,
-			strings = hammock.strings,
+		var hubloy_membership = this.props.hubloy_membership,
+			strings = hubloy_membership.strings,
 		    active_nav = this.props.match.params.section !== undefined ? this.props.match.params.section : 'all',
 			page = this.props.match.params.page !== undefined ? this.props.match.params.page : 0;
 			
 		return (
-			<Dashboard hammock={hammock} button={<a className="uk-button uk-button-primary uk-button-small" href="#hammock-add-rule" uk-toggle="">{strings.dashboard.add_new.button}</a>}>
-				<div className="hammock-settings uk-width-expand">
+			<Dashboard hubloy_membership={hubloy_membership} button={<a className="uk-button uk-button-primary uk-button-small" href="#hubloy_membership-add-rule" uk-toggle="">{strings.dashboard.add_new.button}</a>}>
+				<div className="hubloy_membership-settings uk-width-expand">
 					{this.state.loading ? (
                         <span className="uk-text-center" uk-spinner="ratio: 2"></span>
                     ) : (
 						<React.Fragment>
 							<LazyLoad>
-								<Nav hammock={hammock} active_nav={active_nav} rules={this.state.rules}/>
+								<Nav hubloy_membership={hubloy_membership} active_nav={active_nav} rules={this.state.rules}/>
 							</LazyLoad>
-							<div className="hammock-protection-rules uk-background-default uk-padding-small">
-								<Content hammock={hammock} type={active_nav} page={page} rules={this.state.rules}/>
+							<div className="hubloy_membership-protection-rules uk-background-default uk-padding-small">
+								<Content hubloy_membership={hubloy_membership} type={active_nav} page={page} rules={this.state.rules}/>
 							</div>
-							<AddContent hammock={hammock} active_nav={active_nav} rules={this.state.rules} />
+							<AddContent hubloy_membership={hubloy_membership} active_nav={active_nav} rules={this.state.rules} />
 						</React.Fragment>
 					)}
 				</div>
@@ -64,5 +64,5 @@ export default class Rules extends Component {
 }
 
 Rules.propTypes = {
-	hammock: PropTypes.object
+	hubloy_membership: PropTypes.object
 };

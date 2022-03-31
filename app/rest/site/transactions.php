@@ -1,13 +1,13 @@
 <?php
-namespace Hammock\Rest\Site;
+namespace HubloyMembership\Rest\Site;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Base\Rest;
-use Hammock\Core\Util;
-use Hammock\Helper\Pagination;
+use HubloyMembership\Base\Rest;
+use HubloyMembership\Core\Util;
+use HubloyMembership\Helper\Pagination;
 
 /**
  * Transactions rest route
@@ -63,42 +63,42 @@ class Transactions extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
-						'description'       => __( 'The current page', 'hammock' ),
+						'description'       => __( 'The current page', 'hubloy-membership' ),
 					),
 					'per_page'  => array(
 						'required'          => false,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
 						'default'           => 10,
-						'description'       => __( 'Items per page', 'hammock' ),
+						'description'       => __( 'Items per page', 'hubloy-membership' ),
 					),
 					'gateway'   => array(
 						'required'          => false,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
 						'default'           => '',
-						'description'       => __( 'Gateway id', 'hammock' ),
+						'description'       => __( 'Gateway id', 'hubloy-membership' ),
 					),
 					'status'    => array(
 						'required'          => false,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
 						'default'           => '',
-						'description'       => __( 'Transaction Status', 'hammock' ),
+						'description'       => __( 'Transaction Status', 'hubloy-membership' ),
 					),
 					'member_id' => array(
 						'required'          => false,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
 						'default'           => false,
-						'description'       => __( 'The member id', 'hammock' ),
+						'description'       => __( 'The member id', 'hubloy-membership' ),
 					),
 					'amount'    => array(
 						'required'          => false,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
 						'default'           => false,
-						'description'       => __( 'The amount', 'hammock' ),
+						'description'       => __( 'The amount', 'hubloy-membership' ),
 					),
 				),
 			)
@@ -160,7 +160,7 @@ class Transactions extends Rest {
 		$page         = $request->get_param( 'page' );
 		$per_page     = $request->get_param( 'per_page' );
 		$current_page = $page - 1;
-		$service      = new \Hammock\Services\Transactions();
+		$service      = new \HubloyMembership\Services\Transactions();
 		$params       = array(
 			'gateway'   => $request->get_param( 'gateway' ),
 			'status'    => $request->get_param( 'status' ),
@@ -189,8 +189,8 @@ class Transactions extends Rest {
 	 * @return array
 	 */
 	public function list_transaction_status( $request ) {
-		$status = \Hammock\Services\Transactions::transaction_status();
-		array_unshift( $status, array( 0 => __( 'Select Status', 'hammock' ) ) );
+		$status = \HubloyMembership\Services\Transactions::transaction_status();
+		array_unshift( $status, array( 0 => __( 'Select Status', 'hubloy-membership' ) ) );
 		return $status;
 	}
 
@@ -203,7 +203,7 @@ class Transactions extends Rest {
 	 */
 	public function get_invoice( $request ) {
 		$id      = sanitize_text_field( $request['id'] );
-		$invoice = \Hammock\Services\Transactions::get_invoice( $id );
+		$invoice = \HubloyMembership\Services\Transactions::get_invoice( $id );
 		return (object) $invoice->to_html();
 	}
 
@@ -220,7 +220,7 @@ class Transactions extends Rest {
 		$status     = sanitize_text_field( $request['status'] );
 		$gateway    = sanitize_text_field( $request['gateway'] );
 		$due_date   = sanitize_text_field( $request['due_date'] );
-		$service    = new \Hammock\Services\Transactions();
+		$service    = new \HubloyMembership\Services\Transactions();
 		return $service->create_transaction( $user_id, $membership, $status, $gateway, $due_date );
 	}
 
@@ -236,11 +236,11 @@ class Transactions extends Rest {
 		$status   = sanitize_text_field( $request['status'] );
 		$due_date = sanitize_text_field( $request['due_date'] );
 		$amount   = sanitize_text_field( $request['amount'] );
-		$service  = new \Hammock\Services\Transactions();
+		$service  = new \HubloyMembership\Services\Transactions();
 		$success  = $service->update_transaction( $id, '', $status, $amount, $due_date );
 		return array(
 			'status'  => $success,
-			'message' => $success ? __( 'Transaction updated', 'hammock' ) : __( 'Error updating transaction', 'hammock' ),
+			'message' => $success ? __( 'Transaction updated', 'hubloy-membership' ) : __( 'Error updating transaction', 'hubloy-membership' ),
 		);
 	}
 }

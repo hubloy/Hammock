@@ -1,5 +1,5 @@
 <?php
-namespace Hammock\Core;
+namespace HubloyMembership\Core;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -69,14 +69,14 @@ class Api {
 			 *
 			 * @since 1.0.0
 			 */
-			do_action( 'hammock_api_request', $api_request );
+			do_action( 'hubloy-membership_api_request', $api_request );
 
 			/**
 			 * Specific api action
 			 *
 			 * @since 1.0.0
 			 */
-			do_action( 'hammock_api_' . $api_request );
+			do_action( 'hubloy-membership_api_' . $api_request );
 
 			ob_end_clean();
 			die( '-1' );

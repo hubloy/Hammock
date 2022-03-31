@@ -10,13 +10,13 @@ export default class NotFound extends Component {
 
 	render() {
 		return (
-			<Dashboard hammock={this.props.hammock}>
-				<h2 className="uk-text-center uk-heading-divider">{this.props.hammock.common.string.not_found}</h2>
+			<Dashboard hubloy_membership={this.props.hubloy_membership}>
+				<h2 className="uk-text-center uk-heading-divider">{this.props.hubloy_membership.common.string.not_found}</h2>
 			</Dashboard>
 		)
 	}
 }
 
 NotFound.propTypes = {
-	hammock: PropTypes.object
+	hubloy_membership: PropTypes.object
 };

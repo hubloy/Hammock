@@ -1,5 +1,5 @@
 <?php
-namespace Hammock\Core;
+namespace hubloy_m\Core;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -46,15 +46,15 @@ class Database {
 		}
 
 		return array(
-			self::MEMBERSHIP       => $db->prefix . 'hammock_membership',
-			self::MEMBERSHIP_RULES => $db->prefix . 'hammock_membership_rules',
-			self::META             => $db->prefix . 'hammock_meta',
-			self::MEMBERS          => $db->prefix . 'hammock_members',
-			self::PLANS            => $db->prefix . 'hammock_plans',
-			self::INVOICE          => $db->prefix . 'hammock_invoice',
-			self::CODES            => $db->prefix . 'hammock_codes',
-			self::ACTIVITY         => $db->prefix . 'hammock_activity',
-			self::LOGS             => $db->prefix . 'hammock_subscription_log',
+			self::MEMBERSHIP       => $db->prefix . 'hubloy_m_membership',
+			self::MEMBERSHIP_RULES => $db->prefix . 'hubloy_m_membership_rules',
+			self::META             => $db->prefix . 'hubloy_m_meta',
+			self::MEMBERS          => $db->prefix . 'hubloy_m_members',
+			self::PLANS            => $db->prefix . 'hubloy_m_plans',
+			self::INVOICE          => $db->prefix . 'hubloy_m_invoice',
+			self::CODES            => $db->prefix . 'hubloy_m_codes',
+			self::ACTIVITY         => $db->prefix . 'hubloy_m_activity',
+			self::LOGS             => $db->prefix . 'hubloy_m_subscription_log',
 		);
 	}
 
@@ -110,17 +110,17 @@ class Database {
                 `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 				`date_updated` datetime DEFAULT NULL,
 				PRIMARY KEY (`id`),
-				UNIQUE KEY `hammock_membership_id` (`membership_id`),
-				KEY `hammock_membership_name` (`name`),
-				KEY `hammock_membership_enabled` (`enabled`),
-                KEY `hammock_membership_trial_enabled` (`trial_enabled`),
-				KEY `hammock_membership_limit_spaces` (`limit_spaces`),
-				KEY `hammock_membership_type` (`type`),
-                KEY `hammock_membership_duration` (`duration`),
-                KEY `hammock_membership_price` (`price`),
-                KEY `hammock_membership_trial_price` (`trial_price`),
-                KEY `hammock_membership_total_available` (`total_available`),
-                KEY `hammock_membership_date_created` (`date_created`)
+				UNIQUE KEY `hubloy_m_membership_id` (`membership_id`),
+				KEY `hubloy_m_membership_name` (`name`),
+				KEY `hubloy_m_membership_enabled` (`enabled`),
+                KEY `hubloy_m_membership_trial_enabled` (`trial_enabled`),
+				KEY `hubloy_m_membership_limit_spaces` (`limit_spaces`),
+				KEY `hubloy_m_membership_type` (`type`),
+                KEY `hubloy_m_membership_duration` (`duration`),
+                KEY `hubloy_m_membership_price` (`price`),
+                KEY `hubloy_m_membership_trial_price` (`trial_price`),
+                KEY `hubloy_m_membership_total_available` (`total_available`),
+                KEY `hubloy_m_membership_date_created` (`date_created`)
 			) $charset_collate;";
 			dbDelta( $sql );
 		}

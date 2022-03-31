@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Addon\Prorate;
+namespace HubloyMembership\Addon\Prorate;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Addon;
+use HubloyMembership\Base\Addon;
 
 class Prorate extends Addon {
 
@@ -51,8 +51,8 @@ class Prorate extends Addon {
 	public function register( $addons ) {
 		if ( ! isset( $addons['prorate'] ) ) {
 			$addons['prorate'] = array(
-				'name'        => __( 'Pro-Rating', 'hammock' ),
-				'description' => __( 'Pro-Rate previous payments when switching memberships', 'hammock' ),
+				'name'        => __( 'Pro-Rating', 'hubloy-membership' ),
+				'description' => __( 'Pro-Rate previous payments when switching memberships', 'hubloy-membership' ),
 				'icon'        => 'dashicons dashicons-money',
 			);
 		}

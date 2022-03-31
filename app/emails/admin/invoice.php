@@ -1,7 +1,7 @@
 <?php
-namespace Hammock\Emails\Admin;
+namespace HubloyMembership\Emails\Admin;
 
-use Hammock\Base\Email;
+use HubloyMembership\Base\Email;
 
 /**
  * Admin invoice
@@ -36,7 +36,7 @@ class Invoice extends Email {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$type                = \Hammock\Services\Emails::COMM_TYPE_INVOICE;
+		$type                = \HubloyMembership\Services\Emails::COMM_TYPE_INVOICE;
 		$this->id            = 'admin-' . $type;
 		$this->is_admin      = true;
 		$this->template_html = 'emails/admin/invoice.php';
@@ -54,10 +54,10 @@ class Invoice extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'New payment', 'hammock' ),
-			'description' => __( 'Email sent to admin to notify a new payment is received', 'hammock' ),
-			'heading'     => sprintf( __( 'New payment %s', 'hammock' ), '#{invoice_number}' ),
-			'subject'     => sprintf( __( '%1$s: New payment %2$s', 'hammock' ), '[{site_title}]', '#{invoice_number}' ),
+			'title'       => __( 'New payment', 'hubloy-membership' ),
+			'description' => __( 'Email sent to admin to notify a new payment is received', 'hubloy-membership' ),
+			'heading'     => sprintf( __( 'New payment %s', 'hubloy-membership' ), '#{invoice_number}' ),
+			'subject'     => sprintf( __( '%1$s: New payment %2$s', 'hubloy-membership' ), '[{site_title}]', '#{invoice_number}' ),
 			'recipient'   => get_option( 'admin_email' ),
 			'enabled'     => true,
 		);

@@ -1,5 +1,5 @@
 <?php
-namespace Hammock\Helper;
+namespace HubloyMembership\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -33,12 +33,12 @@ class Pages {
 	public static function list_pages() {
 		if ( empty( self::$drop_down ) ) {
 			$pages             = get_pages();
-			self::$drop_down[] = __( 'Select Page', 'hammock' );
+			self::$drop_down[] = __( 'Select Page', 'hubloy-membership' );
 			foreach ( $pages as $page ) {
 				self::$drop_down[ $page->ID ] = $page->post_title;
 			}
 		}
-		return apply_filters( 'hammock_page_drop_downs', self::$drop_down );
+		return apply_filters( 'hubloy-membership_page_drop_downs', self::$drop_down );
 	}
 
 	/**
@@ -91,23 +91,23 @@ class Pages {
 		$type = trim( $type );
 		switch ( $type ) {
 			case 'membership_list':
-				$page_id = self::create_page( __( 'Membership List', 'hammock' ), '[hammock_membership_list]' );
+				$page_id = self::create_page( __( 'Membership List', 'hubloy-membership' ), '[hubloy-membership_membership_list]' );
 				return $page_id;
 			break;
 			case 'protected_content':
-				$page_id = self::create_page( __( 'Protected Content', 'hammock' ), '[hammock_protected_content]' );
+				$page_id = self::create_page( __( 'Protected Content', 'hubloy-membership' ), '[hubloy-membership_protected_content]' );
 				return $page_id;
 			break;
 			case 'registration':
-				$page_id = self::create_page( __( 'Register', 'hammock' ), '[hammock_registration]' );
+				$page_id = self::create_page( __( 'Register', 'hubloy-membership' ), '[hubloy-membership_registration]' );
 				return $page_id;
 			break;
 			case 'thank_you_page':
-				$page_id = self::create_page( __( 'Thank You', 'hammock' ), '[hammock_thank_you_page]' );
+				$page_id = self::create_page( __( 'Thank You', 'hubloy-membership' ), '[hubloy-membership_thank_you_page]' );
 				return $page_id;
 			break;
 			case 'account_page':
-				$page_id = self::create_page( __( 'Account', 'hammock' ), '[hammock_account_page]' );
+				$page_id = self::create_page( __( 'Account', 'hubloy-membership' ), '[hubloy-membership_account_page]' );
 				return $page_id;
 			break;
 			default:
@@ -126,7 +126,7 @@ class Pages {
 	 * @return bool
 	 */
 	public static function is_membership_page( $page_id ) {
-		$settings = \Hammock\Model\Settings::instance();
+		$settings = \HubloyMembership\Model\Settings::instance();
 		$pages    = $settings->get_general_setting( 'pages', array() );
 		$page_ids = array_values( $pages );
 		if ( in_array( $page_id, $page_ids ) ) {

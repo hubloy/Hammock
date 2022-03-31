@@ -15,8 +15,8 @@ export default class EditCode extends Component {
 
 		this.coupon_edit_code = React.createRef();
 		this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
 		});
 		
 		this.state = {
@@ -53,8 +53,8 @@ export default class EditCode extends Component {
 	}
 
 	init_scripts() {
-		window.hammock.helper.bind_date_range();
-        jQuery('.hammock-email-tags').tagsInput({width:'98%',  defaultText : this.props.hammock.strings.select_email});
+		window.hubloy_membership.helper.bind_date_range();
+        jQuery('.hubloy_membership-email-tags').tagsInput({width:'98%',  defaultText : this.props.hubloy_membership.strings.select_email});
 	}
 
 
@@ -80,7 +80,7 @@ export default class EditCode extends Component {
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				self.notify( self.props.hammock.error, 'error' );
+				self.notify( self.props.hubloy_membership.error, 'error' );
 			}
 		);
 	}
@@ -118,14 +118,14 @@ export default class EditCode extends Component {
 				<div className="uk-margin">
 					<legend className="uk-form-label">{strings.create.coupons.expire.title}</legend>
 					<div className="uk-form-controls">
-						<InputUI name={`expire`} class_name={`hammock-from-date`} placeholder={``} value={typeof code.custom_data.expire !== 'undefined' ? code.custom_data.expire : ''} required={false}/>
+						<InputUI name={`expire`} class_name={`hubloy_membership-from-date`} placeholder={``} value={typeof code.custom_data.expire !== 'undefined' ? code.custom_data.expire : ''} required={false}/>
 						<p className="uk-text-meta">{strings.create.coupons.expire.description}</p>
 					</div>
 				</div>
 				<div className="uk-margin">
 					<legend className="uk-form-label">{strings.create.coupons.restrict.title}</legend>
 					<div className="uk-form-controls">
-						<InputUI name={`restrict`} class_name={`hammock-email-tags`} placeholder={``} value={typeof code.custom_data.restrict !== 'undefined' ? code.custom_data.restrict : ''} required={false}/>
+						<InputUI name={`restrict`} class_name={`hubloy_membership-email-tags`} placeholder={``} value={typeof code.custom_data.restrict !== 'undefined' ? code.custom_data.restrict : ''} required={false}/>
 						<p className="uk-text-meta">{strings.create.coupons.restrict.description}</p>
 					</div>
 				</div>
@@ -159,14 +159,14 @@ export default class EditCode extends Component {
 				<div className="uk-margin">
 					<legend className="uk-form-label">{strings.create.invites.expire.title}</legend>
 					<div className="uk-form-controls">
-						<InputUI name={`expire`} class_name={`hammock-from-date`} placeholder={``} value={typeof code.custom_data.expire !== 'undefined' ? code.custom_data.expire : ''} required={false}/>
+						<InputUI name={`expire`} class_name={`hubloy_membership-from-date`} placeholder={``} value={typeof code.custom_data.expire !== 'undefined' ? code.custom_data.expire : ''} required={false}/>
 						<p className="uk-text-meta">{strings.create.invites.expire.description}</p>
 					</div>
 				</div>
 				<div className="uk-margin">
 					<legend className="uk-form-label">{strings.create.invites.restrict.title}</legend>
 					<div className="uk-form-controls">
-						<InputUI name={`restrict`} class_name={`hammock-email-tags`} placeholder={``} value={typeof code.custom_data.restrict !== 'undefined' ? code.custom_data.restrict : ''} required={false}/>
+						<InputUI name={`restrict`} class_name={`hubloy_membership-email-tags`} placeholder={``} value={typeof code.custom_data.restrict !== 'undefined' ? code.custom_data.restrict : ''} required={false}/>
 						<p className="uk-text-meta">{strings.create.invites.restrict.description}</p>
 					</div>
 				</div>
@@ -174,14 +174,14 @@ export default class EditCode extends Component {
 		)
 	}
 
-	render_form( hammock ) {
+	render_form( hubloy_membership ) {
 		const type = this.props.type,
-			strings = hammock.strings,
-			page_strings = hammock.page_strings,
+			strings = hubloy_membership.strings,
+			page_strings = hubloy_membership.page_strings,
 			code = this.state.item;
 		return (
-			<Dashboard hammock={hammock} title={type === 'coupons' ? strings.edit.coupon : strings.edit.invite}>
-				<div className={"uk-background-default uk-padding-small uk-margin-small-top hammock-settings-" + type}>
+			<Dashboard hubloy_membership={hubloy_membership} title={type === 'coupons' ? strings.edit.coupon : strings.edit.invite}>
+				<div className={"uk-background-default uk-padding-small uk-margin-small-top hubloy_membership-settings-" + type}>
 					<form className="uk-form-horizontal uk-margin-large" onSubmit={this.handleSubmit.bind(this)} ref={this.coupon_edit_code}>
 						<InputUI name={`type`} type={`hidden`} value={this.props.type}/>
 						<InputUI name={`id`} type={`hidden`} value={code.id}/>
@@ -191,8 +191,8 @@ export default class EditCode extends Component {
 							this.renderInviteForm( strings, page_strings, code )
 						)}
 						<div className="uk-margin uk-button-group">
-							<button className="uk-button uk-button-primary save-button">{hammock.common.buttons.update}</button>
-							<Link to={'/'} className="uk-button uk-button-secondary uk-margin-small-left">{hammock.common.buttons.back}</Link>
+							<button className="uk-button uk-button-primary save-button">{hubloy_membership.common.buttons.update}</button>
+							<Link to={'/'} className="uk-button uk-button-secondary uk-margin-small-left">{hubloy_membership.common.buttons.back}</Link>
 						</div>
 					</form>
 				</div>
@@ -201,7 +201,7 @@ export default class EditCode extends Component {
 	}
 
 	render() {
-		const hammock = this.props.hammock;
+		const hubloy_membership = this.props.hubloy_membership;
 		if ( this.state.loading ) {
 			return (
 				<div className="uk-container uk-padding-small uk-margin-top uk-width-1-1 uk-background-default">
@@ -212,15 +212,15 @@ export default class EditCode extends Component {
 			if ( this.state.error) {
 				
 				return (
-					<h3 className="uk-text-center uk-text-danger">{hammock.error}</h3>
+					<h3 className="uk-text-center uk-text-danger">{hubloy_membership.error}</h3>
 				)
 			} else {
-				return this.render_form( hammock );
+				return this.render_form( hubloy_membership );
 			}
 		}
 	}
 
 }
 EditCode.propTypes = {
-	hammock: PropTypes.object
+	hubloy_membership: PropTypes.object
 };

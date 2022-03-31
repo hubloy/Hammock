@@ -1,4 +1,4 @@
-.hammock-input {
+.hubloy-membership-input {
 	.slider-checkbox {
 		position: relative;
 		input {
@@ -142,12 +142,12 @@
 		}
 	}
 
-	.hammock-no-suggestions {
+	.hubloy-membership-no-suggestions {
 		color: $label-gray-color;
 		padding: 0.5rem;
 	}
 
-	.hammock-suggestions {
+	.hubloy-membership-suggestions {
 		border: 1px solid $label-gray-color;
 		border-top-width: 0;
 		list-style: none;
@@ -185,7 +185,7 @@
 		}
 	}
 
-	.hammock-preloader{
+	.hubloy-membership-preloader{
 		width: 100%;
 		svg {
 			margin: 0 auto;
@@ -204,7 +204,7 @@
 	}
 }
 
-.hammock-nav-button {
+.hubloy_membership-nav-button {
 	background-color: $white-color;
 	width: 100%;
 	padding: 5px;
@@ -221,12 +221,12 @@
 		color: $white-color !important;
 	}
 
-	.hammock-badge {
+	.hubloy_membership-badge {
 		margin-top: 2px;
 	}
 }
 
-.hammock-switcher-nav {
+.hubloy_membership-switcher-nav {
 	.uk-active {
 		a {
 			background-color: $blue-color;
@@ -274,6 +274,6 @@
 	max-width: 100% !important;
 }
 
-.hammock-text-small{
+.hubloy_membership-text-small{
 	font-size: .675rem;
 }

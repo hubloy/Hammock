@@ -1,5 +1,5 @@
 <?php
-namespace Hammock\Services;
+namespace HubloyMembership\Services;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -14,14 +14,14 @@ class Gateways {
 
 	/**
 	 * Load gatewats
-	 * The return filter is completed in each gateway class and initiated in the `hammock_init_gateway` hook
+	 * The return filter is completed in each gateway class and initiated in the `hubloy-membership_init_gateway` hook
 	 *
 	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
 	public static function load_gateways() {
-		$gateways = apply_filters( 'hammock_register_gateways', array() );
+		$gateways = apply_filters( 'hubloy-membership_register_gateways', array() );
 		ksort( $gateways );
 		return $gateways;
 	}
@@ -42,7 +42,7 @@ class Gateways {
 		$gateways = self::load_gateways();
 		if ( $include_select ) {
 			$drop_down = array(
-				'' => __( 'Select Gateway', 'hammock' ),
+				'' => __( 'Select Gateway', 'hubloy-membership' ),
 			);
 		} else {
 			$drop_down = array();
@@ -50,7 +50,7 @@ class Gateways {
 		foreach ( $gateways as $key => $value ) {
 			$drop_down[ $key ] = $value['name'];
 		}
-		return apply_filters( 'hammock_list_simple_gateways', $drop_down );
+		return apply_filters( 'hubloy-membership_list_simple_gateways', $drop_down );
 	}
 
 	/**
@@ -64,7 +64,7 @@ class Gateways {
 		$gateways        = self::load_gateways();
 		$active_gateways = array();
 		foreach ( $gateways as $key => $value ) {
-			$is_active = apply_filters( 'hammock_gateway_' . $key . '_is_active', false );
+			$is_active = apply_filters( 'hubloy-membership_gateway_' . $key . '_is_active', false );
 			if ( $is_active ) {
 				$active_gateways[ $key ] = $value['name'];
 			}

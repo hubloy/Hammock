@@ -3,18 +3,18 @@
 /*global $:false */
 /*global window:false */
 /*global document:false */
-/*global hammock:false */
+/*global hubloy_membership:false */
 /*global Swal:false */
 
-window.hammock = window.hammock || {};
+window.hubloy_membership = window.hubloy_membership || {};
 
-hammock.helper = {
+hubloy_membership.helper = {
 
 	notify : function(message, type, callback){
 		Swal.fire({
 			type: type,
 			html: message,
-			confirmButtonText: hammock.common.buttons.ok
+			confirmButtonText: hubloy_membership.common.buttons.ok
 		}).then(function(result) {
 			if (result.value) {
 				if(typeof callback !== 'undefined'){
@@ -29,8 +29,8 @@ hammock.helper = {
 			type: type,
 			html: message,
 			showCancelButton: true,
-			confirmButtonText: hammock.common.buttons.ok,
-			cancelButtonText: hammock.common.buttons.cancel
+			confirmButtonText: hubloy_membership.common.buttons.ok,
+			cancelButtonText: hubloy_membership.common.buttons.cancel
 		}).then(function(result) {
 			if (result.value) {
 				if(typeof callback !== 'undefined'){
@@ -44,7 +44,7 @@ hammock.helper = {
 	 * Progress Loader
 	 */
 	loader : function(container_class,elem){
-		jQuery("<div class='"+container_class+"'><img src='"+hammock.assets.spinner+"' class='hammock-spinner-center'/></div>").css({
+		jQuery("<div class='"+container_class+"'><img src='"+hubloy_membership.assets.spinner+"' class='hubloy_membership-spinner-center'/></div>").css({
 			position: "absolute",
 			width: "100%",
 			height: "100%",

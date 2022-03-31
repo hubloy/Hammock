@@ -12,15 +12,15 @@ export default class Marketing extends Component {
 	}
 
 	render() {
-		var hammock = this.props.hammock;
+		var hubloy_membership = this.props.hubloy_membership;
 		var section = this.props.match.params.page !== undefined ? this.props.match.params.page : 'mailchimp';
 		return (
-			<Dashboard hammock={hammock}>
-				<div className="hammock-settings uk-width-expand">
+			<Dashboard hubloy_membership={hubloy_membership}>
+				<div className="hubloy_membership-settings uk-width-expand">
 					<nav className="uk-navbar-container uk-navbar-transparent" uk-navbar="">
 						<div className="uk-navbar-left">
-							<ul className="uk-navbar-nav hammock-navbar">
-								{Object.entries(hammock.strings.nav).map((type, index) => {
+							<ul className="uk-navbar-nav hubloy_membership-navbar">
+								{Object.entries(hubloy_membership.strings.nav).map((type, index) => {
 									return (<li key={index} className={section === type[0] ? 'uk-active' : '' }>
 										<Link to={"/" + type[0]}><span>{type[1]}</span></Link>
 									</li>)
@@ -28,10 +28,10 @@ export default class Marketing extends Component {
 							</ul>
 						</div>
 					</nav>
-					<div className="hammock-settings-settings hammock-marketing-settings uk-background-default uk-padding-small">
+					<div className="hubloy_membership-settings-settings hubloy_membership-marketing-settings uk-background-default uk-padding-small">
 						{
 							{
-								'mailchimp': <MailChimpSettings hammock={this.props.hammock}/>
+								'mailchimp': <MailChimpSettings hubloy_membership={this.props.hubloy_membership}/>
 							}[section]
 						}
 					</div>
@@ -42,5 +42,5 @@ export default class Marketing extends Component {
 }
 
 Marketing.propTypes = {
-	hammock: PropTypes.object
+	hubloy_membership: PropTypes.object
 };

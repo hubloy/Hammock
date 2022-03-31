@@ -22,7 +22,7 @@ export class DropDownUI extends PureComponent{
     render() {
         const value = ( typeof this.state.value === 'undefined' || ! this.state.value ) ? this.props.value : this.state.value,
             blank = typeof this.props.blank !== 'undefined',
-            hammock = window.hammock,
+            hubloy_membership = window.hubloy_membership,
             class_name = ( typeof this.props.class_name === 'undefined' || ! this.props.class_name ) ? this.props.name + '-select' : this.props.class_name,
             self = this;
         var data = Array(),
@@ -44,7 +44,7 @@ export class DropDownUI extends PureComponent{
         return(
             <select name={self.props.name} value={value} className={"uk-select " + class_name } id="form-horizontal-select" {...data} onChange={self.handleChangeEvent} onSelect={self.handleChangeEvent} required={required}>
                 {blank &&
-                    <option value='0'>{hammock.common.general.select}</option>
+                    <option value='0'>{hubloy_membership.common.general.select}</option>
                 }
                 {dropdown}
             </select>

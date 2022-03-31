@@ -2,9 +2,9 @@
 /**
  * Protected Content
  *
- * This template can be overridden by copying it to yourtheme/hammock/protected-content.php.
+ * This template can be overridden by copying it to yourtheme/hubloy-membership/protected-content.php.
  *
- * @package Hammock/Templates
+ * @package HubloyMembership/Templates
  * @version 1.0.0
  */
 if ( ! defined( 'ABSPATH' ) ) {

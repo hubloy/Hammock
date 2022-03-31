@@ -15,26 +15,26 @@ export default class Admin extends Component {
 
 	render() {
 		
-		var hammock = this.props.hammock;
+		var hubloy_membership = this.props.hubloy_membership;
 		return (
-			<Dashboard hammock={hammock}>
-				<div className="hammock-dashboard" uk-grid="">
+			<Dashboard hubloy_membership={hubloy_membership}>
+				<div className="hubloy_membership-dashboard" uk-grid="">
 					<div className="uk-width-1-1">
-						<StatsDashboard hammock={hammock}/>
+						<StatsDashboard hubloy_membership={hubloy_membership}/>
 					</div>
 					<div className="uk-width-1-1">
 						<div className="uk-grid-small uk-child-width-1-3@m uk-child-width-1-1@s" uk-grid="">
 							<div className="">
-								<MembersDashboard hammock={hammock} />
+								<MembersDashboard hubloy_membership={hubloy_membership} />
 							</div>
 							<div className="">
-								<MembershipDashboard hammock={hammock} />
+								<MembershipDashboard hubloy_membership={hubloy_membership} />
 							</div>
 							<div className="">
 								<div className="uk-background-default uk-padding-small uk-panel uk-height-medium">
-									<p className="uk-h4">{hammock.strings.dashboard.management.title}</p>
+									<p className="uk-h4">{hubloy_membership.strings.dashboard.management.title}</p>
 									<div>
-										{Object.entries(hammock.strings.dashboard.management.types).map((type, index) => {
+										{Object.entries(hubloy_membership.strings.dashboard.management.types).map((type, index) => {
 											return (<a key={index} href={type[1].url} title={type[1].name}><div className="uk-margin-small uk-padding-small uk-card uk-card-default uk-card-body">{type[1].name}</div></a>)
 										})}
 									</div>
@@ -49,5 +49,5 @@ export default class Admin extends Component {
 }
 
 Admin.propTypes = {
-	hammock: PropTypes.object
+	hubloy_membership: PropTypes.object
 };

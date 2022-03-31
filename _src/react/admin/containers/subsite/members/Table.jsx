@@ -17,8 +17,8 @@ export default class Table extends Component {
         };
 
         this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
     }
 
@@ -66,8 +66,8 @@ export default class Table extends Component {
 			$btn_txt = $button.text(),
 			id = $button.attr('data-id'),
 			prompt = $button.attr('data-prompt'),
-			helper = window.hammock.helper,
-			error = $this.props.hammock.error,
+			helper = window.hubloy_membership.helper,
+			error = $this.props.hubloy_membership.error,
 			fetchWP = $this.fetchWP;
 		helper.confirm( prompt, 'warning', function() {
 			//continue
@@ -94,8 +94,8 @@ export default class Table extends Component {
 
     render() {
         const { pager, items } = this.state;
-        var hammock = this.props.hammock;
-        var strings = hammock.strings;
+        var hubloy_membership = this.props.hubloy_membership;
+        var strings = hubloy_membership.strings;
         if ( this.state.loading) {
             return (
                 <div className="uk-container uk-padding-small uk-margin-top uk-width-1-1 uk-background-default">
@@ -105,18 +105,18 @@ export default class Table extends Component {
         } else {
 			if ( this.state.error) {
 				return (
-					<h3 className="uk-text-center uk-text-danger">{hammock.error}</h3>
+					<h3 className="uk-text-center uk-text-danger">{hubloy_membership.error}</h3>
 				)
 			} else {
 				return (
 					<React.Fragment>
 						{items.length <= 0 ? (
-							<ToggleInfoBox title={strings.dashboard.table.not_found} icon={'users'} linkText={strings.dashboard.add_new.button} linkTo={'#hammock-add-member'}/>
+							<ToggleInfoBox title={strings.dashboard.table.not_found} icon={'users'} linkText={strings.dashboard.add_new.button} linkTo={'#hubloy_membership-add-member'}/>
 						) : (
 							<table className="uk-table">
 								<thead>
 									<tr>
-										<th><input className="uk-checkbox hammock-top-checkbox" type="checkbox" /></th>
+										<th><input className="uk-checkbox hubloy_membership-top-checkbox" type="checkbox" /></th>
 										<th>{strings.dashboard.table.name}</th>
 										<th>{strings.dashboard.table.email}</th>
 										<th>{strings.dashboard.table.member_id}</th>
@@ -127,7 +127,7 @@ export default class Table extends Component {
 								</thead>
 								<tfoot>
 									<tr>
-										<th><input className="uk-checkbox hammock-bottom-checkbox" type="checkbox" /></th>
+										<th><input className="uk-checkbox hubloy_membership-bottom-checkbox" type="checkbox" /></th>
 										<th>{strings.dashboard.table.name}</th>
 										<th>{strings.dashboard.table.email}</th>
 										<th>{strings.dashboard.table.member_id}</th>
@@ -143,12 +143,12 @@ export default class Table extends Component {
 											<td>
 												<Link className="uk-text-primary" to={"/member/" + item.id}>{item.user_info.name}</Link>
 												<div id={"member-hover-"+ item.id}>
-													<Link className="uk-text-primary" to={"/member/" + item.id}>{hammock.common.buttons.edit}</Link>{' '}|{' '}<a href="#" data-id={item.id} data-prompt={strings.edit.details.delete.prompt} onClick={this.delete.bind(this)} className="uk-text-danger">{hammock.common.buttons.delete}</a>
+													<Link className="uk-text-primary" to={"/member/" + item.id}>{hubloy_membership.common.buttons.edit}</Link>{' '}|{' '}<a href="#" data-id={item.id} data-prompt={strings.edit.details.delete.prompt} onClick={this.delete.bind(this)} className="uk-text-danger">{hubloy_membership.common.buttons.delete}</a>
 												</div>
 											</td>
 											<td>{item.user_info.email}</td>
 											<td><code>{item.member_id}</code></td>
-											<td>{item.enabled ? hammock.common.status.enabled : hammock.common.status.disabled}</td>
+											<td>{item.enabled ? hubloy_membership.common.status.enabled : hubloy_membership.common.status.disabled}</td>
 											<td>{item.plans}</td>
 											<td>{item.date_created}</td>
 										</tr>

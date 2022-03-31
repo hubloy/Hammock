@@ -1,7 +1,7 @@
 <?php
-namespace Hammock\Emails\Member;
+namespace HubloyMembership\Emails\Member;
 
-use Hammock\Base\Email;
+use HubloyMembership\Base\Email;
 
 /**
  * User email password reset
@@ -36,7 +36,7 @@ class Reset extends Email {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$type                = \Hammock\Services\Emails::COMM_TYPE_RESETPASSWORD;
+		$type                = \HubloyMembership\Services\Emails::COMM_TYPE_RESETPASSWORD;
 		$this->id            = 'member-' . $type;
 		$this->template_html = 'emails/member-reset-password.php';
 		$this->placeholders  = array(
@@ -53,10 +53,10 @@ class Reset extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Reset Password', 'hammock' ),
-			'description' => __( 'Sent when customers reset their password', 'hammock' ),
-			'heading'     => __( 'Password Reset Request', 'hammock' ),
-			'subject'     => sprintf( __( 'Password Reset Request for %s', 'hammock' ), '{site_title}' ),
+			'title'       => __( 'Reset Password', 'hubloy-membership' ),
+			'description' => __( 'Sent when customers reset their password', 'hubloy-membership' ),
+			'heading'     => __( 'Password Reset Request', 'hubloy-membership' ),
+			'subject'     => sprintf( __( 'Password Reset Request for %s', 'hubloy-membership' ), '{site_title}' ),
 			'recipient'   => '',
 			'enabled'     => false,
 		);

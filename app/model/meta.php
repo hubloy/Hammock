@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Model;
+namespace HubloyMembership\Model;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Core\Database;
+use HubloyMembership\Core\Database;
 
 /**
  * Meta database model

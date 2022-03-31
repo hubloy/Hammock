@@ -3,7 +3,7 @@
  * Cache functions
  * Functions used to manage cache
  *
- * @package Hammock/Functions
+ * @package HubloyMembership/Functions
  * @since 1.0.0
  */
 if ( ! defined( 'ABSPATH' ) ) {
@@ -19,8 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-function hammock_add_cache( $cache_key, $results, $group ) {
-	\Hammock\Helper\Cache::set_cache( $cache_key, $results, $group );
+function hubloy-membership_add_cache( $cache_key, $results, $group ) {
+	\HubloyMembership\Helper\Cache::set_cache( $cache_key, $results, $group );
 }
 
 /**
@@ -33,8 +33,8 @@ function hammock_add_cache( $cache_key, $results, $group ) {
  *
  * @return mixed
  */
-function hammock_get_cache( $group, $cache_key ) {
-	return \Hammock\Helper\Cache::get_cache( $cache_key, $group );
+function hubloy-membership_get_cache( $group, $cache_key ) {
+	return \HubloyMembership\Helper\Cache::get_cache( $cache_key, $group );
 }
 
 /**
@@ -45,10 +45,10 @@ function hammock_get_cache( $group, $cache_key ) {
  *
  * @since 1.0.0
  */
-function hammock_delete_cache( $group, $cache_key = false ) {
+function hubloy-membership_delete_cache( $group, $cache_key = false ) {
 	if ( $cache_key ) {
-		\Hammock\Helper\Cache::delete_cache( $cache_key, $group );
+		\HubloyMembership\Helper\Cache::delete_cache( $cache_key, $group );
 	} else {
-		\Hammock\Helper\Cache::invalidate_cache_group( $group );
+		\HubloyMembership\Helper\Cache::invalidate_cache_group( $group );
 	}
 }

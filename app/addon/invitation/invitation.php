@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Addon\Invitation;
+namespace HubloyMembership\Addon\Invitation;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Addon;
+use HubloyMembership\Base\Addon;
 
 class Invitation extends Addon {
 
@@ -51,10 +51,10 @@ class Invitation extends Addon {
 	public function register( $addons ) {
 		if ( ! isset( $addons['invitation'] ) ) {
 			$addons['invitation'] = array(
-				'name'        => __( 'Invitation Codes', 'hammock' ),
-				'description' => __( 'Users need an invitation code to subscribe to a membership.', 'hammock' ),
+				'name'        => __( 'Invitation Codes', 'hubloy-membership' ),
+				'description' => __( 'Users need an invitation code to subscribe to a membership.', 'hubloy-membership' ),
 				'icon'        => 'dashicons dashicons-unlock',
-				'url'         => admin_url( 'admin.php?page=hammock-invites' ),
+				'url'         => admin_url( 'admin.php?page=hubloy-membership-invites' ),
 			);
 		}
 		return $addons;
@@ -72,7 +72,7 @@ class Invitation extends Addon {
 	public function settings_link( $links ) {
 		if ( ! isset( $links['invitation'] ) ) {
 			$links['invitation'] = array(
-				'name'    => __( 'Invitation Codes', 'hammock' ),
+				'name'    => __( 'Invitation Codes', 'hubloy-membership' ),
 				'enabled' => $this->is_enabled(),
 			);
 		}

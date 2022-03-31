@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Gateway\Manual;
+namespace HubloyMembership\Gateway\Manual;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Base\Gateway;
+use HubloyMembership\Base\Gateway;
 
 /**
  * Manual gateway
@@ -72,7 +72,7 @@ class Manual extends Gateway {
 	public function register( $gateways ) {
 		if ( ! isset( $gateways['manual'] ) ) {
 			$gateways['manual'] = array(
-				'name' => __( 'Manual Gateway', 'hammock' ),
+				'name' => __( 'Manual Gateway', 'hubloy-membership' ),
 			);
 		}
 		return $gateways;
@@ -96,7 +96,7 @@ class Manual extends Gateway {
 	 * @return string
 	 */
 	public function settings( $data = '' ) {
-		$view       = new \Hammock\View\Backend\Gateways\Manual();
+		$view       = new \HubloyMembership\View\Backend\Gateways\Manual();
 		$settings   = $this->settings->get_gateway_setting( $this->id );
 		$view->data = array(
 			'settings' => $settings,

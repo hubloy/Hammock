@@ -1,7 +1,7 @@
 <?php
-namespace Hammock\Emails\Member\Membership\Status;
+namespace HubloyMembership\Emails\Member\Membership\Status;
 
-use Hammock\Base\Email;
+use HubloyMembership\Base\Email;
 
 /**
  * User card expire
@@ -36,7 +36,7 @@ class Before extends Email {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$type                = \Hammock\Services\Emails::COMM_TYPE_BEFORE_FINISHES;
+		$type                = \HubloyMembership\Services\Emails::COMM_TYPE_BEFORE_FINISHES;
 		$this->id            = 'member-' . $type;
 		$this->template_html = 'emails/membership/status/before.php';
 		$this->placeholders  = array();
@@ -51,10 +51,10 @@ class Before extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Before Membership Finishes', 'hammock' ),
-			'description' => __( 'Sent to a member before the membership finishes', 'hammock' ),
-			'heading'     => __( 'Membership Ending Soon', 'hammock' ),
-			'subject'     => sprintf( __( 'Reminder: your %s membership will end soon', 'hammock' ), '{membership_name}' ),
+			'title'       => __( 'Before Membership Finishes', 'hubloy-membership' ),
+			'description' => __( 'Sent to a member before the membership finishes', 'hubloy-membership' ),
+			'heading'     => __( 'Membership Ending Soon', 'hubloy-membership' ),
+			'subject'     => sprintf( __( 'Reminder: your %s membership will end soon', 'hubloy-membership' ), '{membership_name}' ),
 			'recipient'   => '',
 			'enabled'     => false,
 		);

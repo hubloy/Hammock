@@ -1,14 +1,14 @@
 <?php
-namespace Hammock\Gateway\Paypal;
+namespace HubloyMembership\Gateway\Paypal;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Hammock\Base\Gateway;
-use Hammock\Helper\Duration;
-use Hammock\Model\Invoice;
-use Hammock\Service\Transactions;
+use HubloyMembership\Base\Gateway;
+use HubloyMembership\Helper\Duration;
+use HubloyMembership\Model\Invoice;
+use HubloyMembership\Service\Transactions;
 
 class PayPal extends Gateway {
 
@@ -56,8 +56,8 @@ class PayPal extends Gateway {
 	public function register( $gateways ) {
 		if ( ! isset( $gateways['paypal'] ) ) {
 			$gateways['paypal'] = array(
-				'name' => __( 'PayPal Standard Gateway', 'hammock' ),
-				'logo' => HAMMOCK_ASSETS_URL . '/img/gateways/paypal.png',
+				'name' => __( 'PayPal Standard Gateway', 'hubloy-membership' ),
+				'logo' => HUBMEMB_ASSETS_URL . '/img/gateways/paypal.png',
 			);
 		}
 		return $gateways;
@@ -81,7 +81,7 @@ class PayPal extends Gateway {
 	 * @return string
 	 */
 	public function settings( $data = '' ) {
-		$view       = new \Hammock\View\Backend\Gateways\PayPal();
+		$view       = new \HubloyMembership\View\Backend\Gateways\PayPal();
 		$settings   = $this->settings->get_gateway_setting( $this->get_id() );
 		$view->data = array(
 			'settings' => $settings,
@@ -275,10 +275,10 @@ class PayPal extends Gateway {
 			$invoice->status = Transactions::STATUS_PAID;
 		} elseif ( 'pending' === $paypal_status && ! empty( $_POST['pending_reason'] ) ) {
 			$invoice->status = Transactions::STATUS_PENDING;
-			$invoice->add_note( sprintf( __( 'PayPal has the payment on hold. Reason given: %s', 'hammock' ), sanitize_text_field( $_POST['pending_reason'] ) ) );
+			$invoice->add_note( sprintf( __( 'PayPal has the payment on hold. Reason given: %s', 'hubloy-membership' ), sanitize_text_field( $_POST['pending_reason'] ) ) );
 		} else {
 			$invoice->status = Transactions::STATUS_FAILED;
-			$invoice->add_note( sprintf( __( 'PayPal rejected the payment. PayPal Status: %s', 'hammock' ), $paypal_status ) );
+			$invoice->add_note( sprintf( __( 'PayPal rejected the payment. PayPal Status: %s', 'hubloy-membership' ), $paypal_status ) );
 		}
 
 		$invoice->save();
@@ -295,7 +295,7 @@ class PayPal extends Gateway {
 		}
 		$subscr_id       = sanitize_text_field( $_POST['subscr_id'] );
 		$invoice->status = Transactions::STATUS_PAID;
-		$invoice->add_note( sprintf( __( 'PayPal Subscription ID: %s', 'hammock' ), $subscr_id ) );
+		$invoice->add_note( sprintf( __( 'PayPal Subscription ID: %s', 'hubloy-membership' ), $subscr_id ) );
 		$invoice->save();
 
 		$plan = $invoice->get_plan();
@@ -379,7 +379,7 @@ class PayPal extends Gateway {
 	/**
 	 * Render the payment form
 	 *
-	 * @param \Hammock\Model\Invoice $invoice - the invoice model
+	 * @param \HubloyMembership\Model\Invoice $invoice - the invoice model
 	 *
 	 * @return string
 	 */
@@ -390,7 +390,7 @@ class PayPal extends Gateway {
 	/**
 	 * Render the subscription payment update form
 	 *
-	 * @param \Hammock\Model\Plan $plan - the plan model
+	 * @param \HubloyMembership\Model\Plan $plan - the plan model
 	 *
 	 * @return string
 	 */
@@ -401,7 +401,7 @@ class PayPal extends Gateway {
 	/**
 	 * Process Payment
 	 *
-	 * @param \Hammock\Model\Invoice $invoice - the invoice model
+	 * @param \HubloyMembership\Model\Invoice $invoice - the invoice model
 	 *
 	 * @since 1.0.0
 	 */
@@ -423,7 +423,7 @@ class PayPal extends Gateway {
 			'invoice'       => $invoice->invoice_id,
 			'no_shipping'   => '1',
 			'shipping'      => '0',
-			'currency_code' => hammock_get_currency_symbol(),
+			'currency_code' => hubloy-membership_get_currency_symbol(),
 			'charset'       => 'utf-8',
 			'no_note'       => '1',
 			'custom'        => json_encode(
@@ -448,7 +448,7 @@ class PayPal extends Gateway {
 
 		wp_send_json_success(
 			array(
-				'message' => __( 'Redirecting to PayPal', 'hammock' ),
+				'message' => __( 'Redirecting to PayPal', 'hubloy-membership' ),
 				'url'     => $url,
 			)
 		);
@@ -457,9 +457,9 @@ class PayPal extends Gateway {
 	/**
 	 * Process recurring payment
 	 *
-	 * @param \Hammock\Model\Invoice    $invoice The current invoice.
-	 * @param \Hammock\Model\Plan       $plan The current plan.
-	 * @param \Hammock\Model\Membership $membership The plan membership.
+	 * @param \HubloyMembership\Model\Invoice    $invoice The current invoice.
+	 * @param \HubloyMembership\Model\Plan       $plan The current plan.
+	 * @param \HubloyMembership\Model\Membership $membership The plan membership.
 	 * @param array                     $credentials The gateway credentials
 	 *
 	 * @since 1.0.0
@@ -477,7 +477,7 @@ class PayPal extends Gateway {
 			'no_shipping'   => '1',
 			'shipping'      => '0',
 			'no_note'       => '1',
-			'currency_code' => hammock_get_currency_symbol(),
+			'currency_code' => hubloy-membership_get_currency_symbol(),
 			'charset'       => 'utf-8',
 			'custom'        => json_encode(
 				array(
@@ -525,7 +525,7 @@ class PayPal extends Gateway {
 
 		wp_send_json_success(
 			array(
-				'message' => __( 'Redirecting to PayPal', 'hammock' ),
+				'message' => __( 'Redirecting to PayPal', 'hubloy-membership' ),
 				'url'     => $url,
 			)
 		);
@@ -593,7 +593,7 @@ class PayPal extends Gateway {
 		}
 
 		if ( ! $best_match ) {
-			wp_die( __( 'Can not create a valid PayPal subscription configuration from plan.', 'hammock' ) );
+			wp_die( __( 'Can not create a valid PayPal subscription configuration from plan.', 'hubloy-membership' ) );
 		}
 
 		return $best_match;

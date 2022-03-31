@@ -22,8 +22,8 @@ export default class EditTransaction extends Component {
 		};
 		
 		this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
 	}
 
@@ -75,20 +75,20 @@ export default class EditTransaction extends Component {
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				self.notify( self.props.hammock.error, 'error' );
+				self.notify( self.props.hubloy_membership.error, 'error' );
 			}
 		);
 	}
 
 	componentDidUpdate() {
-		window.hammock.helper.bind_date_range();
+		window.hubloy_membership.helper.bind_date_range();
 	}
 
-	render_form( hammock, invoice ) {
-		var strings = hammock.strings;
+	render_form( hubloy_membership, invoice ) {
+		var strings = hubloy_membership.strings;
 		return (
-			<Dashboard hammock={hammock} title={strings.update.title}>
-				<div className="hammock-transaction uk-background-default uk-padding-small">
+			<Dashboard hubloy_membership={hubloy_membership} title={strings.update.title}>
+				<div className="hubloy_membership-transaction uk-background-default uk-padding-small">
 					<form className="uk-form-horizontal uk-margin-large" onSubmit={this.handleSubmit.bind(this)} ref={this.update_transaction}>
 						<InputUI name={`id`} type={`hidden`} value={invoice.id}/>
 						<div className="uk-margin">
@@ -113,7 +113,7 @@ export default class EditTransaction extends Component {
 							<label className="uk-form-label">{strings.update.form.amount}</label>
 							<div className="uk-form-controls">
 								<div className="uk-inline">
-									<span className="uk-form-icon" dangerouslySetInnerHTML={{ __html: this.props.hammock.common.currency_code }} />
+									<span className="uk-form-icon" dangerouslySetInnerHTML={{ __html: this.props.hubloy_membership.common.currency_code }} />
 									<InputUI name={`amount`} placeholder={`0.00`} required={true} value={invoice.amount}/>
 								</div>
 							</div>
@@ -127,11 +127,11 @@ export default class EditTransaction extends Component {
 						<div className="uk-margin">
 							<label className="uk-form-label">{strings.update.form.date}</label>
 							<div className="uk-form-controls">
-								<InputUI name={`due_date`} class_name={`hammock-from-date`} value={invoice.due}/>
+								<InputUI name={`due_date`} class_name={`hubloy_membership-from-date`} value={invoice.due}/>
 							</div>
 						</div>
 						<div className="uk-margin ">
-							<button className="uk-button uk-button-primary save-button">{hammock.common.buttons.update}</button>
+							<button className="uk-button uk-button-primary save-button">{hubloy_membership.common.buttons.update}</button>
 						</div>
 					</form>
 				</div>
@@ -140,7 +140,7 @@ export default class EditTransaction extends Component {
 	}
 
 	render() {
-		const hammock = this.props.hammock,
+		const hubloy_membership = this.props.hubloy_membership,
 			invoice = this.state.invoice;
 		if ( this.state.loading) {
 			return (
@@ -151,10 +151,10 @@ export default class EditTransaction extends Component {
 		} else {
 			if ( this.state.error) {
 				return (
-					<h3 className="uk-text-center uk-text-danger">{hammock.error}</h3>
+					<h3 className="uk-text-center uk-text-danger">{hubloy_membership.error}</h3>
 				)
 			} else if ( invoice.id > 0 ) {
-				return this.render_form( hammock, invoice );
+				return this.render_form( hubloy_membership, invoice );
 			}
 		}
 		
@@ -162,5 +162,5 @@ export default class EditTransaction extends Component {
 }
 
 EditTransaction.propTypes = {
-	hammock: PropTypes.object
+	hubloy_membership: PropTypes.object
 };

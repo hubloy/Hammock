@@ -1,5 +1,5 @@
 <?php
-namespace Hammock\Core;
+namespace HubloyMembership\Core;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.

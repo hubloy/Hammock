@@ -18,8 +18,8 @@ export default class StatsDashboard extends Component {
 			transactions : []
         };
         this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
 	}
 
@@ -39,7 +39,7 @@ export default class StatsDashboard extends Component {
 				error : false,
 			}), (err) => {
 				this.setState({ loading_subs : false, error : true });
-				this.notify( this.props.hammock.error, 'error' );
+				this.notify( this.props.hubloy_membership.error, 'error' );
 			}
 		);
 	}
@@ -52,7 +52,7 @@ export default class StatsDashboard extends Component {
 				error : false,
 			}), (err) => {
 				this.setState({ loading_trans : false, error : true });
-				this.notify( this.props.hammock.error, 'error' );
+				this.notify( this.props.hubloy_membership.error, 'error' );
 			}
 		);
 	}
@@ -61,8 +61,8 @@ export default class StatsDashboard extends Component {
 	render() {
 		var subscribers = this.state.subscribers;
 		var transactions = this.state.transactions;
-		var hammock = this.props.hammock,
-			days = hammock.strings.dashboard.stats.charts.days;
+		var hubloy_membership = this.props.hubloy_membership,
+			days = hubloy_membership.strings.dashboard.stats.charts.days;
 		const options = {
 			scales: {
 				yAxes: [
@@ -86,7 +86,7 @@ export default class StatsDashboard extends Component {
 				<div className="">
 					<div className="uk-padding-small uk-height-large uk-card uk-card-default">
 						<div className="uk-card-header uk-padding-remove dashboard-heading">
-							<h4 className="uk-card-title">{hammock.strings.dashboard.stats.title.subscribers}</h4>
+							<h4 className="uk-card-title">{hubloy_membership.strings.dashboard.stats.title.subscribers}</h4>
 						</div>
 						<div className="uk-card-body">
 							{this.state.loading_subs ? (
@@ -97,7 +97,7 @@ export default class StatsDashboard extends Component {
 										labels: [days.mon, days.tue, days.wed, days.thu, days.fri, days.sat, days.sun],
 										datasets: [
 											{
-												label: hammock.strings.dashboard.stats.charts.subscribers,
+												label: hubloy_membership.strings.dashboard.stats.charts.subscribers,
 												data: [subscribers.mon, subscribers.tue, subscribers.wed, subscribers.thu, subscribers.fri, subscribers.sat, subscribers.sun],
 												backgroundColor: 'rgb(49, 104, 142)',
 												borderColor: 'rgb(49, 104, 142)',
@@ -106,7 +106,7 @@ export default class StatsDashboard extends Component {
 										],
 									}} options={options}/>
 								) : (
-									<Center text={hammock.strings.dashboard.stats.no_data.subscribers} backgroundImage={hammock.assets_url + '/img/preloader-chart.jpg'}/>
+									<Center text={hubloy_membership.strings.dashboard.stats.no_data.subscribers} backgroundImage={hubloy_membership.assets_url + '/img/preloader-chart.jpg'}/>
 								)
 							)}
 						</div>
@@ -115,7 +115,7 @@ export default class StatsDashboard extends Component {
 				<div className="">
 					<div className="uk-padding-small uk-height-large uk-card uk-card-default">
 						<div className="uk-card-header uk-padding-remove dashboard-heading">
-							<h4 className="uk-card-title">{hammock.strings.dashboard.stats.title.transactions}</h4>
+							<h4 className="uk-card-title">{hubloy_membership.strings.dashboard.stats.title.transactions}</h4>
 						</div>
 						<div className="uk-card-body">
 							{this.state.loading_trans ? (
@@ -126,7 +126,7 @@ export default class StatsDashboard extends Component {
 										labels: [days.mon, days.tue, days.wed, days.thu, days.fri, days.sat, days.sun],
 										datasets: [
 											{
-												label: hammock.strings.dashboard.stats.charts.transactions,
+												label: hubloy_membership.strings.dashboard.stats.charts.transactions,
 												data: [transactions.mon, transactions.tue, transactions.wed, transactions.thu, transactions.fri, transactions.sat, transactions.sun],
 												fill: false,
 												backgroundColor: 'rgb(49, 104, 142)',
@@ -135,7 +135,7 @@ export default class StatsDashboard extends Component {
 										],
 									}} options={options} />
 								) : (
-									<Center text={hammock.strings.dashboard.stats.no_data.transactions} backgroundImage={hammock.assets_url + '/img/preloader-chart.jpg'}/>
+									<Center text={hubloy_membership.strings.dashboard.stats.no_data.transactions} backgroundImage={hubloy_membership.assets_url + '/img/preloader-chart.jpg'}/>
 								)
 							)}
 						</div>

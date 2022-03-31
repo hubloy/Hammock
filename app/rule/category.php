@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Rule;
+namespace HubloyMembership\Rule;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Rule;
+use HubloyMembership\Base\Rule;
 
 class Category extends Rule {
 
@@ -49,7 +49,7 @@ class Category extends Rule {
 	 */
 	public function init() {
 		$this->id          = 'term';
-		$this->name        = __( 'Categories', 'hammock' );
+		$this->name        = __( 'Categories', 'hubloy-membership' );
 		$this->has_setting = true;
 	}
 
@@ -165,11 +165,11 @@ class Category extends Rule {
 	public function protect_content() {
 		add_action( 'wp', array( $this, 'restrict_content' ) );
 
-		add_filter( 'hammock_post_rule_manage_posts_clauses', array( $this, 'manage_term_clauses' ) );
+		add_filter( 'hubloy-membership_post_rule_manage_posts_clauses', array( $this, 'manage_term_clauses' ) );
 		add_filter( 'get_terms_args', array( $this, 'manage_get_terms_args' ), 999, 2 );
 		add_filter( 'terms_clauses', array( $this, 'handle_terms_clauses' ), 999 );
 		do_action(
-			'hammock_protect_term_content',
+			'hubloy-membership_protect_term_content',
 			$this
 		);
 	}
@@ -292,8 +292,8 @@ class Category extends Rule {
 
 				foreach ( $terms as $term_id ) {
 
-					if ( hammock_is_term_protected( $term_id, $taxonomy ) ) {
-						$message_code    = hammock_content_protected_message( $term_id, 'term', $taxonomy );
+					if ( hubloy-membership_is_term_protected( $term_id, $taxonomy ) ) {
+						$message_code    = hubloy-membership_content_protected_message( $term_id, 'term', $taxonomy );
 						$restricted_term = get_term( $term_id, $taxonomy );
 					}
 				}

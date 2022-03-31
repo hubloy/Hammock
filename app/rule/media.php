@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Rule;
+namespace HubloyMembership\Rule;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Rule;
+use HubloyMembership\Base\Rule;
 
 class Media extends Rule {
 
@@ -40,6 +40,6 @@ class Media extends Rule {
 	 */
 	public function init() {
 		$this->id   = 'media';
-		$this->name = __( 'Media Library Items', 'hammock' );
+		$this->name = __( 'Media Library Items', 'hubloy-membership' );
 	}
 }

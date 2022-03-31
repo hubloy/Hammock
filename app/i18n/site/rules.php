@@ -9,22 +9,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 return array(
 	'dashboard' => array(
 		'add_new' => array(
-			'button' => __( 'Create Rule', 'hammock' ),
+			'button' => __( 'Create Rule', 'hubloy-membership' ),
 			'modal'  => array(
-				'title'      => __( 'New Rule', 'hammock' ),
-				'rule'       => __( 'Select Rule', 'hammock' ),
-				'item'       => __( 'Select Item to protect', 'hammock' ),
-				'membership' => __( 'Membership', 'hammock' ),
+				'title'      => __( 'New Rule', 'hubloy-membership' ),
+				'rule'       => __( 'Select Rule', 'hubloy-membership' ),
+				'item'       => __( 'Select Item to protect', 'hubloy-membership' ),
+				'membership' => __( 'Membership', 'hubloy-membership' ),
 			),
 		),
 		'table'   => array(
-			'id'     => __( 'ID', 'hammock' ),
-			'desc'   => __( 'Description', 'hammock' ),
-			'status' => __( 'Status', 'hammock' ),
-			'type'   => __( 'Type', 'hammock' ),
-			'date'   => __( 'Date Created', 'hammock' ),
+			'id'     => __( 'ID', 'hubloy-membership' ),
+			'desc'   => __( 'Description', 'hubloy-membership' ),
+			'status' => __( 'Status', 'hubloy-membership' ),
+			'type'   => __( 'Type', 'hubloy-membership' ),
+			'date'   => __( 'Date Created', 'hubloy-membership' ),
 			'delete' => array(
-				'prompt' => __( 'Are you sure you want to delete this rule?', 'hammock' ),
+				'prompt' => __( 'Are you sure you want to delete this rule?', 'hubloy-membership' ),
 			),
 		),
 	),

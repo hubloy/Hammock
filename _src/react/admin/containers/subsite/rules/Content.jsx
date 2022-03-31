@@ -15,8 +15,8 @@ export default class Table extends Component {
 			error : false,
 		};
 		this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
 		});
 
 		this.getData = this.getData.bind(this);
@@ -38,7 +38,7 @@ export default class Table extends Component {
 					loading : false,
 					error : ! json.success,
 				});
-				window.hammock.helper.select2();
+				window.hubloy_membership.helper.select2();
 			}, (err) => this.setState({ loading : false, error : true })
 		);
 	}
@@ -57,24 +57,24 @@ export default class Table extends Component {
 	handleRowAction(event, id, action ) {
 		event.preventDefault();
 		var $button = jQuery(event.target),
-			hammock = this.props.hammock;
+			hubloy_membership = this.props.hubloy_membership;
 		if ( 'edit' == action ) {
 			this.handleEdit( id );
 		} else if ( 'delete' == action ) {
-			this.handleDelete( $button, id, hammock );
+			this.handleDelete( $button, id, hubloy_membership );
 		}
 		return false;
 	}
 
 	handleEdit( id ) {
-		UIkit.modal( jQuery( '#hammock-edit-rule-' + id ) ).show();
+		UIkit.modal( jQuery( '#hubloy_membership-edit-rule-' + id ) ).show();
 	}
 
-	handleDelete( $button, id, hammock ) {
+	handleDelete( $button, id, hubloy_membership ) {
 		var $btn_txt = $button.text(),
 			prompt = $button.attr('data-prompt'),
-			helper = hammock.helper,
-			error = hammock.error,
+			helper = hubloy_membership.helper,
+			error = hubloy_membership.error,
 			self = this,
 			fetchWP = self.fetchWP;
 		helper.confirm( prompt, 'warning', function() {
@@ -102,8 +102,8 @@ export default class Table extends Component {
 
     render() {
 		const { pager, items, loading, error } = this.state;
-        var hammock = this.props.hammock,
-		    strings = hammock.strings;
+        var hubloy_membership = this.props.hubloy_membership,
+		    strings = hubloy_membership.strings;
 		return (
 			<React.Fragment>
 				{loading ? (
@@ -112,16 +112,16 @@ export default class Table extends Component {
 					</div>
 				) : (
 					error ? (
-						<h3 className="uk-text-center uk-margin-top">{hammock.error}</h3>
+						<h3 className="uk-text-center uk-margin-top">{hubloy_membership.error}</h3>
 					) : (
 						pager.total <= 0 ? (
-							<h3 className="uk-text-center uk-margin-top">{hammock.no_data}</h3>
+							<h3 className="uk-text-center uk-margin-top">{hubloy_membership.no_data}</h3>
 						) : (
 							<React.Fragment>
 								<table className="uk-table uk-background-default">
 									<thead>
 										<tr>
-											<th className='uk-table-shrink'><input className="uk-checkbox hammock-top-checkbox" type="checkbox" /></th>
+											<th className='uk-table-shrink'><input className="uk-checkbox hubloy_membership-top-checkbox" type="checkbox" /></th>
 											<th className="uk-table-shrink">{strings.dashboard.table.id}</th>
 											<th>{strings.dashboard.table.desc}</th>
 											<th>{strings.dashboard.table.status}</th>
@@ -137,9 +137,9 @@ export default class Table extends Component {
 												<td>
 													<span dangerouslySetInnerHTML={{ __html: item.desc}}/>
 													<div id={"rule-hover-"+ item.rule_id}>
-														<a href="#" uk-tooltip={hammock.common.buttons.edit} title={hammock.common.buttons.edit} data-type={item.object_type} className="uk-text-primary" onClick={ e => this.handleRowAction(e, item.rule_id, 'edit')}>{hammock.common.buttons.edit}</a>
+														<a href="#" uk-tooltip={hubloy_membership.common.buttons.edit} title={hubloy_membership.common.buttons.edit} data-type={item.object_type} className="uk-text-primary" onClick={ e => this.handleRowAction(e, item.rule_id, 'edit')}>{hubloy_membership.common.buttons.edit}</a>
 														{' '}|{' '}
-														<a href="#" uk-tooltip={hammock.common.buttons.delete} title={hammock.common.buttons.delete} data-prompt={strings.dashboard.table.delete.prompt} className="uk-text-danger" onClick={ e => this.handleRowAction(e, item.rule_id, 'delete')}>{hammock.common.buttons.delete}</a>
+														<a href="#" uk-tooltip={hubloy_membership.common.buttons.delete} title={hubloy_membership.common.buttons.delete} data-prompt={strings.dashboard.table.delete.prompt} className="uk-text-danger" onClick={ e => this.handleRowAction(e, item.rule_id, 'delete')}>{hubloy_membership.common.buttons.delete}</a>
 													</div>
 												</td>
 												<td>{item.status_name}</td>
@@ -150,7 +150,7 @@ export default class Table extends Component {
 									</tbody>
 									<tfoot>
 										<tr>
-											<th className='uk-table-shrink'><input className="uk-checkbox hammock-top-checkbox" type="checkbox" /></th>
+											<th className='uk-table-shrink'><input className="uk-checkbox hubloy_membership-top-checkbox" type="checkbox" /></th>
 											<th className="uk-table-shrink">{strings.dashboard.table.id}</th>
 											<th>{strings.dashboard.table.desc}</th>
 											<th>{strings.dashboard.table.status}</th>
@@ -160,7 +160,7 @@ export default class Table extends Component {
 									</tfoot>
 								</table>
 								{items.map(item =>
-									<EditRule key={item.rule_id} hammock={hammock} rule={item} rules={this.props.rules} />
+									<EditRule key={item.rule_id} hubloy_membership={hubloy_membership} rule={item} rules={this.props.rules} />
 								)}
 							</React.Fragment>
 						)

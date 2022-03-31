@@ -1,7 +1,7 @@
 <?php
-namespace Hammock\Emails\Member\Membership\Status;
+namespace HubloyMembership\Emails\Member\Membership\Status;
 
-use Hammock\Base\Email;
+use HubloyMembership\Base\Email;
 
 /**
  * User card expire
@@ -36,7 +36,7 @@ class Finished extends Email {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$type                = \Hammock\Services\Emails::COMM_TYPE_FINISHED;
+		$type                = \HubloyMembership\Services\Emails::COMM_TYPE_FINISHED;
 		$this->id            = 'member-' . $type;
 		$this->template_html = 'emails/membership/status/finished.php';
 		$this->placeholders  = array();
@@ -51,10 +51,10 @@ class Finished extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Membership Ended', 'hammock' ),
-			'description' => __( 'Sent to a member when the membership ends', 'hammock' ),
-			'heading'     => __( 'Membership Ended', 'hammock' ),
-			'subject'     => sprintf( __( 'Your %s membership hase ended', 'hammock' ), '{membership_name}' ),
+			'title'       => __( 'Membership Ended', 'hubloy-membership' ),
+			'description' => __( 'Sent to a member when the membership ends', 'hubloy-membership' ),
+			'heading'     => __( 'Membership Ended', 'hubloy-membership' ),
+			'subject'     => sprintf( __( 'Your %s membership hase ended', 'hubloy-membership' ), '{membership_name}' ),
 			'recipient'   => '',
 			'enabled'     => false,
 		);

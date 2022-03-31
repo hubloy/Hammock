@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Controller\Site;
+namespace HubloyMembership\Controller\Site;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Controller;
+use HubloyMembership\Base\Controller;
 
 /**
  * Members controller
@@ -90,8 +90,8 @@ class Members extends Controller {
 		$this->_cap     = $cap;
 		add_submenu_page(
 			$slug,
-			__( 'Members', 'hammock' ),
-			__( 'Members', 'hammock' ),
+			__( 'Members', 'hubloy-membership' ),
+			__( 'Members', 'hubloy-membership' ),
 			$this->_cap,
 			$this->_page_id,
 			array( $this, 'render' )
@@ -109,13 +109,13 @@ class Members extends Controller {
 	 */
 	function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'members' ) ) {
-			$service                           = new \Hammock\Services\Memberships();
-			$vars['common']['string']['title'] = __( 'Members', 'hammock' );
+			$service                           = new \HubloyMembership\Services\Memberships();
+			$vars['common']['string']['title'] = __( 'Members', 'hubloy-membership' );
 			$vars['active_page']               = 'members';
 			$vars['strings']                   = $this->get_strings();
 			$vars['page_strings']              = array(
 				'type'     => $service->list_simple_memberships(),
-				'gateways' => \Hammock\Services\Gateways::list_simple_gateways(),
+				'gateways' => \HubloyMembership\Services\Gateways::list_simple_gateways(),
 			);
 		}
 		return $vars;
@@ -129,7 +129,7 @@ class Members extends Controller {
 	 */
 	private function get_strings() {
 		if ( empty( $this->strings ) ) {
-			$this->strings = include HAMMOCK_LOCALE_DIR . '/site/members.php';
+			$this->strings = include HUBMEMB_LOCALE_DIR . '/site/members.php';
 		}
 		return $this->strings;
 	}
@@ -140,7 +140,7 @@ class Members extends Controller {
 	 * @since 1.0.0
 	 */
 	public function controller_scripts() {
-		wp_enqueue_script( 'hammock-members-react' );
+		wp_enqueue_script( 'hubloy-membership-members-react' );
 	}
 
 	/**
@@ -151,7 +151,7 @@ class Members extends Controller {
 	public function render() {
 
 		?>
-		<div id="hammock-members-container"></div>
+		<div id="hubloy-membership-members-container"></div>
 		<?php
 	}
 }

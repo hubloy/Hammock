@@ -3,18 +3,18 @@
 /*global $:false */
 /*global window:false */
 /*global document:false */
-/*global hammock:false */
+/*global hubloy_membership:false */
 /*global Swal:false */
 
-window.hammock = window.hammock || {};
+window.hubloy_membership = window.hubloy_membership || {};
 
-hammock.helper = {
+hubloy_membership.helper = {
 
 	notify : function(message, type, callback){
 		Swal.fire({
 			type: type,
 			title: message,
-			confirmButtonText: hammock.common.buttons.ok
+			confirmButtonText: hubloy_membership.common.buttons.ok
 		}).then(function(result) {
 			if (result.value) {
 				if(typeof callback !== 'undefined'){
@@ -29,8 +29,8 @@ hammock.helper = {
 			type: type,
 			title: message,
 			showCancelButton: true,
-			confirmButtonText: hammock.common.buttons.ok,
-			cancelButtonText: hammock.common.buttons.cancel
+			confirmButtonText: hubloy_membership.common.buttons.ok,
+			cancelButtonText: hubloy_membership.common.buttons.cancel
 		}).then(function(result) {
 			if (result.value) {
 				if(typeof callback !== 'undefined'){
@@ -63,7 +63,7 @@ hammock.helper = {
 	 * Progress Loader
 	 */
 	loader : function(container_class,elem){
-		jQuery("<div class='"+container_class+"'><img src='"+hammock.assets.spinner+"' class='hammock-spinner-center'/></div>").css({
+		jQuery("<div class='"+container_class+"'><img src='"+hubloy_membership.assets.spinner+"' class='hubloy_membership-spinner-center'/></div>").css({
 			position: "absolute",
 			width: "100%",
 			height: "100%",
@@ -75,25 +75,25 @@ hammock.helper = {
 	},
 
 	bind_date_range : function() {
-		if ( jQuery(".hammock-from-date").length ) {
-			var $hammockFromDate = jQuery(".hammock-from-date").datepicker({
+		if ( jQuery(".hubloy_membership-from-date").length ) {
+			var $hubloy_membershipFromDate = jQuery(".hubloy_membership-from-date").datepicker({
 					dateFormat:'yy-mm-dd',
 					minDate : "0",
 					changeMonth: true,
 					changeYear: true,
 					numberOfMonths: 1
 				}),
-				$hammockToDate = jQuery(".hammock-to-date").datepicker({
+				$hubloy_membershipToDate = jQuery(".hubloy_membership-to-date").datepicker({
 					dateFormat:'yy-mm-dd',
 					changeMonth: true,
 					changeYear: true,
 					numberOfMonths: 1
 				});
-			$hammockFromDate.on( "change", function() {
-				$hammockToDate.datepicker( "option", "minDate", hammock.helper.get_date( this ) );
+			$hubloy_membershipFromDate.on( "change", function() {
+				$hubloy_membershipToDate.datepicker( "option", "minDate", hubloy_membership.helper.get_date( this ) );
 			});
-			$hammockToDate.on( "change", function() {
-				$hammockFromDate.datepicker( "option", "maxDate", hammock.helper.get_date( this ) );
+			$hubloy_membershipToDate.on( "change", function() {
+				$hubloy_membershipFromDate.datepicker( "option", "maxDate", hubloy_membership.helper.get_date( this ) );
 			});
 		}
 	},
@@ -110,11 +110,11 @@ hammock.helper = {
 	},
 
 	select2 : function() {
-		jQuery( '.hammock-select2' ).select2();
-		var container = jQuery( '.hammock-select2-ajax' );
+		jQuery( '.hubloy_membership-select2' ).select2();
+		var container = jQuery( '.hubloy_membership-select2-ajax' );
 		if ( container.length ) {
 			var url = container.attr( 'data-url' );
-			jQuery( '.hammock-select2-ajax' ).select2({
+			jQuery( '.hubloy_membership-select2-ajax' ).select2({
 				ajax: {
 					url: url,
 					dataType: 'json',

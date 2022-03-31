@@ -6,10 +6,10 @@ import SiteComms from './admin/containers/subsite/Comms';
 import SiteCommsManage from './admin/containers/subsite/comms/Manage';
 
 document.addEventListener('DOMContentLoaded', function () {
-	const hammockContainer = document.getElementById( 'hammock-comms-container' );
-	if ( hammockContainer !== null ) {
-		const CommsPage = (props) => <SiteComms hammock={window.hammock} {...props} />
-		const CommsManagePage = (props) => <SiteCommsManage hammock={window.hammock} {...props} />
+	const hubloy_membershipContainer = document.getElementById( 'hubloy_membership-comms-container' );
+	if ( hubloy_membershipContainer !== null ) {
+		const CommsPage = (props) => <SiteComms hubloy_membership={window.hubloy_membership} {...props} />
+		const CommsManagePage = (props) => <SiteCommsManage hubloy_membership={window.hubloy_membership} {...props} />
 		const routing = (
 			<HashRouter>
 				<Switch>
@@ -18,6 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				</Switch>
 			</HashRouter>
 		);
-		ReactDOM.render(routing, hammockContainer);
+		ReactDOM.render(routing, hubloy_membershipContainer);
 	}
 });

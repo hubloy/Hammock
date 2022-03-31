@@ -1,7 +1,7 @@
 <?php
-namespace Hammock\Emails\Member\Membership\Payment;
+namespace HubloyMembership\Emails\Member\Membership\Payment;
 
-use Hammock\Base\Email;
+use HubloyMembership\Base\Email;
 
 /**
  * User card expire
@@ -36,7 +36,7 @@ class Failed extends Email {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$type                = \Hammock\Services\Emails::COMM_TYPE_FAILED_PAYMENT;
+		$type                = \HubloyMembership\Services\Emails::COMM_TYPE_FAILED_PAYMENT;
 		$this->id            = 'member-' . $type;
 		$this->template_html = 'emails/membership/payment/failed.php';
 		$this->placeholders  = array(
@@ -53,10 +53,10 @@ class Failed extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Payment failed', 'hammock' ),
-			'description' => __( 'Sent to a member when payment fails', 'hammock' ),
-			'heading'     => __( 'Payment failed', 'hammock' ),
-			'subject'     => sprintf( __( 'Your %s membership payment failed', 'hammock' ), '{membership_name}' ),
+			'title'       => __( 'Payment failed', 'hubloy-membership' ),
+			'description' => __( 'Sent to a member when payment fails', 'hubloy-membership' ),
+			'heading'     => __( 'Payment failed', 'hubloy-membership' ),
+			'subject'     => sprintf( __( 'Your %s membership payment failed', 'hubloy-membership' ), '{membership_name}' ),
 			'recipient'   => '',
 			'enabled'     => false,
 		);

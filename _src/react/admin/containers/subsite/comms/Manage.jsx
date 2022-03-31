@@ -21,8 +21,8 @@ export default class Manage extends Component {
 			id : this.props.match.params.id
         };
         this.fetchWP = new fetchWP({
-			api_url: this.props.hammock.api_url,
-			api_nonce: this.props.hammock.api_nonce,
+			api_url: this.props.hubloy_membership.api_url,
+			api_nonce: this.props.hubloy_membership.api_nonce,
         });
 	}
 
@@ -61,27 +61,27 @@ export default class Manage extends Component {
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				self.notify( this.props.hammock.error, 'error' );
+				self.notify( this.props.hubloy_membership.error, 'error' );
 			}
 		);
 	}
 
 	render() {
-		var hammock = this.props.hammock;
+		var hubloy_membership = this.props.hubloy_membership;
 		return(
-			<Dashboard hammock={hammock}>
+			<Dashboard hubloy_membership={hubloy_membership}>
 				{this.state && typeof this.state.item.id !== 'undefined' ? (
 					<React.Fragment>
 						<div className='uk-container uk-padding-small uk-margin-top uk-width-1-1 uk-background-default'>
 							<div>
 								<h2 className="uk-heading-divider">{this.state.item.title}</h2>
 							</div>
-							<div className="hammock-membership hammock-membership-comms">
+							<div className="hubloy_membership-membership hubloy_membership-membership-comms">
 								<form className="uk-form-horizontal uk-margin-large" onSubmit={this.handleSubmit} ref={this.comm_setting}>
 									<InputUI name={`id`} type={`hidden`} value={this.state.item.id}/>
 									<div dangerouslySetInnerHTML={{ __html: this.state.item.form }} />
 									<div className="uk-margin">
-										<button className="uk-button uk-button-primary update-button">{hammock.common.buttons.update}</button>
+										<button className="uk-button uk-button-primary update-button">{hubloy_membership.common.buttons.update}</button>
 									</div>
 								</form>
 							</div>

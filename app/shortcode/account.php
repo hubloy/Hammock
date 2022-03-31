@@ -1,11 +1,11 @@
 <?php
-namespace Hammock\Shortcode;
+namespace HubloyMembership\Shortcode;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Hammock\Base\Shortcode;
+use HubloyMembership\Base\Shortcode;
 
 /**
  * Account shortcode manager
@@ -56,13 +56,13 @@ class Account extends Shortcode {
 			$verify  = sanitize_text_field( $_REQUEST['verify'] );
 			$user_id = absint( sanitize_text_field( $_REQUEST['id'] ) );
 
-			$user_activation_status = get_user_meta( $user_id, '_hammock_activation_status', true );
+			$user_activation_status = get_user_meta( $user_id, '_hubloy-membership_activation_status', true );
 
 			if ( $user_activation_status && intval( $user_activation_status ) === 2 ) {
-				$activation_code = get_user_meta( $user_id, '_hammock_activation_key', true );
+				$activation_code = get_user_meta( $user_id, '_hubloy-membership_activation_key', true );
 				if ( $activation_code === $verify ) {
 					// Account verified
-					update_user_meta( $user_id, '_hammock_activation_status', 3 );
+					update_user_meta( $user_id, '_hubloy-membership_activation_status', 3 );
 				}
 			}
 		}
