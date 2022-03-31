@@ -79,7 +79,7 @@ class Addon extends Controller {
 		$this->load_addons();
 		$this->init_addons();
 
-		$this->add_ajax_action( 'hubloy-membership_addon_settings', 'addon_settings' );
+		$this->add_ajax_action( 'hubloy_membership_addon_settings', 'addon_settings' );
 	}
 
 	/**
@@ -97,7 +97,7 @@ class Addon extends Controller {
 		\HubloyMembership\Addon\Mailchimp\Mailchimp::instance();
 		\HubloyMembership\Addon\Invitation\Invitation::instance();
 
-		do_action( 'hubloy-membership_load_addons' );
+		do_action( 'hubloy_membership_load_addons' );
 	}
 
 	/**
@@ -107,7 +107,7 @@ class Addon extends Controller {
 	 */
 	private function init_addons() {
 		// Action called by addon to initiate it
-		do_action( 'hubloy-membership_init_addon' );
+		do_action( 'hubloy_membership_init_addon' );
 	}
 
 	/**
@@ -154,7 +154,7 @@ class Addon extends Controller {
 	 * @since 1.0.0
 	 */
 	public function controller_scripts() {
-		wp_enqueue_script( 'hubloy-membership-addons-react' );
+		wp_enqueue_script( 'hubloy_membership-addons-react' );
 	}
 
 	/**
@@ -164,7 +164,7 @@ class Addon extends Controller {
 	 */
 	public function render() {
 		?>
-		<div id="hubloy-membership-addon-container"></div>
+		<div id="hubloy_membership-addon-container"></div>
 		<?php
 	}
 
@@ -178,7 +178,7 @@ class Addon extends Controller {
 
 		$addon_id = sanitize_text_field( $_POST['id'] );
 
-		$view = apply_filters( 'hubloy-membership_addon_' . $addon_id . '_settings', __( 'Not implemented', 'hubloy-membership' ) );
+		$view = apply_filters( 'hubloy_membership_addon_' . $addon_id . '_settings', __( 'Not implemented', 'hubloy-membership' ) );
 		wp_send_json_success(
 			array(
 				'view' => $view,

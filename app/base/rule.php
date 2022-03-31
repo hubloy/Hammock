@@ -89,11 +89,11 @@ class Rule {
 		$this->init();
 
 		// Register the rule.
-		add_filter( 'hubloy-membership_protection_rules', array( $this, 'register_rule' ) );
-		add_filter( 'hubloy-membership_protection_setting_rules', array( $this, 'register_setting_rule' ) );
+		add_filter( 'hubloy_membership_protection_rules', array( $this, 'register_rule' ) );
+		add_filter( 'hubloy_membership_protection_setting_rules', array( $this, 'register_setting_rule' ) );
 
 		if ( $this->enabled ) {
-			add_filter( 'hubloy-membership_' . $this->id . '_content_has_access', array( $this, 'has_access' ), 10, 3 );
+			add_filter( 'hubloy_membership_' . $this->id . '_content_has_access', array( $this, 'has_access' ), 10, 3 );
 			if ( ! is_super_admin() && ! current_user_can( 'manage_options' ) ) {
 				if ( is_admin() || is_network_admin() ) {
 					$this->protect_admin_content();
@@ -209,7 +209,7 @@ class Rule {
 	 */
 	public function protect_content() {
 		do_action(
-			'hubloy-membership_protect_content',
+			'hubloy_membership_protect_content',
 			$this
 		);
 	}
@@ -224,7 +224,7 @@ class Rule {
 	 */
 	public function protect_admin_content() {
 		do_action(
-			'hubloy-membership_protect_admin_content',
+			'hubloy_membership_protect_admin_content',
 			$this
 		);
 	}
@@ -414,24 +414,24 @@ class Rule {
 			return true;
 		}
 
-		$access = apply_filters( 'hubloy-membership_guest_has_access', true, $object, $content_type );
+		$access = apply_filters( 'hubloy_membership_guest_has_access', true, $object, $content_type );
 
 		if ( is_user_logged_in() ) {
 			$user_id = get_current_user_id();
 			$member  = $this->members_service->get_member_by_user_id( $user_id );
 			if ( $member && $member->id > 0 ) {
 				if ( $member->enabled ) {
-					$access = apply_filters( 'hubloy-membership_enabled_member_has_access', true, $member, $object, $content_type );
+					$access = apply_filters( 'hubloy_membership_enabled_member_has_access', true, $member, $object, $content_type );
 				} else {
-					$access = apply_filters( 'hubloy-membership_disabled_member_has_access', false, $member, $object, $content_type );
+					$access = apply_filters( 'hubloy_membership_disabled_member_has_access', false, $member, $object, $content_type );
 				}
 			} else {
-				$access = apply_filters( 'hubloy-membership_non_member_has_access', true, $user_id, $object, $content_type );
+				$access = apply_filters( 'hubloy_membership_non_member_has_access', true, $user_id, $object, $content_type );
 			}
 		}
 
 		return apply_filters(
-			'hubloy-membership_rule_has_access',
+			'hubloy_membership_rule_has_access',
 			$access,
 			$object,
 			$content_type,
@@ -496,7 +496,7 @@ class Rule {
 				foreach ( $restricted as $key => $item ) {
 					$values = is_array( $item['value'] ) ? $item['value'] : array();
 					foreach ( $plans as $plan_id ) {
-						if ( hubloy-membership_is_member_plan_active( $plan_id ) ) {
+						if ( hubloy_membership_is_member_plan_active( $plan_id ) ) {
 							if ( in_array( $plan_id, $values ) ) {
 								unset( $content_ids[ $item['id'] ] );
 							}
@@ -529,7 +529,7 @@ class Rule {
 		}
 
 		if ( $sql ) {
-			$results = $wpdb->get_results( $wpdb->prepare( $sql, '_hubloy-membership_mebership_access' ) );
+			$results = $wpdb->get_results( $wpdb->prepare( $sql, '_hubloy_membership_mebership_access' ) );
 			foreach ( $results as $result ) {
 				$value                      = is_array( $result->meta_value ) ? array_map( 'maybe_unserialize', $result->meta_value ) : maybe_unserialize( $result->meta_value );
 				$output[ $result->item_id ] = array(
@@ -635,7 +635,7 @@ class Rule {
 			if ( (int) $object_id === $page_id ) {
 				$restricted = false; // the restricted content page cannot be itself restricted
 			} else {
-				$restricted = hubloy-membership_is_post_protected();
+				$restricted = hubloy_membership_is_post_protected();
 			}
 		} elseif ( 'taxonomy' === $object_type ) {
 
@@ -644,7 +644,7 @@ class Rule {
 
 			foreach ( $terms as $term_id ) {
 
-				$restricted = hubloy-membership_is_term_protected( $term_id, $taxonomy );
+				$restricted = hubloy_membership_is_term_protected( $term_id, $taxonomy );
 
 				if ( $restricted ) {
 

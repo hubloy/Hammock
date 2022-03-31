@@ -60,7 +60,7 @@ class Codes {
 			self::STATUS_EXPIRED  => __( 'Expired', 'hubloy-membership' ),
 			self::STATUS_CANCELED => __( 'Canceled', 'hubloy-membership' ),
 		);
-		return apply_filters( 'hubloy-membership_codes_get_code_statuses', $status );
+		return apply_filters( 'hubloy_membership_codes_get_code_statuses', $status );
 	}
 
 	/**
@@ -75,7 +75,7 @@ class Codes {
 			self::TYPE_FIXED      => __( 'Fixed discount', 'hubloy-membership' ),
 			self::TYPE_PRECENTAGE => __( 'Percentage discount', 'hubloy-membership' ),
 		);
-		return apply_filters( 'hubloy-membership_codes_get_code_amount_types', $types );
+		return apply_filters( 'hubloy_membership_codes_get_code_amount_types', $types );
 	}
 
 	/**
@@ -90,7 +90,7 @@ class Codes {
 	public static function get_code_status( $status ) {
 		$statuses = self::get_code_statuses();
 		$return   = isset( $statuses[ $status ] ) ? $statuses[ $status ] : __( 'N\A', 'hubloy-membership' );
-		return apply_filters( 'hubloy-membership_codes_get_code_status', $return, $status );
+		return apply_filters( 'hubloy_membership_codes_get_code_status', $return, $status );
 	}
 
 	/**
@@ -105,7 +105,7 @@ class Codes {
 	public static function get_code_amount_type( $type ) {
 		$types  = self::get_code_amount_types();
 		$return = isset( $types[ $type ] ) ? $types[ $type ] : __( 'N\A', 'hubloy-membership' );
-		return apply_filters( 'hubloy-membership_codes_get_code_amount_type', $return, $type );
+		return apply_filters( 'hubloy_membership_codes_get_code_amount_type', $return, $type );
 	}
 
 	/**
@@ -255,7 +255,7 @@ class Codes {
 		}
 
 		$random_coupon = implode( '-', str_split( strtoupper( $random_coupon ), 4 ) );
-		return apply_filters( 'hubloy-membership_generate_code', $random_coupon );
+		return apply_filters( 'hubloy_membership_generate_code', $random_coupon );
 	}
 
 	/**

@@ -66,7 +66,7 @@ class View extends Component {
 	 */
 	protected function to_html() {
 		$content = $this->header();
-		return apply_filters( 'hubloy-membership_base_view_to_html', $content );
+		return apply_filters( 'hubloy_membership_base_view_to_html', $content );
 	}
 
 	/**
@@ -79,13 +79,13 @@ class View extends Component {
 
 		if ( $return ) {
 			return apply_filters(
-				'hubloy-membership_base_view_render',
+				'hubloy_membership_base_view_render',
 				$html,
 				$this
 			);
 		} else {
 			echo apply_filters(
-				'hubloy-membership_base_view_render',
+				'hubloy_membership_base_view_render',
 				$html,
 				$this
 			);

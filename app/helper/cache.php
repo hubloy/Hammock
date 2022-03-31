@@ -24,14 +24,14 @@ class Cache {
 	 */
 	private static function get_cache_prefix( $group ) {
 		// Get cache key - uses cache key wc_orders_cache_prefix to invalidate when needed.
-		$prefix = wp_cache_get( 'hubloy-membership_' . $group . '_cache_prefix', $group );
+		$prefix = wp_cache_get( 'hubloy_membership_' . $group . '_cache_prefix', $group );
 
 		if ( false === $prefix ) {
 			$prefix = microtime();
-			wp_cache_set( 'hubloy-membership_' . $group . '_cache_prefix', $prefix, $group );
+			wp_cache_set( 'hubloy_membership_' . $group . '_cache_prefix', $prefix, $group );
 		}
 
-		return 'hubloy-membership_cache_' . $prefix . '_';
+		return 'hubloy_membership_cache_' . $prefix . '_';
 	}
 
 	/**
@@ -42,7 +42,7 @@ class Cache {
 	 * @since 1.0.0
 	 */
 	public static function invalidate_cache_group( $group ) {
-		wp_cache_set( 'hubloy-membership_' . $group . '_cache_prefix', microtime(), $group );
+		wp_cache_set( 'hubloy_membership_' . $group . '_cache_prefix', microtime(), $group );
 	}
 
 	/**

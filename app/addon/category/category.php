@@ -117,7 +117,7 @@ class Category extends Addon {
 	 */
 	public function protection_column_content( $value, $column_name, $tax_id ) {
 		if ( $column_name === 'hubloy-membership' ) {
-			$access = get_term_meta( $tax_id, '_hubloy-membership_mebership_access', true );
+			$access = get_term_meta( $tax_id, '_hubloy_membership_mebership_access', true );
 			if ( ! is_array( $access ) ) {
 				$access = array();
 			}
@@ -137,7 +137,7 @@ class Category extends Addon {
 	 * @return string
 	 */
 	public function term_protection_fields( $tag, $taxonomy ) {
-		$access      = get_term_meta( $tag->term_id, '_hubloy-membership_mebership_access', true );
+		$access      = get_term_meta( $tag->term_id, '_hubloy_membership_mebership_access', true );
 		$memberships = $this->membership_service->list_simple_memberships( 0, false );
 		if ( ! is_array( $access ) ) {
 			$access = array();
@@ -148,7 +148,7 @@ class Category extends Addon {
 				<label for="membership"><?php _e( 'Membership Access', 'hubloy-membership' ); ?></label>
 			</th>
 			<td>
-				<select name="hubloy-membership_membership[]" data-placeholder="<?php _e( 'Select Memberships', 'hubloy-membership' ); ?>" multiple class="hubloy-membership-multi-select">
+				<select name="hubloy_membership_membership[]" data-placeholder="<?php _e( 'Select Memberships', 'hubloy-membership' ); ?>" multiple class="hubloy_membership-multi-select">
 					<?php
 					foreach ( $memberships as $id => $name ) {
 						?>
@@ -173,11 +173,11 @@ class Category extends Addon {
 	 * @since 1.0.0
 	 */
 	public function term_protection_update( $term_id, $tt_id ) {
-		if ( isset( $_POST['hubloy-membership_membership'] ) ) {
-			$memberships = array_map( 'sanitize_text_field', wp_unslash( $_POST['hubloy-membership_membership'] ) );
-			update_term_meta( $term_id, '_hubloy-membership_mebership_access', $memberships );
+		if ( isset( $_POST['hubloy_membership_membership'] ) ) {
+			$memberships = array_map( 'sanitize_text_field', wp_unslash( $_POST['hubloy_membership_membership'] ) );
+			update_term_meta( $term_id, '_hubloy_membership_mebership_access', $memberships );
 		} else {
-			update_term_meta( $term_id, '_hubloy-membership_mebership_access', array() );
+			update_term_meta( $term_id, '_hubloy_membership_mebership_access', array() );
 		}
 	}
 

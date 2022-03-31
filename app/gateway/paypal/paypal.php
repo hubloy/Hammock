@@ -423,7 +423,7 @@ class PayPal extends Gateway {
 			'invoice'       => $invoice->invoice_id,
 			'no_shipping'   => '1',
 			'shipping'      => '0',
-			'currency_code' => hubloy-membership_get_currency_symbol(),
+			'currency_code' => hubloy_membership_get_currency_symbol(),
 			'charset'       => 'utf-8',
 			'no_note'       => '1',
 			'custom'        => json_encode(
@@ -477,7 +477,7 @@ class PayPal extends Gateway {
 			'no_shipping'   => '1',
 			'shipping'      => '0',
 			'no_note'       => '1',
-			'currency_code' => hubloy-membership_get_currency_symbol(),
+			'currency_code' => hubloy_membership_get_currency_symbol(),
 			'charset'       => 'utf-8',
 			'custom'        => json_encode(
 				array(

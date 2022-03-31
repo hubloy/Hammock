@@ -64,15 +64,15 @@ class Activity extends Controller {
 		 * General action to log activities
 		 * This can be called anywhere
 		 */
-		$this->add_action( 'hubloy-membership_log_activity', 'log_activity', 10, 5 );
+		$this->add_action( 'hubloy_membership_log_activity', 'log_activity', 10, 5 );
 
 		// Member
-		$this->add_action( 'hubloy-membership_members_save_member', 'log_save_member', 10, 2 );
+		$this->add_action( 'hubloy_membership_members_save_member', 'log_save_member', 10, 2 );
 
 		// Plans
-		$this->add_action( 'hubloy-membership_member_after_add_plan', 'log_add_plan', 10, 3 );
-		$this->add_action( 'hubloy-membership_member_plan_update_plan', 'log_update_plan', 10, 3 );
-		$this->add_action( 'hubloy-membership_member_after_delete_plan', 'log_delete_plan', 10, 2 );
+		$this->add_action( 'hubloy_membership_member_after_add_plan', 'log_add_plan', 10, 3 );
+		$this->add_action( 'hubloy_membership_member_plan_update_plan', 'log_update_plan', 10, 3 );
+		$this->add_action( 'hubloy_membership_member_after_delete_plan', 'log_delete_plan', 10, 2 );
 	}
 
 	/**

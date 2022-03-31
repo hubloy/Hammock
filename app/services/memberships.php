@@ -80,7 +80,7 @@ class Memberships {
 			self::PAYMENT_TYPE_DATE_RANGE => __( 'One payment for date range access', 'hubloy-membership' ),
 			self::PAYMENT_TYPE_RECURRING  => __( 'Recurring payment', 'hubloy-membership' ),
 		);
-		return apply_filters( 'hubloy-membership_membership_payment_types', $payment_types );
+		return apply_filters( 'hubloy_membership_membership_payment_types', $payment_types );
 	}
 
 	/**
@@ -92,7 +92,7 @@ class Memberships {
 	 */
 	public static function payment_durations() {
 		return apply_filters(
-			'hubloy-membership_membership_payment_durations',
+			'hubloy_membership_membership_payment_durations',
 			array(
 				Duration::PERIOD_TYPE_DAYS   => __( 'Daily', 'hubloy-membership' ),
 				Duration::PERIOD_TYPE_WEEKS  => __( 'Weekly', 'hubloy-membership' ),
@@ -127,7 +127,7 @@ class Memberships {
 	 */
 	public static function trial_duration() {
 		return apply_filters(
-			'hubloy-membership_membership_trial_duration',
+			'hubloy_membership_membership_trial_duration',
 			array(
 				Duration::PERIOD_TYPE_DAYS   => __( 'Day', 'hubloy-membership' ),
 				Duration::PERIOD_TYPE_WEEKS  => __( 'Week', 'hubloy-membership' ),
@@ -378,7 +378,7 @@ class Memberships {
 			 *
 			 * @since 1.0.0
 			 */
-			do_action( 'hubloy-membership_memberships_plan_created', $id );
+			do_action( 'hubloy_membership_memberships_plan_created', $id );
 			return $id;
 		}
 	}
@@ -419,7 +419,7 @@ class Memberships {
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( 'hubloy-membership_memberships_general_updated', $id );
+		do_action( 'hubloy_membership_memberships_general_updated', $id );
 
 		/**
 		 * General action for all updates on a membership
@@ -428,7 +428,7 @@ class Memberships {
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( 'hubloy-membership_memberships_updated', $id );
+		do_action( 'hubloy_membership_memberships_updated', $id );
 	}
 
 	/**
@@ -457,7 +457,7 @@ class Memberships {
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( 'hubloy-membership_memberships_duration_updated', $id );
+		do_action( 'hubloy_membership_memberships_duration_updated', $id );
 
 		/**
 		 * General action for all updates on a membership
@@ -466,7 +466,7 @@ class Memberships {
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( 'hubloy-membership_memberships_updated', $id );
+		do_action( 'hubloy_membership_memberships_updated', $id );
 	}
 
 	/**
@@ -505,7 +505,7 @@ class Memberships {
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( 'hubloy-membership_memberships_price_updated', $id );
+		do_action( 'hubloy_membership_memberships_price_updated', $id );
 
 		/**
 		 * General action for all updates on a membership
@@ -514,7 +514,7 @@ class Memberships {
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( 'hubloy-membership_memberships_updated', $id );
+		do_action( 'hubloy_membership_memberships_updated', $id );
 	}
 
 	/**

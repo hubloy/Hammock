@@ -139,7 +139,7 @@ class Transactions extends Controller {
 	 * @since 1.0.0
 	 */
 	public function controller_scripts() {
-		wp_enqueue_script( 'hubloy-membership-transactions-react' );
+		wp_enqueue_script( 'hubloy_membership-transactions-react' );
 	}
 
 	/**
@@ -150,7 +150,7 @@ class Transactions extends Controller {
 	public function render() {
 
 		?>
-		<div id="hubloy-membership-transactions-container"></div>
+		<div id="hubloy_membership-transactions-container"></div>
 		<?php
 	}
 }

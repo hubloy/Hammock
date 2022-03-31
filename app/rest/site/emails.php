@@ -116,7 +116,7 @@ class Emails extends Rest {
 	 */
 	public function get_sender( $request ) {
 		$id       = $request['id'];
-		$response = apply_filters( 'hubloy-membership_email_sender_' . $id . '_get_setting_form', array(), $request );
+		$response = apply_filters( 'hubloy_membership_email_sender_' . $id . '_get_setting_form', array(), $request );
 		return $response;
 	}
 
@@ -131,7 +131,7 @@ class Emails extends Rest {
 	 */
 	public function update_sender( $request ) {
 		$id = $request['id'];
-		do_action( 'hubloy-membership_email_sender_' . $id . '_update_settings', $request );
+		do_action( 'hubloy_membership_email_sender_' . $id . '_update_settings', $request );
 		return array(
 			'status'  => true,
 			'message' => __( 'Settings updated', 'hubloy-membership' ),

@@ -3,7 +3,7 @@
  * Account subscription plan page
  * renders a users subsscription plan
  *
- * This template can be overridden by copying it to yourtheme/hubloy-membership/account/subscription-plan.php.
+ * This template can be overridden by copying it to yourtheme/hubloy_membership/account/subscription-plan.php.
  *
  * @package HubloyMembership/Templates/Account
  * @version 1.0.0
@@ -13,40 +13,40 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<div class="hubloy-membership-account-membership-plan hubloy-membership-account-membership-plan-card hubloy-membership-account-membership-plan-<?php echo $plan->id; ?>">
-	<h4 class="hubloy-membership-account-membership-plan--title"><?php echo $plan->name; ?></h4>
-	<span class="hubloy-membership-account-membership-plan--details"><?php echo $plan->details; ?></span>
-	<p class="hubloy-membership-account-membership-plan--price">
+<div class="hubloy_membership-account-membership-plan hubloy_membership-account-membership-plan-card hubloy_membership-account-membership-plan-<?php echo $plan->id; ?>">
+	<h4 class="hubloy_membership-account-membership-plan--title"><?php echo $plan->name; ?></h4>
+	<span class="hubloy_membership-account-membership-plan--details"><?php echo $plan->details; ?></span>
+	<p class="hubloy_membership-account-membership-plan--price">
 		
 		<?php
 		if ( $plan->trial_enabled ) {
-			echo esc_html( hubloy-membership_format_currency( $plan->trial_price ) );
+			echo esc_html( hubloy_membership_format_currency( $plan->trial_price ) );
 			?>
-				<span class="hubloy-membership-account-membership-plan--price-description">
+				<span class="hubloy_membership-account-membership-plan--price-description">
 				<?php
 					$trial_text   = $plan->get_readable_trial_text();
-					$normal_price = hubloy-membership_format_currency( $plan->price );
+					$normal_price = hubloy_membership_format_currency( $plan->price );
 					$sub_text     = $plan->get_readable_type();
-					echo sprintf( esc_html__( '%1$s then %2$s %3$s', 'hubloy-membership' ), esc_attr( $trial_text ), esc_attr( $normal_price ), esc_attr( $sub_text ) );
+					echo sprintf( esc_html__( '%1$s then %2$s %3$s', 'hubloy_membership' ), esc_attr( $trial_text ), esc_attr( $normal_price ), esc_attr( $sub_text ) );
 				?>
 				</span>
 				<?php
 		} else {
 			if ( $plan->is_recurring() && $plan->signup_price > 0 ) {
-				echo esc_html( hubloy-membership_format_currency( $plan->signup_price ) );
+				echo esc_html( hubloy_membership_format_currency( $plan->signup_price ) );
 				?>
-					<span class="hubloy-membership-account-membership-plan--price-description">
+					<span class="hubloy_membership-account-membership-plan--price-description">
 					<?php
-						$normal_price = hubloy-membership_format_currency( $plan->price );
+						$normal_price = hubloy_membership_format_currency( $plan->price );
 						$sub_text     = $plan->get_readable_type();
-						echo sprintf( esc_html__( 'then %1$s %2$s', 'hubloy-membership' ), esc_attr( $normal_price ), esc_attr( $sub_text ) );
+						echo sprintf( esc_html__( 'then %1$s %2$s', 'hubloy_membership' ), esc_attr( $normal_price ), esc_attr( $sub_text ) );
 					?>
 					</span>
 					<?php
 			} else {
-				echo hubloy-membership_format_currency( $plan->price );
+				echo hubloy_membership_format_currency( $plan->price );
 				?>
-					<span class="hubloy-membership-account-membership-plan--price-description">
+					<span class="hubloy_membership-account-membership-plan--price-description">
 					<?php
 						echo esc_html( $plan->get_readable_type() );
 					?>
@@ -57,20 +57,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 		?>
 
 		<?php
-		$can_join = hubloy-membership_can_user_join_plan( $plan->id );
+		$can_join = hubloy_membership_can_user_join_plan( $plan->id );
 		if ( $can_join['status'] ) :
 			?>
-			<a class="button hubloy-membership-account-membership-plan--price--can-join" href="<?php echo esc_url( hubloy-membership_get_account_page_links( 'view-plan', $plan->membership_id ) ); ?>">
+			<a class="button hubloy_membership-account-membership-plan--price--can-join" href="<?php echo esc_url( hubloy_membership_get_account_page_links( 'view-plan', $plan->membership_id ) ); ?>">
 				<?php
 				if ( $plan->trial_enabled ) {
-					esc_html_e( 'Begin Trial', 'hubloy-membership' );
+					esc_html_e( 'Begin Trial', 'hubloy_membership' );
 				} else {
-					esc_html_e( 'Join Membership', 'hubloy-membership' );
+					esc_html_e( 'Join Membership', 'hubloy_membership' );
 				}
 				?>
 			</a>
 		<?php else : ?>
-			<p class="hubloy-membership-account-membership-plan--price--cant-join"><?php echo esc_html( $can_join['message'] ); ?></p>
+			<p class="hubloy_membership-account-membership-plan--price--cant-join"><?php echo esc_html( $can_join['message'] ); ?></p>
 		<?php endif; ?>
 	</p>
 	

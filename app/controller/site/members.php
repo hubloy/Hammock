@@ -140,7 +140,7 @@ class Members extends Controller {
 	 * @since 1.0.0
 	 */
 	public function controller_scripts() {
-		wp_enqueue_script( 'hubloy-membership-members-react' );
+		wp_enqueue_script( 'hubloy_membership-members-react' );
 	}
 
 	/**
@@ -151,7 +151,7 @@ class Members extends Controller {
 	public function render() {
 
 		?>
-		<div id="hubloy-membership-members-container"></div>
+		<div id="hubloy_membership-members-container"></div>
 		<?php
 	}
 }

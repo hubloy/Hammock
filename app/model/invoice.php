@@ -319,7 +319,7 @@ class Invoice {
 			 *
 			 * @since 1.0.0
 			 */
-			do_action( 'hubloy-membership_after_invoice_update', $this );
+			do_action( 'hubloy_membership_after_invoice_update', $this );
 
 		} else {
 			$result = $wpdb->insert(
@@ -354,7 +354,7 @@ class Invoice {
 				 *
 				 * @since 1.0.0
 				 */
-				do_action( 'hubloy-membership_after_invoice_save', $this );
+				do_action( 'hubloy_membership_after_invoice_save', $this );
 			}
 		}
 		return $this->id;
@@ -414,10 +414,10 @@ class Invoice {
 	 */
 	public function gateway_name() {
 		if ( empty( $this->gateway ) ) {
-			return apply_filters( 'hubloy-membership_invoice_gateway_blank', __( 'None', 'hubloy-membership' ), $this );
+			return apply_filters( 'hubloy_membership_invoice_gateway_blank', __( 'None', 'hubloy-membership' ), $this );
 		} else {
 			$gateways = Gateways::load_gateways();
-			return isset( $gateways[ $this->gateway ] ) ? $gateways[ $this->gateway ]['name'] : apply_filters( 'hubloy-membership_invoice_gateway_missing', $this->gateway, $this );
+			return isset( $gateways[ $this->gateway ] ) ? $gateways[ $this->gateway ]['name'] : apply_filters( 'hubloy_membership_invoice_gateway_missing', $this->gateway, $this );
 		}
 	}
 
@@ -429,7 +429,7 @@ class Invoice {
 	 * @return string
 	 */
 	public function admin_edit_url() {
-		return admin_url( 'admin.php?page=hubloy-membership-transactions#/transaction/' . $this->id );
+		return admin_url( 'admin.php?page=hubloy_membership-transactions#/transaction/' . $this->id );
 	}
 
 	/**
@@ -441,7 +441,7 @@ class Invoice {
 	 */
 	public function is_paid() {
 		$is_paid = Transactions::is_paid( $this->status );
-		return apply_filters( 'hubloy-membership_invoice_is_paid', $is_paid, $this );
+		return apply_filters( 'hubloy_membership_invoice_is_paid', $is_paid, $this );
 	}
 
 	/**
@@ -491,7 +491,7 @@ class Invoice {
 		}
 		$current_user_id = get_current_user_id();
 		$is_owner = ( $this->user_id === $current_user_id );
-		return apply_filters( 'hubloy-membership_current_user_is_invoice_owner', $is_owner, $this->id );
+		return apply_filters( 'hubloy_membership_current_user_is_invoice_owner', $is_owner, $this->id );
 	}
 
 	/**
@@ -513,7 +513,7 @@ class Invoice {
 	 * @return string
 	 */
 	public function get_amount_formated() {
-		return hubloy-membership_format_currency( $this->amount );
+		return hubloy_membership_format_currency( $this->amount );
 	}
 
 	/**
@@ -580,7 +580,7 @@ class Invoice {
 	 */
 	public function to_html() {
 		return apply_filters(
-			'hubloy-membership_invoice_to_html',
+			'hubloy_membership_invoice_to_html',
 			array(
 				'id'              => $this->id,
 				'gateway'         => $this->gateway,

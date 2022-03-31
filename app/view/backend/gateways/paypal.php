@@ -30,7 +30,7 @@ class Paypal extends View {
 						array(
 							'name'       => 'paypal_mode',
 							'selected'   => $mode,
-							'class'      => 'hubloy-membership-mode-select',
+							'class'      => 'hubloy_membership-mode-select',
 							'attributes' => array(
 								'data-target' => 'paypal',
 							),
@@ -43,7 +43,7 @@ class Paypal extends View {
 				?>
 			</div>
 		</div>
-		<div class="uk-margin hubloy-membership-paypal paypal-live" <?php echo $mode != 'live' ? 'style="display:none"' : ''; ?>>
+		<div class="uk-margin hubloy_membership-paypal paypal-live" <?php echo $mode != 'live' ? 'style="display:none"' : ''; ?>>
 			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Live Business Email', 'hubloy-membership' ); ?></label>
 			<div class="uk-form-controls">
 				<?php
@@ -59,7 +59,7 @@ class Paypal extends View {
 				?>
 			</div>
 		</div>
-		<div class="uk-margin hubloy-membership-paypal paypal-live" <?php echo $mode != 'live' ? 'style="display:none"' : ''; ?>>
+		<div class="uk-margin hubloy_membership-paypal paypal-live" <?php echo $mode != 'live' ? 'style="display:none"' : ''; ?>>
 			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Live Merchant ID', 'hubloy-membership' ); ?></label>
 			<div class="uk-form-controls">
 				<?php
@@ -76,7 +76,7 @@ class Paypal extends View {
 				?>
 			</div>
 		</div>
-		<div class="uk-margin hubloy-membership-paypal paypal-test" <?php echo $mode != 'test' ? 'style="display:none"' : ''; ?>>
+		<div class="uk-margin hubloy_membership-paypal paypal-test" <?php echo $mode != 'test' ? 'style="display:none"' : ''; ?>>
 			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Sandbox Business Email', 'hubloy-membership' ); ?></label>
 			<div class="uk-form-controls">
 				<?php
@@ -92,7 +92,7 @@ class Paypal extends View {
 				?>
 			</div>
 		</div>
-		<div class="uk-margin hubloy-membership-paypal paypal-test" <?php echo $mode != 'test' ? 'style="display:none"' : ''; ?>>
+		<div class="uk-margin hubloy_membership-paypal paypal-test" <?php echo $mode != 'test' ? 'style="display:none"' : ''; ?>>
 			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Sandbox Merchant ID', 'hubloy-membership' ); ?></label>
 			<div class="uk-form-controls">
 				<?php

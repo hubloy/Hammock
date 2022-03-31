@@ -82,15 +82,15 @@ class Auth extends Controller {
 		$this->member_service     = new Members();
 		$this->membership_service = new Memberships();
 
-		$this->add_ajax_action( 'hubloy-membership_register', 'account_register', true, true );
-		$this->add_ajax_action( 'hubloy-membership_reset', 'account_reset', true, true );
-		$this->add_ajax_action( 'hubloy-membership_login', 'account_login', true, true );
+		$this->add_ajax_action( 'hubloy_membership_register', 'account_register', true, true );
+		$this->add_ajax_action( 'hubloy_membership_reset', 'account_reset', true, true );
+		$this->add_ajax_action( 'hubloy_membership_login', 'account_login', true, true );
 
 		// Verification code check
 		$this->add_action( 'wp_login', 'handle_verification_code', 10, 2 );
 
 		// Handle messages on auth page
-		$this->add_action( 'hubloy-membership_before_account_access', 'message_on_auth_page' );
+		$this->add_action( 'hubloy_membership_before_account_access', 'message_on_auth_page' );
 	}
 
 	/**
@@ -102,7 +102,7 @@ class Auth extends Controller {
 	 * @return application/json
 	 */
 	public function account_register() {
-		$this->verify_nonce( 'hubloy-membership_account_register_nonce' );
+		$this->verify_nonce( 'hubloy_membership_account_register_nonce' );
 
 		$user_login    = sanitize_text_field( $_POST['user_login'] );
 		$user_email    = sanitize_text_field( $_POST['user_email'] );
@@ -131,14 +131,14 @@ class Auth extends Controller {
 				 *
 				 * @since 1.0.0
 				 */
-				do_action( 'hubloy-membership_send_email_member-' . $type, array(), $user, $user_email, array(), array() );
+				do_action( 'hubloy_membership_send_email_member-' . $type, array(), $user, $user_email, array(), array() );
 
 				if ( $this->settings->get_general_setting( 'account_verification' ) === 1 ) {
 
 					$verify_key = wp_generate_password( 20, false );
 					// Flag the account
-					update_user_meta( $user_id, '_hubloy-membership_activation_status', 2 );
-					update_user_meta( $user_id, '_hubloy-membership_activation_key', $verify_key );
+					update_user_meta( $user_id, '_hubloy_membership_activation_status', 2 );
+					update_user_meta( $user_id, '_hubloy_membership_activation_key', $verify_key );
 
 					$type = \HubloyMembership\Services\Emails::COMM_TYPE_REGISTRATION_VERIFY;
 
@@ -148,7 +148,7 @@ class Auth extends Controller {
 						'verify_key' => $verify_key,
 					);
 					// Send verification email
-					do_action( 'hubloy-membership_send_email_member-' . $type, array(), $user_object, $user_email, array(), array() );
+					do_action( 'hubloy_membership_send_email_member-' . $type, array(), $user_object, $user_email, array(), array() );
 
 					wp_send_json_success( __( 'Registration successful. An email has been sent with a link to verify your account', 'hubloy-membership' ) );
 				} else {
@@ -196,7 +196,7 @@ class Auth extends Controller {
 	 * @return application/json
 	 */
 	public function account_reset() {
-		$this->verify_nonce( 'hubloy-membership_account_reset_nonce' );
+		$this->verify_nonce( 'hubloy_membership_account_reset_nonce' );
 		$user_data = false;
 		if ( empty( $_POST['user_login'] ) || ! is_string( $_POST['user_login'] ) ) {
 			wp_send_json_error( __( 'Enter a username or email address', 'hubloy-membership' ) );
@@ -243,7 +243,7 @@ class Auth extends Controller {
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( 'hubloy-membership_send_email_member-' . $type, $placeholders, $user_data, $user_email, array(), array() );
+		do_action( 'hubloy_membership_send_email_member-' . $type, $placeholders, $user_data, $user_email, array(), array() );
 
 		wp_send_json_success( __( 'An email has been sent with a link to create a new password', 'hubloy-membership' ) );
 	}
@@ -254,7 +254,7 @@ class Auth extends Controller {
 	 * @since 1.0.0
 	 */
 	public function account_login() {
-		$this->verify_nonce( 'hubloy-membership_account_login_nonce' );
+		$this->verify_nonce( 'hubloy_membership_account_login_nonce' );
 
 		$rememberme = isset( $_POST['rememberme'] );
 		$user_login = sanitize_text_field( $_POST['user_login'] );
@@ -276,18 +276,18 @@ class Auth extends Controller {
 		 *
 		 * @return bool
 		 */
-		$can_login = apply_filters( 'hubloy-membership_account_can_login', true, $info );
+		$can_login = apply_filters( 'hubloy_membership_account_can_login', true, $info );
 		if ( $can_login ) {
 			$user_signon = wp_signon( $info );
 
 			if ( is_wp_error( $user_signon ) ) {
-				do_action( 'hubloy-membership_account_login_error', $user_signon );
+				do_action( 'hubloy_membership_account_login_error', $user_signon );
 				wp_send_json_error( $user_signon->get_error_message() );
 			} else {
 				if ( ! is_super_admin( $user_signon->ID ) ) {
-					$user_activation_status = get_user_meta( $user_signon->ID, '_hubloy-membership_activation_status', true );
+					$user_activation_status = get_user_meta( $user_signon->ID, '_hubloy_membership_activation_status', true );
 					if ( $user_activation_status && intval( $user_activation_status ) === 2 ) {
-						do_action( 'hubloy-membership_verification_failed', $login, $user );
+						do_action( 'hubloy_membership_verification_failed', $login, $user );
 						wp_destroy_current_session();
 						wp_clear_auth_cookie();
 						wp_send_json_error( __( 'Account not validated. Please check your email for a verification link', 'hubloy-membership' ) );
@@ -300,7 +300,7 @@ class Auth extends Controller {
 						'reload'  => true,
 					)
 				);
-				do_action( 'hubloy-membership_account_login_success', $user_signon );
+				do_action( 'hubloy_membership_account_login_success', $user_signon );
 			}
 		} else {
 			wp_send_json_error( __( 'Login is disabled for your account', 'hubloy-membership' ) );
@@ -318,12 +318,12 @@ class Auth extends Controller {
 	public function handle_verification_code( $login, $user ) {
 		if ( $this->settings->get_general_setting( 'account_verification' ) === 1 ) {
 			if ( ! is_super_admin( $user->ID ) ) {
-				$user_activation_status = get_user_meta( $user->ID, '_hubloy-membership_activation_status', true );
+				$user_activation_status = get_user_meta( $user->ID, '_hubloy_membership_activation_status', true );
 				if ( $user_activation_status && intval( $user_activation_status ) === 2 ) {
-					do_action( 'hubloy-membership_verification_failed', $login, $user );
+					do_action( 'hubloy_membership_verification_failed', $login, $user );
 					wp_destroy_current_session();
 					wp_clear_auth_cookie();
-					$login_url = hubloy-membership_get_account_url();
+					$login_url = hubloy_membership_get_account_url();
 					$login_url = add_query_arg(
 						array(
 							'ver_error' => true,
@@ -352,7 +352,7 @@ class Auth extends Controller {
 		global $wp;
 		if ( isset( $_REQUEST['ver_error'] ) ) {
 			?>
-			<div class="hubloy-membership-notification hubloy-membership-notification--error">
+			<div class="hubloy_membership-notification hubloy_membership-notification--error">
 				<?php _e( 'Your account is not verified. Please check your email for a link to verify your account', 'hubloy-membership' ); ?>
 			</div>
 			<?php
@@ -364,7 +364,7 @@ class Auth extends Controller {
 				$membership = $this->membership_service->get_membership_by_membership_id( $plan_id );
 				if ( $membership ) {
 					?>
-					<div class="hubloy-membership-notification hubloy-membership-notification--primary">
+					<div class="hubloy_membership-notification hubloy_membership-notification--primary">
 						<?php echo sprintf( __( 'Log in or create an account to join the %s plan', 'hubloy-membership' ), '<strong>' . $membership->name . '</strong>' ); ?>
 					</div>
 					<?php

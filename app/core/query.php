@@ -104,11 +104,11 @@ class Query {
 	public function get_endpoints_mask() {
 		if ( 'page' === get_option( 'show_on_front' ) ) {
 			$page_on_front        = get_option( 'page_on_front' );
-			$membership_page_id   = hubloy-membership_page_id( 'membership_list' );
-			$protected_page_id    = hubloy-membership_page_id( 'protected_content' );
-			$registration_page_id = hubloy-membership_page_id( 'registration' );
-			$thank_you_page_id    = hubloy-membership_page_id( 'thank_you_page' );
-			$account_page_id      = hubloy-membership_page_id( 'account_page' );
+			$membership_page_id   = hubloy_membership_page_id( 'membership_list' );
+			$protected_page_id    = hubloy_membership_page_id( 'protected_content' );
+			$registration_page_id = hubloy_membership_page_id( 'registration' );
+			$thank_you_page_id    = hubloy_membership_page_id( 'thank_you_page' );
+			$account_page_id      = hubloy_membership_page_id( 'account_page' );
 
 			$page_ids = array( $membership_page_id, $protected_page_id, $registration_page_id, $thank_you_page_id, $account_page_id );
 
@@ -128,7 +128,7 @@ class Query {
 	 * @return array
 	 */
 	public function get_query_vars() {
-		return apply_filters( 'hubloy-membership_get_query_vars', $this->query_vars );
+		return apply_filters( 'hubloy_membership_get_query_vars', $this->query_vars );
 	}
 
 

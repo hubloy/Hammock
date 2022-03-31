@@ -54,7 +54,7 @@ class Invitation extends Addon {
 				'name'        => __( 'Invitation Codes', 'hubloy-membership' ),
 				'description' => __( 'Users need an invitation code to subscribe to a membership.', 'hubloy-membership' ),
 				'icon'        => 'dashicons dashicons-unlock',
-				'url'         => admin_url( 'admin.php?page=hubloy-membership-invites' ),
+				'url'         => admin_url( 'admin.php?page=hubloy_membership-invites' ),
 			);
 		}
 		return $addons;

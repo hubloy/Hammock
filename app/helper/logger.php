@@ -119,7 +119,7 @@ class Logger {
 		if ( $this->is_enabled() ) {
 			$log_time = date( "Y-m-d\tH:i:s\t" );
 			$log_file = date( 'Y-m-d' );
-			$log_file = trailingslashit( HUBMEMB_LOG_DIR ) . $log_file . '_hubloy-membership.log';
+			$log_file = trailingslashit( HUBMEMB_LOG_DIR ) . $log_file . '_hubloy_membership.log';
 			foreach ( func_get_args() as $param ) {
 				if ( is_scalar( $param ) ) {
 					$dump = $param;

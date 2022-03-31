@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @return int
  */
-function hubloy-membership_page_id( $page_key ) {
+function hubloy_membership_page_id( $page_key ) {
 	$settings = \HubloyMembership\Model\Settings::instance();
 	$pages    = $settings->get_general_setting( 'pages' );
 	$page_id  = 0;
@@ -31,7 +31,7 @@ function hubloy-membership_page_id( $page_key ) {
 			$page_id = $pages[ $page_key ];
 		}
 	}
-	return apply_filters( 'hubloy-membership_get_page_id', $page_id, $page_id );
+	return apply_filters( 'hubloy_membership_get_page_id', $page_id, $page_id );
 }
 
 /**
@@ -45,15 +45,15 @@ function hubloy-membership_page_id( $page_key ) {
  *
  * @return string
  */
-function hubloy-membership_format_currency( $price, $cude_position = 'left' ) {
-	$code  = hubloy-membership_get_currency_symbol();
-	$price = hubloy-membership_format_price( $price );
+function hubloy_membership_format_currency( $price, $cude_position = 'left' ) {
+	$code  = hubloy_membership_get_currency_symbol();
+	$price = hubloy_membership_format_price( $price );
 	if ( 'left' === $cude_position ) {
 		$output = $code . '' . $price;
 	} else {
 		$output = $price . ' ' . $code;
 	}
-	return apply_filters( 'hubloy-membership_format_currency', $output, $code, $price );
+	return apply_filters( 'hubloy_membership_format_currency', $output, $code, $price );
 }
 
 
@@ -66,7 +66,7 @@ function hubloy-membership_format_currency( $price, $cude_position = 'left' ) {
  *
  * @return string
  */
-function hubloy-membership_format_price( $price ) {
+function hubloy_membership_format_price( $price ) {
 	return \HubloyMembership\Helper\Currency::format_price( $price );
 }
 
@@ -79,7 +79,7 @@ function hubloy-membership_format_price( $price ) {
  *
  * @return string
  */
-function hubloy-membership_get_currency_symbol() {
+function hubloy_membership_get_currency_symbol() {
 	return \HubloyMembership\Helper\Currency::get_membership_currency();
 }
 

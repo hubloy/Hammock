@@ -174,7 +174,7 @@ class Addons extends Rest {
 		if ( isset( $addons[ $name ] ) ) {
 			$settings = new Settings();
 			$settings = $settings->get_addon_setting( $name );
-			$active   = apply_filters( 'hubloy-membership_get_addon_' . $name . '_active', true );
+			$active   = apply_filters( 'hubloy_membership_get_addon_' . $name . '_active', true );
 			return rest_ensure_response(
 				array(
 					'settings' => $settings,
@@ -197,7 +197,7 @@ class Addons extends Rest {
 	public function update_settings( $request ) {
 		$id       = $request['id'];
 		$response = apply_filters(
-			'hubloy-membership_addon_' . $id . '_update_settings',
+			'hubloy_membership_addon_' . $id . '_update_settings',
 			array(
 				'status'  => false,
 				'message' => __(
@@ -249,7 +249,7 @@ class Addons extends Rest {
 	public function inner_action( $request ) {
 		$id       = $request['id'];
 		$response = apply_filters(
-			'hubloy-membership_addon_' . $id . '_action',
+			'hubloy_membership_addon_' . $id . '_action',
 			array(
 				'success' => true,
 				'message' => __(

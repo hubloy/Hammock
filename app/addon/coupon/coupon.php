@@ -54,7 +54,7 @@ class Coupon extends Addon {
 				'name'        => __( 'Coupon', 'hubloy-membership' ),
 				'description' => __( 'Discount coupons.', 'hubloy-membership' ),
 				'icon'        => 'dashicons dashicons-tickets-alt',
-				'url'         => admin_url( 'admin.php?page=hubloy-membership-coupons' ),
+				'url'         => admin_url( 'admin.php?page=hubloy_membership-coupons' ),
 			);
 		}
 		return $addons;

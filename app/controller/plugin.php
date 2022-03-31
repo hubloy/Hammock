@@ -76,7 +76,7 @@ class Plugin extends Controller {
 
 		$this->add_filter( 'single_post_title', 'custom_page_titles', 10, 2 );
 
-		$this->add_filter( 'hubloy-membership_admin_register_content_sub_page', 'register_content_page' );
+		$this->add_filter( 'hubloy_membership_admin_register_content_sub_page', 'register_content_page' );
 
 		// Set up content protection
 		// This checks if its enabled
@@ -89,7 +89,7 @@ class Plugin extends Controller {
 	 * @return string
 	 */
 	public static function get_cap() {
-		return apply_filters( 'hubloy-membership_admin_cap', 'manage_options' );
+		return apply_filters( 'hubloy_membership_admin_cap', 'manage_options' );
 	}
 
 	/**
@@ -131,7 +131,7 @@ class Plugin extends Controller {
 	public function post_states( $states, $post ) {
 		if ( 'page' == $post->post_type ) {
 			if ( Pages::is_membership_page( $post->ID ) ) {
-				$url               = admin_url( 'admin.php?page=hubloy-membership-settings#/' );
+				$url               = admin_url( 'admin.php?page=hubloy_membership-settings#/' );
 				$states['hubloy-membership'] = sprintf(
 					'<a style="%2$s" href="%3$s">%1$s</a>',
 					__( 'Membership Page', 'hubloy-membership' ),
@@ -169,7 +169,7 @@ class Plugin extends Controller {
 			array( $this, 'render' )
 		);
 
-		$installed = Util::get_option( 'hubloy-membership_installed' );
+		$installed = Util::get_option( 'hubloy_membership_installed' );
 
 		// Flag to check if wizard has run for first use
 		if ( $installed == 1 ) {
@@ -183,7 +183,7 @@ class Plugin extends Controller {
 			 *
 			 * @since 1.0.0
 			 */
-			do_action( 'hubloy-membership_admin_menu_page', self::MENU_SLUG, $cap );
+			do_action( 'hubloy_membership_admin_menu_page', self::MENU_SLUG, $cap );
 		}
 	}
 
@@ -214,7 +214,7 @@ class Plugin extends Controller {
 			array( $this, 'network_render' )
 		);
 
-		$installed = Util::get_option( 'hubloy-membership_installed' );
+		$installed = Util::get_option( 'hubloy_membership_installed' );
 
 		// Flag to check if wizard has run for first use
 		if ( $installed == 1 ) {
@@ -228,7 +228,7 @@ class Plugin extends Controller {
 			 *
 			 * @since 1.0.0
 			 */
-			do_action( 'hubloy-membership_network_admin_menu_page', self::MENU_SLUG, $cap );
+			do_action( 'hubloy_membership_network_admin_menu_page', self::MENU_SLUG, $cap );
 		}
 	}
 
@@ -240,7 +240,7 @@ class Plugin extends Controller {
 	 * @return array
 	 */
 	public function content_pages() {
-		return apply_filters( 'hubloy-membership_admin_register_content_sub_page', $this->admin->get_content_pages() );
+		return apply_filters( 'hubloy_membership_admin_register_content_sub_page', $this->admin->get_content_pages() );
 	}
 
 	/**
@@ -252,22 +252,22 @@ class Plugin extends Controller {
 	 */
 	public function enqueue_plugin_styles( $hook ) {
 		$screen         = get_current_screen();
-		$load_resources = apply_filters( 'hubloy-membership_load_admin_resouces', strpos( $screen->id, self::MENU_SLUG ) );
+		$load_resources = apply_filters( 'hubloy_membership_load_admin_resouces', strpos( $screen->id, self::MENU_SLUG ) );
 		if ( $load_resources !== false ) {
-			wp_enqueue_style( 'hubloy-membership-uikit' );
-			wp_enqueue_style( 'hubloy-membership-tiptip' );
-			wp_enqueue_style( 'hubloy-membership-jquery-ui' );
-			wp_enqueue_style( 'hubloy-membership-jquery-tags' );
-			wp_enqueue_style( 'hubloy-membership-styled-notifications' );
-			wp_enqueue_style( 'hubloy-membership-select2' );
-			wp_enqueue_style( 'hubloy-membership-admin' );
+			wp_enqueue_style( 'hubloy_membership-uikit' );
+			wp_enqueue_style( 'hubloy_membership-tiptip' );
+			wp_enqueue_style( 'hubloy_membership-jquery-ui' );
+			wp_enqueue_style( 'hubloy_membership-jquery-tags' );
+			wp_enqueue_style( 'hubloy_membership-styled-notifications' );
+			wp_enqueue_style( 'hubloy_membership-select2' );
+			wp_enqueue_style( 'hubloy_membership-admin' );
 
 			$enabled_text = __( 'Enabled', 'hubloy-membership' );
 			$custom_css   = "
-				.hubloy-membership-input .switch-checkbox .switch .knobs::after {
+				.hubloy_membership-input .switch-checkbox .switch .knobs::after {
                     content: '{$enabled_text}';
                 }";
-			wp_add_inline_style( 'hubloy-membership-admin', $custom_css );
+			wp_add_inline_style( 'hubloy_membership-admin', $custom_css );
 
 			// Add body classes
 			add_filter( 'admin_body_class', array( $this, 'add_body_class' ) );
@@ -285,7 +285,7 @@ class Plugin extends Controller {
 	 * @return string $classes
 	 */
 	public function add_body_class( $admin_body_classes ) {
-		return "$admin_body_classes hubloy-membership-dashboard";
+		return "$admin_body_classes hubloy_membership-dashboard";
 	}
 
 	/**
@@ -297,21 +297,21 @@ class Plugin extends Controller {
 	 */
 	public function enqueue_plugin_scripts( $hook ) {
 		$screen         = get_current_screen();
-		$load_resources = apply_filters( 'hubloy-membership_load_admin_resouces', strpos( $screen->id, self::MENU_SLUG ) );
+		$load_resources = apply_filters( 'hubloy_membership_load_admin_resouces', strpos( $screen->id, self::MENU_SLUG ) );
 		if ( $load_resources !== false ) {
-			wp_enqueue_script( 'hubloy-membership-uikit' );
-			wp_enqueue_script( 'hubloy-membership-uikit-icons' );
-			wp_enqueue_script( 'hubloy-membership-tiptip' );
-			wp_enqueue_script( 'hubloy-membership-sweetalert' );
+			wp_enqueue_script( 'hubloy_membership-uikit' );
+			wp_enqueue_script( 'hubloy_membership-uikit-icons' );
+			wp_enqueue_script( 'hubloy_membership-tiptip' );
+			wp_enqueue_script( 'hubloy_membership-sweetalert' );
 			// Date picker
 			wp_enqueue_script( 'jquery-ui-datepicker' );
-			wp_enqueue_script( 'hubloy-membership-jquery-tags' );
-			wp_enqueue_script( 'hubloy-membership-styled-notifications' );
-			wp_enqueue_script( 'hubloy-membership-select2' );
-			wp_enqueue_script( 'hubloy-membership-admin' );
-			wp_enqueue_script( 'hubloy-membership-admin-react' );
-			wp_enqueue_script( 'hubloy-membership-wizard-react' );
-			do_action( 'hubloy-membership_controller_scripts' );
+			wp_enqueue_script( 'hubloy_membership-jquery-tags' );
+			wp_enqueue_script( 'hubloy_membership-styled-notifications' );
+			wp_enqueue_script( 'hubloy_membership-select2' );
+			wp_enqueue_script( 'hubloy_membership-admin' );
+			wp_enqueue_script( 'hubloy_membership-admin-react' );
+			wp_enqueue_script( 'hubloy_membership-wizard-react' );
+			do_action( 'hubloy_membership_controller_scripts' );
 		}
 	}
 
@@ -320,9 +320,9 @@ class Plugin extends Controller {
 	 * Front styles
 	 */
 	public function enqueue_front_styles() {
-		wp_enqueue_style( 'hubloy-membership-front' );
-		wp_enqueue_script( 'hubloy-membership-sweetalert' );
-		wp_enqueue_script( 'hubloy-membership-front' );
+		wp_enqueue_style( 'hubloy_membership-front' );
+		wp_enqueue_script( 'hubloy_membership-sweetalert' );
+		wp_enqueue_script( 'hubloy_membership-front' );
 	}
 
 	/**
@@ -335,16 +335,16 @@ class Plugin extends Controller {
 	 * @return array
 	 */
 	public function front_body_class( $classes ) {
-		if ( hubloy-membership_is_account_page() ) {
-			return array_merge( $classes, array( 'hubloy-membership-account-page' ) );
-		} elseif ( hubloy-membership_is_membership_page() ) {
-			return array_merge( $classes, array( 'hubloy-membership-memberhsip-page' ) );
-		} elseif ( hubloy-membership_is_protected_content_page() ) {
-			return array_merge( $classes, array( 'hubloy-membership-protected-content-page' ) );
-		} elseif ( hubloy-membership_is_registration_page() ) {
-			return array_merge( $classes, array( 'hubloy-membership-registration-page' ) );
-		} elseif ( hubloy-membership_is_thank_you_page() ) {
-			return array_merge( $classes, array( 'hubloy-membership-thank-you-page' ) );
+		if ( hubloy_membership_is_account_page() ) {
+			return array_merge( $classes, array( 'hubloy_membership-account-page' ) );
+		} elseif ( hubloy_membership_is_membership_page() ) {
+			return array_merge( $classes, array( 'hubloy_membership-memberhsip-page' ) );
+		} elseif ( hubloy_membership_is_protected_content_page() ) {
+			return array_merge( $classes, array( 'hubloy_membership-protected-content-page' ) );
+		} elseif ( hubloy_membership_is_registration_page() ) {
+			return array_merge( $classes, array( 'hubloy_membership-registration-page' ) );
+		} elseif ( hubloy_membership_is_thank_you_page() ) {
+			return array_merge( $classes, array( 'hubloy_membership-thank-you-page' ) );
 		}
 		return $classes;
 	}
@@ -359,7 +359,7 @@ class Plugin extends Controller {
 			$args = array(
 				'id'    => 'hubloy-membership',
 				'title' => __( 'Memberships', 'hubloy-membership' ),
-				'href'  => is_multisite() ? esc_url( network_admin_url( 'admin.php?page=hubloy-membership' ) ) : esc_url( admin_url( 'admin.php?page=hubloy-membership' ) ),
+				'href'  => is_multisite() ? esc_url( network_admin_url( 'admin.php?page=hubloy_membership' ) ) : esc_url( admin_url( 'admin.php?page=hubloy_membership' ) ),
 			);
 			$admin_bar->add_node( $args );
 		}
@@ -376,14 +376,14 @@ class Plugin extends Controller {
 	public function custom_page_titles( $title, $post ) {
 		global $wp;
 
-		if ( hubloy-membership_is_account_page() ) {
-			$endpoint = hubloy-membership()->get_query()->get_current_endpoint();
-			$sep      = apply_filters( 'hubloy-membership_account_title_separator', '|' );
+		if ( hubloy_membership_is_account_page() ) {
+			$endpoint = hubloy_membership()->get_query()->get_current_endpoint();
+			$sep      = apply_filters( 'hubloy_membership_account_title_separator', '|' );
 			switch ( $endpoint ) {
 				case 'view-plan':
 					$plan_id = $wp->query_vars['view-plan'];
 					if ( ! empty( $plan_id ) ) {
-						$membership = hubloy-membership_get_plan_by_id( $plan_id );
+						$membership = hubloy_membership_get_plan_by_id( $plan_id );
 						if ( $membership ) {
 							$title = sprintf( __( 'Membership Plan %1$s  %2$s', 'hubloy-membership' ), $sep, $membership->name );
 						}
@@ -426,12 +426,12 @@ class Plugin extends Controller {
 	 * @return String
 	 */
 	public function render() {
-		$installed = Util::get_option( 'hubloy-membership_installed' );
+		$installed = Util::get_option( 'hubloy_membership_installed' );
 
 		// Flag to check if wizard has run for first use
 		if ( $installed == 1 ) {
 			?>
-			<div id="hubloy-membership-admin-container"></div>
+			<div id="hubloy_membership-admin-container"></div>
 			<?php
 		} else {
 			$this->show_wizard_page();
@@ -447,12 +447,12 @@ class Plugin extends Controller {
 	 * @return string
 	 */
 	function network_render() {
-		$installed = Util::get_option( 'hubloy-membership_installed' );
+		$installed = Util::get_option( 'hubloy_membership_installed' );
 
 		// Flag to check if wizard has run for first use
 		if ( $installed == 1 ) {
 			?>
-			<div id="hubloy-membership-admin-container"></div>
+			<div id="hubloy_membership-admin-container"></div>
 			<?php
 		} else {
 			$this->show_wizard_page();
@@ -465,7 +465,7 @@ class Plugin extends Controller {
 	 * @since 1.0.0
 	 */
 	function register_routes() {
-		do_action( 'hubloy-membership_register_rest_route' );
+		do_action( 'hubloy_membership_register_rest_route' );
 	}
 
 	/**
@@ -475,7 +475,7 @@ class Plugin extends Controller {
 	 */
 	public function show_wizard_page() {
 		?>
-		<div id="hubloy-membership-wizard-container"></div>
+		<div id="hubloy_membership-wizard-container"></div>
 		<?php
 	}
 

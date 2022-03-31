@@ -165,11 +165,11 @@ class Category extends Rule {
 	public function protect_content() {
 		add_action( 'wp', array( $this, 'restrict_content' ) );
 
-		add_filter( 'hubloy-membership_post_rule_manage_posts_clauses', array( $this, 'manage_term_clauses' ) );
+		add_filter( 'hubloy_membership_post_rule_manage_posts_clauses', array( $this, 'manage_term_clauses' ) );
 		add_filter( 'get_terms_args', array( $this, 'manage_get_terms_args' ), 999, 2 );
 		add_filter( 'terms_clauses', array( $this, 'handle_terms_clauses' ), 999 );
 		do_action(
-			'hubloy-membership_protect_term_content',
+			'hubloy_membership_protect_term_content',
 			$this
 		);
 	}
@@ -292,8 +292,8 @@ class Category extends Rule {
 
 				foreach ( $terms as $term_id ) {
 
-					if ( hubloy-membership_is_term_protected( $term_id, $taxonomy ) ) {
-						$message_code    = hubloy-membership_content_protected_message( $term_id, 'term', $taxonomy );
+					if ( hubloy_membership_is_term_protected( $term_id, $taxonomy ) ) {
+						$message_code    = hubloy_membership_content_protected_message( $term_id, 'term', $taxonomy );
 						$restricted_term = get_term( $term_id, $taxonomy );
 					}
 				}

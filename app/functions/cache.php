@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-function hubloy-membership_add_cache( $cache_key, $results, $group ) {
+function hubloy_membership_add_cache( $cache_key, $results, $group ) {
 	\HubloyMembership\Helper\Cache::set_cache( $cache_key, $results, $group );
 }
 
@@ -33,7 +33,7 @@ function hubloy-membership_add_cache( $cache_key, $results, $group ) {
  *
  * @return mixed
  */
-function hubloy-membership_get_cache( $group, $cache_key ) {
+function hubloy_membership_get_cache( $group, $cache_key ) {
 	return \HubloyMembership\Helper\Cache::get_cache( $cache_key, $group );
 }
 
@@ -45,7 +45,7 @@ function hubloy-membership_get_cache( $group, $cache_key ) {
  *
  * @since 1.0.0
  */
-function hubloy-membership_delete_cache( $group, $cache_key = false ) {
+function hubloy_membership_delete_cache( $group, $cache_key = false ) {
 	if ( $cache_key ) {
 		\HubloyMembership\Helper\Cache::delete_cache( $cache_key, $group );
 	} else {

@@ -18,9 +18,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @return array
  */
-function hubloy-membership_view_subscription_list_table_columns() {
+function hubloy_membership_view_subscription_list_table_columns() {
 	return apply_filters(
-		'hubloy-membership_view_subscription_list_table_columns',
+		'hubloy_membership_view_subscription_list_table_columns',
 		array(
 			'plan-name'    => __( 'Membership Name', 'hubloy-membership' ),
 			'plan-status'  => __( 'Status', 'hubloy-membership' ),
@@ -37,9 +37,9 @@ function hubloy-membership_view_subscription_list_table_columns() {
  *
  * @return array
  */
-function hubloy-membership_view_transaction_list_table_columns() {
+function hubloy_membership_view_transaction_list_table_columns() {
 	return apply_filters(
-		'hubloy-membership_view_transaction_list_table_columns',
+		'hubloy_membership_view_transaction_list_table_columns',
 		array(
 			'transaction-id'      => __( 'Transaction ID', 'hubloy-membership' ),
 			'transaction-status'  => __( 'Status', 'hubloy-membership' ),

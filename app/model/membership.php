@@ -408,7 +408,7 @@ class Membership {
 				return Memberships::get_payment_duration( $this->duration );
 			break;
 			default:
-				return apply_filters( 'hubloy-membership_membership_get_readable_type', '', $this );
+				return apply_filters( 'hubloy_membership_membership_get_readable_type', '', $this );
 			break;
 		}
 	}
@@ -436,7 +436,7 @@ class Membership {
 		if ( $this->trial_enabled ) {
 			$trial_text = sprintf( __( 'Free trial for %1$s %2$s', 'hubloy-membership' ), $this->trial_period, strtolower( $this->trial_duration_text ) );
 		}
-		return apply_filters( 'hubloy-membership_membership_get_readable_trial_text', $trial_text, $this );
+		return apply_filters( 'hubloy_membership_membership_get_readable_trial_text', $trial_text, $this );
 	}
 
 	/**
@@ -459,7 +459,7 @@ class Membership {
 	 * @return string
 	 */
 	public function get_type_price() {
-		$price = hubloy-membership_format_currency( $this->price );
+		$price = hubloy_membership_format_currency( $this->price );
 		$type  = $this->get_readable_type();
 		return $price . ' ' . strtolower( $type );
 	}
@@ -474,7 +474,7 @@ class Membership {
 	 */
 	public function to_html() {
 		return apply_filters(
-			'hubloy-membership_membership_to_html',
+			'hubloy_membership_membership_to_html',
 			array(
 				'id'                  => $this->id,
 				'membership_id'       => $this->membership_id,
@@ -487,10 +487,10 @@ class Membership {
 				'limit_spaces'        => $this->limit_spaces ? __( 'Limited Registration', 'hubloy-membership' ) : __( 'Open Registration', 'hubloy-membership' ),
 				'type'                => Memberships::get_type( $this->type ),
 				'duration'            => $this->duration,
-				'signup_price'        => hubloy-membership_format_currency( $this->signup_price ),
-				'price'               => hubloy-membership_format_currency( $this->price ),
+				'signup_price'        => hubloy_membership_format_currency( $this->signup_price ),
+				'price'               => hubloy_membership_format_currency( $this->price ),
 				'price_name'          => $this->get_type_price(),
-				'trial_price'         => hubloy-membership_format_currency( $this->trial_price ),
+				'trial_price'         => hubloy_membership_format_currency( $this->trial_price ),
 				'trial_period'        => $this->trial_period,
 				'trial_duration'      => $this->trial_duration,
 				'trial_duration_text' => $this->trial_duration_text,

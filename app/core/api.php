@@ -69,14 +69,14 @@ class Api {
 			 *
 			 * @since 1.0.0
 			 */
-			do_action( 'hubloy-membership_api_request', $api_request );
+			do_action( 'hubloy_membership_api_request', $api_request );
 
 			/**
 			 * Specific api action
 			 *
 			 * @since 1.0.0
 			 */
-			do_action( 'hubloy-membership_api_' . $api_request );
+			do_action( 'hubloy_membership_api_' . $api_request );
 
 			ob_end_clean();
 			die( '-1' );

@@ -19,7 +19,7 @@ class Rest extends Component {
 	 */
 	public function __construct() {
 		$this->init();
-		$this->add_action( 'hubloy-membership_register_rest_route', 'register_rest_route' );
+		$this->add_action( 'hubloy_membership_register_rest_route', 'register_rest_route' );
 	}
 
 	/**
@@ -60,7 +60,7 @@ class Rest extends Component {
 	 * @return bool|WP_Error
 	 */
 	public function validate_request( $request ) {
-		$can_view = apply_filters( 'hubloy-membership_default_rest_check', current_user_can( 'manage_options' ), $request );
+		$can_view = apply_filters( 'hubloy_membership_default_rest_check', current_user_can( 'manage_options' ), $request );
 		if ( ! $can_view ) {
 			return new \WP_Error(
 				'rest_user_cannot_view',

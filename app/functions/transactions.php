@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @return int
  */
-function hubloy-membership_count_member_transactions( $member_id, $status = 'all' ) {
+function hubloy_membership_count_member_transactions( $member_id, $status = 'all' ) {
 	$transactions = new \HubloyMembership\Services\Transactions();
 	$status       = strtolower( $status );
 	if ( $status === 'all' ) {
@@ -55,7 +55,7 @@ function hubloy-membership_count_member_transactions( $member_id, $status = 'all
  *
  * @return array
  */
-function hubloy-membership_list_member_transactions( $member_id, $per_page, $page = 0, $status = 'all' ) {
+function hubloy_membership_list_member_transactions( $member_id, $per_page, $page = 0, $status = 'all' ) {
 	$transactions = new \HubloyMembership\Services\Transactions();
 	$status       = strtolower( $status );
 	if ( $status === 'all' ) {

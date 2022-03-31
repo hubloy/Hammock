@@ -184,7 +184,7 @@ class Settings extends Rest {
 		if ( $settings->get_general_setting( 'account_verification' ) !== $account_verification ) {
 			$type                = \HubloyMembership\Services\Emails::COMM_TYPE_REGISTRATION_VERIFY;
 			$verifcation_enabled = ( $account_verification === 1 );
-			do_action( 'hubloy-membership_email_sender_member-' . $type, $verifcation_enabled );
+			do_action( 'hubloy_membership_email_sender_member-' . $type, $verifcation_enabled );
 		}
 
 		$settings->set_general_setting( 'content_protection', $content_protection );

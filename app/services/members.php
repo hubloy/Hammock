@@ -217,7 +217,7 @@ class Members {
 		}
 
 		return apply_filters(
-			'hubloy-membership_member_subscription_status_type',
+			'hubloy_membership_member_subscription_status_type',
 			$status_types
 		);
 	}
@@ -234,7 +234,7 @@ class Members {
 	public static function get_status( $status ) {
 		$types  = self::get_status_types();
 		$return = isset( $types[ $status ] ) ? $types[ $status ] : __( 'N/A', 'hubloy-membership' );
-		return apply_filters( 'hubloy-membership_member_subscription_get_status', $return, $status );
+		return apply_filters( 'hubloy_membership_member_subscription_get_status', $return, $status );
 	}
 
 
@@ -440,7 +440,7 @@ class Members {
 				}
 			}
 		}
-		return apply_filters( 'hubloy-membership_members_generate_where', $where, $args );
+		return apply_filters( 'hubloy_membership_members_generate_where', $where, $args );
 	}
 
 
@@ -525,7 +525,7 @@ class Members {
 				 *
 				 * @since 1.0.0
 				 */
-				$name  = apply_filters( 'hubloy-membership_full_user_names', $user->first_name . ' ' . $user->last_name, $user );
+				$name  = apply_filters( 'hubloy_membership_full_user_names', $user->first_name . ' ' . $user->last_name, $user );
 				$fname = $user->first_name;
 				$lname = $user->last_name;
 			} elseif ( ! empty( $user->last_name ) ) {
@@ -593,7 +593,7 @@ class Members {
 		if ( empty( $this->roles ) ) {
 			global $wp_roles;
 			$exclude = apply_filters(
-				'hubloy-membership_roles_list_exclude',
+				'hubloy_membership_roles_list_exclude',
 				array( 'administrator' )
 			);
 
@@ -634,7 +634,7 @@ class Members {
 			}
 		}
 
-		$args  = apply_filters( 'hubloy-membership_list_non_members', $args, $search );
+		$args  = apply_filters( 'hubloy_membership_list_non_members', $args, $search );
 		$query = new \WP_User_Query( $args );
 		$users = $query->get_results();
 		foreach ( $users as $user ) {
@@ -646,7 +646,7 @@ class Members {
 				 *
 				 * @since 1.0.0
 				 */
-				$name = apply_filters( 'hubloy-membership_full_user_names', $user->first_name . ' ' . $user->last_name, $user );
+				$name = apply_filters( 'hubloy_membership_full_user_names', $user->first_name . ' ' . $user->last_name, $user );
 			} elseif ( ! empty( $user->last_name ) ) {
 				$name = $user->last_name;
 			} elseif ( ! empty( $user->first_name ) ) {
@@ -777,7 +777,7 @@ class Members {
 			 * @param int $id - the member id
 			 * @param int $user_id - the user id
 			 */
-			do_action( 'hubloy-membership_members_save_member', $id, $user_id );
+			do_action( 'hubloy_membership_members_save_member', $id, $user_id );
 
 			return array(
 				'status'  => true,
@@ -844,7 +844,7 @@ class Members {
 					 *
 					 * @return $due_date
 					 */
-					$due_date = apply_filters( 'hubloy-membership_admin_new_plan_invoice_due_date', $due_date, $member, $membership, $plan );
+					$due_date = apply_filters( 'hubloy_membership_admin_new_plan_invoice_due_date', $due_date, $member, $membership, $plan );
 
 					/**
 					 * Save transaction
@@ -903,7 +903,7 @@ class Members {
 			 * @param string $status - the new status
 			 * @param object $plan - the plan
 			 */
-			do_action( 'hubloy-membership_member_plan_update_plan', $old_status, $status, $plan );
+			do_action( 'hubloy_membership_member_plan_update_plan', $old_status, $status, $plan );
 			return array(
 				'status'  => true,
 				'message' => __( 'Plan updated', 'hubloy-membership' ),
@@ -1057,7 +1057,7 @@ class Members {
 		 * 
 		 * @since 1.0.0
 		 */
-		do_action( 'hubloy-membership_user_deactivate_plan', $plan );
+		do_action( 'hubloy_membership_user_deactivate_plan', $plan );
 	}
 }
 

@@ -59,8 +59,8 @@ class Transaction extends Controller {
 	 */
 	public function init() {
 		$this->transaction_service = new Transactions();
-		$this->add_action( 'hubloy-membership_api_ipn_notify', 'ipn_notify' );
-		$this->add_action( 'hubloy-membership_api_handle_return', 'handle_return' );
+		$this->add_action( 'hubloy_membership_api_ipn_notify', 'ipn_notify' );
+		$this->add_action( 'hubloy_membership_api_handle_return', 'handle_return' );
 	}
 
 	/**

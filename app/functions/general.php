@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-function hubloy-membership_get_template( $template_name, $args = array() ) {
+function hubloy_membership_get_template( $template_name, $args = array() ) {
 	\HubloyMembership\Helper\Template::get_template( $template_name, $args );
 }
 
@@ -32,7 +32,7 @@ function hubloy-membership_get_template( $template_name, $args = array() ) {
  *
  * @return array
  */
-function hubloy-membership_list_active_gateways() {
+function hubloy_membership_list_active_gateways() {
 	return \HubloyMembership\Services\Gateways::list_active_gateways();
 }
 
@@ -43,7 +43,7 @@ function hubloy-membership_list_active_gateways() {
  *
  * @return int
  */
-function hubloy-membership_get_current_page() {
+function hubloy_membership_get_current_page() {
 	$paged = 0;
 	if ( get_query_var( 'page' ) ) {
 		$paged = intval( get_query_var( 'page' ) ) - 1;
@@ -58,7 +58,7 @@ function hubloy-membership_get_current_page() {
  *
  * @return string
  */
-function hubloy-membership_get_current_status() {
+function hubloy_membership_get_current_status() {
 	$status = 'all';
 	if ( get_query_var( 'status' ) ) {
 		$status = sanitize_text_field( get_query_var( 'status' ) );

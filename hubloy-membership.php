@@ -214,11 +214,11 @@ if ( ! class_exists( 'HubloyMembership' ) ) :
 	 *
 	 * @return HubloyMembership
 	 */
-	function hubloy-membership() {
+	function hubloy_membership() {
 		return HubloyMembership::instance();
 	}
 
-	hubloy-membership();
+	hubloy_membership();
 
 endif;
 

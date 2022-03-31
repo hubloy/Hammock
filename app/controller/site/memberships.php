@@ -142,7 +142,7 @@ class Memberships extends Controller {
 	 * @since 1.0.0
 	 */
 	public function controller_scripts() {
-		wp_enqueue_script( 'hubloy-membership-memberships-react' );
+		wp_enqueue_script( 'hubloy_membership-memberships-react' );
 		wp_enqueue_editor();
 	}
 
@@ -154,7 +154,7 @@ class Memberships extends Controller {
 	public function render() {
 
 		?>
-		<div id="hubloy-membership-memberships-container"></div>
+		<div id="hubloy_membership-memberships-container"></div>
 		<?php
 	}
 }

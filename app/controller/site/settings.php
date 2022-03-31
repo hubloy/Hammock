@@ -91,8 +91,8 @@ class Settings extends Controller {
 	public function init() {
 		$this->admin = new Admin();
 		// Ajax to create missing pages
-		$this->add_ajax_action( 'hubloy-membership_settings_create_page', 'create_page' );
-		$this->add_filter( 'hubloy-membership_admin_register_setting_sub_page', 'register_setting_page' );
+		$this->add_ajax_action( 'hubloy_membership_settings_create_page', 'create_page' );
+		$this->add_filter( 'hubloy_membership_admin_register_setting_sub_page', 'register_setting_page' );
 	}
 
 	/**
@@ -125,7 +125,7 @@ class Settings extends Controller {
 	 * @return array
 	 */
 	public function setting_pages() {
-		return apply_filters( 'hubloy-membership_admin_register_setting_sub_page', $this->admin->get_setting_pages() );
+		return apply_filters( 'hubloy_membership_admin_register_setting_sub_page', $this->admin->get_setting_pages() );
 	}
 
 	/**
@@ -173,7 +173,7 @@ class Settings extends Controller {
 	 * @since 1.0.0
 	 */
 	public function controller_scripts() {
-		wp_enqueue_script( 'hubloy-membership-settings-react' );
+		wp_enqueue_script( 'hubloy_membership-settings-react' );
 	}
 
 	/**
@@ -184,7 +184,7 @@ class Settings extends Controller {
 	public function render() {
 
 		?>
-		<div id="hubloy-membership-settings-container"></div>
+		<div id="hubloy_membership-settings-container"></div>
 		<?php
 	}
 

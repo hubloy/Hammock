@@ -165,7 +165,7 @@ class Coupons extends Controller {
 	 * @since 1.0.0
 	 */
 	public function controller_scripts() {
-		wp_enqueue_script( 'hubloy-membership-coupons-react' );
+		wp_enqueue_script( 'hubloy_membership-coupons-react' );
 	}
 
 	/**
@@ -176,7 +176,7 @@ class Coupons extends Controller {
 	public function render() {
 
 		?>
-		<div id="hubloy-membership-coupons-container"></div>
+		<div id="hubloy_membership-coupons-container"></div>
 		<?php
 	}
 }

@@ -67,7 +67,7 @@ class Emails {
 			'member-' . self::COMM_TYPE_AFTER_PAYMENT_DUE,
 		);
 		return apply_filters(
-			'hubloy-membership_email_types',
+			'hubloy_membership_email_types',
 			array(
 				'admin'  => $admin_emails,
 				'member' => $user_emails,
@@ -84,7 +84,7 @@ class Emails {
 	 */
 	public static function get_email_senders() {
 		return apply_filters(
-			'hubloy-membership_get_email_senders',
+			'hubloy_membership_get_email_senders',
 			array(
 				'admin'  => array(),
 				'member' => array(),

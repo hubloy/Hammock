@@ -165,7 +165,7 @@ class Invites extends Controller {
 	 * @since 1.0.0
 	 */
 	public function controller_scripts() {
-		wp_enqueue_script( 'hubloy-membership-invites-react' );
+		wp_enqueue_script( 'hubloy_membership-invites-react' );
 	}
 
 	/**
@@ -176,7 +176,7 @@ class Invites extends Controller {
 	public function render() {
 
 		?>
-		<div id="hubloy-membership-invites-container"></div>
+		<div id="hubloy_membership-invites-container"></div>
 		<?php
 	}
 }

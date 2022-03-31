@@ -87,20 +87,20 @@ class Account extends Controller {
 		/**
 		 * Account page navigation
 		 */
-		$this->add_action( 'hubloy-membership_member_account_navigation', 'member_account_navigation' );
+		$this->add_action( 'hubloy_membership_member_account_navigation', 'member_account_navigation' );
 
 		/**
 		 * Account page content
 		 */
-		$this->add_action( 'hubloy-membership_member_account_content', 'member_account_content' );
+		$this->add_action( 'hubloy_membership_member_account_content', 'member_account_content' );
 
 		// Action called to render various account page content
-		$this->add_action( 'hubloy-membership_member_account_dashboard_content', 'member_account_dashboard_content' );
-		$this->add_action( 'hubloy-membership_member_account_edit-account_content', 'member_account_edit_content', 10, 2 );
-		$this->add_action( 'hubloy-membership_member_account_transactions_content', 'member_account_transactions_content', 10, 2 );
-		$this->add_action( 'hubloy-membership_member_account_subscriptions_content', 'member_account_subscriptions_content', 10, 2 );
-		$this->add_action( 'hubloy-membership_member_account_view-plan_content', 'member_account_view_plan_content', 10, 2 );
-		$this->add_action( 'hubloy-membership_member_account_view-transaction_content', 'member_account_view_transaction_content', 10, 2 );
+		$this->add_action( 'hubloy_membership_member_account_dashboard_content', 'member_account_dashboard_content' );
+		$this->add_action( 'hubloy_membership_member_account_edit-account_content', 'member_account_edit_content', 10, 2 );
+		$this->add_action( 'hubloy_membership_member_account_transactions_content', 'member_account_transactions_content', 10, 2 );
+		$this->add_action( 'hubloy_membership_member_account_subscriptions_content', 'member_account_subscriptions_content', 10, 2 );
+		$this->add_action( 'hubloy_membership_member_account_view-plan_content', 'member_account_view_plan_content', 10, 2 );
+		$this->add_action( 'hubloy_membership_member_account_view-transaction_content', 'member_account_view_transaction_content', 10, 2 );
 	}
 
 	/**
@@ -124,7 +124,7 @@ class Account extends Controller {
 			if ( isset( $wp->query_vars['member-logout'] ) ) {
 				wp_logout();
 				echo "<script>
-					window.location.href='" . hubloy-membership_get_account_page_links() . "';
+					window.location.href='" . hubloy_membership_get_account_page_links() . "';
 				</script>";
 			}
 
@@ -134,14 +134,14 @@ class Account extends Controller {
 					continue;
 				}
 
-				if ( has_action( 'hubloy-membership_member_account_' . $key . '_content' ) ) {
-					do_action( 'hubloy-membership_member_account_' . $key . '_content', $value, $current_user );
+				if ( has_action( 'hubloy_membership_member_account_' . $key . '_content' ) ) {
+					do_action( 'hubloy_membership_member_account_' . $key . '_content', $value, $current_user );
 					return;
 				}
 			}
 		}
 
-		do_action( 'hubloy-membership_member_account_dashboard_content', $current_user );
+		do_action( 'hubloy_membership_member_account_dashboard_content', $current_user );
 	}
 
 	/**
@@ -224,7 +224,7 @@ class Account extends Controller {
 		$plan_id = $wp->query_vars['view-plan'];
 		if ( empty( $plan_id ) ) {
 			echo "<script>
-				window.location.href='" . hubloy-membership_get_account_page_links() . "';
+				window.location.href='" . hubloy_membership_get_account_page_links() . "';
 			</script>";
 		}
 
@@ -256,7 +256,7 @@ class Account extends Controller {
 		$transaction_id = $wp->query_vars['view-transaction'];
 		if ( empty( $transaction_id ) ) {
 			echo "<script>
-				window.location.href='" . hubloy-membership_get_account_page_links( 'transactions' ) . "';
+				window.location.href='" . hubloy_membership_get_account_page_links( 'transactions' ) . "';
 			</script>";
 		}
 		$member      = $this->member_service->get_member_by_user_id( $current_user->id );

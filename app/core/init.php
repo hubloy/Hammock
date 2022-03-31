@@ -36,9 +36,9 @@ class Init {
 			foreach ( $table_names as $table ) {
 				$wpdb->query( "DROP TABLE IF EXISTS {$table}" );
 			}
-			Util::delete_option( 'hubloy-membership_settings' );
-			Util::delete_option( 'hubloy-membership_installed' );
-			Util::delete_option( 'hubloy-membership_wizard_step' );
+			Util::delete_option( 'hubloy_membership_settings' );
+			Util::delete_option( 'hubloy_membership_installed' );
+			Util::delete_option( 'hubloy_membership_wizard_step' );
 		}
 	}
 }

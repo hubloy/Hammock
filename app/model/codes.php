@@ -279,7 +279,7 @@ class Codes {
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( 'hubloy-membership_after_save_code_' . $this->code_type, $this );
+		do_action( 'hubloy_membership_after_save_code_' . $this->code_type, $this );
 
 		return $this->id;
 	}
@@ -308,7 +308,7 @@ class Codes {
 		 *
 		 * @return string
 		 */
-		return apply_filters( 'hubloy-membership_get_code_value_' . $this->code_type, $value, $this );
+		return apply_filters( 'hubloy_membership_get_code_value_' . $this->code_type, $value, $this );
 	}
 
 	/**
@@ -404,7 +404,7 @@ class Codes {
 	 */
 	public function to_html() {
 		return apply_filters(
-			'hubloy-membership_' . $this->code_type . '_code_to_html',
+			'hubloy_membership_' . $this->code_type . '_code_to_html',
 			array(
 				'id'           => $this->id,
 				'code'         => $this->code,

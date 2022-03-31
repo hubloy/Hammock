@@ -62,7 +62,7 @@ class Gateway extends Controller {
 	function load_gateways() {
 		\HubloyMembership\Gateway\Manual\Manual::instance();
 		\HubloyMembership\Gateway\Paypal\Paypal::instance();
-		do_action( 'hubloy-membership_load_gateways' );
+		do_action( 'hubloy_membership_load_gateways' );
 	}
 
 	/**
@@ -71,7 +71,7 @@ class Gateway extends Controller {
 	 * @since 1.0.0
 	 */
 	function init_gateways() {
-		do_action( 'hubloy-membership_init_gateway' );
+		do_action( 'hubloy_membership_init_gateway' );
 	}
 }
 

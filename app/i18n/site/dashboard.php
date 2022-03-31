@@ -11,25 +11,25 @@ return array(
 	'members'     => array(
 		'title' => __( 'Members', 'hubloy-membership' ),
 		'none'  => __( 'No Members Found', 'hubloy-membership' ),
-		'url'   => admin_url( 'admin.php?page=hubloy-membership-members' ),
+		'url'   => admin_url( 'admin.php?page=hubloy_membership-members' ),
 	),
 	'memberships' => array(
 		'title' => __( 'Memberships', 'hubloy-membership' ),
 		'none'  => __( 'No Memberships Found', 'hubloy-membership' ),
-		'url'   => admin_url( 'admin.php?page=hubloy-membership-memberships' ),
+		'url'   => admin_url( 'admin.php?page=hubloy_membership-memberships' ),
 	),
 	'management'  => array(
 		'title' => __( 'Site Management', 'hubloy-membership' ),
 		'types' => apply_filters(
-			'hubloy-membership_dashboard_links',
+			'hubloy_membership_dashboard_links',
 			array(
 				'memberships' => array(
 					'name' => __( 'View Memberships', 'hubloy-membership' ),
-					'url'  => admin_url( 'admin.php?page=hubloy-membership-memberships' ),
+					'url'  => admin_url( 'admin.php?page=hubloy_membership-memberships' ),
 				),
 				'addons'      => array(
 					'name' => __( 'View Addons', 'hubloy-membership' ),
-					'url'  => admin_url( 'admin.php?page=hubloy-membership-addons' ),
+					'url'  => admin_url( 'admin.php?page=hubloy_membership-addons' ),
 				),
 			)
 		),

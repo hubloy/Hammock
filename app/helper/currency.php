@@ -24,7 +24,7 @@ class Currency {
 		if ( ! isset( $currencies ) ) {
 			$currencies = array_unique(
 				apply_filters(
-					'hubloy-membership_currencies',
+					'hubloy_membership_currencies',
 					array(
 						'AED' => __( 'United Arab Emirates dirham', 'hubloy-membership' ),
 						'AFN' => __( 'Afghan afghani', 'hubloy-membership' ),
@@ -200,7 +200,7 @@ class Currency {
 
 	public static function get_currency_symbol( $currency = 'USD' ) {
 		$symbols         = apply_filters(
-			'hubloy-membership_currency_symbols',
+			'hubloy_membership_currency_symbols',
 			array(
 				'AED' => '&#x62f;.&#x625;',
 				'AFN' => '&#x60b;',
@@ -370,7 +370,7 @@ class Currency {
 		);
 		$currency_symbol = isset( $symbols[ $currency ] ) ? $symbols[ $currency ] : '';
 
-		return apply_filters( 'hubloy-membership_currency_symbol', $currency_symbol, $currency );
+		return apply_filters( 'hubloy_membership_currency_symbol', $currency_symbol, $currency );
 	}
 
 	/**
@@ -385,7 +385,7 @@ class Currency {
 		$general  = $settings->get_general_settings();
 		$currency = $general['currency'];
 		$code     = self::get_currency_symbol( $currency );
-		return apply_filters( 'hubloy-membership_get_membership_currency', $code, $currency );
+		return apply_filters( 'hubloy_membership_get_membership_currency', $code, $currency );
 	}
 
 
@@ -402,7 +402,7 @@ class Currency {
 		$formatted = number_format_i18n( $price, 2 );
 
 		return apply_filters(
-			'hubloy-membership_format_price',
+			'hubloy_membership_format_price',
 			$formatted,
 			$price
 		);

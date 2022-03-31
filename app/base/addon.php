@@ -35,15 +35,15 @@ class Addon extends Component {
 	public function __construct() {
 		$this->settings = new Settings();
 		$this->init();
-		$this->add_filter( 'hubloy-membership_register_addons', 'register' );
-		$this->add_filter( 'hubloy-membership_register_addon_setting_link', 'settings_link' );
-		$this->add_filter( 'hubloy-membership_get_addon_' . $this->id . '_active', 'plugin_active' );
-		$this->add_filter( 'hubloy-membership_addon_' . $this->id . '_action', 'addon_action', 10, 2 );
+		$this->add_filter( 'hubloy_membership_register_addons', 'register' );
+		$this->add_filter( 'hubloy_membership_register_addon_setting_link', 'settings_link' );
+		$this->add_filter( 'hubloy_membership_get_addon_' . $this->id . '_active', 'plugin_active' );
+		$this->add_filter( 'hubloy_membership_addon_' . $this->id . '_action', 'addon_action', 10, 2 );
 		if ( $this->is_enabled() ) {
-			$this->add_action( 'hubloy-membership_init_addon', 'init_addon' );
+			$this->add_action( 'hubloy_membership_init_addon', 'init_addon' );
 		}
-		$this->add_filter( 'hubloy-membership_addon_' . $this->id . '_settings', 'settings_page' );
-		$this->add_filter( 'hubloy-membership_addon_' . $this->id . '_update_settings', 'update_settings', 10, 2 );
+		$this->add_filter( 'hubloy_membership_addon_' . $this->id . '_settings', 'settings_page' );
+		$this->add_filter( 'hubloy_membership_addon_' . $this->id . '_update_settings', 'update_settings', 10, 2 );
 	}
 
 	/**

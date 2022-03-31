@@ -2,7 +2,7 @@
 /**
  * Member account dashboard
  *
- * This template can be overridden by copying it to yourtheme/hubloy-membership/member-account.php.
+ * This template can be overridden by copying it to yourtheme/hubloy_membership/member-account.php.
  *
  * @package HubloyMembership/Templates
  * @version 1.0.0
@@ -12,17 +12,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 ?>
-<div class="hubloy-membership-member-account">
+<div class="hubloy_membership-member-account">
 	<?php
 	/**
 	 * The account navigation
 	 *
 	 * @since 1.0.0
 	 */
-	do_action( 'hubloy-membership_member_account_navigation' );
+	do_action( 'hubloy_membership_member_account_navigation' );
 
 	?>
-	<div class="hubloy-membership-member-account-content">
+	<div class="hubloy_membership-member-account-content">
 
 		<?php
 			/**
@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			 *
 			 * @since 1.0.0
 			 */
-			do_action( 'hubloy-membership_member_account_content' );
+			do_action( 'hubloy_membership_member_account_content' );
 		?>
 
 	</div>

@@ -31,7 +31,7 @@ class Setting extends View {
 			<label class="uk-form-label uk-text-bold" for="enabled">
 				<?php esc_html_e( 'Enabled', 'hubloy-membership' ); ?>
 			</label>
-			<div class="uk-form-controls hubloy-membership-input">
+			<div class="uk-form-controls hubloy_membership-input">
 				<?php
 				$this->ui->render(
 					'switch',
@@ -112,9 +112,9 @@ class Setting extends View {
 			?>
 			<div class="template">
 				<?php if ( $file_service->exists( $local_file ) ) : ?>
-					<button class="uk-button uk-button-default uk-button-small" type="button" uk-toggle="target: .hubloy-membership-template-details; animation: uk-animation-fade"><?php esc_html_e( 'View', 'hubloy-membership' ); ?></button>
+					<button class="uk-button uk-button-default uk-button-small" type="button" uk-toggle="target: .hubloy_membership-template-details; animation: uk-animation-fade"><?php esc_html_e( 'View', 'hubloy-membership' ); ?></button>
 					<?php if ( $file_service->is_writable( $local_file ) ) : ?>
-						<a href="#" class="hubloy-membership-ajax-click uk-button uk-button-default" data-action="hubloy-membership_email_delete_theme" data-nonce="<?php echo wp_create_nonce( 'hubloy-membership_email_delete_theme' ); ?>" data-id="<?php echo $id; ?>">
+						<a href="#" class="hubloy_membership-ajax-click uk-button uk-button-default" data-action="hubloy_membership_email_delete_theme" data-nonce="<?php echo wp_create_nonce( 'hubloy_membership_email_delete_theme' ); ?>" data-id="<?php echo $id; ?>">
 							<?php esc_html_e( 'Delete template file', 'hubloy-membership' ); ?>
 						</a>
 					<?php endif; ?>
@@ -123,11 +123,11 @@ class Setting extends View {
 						printf( esc_html__( 'This template has been overridden by your theme and can be found in: %s.', 'hubloy-membership' ), '<code>' . esc_html( trailingslashit( basename( get_stylesheet_directory() ) ) . $template_dir . '/' . $template ) . '</code>' );
 					?>
 					</p>
-					<div class="uk-card uk-card-default uk-card-body uk-margin-small hubloy-membership-template-details" hidden>
+					<div class="uk-card uk-card-default uk-card-body uk-margin-small hubloy_membership-template-details" hidden>
 						<pre><?php echo esc_html( $file_service->read_file( $local_file ) ); ?></pre>
 					</div>
 				<?php elseif ( $file_service->exists( $template_file ) ) : ?>
-					<button class="uk-button uk-button-default uk-button-small" type="button" uk-toggle="target: .hubloy-membership-template-details; animation: uk-animation-fade"><?php esc_html_e( 'View', 'hubloy-membership' ); ?></button>
+					<button class="uk-button uk-button-default uk-button-small" type="button" uk-toggle="target: .hubloy_membership-template-details; animation: uk-animation-fade"><?php esc_html_e( 'View', 'hubloy-membership' ); ?></button>
 					<?php
 						$emails_dir    = get_stylesheet_directory() . '/' . $template_dir . '/emails';
 						$templates_dir = get_stylesheet_directory() . '/' . $template_dir;
@@ -143,7 +143,7 @@ class Setting extends View {
 
 					if ( $file_service->is_writable( $target_dir ) ) : // phpcs:ignore WordPress.VIP.FileSystemWritesDisallow.file_ops_is_writable
 						?>
-							<a href="#" class="uk-button uk-button-default uk-button-small hubloy-membership-ajax-click" data-action="hubloy-membership_email_copy_theme" data-nonce="<?php echo wp_create_nonce( 'hubloy-membership_email_copy_theme' ); ?>" data-id="<?php echo $id; ?>">
+							<a href="#" class="uk-button uk-button-default uk-button-small hubloy_membership-ajax-click" data-action="hubloy_membership_email_copy_theme" data-nonce="<?php echo wp_create_nonce( 'hubloy_membership_email_copy_theme' ); ?>" data-id="<?php echo $id; ?>">
 							<?php esc_html_e( 'Copy file to theme', 'hubloy-membership' ); ?>
 							</a>
 						<?php
@@ -154,7 +154,7 @@ class Setting extends View {
 								printf( esc_html__( 'To override and edit this email template copy %1$s to your theme folder: %2$s.', 'hubloy-membership' ), '<code>' . esc_html( plugin_basename( $template_file ) ) . '</code>', '<code>' . esc_html( trailingslashit( basename( get_stylesheet_directory() ) ) . $template_dir . '/' . $template ) . '</code>' );
 							?>
 						</p>
-					<div class="uk-card uk-card-default uk-card-body uk-margin-small hubloy-membership-template-details" hidden>
+					<div class="uk-card uk-card-default uk-card-body uk-margin-small hubloy_membership-template-details" hidden>
 						<pre><?php echo esc_html( $file_service->read_file( $template_file ) ); ?></pre>
 					</div>
 				<?php else : ?>

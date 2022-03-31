@@ -17,7 +17,7 @@ class Header extends View {
 	 * @return string
 	 */
 	protected function to_html() {
-		$url = is_multisite() ? network_admin_url( 'admin.php?page=hubloy-membership' ) : admin_url( 'admin.php?page=hubloy-membership' );
+		$url = is_multisite() ? network_admin_url( 'admin.php?page=hubloy_membership' ) : admin_url( 'admin.php?page=hubloy_membership' );
 		ob_start();
 		$this->ui->render( 'header', array( 'url' => $url ) );
 		return ob_get_clean();

@@ -33,7 +33,7 @@ class Template {
 	 * @return string
 	 */
 	public static function template_directory() {
-		return apply_filters( 'hubloy-membership_template_directory', 'hubloy-membership' );
+		return apply_filters( 'hubloy_membership_template_directory', 'hubloy-membership' );
 	}
 
 	/**
@@ -46,7 +46,7 @@ class Template {
 	 * @return string
 	 */
 	public static function get_theme_template_file( $template ) {
-		return get_stylesheet_directory() . '/' . apply_filters( 'hubloy-membership_template_directory', 'hubloy-membership', $template ) . '/' . $template;
+		return get_stylesheet_directory() . '/' . apply_filters( 'hubloy_membership_template_directory', 'hubloy-membership', $template ) . '/' . $template;
 	}
 
 	/**
@@ -135,7 +135,7 @@ class Template {
 			}
 
 			if ( ! $template ) {
-				// If template file doesn't exist, look in yourtheme/slug.php and yourtheme/hubloy-membership/slug.php.
+				// If template file doesn't exist, look in yourtheme/slug.php and yourtheme/hubloy_membership/slug.php.
 				$template = locate_template(
 					array(
 						"{$slug}.php",
@@ -148,7 +148,7 @@ class Template {
 		}
 
 		// Allow 3rd party plugins to filter template file from their plugin.
-		$template = apply_filters( 'hubloy-membership_get_template_part', $template, $slug, $name );
+		$template = apply_filters( 'hubloy_membership_get_template_part', $template, $slug, $name );
 
 		if ( $template ) {
 			load_template( $template, false );
@@ -173,7 +173,7 @@ class Template {
 		}
 
 		// Allow 3rd party plugin filter template file from their plugin.
-		$filter_template = apply_filters( 'hubloy-membership_get_template', $template, $template_name, $args, $template_path, $default_path );
+		$filter_template = apply_filters( 'hubloy_membership_get_template', $template, $template_name, $args, $template_path, $default_path );
 
 		if ( $filter_template !== $template ) {
 			if ( ! file_exists( $filter_template ) ) {
@@ -194,11 +194,11 @@ class Template {
 			extract( $args );
 		}
 
-		do_action( 'hubloy-membership_before_template_part', $action_args['template_name'], $action_args['template_path'], $action_args['located'], $action_args['args'] );
+		do_action( 'hubloy_membership_before_template_part', $action_args['template_name'], $action_args['template_path'], $action_args['located'], $action_args['args'] );
 
 		include $action_args['located'];
 
-		do_action( 'hubloy-membership_after_template_part', $action_args['template_name'], $action_args['template_path'], $action_args['located'], $action_args['args'] );
+		do_action( 'hubloy_membership_after_template_part', $action_args['template_name'], $action_args['template_path'], $action_args['located'], $action_args['args'] );
 	}
 
 	/**
@@ -259,7 +259,7 @@ class Template {
 		}
 
 		// Return what we found.
-		return apply_filters( 'hubloy-membership_locate_template', $template, $template_name, $template_path );
+		return apply_filters( 'hubloy_membership_locate_template', $template, $template_name, $template_path );
 	}
 }
 

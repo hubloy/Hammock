@@ -95,7 +95,7 @@ class Users extends Controller {
 
 		$new_columns = $columns_4 + $membership_column + $columns_5;
 
-		return apply_filters( 'hubloy-membership_manage_users_columns', $new_columns, $columns );
+		return apply_filters( 'hubloy_membership_manage_users_columns', $new_columns, $columns );
 	}
 
 
@@ -112,11 +112,11 @@ class Users extends Controller {
 	 */
 	public function manage_users_custom_column( $value, $column_name, $user_id ) {
 		if ( 'membership' == $column_name ) {
-			if ( ! hubloy-membership_user_can_subscribe( $user_id ) ) {
+			if ( ! hubloy_membership_user_can_subscribe( $user_id ) ) {
 				$value = '<span style="font-weight:bold;">' . __( 'No (Not allowed)', 'hubloy-membership' ) . '</span>';
 			} else {
-				if ( hubloy-membership_user_is_member( $user_id ) ) {
-					$plans = hubloy-membership_user_has_plans( $user_id );
+				if ( hubloy_membership_user_is_member( $user_id ) ) {
+					$plans = hubloy_membership_user_has_plans( $user_id );
 					$value = sprintf( __( '%d plans', 'hubloy-membership' ), $plans );
 				} else {
 					$value = __( 'No', 'hubloy-membership' );
@@ -126,7 +126,7 @@ class Users extends Controller {
 			if ( is_super_admin( $user_id ) ) {
 				$value = '<span style="font-weight:bold;">' . __( 'No (Admin)', 'hubloy-membership' ) . '</span>';
 			} else {
-				$user_activation_status = get_user_meta( $user_id, '_hubloy-membership_activation_status', true );
+				$user_activation_status = get_user_meta( $user_id, '_hubloy_membership_activation_status', true );
 				$value                  = __( 'Not Verified', 'hubloy-membership' );
 				if ( $user_activation_status ) {
 					if ( intval( $user_activation_status ) === 3 ) {
@@ -135,7 +135,7 @@ class Users extends Controller {
 				}
 			}
 		}
-		return apply_filters( 'hubloy-membership_manage_users_custom_column', $value, $column_name, $user_id );
+		return apply_filters( 'hubloy_membership_manage_users_custom_column', $value, $column_name, $user_id );
 	}
 
 	/**
@@ -149,9 +149,9 @@ class Users extends Controller {
 	 */
 	public function add_verify_bulk_action( $actions ) {
 
-		$actions['hubloy-membership_bulk_approve']    = __( 'Approve', 'hubloy-membership' );
-		$actions['hubloy-membership_bulk_disapprove'] = __( 'Disapprove', 'hubloy-membership' );
-		$actions['hubloy-membership_bulk_resend']     = __( 'Resend Verification Email', 'hubloy-membership' );
+		$actions['hubloy_membership_bulk_approve']    = __( 'Approve', 'hubloy-membership' );
+		$actions['hubloy_membership_bulk_disapprove'] = __( 'Disapprove', 'hubloy-membership' );
+		$actions['hubloy_membership_bulk_resend']     = __( 'Resend Verification Email', 'hubloy-membership' );
 
 		return $actions;
 	}
@@ -170,29 +170,29 @@ class Users extends Controller {
 	public function handle_verify_bulk_action( $redirect_to, $doaction, $items ) {
 
 		switch ( $doaction ) {
-			case 'hubloy-membership_bulk_approve':
+			case 'hubloy_membership_bulk_approve':
 				foreach ( $items as $user_id ) {
-					if ( hubloy-membership_user_can_subscribe( $user_id ) ) {
-						update_user_meta( $user_id, '_hubloy-membership_activation_status', 3 );
+					if ( hubloy_membership_user_can_subscribe( $user_id ) ) {
+						update_user_meta( $user_id, '_hubloy_membership_activation_status', 3 );
 					}
 				}
 				$redirect_to = admin_url( 'users.php' );
-				$redirect_to = add_query_arg( '_hubloy-membership_approved', count( $items ), $redirect_to );
+				$redirect_to = add_query_arg( '_hubloy_membership_approved', count( $items ), $redirect_to );
 				break;
 
-			case 'hubloy-membership_bulk_disapprove':
+			case 'hubloy_membership_bulk_disapprove':
 				foreach ( $items as $user_id ) {
-					if ( hubloy-membership_user_can_subscribe( $user_id ) ) {
-						update_user_meta( $user_id, '_hubloy-membership_activation_status', 2 );
+					if ( hubloy_membership_user_can_subscribe( $user_id ) ) {
+						update_user_meta( $user_id, '_hubloy_membership_activation_status', 2 );
 					}
 				}
 				$redirect_to = admin_url( 'users.php' );
-				$redirect_to = add_query_arg( '_hubloy-membership_disapproved', count( $items ), $redirect_to );
+				$redirect_to = add_query_arg( '_hubloy_membership_disapproved', count( $items ), $redirect_to );
 				break;
 
-			case 'hubloy-membership_bulk_resend':
+			case 'hubloy_membership_bulk_resend':
 				foreach ( $items as $user_id ) {
-					if ( hubloy-membership_user_can_subscribe( $user_id ) ) {
+					if ( hubloy_membership_user_can_subscribe( $user_id ) ) {
 						// Send mail
 						// Find better way to process and queue bulk emails. Maybe a cron
 						$user = get_user_by( 'ID', $user_id );
@@ -200,8 +200,8 @@ class Users extends Controller {
 							$type       = \HubloyMembership\Services\Emails::COMM_TYPE_REGISTRATION_VERIFY;
 							$verify_key = wp_generate_password( 20, false );
 
-							update_user_meta( $user_id, '_hubloy-membership_activation_status', 2 );
-							update_user_meta( $user_id, '_hubloy-membership_activation_key', $verify_key );
+							update_user_meta( $user_id, '_hubloy_membership_activation_status', 2 );
+							update_user_meta( $user_id, '_hubloy_membership_activation_key', $verify_key );
 
 							$user_object = (object) array(
 								'user_login' => $user->user_login,
@@ -209,12 +209,12 @@ class Users extends Controller {
 								'verify_key' => $verify_key,
 							);
 							// Send verification email
-							do_action( 'hubloy-membership_send_email_member-' . $type, array(), $user_object, $user->user_email, array(), array() );
+							do_action( 'hubloy_membership_send_email_member-' . $type, array(), $user_object, $user->user_email, array(), array() );
 						}
 					}
 				}
 				$redirect_to = admin_url( 'users.php' );
-				$redirect_to = add_query_arg( '_hubloy-membership_resend', count( $items ), $redirect_to );
+				$redirect_to = add_query_arg( '_hubloy_membership_resend', count( $items ), $redirect_to );
 				break;
 		}
 
@@ -227,22 +227,22 @@ class Users extends Controller {
 	 * @since 1.1.3
 	 */
 	public function handle_verify_bulk_message() {
-		if ( isset( $_REQUEST['_hubloy-membership_approved'] ) ) {
-			$user_count = intval( $_REQUEST['_hubloy-membership_approved'] );
+		if ( isset( $_REQUEST['_hubloy_membership_approved'] ) ) {
+			$user_count = intval( $_REQUEST['_hubloy_membership_approved'] );
 			?>
 			<div class="notice notice-success is-dismissible">
 				<p><?php echo sprintf( __( '%d user accounts approved', 'hubloy-membership' ), $user_count ); ?></p>
 			</div>
 			<?php
-		} elseif ( isset( $_REQUEST['_hubloy-membership_disapproved'] ) ) {
-			$user_count = intval( $_REQUEST['_hubloy-membership_disapproved'] );
+		} elseif ( isset( $_REQUEST['_hubloy_membership_disapproved'] ) ) {
+			$user_count = intval( $_REQUEST['_hubloy_membership_disapproved'] );
 			?>
 			<div class="notice notice-success is-dismissible">
 				<p><?php echo sprintf( __( '%d user accounts disapproved', 'hubloy-membership' ), $user_count ); ?></p>
 			</div>
 			<?php
-		} elseif ( isset( $_REQUEST['_hubloy-membership_resend'] ) ) {
-			$user_count = intval( $_REQUEST['_hubloy-membership_resend'] );
+		} elseif ( isset( $_REQUEST['_hubloy_membership_resend'] ) ) {
+			$user_count = intval( $_REQUEST['_hubloy_membership_resend'] );
 			?>
 			<div class="notice notice-success is-dismissible">
 				<p><?php echo sprintf( __( '%d user accounts resent emails', 'hubloy-membership' ), $user_count ); ?></p>

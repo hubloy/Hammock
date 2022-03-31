@@ -139,7 +139,7 @@ class Marketing extends Controller {
 	 * @since 1.0.0
 	 */
 	public function controller_scripts() {
-		wp_enqueue_script( 'hubloy-membership-marketing-react' );
+		wp_enqueue_script( 'hubloy_membership-marketing-react' );
 	}
 
 	/**
@@ -150,7 +150,7 @@ class Marketing extends Controller {
 	public function render() {
 
 		?>
-		<div id="hubloy-membership-marketing-container"></div>
+		<div id="hubloy_membership-marketing-container"></div>
 		<?php
 	}
 }

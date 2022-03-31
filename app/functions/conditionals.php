@@ -17,8 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @return bool
  */
-function hubloy-membership_is_account_page() {
-	$page_id = hubloy-membership_page_id( 'account_page' );
+function hubloy_membership_is_account_page() {
+	$page_id = hubloy_membership_page_id( 'account_page' );
 	return ( $page_id && is_page( $page_id ) );
 }
 
@@ -29,8 +29,8 @@ function hubloy-membership_is_account_page() {
  *
  * @return bool
  */
-function hubloy-membership_is_membership_page() {
-	$page_id = hubloy-membership_page_id( 'membership_list' );
+function hubloy_membership_is_membership_page() {
+	$page_id = hubloy_membership_page_id( 'membership_list' );
 	return ( $page_id && is_page( $page_id ) );
 }
 
@@ -41,8 +41,8 @@ function hubloy-membership_is_membership_page() {
  *
  * @return bool
  */
-function hubloy-membership_is_protected_content_page() {
-	$page_id = hubloy-membership_page_id( 'protected_content' );
+function hubloy_membership_is_protected_content_page() {
+	$page_id = hubloy_membership_page_id( 'protected_content' );
 	return ( $page_id && is_page( $page_id ) );
 }
 
@@ -53,8 +53,8 @@ function hubloy-membership_is_protected_content_page() {
  *
  * @return bool
  */
-function hubloy-membership_is_registration_page() {
-	$page_id = hubloy-membership_page_id( 'registration' );
+function hubloy_membership_is_registration_page() {
+	$page_id = hubloy_membership_page_id( 'registration' );
 	return ( $page_id && is_page( $page_id ) );
 }
 
@@ -65,8 +65,8 @@ function hubloy-membership_is_registration_page() {
  *
  * @return bool
  */
-function hubloy-membership_is_thank_you_page() {
-	$page_id = hubloy-membership_page_id( 'thank_you_page' );
+function hubloy_membership_is_thank_you_page() {
+	$page_id = hubloy_membership_page_id( 'thank_you_page' );
 	return ( $page_id && is_page( $page_id ) );
 }
 

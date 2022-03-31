@@ -59,7 +59,7 @@ class Duration {
 			27 => __( 'Twenty-seven Days', 'hubloy-membership' ),
 			28 => __( 'Twenty-eight Days', 'hubloy-membership' ),
 		);
-		return apply_filters( 'hubloy-membership_helper_duration_list_days', $days );
+		return apply_filters( 'hubloy_membership_helper_duration_list_days', $days );
 	}
 
 	/**
@@ -92,7 +92,7 @@ class Duration {
 		}
 
 		return apply_filters(
-			'hubloy-membership_duration_add_interval',
+			'hubloy_membership_duration_add_interval',
 			$result,
 			$period_unit,
 			$period_type,
@@ -131,7 +131,7 @@ class Duration {
 		$date_format = get_option( 'date_format' );
 
 		return apply_filters(
-			'hubloy-membership_subtract_interval',
+			'hubloy_membership_subtract_interval',
 			date_i18n( $date_format, $result )
 		);
 	}
@@ -190,7 +190,7 @@ class Duration {
 		}
 
 		return apply_filters(
-			'hubloy-membership_duration_subtract_dates',
+			'hubloy_membership_duration_subtract_dates',
 			$result
 		);
 	}
@@ -251,7 +251,7 @@ class Duration {
 		}
 
 		return apply_filters(
-			'hubloy-membership_duration_get_period_in_days',
+			'hubloy_membership_duration_get_period_in_days',
 			$days,
 			$type
 		);

@@ -82,7 +82,7 @@ class Rules {
 	 * @return array
 	 */
 	public function list_rule_types() {
-		return apply_filters( 'hubloy-membership_protection_rules', array() );
+		return apply_filters( 'hubloy_membership_protection_rules', array() );
 	}
 
 	/**
@@ -93,7 +93,7 @@ class Rules {
 	 * @return array
 	 */
 	public function list_rule_types_with_setting() {
-		return apply_filters( 'hubloy-membership_protection_setting_rules', array() );
+		return apply_filters( 'hubloy_membership_protection_setting_rules', array() );
 	}
 
 	/**

@@ -67,11 +67,11 @@ class Gateway extends Component {
 		$this->settings = new Settings();
 		$this->logger   = new Logger();
 		$this->init();
-		$this->add_filter( 'hubloy-membership_register_gateways', 'register' );
-		$this->add_action( 'hubloy-membership_init_gateway', 'init_gateway' );
-		$this->add_filter( 'hubloy-membership_gateway_' . $this->id . '_is_active', 'is_active' );
-		$this->add_filter( 'hubloy-membership_gateway_' . $this->id . '_settings', 'settings' );
-		$this->add_action( 'hubloy-membership_gateway_' . $this->id . '_update_settings', 'update_settings', 10, 2 );
+		$this->add_filter( 'hubloy_membership_register_gateways', 'register' );
+		$this->add_action( 'hubloy_membership_init_gateway', 'init_gateway' );
+		$this->add_filter( 'hubloy_membership_gateway_' . $this->id . '_is_active', 'is_active' );
+		$this->add_filter( 'hubloy_membership_gateway_' . $this->id . '_settings', 'settings' );
+		$this->add_action( 'hubloy_membership_gateway_' . $this->id . '_update_settings', 'update_settings', 10, 2 );
 
 		if ( $this->is_active() ) {
 
@@ -79,22 +79,22 @@ class Gateway extends Component {
 			$this->add_action( 'wp_enqueue_scripts', 'register_scripts' );
 
 			// Memberships. Need to sync the plan to the gateway
-			$this->add_action( 'hubloy-membership_memberships_plan_created', 'membership_created_sync' );
-			$this->add_action( 'hubloy-membership_memberships_updated', 'membership_updated_sync' );
+			$this->add_action( 'hubloy_membership_memberships_plan_created', 'membership_created_sync' );
+			$this->add_action( 'hubloy_membership_memberships_updated', 'membership_updated_sync' );
 
 			// Subscription actions
-			$this->add_action( 'hubloy-membership_gateway_' . $this->id . '_ipn_notify', 'ipn_notify' );
-			$this->add_action( 'hubloy-membership_gateway_' . $this->id . '_render_payment_form', 'render_payment_form' );
-			$this->add_action( 'hubloy-membership_gateway_' . $this->id . '_render_payment_update_form', 'render_payment_update_form' );
-			$this->add_action( 'hubloy-membership_gateway_' . $this->id . '_process_payment', 'process_payment' );
-			$this->add_action( 'hubloy-membership_gateway_' . $this->id . '_process_refund', 'process_refund', 10, 3 );
-			$this->add_action( 'hubloy-membership_gateway_' . $this->id . '_process_cancel', 'process_cancel' );
-			$this->add_action( 'hubloy-membership_gateway_' . $this->id . '_process_pause', 'process_pause' );
-			$this->add_action( 'hubloy-membership_gateway_' . $this->id . '_process_resume', 'process_resume' );
-			$this->add_action( 'hubloy-membership_gateway_' . $this->id . '_handle_return', 'handle_return' );
+			$this->add_action( 'hubloy_membership_gateway_' . $this->id . '_ipn_notify', 'ipn_notify' );
+			$this->add_action( 'hubloy_membership_gateway_' . $this->id . '_render_payment_form', 'render_payment_form' );
+			$this->add_action( 'hubloy_membership_gateway_' . $this->id . '_render_payment_update_form', 'render_payment_update_form' );
+			$this->add_action( 'hubloy_membership_gateway_' . $this->id . '_process_payment', 'process_payment' );
+			$this->add_action( 'hubloy_membership_gateway_' . $this->id . '_process_refund', 'process_refund', 10, 3 );
+			$this->add_action( 'hubloy_membership_gateway_' . $this->id . '_process_cancel', 'process_cancel' );
+			$this->add_action( 'hubloy_membership_gateway_' . $this->id . '_process_pause', 'process_pause' );
+			$this->add_action( 'hubloy_membership_gateway_' . $this->id . '_process_resume', 'process_resume' );
+			$this->add_action( 'hubloy_membership_gateway_' . $this->id . '_handle_return', 'handle_return' );
 
 			// Member delete
-			$this->add_action( 'hubloy-membership_member_before_delete_member', 'handle_member_delete' );
+			$this->add_action( 'hubloy_membership_member_before_delete_member', 'handle_member_delete' );
 		}
 	}
 
@@ -212,7 +212,7 @@ class Gateway extends Component {
 	public function get_currency() {
 		$general  = $this->settings->get_general_settings();
 		$currency = $general['currency'];
-		return apply_filters( 'hubloy-membership_gateway_currency_' . $this->id, $currency );
+		return apply_filters( 'hubloy_membership_gateway_currency_' . $this->id, $currency );
 	}
 
 	/**
@@ -234,7 +234,7 @@ class Gateway extends Component {
 	 * @return string
 	 */
 	public function get_invoice_page( $invoice ) {
-		return esc_url( hubloy-membership_get_invoice_link( $invoice->invoice_id ) );
+		return esc_url( hubloy_membership_get_invoice_link( $invoice->invoice_id ) );
 	}
 
 	/**
@@ -429,7 +429,7 @@ class Gateway extends Component {
 	 * @since 1.0.0
 	 */
 	public function handle_return( $invoice ) {
-		wp_safe_redirect( hubloy-membership_get_invoice_link( $invoice->invoice_id ) );
+		wp_safe_redirect( hubloy_membership_get_invoice_link( $invoice->invoice_id ) );
 		exit;
 	}
 

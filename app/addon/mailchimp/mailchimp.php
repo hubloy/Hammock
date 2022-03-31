@@ -63,7 +63,7 @@ class Mailchimp extends Addon {
 				'name'        => __( 'MailChimp Integration', 'hubloy-membership' ),
 				'description' => __( 'MailChimp integration.', 'hubloy-membership' ),
 				'icon'        => 'dashicons dashicons-email',
-				'url'         => admin_url( 'admin.php?page=hubloy-membership-marketing' ),
+				'url'         => admin_url( 'admin.php?page=hubloy_membership-marketing' ),
 			);
 		}
 		return $addons;

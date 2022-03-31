@@ -89,7 +89,7 @@ class Wizard extends Rest {
 	 * @return array
 	 */
 	public function get_step( $request ) {
-		$step = Util::get_option( 'hubloy-membership_wizard_step' );
+		$step = Util::get_option( 'hubloy_membership_wizard_step' );
 		if ( ! $step || ! is_array( $step ) ) {
 			$step = array(
 				'value' => 10,
@@ -155,7 +155,7 @@ class Wizard extends Rest {
 		);
 
 		// Update wizard step
-		Util::update_option( 'hubloy-membership_wizard_step', $stage );
+		Util::update_option( 'hubloy_membership_wizard_step', $stage );
 
 		$code = \HubloyMembership\Helper\Currency::get_membership_currency();
 
@@ -193,11 +193,11 @@ class Wizard extends Rest {
 		$id      = $service->save( $name, '', $enabled, $type, $price );
 		if ( $id ) {
 
-			Util::update_option( 'hubloy-membership_installed', 1 );
+			Util::update_option( 'hubloy_membership_installed', 1 );
 
 			// Update wizard step
 			Util::update_option(
-				'hubloy-membership_wizard_step',
+				'hubloy_membership_wizard_step',
 				array(
 					'value' => 100,
 					'step'  => 'membership',

@@ -86,11 +86,11 @@ class Communication extends Controller {
 	public function init() {
 		$this->load_comms();
 
-		$this->add_action( 'hubloy-membership_email_header', 'email_header' );
-		$this->add_action( 'hubloy-membership_email_footer', 'email_footer' );
+		$this->add_action( 'hubloy_membership_email_header', 'email_header' );
+		$this->add_action( 'hubloy_membership_email_footer', 'email_footer' );
 
-		$this->add_ajax_action( 'hubloy-membership_email_copy_theme', 'copy_theme' );
-		$this->add_ajax_action( 'hubloy-membership_email_delete_theme', 'delete_theme' );
+		$this->add_ajax_action( 'hubloy_membership_email_copy_theme', 'copy_theme' );
+		$this->add_ajax_action( 'hubloy_membership_email_delete_theme', 'delete_theme' );
 	}
 
 	/**
@@ -123,7 +123,7 @@ class Communication extends Controller {
 		\HubloyMembership\Emails\Member\Membership\Status\Before::instance();
 		\HubloyMembership\Emails\Member\Membership\Status\Finished::instance();
 
-		do_action( 'hubloy-membership_load_comms' );
+		do_action( 'hubloy_membership_load_comms' );
 	}
 
 	/**
@@ -184,7 +184,7 @@ class Communication extends Controller {
 	 * @since 1.0.0
 	 */
 	public function controller_scripts() {
-		wp_enqueue_script( 'hubloy-membership-comms-react' );
+		wp_enqueue_script( 'hubloy_membership-comms-react' );
 	}
 
 	/**
@@ -195,7 +195,7 @@ class Communication extends Controller {
 	public function render() {
 
 		?>
-		<div id="hubloy-membership-comms-container"></div>
+		<div id="hubloy_membership-comms-container"></div>
 		<?php
 	}
 
@@ -228,10 +228,10 @@ class Communication extends Controller {
 	 * @return application/json
 	 */
 	public function copy_theme() {
-		$this->verify_nonce( 'hubloy-membership_email_copy_theme' );
+		$this->verify_nonce( 'hubloy_membership_email_copy_theme' );
 		$id = sanitize_text_field( $_POST['id'] );
 
-		do_action( 'hubloy-membership_email_copy_theme_' . $id );
+		do_action( 'hubloy_membership_email_copy_theme_' . $id );
 
 		wp_send_json_error( __( 'Action not implemented', 'hubloy-membership' ) );
 	}
@@ -245,10 +245,10 @@ class Communication extends Controller {
 	 * @return application/json
 	 */
 	public function delete_theme() {
-		$this->verify_nonce( 'hubloy-membership_email_delete_theme' );
+		$this->verify_nonce( 'hubloy_membership_email_delete_theme' );
 		$id = sanitize_text_field( $_POST['id'] );
 
-		do_action( 'hubloy-membership_email_delete_theme_' . $id );
+		do_action( 'hubloy_membership_email_delete_theme_' . $id );
 
 		wp_send_json_error( __( 'Action not implemented', 'hubloy-membership' ) );
 	}

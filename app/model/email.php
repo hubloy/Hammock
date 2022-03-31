@@ -71,7 +71,7 @@ class Email {
 	 * @return string
 	 */
 	private function option_key() {
-		return apply_filters( 'hubloy-membership_email_settings_name_key', 'hubloy-membership_email_settings' );
+		return apply_filters( 'hubloy_membership_email_settings_name_key', 'hubloy_membership_email_settings' );
 	}
 
 	/**

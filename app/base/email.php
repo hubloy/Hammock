@@ -160,14 +160,14 @@ class Email extends Component {
 		$this->subject   = $this->get_setting( 'subject' );
 		$this->recipient = $this->get_setting( 'recipient' );
 
-		$this->add_action( 'hubloy-membership_email_copy_theme_' . $this->id, 'copy_theme' );
-		$this->add_action( 'hubloy-membership_email_delete_theme_' . $this->id, 'delete_theme' );
+		$this->add_action( 'hubloy_membership_email_copy_theme_' . $this->id, 'copy_theme' );
+		$this->add_action( 'hubloy_membership_email_delete_theme_' . $this->id, 'delete_theme' );
 
-		$this->add_filter( 'hubloy-membership_get_email_senders', 'register' );
-		$this->add_filter( 'hubloy-membership_email_sender_' . $this->id . '_get_setting_form', 'setting_form' );
-		$this->add_action( 'hubloy-membership_email_sender_' . $this->id . '_enabled_sender', 'enable_sender' );
-		$this->add_action( 'hubloy-membership_email_sender_' . $this->id . '_update_settings', 'update_setting' );
-		$this->add_action( 'hubloy-membership_send_email_' . $this->id, 'send_email', 10, 5 );
+		$this->add_filter( 'hubloy_membership_get_email_senders', 'register' );
+		$this->add_filter( 'hubloy_membership_email_sender_' . $this->id . '_get_setting_form', 'setting_form' );
+		$this->add_action( 'hubloy_membership_email_sender_' . $this->id . '_enabled_sender', 'enable_sender' );
+		$this->add_action( 'hubloy_membership_email_sender_' . $this->id . '_update_settings', 'update_setting' );
+		$this->add_action( 'hubloy_membership_send_email_' . $this->id, 'send_email', 10, 5 );
 	}
 
 	/**
@@ -427,7 +427,7 @@ class Email extends Component {
 	 */
 	public function email_from() {
 		$admin_email = get_option( 'admin_email' );
-		return apply_filters( 'hubloy-membership_email_from_email', $admin_email, $this->id );
+		return apply_filters( 'hubloy_membership_email_from_email', $admin_email, $this->id );
 	}
 
 	/**
@@ -438,7 +438,7 @@ class Email extends Component {
 	 * @return string
 	 */
 	public function email_from_name() {
-		return apply_filters( 'hubloy-membership_email_from_name', $this->get_blogname(), $this->id );
+		return apply_filters( 'hubloy_membership_email_from_name', $this->get_blogname(), $this->id );
 	}
 
 	/**
@@ -461,7 +461,7 @@ class Email extends Component {
 
 		$string = str_replace( $find, $replace, $string );
 
-		return apply_filters( 'hubloy-membership_email_format_string', $string, $this->id );
+		return apply_filters( 'hubloy_membership_email_format_string', $string, $this->id );
 	}
 
 	/**
@@ -473,7 +473,7 @@ class Email extends Component {
 	 */
 	public function default_headers() {
 		return apply_filters(
-			'hubloy-membership_email_default_headers',
+			'hubloy_membership_email_default_headers',
 			array(
 				'From: ' . $this->email_from() . ' <' . $this->email_from_name() . '>',
 				'Content-Type: text/html; charset=UTF-8',
@@ -491,7 +491,7 @@ class Email extends Component {
 	 */
 	public function default_multipart_headers() {
 		return apply_filters(
-			'hubloy-membership_email_default_multipart_headers',
+			'hubloy_membership_email_default_multipart_headers',
 			array(
 				'From: ' . $this->email_from() . ' <' . $this->email_from_name() . '>',
 				'Content-Type: multipart/alternative; charset=UTF-8',

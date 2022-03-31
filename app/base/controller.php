@@ -40,19 +40,19 @@ class Controller extends Component {
 	public function __construct() {
 		$this->init_variables();
 		if ( ! $this->is_base ) {
-			$this->add_action( 'hubloy-membership_admin_menu_page', 'menu_page', 10, 2 );
-			$this->add_action( 'hubloy-membership_network_admin_menu_page', 'network_menu_page', 10, 2 );
+			$this->add_action( 'hubloy_membership_admin_menu_page', 'menu_page', 10, 2 );
+			$this->add_action( 'hubloy_membership_network_admin_menu_page', 'network_menu_page', 10, 2 );
 		}
-		$this->add_action( 'hubloy-membership_plugin_admin_setup', 'setup' );
-		$this->add_action( 'hubloy-membership_controller_scripts', 'controller_scripts' );
+		$this->add_action( 'hubloy_membership_plugin_admin_setup', 'setup' );
+		$this->add_action( 'hubloy_membership_controller_scripts', 'controller_scripts' );
 		$this->init();
 	}
 
 
 	public function init_variables() {
-		add_filter( 'hubloy-membership_front_vars', array( $this, 'admin_front_vars' ) );
+		add_filter( 'hubloy_membership_front_vars', array( $this, 'admin_front_vars' ) );
 		if ( is_admin() || is_network_admin() ) {
-			add_filter( 'hubloy-membership_admin_vars', array( $this, 'admin_js_vars' ) );
+			add_filter( 'hubloy_membership_admin_vars', array( $this, 'admin_js_vars' ) );
 		}
 	}
 
@@ -139,7 +139,7 @@ class Controller extends Component {
 	 *
 	 * @return boolean True if verified, false otherwise.
 	 */
-	public function verify_nonce( $action = 'hubloy-membership_rest_nonce', $request_method = 'POST', $nonce_field = '_wpnonce', $json = true ) {
+	public function verify_nonce( $action = 'hubloy_membership_rest_nonce', $request_method = 'POST', $nonce_field = '_wpnonce', $json = true ) {
 		switch ( $request_method ) {
 			case 'GET':
 				$request_fields = $_GET;
@@ -164,7 +164,7 @@ class Controller extends Component {
 			&& wp_verify_nonce( $request_fields[ $nonce_field ], $action )
 		) {
 			return apply_filters(
-				'hubloy-membership_base_controller_verify_nonce',
+				'hubloy_membership_base_controller_verify_nonce',
 				true,
 				$action,
 				$request_method,
@@ -218,7 +218,7 @@ class Controller extends Component {
 		}
 
 		return apply_filters(
-			'hubloy-membership_base_controller_get_request_field',
+			'hubloy_membership_base_controller_get_request_field',
 			$value,
 			$id,
 			$default
@@ -243,7 +243,7 @@ class Controller extends Component {
 	 */
 	public function render() {
 		?>
-		<div id="hubloy-membership-admin-container"></div>
+		<div id="hubloy_membership-admin-container"></div>
 		<?php
 	}
 

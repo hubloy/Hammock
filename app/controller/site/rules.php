@@ -85,9 +85,9 @@ class Rules extends Controller {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$this->add_ajax_action( 'hubloy-membership_rule_items', 'rule_items' );
-		$this->add_filter( 'hubloy-membership_rule_type_name', 'get_rule_name' );
-		$this->add_filter( 'hubloy-membership_rule_title_name', 'get_rule_title', 10, 2 );
+		$this->add_ajax_action( 'hubloy_membership_rule_items', 'rule_items' );
+		$this->add_filter( 'hubloy_membership_rule_type_name', 'get_rule_name' );
+		$this->add_filter( 'hubloy_membership_rule_title_name', 'get_rule_title', 10, 2 );
 	}
 
 	/**
@@ -154,7 +154,7 @@ class Rules extends Controller {
 	 * @return array
 	 */
 	public function get_rules() {
-		return apply_filters( 'hubloy-membership_protection_rules', array() );
+		return apply_filters( 'hubloy_membership_protection_rules', array() );
 	}
 
 	/**
@@ -163,7 +163,7 @@ class Rules extends Controller {
 	 * @since 1.0.0
 	 */
 	public function controller_scripts() {
-		wp_enqueue_script( 'hubloy-membership-rules-react' );
+		wp_enqueue_script( 'hubloy_membership-rules-react' );
 	}
 
 	/**
@@ -174,7 +174,7 @@ class Rules extends Controller {
 	public function render() {
 
 		?>
-		<div id="hubloy-membership-rules-container"></div>
+		<div id="hubloy_membership-rules-container"></div>
 		<?php
 	}
 
@@ -184,7 +184,7 @@ class Rules extends Controller {
 	 * @since 1.0.0
 	 */
 	public function rule_items() {
-		$this->verify_nonce( 'hubloy-membership_rule_items', 'GET' );
+		$this->verify_nonce( 'hubloy_membership_rule_items', 'GET' );
 		$type     = sanitize_text_field( $_GET['type'] );
 		$term     = isset( $_GET['term'] ) ? sanitize_text_field( $_GET['term'] ) : '';
 		$service  = new \HubloyMembership\Services\Rules();

@@ -297,7 +297,7 @@ class Plan {
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( 'hubloy-membership_member_before_delete_plan', $this, $member_id, $membership_id );
+		do_action( 'hubloy_membership_member_before_delete_plan', $this, $member_id, $membership_id );
 
 		Meta::remove_all( $this->id, 'plan' );
 		$sql = "DELETE FROM {$this->table_name} WHERE `id` = %d";
@@ -311,7 +311,7 @@ class Plan {
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( 'hubloy-membership_member_after_delete_plan', $member_id, $membership_id );
+		do_action( 'hubloy_membership_member_after_delete_plan', $member_id, $membership_id );
 	}
 
 	/**
@@ -430,7 +430,7 @@ class Plan {
 		} else {
 			$is_active = $this->has_trial();
 		}
-		return apply_filters( 'hubloy-membership_plan_is_active', $is_active, $this );
+		return apply_filters( 'hubloy_membership_plan_is_active', $is_active, $this );
 	}
 
 	/**
@@ -466,7 +466,7 @@ class Plan {
 				$has_trial = true;
 			}
 		}
-		return apply_filters( 'hubloy-membership_plan_has_trial', $has_trial, $this );
+		return apply_filters( 'hubloy_membership_plan_has_trial', $has_trial, $this );
 	}
 
 	/**
@@ -558,7 +558,7 @@ class Plan {
 		 * 
 		 * @since 1.0.0
 		 */
-		do_action( 'hubloy-membership_plan_record_payment', $this, $invoice );
+		do_action( 'hubloy_membership_plan_record_payment', $this, $invoice );
 	}
 
 	/**
@@ -588,7 +588,7 @@ class Plan {
 	 */
 	public function to_html() {
 		return apply_filters(
-			'hubloy-membership_plan_to_html',
+			'hubloy_membership_plan_to_html',
 			array(
 				'id'              => $this->id,
 				'plan_id'         => $this->plan_id,

@@ -132,7 +132,7 @@ class Settings {
 	 * @return string
 	 */
 	private function option_key() {
-		return 'hubloy-membership_settings';
+		return 'hubloy_membership_settings';
 	}
 
 	/**

@@ -54,9 +54,9 @@ class Shortcodes extends Controller {
 	 */
 	public function init() {
 
-		add_shortcode( 'hubloy-membership_membership_list', array( $this, 'membership_list' ) );
-		add_shortcode( 'hubloy-membership_protected_content', array( $this, 'protected_content' ) );
-		add_shortcode( 'hubloy-membership_account_page', array( $this, 'account_page' ) );
+		add_shortcode( 'hubloy_membership_membership_list', array( $this, 'membership_list' ) );
+		add_shortcode( 'hubloy_membership_protected_content', array( $this, 'protected_content' ) );
+		add_shortcode( 'hubloy_membership_account_page', array( $this, 'account_page' ) );
 	}
 
 	/**

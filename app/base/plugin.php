@@ -62,7 +62,7 @@ class Plugin {
 			self::$instance = new self();
 
 			self::$instance = apply_filters(
-				'hubloy-membership_base_plugin_instance',
+				'hubloy_membership_base_plugin_instance',
 				self::$instance
 			);
 		}
@@ -81,7 +81,7 @@ class Plugin {
 	public function __construct() {
 
 		// Do action before plugin is initialized
-		do_action( 'hubloy-membership_base_plugin_init', $this );
+		do_action( 'hubloy_membership_base_plugin_init', $this );
 
 		// Plugin activation Hook.
 		register_activation_hook(
@@ -120,10 +120,10 @@ class Plugin {
 		self::$instance = $this;
 
 		// Handle the wrong actions
-		add_action( 'hubloy-membership_doing_it_wrong', array( $this, 'doing_it_wrong' ) );
+		add_action( 'hubloy_membership_doing_it_wrong', array( $this, 'doing_it_wrong' ) );
 
 		// Do action afterp lugin is initialized
-		do_action( 'hubloy-membership_base_plugin_end', $this );
+		do_action( 'hubloy_membership_base_plugin_end', $this );
 	}
 
 
@@ -136,7 +136,7 @@ class Plugin {
 
 		\HubloyMembership\Core\Init::activate();
 
-		do_action( 'hubloy-membership_plugin_activation', $this );
+		do_action( 'hubloy_membership_plugin_activation', $this );
 	}
 
 	/**
@@ -147,14 +147,14 @@ class Plugin {
 	public function plugin_deactivation() {
 		\HubloyMembership\Core\Init::deactivate();
 
-		do_action( 'hubloy-membership_plugin_deactivation', $this );
+		do_action( 'hubloy_membership_plugin_deactivation', $this );
 	}
 
 	public function plugin_settings_link( $links ) {
 		if ( ! is_network_admin() ) {
 			$base_url      = 'admin.php?page=' . \HubloyMembership\Controller\Plugin::MENU_SLUG;
 			$settings_link = apply_filters(
-				'hubloy-membership_plugin_settings_link',
+				'hubloy_membership_plugin_settings_link',
 				sprintf( '<a href="%s">%s</a>', admin_url( $base_url ), __( 'Settings', 'hubloy-membership' ) ),
 				$this
 			);
@@ -172,7 +172,7 @@ class Plugin {
 		\HubloyMembership\Core\Controller::load_controllers();
 		\HubloyMembership\Core\Controller::load_routes();
 
-		do_action( 'hubloy-membership_setup_controller' );
+		do_action( 'hubloy_membership_setup_controller' );
 	}
 
 	/**

@@ -142,7 +142,7 @@ class Gateways extends Rest {
 		if ( isset( $gateways[ $name ] ) ) {
 			$settings = new Settings();
 			$settings = $settings->get_gateway_setting( $name );
-			$form     = apply_filters( 'hubloy-membership_gateway_' . $name . '_settings', __( 'Not implemented', 'hubloy-membership' ) );
+			$form     = apply_filters( 'hubloy_membership_gateway_' . $name . '_settings', __( 'Not implemented', 'hubloy-membership' ) );
 			return array(
 				'settings' => $settings,
 				'form'     => $form,
@@ -165,7 +165,7 @@ class Gateways extends Rest {
 		$id       = sanitize_text_field( $request['id'] );
 		$gateways = \HubloyMembership\Services\Gateways::load_gateways();
 		if ( isset( $gateways[ $id ] ) ) {
-			$response = apply_filters( 'hubloy-membership_gateway_' . $id . '_update_settings', array(), $request );
+			$response = apply_filters( 'hubloy_membership_gateway_' . $id . '_update_settings', array(), $request );
 			return array(
 				'status'   => true,
 				'message'  => __( 'Gateway updated', 'hubloy-membership' ),
