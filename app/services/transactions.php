@@ -459,8 +459,7 @@ class Transactions {
 		if ( ! Gateways::gateway_exists( $gateway_id ) ) {
 			wp_send_json_error( __( 'Invalid payment gateway selected', 'hammock' ) );
 		}
-		$invoice = new Invoice();
-		$invoice->get_by_invoice_id( $invoice_id );
+		$invoice = new Invoice( $invoice_id );
 		if ( ! $invoice->is_valid() || ! $invoice->is_owner() ) {
 			wp_send_json_error( __( 'Invalid invoice selected', 'hammock' ) );
 		}
@@ -468,6 +467,14 @@ class Transactions {
 		$invoice->status  = self::STATUS_PENDING;
 		$invoice->save();
 
+		/**
+		 * Action called before trasnaction is processed
+		 * 
+		 * @param \Hammock\Model\Invoice $invoice The current invoice to be paid.
+		 * @param string $gateway_id The associated gateway.
+		 * 
+		 * @since 1.0.0 
+		 */
 		do_action( 'hammock_before_process_payment', $invoice, $gateway_id );
 
 		/**
@@ -475,8 +482,66 @@ class Transactions {
 		 * 
 		 * @see \Hammock\Base\Gateway
 		 * 
+		 * @param \Hammock\Model\Invoice $invoice The current invoice to be paid.
+		 * 
 		 * @since 1.0.0
 		 */
 		do_action( 'hammock_gateway_' . $gateway_id . '_process_payment', $invoice );
+	}
+
+	/**
+	 * Process the IPN notification.
+	 * 
+	 * @param string $gateway_id The gateway id
+	 * 
+	 * @since 1.0.0
+	 */
+	public function process_ipn_notification( $gateway_id ) {
+
+		/**
+		 * Process IPN Notification
+		 * 
+		 * @see \Hammock\Base\Gateway
+		 * 
+		 * @since 1.0.0
+		 */
+		do_action( 'hammock_gateway_' . $gateway_id . '_ipn_notify' );
+	}
+
+	/**
+	 * Process payment return.
+	 * Process the payment and return to the correct page.
+	 * 
+	 * @since 1.0.0
+	 */
+	public function process_payment_return() {
+		if ( isset( $_REQUEST['invoice'] ) ) {
+			$invoice_id = sanitize_text_field( $_REQUEST['invoice'] );
+			$invoice    = new Invoice( $invoice_id );
+			if ( $invoice->is_valid() ) {
+				if ( isset( $_REQUEST['cancel'] ) ) {
+					$invoice->status  = self::STATUS_CANCELED;
+					$invoice->add_note( __( 'Payment canceled by subscriber', 'hammock' ) );
+					$invoice->save();
+					wp_safe_redirect( hammock_get_invoice_link( $invoice->invoice_id ) );
+					exit;
+				}
+				$gateway = $invoice->gateway;
+				if ( isset( $_REQUEST['gateway'] ) ) {
+					$gateway = sanitize_text_field( $_REQUEST['gateway'] );
+				}
+
+				/**
+				 * Process payment return
+				 * 
+				 * @see \Hammock\Base\Gateway
+				 * 
+				 * @since 1.0.0
+				 */
+				do_action( 'hammock_gateway_' . $gateway_id . '_handle_return', $invoice );
+			}
+		}
+		wp_safe_redirect( hammock_get_account_page_links() );
+		exit;
 	}
 }

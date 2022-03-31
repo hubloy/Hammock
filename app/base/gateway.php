@@ -91,7 +91,7 @@ class Gateway extends Component {
 			$this->add_action( 'hammock_gateway_' . $this->id . '_process_cancel', 'process_cancel' );
 			$this->add_action( 'hammock_gateway_' . $this->id . '_process_pause', 'process_pause' );
 			$this->add_action( 'hammock_gateway_' . $this->id . '_process_resume', 'process_resume' );
-			$this->add_action( 'hammock_gateway_' . $this->id . '_handle_return', 'handle_return', 10, 2 );
+			$this->add_action( 'hammock_gateway_' . $this->id . '_handle_return', 'handle_return' );
 
 			// Member delete
 			$this->add_action( 'hammock_member_before_delete_member', 'handle_member_delete' );
@@ -247,7 +247,15 @@ class Gateway extends Component {
 	 * @return string
 	 */
 	public function get_cancel_page( $invoice ) {
-		return esc_url( add_query_arg( 'cancel', 'canceled', hammock_get_invoice_link( $invoice->invoice_id ) ) );
+		return esc_url(
+			add_query_arg(
+				array(
+					'cancel'  => 'true',
+					'invoice' => $invoice->invoice_id
+				),
+				$this->get_return_url() 
+			) 
+		);
 	}
 
 	/**
@@ -258,14 +266,12 @@ class Gateway extends Component {
 	 * @return string
 	 */
 	public function get_return_url() {
-		return esc_url(
-			add_query_arg(
-				array(
-					'hm-api'  => 'handle_return',
-					'gateway' => $this->get_id(),
-				),
-				home_url( 'index.php' )
-			)
+		return add_query_arg(
+			array(
+				'hm-api'  => 'handle_return',
+				'gateway' => $this->get_id(),
+			),
+			home_url( 'index.php' )
 		);
 	}
 
@@ -423,7 +429,8 @@ class Gateway extends Component {
 	 * @since 1.0.0
 	 */
 	public function handle_return( $invoice ) {
-
+		wp_safe_redirect( hammock_get_invoice_link( $invoice->invoice_id ) );
+		exit;
 	}
 
 	/**

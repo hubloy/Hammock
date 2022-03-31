@@ -92,4 +92,3 @@ function hammock_get_page_permalink( $page_key ) {
 	$page_url = get_permalink( $page_id );
 	return apply_filters( 'hammock_get_page_permalink', $page_url, $page_id );
 }
-

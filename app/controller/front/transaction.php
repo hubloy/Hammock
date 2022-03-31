@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Hammock\Base\Controller;
+use Hammock\Services\Transactions;
 
 /**
  * Transaction controller
@@ -14,6 +15,15 @@ use Hammock\Base\Controller;
  * @since 1.0.0
  */
 class Transaction extends Controller {
+
+	/**
+	 * Transaction service
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var object
+	 */
+	private $transaction_service = null;
 
 	/**
 	 * Singletone instance of the plugin.
@@ -48,6 +58,7 @@ class Transaction extends Controller {
 	 * @since 1.0.0
 	 */
 	public function init() {
+		$this->transaction_service = new Transactions();
 		$this->add_action( 'hammock_api_ipn_notify', 'ipn_notify' );
 		$this->add_action( 'hammock_api_handle_return', 'handle_return' );
 	}
@@ -60,9 +71,12 @@ class Transaction extends Controller {
 	 * @since 1.0.0
 	 */
 	public function ipn_notify() {
-		if ( isset( $_GET['gateway'] ) ) {
-			$gateway = sanitize_text_field( $_GET['gateway'] );
+		if ( isset( $_REQUEST['gateway'] ) ) {
+			$gateway = sanitize_text_field( $_REQUEST['gateway'] );
+
+			$this->transaction_service->process_ipn_notification( $gateway );
 		}
+		wp_die();
 	}
 
 
@@ -73,7 +87,7 @@ class Transaction extends Controller {
 	 * @since 1.0.0
 	 */
 	public function handle_return() {
-
+		$this->transaction_service->process_payment_return();
 	}
 }
 

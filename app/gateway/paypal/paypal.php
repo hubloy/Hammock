@@ -433,7 +433,7 @@ class PayPal extends Gateway {
 				)
 			),
 			'rm'            => '2',
-			'return'        => add_query_arg( 'gateway', $this->get_id(), $this->get_invoice_page( $invoice ) ),
+			'return'        => add_query_arg( 'gateway', $this->get_id(), $this->get_return_url() ),
 			'cancel_return' => $this->get_cancel_page( $invoice ),
 			'notify_url'    => $this->get_listener_url(),
 			'cbt'           => get_bloginfo( 'name' ),
@@ -486,7 +486,7 @@ class PayPal extends Gateway {
 				)
 			),
 			'rm'            => '2',
-			'return'        => add_query_arg( 'gateway', $this->get_id(), $this->get_invoice_page( $invoice ) ),
+			'return'        => add_query_arg( 'gateway', $this->get_id(), $this->get_return_url() ),
 			'cancel_return' => $this->get_cancel_page( $invoice ),
 			'notify_url'    => $this->get_listener_url(),
 			'cbt'           => get_bloginfo( 'name' ),
@@ -597,68 +597,6 @@ class PayPal extends Gateway {
 		}
 
 		return $best_match;
-	}
-
-	/**
-	 * Process Refund
-	 *
-	 * @param \Hammock\Model\Invoice $invoice - the invoice model
-	 * @param \Hammock\Model\Plan    $plan - the plan model
-	 * @param double                 $amount - the amount
-	 *
-	 * @since 1.0.0
-	 */
-	public function process_refund( $invoice, $plan, $amount ) {
-
-	}
-
-
-	/**
-	 * Process Cancel
-	 * Called when a plan is cancelled
-	 *
-	 * @param \Hammock\Model\Plan $plan - the plan model
-	 *
-	 * @since 1.0.0
-	 */
-	public function process_cancel( $plan ) {
-
-	}
-
-	/**
-	 * Process Pause
-	 * Called when a plan is paused
-	 *
-	 * @param \Hammock\Model\Plan $plan - the plan model
-	 *
-	 * @since 1.0.0
-	 */
-	public function process_pause( $plan ) {
-
-	}
-
-	/**
-	 * Process Resume
-	 * Called when a plan is resumed
-	 *
-	 * @param \Hammock\Model\Plan $plan - the plan model
-	 *
-	 * @since 1.0.0
-	 */
-	public function process_resume( $plan ) {
-
-	}
-
-	/**
-	 * Handle payment return
-	 * This is called after a payment gateway redirects
-	 *
-	 * @param \Hammock\Model\Invoice $invoice - the invoice model
-	 *
-	 * @since 1.0.0
-	 */
-	public function handle_return( $invoice ) {
-
 	}
 
 	/**
