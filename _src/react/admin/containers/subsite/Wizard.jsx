@@ -27,7 +27,7 @@ export default class Wizard extends Component {
         this.buttonClick = this.buttonClick.bind(this);
 	}
 
-	notify(type, message) {
+	notify(message, type) {
 		toast[type](message, {toastId: 'wizard-toast'});
 	}
 

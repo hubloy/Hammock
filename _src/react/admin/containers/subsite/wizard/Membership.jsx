@@ -80,7 +80,7 @@ export default class WizardCreateMembership extends PureComponent {
                         <DropDownUI name={`membership_type`} values={strings.type} class_name={`hubloy_membership-membership-type`}/>
                     </div>
                 </div>
-                <div className="uk-margin hubloy_membership-membership-date">
+                <div className="uk-margin hubloy_membership-membership-date hidden">
                     <legend className="uk-form-label">{strings.labels.days}</legend>
                     <div className="uk-form-controls">
                         <InputUI name={`membership_days`} type={`number`}/>

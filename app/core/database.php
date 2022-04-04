@@ -1,5 +1,5 @@
 <?php
-namespace hubloy_m\Core;
+namespace HubloyMembership\Core;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.

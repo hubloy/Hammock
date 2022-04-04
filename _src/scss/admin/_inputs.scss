@@ -1,4 +1,4 @@
-.hubloy-membership-input {
+.hubloy_membership-input {
 	.slider-checkbox {
 		position: relative;
 		input {
@@ -142,12 +142,12 @@
 		}
 	}
 
-	.hubloy-membership-no-suggestions {
+	.hubloy_membership-no-suggestions {
 		color: $label-gray-color;
 		padding: 0.5rem;
 	}
 
-	.hubloy-membership-suggestions {
+	.hubloy_membership-suggestions {
 		border: 1px solid $label-gray-color;
 		border-top-width: 0;
 		list-style: none;
@@ -185,7 +185,7 @@
 		}
 	}
 
-	.hubloy-membership-preloader{
+	.hubloy_membership-preloader{
 		width: 100%;
 		svg {
 			margin: 0 auto;

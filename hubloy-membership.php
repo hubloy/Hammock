@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:         HubloyMembership
+ * Plugin Name:         Memberships by Hubloy
  * Plugin URI:          https://www.hubloymembership.com
- * Description:         Manage access to your WordPress site like a pro
+ * Description:         A complete membership and subscription experience.
  * Version:             1.0.0
  * Author:              Hubloy
  * Author URI:          https://www.hubloy.com
