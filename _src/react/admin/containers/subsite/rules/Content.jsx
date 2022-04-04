@@ -115,7 +115,7 @@ export default class Table extends Component {
 						<h3 className="uk-text-center uk-margin-top">{hubloy_membership.error}</h3>
 					) : (
 						pager.total <= 0 ? (
-							<h3 className="uk-text-center uk-margin-top">{hubloy_membership.no_data}</h3>
+							<h3 className="uk-text-center uk-margin-top">{strings.dashboard.none}</h3>
 						) : (
 							<React.Fragment>
 								<table className="uk-table uk-background-default">
