@@ -39,14 +39,15 @@ class Shortcode {
 	 * Render shortcode
 	 *
 	 * @param array $atts - the shortcode attributes
+	 * @param string $content The default content between the shortcode.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
-	public function render( $atts ) {
+	public function render( $atts, $content = '' ) {
 		ob_start();
-		$this->output( $atts );
+		$this->output( $atts, $content );
 		return ob_get_clean();
 	}
 
@@ -54,11 +55,12 @@ class Shortcode {
 	 * Get the shortcode content output
 	 *
 	 * @param array $atts - the shortcode attributes
+	 * @param string $content The default content between the shortcode.
 	 *
 	 * @since 1.0.0
 	 */
-	public function output( $atts ) {
-		_e( 'Shortcode', 'hubloy-membership' );
+	public function output( $atts, $content = '' ) {
+		esc_html_e( 'Shortcode', 'hubloy-membership' );
 	}
 
 	/**

@@ -61,13 +61,16 @@ class Restricted extends Shortcode {
 	 *
 	 * @since 1.0.0
 	 */
-	public function output( $atts ) {
+	public function output( $atts, $content = '' ) {
+		global $post;
 		if ( isset( $atts['id'] ) ) {
 			$membership = $this->membership_service->get_membership_by_id( (int) $atts['id'] );
-			if ( $membership->is_valid() ) {
-
+			if ( ! $membership->is_valid() ) {
+				$message = hubloy_membership_content_protected_message( $post->ID, 'post', $post->post_type );
+				return $message;
 			}
 		}
+		return $content;
 	}
 }
 

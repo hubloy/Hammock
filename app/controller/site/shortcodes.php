@@ -76,15 +76,16 @@ class Shortcodes extends Controller {
 	/**
 	 * Protected content shortcode
 	 *
-	 * @param array $atts - user defined attributes
+	 * @param array $atts User defined attributes
+	 * @param string $content The content of the shortcode
 	 *
 	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
-	public function protected_content( $atts ) {
+	public function protected_content( $atts, $content = '' ) {
 		$output = Restricted::instance();
-		return $output->render( $atts );
+		return $output->render( $atts, $content );
 	}
 
 

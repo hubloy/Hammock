@@ -56,4 +56,3 @@ class Memberships extends Shortcode {
 	}
 }
 
-
