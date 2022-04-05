@@ -111,12 +111,11 @@ export default class Table extends Component {
 											<td><span dangerouslySetInnerHTML={{ __html: item.price_name }}></span></td>
 											<td>
 												<div className="uk-inline">
-													<button className="uk-button uk-button-default uk-button-small uk-padding-small" type="button"><span uk-icon="cog"></span></button>
-													<div uk-dropdown="pos: bottom-right">
-														<ul className="uk-nav uk-dropdown-nav">
-															<li className="uk-nav-header">Header</li>
-															<li className="uk-nav-header">Header</li>
-															<li className="uk-nav-header">Header</li>
+													<button className="uk-button uk-button-default uk-button-small uk-padding-small" type="button"><span uk-icon="code"></span></button>
+													<div className='uk-padding-small' uk-dropdown="pos: bottom-right">
+														<ul className="uk-nav uk-dropdown-nav hubloy_membership-shortcodes">
+															<li className="uk-nav-header"><code>[hubloy_membership_single_membership id="{item.id}"]</code></li>
+															<li className="uk-nav-header"><code>[hubloy_membership_membership_button id="{item.id}"]</code></li>
 														</ul>
 													</div>
 												</div>

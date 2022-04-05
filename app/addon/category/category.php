@@ -231,7 +231,6 @@ class Category extends Addon {
 	 */
 	public function plugin_active() {
 		$is_active = $this->settings->get_general_setting( 'content_protection', 0 );
-		return $is_active == 1 ? true : false;
+		return 1 === $is_active ? true : false;
 	}
 }
-

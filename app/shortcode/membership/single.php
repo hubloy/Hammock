@@ -48,19 +48,20 @@ class Single extends Shortcode {
 	 * Get the shortcode content output
 	 *
 	 * @param array $atts - the shortcode attributes
+	 * @param string $content The content wrapped in the shortcode
 	 *
 	 * @since 1.0.0
 	 */
-	public function output( $atts ) {
+	public function output( $atts, $content = '' ) {
 		$attributes = shortcode_atts(
 			array(
-				'plan_id' => false,
+				'id' => false,
 			),
 			$atts
 		);
 
-		if ( $attributes['plan_id'] ) {
-			$plan_id = (int) $attributes['plan_id'];
+		if ( $attributes['id'] ) {
+			$plan_id = (int) $attributes['id'];
 			$plan    = new Membership( $plan_id );
 
 			if ( $plan->is_valid() ) {

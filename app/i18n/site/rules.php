@@ -27,6 +27,7 @@ return array(
 				'prompt' => __( 'Are you sure you want to delete this rule?', 'hubloy-membership' ),
 			),
 		),
-		'none' => __( 'No protection rules found', 'hubloy-membership' ),
+		'none'     => __( 'No protection rules found', 'hubloy-membership' ),
+		'disabled' => __( 'Content protection is currently disabled', 'hubloy-membership' ),
 	),
 );

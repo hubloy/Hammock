@@ -9,6 +9,7 @@ use HubloyMembership\Core\Database;
 use HubloyMembership\Model\Rule;
 use HubloyMembership\Helper\Cache;
 use HubloyMembership\Helper\Pagination;
+use HubloyMembership\Model\Settings;
 
 /**
  * Rules service
@@ -49,6 +50,15 @@ class Rules {
 	 */
 	const STATUS_DISABLED = 'disabled';
 
+	/**
+	 * Setting object
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var object
+	 */
+	protected $settings = null;
+
 
 	/**
 	 * Main service constructor
@@ -56,6 +66,7 @@ class Rules {
 	 * Sets up the service
 	 */
 	public function __construct() {
+		$this->settings           = new Settings();
 		$this->table_name         = Database::get_table_name( Database::MEMBERSHIP_RULES );
 		$this->protection_service = Protection::instance( false );
 	}
@@ -118,9 +129,11 @@ class Rules {
 		$types    = $this->list_rule_types();
 		$type     = $args['type'];
 		$type     = strtolower( $type );
+		$enabled  = $this->content_protection_enabled();
 		if ( ( 'all' !== $type ) && ! isset( $types[ $type ] ) ) {
 			return array(
 				'success' => false,
+				'enabled' => $enabled,
 			);
 		}
 		$offset = (int) $args['paged'];
@@ -144,6 +157,7 @@ class Rules {
 			'pager'   => $pager,
 			'items'   => $items,
 			'success' => true,
+			'enabled' => $enabled,
 		);
 	}
 
@@ -365,5 +379,17 @@ class Rules {
 			'type' => $type,
 		);
 		return $view->render( true );
+	}
+
+	/**
+	 * Check if protection setting is active
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return bool
+	 */
+	public function content_protection_enabled() {
+		$is_active = $this->settings->get_general_setting( 'content_protection', 0 );
+		return 1 === $is_active ? true : false;
 	}
 }

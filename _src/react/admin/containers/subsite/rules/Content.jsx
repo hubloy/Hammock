@@ -11,6 +11,7 @@ export default class Table extends Component {
 		this.state = {
 			pager: { current : 1, total : 0, pages : [] },
 			items: [],
+			enabled : false,
 			loading : true,
 			error : false,
 		};
@@ -35,6 +36,7 @@ export default class Table extends Component {
 				this.setState({
 					items : json.items,
 					pager : json.pager,
+					enabled : json.enabled,
 					loading : false,
 					error : ! json.success,
 				});
@@ -101,11 +103,17 @@ export default class Table extends Component {
 	}
 
     render() {
-		const { pager, items, loading, error } = this.state;
+		const { pager, items, loading, error, enabled } = this.state;
         var hubloy_membership = this.props.hubloy_membership,
 		    strings = hubloy_membership.strings;
 		return (
 			<React.Fragment>
+				{ !loading && !error && !enabled && 
+					<div className="uk-alert-warning" uk-alert="">
+						<a className="uk-alert-close" uk-close=""></a>
+						<p>{strings.dashboard.disabled}</p>
+					</div>
+				}
 				{loading ? (
 					<div className="uk-container uk-padding-small uk-margin-top uk-width-1-1">
 						<span className="uk-text-center" uk-spinner="ratio: 3"></span>

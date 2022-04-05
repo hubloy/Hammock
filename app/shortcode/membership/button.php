@@ -47,10 +47,11 @@ class Button extends Shortcode {
 	 * Get the shortcode content output
 	 *
 	 * @param array $atts - the shortcode attributes
+	 * @param string $content The content wrapped in the shortcode
 	 *
 	 * @since 1.0.0
 	 */
-	public function output( $atts ) {
+	public function output( $atts, $content = '' ) {
 		if ( isset( $atts['id'] ) ) {
 			$membership = new Membership( (int) $atts['id'] );
 			if ( ! $membership->is_valid() ) {
