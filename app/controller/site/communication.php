@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 use HubloyMembership\Base\Controller;
 use HubloyMembership\Helper\Template;
 use HubloyMembership\Services\Emails;
+use HubloyMembership\Services\Transactions;
 
 /**
  * Communication controller
@@ -96,6 +97,11 @@ class Communication extends Controller {
 		$this->add_action( 'hubloy_member_verification', 'verification_email', 10, 3 );
 		$this->add_action( 'hubloy_member_registered', 'registered_email' );
 		$this->add_action( 'hubloy_member_account_reset', 'account_reset_email', 10, 2 );
+
+		$this->add_action( 'hubloy_member_plan_joined', 'plan_joined_email', 10, 2 );
+
+		$this->add_action( 'hubloy_membership_after_invoice_update', 'invoice_processed_email' );
+		$this->add_action( 'hubloy_membership_after_invoice_save', 'invoice_processed_email' );
 	}
 
 	/**
@@ -342,5 +348,63 @@ class Communication extends Controller {
 		 */
 		do_action( 'hubloy_membership_send_email_member-' . $type, $placeholders, $user, $user->user_email, array(), array() );
 	}
+
+	/**
+	 * Plan joined email notification
+	 * 
+	 * @param \HubloyMembership\Model\Member $member The member.
+	 * @param HubloyMembership\Model\Plan $plan The plan
+	 * 
+	 * @since 1.0.0
+	 */
+	public function plan_joined_email( $member, $plan ) {
+		$type         = Emails::COMM_TYPE_SIGNUP;
+		$placeholders = array(
+			'{membership_name}' => $plan->get_membership()->name
+		);
+		$user = $member->get_user();
+		/**
+		 * Send the email.
+		 * Send to both user and admin.
+		 *
+		 * @see \HubloyMembership\Base\Email::send_email
+		 *
+		 * @since 1.0.0
+		 */
+		do_action( 'hubloy_membership_send_email_member-' . $type, $placeholders, $user, $user->user_email, array(), array() );
+		do_action( 'hubloy_membership_send_email_admin-' . $type, $placeholders, $user, '', array(), array() );
+	}
+
+	/**
+	 * Email sent once an invoice has been processed
+	 * 
+	 * @param \HubloyMembership\Model\Invoice $invoice The current invoice.
+	 * 
+	 * @since 1.0.0
+	 */
+	public function invoice_processed_email( $invoice ) {
+		if ( Transactions::STATUS_PAID !== $invoice->status ) {
+			return;
+		}
+		$plan         = $invoice->get_plan();
+		$member       = $plan->get_member();
+		$membership   = $plan->get_membership();
+		$user         = $member->get_user();
+		$type         = Emails::COMM_TYPE_INVOICE;
+		$placeholders = array(
+			'{invoice_number}'  => $invoice->invoice_id,
+			'{membership_name}' => $membership->name,
+		);
+
+		/**
+		 * Send the email.
+		 * Send to both user and admin.
+		 *
+		 * @see \HubloyMembership\Base\Email::send_email
+		 *
+		 * @since 1.0.0
+		 */
+		do_action( 'hubloy_membership_send_email_member-' . $type, $placeholders, $user, $user->user_email, array(), array() );
+		do_action( 'hubloy_membership_send_email_admin-' . $type, $placeholders, $user, '', array(), array() );
+	}
 }
-?>

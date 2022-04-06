@@ -537,6 +537,17 @@ class Member {
 	}
 
 	/**
+	 * Get the user
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return WP_User
+	 */
+	public function get_user() {
+		return get_userdata( $this->user_id );
+	}
+
+	/**
 	 * Render values to readable strings
 	 *
 	 * @since 1.0.0

@@ -156,6 +156,17 @@ class Signup extends Controller {
 				$invoice_id = $this->transaction_service->save_transaction( '', Transactions::STATUS_PENDING, $member, $plan, $membership->get_price(), $due_date );
 
 				if ( $invoice_id ) {
+
+					/**
+					 * Action called before plan is joined.
+					 * 
+					 * @param \HubloyMembership\Model\Member $member The member.
+					 * @param HubloyMembership\Model\Plan $plan The plan
+					 * 
+					 * @since 1.0.0
+					 */
+					do_action( 'hubloy_member_plan_joined', $member, $plan );
+
 					wp_send_json_success(
 						array(
 							'message' => __( 'Plan joined. Proceeding to payments', 'hubloy-membership' ),
@@ -218,6 +229,17 @@ class Signup extends Controller {
 		$plan->set_pending();
 		$invoice_id = $this->transaction_service->get_pending_invoice( $plan );
 		if ( $invoice_id ) {
+
+			/**
+			 * Action called before plan is joined.
+			 * 
+			 * @param \HubloyMembership\Model\Member $member The member.
+			 * @param HubloyMembership\Model\Plan $plan The plan
+			 * 
+			 * @since 1.0.0
+			 */
+			do_action( 'hubloy_member_plan_joined', $plan->get_member(), $plan );
+
 			wp_send_json_success(
 				array(
 					'message' => __( 'Plan joined. Proceeding to payments', 'hubloy-membership' ),
