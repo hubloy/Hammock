@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use HubloyMembership\Base\Controller;
 use HubloyMembership\Helper\Template;
+use HubloyMembership\Services\Emails;
 
 /**
  * Communication controller
@@ -91,6 +92,10 @@ class Communication extends Controller {
 
 		$this->add_ajax_action( 'hubloy_membership_email_copy_theme', 'copy_theme' );
 		$this->add_ajax_action( 'hubloy_membership_email_delete_theme', 'delete_theme' );
+
+		$this->add_action( 'hubloy_member_verification', 'verification_email', 10, 3 );
+		$this->add_action( 'hubloy_member_registered', 'registered_email' );
+		$this->add_action( 'hubloy_member_account_reset', 'account_reset_email', 10, 2 );
 	}
 
 	/**
@@ -251,6 +256,91 @@ class Communication extends Controller {
 		do_action( 'hubloy_membership_email_delete_theme_' . $id );
 
 		wp_send_json_error( __( 'Action not implemented', 'hubloy-membership' ) );
+	}
+
+	/**
+	 * Handle verification email.
+	 * 
+	 * @param string $username The username
+	 * @param WP_User $user The current user
+	 * @param string $verify_key The account verification key
+	 * 
+	 * @since 1.0.0
+	 */
+	public function verification_email( $username, $user, $verify_key ) {
+
+		$type = Emails::COMM_TYPE_REGISTRATION_VERIFY;
+
+		$user_object = (object) array(
+			'user_login' => $user->user_login,
+			'user_id'    => $user->ID,
+			'verify_key' => $verify_key,
+		);
+		// Send verification email
+		do_action( 'hubloy_membership_send_email_member-' . $type, array(), $user_object, $user->user_email, array(), array() );
+	}
+
+	/**
+	 * Send registration email
+	 * 
+	 * @param WP_User $user The current user
+	 * 
+	 * @since 1.0.0
+	 */
+	public function registered_email( $user ) {
+		$type = Emails::COMM_TYPE_REGISTRATION;
+		/**
+		 * Send the email
+		 *
+		 * @see \HubloyMembership\Base\Email::send_email
+		 *
+		 * @since 1.0.0
+		 */
+		do_action( 'hubloy_membership_send_email_member-' . $type, array(), $user, $user->user_email, array(), array() );
+	}
+
+	/**
+	 * Account reset email
+	 * 
+	 * @param WP_User $user The current user.
+	 * @param string $key The reset key.
+	 * 
+	 * @since 1.0.0
+	 */
+	public function account_reset_email( $user, $key ) {
+
+		if ( is_multisite() ) {
+			$site_name = get_network()->site_name;
+		} else {
+			/*
+			 * The blogname option is escaped with esc_html on the way into the database
+			 * in sanitize_option we want to reverse this for the plain text area of emails.
+			 */
+			$site_name = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+		}
+		$type         = Emails::COMM_TYPE_RESETPASSWORD;
+		$placeholders = array(
+			'{reset_url}' => apply_filters(
+								'hubloy_membership_reset_url',
+								add_query_arg(
+									array(
+										'action' => 'rp',
+										'key'    => $key,
+										'login'  => rawurlencode( $user_login )
+									),
+									network_site_url( 'wp-login.php', 'login' )
+								)
+							),
+		);
+
+		/**
+		 * Send the email
+		 *
+		 * @see \HubloyMembership\Base\Email::send_email
+		 *
+		 * @since 1.0.0
+		 */
+		do_action( 'hubloy_membership_send_email_member-' . $type, $placeholders, $user, $user->user_email, array(), array() );
 	}
 }
 ?>

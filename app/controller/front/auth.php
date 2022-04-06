@@ -123,15 +123,10 @@ class Auth extends Controller {
 			if ( $user ) {
 				do_action( 'signup_finished' );
 
-				$type = \HubloyMembership\Services\Emails::COMM_TYPE_REGISTRATION;
 				/**
-				 * Send the email
-				 *
-				 * @see \HubloyMembership\Base\Email::send_email
-				 *
-				 * @since 1.0.0
+				 * Trigger ustom registration action
 				 */
-				do_action( 'hubloy_membership_send_email_member-' . $type, array(), $user, $user_email, array(), array() );
+				do_action( 'hubloy_member_registered', $user );
 
 				if ( $this->settings->get_general_setting( 'account_verification' ) === 1 ) {
 
@@ -140,15 +135,7 @@ class Auth extends Controller {
 					update_user_meta( $user_id, '_hubloy_membership_activation_status', 2 );
 					update_user_meta( $user_id, '_hubloy_membership_activation_key', $verify_key );
 
-					$type = \HubloyMembership\Services\Emails::COMM_TYPE_REGISTRATION_VERIFY;
-
-					$user_object = (object) array(
-						'user_login' => $user_login,
-						'user_id'    => $user_id,
-						'verify_key' => $verify_key,
-					);
-					// Send verification email
-					do_action( 'hubloy_membership_send_email_member-' . $type, array(), $user_object, $user_email, array(), array() );
+					do_action( 'hubloy_member_verification', $user->username, $user, $verify_key );
 
 					wp_send_json_success( __( 'Registration successful. An email has been sent with a link to verify your account', 'hubloy-membership' ) );
 				} else {
@@ -222,28 +209,7 @@ class Auth extends Controller {
 			wp_send_json_error( $key->get_error_message() );
 		}
 
-		if ( is_multisite() ) {
-			$site_name = get_network()->site_name;
-		} else {
-			/*
-			 * The blogname option is escaped with esc_html on the way into the database
-			 * in sanitize_option we want to reverse this for the plain text arena of emails.
-			 */
-			$site_name = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
-		}
-		$type         = \HubloyMembership\Services\Emails::COMM_TYPE_RESETPASSWORD;
-		$placeholders = array(
-			'{reset_url}' => network_site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user_login ), 'login' ),
-		);
-
-		/**
-		 * Send the email
-		 *
-		 * @see \HubloyMembership\Base\Email::send_email
-		 *
-		 * @since 1.0.0
-		 */
-		do_action( 'hubloy_membership_send_email_member-' . $type, $placeholders, $user_data, $user_email, array(), array() );
+		do_action( 'hubloy_member_account_reset', $user_data, $key );
 
 		wp_send_json_success( __( 'An email has been sent with a link to create a new password', 'hubloy-membership' ) );
 	}
@@ -290,7 +256,7 @@ class Auth extends Controller {
 						do_action( 'hubloy_membership_verification_failed', $login, $user );
 						wp_destroy_current_session();
 						wp_clear_auth_cookie();
-						wp_send_json_error( __( 'Account not validated. Please check your email for a verification link', 'hubloy-membership' ) );
+						wp_send_json_error( __( 'Account verification error. Please check your email for a verification link', 'hubloy-membership' ) );
 					}
 				}
 
@@ -334,7 +300,7 @@ class Auth extends Controller {
 						wp_redirect( $login_url );
 						exit;
 					} else {
-						wp_send_json_error( __( 'Account not validated. Please check your email for a verification link', 'hubloy-membership' ) );
+						wp_send_json_error( __( 'Account verification error. Please check your email for a verification link', 'hubloy-membership' ) );
 					}
 				}
 			}
@@ -373,5 +339,3 @@ class Auth extends Controller {
 		}
 	}
 }
-
-?>

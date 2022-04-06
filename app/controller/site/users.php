@@ -197,19 +197,12 @@ class Users extends Controller {
 						// Find better way to process and queue bulk emails. Maybe a cron
 						$user = get_user_by( 'ID', $user_id );
 						if ( $user ) {
-							$type       = \HubloyMembership\Services\Emails::COMM_TYPE_REGISTRATION_VERIFY;
 							$verify_key = wp_generate_password( 20, false );
 
 							update_user_meta( $user_id, '_hubloy_membership_activation_status', 2 );
 							update_user_meta( $user_id, '_hubloy_membership_activation_key', $verify_key );
 
-							$user_object = (object) array(
-								'user_login' => $user->user_login,
-								'user_id'    => $user->ID,
-								'verify_key' => $verify_key,
-							);
-							// Send verification email
-							do_action( 'hubloy_membership_send_email_member-' . $type, array(), $user_object, $user->user_email, array(), array() );
+							do_action( 'hubloy_member_verification', $user->username, $user, $verify_key );
 						}
 					}
 				}
