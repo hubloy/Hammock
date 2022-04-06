@@ -383,18 +383,26 @@ class Communication extends Controller {
 	 * @since 1.0.0
 	 */
 	public function invoice_processed_email( $invoice ) {
-		if ( Transactions::STATUS_PAID !== $invoice->status ) {
+		if ( Transactions::STATUS_PAID !== $invoice->status || Transactions::STATUS_FAILED !== $invoice->status || ! $invoice->is_overdue() ) {
 			return;
+		}
+		$type = Emails::COMM_TYPE_INVOICE;
+		if ( Transactions::STATUS_FAILED === $invoice->status ) {
+			$type = Emails::COMM_TYPE_FAILED_PAYMENT;
+		} elseif ( $invoice->is_overdue() ) {
+			$type = Emails::COMM_TYPE_AFTER_PAYMENT_DUE;
 		}
 		$plan         = $invoice->get_plan();
 		$member       = $plan->get_member();
 		$membership   = $plan->get_membership();
 		$user         = $member->get_user();
-		$type         = Emails::COMM_TYPE_INVOICE;
 		$placeholders = array(
 			'{invoice_number}'  => $invoice->invoice_id,
 			'{membership_name}' => $membership->name,
 		);
+
+		$user->invoice = $invoice;
+		$user->member  = $member;
 
 		/**
 		 * Send the email.
@@ -405,6 +413,8 @@ class Communication extends Controller {
 		 * @since 1.0.0
 		 */
 		do_action( 'hubloy_membership_send_email_member-' . $type, $placeholders, $user, $user->user_email, array(), array() );
-		do_action( 'hubloy_membership_send_email_admin-' . $type, $placeholders, $user, '', array(), array() );
+		if ( Transactions::STATUS_PAID === $invoice->status ) {
+			do_action( 'hubloy_membership_send_email_admin-' . $type, $placeholders, $user, '', array(), array() );
+		}
 	}
 }

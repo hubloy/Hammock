@@ -450,8 +450,10 @@ class Invoice {
 	public function is_overdue() {
 		$is_paid = $this->is_paid();
 		if ( ! empty( $this->due_date ) && ! $is_paid ) {
-			$is_past = Duration::is_past_date( $this->due_date );
-			return $is_past;
+			if ( Transactions::STATUS_CANCELED !== $this->status ) {
+				$is_past = Duration::is_past_date( $this->due_date );
+				return $is_past;
+			}
 		}
 		return false;
 	}
