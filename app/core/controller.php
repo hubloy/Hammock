@@ -24,8 +24,6 @@ class Controller {
 		\HubloyMembership\Controller\Site\Addon::instance();
 		\HubloyMembership\Controller\Site\Rules::instance();
 		\HubloyMembership\Controller\Site\Gateway::instance();
-		\HubloyMembership\Controller\Site\Coupons::instance();
-		\HubloyMembership\Controller\Site\Invites::instance();
 		\HubloyMembership\Controller\Site\Settings::instance();
 		\HubloyMembership\Controller\Site\Activity::instance();
 		\HubloyMembership\Controller\Site\Shortcodes::instance();
@@ -45,7 +43,6 @@ class Controller {
 	 * @since 1.0.0
 	 */
 	public static function load_routes() {
-		\HubloyMembership\Rest\Site\Codes::instance();
 		\HubloyMembership\Rest\Site\Rules::instance();
 		\HubloyMembership\Rest\Site\Wizard::instance();
 		\HubloyMembership\Rest\Site\Emails::instance();
