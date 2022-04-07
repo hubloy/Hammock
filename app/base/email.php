@@ -563,7 +563,7 @@ class Email extends Component {
 				$headers[] = 'Cc: ' . $cc;
 			}
 		}
-
+		$headers = apply_filters( 'hubloy_membership_email_headers', $headers, $this->id );
 		$subject = $this->format_string( $placeholders, $params['subject'] );
 		$content = $this->format_string( $placeholders, $content );
 		$content = stripslashes( $content );

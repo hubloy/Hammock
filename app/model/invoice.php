@@ -446,6 +446,10 @@ class Invoice {
 
 	/**
 	 * Check if invoice is overdue
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return bool
 	 */
 	public function is_overdue() {
 		$is_paid = $this->is_paid();
