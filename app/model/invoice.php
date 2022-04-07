@@ -446,9 +446,9 @@ class Invoice {
 
 	/**
 	 * Check if invoice is overdue
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function is_overdue() {
@@ -486,9 +486,9 @@ class Invoice {
 
 	/**
 	 * Check if the current user is the invoice owner
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function is_owner() {
@@ -496,15 +496,15 @@ class Invoice {
 			return false;
 		}
 		$current_user_id = get_current_user_id();
-		$is_owner = ( $this->user_id === $current_user_id );
+		$is_owner        = ( $this->user_id === $current_user_id );
 		return apply_filters( 'hubloy_membership_current_user_is_invoice_owner', $is_owner, $this->id );
 	}
 
 	/**
 	 * Get hte status name
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function get_status_name() {
@@ -513,9 +513,9 @@ class Invoice {
 
 	/**
 	 * Get the amount formatted
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function get_amount_formated() {

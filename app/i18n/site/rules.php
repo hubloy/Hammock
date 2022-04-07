@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 return array(
 	'dashboard' => array(
-		'add_new' => array(
+		'add_new'  => array(
 			'button' => __( 'Create Rule', 'hubloy-membership' ),
 			'modal'  => array(
 				'title'      => __( 'New Rule', 'hubloy-membership' ),
@@ -17,7 +17,7 @@ return array(
 				'membership' => __( 'Membership', 'hubloy-membership' ),
 			),
 		),
-		'table'   => array(
+		'table'    => array(
 			'id'     => __( 'ID', 'hubloy-membership' ),
 			'desc'   => __( 'Description', 'hubloy-membership' ),
 			'status' => __( 'Status', 'hubloy-membership' ),

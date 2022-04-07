@@ -131,7 +131,7 @@ class Plugin extends Controller {
 	public function post_states( $states, $post ) {
 		if ( 'page' == $post->post_type ) {
 			if ( Pages::is_membership_page( $post->ID ) ) {
-				$url               = admin_url( 'admin.php?page=hubloy_membership-settings#/' );
+				$url                         = admin_url( 'admin.php?page=hubloy_membership-settings#/' );
 				$states['hubloy-membership'] = sprintf(
 					'<a style="%2$s" href="%3$s">%1$s</a>',
 					__( 'Membership Page', 'hubloy-membership' ),

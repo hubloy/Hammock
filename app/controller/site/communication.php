@@ -270,11 +270,11 @@ class Communication extends Controller {
 
 	/**
 	 * Handle verification email.
-	 * 
-	 * @param string $username The username
+	 *
+	 * @param string  $username The username
 	 * @param WP_User $user The current user
-	 * @param string $verify_key The account verification key
-	 * 
+	 * @param string  $verify_key The account verification key
+	 *
 	 * @since 1.0.0
 	 */
 	public function verification_email( $username, $user, $verify_key ) {
@@ -292,9 +292,9 @@ class Communication extends Controller {
 
 	/**
 	 * Send registration email
-	 * 
+	 *
 	 * @param WP_User $user The current user
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function registered_email( $user ) {
@@ -311,10 +311,10 @@ class Communication extends Controller {
 
 	/**
 	 * Account reset email
-	 * 
+	 *
 	 * @param WP_User $user The current user.
-	 * @param string $key The reset key.
-	 * 
+	 * @param string  $key The reset key.
+	 *
 	 * @since 1.0.0
 	 */
 	public function account_reset_email( $user, $key ) {
@@ -331,16 +331,16 @@ class Communication extends Controller {
 		$type         = Emails::COMM_TYPE_RESETPASSWORD;
 		$placeholders = array(
 			'{reset_url}' => apply_filters(
-								'hubloy_membership_reset_url',
-								add_query_arg(
-									array(
-										'action' => 'rp',
-										'key'    => $key,
-										'login'  => rawurlencode( $user_login )
-									),
-									network_site_url( 'wp-login.php', 'login' )
-								)
-							),
+				'hubloy_membership_reset_url',
+				add_query_arg(
+					array(
+						'action' => 'rp',
+						'key'    => $key,
+						'login'  => rawurlencode( $user_login ),
+					),
+					network_site_url( 'wp-login.php', 'login' )
+				)
+			),
 		);
 
 		/**
@@ -355,18 +355,18 @@ class Communication extends Controller {
 
 	/**
 	 * Plan joined email notification
-	 * 
+	 *
 	 * @param \HubloyMembership\Model\Member $member The member.
-	 * @param HubloyMembership\Model\Plan $plan The plan
-	 * 
+	 * @param HubloyMembership\Model\Plan    $plan The plan
+	 *
 	 * @since 1.0.0
 	 */
 	public function plan_joined_email( $member, $plan ) {
 		$type         = Emails::COMM_TYPE_SIGNUP;
 		$placeholders = array(
-			'{membership_name}' => $plan->get_membership()->name
+			'{membership_name}' => $plan->get_membership()->name,
 		);
-		$user = $member->get_user();
+		$user         = $member->get_user();
 		/**
 		 * Send the email.
 		 * Send to both user and admin.
@@ -381,9 +381,9 @@ class Communication extends Controller {
 
 	/**
 	 * Email sent once an invoice has been processed
-	 * 
+	 *
 	 * @param \HubloyMembership\Model\Invoice $invoice The current invoice.
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function invoice_processed_email( $invoice ) {
@@ -426,10 +426,10 @@ class Communication extends Controller {
 
 	/**
 	 * Subscription renewed email
-	 * 
+	 *
 	 * @param \HubloyMembership\Model\Plan The current plan
 	 * @param \HubloyMembership\Model\Invoice The invoice
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function subscription_renewed_email( $plan, $invoice ) {
@@ -449,9 +449,9 @@ class Communication extends Controller {
 
 	/**
 	 * Subscription cancelled email
-	 * 
+	 *
 	 * @param \HubloyMembership\Model\Plan The current plan
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function subscription_canceled_email( $plan ) {
@@ -471,9 +471,9 @@ class Communication extends Controller {
 
 	/**
 	 * Subscription pending email
-	 * 
+	 *
 	 * @param \HubloyMembership\Model\Plan The current plan
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function subscription_pending_email( $plan ) {

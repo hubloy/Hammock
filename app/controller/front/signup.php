@@ -159,10 +159,10 @@ class Signup extends Controller {
 
 					/**
 					 * Action called before plan is joined.
-					 * 
+					 *
 					 * @param \HubloyMembership\Model\Member $member The member.
 					 * @param HubloyMembership\Model\Plan $plan The plan
-					 * 
+					 *
 					 * @since 1.0.0
 					 */
 					do_action( 'hubloy_member_plan_joined', $member, $plan );
@@ -181,7 +181,7 @@ class Signup extends Controller {
 
 	/**
 	 * Deactivate plan
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function deactivate_plan() {
@@ -195,9 +195,9 @@ class Signup extends Controller {
 
 		/**
 		 * Action called before plan is deactivated
-		 * 
+		 *
 		 * @param \HubloyMembership\Model\Plan $plan The subscription plan
-		 * 
+		 *
 		 * @since 1.0.0
 		 */
 		do_action( 'hubloy_membership_account_before_deactivate_plan', $plan );
@@ -214,7 +214,7 @@ class Signup extends Controller {
 
 	/**
 	 * Activate or purchase plan
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function activate_plan() {
@@ -232,10 +232,10 @@ class Signup extends Controller {
 
 			/**
 			 * Action called before plan is joined.
-			 * 
+			 *
 			 * @param \HubloyMembership\Model\Member $member The member.
 			 * @param HubloyMembership\Model\Plan $plan The plan
-			 * 
+			 *
 			 * @since 1.0.0
 			 */
 			do_action( 'hubloy_member_plan_joined', $plan->get_member(), $plan );
@@ -251,7 +251,7 @@ class Signup extends Controller {
 
 	/**
 	 * Process subscription purchase
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function purchase_subscription() {
@@ -264,11 +264,11 @@ class Signup extends Controller {
 
 	/**
 	 * Get user plan
-	 * 
+	 *
 	 * @param int $plan_id The plan id
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool|object
 	 */
 	private function get_user_plan( $plan_id ) {
