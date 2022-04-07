@@ -98,7 +98,13 @@ module.exports = function( grunt ) {
 				'!jsconfig.json',
 				'!**/jsconfig.json',
 				'!README.md',
-				'!**/README.md'
+				'!**/README.md',
+				'!phpcs.ruleset.xml',
+				'!../phpcs.ruleset.xml',
+				'!LICENSE',
+				'!../LICENSE',
+				'!bin/**',
+				'!../bin/**'
 			]
 		},
 

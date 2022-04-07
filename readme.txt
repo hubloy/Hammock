@@ -29,7 +29,7 @@ Users have full control of their membership and subscription on your site.
 
 == Screenshots ==
 
-[See feature lists and screenshots](https://hubloymembership.com/features/)
+[See feature lists and screenshots](https://hubloymembership.com/docs-category/installation/)
 
 == Installation ==
 
