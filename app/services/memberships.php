@@ -225,7 +225,7 @@ class Memberships {
 	public function list_memberships( $per_page, $page = 0 ) {
 		global $wpdb;
 		$memberships = array();
-		$page        = $per_page * $page;
+		$page        = max( $per_page * $page, 0 );
 		$sql         = "SELECT `id` FROM {$this->table_name} ORDER BY `id` DESC LIMIT %d, %d";
 		$results     = $wpdb->get_results( $wpdb->prepare( $sql, $page, $per_page ) );
 

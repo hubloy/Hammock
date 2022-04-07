@@ -153,7 +153,7 @@ class Transactions {
 	 */
 	public function list_transactions( $per_page, $page = 0, $params = array(), $as_object = false ) {
 		global $wpdb;
-		$page         = $per_page * $page;
+		$page         = max( $per_page * $page, 0 );
 		$where        = $this->prepare_where( $params );
 		$sql          = "SELECT `id` FROM {$this->table_name} $where ORDER BY `id` DESC LIMIT %d, %d";
 		$results      = $wpdb->get_results( $wpdb->prepare( $sql, $page, $per_page ) );

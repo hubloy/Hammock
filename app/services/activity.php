@@ -136,7 +136,7 @@ class Activity {
 	 */
 	public function list_activities( $ref_id, $ref_type, $per_page, $page = 0 ) {
 		global $wpdb;
-		$page       = $per_page * $page;
+		$page       = max( $per_page * $page, 0 );
 		$sql        = "SELECT * FROM {$this->table_name} WHERE `ref_id` = %d AND `ref_type` = %s ORDER BY `log_id` DESC LIMIT %d, %d";
 		$results    = $wpdb->get_results( $wpdb->prepare( $sql, $ref_id, $ref_type, $page, $per_page ) );
 		$activities = array();

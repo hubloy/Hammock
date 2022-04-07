@@ -289,7 +289,7 @@ class Members {
 	public function list_members( $per_page, $page = 0, $args = array() ) {
 		global $wpdb;
 		$members = array();
-		$page    = $per_page * $page;
+		$page    = max( $per_page * $page, 0 );
 		$where   = $this->generate_where( $args );
 		$sql     = "SELECT m.`id` FROM {$this->table_name} m LEFT JOIN {$this->plans_table_name} p ON(p.`member_id` = m.`id`) $where ORDER BY m.`id` DESC LIMIT %d, %d";
 		$results = $wpdb->get_results( $wpdb->prepare( $sql, $page, $per_page ) );
@@ -372,7 +372,7 @@ class Members {
 	public function list_html_members( $per_page, $page = 0, $args = array() ) {
 		global $wpdb;
 		$members = array();
-		$page    = $per_page * $page;
+		$page    = max( $per_page * $page, 0 );
 		$where   = $this->generate_where( $args );
 		$sql     = "SELECT m.`id` FROM {$this->table_name} m LEFT JOIN {$this->plans_table_name} p ON(p.`member_id` = m.`id`) $where ORDER BY m.`id` DESC LIMIT %d, %d";
 		$results = $wpdb->get_results( $wpdb->prepare( $sql, $page, $per_page ) );

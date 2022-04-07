@@ -89,12 +89,7 @@ class Addon extends Controller {
 	 * @since 1.0.0
 	 */
 	public function load_addons() {
-		//\HubloyMembership\Addon\Media\Media::instance();
-		\HubloyMembership\Addon\Coupon\Coupon::instance();
-		//\HubloyMembership\Addon\Prorate\Prorate::instance();
-		//\HubloyMembership\Addon\Redirect\Redirect::instance();
 		\HubloyMembership\Addon\Category\Category::instance();
-		\HubloyMembership\Addon\Invitation\Invitation::instance();
 
 		do_action( 'hubloy_membership_load_addons' );
 	}
