@@ -51,12 +51,12 @@ class Finished extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Membership Ended', 'hubloy-membership' ),
-			'description' => __( 'Sent to a member when the membership ends', 'hubloy-membership' ),
-			'heading'     => __( 'Membership Ended', 'hubloy-membership' ),
-			'subject'     => sprintf( __( 'Your %s membership hase ended', 'hubloy-membership' ), '{membership_name}' ),
+			'title'       => __( 'Membership Started', 'hubloy-membership' ),
+			'description' => __( 'Sent to a member when the membership starts', 'hubloy-membership' ),
+			'heading'     => __( 'Membership Started', 'hubloy-membership' ),
+			'subject'     => sprintf( __( 'Your %s membership hase started', 'hubloy-membership' ), '{membership_name}' ),
 			'recipient'   => '',
-			'enabled'     => false,
+			'enabled'     => true,
 		);
 	}
 }

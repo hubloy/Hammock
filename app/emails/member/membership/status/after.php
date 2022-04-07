@@ -53,9 +53,9 @@ class After extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Membership Finished', 'hubloy-membership' ),
+			'title'       => __( 'Membership Ended', 'hubloy-membership' ),
 			'description' => __( 'Sent to a member after the membership finishes', 'hubloy-membership' ),
-			'heading'     => __( 'Membership Finished', 'hubloy-membership' ),
+			'heading'     => __( 'Membership Ended', 'hubloy-membership' ),
 			'subject'     => sprintf( __( 'Reminder: your %s membership has ended', 'hubloy-membership' ), '{membership_name}' ),
 			'recipient'   => '',
 			'enabled'     => false,

@@ -569,6 +569,15 @@ class Plan {
 	public function cancel() {
 		$this->status = Members::STATUS_CANCELED;
 		$this->save();
+
+		/**
+		 * Action called when membership is canceled
+		 * 
+		 * @param \HubloyMembership\Model\Plan The current plan
+		 * 
+		 * @since 1.0.0
+		 */
+		do_action( 'hubloy_membership_plan_canceled', $this );
 	}
 
 	/**
@@ -579,6 +588,16 @@ class Plan {
 	public function set_pending() {
 		$this->status = Members::STATUS_PENDING;
 		$this->save();
+
+		/**
+		 * Action called when membership is set to pending.
+		 * This is normally when payment is pending.
+		 * 
+		 * @param \HubloyMembership\Model\Plan The current plan
+		 * 
+		 * @since 1.0.0
+		 */
+		do_action( 'hubloy_membership_plan_pending', $this );
 	}
 
 	/**

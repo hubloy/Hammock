@@ -102,6 +102,8 @@ class Communication extends Controller {
 
 		$this->add_action( 'hubloy_membership_after_invoice_update', 'invoice_processed_email' );
 		$this->add_action( 'hubloy_membership_after_invoice_save', 'invoice_processed_email' );
+
+		$this->add_action( 'hubloy_membership_plan_record_payment', 'subscription_renewed_email', 10, 2 );
 	}
 
 	/**
@@ -383,12 +385,14 @@ class Communication extends Controller {
 	 * @since 1.0.0
 	 */
 	public function invoice_processed_email( $invoice ) {
-		if ( Transactions::STATUS_PAID !== $invoice->status || Transactions::STATUS_FAILED !== $invoice->status || ! $invoice->is_overdue() ) {
+		if ( Transactions::STATUS_PENDING !== $invoice->status || Transactions::STATUS_PAID !== $invoice->status || Transactions::STATUS_FAILED !== $invoice->status || ! $invoice->is_overdue() ) {
 			return;
 		}
 		$type = Emails::COMM_TYPE_INVOICE;
 		if ( Transactions::STATUS_FAILED === $invoice->status ) {
 			$type = Emails::COMM_TYPE_FAILED_PAYMENT;
+		} elseif ( Transactions::STATUS_PENDING === $invoice->status ) {
+			$type = Emails::COMM_TYPE_BEFORE_PAYMENT_DUE;
 		} elseif ( $invoice->is_overdue() ) {
 			$type = Emails::COMM_TYPE_AFTER_PAYMENT_DUE;
 		}
@@ -416,5 +420,28 @@ class Communication extends Controller {
 		if ( Transactions::STATUS_PAID === $invoice->status ) {
 			do_action( 'hubloy_membership_send_email_admin-' . $type, $placeholders, $user, '', array(), array() );
 		}
+	}
+
+	/**
+	 * Subscription renewed email
+	 * 
+	 * @param \HubloyMembership\Model\Plan The current plan
+	 * @param \HubloyMembership\Model\Invoice The invoice
+	 * 
+	 * @since 1.0.0
+	 */
+	public function subscription_renewed_email( $plan, $invoice ) {
+		$type         = Emails::COMM_TYPE_RENEWED;
+		$member       = $plan->get_member();
+		$membership   = $plan->get_membership();
+		$user         = $member->get_user();
+		$placeholders = array(
+			'{membership_name}' => $membership->name,
+		);
+
+		$user->member     = $member;
+		$user->membership = $membership;
+
+		do_action( 'hubloy_membership_send_email_member-' . $type, $placeholders, $user, $user->user_email, array(), array() );
 	}
 }

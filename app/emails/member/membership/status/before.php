@@ -51,7 +51,7 @@ class Before extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Before Membership Finishes', 'hubloy-membership' ),
+			'title'       => __( 'Before Membership Ends', 'hubloy-membership' ),
 			'description' => __( 'Sent to a member before the membership finishes', 'hubloy-membership' ),
 			'heading'     => __( 'Membership Ending Soon', 'hubloy-membership' ),
 			'subject'     => sprintf( __( 'Reminder: your %s membership will end soon', 'hubloy-membership' ), '{membership_name}' ),
