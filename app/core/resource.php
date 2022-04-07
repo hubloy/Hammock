@@ -222,13 +222,6 @@ class Resource {
 		);
 
 		wp_register_script(
-			'hubloy_membership-marketing-react',
-			HUBMEMB_ASSETS_URL . '/js/react/marketing.min.js',
-			array( 'jquery' ),
-			HUBMEMB_VERSION
-		);
-
-		wp_register_script(
 			'hubloy_membership-invites-react',
 			HUBMEMB_ASSETS_URL . '/js/react/invites.min.js',
 			array( 'jquery' ),
