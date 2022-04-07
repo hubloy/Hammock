@@ -215,20 +215,6 @@ class Resource {
 		);
 
 		wp_register_script(
-			'hubloy_membership-coupons-react',
-			HUBMEMB_ASSETS_URL . '/js/react/coupons.min.js',
-			array( 'jquery' ),
-			HUBMEMB_VERSION
-		);
-
-		wp_register_script(
-			'hubloy_membership-invites-react',
-			HUBMEMB_ASSETS_URL . '/js/react/invites.min.js',
-			array( 'jquery' ),
-			HUBMEMB_VERSION
-		);
-
-		wp_register_script(
 			'hubloy_membership-rules-react',
 			HUBMEMB_ASSETS_URL . '/js/react/rules.min.js',
 			array( 'jquery' ),
