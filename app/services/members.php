@@ -1043,18 +1043,18 @@ class Members {
 
 	/**
 	 * Cancel member plan
-	 * 
+	 *
 	 * @param \HubloyMembership\Model\Plan $plan The current plan
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public static function cancel_plan( $plan ) {
 		$plan->cancel();
 		/**
 		 * Action called after a new payment is recorded
-		 * 
+		 *
 		 * @param \HubloyMembership\Model\Plan The current plan
-		 * 
+		 *
 		 * @since 1.0.0
 		 */
 		do_action( 'hubloy_membership_user_deactivate_plan', $plan );

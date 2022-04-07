@@ -460,7 +460,7 @@ class PayPal extends Gateway {
 	 * @param \HubloyMembership\Model\Invoice    $invoice The current invoice.
 	 * @param \HubloyMembership\Model\Plan       $plan The current plan.
 	 * @param \HubloyMembership\Model\Membership $membership The plan membership.
-	 * @param array                     $credentials The gateway credentials
+	 * @param array                              $credentials The gateway credentials
 	 *
 	 * @since 1.0.0
 	 */

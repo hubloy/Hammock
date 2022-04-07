@@ -428,9 +428,9 @@ class Transactions {
 	 * Get any pending invoice or create a new one.
 	 *
 	 * @param \HubloyMembership\Model\Plan $plan The subscription plan
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string $invoice_id The invoice id
 	 */
 	public function get_pending_invoice( $plan ) {
@@ -447,12 +447,12 @@ class Transactions {
 
 	/**
 	 * Process transaction
-	 * 
-	 * @param int $invoice_id The invoice id
+	 *
+	 * @param int    $invoice_id The invoice id
 	 * @param string $gateway_id The gateway id
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return json
 	 */
 	public function process_transaction( $invoice_id, $gateway_id ) {
@@ -469,21 +469,21 @@ class Transactions {
 
 		/**
 		 * Action called before trasnaction is processed
-		 * 
+		 *
 		 * @param \HubloyMembership\Model\Invoice $invoice The current invoice to be paid.
 		 * @param string $gateway_id The associated gateway.
-		 * 
-		 * @since 1.0.0 
+		 *
+		 * @since 1.0.0
 		 */
 		do_action( 'hubloy_membership_before_process_payment', $invoice, $gateway_id );
 
 		/**
 		 * Process transaction
-		 * 
+		 *
 		 * @see \HubloyMembership\Base\Gateway
-		 * 
+		 *
 		 * @param \HubloyMembership\Model\Invoice $invoice The current invoice to be paid.
-		 * 
+		 *
 		 * @since 1.0.0
 		 */
 		do_action( 'hubloy_membership_gateway_' . $gateway_id . '_process_payment', $invoice );
@@ -491,18 +491,18 @@ class Transactions {
 
 	/**
 	 * Process the IPN notification.
-	 * 
+	 *
 	 * @param string $gateway_id The gateway id
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function process_ipn_notification( $gateway_id ) {
 
 		/**
 		 * Process IPN Notification
-		 * 
+		 *
 		 * @see \HubloyMembership\Base\Gateway
-		 * 
+		 *
 		 * @since 1.0.0
 		 */
 		do_action( 'hubloy_membership_gateway_' . $gateway_id . '_ipn_notify' );
@@ -511,7 +511,7 @@ class Transactions {
 	/**
 	 * Process payment return.
 	 * Process the payment and return to the correct page.
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function process_payment_return() {
@@ -520,7 +520,7 @@ class Transactions {
 			$invoice    = new Invoice( $invoice_id );
 			if ( $invoice->is_valid() ) {
 				if ( isset( $_REQUEST['cancel'] ) ) {
-					$invoice->status  = self::STATUS_CANCELED;
+					$invoice->status = self::STATUS_CANCELED;
 					$invoice->add_note( __( 'Payment canceled by subscriber', 'hubloy-membership' ) );
 					$invoice->save();
 					wp_safe_redirect( hubloy_membership_get_invoice_link( $invoice->invoice_id ) );
@@ -533,9 +533,9 @@ class Transactions {
 
 				/**
 				 * Process payment return
-				 * 
+				 *
 				 * @see \HubloyMembership\Base\Gateway
-				 * 
+				 *
 				 * @since 1.0.0
 				 */
 				do_action( 'hubloy_membership_gateway_' . $gateway_id . '_handle_return', $invoice );

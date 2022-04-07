@@ -47,7 +47,7 @@ class Single extends Shortcode {
 	/**
 	 * Get the shortcode content output
 	 *
-	 * @param array $atts - the shortcode attributes
+	 * @param array  $atts - the shortcode attributes
 	 * @param string $content The content wrapped in the shortcode
 	 *
 	 * @since 1.0.0

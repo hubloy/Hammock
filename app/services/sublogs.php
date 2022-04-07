@@ -72,7 +72,7 @@ class Sublogs {
 	 * Check if the current member is eligible for a trial on a membership
 	 *
 	 * @param \HubloyMembership\Model\Member $member - the member object
-	 * @param int                   $membership_id - the membership id
+	 * @param int                            $membership_id - the membership id
 	 *
 	 * @since 1.0.0
 	 *
@@ -93,7 +93,7 @@ class Sublogs {
 	 * counted as a subscription
 	 *
 	 * @param \HubloyMembership\Model\Member $member - the member object
-	 * @param int                   $membership_id - the membership id
+	 * @param int                            $membership_id - the membership id
 	 *
 	 * @since 1.0.0
 	 *

@@ -471,9 +471,9 @@ class Plan {
 
 	/**
 	 * Check if the plan had a trial.
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function had_trial() {
@@ -499,7 +499,7 @@ class Plan {
 	 * This sets the membership status and the correct dates
 	 *
 	 * @param Membership $membership - the membership
-	 * @param bool $change_start Set to true to change the start date
+	 * @param bool       $change_start Set to true to change the start date
 	 *
 	 * @since 1.0.0
 	 */
@@ -509,16 +509,16 @@ class Plan {
 			$this->start_date = date_i18n( 'Y-m-d H:i:s' );
 		}
 		if ( $membership->type === Memberships::PAYMENT_TYPE_PERMANENT ) {
-			$this->end_date   = '';
+			$this->end_date = '';
 		} elseif ( $membership->type === Memberships::PAYMENT_TYPE_DATE_RANGE ) {
 			$days = $membership->get_meta_value( 'membership_days' );
 			if ( $days ) {
-				$end_date         = Duration::add_interval( $days, Duration::PERIOD_TYPE_DAYS );
-				$this->end_date   = $end_date;
+				$end_date       = Duration::add_interval( $days, Duration::PERIOD_TYPE_DAYS );
+				$this->end_date = $end_date;
 			}
 		} elseif ( $membership->type === Memberships::PAYMENT_TYPE_RECURRING ) {
-			$end_date         = Duration::add_interval( 1, $membership->duration );
-			$this->end_date   = $end_date;
+			$end_date       = Duration::add_interval( 1, $membership->duration );
+			$this->end_date = $end_date;
 		}
 	}
 
@@ -563,10 +563,10 @@ class Plan {
 
 		/**
 		 * Action called after a new payment is recorded
-		 * 
+		 *
 		 * @param \HubloyMembership\Model\Plan The current plan
 		 * @param \HubloyMembership\Model\Invoice The invoice
-		 * 
+		 *
 		 * @since 1.0.0
 		 */
 		do_action( 'hubloy_membership_plan_record_payment', $this, $invoice );
@@ -583,9 +583,9 @@ class Plan {
 
 		/**
 		 * Action called when membership is canceled
-		 * 
+		 *
 		 * @param \HubloyMembership\Model\Plan The current plan
-		 * 
+		 *
 		 * @since 1.0.0
 		 */
 		do_action( 'hubloy_membership_plan_canceled', $this );
@@ -593,7 +593,7 @@ class Plan {
 
 	/**
 	 * Set status to pending.
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function set_pending() {
@@ -603,9 +603,9 @@ class Plan {
 		/**
 		 * Action called when membership is set to pending.
 		 * This is normally when payment is pending.
-		 * 
+		 *
 		 * @param \HubloyMembership\Model\Plan The current plan
-		 * 
+		 *
 		 * @since 1.0.0
 		 */
 		do_action( 'hubloy_membership_plan_pending', $this );

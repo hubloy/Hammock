@@ -251,10 +251,10 @@ class Gateway extends Component {
 			add_query_arg(
 				array(
 					'cancel'  => 'true',
-					'invoice' => $invoice->invoice_id
+					'invoice' => $invoice->invoice_id,
 				),
-				$this->get_return_url() 
-			) 
+				$this->get_return_url()
+			)
 		);
 	}
 
@@ -364,9 +364,9 @@ class Gateway extends Component {
 		$invoice->save();
 		wp_send_json_success(
 			array(
-				'url'      => $this->get_invoice_page( $invoice ),
-				'message'  => __( 'Payment Successful', 'hubloy-membership' ),
-			) 
+				'url'     => $this->get_invoice_page( $invoice ),
+				'message' => __( 'Payment Successful', 'hubloy-membership' ),
+			)
 		);
 	}
 
@@ -375,7 +375,7 @@ class Gateway extends Component {
 	 *
 	 * @param \HubloyMembership\Model\Invoice $invoice - the invoice model
 	 * @param \HubloyMembership\Model\Plan    $plan - the plan model
-	 * @param double                 $amount - the amount
+	 * @param double                          $amount - the amount
 	 *
 	 * @since 1.0.0
 	 */

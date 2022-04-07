@@ -79,7 +79,7 @@ class Shortcodes extends Controller {
 	/**
 	 * Protected content shortcode
 	 *
-	 * @param array $atts User defined attributes
+	 * @param array  $atts User defined attributes
 	 * @param string $content The content of the shortcode
 	 *
 	 * @since 1.0.0
@@ -108,7 +108,7 @@ class Shortcodes extends Controller {
 
 	/**
 	 * Single Membership view.
-	 * 
+	 *
 	 * @param array $atts - user defined attributes
 	 *
 	 * @since 1.0.0
@@ -122,7 +122,7 @@ class Shortcodes extends Controller {
 
 	/**
 	 * Membership button
-	 * 
+	 *
 	 * @param array $atts - user defined attributes
 	 *
 	 * @since 1.0.0

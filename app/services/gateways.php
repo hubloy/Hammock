@@ -74,11 +74,11 @@ class Gateways {
 
 	/**
 	 * Check if the selected gate3way exists
-	 * 
+	 *
 	 * @param string $gateway_id The gateway id
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return bool
 	 */
 	public static function gateway_exists( $gateway_id ) {

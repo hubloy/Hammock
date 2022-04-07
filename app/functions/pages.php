@@ -31,11 +31,11 @@ function hubloy_membership_get_account_page_links( $endpoint = 'base', $value = 
 
 /**
  * Get invoice link
- * 
+ *
  * @param string $invoice_id The invoice id
- * 
+ *
  * @since 1.0.0
- * 
+ *
  * @return string
  */
 function hubloy_membership_get_invoice_link( $invoice_id ) {

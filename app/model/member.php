@@ -388,7 +388,7 @@ class Member {
 				}
 
 				$new_plan->save();
-				
+
 				$user_email = $this->get_user_info( 'email' );
 				$this->sub_log_service->save_log( $this->id, $user_email, $membership->trial_enabled, $membership->id, $this->user_id );
 
@@ -538,9 +538,9 @@ class Member {
 
 	/**
 	 * Get the user
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return WP_User
 	 */
 	public function get_user() {

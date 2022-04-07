@@ -38,7 +38,7 @@ class Shortcode {
 	/**
 	 * Render shortcode
 	 *
-	 * @param array $atts - the shortcode attributes
+	 * @param array  $atts - the shortcode attributes
 	 * @param string $content The default content between the shortcode.
 	 *
 	 * @since 1.0.0
@@ -54,7 +54,7 @@ class Shortcode {
 	/**
 	 * Get the shortcode content output
 	 *
-	 * @param array $atts - the shortcode attributes
+	 * @param array  $atts - the shortcode attributes
 	 * @param string $content The default content between the shortcode.
 	 *
 	 * @since 1.0.0
