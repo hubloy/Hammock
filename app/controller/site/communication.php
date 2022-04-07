@@ -104,6 +104,8 @@ class Communication extends Controller {
 		$this->add_action( 'hubloy_membership_after_invoice_save', 'invoice_processed_email' );
 
 		$this->add_action( 'hubloy_membership_plan_record_payment', 'subscription_renewed_email', 10, 2 );
+		$this->add_action( 'hubloy_membership_plan_canceled', 'subscription_canceled_email' );
+		$this->add_action( 'hubloy_membership_plan_pending', 'subscription_pending_email' );
 	}
 
 	/**
@@ -432,6 +434,53 @@ class Communication extends Controller {
 	 */
 	public function subscription_renewed_email( $plan, $invoice ) {
 		$type         = Emails::COMM_TYPE_RENEWED;
+		$member       = $plan->get_member();
+		$membership   = $plan->get_membership();
+		$user         = $member->get_user();
+		$placeholders = array(
+			'{membership_name}' => $membership->name,
+		);
+
+		$user->member     = $member;
+		$user->membership = $membership;
+
+		do_action( 'hubloy_membership_send_email_member-' . $type, $placeholders, $user, $user->user_email, array(), array() );
+	}
+
+	/**
+	 * Subscription cancelled email
+	 * 
+	 * @param \HubloyMembership\Model\Plan The current plan
+	 * 
+	 * @since 1.0.0
+	 */
+	public function subscription_canceled_email( $plan ) {
+		$type         = Emails::COMM_TYPE_CANCELLED;
+		$member       = $plan->get_member();
+		$membership   = $plan->get_membership();
+		$user         = $member->get_user();
+		$placeholders = array(
+			'{membership_name}' => $membership->name,
+		);
+
+		$user->member     = $member;
+		$user->membership = $membership;
+
+		do_action( 'hubloy_membership_send_email_member-' . $type, $placeholders, $user, $user->user_email, array(), array() );
+	}
+
+	/**
+	 * Subscription pending email
+	 * 
+	 * @param \HubloyMembership\Model\Plan The current plan
+	 * 
+	 * @since 1.0.0
+	 */
+	public function subscription_pending_email( $plan ) {
+		$type = Emails::COMM_TYPE_BEFORE_FINISHES;
+		if ( $plan->had_trial() ) {
+			$type = Emails::COMM_TYPE_BEFORE_TRIAL_FINISHES;
+		}
 		$member       = $plan->get_member();
 		$membership   = $plan->get_membership();
 		$user         = $member->get_user();

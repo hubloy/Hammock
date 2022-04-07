@@ -459,7 +459,7 @@ class Plan {
 	 */
 	public function has_trial() {
 		$has_trial = false;
-		if ( Members::STATUS_TRIAL == $this->status ) {
+		if ( $this->had_trial() ) {
 			if ( $this->is_expired() ) {
 				$has_trial = false;
 			} else {
@@ -467,6 +467,17 @@ class Plan {
 			}
 		}
 		return apply_filters( 'hubloy_membership_plan_has_trial', $has_trial, $this );
+	}
+
+	/**
+	 * Check if the plan had a trial.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return bool
+	 */
+	public function had_trial() {
+		return ( Members::STATUS_TRIAL === $this->status );
 	}
 
 	/**
