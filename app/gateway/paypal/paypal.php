@@ -103,9 +103,9 @@ class PayPal extends Gateway {
 		$settings                            = $this->settings->get_gateway_setting( $this->get_id() );
 		$settings['enabled']                 = isset( $data[ $this->id ] ) ? true : false;
 		$settings['mode']                    = sanitize_text_field( $data['paypal_mode'] );
-		$settings['paypal_email']            = sanitize_text_field( $data['paypal_email'] );
+		$settings['paypal_email']            = sanitize_email( $data['paypal_email'] );
 		$settings['paypal_merchant_id']      = sanitize_text_field( $data['paypal_merchant_id'] );
-		$settings['test_paypal_email']       = sanitize_text_field( $data['test_paypal_email'] );
+		$settings['test_paypal_email']       = sanitize_email( $data['test_paypal_email'] );
 		$settings['test_paypal_merchant_id'] = sanitize_text_field( $data['test_paypal_merchant_id'] );
 		$this->settings->set_gateway_setting( $this->id, $settings );
 		$this->settings->save();
