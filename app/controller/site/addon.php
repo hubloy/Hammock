@@ -134,7 +134,7 @@ class Addon extends Controller {
 	 *
 	 * @return array
 	 */
-	function admin_js_vars( $vars ) {
+	public function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'addons' ) ) {
 			$vars['common']['string']['title'] = __( 'Addons', 'hubloy-membership' );
 			$vars['active_page']               = 'addon';
@@ -167,7 +167,7 @@ class Addon extends Controller {
 	 *
 	 * @since 1.0.0
 	 */
-	function addon_settings() {
+	public function addon_settings() {
 		$this->verify_nonce();
 
 		$addon_id = sanitize_text_field( $_POST['id'] );
@@ -180,4 +180,3 @@ class Addon extends Controller {
 		);
 	}
 }
-?>

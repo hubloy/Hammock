@@ -137,7 +137,7 @@ class Settings extends Controller {
 	 *
 	 * @return array
 	 */
-	function admin_js_vars( $vars ) {
+	public function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'settings' ) ) {
 			$vars['common']['string']['title'] = __( 'Settings', 'hubloy-membership' );
 			$vars['active_page']               = 'settings';
@@ -212,4 +212,4 @@ class Settings extends Controller {
 		return $this->admin->register_setting_sub_page( $args );
 	}
 }
-?>
+

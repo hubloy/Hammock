@@ -162,5 +162,3 @@ class Activity {
 		$wpdb->query( $wpdb->prepare( $sql, $ref_id, $ref_type ) );
 	}
 }
-
-

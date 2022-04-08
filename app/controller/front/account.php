@@ -123,9 +123,11 @@ class Account extends Controller {
 		if ( ! empty( $wp->query_vars ) ) {
 			if ( isset( $wp->query_vars['member-logout'] ) ) {
 				wp_logout();
-				echo "<script>
+				echo esc_html(
+					"<script type='text/javascript'>
 					window.location.href='" . hubloy_membership_get_account_page_links() . "';
-				</script>";
+				</script>"
+				);
 			}
 
 			foreach ( $wp->query_vars as $key => $value ) {
@@ -223,9 +225,11 @@ class Account extends Controller {
 		global $wp;
 		$plan_id = $wp->query_vars['view-plan'];
 		if ( empty( $plan_id ) ) {
-			echo "<script>
+			echo esc_html(
+				"<script>
 				window.location.href='" . hubloy_membership_get_account_page_links() . "';
-			</script>";
+			</script>"
+			);
 		}
 
 		$member     = $this->member_service->get_member_by_user_id( $current_user->id );
@@ -255,9 +259,11 @@ class Account extends Controller {
 		global $wp;
 		$transaction_id = $wp->query_vars['view-transaction'];
 		if ( empty( $transaction_id ) ) {
-			echo "<script>
+			echo esc_html(
+				"<script>
 				window.location.href='" . hubloy_membership_get_account_page_links( 'transactions' ) . "';
-			</script>";
+			</script>"
+			);
 		}
 		$member      = $this->member_service->get_member_by_user_id( $current_user->id );
 		$transaction = $this->transaction_service->get_invoice( $transaction_id );

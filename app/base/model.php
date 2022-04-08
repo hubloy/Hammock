@@ -44,7 +44,7 @@ class Model extends Component {
 	 *
 	 * @var array
 	 */
-	public $_saved_data = array();
+	public $saved_data = array();
 
 	/**
 	 * Model Contstuctor
@@ -106,9 +106,9 @@ class Model extends Component {
 
 			// Only reset values of existing fields.
 			if ( property_exists( $this, $field )
-				&& isset( $this->_saved_data[ $field ] )
+				&& isset( $this->saved_data[ $field ] )
 			) {
-				$this->$field = $this->_saved_data[ $field ];
+				$this->$field = $this->saved_data[ $field ];
 				$result       = $this->$field;
 			}
 		}

@@ -24,7 +24,7 @@ class Pagination {
 	 *
 	 * @return array
 	 */
-	static function generate_pages( $total, $per_page, $current = 1 ) {
+	public static function generate_pages( $total, $per_page, $current = 1 ) {
 		$pages = array();
 		if ( $total > $per_page ) {
 			$total_pages = ceil( $total / $per_page );

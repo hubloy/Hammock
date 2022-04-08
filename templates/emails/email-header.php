@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 									<table border="0" cellpadding="0" cellspacing="0" width="600" id="template_header">
 										<tr>
 											<td id="header_wrapper">
-												<h1><?php echo $email_heading; ?></h1>
+												<h1><?php echo esc_html( $email_heading ); ?></h1>
 											</td>
 										</tr>
 									</table>

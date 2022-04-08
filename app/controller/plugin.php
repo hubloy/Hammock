@@ -129,7 +129,7 @@ class Plugin extends Controller {
 	 * @return array
 	 */
 	public function post_states( $states, $post ) {
-		if ( 'page' == $post->post_type ) {
+		if ( 'page' === $post->post_type ) {
 			if ( Pages::is_membership_page( $post->ID ) ) {
 				$url                         = admin_url( 'admin.php?page=hubloy_membership-settings#/' );
 				$states['hubloy-membership'] = sprintf(
@@ -172,7 +172,7 @@ class Plugin extends Controller {
 		$installed = Util::get_option( 'hubloy_membership_installed' );
 
 		// Flag to check if wizard has run for first use
-		if ( $installed == 1 ) {
+		if ( 1 === $installed ) {
 			/**
 			 * Action to set up additional admin pages
 			 * This is called by the base controller
@@ -217,7 +217,7 @@ class Plugin extends Controller {
 		$installed = Util::get_option( 'hubloy_membership_installed' );
 
 		// Flag to check if wizard has run for first use
-		if ( $installed == 1 ) {
+		if ( 1 === $installed ) {
 			/**
 			 * Action to set up additional admin pages
 			 * This is called by the base controller
@@ -253,7 +253,7 @@ class Plugin extends Controller {
 	public function enqueue_plugin_styles( $hook ) {
 		$screen         = get_current_screen();
 		$load_resources = apply_filters( 'hubloy_membership_load_admin_resouces', strpos( $screen->id, self::MENU_SLUG ) );
-		if ( $load_resources !== false ) {
+		if ( false !== $load_resources ) {
 			wp_enqueue_style( 'hubloy_membership-uikit' );
 			wp_enqueue_style( 'hubloy_membership-tiptip' );
 			wp_enqueue_style( 'hubloy_membership-jquery-ui' );
@@ -429,7 +429,7 @@ class Plugin extends Controller {
 		$installed = Util::get_option( 'hubloy_membership_installed' );
 
 		// Flag to check if wizard has run for first use
-		if ( $installed == 1 ) {
+		if ( 1 === $installed ) {
 			?>
 			<div id="hubloy_membership-admin-container"></div>
 			<?php
@@ -446,11 +446,11 @@ class Plugin extends Controller {
 	 *
 	 * @return string
 	 */
-	function network_render() {
+	public function network_render() {
 		$installed = Util::get_option( 'hubloy_membership_installed' );
 
 		// Flag to check if wizard has run for first use
-		if ( $installed == 1 ) {
+		if ( 1 === $installed ) {
 			?>
 			<div id="hubloy_membership-admin-container"></div>
 			<?php
@@ -464,7 +464,7 @@ class Plugin extends Controller {
 	 *
 	 * @since 1.0.0
 	 */
-	function register_routes() {
+	public function register_routes() {
 		do_action( 'hubloy_membership_register_rest_route' );
 	}
 
@@ -488,7 +488,7 @@ class Plugin extends Controller {
 	 *
 	 * @return array
 	 */
-	function admin_js_vars( $vars ) {
+	public function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'hubloy-membership' ) ) {
 			$vars['common']['string']['title'] = __( 'Dashboard', 'hubloy-membership' );
 			$vars['active_page']               = 'dashboard';
@@ -510,4 +510,3 @@ class Plugin extends Controller {
 		return $this->strings;
 	}
 }
-?>

@@ -107,7 +107,7 @@ class Transactions extends Controller {
 	 *
 	 * @return array
 	 */
-	function admin_js_vars( $vars ) {
+	public function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'transactions' ) ) {
 			$vars['common']['string']['title'] = __( 'Transactions', 'hubloy-membership' );
 			$vars['active_page']               = 'transactions';
@@ -154,4 +154,3 @@ class Transactions extends Controller {
 		<?php
 	}
 }
-?>

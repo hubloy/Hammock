@@ -109,7 +109,7 @@ class Controller extends Component {
 	 *
 	 * @return array
 	 */
-	function admin_js_vars( $vars ) {
+	public function admin_js_vars( $vars ) {
 		return $vars;
 	}
 
@@ -122,7 +122,7 @@ class Controller extends Component {
 	 *
 	 * @return array
 	 */
-	function admin_front_vars( $vars ) {
+	public function admin_front_vars( $vars ) {
 		return $vars;
 	}
 
@@ -259,10 +259,10 @@ class Controller extends Component {
 	protected function is_page( $page_id ) {
 		if ( isset( $_GET['page'] ) ) {
 			$page = sanitize_text_field( $_GET['page'] );
-			if ( $page === self::MENU_SLUG ) {
+			if ( self::MENU_SLUG === $page ) {
 				return true;
 			} else {
-				return $page == self::MENU_SLUG . '-' . $page_id;
+				return $page === ( self::MENU_SLUG . '-' . $page_id );
 			}
 		}
 		return false;

@@ -585,7 +585,7 @@ class Email extends Component {
 	 *
 	 * @since 1.0.0
 	 */
-	function send_email( $placeholders, $object, $to, $attachments = array(), $cc = array() ) {
+	public function send_email( $placeholders, $object, $to, $attachments = array(), $cc = array() ) {
 		$this->object     = $object;
 		$new_placeholders = array_merge( $this->placeholders, $placeholders );
 		$this->send( $new_placeholders, $to, $attachments, $cc );

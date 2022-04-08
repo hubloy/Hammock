@@ -10,3 +10,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+?>
+<div class="hubloy_membership-protected-content">
+	<?php esc_html_e( 'This content is protected', 'hubloy_membership' ); ?>
+</div>

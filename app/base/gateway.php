@@ -248,7 +248,7 @@ class Gateway extends Component {
 	 * @return string
 	 */
 	public function get_cancel_page( $invoice ) {
-		return  add_query_arg(
+		return add_query_arg(
 			array(
 				'cancel'  => 'true',
 				'invoice' => $invoice->invoice_id,

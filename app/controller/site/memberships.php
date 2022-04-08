@@ -108,7 +108,7 @@ class Memberships extends Controller {
 	 *
 	 * @return array
 	 */
-	function admin_js_vars( $vars ) {
+	public function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'memberships' ) ) {
 			$vars['common']['string']['title'] = __( 'Memberships', 'hubloy-membership' );
 			$vars['active_page']               = 'memberships';
@@ -158,4 +158,3 @@ class Memberships extends Controller {
 		<?php
 	}
 }
-?>

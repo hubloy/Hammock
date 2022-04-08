@@ -299,7 +299,7 @@ class Category extends Rule {
 				}
 
 				if ( '' !== $message_code ) {
-					echo $message_code;
+					echo esc_html( $message_code );
 				}
 			}
 		}

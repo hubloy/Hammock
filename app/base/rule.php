@@ -667,7 +667,7 @@ class Rule {
 				}
 			}
 
-			wp_redirect( esc_url( get_permalink( $page_id ) ) );
+			wp_safe_redirect( esc_url( get_permalink( $page_id ) ) );
 			exit;
 		}
 	}

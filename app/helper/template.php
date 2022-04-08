@@ -80,8 +80,9 @@ class Template {
 	 * @return bool
 	 */
 	public static function copy_to_theme( $template ) {
-		$theme_file = self::get_theme_template_file( $template );
-		if ( wp_mkdir_p( dirname( $theme_file ) ) && ! file_exists( $theme_file ) ) {
+		$theme_file  = self::get_theme_template_file( $template );
+		$file_helper = new File();
+		if ( $file_helper->create_directory( dirname( $theme_file ) ) && ! $file_helper->exists( $theme_file ) ) {
 			$core_file = HUBMEMB_TEMPLATE_DIR . '/' . $template;
 			// Copy template file.
 			copy( $core_file, $theme_file );
@@ -99,8 +100,9 @@ class Template {
 	 * @return bool
 	 */
 	public static function remove_template( $template ) {
-		$theme_file = self::get_theme_template_file( $template );
-		if ( file_exists( $theme_file ) ) {
+		$theme_file  = self::get_theme_template_file( $template );
+		$file_helper = new File();
+		if ( $file_helper->exists( $theme_file ) ) {
 			unlink( $theme_file );
 			return true;
 		}

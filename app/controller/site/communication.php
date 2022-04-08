@@ -171,7 +171,7 @@ class Communication extends Controller {
 	 *
 	 * @return array
 	 */
-	function admin_js_vars( $vars ) {
+	public function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'comms' ) ) {
 			$vars['common']['string']['title'] = __( 'Communication', 'hubloy-membership' );
 			$vars['active_page']               = 'comms';

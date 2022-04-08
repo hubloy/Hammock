@@ -196,7 +196,7 @@ class PayPal extends Gateway {
 		$invoice    = new Invoice();
 
 		if ( ! $invoice_id && ! empty( $_POST['custom'] ) ) {
-			$invoice_id = json_decode( $_POST['custom'] );
+			$custom = json_decode( $_POST['custom'] );
 
 			if ( ! empty( $custom->payment_id ) ) {
 				$invoice_id = absint( $custom->payment_id );
@@ -323,7 +323,7 @@ class PayPal extends Gateway {
 		}
 
 		$date1         = date( 'Y-n-d', strtotime( $invoice->date_created ) );
-		$date2         = date( 'Y-n-d', strtotime( $_POST['payment_date'] ) );
+		$date2         = date( 'Y-n-d', strtotime( sanitize_text_field( $_POST['payment_date'] ) ) );
 		$same_day      = $date1 == $date2;
 		$first_payment = $plan->gateway_subscription_id ? false : true;
 

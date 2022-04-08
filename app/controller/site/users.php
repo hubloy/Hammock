@@ -111,7 +111,7 @@ class Users extends Controller {
 	 * @return string
 	 */
 	public function manage_users_custom_column( $value, $column_name, $user_id ) {
-		if ( 'membership' == $column_name ) {
+		if ( 'membership' === $column_name ) {
 			if ( ! hubloy_membership_user_can_subscribe( $user_id ) ) {
 				$value = '<span style="font-weight:bold;">' . __( 'No (Not allowed)', 'hubloy-membership' ) . '</span>';
 			} else {
@@ -122,7 +122,7 @@ class Users extends Controller {
 					$value = __( 'No', 'hubloy-membership' );
 				}
 			}
-		} elseif ( 'verified' == $column_name ) {
+		} elseif ( 'verified' === $column_name ) {
 			if ( is_super_admin( $user_id ) ) {
 				$value = '<span style="font-weight:bold;">' . __( 'No (Admin)', 'hubloy-membership' ) . '</span>';
 			} else {
@@ -224,24 +224,23 @@ class Users extends Controller {
 			$user_count = intval( $_REQUEST['_hubloy_membership_approved'] );
 			?>
 			<div class="notice notice-success is-dismissible">
-				<p><?php echo sprintf( __( '%d user accounts approved', 'hubloy-membership' ), $user_count ); ?></p>
+				<p><?php echo sprintf( esc_html__( '%d user accounts approved', 'hubloy-membership' ), $user_count ); ?></p>
 			</div>
 			<?php
 		} elseif ( isset( $_REQUEST['_hubloy_membership_disapproved'] ) ) {
 			$user_count = intval( $_REQUEST['_hubloy_membership_disapproved'] );
 			?>
 			<div class="notice notice-success is-dismissible">
-				<p><?php echo sprintf( __( '%d user accounts disapproved', 'hubloy-membership' ), $user_count ); ?></p>
+				<p><?php echo sprintf( esc_html__( '%d user accounts disapproved', 'hubloy-membership' ), $user_count ); ?></p>
 			</div>
 			<?php
 		} elseif ( isset( $_REQUEST['_hubloy_membership_resend'] ) ) {
 			$user_count = intval( $_REQUEST['_hubloy_membership_resend'] );
 			?>
 			<div class="notice notice-success is-dismissible">
-				<p><?php echo sprintf( __( '%d user accounts resent emails', 'hubloy-membership' ), $user_count ); ?></p>
+				<p><?php echo sprintf( esc_html__( '%d user accounts resent emails', 'hubloy-membership' ), $user_count ); ?></p>
 			</div>
 			<?php
 		}
 	}
 }
-?>

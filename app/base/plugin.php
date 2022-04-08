@@ -240,7 +240,7 @@ class Plugin {
 	 *
 	 * @return array $schedules
 	 */
-	function cron_time_intervals( $schedules ) {
+	public function cron_time_intervals( $schedules ) {
 		$schedules['weekly']     = array(
 			'interval' => 604800,
 			'display'  => __( 'Weekly', 'hubloy-membership' ),

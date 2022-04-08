@@ -145,20 +145,20 @@ class Category extends Addon {
 		?>
 		<tr class="form-field">
 			<th scope="row" valign="top">
-				<label for="membership"><?php _e( 'Membership Access', 'hubloy-membership' ); ?></label>
+				<label for="membership"><?php esc_html_e( 'Membership Access', 'hubloy-membership' ); ?></label>
 			</th>
 			<td>
-				<select name="hubloy_membership_membership[]" data-placeholder="<?php _e( 'Select Memberships', 'hubloy-membership' ); ?>" multiple class="hubloy_membership-multi-select">
+				<select name="hubloy_membership_membership[]" data-placeholder="<?php esc_html_e( 'Select Memberships', 'hubloy-membership' ); ?>" multiple class="hubloy_membership-multi-select">
 					<?php
 					foreach ( $memberships as $id => $name ) {
 						?>
-							<option value="<?php echo $id; ?>" <?php echo in_array( $id, $access ) ? 'selected' : ''; ?>><?php echo $name; ?></option>
-							<?php
+							<option value="<?php echo esc_attr( $id ); ?>" <?php echo in_array( $id, $access, true ) ? 'selected' : ''; ?>><?php echo esc_html( $name ); ?></option>
+						<?php
 					}
 					?>
 					
 				</select>
-				<p class='description'><?php _e( 'Membership access to items under this category', 'hubloy-membership' ); ?></p>
+				<p class='description'><?php esc_html_e( 'Membership access to items under this category', 'hubloy-membership' ); ?></p>
 			</td>
 		</tr>
 		<?php

@@ -84,10 +84,12 @@ class View extends Component {
 				$this
 			);
 		} else {
-			echo apply_filters(
-				'hubloy_membership_base_view_render',
-				$html,
-				$this
+			echo esc_html(
+				apply_filters(
+					'hubloy_membership_base_view_render',
+					$html,
+					$this
+				)
 			);
 		}
 

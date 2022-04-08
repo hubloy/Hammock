@@ -121,7 +121,7 @@ class Rules extends Controller {
 	 *
 	 * @return array
 	 */
-	function admin_js_vars( $vars ) {
+	public function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'rules' ) ) {
 			$vars['common']['string']['title'] = __( 'Membership Rules', 'hubloy-membership' );
 			$vars['active_page']               = 'rules';

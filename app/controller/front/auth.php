@@ -105,7 +105,7 @@ class Auth extends Controller {
 		$this->verify_nonce( 'hubloy_membership_account_register_nonce' );
 
 		$user_login    = sanitize_text_field( $_POST['user_login'] );
-		$user_email    = sanitize_text_field( $_POST['user_email'] );
+		$user_email    = sanitize_email( $_POST['user_email'] );
 		$user_password = sanitize_text_field( $_POST['user_password'] );
 
 		if ( ! is_email( $user_email ) ) {
@@ -124,7 +124,7 @@ class Auth extends Controller {
 				do_action( 'signup_finished' );
 
 				/**
-				 * Trigger ustom registration action
+				 * Trigger custom registration action.
 				 */
 				do_action( 'hubloy_member_registered', $user );
 
@@ -297,7 +297,7 @@ class Auth extends Controller {
 						$login_url
 					);
 					if ( ! defined( 'DOING_AJAX' ) ) {
-						wp_redirect( $login_url );
+						wp_safe_redirect( $login_url );
 						exit;
 					} else {
 						wp_send_json_error( __( 'Account verification error. Please check your email for a verification link', 'hubloy-membership' ) );
@@ -319,7 +319,7 @@ class Auth extends Controller {
 		if ( isset( $_REQUEST['ver_error'] ) ) {
 			?>
 			<div class="hubloy_membership-notification hubloy_membership-notification--error">
-				<?php _e( 'Your account is not verified. Please check your email for a link to verify your account', 'hubloy-membership' ); ?>
+				<?php esc_html_e( 'Your account is not verified. Please check your email for a link to verify your account', 'hubloy-membership' ); ?>
 			</div>
 			<?php
 		}
@@ -331,7 +331,7 @@ class Auth extends Controller {
 				if ( $membership ) {
 					?>
 					<div class="hubloy_membership-notification hubloy_membership-notification--primary">
-						<?php echo sprintf( __( 'Log in or create an account to join the %s plan', 'hubloy-membership' ), '<strong>' . $membership->name . '</strong>' ); ?>
+						<?php echo sprintf( esc_html__( 'Log in or create an account to join the %s plan', 'hubloy-membership' ), '<strong>' . $membership->name . '</strong>' ); ?>
 					</div>
 					<?php
 				}
