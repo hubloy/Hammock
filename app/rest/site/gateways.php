@@ -142,9 +142,11 @@ class Gateways extends Rest {
 		if ( isset( $gateways[ $name ] ) ) {
 			$settings = new Settings();
 			$settings = $settings->get_gateway_setting( $name );
+			$ipn       = apply_filters( 'hubloy_membership_gateway_' . $name . '_ipn', __( 'Not supported', 'hubloy-membership' ) );
 			$form     = apply_filters( 'hubloy_membership_gateway_' . $name . '_settings', __( 'Not implemented', 'hubloy-membership' ) );
 			return array(
 				'settings' => $settings,
+				'ipn'      => $ipn,
 				'form'     => $form,
 			);
 		} else {

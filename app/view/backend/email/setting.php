@@ -141,7 +141,7 @@ class Setting extends View {
 						$target_dir = $theme_dir;
 					}
 
-					if ( $file_service->is_writable( $target_dir ) ) : // phpcs:ignore WordPress.VIP.FileSystemWritesDisallow.file_ops_is_writable
+					if ( $file_service->is_writable( $target_dir ) ) :
 						?>
 							<a href="#" class="uk-button uk-button-default uk-button-small hubloy_membership-ajax-click" data-action="hubloy_membership_email_copy_theme" data-nonce="<?php echo wp_create_nonce( 'hubloy_membership_email_copy_theme' ); ?>" data-id="<?php echo $id; ?>">
 							<?php esc_html_e( 'Copy file to theme', 'hubloy-membership' ); ?>

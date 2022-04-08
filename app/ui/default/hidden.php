@@ -1,1 +1,1 @@
-<input type="hidden" name="<?php echo $name; ?>" class="<?php echo $name; ?>" value="<?php echo $value; ?>" />
+<input type="hidden" name="<?php echo esc_attr( $name ); ?>" class="<?php echo esc_attr( $name ); ?>" value="<?php echo esc_attr( $value ); ?>" />

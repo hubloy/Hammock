@@ -28,4 +28,4 @@ foreach ( $attributes as $k => $v ) {
 }
 $data = implode( ' ', $data );
 ?>
-<a <?php echo $class; ?> <?php echo $href; ?> <?php echo $target; ?> <?php echo $rel; ?> <?php echo $data; ?> title="<?php echo $title; ?>"><?php echo $title; ?></a>
+<a <?php echo esc_html( $class ); ?> <?php echo esc_html( $href ); ?> <?php echo esc_html( $target ); ?> <?php echo esc_html( $rel ); ?> <?php echo esc_html( $data ); ?> title="<?php echo esc_attr( $title ); ?>"><?php echo esc_html( $title ); ?></a>

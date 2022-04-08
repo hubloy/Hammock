@@ -15,13 +15,13 @@ foreach ( $attributes as $k => $v ) {
 $data = implode( ' ', $data );
 ?>
 
-<select name="<?php echo $name; ?>" class="uk-select <?php echo $class; ?>" id="form-horizontal-select" <?php echo $data; ?>>
+<select name="<?php echo esc_attr( $name ); ?>" class="uk-select <?php echo esc_attr( $class ); ?>" id="form-horizontal-select" <?php echo esc_html( $data ); ?>>
 	<?php
 	if ( isset( $values ) ) {
 		foreach ( $values as $key => $value ) {
 			?>
-				<option value="<?php echo $key; ?>" <?php selected( $selected, $key ); ?>><?php echo $value; ?></option>
-										  <?php
+				<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $selected, $key ); ?>><?php echo esc_html( $value ); ?></option>
+			<?php
 		}
 	}
 	?>

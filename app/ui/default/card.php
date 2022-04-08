@@ -31,21 +31,21 @@ if ( ! $padding ) {
 
 ?>
 <div>
-	<div class="uk-card <?php echo $active_class; ?> uk-card-body uk-card-hover" <?php echo $data; ?> >
-		<h3 class="uk-card-title <?php echo $title_class; ?>">
-			<span uk-icon="icon: <?php echo $icon; ?>; ratio: 1.5"></span> <?php echo esc_attr( $title ); ?>
+	<div class="uk-card <?php echo esc_attr( $active_class ); ?> uk-card-body uk-card-hover" <?php echo esc_html( $data ); ?> >
+		<h3 class="uk-card-title <?php echo esc_attr( $title_class ); ?>">
+			<span uk-icon="icon: <?php echo esc_attr( $icon ); ?>; ratio: 1.5"></span> <?php echo esc_html( $title ); ?>
 			<div class="uk-position-top-right uk-padding-small uk-padding-remove-top">
-				<?php echo $header; ?>
+				<?php echo esc_html( $header ); ?>
 			</div>
 		</h3>
 		<div class="uk-card-body">
-			<?php echo $body; ?>
+			<?php echo esc_html( $body ); ?>
 		</div>
 		<?php
 		if ( isset( $footer ) ) {
 			?>
 				<div class="uk-card-footer">
-				<?php echo $footer; ?>
+				<?php echo esc_html( $footer ); ?>
 				</div>
 				<?php
 		}

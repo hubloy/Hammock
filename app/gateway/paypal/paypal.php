@@ -192,7 +192,7 @@ class PayPal extends Gateway {
 			return;
 		}
 
-		$invoice_id = ! empty( $_POST['invoice'] ) ? $_POST['invoice'] : 0;
+		$invoice_id = ! empty( $_POST['invoice'] ) ? absint( $_POST['invoice'] ) : 0;
 		$invoice    = new Invoice();
 
 		if ( ! $invoice_id && ! empty( $_POST['custom'] ) ) {
@@ -629,8 +629,8 @@ class PayPal extends Gateway {
 		}
 
 		if ( ! $post_data ) {
-			@ini_set( 'post_max_size', '12M' );
-			$post_data = stripslashes_deep( $_POST );
+			// Set the post data to be sanitized later.
+			$post_data = $_POST;
 		}
 
 		if ( ! $post_data ) {
@@ -640,7 +640,7 @@ class PayPal extends Gateway {
 		$post_data_array['cmd'] = '_notify-validate';
 
 		foreach ( $post_data as $key => $value ) {
-			$post_data_array[ $key ] = $value;
+			$post_data_array[ $key ] = sanitize_text_field( $value );
 		}
 
 		$settings = $this->settings->get_gateway_setting( $this->get_id() );
@@ -664,11 +664,8 @@ class PayPal extends Gateway {
 		if ( is_wp_error( $response ) || ! $response ) {
 			return false;
 		}
-
-		if ( 'VERIFIED' !== wp_remote_retrieve_body( $response ) ) {
-			return false;
-		}
-		return true;
+		$response_body = strtolower( wp_remote_retrieve_body( $response ) );
+		return ( 'verified' !== $response_body );
 	}
 }
 

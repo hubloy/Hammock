@@ -13,7 +13,8 @@ export default class GatewaySetting extends PureComponent {
 		this.state = {
 			item : undefined,
 			checked: false,
-			settings : {}
+			settings : {},
+			ipn : ''
 		};
 		this.onChange = this.onChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -37,6 +38,7 @@ export default class GatewaySetting extends PureComponent {
 			.then( (json) => this.setState({
 				item : json.form,
 				settings : json.settings,
+				ipn : json.ipn,
 				checked : json.settings.enabled
 			}), (err) => console.log( 'error', err )
 		);
@@ -82,6 +84,12 @@ export default class GatewaySetting extends PureComponent {
 				<div className="uk-accordion-content">
 					<form className="uk-form-horizontal uk-margin-large" onSubmit={this.handleSubmit.bind(this)} ref={this.gateway_setting}>
 						<InputUI name={`id`} type={`hidden`} value={this.props.id}/>
+						<div className="uk-margin">
+							<legend className="uk-form-label">{hubloy_membership.strings.ipn}</legend>
+							<div className="uk-form-controls">
+								<code>{this.state.ipn}</code>
+							</div>
+						</div>
 						<div className="uk-margin">
 							<legend className="uk-form-label">{hubloy_membership.common.status.status}</legend>
 							<div className="uk-form-controls">

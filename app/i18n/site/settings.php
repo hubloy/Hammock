@@ -63,5 +63,6 @@ return array(
 			'description' => __( 'This will delete all options and custom database tables once you deactivate and uninstall the plugin from your WordPress dashboard', 'hubloy-membership' ),
 		),
 	),
+	'ipn' => __( 'IPN URL', 'hubloy-membership' ),
 );
 

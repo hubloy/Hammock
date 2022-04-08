@@ -17,6 +17,6 @@ foreach ( $attributes as $k => $v ) {
 $data = implode( ' ', $data );
 ?>
 <section class="slider-checkbox">
-	<input type="checkbox" <?php echo $class; ?> <?php echo $data; ?> name="<?php echo $name; ?>" value="<?php echo $value; ?>" <?php checked( $option, $value ); ?>/>
-	<label class="label <?php echo $label_class; ?>" for="<?php echo $name; ?>"><?php echo $title; ?></label>
+	<input type="checkbox" <?php echo esc_attr( $class ); ?> <?php echo esc_html( $data ); ?> name="<?php echo esc_attr( $name ); ?>" value="<?php echo esc_attr( $value ); ?>" <?php checked( $option, $value ); ?>/>
+	<label class="label <?php echo esc_attr( $label_class ); ?>" for="<?php echo esc_attr( $name ); ?>"><?php echo esc_html( $title ); ?></label>
 </section>

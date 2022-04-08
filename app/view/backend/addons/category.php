@@ -46,8 +46,8 @@ class Category extends View {
 								foreach ( $taxonomies as $taxonomy ) {
 									$checked = in_array( $taxonomy->name, $protected );
 									?>
-										<li><label><input class="uk-checkbox" name="protected[]" <?php echo $checked ? 'checked="checked"' : ''; ?> value="<?php echo $taxonomy->name; ?>" type="checkbox">&nbsp;&nbsp;<?php echo $taxonomy->labels->name; ?></label></li>
-										<?php
+										<li><label><input class="uk-checkbox" name="protected[]" <?php echo $checked ? 'checked="checked"' : ''; ?> value="<?php echo esc_attr( $taxonomy->name ); ?>" type="checkbox">&nbsp;&nbsp;<?php echo esc_html( $taxonomy->labels->name ); ?></label></li>
+									<?php
 								}
 								?>
 							<?php

@@ -70,6 +70,7 @@ class Gateway extends Component {
 		$this->add_filter( 'hubloy_membership_register_gateways', 'register' );
 		$this->add_action( 'hubloy_membership_init_gateway', 'init_gateway' );
 		$this->add_filter( 'hubloy_membership_gateway_' . $this->id . '_is_active', 'is_active' );
+		$this->add_filter( 'hubloy_membership_gateway_' . $this->id . '_ipn', 'get_listener_url' );
 		$this->add_filter( 'hubloy_membership_gateway_' . $this->id . '_settings', 'settings' );
 		$this->add_action( 'hubloy_membership_gateway_' . $this->id . '_update_settings', 'update_settings', 10, 2 );
 
@@ -247,14 +248,12 @@ class Gateway extends Component {
 	 * @return string
 	 */
 	public function get_cancel_page( $invoice ) {
-		return esc_url(
-			add_query_arg(
-				array(
-					'cancel'  => 'true',
-					'invoice' => $invoice->invoice_id,
-				),
-				$this->get_return_url()
-			)
+		return  add_query_arg(
+			array(
+				'cancel'  => 'true',
+				'invoice' => $invoice->invoice_id,
+			),
+			$this->get_return_url()
 		);
 	}
 
@@ -283,14 +282,12 @@ class Gateway extends Component {
 	 * @return string
 	 */
 	public function get_listener_url() {
-		return esc_url(
-			add_query_arg(
-				array(
-					'hm-api'  => 'ipn_notify',
-					'gateway' => $this->get_id(),
-				),
-				home_url( 'index.php' )
-			)
+		return add_query_arg(
+			array(
+				'hm-api'  => 'ipn_notify',
+				'gateway' => $this->get_id(),
+			),
+			home_url( 'index.php' )
 		);
 	}
 

@@ -157,7 +157,7 @@ class Controller extends Component {
 		}
 
 		if ( empty( $action ) ) {
-			$action = ! empty( $request_fields['action'] ) ? $request_fields['action'] : '';
+			$action = ! empty( $request_fields['action'] ) ? sanitize_text_field( $request_fields['action'] ) : '';
 		}
 
 		if ( ! empty( $request_fields[ $nonce_field ] )
@@ -214,7 +214,7 @@ class Controller extends Component {
 		}
 
 		if ( isset( $request_fields[ $id ] ) ) {
-			$value = $request_fields[ $id ];
+			$value = sanitize_text_field( $request_fields[ $id ] );
 		}
 
 		return apply_filters(
@@ -268,4 +268,3 @@ class Controller extends Component {
 		return false;
 	}
 }
-?>
