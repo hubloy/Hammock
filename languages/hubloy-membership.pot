@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Memberships by Hubloy 1.0.0\n"
 "Report-Msgid-Bugs-To: "
 "https://wordpress.org/support/plugin/hubloy-membership\n"
-"POT-Creation-Date: 2022-04-07 11:09:04+00:00\n"
+"POT-Creation-Date: 2022-04-08 08:20:55+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -65,51 +65,6 @@ msgstr ""
 msgid "Category Setting updated"
 msgstr ""
 
-#: app/addon/coupon/coupon.php:54
-msgid "Coupon"
-msgstr ""
-
-#: app/addon/coupon/coupon.php:55
-msgid "Discount coupons."
-msgstr ""
-
-#: app/addon/coupon/coupon.php:75
-msgid "Coupons"
-msgstr ""
-
-#: app/addon/invitation/invitation.php:54
-#: app/addon/invitation/invitation.php:75
-msgid "Invitation Codes"
-msgstr ""
-
-#: app/addon/invitation/invitation.php:55
-msgid "Users need an invitation code to subscribe to a membership."
-msgstr ""
-
-#: app/addon/media/media.php:54
-msgid "Media File Protection"
-msgstr ""
-
-#: app/addon/media/media.php:55
-msgid "Protect direct access to media files"
-msgstr ""
-
-#: app/addon/prorate/prorate.php:54
-msgid "Pro-Rating"
-msgstr ""
-
-#: app/addon/prorate/prorate.php:55
-msgid "Pro-Rate previous payments when switching memberships"
-msgstr ""
-
-#: app/addon/redirect/redirect.php:54
-msgid "Page Redirection"
-msgstr ""
-
-#: app/addon/redirect/redirect.php:55
-msgid "Redirect users to specific pages based on certain rules"
-msgstr ""
-
 #: app/base/controller.php:176 app/base/rest.php:67
 msgid "Invalid request, you are not allowed to make this request"
 msgstr ""
@@ -126,11 +81,11 @@ msgstr ""
 msgid "Template file deleted from theme"
 msgstr ""
 
-#: app/base/gateway.php:368
+#: app/base/gateway.php:365
 msgid "Payment Successful"
 msgstr ""
 
-#: app/base/gateway.php:383
+#: app/base/gateway.php:380 app/rest/site/gateways.php:145
 msgid "Not supported"
 msgstr ""
 
@@ -269,8 +224,7 @@ msgstr ""
 
 #: app/controller/plugin.php:265 app/core/resource.php:135
 #: app/i18n/site/members.php:69 app/model/member.php:568
-#: app/services/codes.php:58 app/view/backend/email/setting.php:32
-#: app/view/backend/email/setting.php:39
+#: app/view/backend/email/setting.php:32 app/view/backend/email/setting.php:39
 msgid "Enabled"
 msgstr ""
 
@@ -292,7 +246,6 @@ msgstr ""
 
 #: app/controller/plugin.php:493 app/core/resource.php:120
 #: app/core/resource.php:122 app/functions/account.php:36
-#: app/ui/default/header.php:9
 msgid "Dashboard"
 msgstr ""
 
@@ -317,7 +270,7 @@ msgstr ""
 msgid "Addons"
 msgstr ""
 
-#: app/controller/site/addon.php:175 app/rest/site/gateways.php:145
+#: app/controller/site/addon.php:175 app/rest/site/gateways.php:146
 msgid "Not implemented"
 msgstr ""
 
@@ -481,7 +434,7 @@ msgstr ""
 msgid "Member not found"
 msgstr ""
 
-#: app/core/resource.php:136 app/model/member.php:568 app/services/codes.php:59
+#: app/core/resource.php:136 app/model/member.php:568
 msgid "Disabled"
 msgstr ""
 
@@ -496,8 +449,8 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: app/core/resource.php:138 app/services/codes.php:60
-#: app/services/members.php:200 app/services/members.php:212
+#: app/core/resource.php:138 app/services/members.php:200
+#: app/services/members.php:212
 msgid "Expired"
 msgstr ""
 
@@ -1648,7 +1601,7 @@ msgstr ""
 msgid "Account"
 msgstr ""
 
-#: app/helper/template.php:180
+#: app/helper/template.php:182
 msgid "%s does not exist."
 msgstr ""
 
@@ -2295,6 +2248,10 @@ msgid ""
 "and uninstall the plugin from your WordPress dashboard"
 msgstr ""
 
+#: app/i18n/site/settings.php:66
+msgid "IPN URL"
+msgstr ""
+
 #: app/i18n/site/transactions.php:13
 msgid "Overdue"
 msgstr ""
@@ -2449,11 +2406,11 @@ msgstr ""
 msgid "The gateway unique key"
 msgstr ""
 
-#: app/rest/site/gateways.php:151 app/rest/site/gateways.php:175
+#: app/rest/site/gateways.php:153 app/rest/site/gateways.php:177
 msgid "The gateway does not exist."
 msgstr ""
 
-#: app/rest/site/gateways.php:171
+#: app/rest/site/gateways.php:173
 msgid "Gateway updated"
 msgstr ""
 
@@ -2592,43 +2549,6 @@ msgstr ""
 msgid "Posts"
 msgstr ""
 
-#: app/services/codes.php:61 app/services/members.php:202
-#: app/services/members.php:214 app/services/transactions.php:86
-msgid "Canceled"
-msgstr ""
-
-#: app/services/codes.php:75
-msgid "Fixed discount"
-msgstr ""
-
-#: app/services/codes.php:76
-msgid "Percentage discount"
-msgstr ""
-
-#: app/services/codes.php:92 app/services/codes.php:107
-msgid "N\\A"
-msgstr ""
-
-#: app/services/codes.php:161
-msgid "Saved successfully"
-msgstr ""
-
-#: app/services/codes.php:166
-msgid "Error saving model"
-msgstr ""
-
-#: app/services/codes.php:172 app/services/codes.php:226
-msgid "Selected Code exists"
-msgstr ""
-
-#: app/services/codes.php:221
-msgid "Updated successfully"
-msgstr ""
-
-#: app/services/codes.php:232
-msgid "Selected Code does not exist"
-msgstr ""
-
 #: app/services/members.php:197 app/services/members.php:207
 #: app/services/transactions.php:85
 msgid "Pending"
@@ -2640,6 +2560,11 @@ msgstr ""
 
 #: app/services/members.php:201 app/services/members.php:213
 msgid "Deactivated"
+msgstr ""
+
+#: app/services/members.php:202 app/services/members.php:214
+#: app/services/transactions.php:86
+msgid "Canceled"
 msgstr ""
 
 #: app/services/members.php:206
@@ -2814,30 +2739,8 @@ msgstr ""
 msgid "Join Membership"
 msgstr ""
 
-#: app/ui/default/header.php:5
-msgid "HubloyMembership logo"
-msgstr ""
-
-#: app/ui/default/pagination.php:62
-msgid "&hellip;"
-msgstr ""
-
 #: app/view/backend/addons/category.php:37
 msgid "Protect the following taxonomies"
-msgstr ""
-
-#: app/view/backend/addons/mailchimp.php:35
-msgid "MailChimp API Key"
-msgstr ""
-
-#: app/view/backend/addons/mailchimp.php:50
-msgid ""
-"Visit <a href=\"%s\" target=\"_blank\">your API dashboard</a> to create an "
-"API Key."
-msgstr ""
-
-#: app/view/backend/addons/mailchimp.php:54
-msgid "Validate"
 msgstr ""
 
 #: app/view/backend/email/setting.php:46
@@ -3190,6 +3093,10 @@ msgstr ""
 
 #: templates/membership-list.php:30
 msgid "No membership plans to subscribe to"
+msgstr ""
+
+#: templates/protected-content.php:15
+msgid "This content is protected"
 msgstr ""
 
 #. Plugin Name of the plugin/theme

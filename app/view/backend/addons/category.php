@@ -34,11 +34,11 @@ class Category extends View {
 		ob_start();
 		?>
 		<div class="uk-margin">
-			<label class="uk-form-label" for="form-horizontal-text"><?php _e( 'Protect the following taxonomies', 'hubloy-membership' ); ?></label>
+			<label class="uk-form-label" for="form-horizontal-text"><?php esc_html_e( 'Protect the following taxonomies', 'hubloy-membership' ); ?></label>
 			<div class="uk-form-controls">
 				<div class="uk-panel uk-panel-scrollable">
 					<ul class="uk-list">
-						<li><label><input class="uk-checkbox" name="protected[]" <?php echo $checked ? 'checked="checked"' : ''; ?> value="category" type="checkbox">&nbsp;&nbsp;<?php _e( 'Categories', 'hubloy-membership' ); ?></label></li>
+						<li><label><input class="uk-checkbox" name="protected[]" <?php echo $checked ? 'checked="checked"' : ''; ?> value="category" type="checkbox">&nbsp;&nbsp;<?php esc_html_e( 'Categories', 'hubloy-membership' ); ?></label></li>
 						<?php
 						if ( $taxonomies ) {
 							?>
