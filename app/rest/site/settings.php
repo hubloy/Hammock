@@ -197,6 +197,16 @@ class Settings extends Rest {
 		$settings->set_general_setting( 'delete_on_uninstall', $delete_on_uninstall );
 		$settings->save();
 
+		/**
+		 * Action called after settings are saved
+		 * 
+		 * @param \HubloyMembership\Model\Settings $settings The settings object
+		 * @param array                            $request The rest request
+		 * 
+		 * @since 1.0.0.1
+		 */
+		do_action( 'hubloy_membership_after_settings_saved', $settings, $request );
+
 		return array(
 			'status'  => true,
 			'message' => __( 'Settings updated', 'memberships-by-hubloy' ),

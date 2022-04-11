@@ -3,7 +3,7 @@
  * Plugin Name:         Memberships by Hubloy
  * Plugin URI:          https://www.hubloymembership.com
  * Description:         A complete membership and subscription experience.
- * Version:             1.0.0
+ * Version:             1.0.0.1
  * Author:              Hubloy
  * Author URI:          https://www.hubloy.com
  * License:             GPLv2
@@ -38,7 +38,7 @@ if ( ! class_exists( 'HubloyMembership' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '1.0.0';
+		public $version = '1.0.0.1';
 
 		/**
 		 * The single instance of the class
@@ -221,4 +221,3 @@ if ( ! class_exists( 'HubloyMembership' ) ) :
 	hubloy_membership();
 
 endif;
-
