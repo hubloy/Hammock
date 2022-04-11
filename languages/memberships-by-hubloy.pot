@@ -2,10 +2,10 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Memberships by Hubloy 1.0.0\n"
+"Project-Id-Version: Memberships by Hubloy 1.0.0.1\n"
 "Report-Msgid-Bugs-To: "
 "https://wordpress.org/support/plugin/hubloy-membership\n"
-"POT-Creation-Date: 2022-04-11 06:59:18+00:00\n"
+"POT-Creation-Date: 2022-04-11 14:27:40+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -244,7 +244,7 @@ msgstr ""
 msgid " %s Subscriptions"
 msgstr ""
 
-#: app/controller/plugin.php:493 app/core/resource.php:120
+#: app/controller/plugin.php:492 app/core/resource.php:120
 #: app/core/resource.php:122 app/functions/account.php:36
 msgid "Dashboard"
 msgstr ""
@@ -2397,7 +2397,7 @@ msgstr ""
 msgid "The email id"
 msgstr ""
 
-#: app/rest/site/emails.php:137 app/rest/site/settings.php:202
+#: app/rest/site/emails.php:137 app/rest/site/settings.php:212
 #: app/rest/site/wizard.php:164
 msgid "Settings updated"
 msgstr ""
@@ -2475,7 +2475,7 @@ msgstr ""
 msgid "The rule id"
 msgstr ""
 
-#: app/rest/site/settings.php:215
+#: app/rest/site/settings.php:225
 msgid "Create New Page"
 msgstr ""
 

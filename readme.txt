@@ -47,5 +47,9 @@ Please visit [our support site at https://hubloymembership.com/docs/](https://hu
 Please post it in the [GitHub issues page](https://github.com/hubloy/memberships-by-hubloy/issues/new/choose) and we'll fix it right away. Thanks for helping.
 
 == Changelog ==
+= 1.0.0.1 =
+* Fix onboarding wizard
+* Add action on settings save
+
 = 1.0.0 =
 Initial release
