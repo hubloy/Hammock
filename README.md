@@ -1,6 +1,6 @@
 # README
 
-A WordPress Membership plugin.
+A [WordPress Membership](https://wordpress.org/plugins/memberships-by-hubloy/) plugin.
 
 The **only** development branchis `master`. This branch ultimately is responsible for creating the production branches that are finally published.
 
