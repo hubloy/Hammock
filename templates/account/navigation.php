@@ -2,7 +2,7 @@
 /**
  * Account dashboard navigation
  *
- * This template can be overridden by copying it to yourtheme/hubloy_membership/account/navigation.php.
+ * This template can be overridden by copying it to yourtheme/memberships-by-hubloy/account/navigation.php.
  *
  * @package HubloyMembership/Templates/Account
  * @version 1.0.0

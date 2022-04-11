@@ -2,7 +2,7 @@
 /**
  * Account payment method
  *
- * This template can be overridden by copying it to yourtheme/hubloy_membership/account/transaction/single/payment-method.php.
+ * This template can be overridden by copying it to yourtheme/memberships-by-hubloy/account/transaction/single/payment-method.php.
  *
  * @package HubloyMembership/Templates/Account/Transaction/Single/Pay
  * @version 1.0.0

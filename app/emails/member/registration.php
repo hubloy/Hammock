@@ -51,10 +51,10 @@ class Registration extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Account Registration', 'hubloy-membership' ),
-			'description' => __( 'Sent once an account is created', 'hubloy-membership' ),
-			'heading'     => sprintf( __( 'Welcome to %s', 'hubloy-membership' ), '{site_title}' ),
-			'subject'     => sprintf( __( 'Your %s account has been created!', 'hubloy-membership' ), '{site_title}' ),
+			'title'       => __( 'Account Registration', 'memberships-by-hubloy' ),
+			'description' => __( 'Sent once an account is created', 'memberships-by-hubloy' ),
+			'heading'     => sprintf( __( 'Welcome to %s', 'memberships-by-hubloy' ), '{site_title}' ),
+			'subject'     => sprintf( __( 'Your %s account has been created!', 'memberships-by-hubloy' ), '{site_title}' ),
 			'recipient'   => '',
 			'enabled'     => false,
 		);

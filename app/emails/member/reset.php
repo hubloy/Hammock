@@ -53,10 +53,10 @@ class Reset extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Reset Password', 'hubloy-membership' ),
-			'description' => __( 'Sent when customers reset their password', 'hubloy-membership' ),
-			'heading'     => __( 'Password Reset Request', 'hubloy-membership' ),
-			'subject'     => sprintf( __( 'Password Reset Request for %s', 'hubloy-membership' ), '{site_title}' ),
+			'title'       => __( 'Reset Password', 'memberships-by-hubloy' ),
+			'description' => __( 'Sent when customers reset their password', 'memberships-by-hubloy' ),
+			'heading'     => __( 'Password Reset Request', 'memberships-by-hubloy' ),
+			'subject'     => sprintf( __( 'Password Reset Request for %s', 'memberships-by-hubloy' ), '{site_title}' ),
 			'recipient'   => '',
 			'enabled'     => false,
 		);

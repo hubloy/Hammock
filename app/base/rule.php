@@ -197,7 +197,7 @@ class Rule {
 	 * @return string
 	 */
 	protected function make_clickable( $link, $title ) {
-		return "<a href='" . esc_url( $link ) . "' title='" . __( 'Edit', 'hubloy-membership' ) . "' target='_blank'>" . esc_attr( $title ) . '</a>';
+		return "<a href='" . esc_url( $link ) . "' title='" . __( 'Edit', 'memberships-by-hubloy' ) . "' target='_blank'>" . esc_attr( $title ) . '</a>';
 	}
 
 	/**
@@ -776,9 +776,9 @@ class Rule {
 				'type'      => $post->post_type,
 				'title'     => $post->post_title,
 				'edit_link' => $edit_link,
-				'edit_html' => sprintf( __( '%1$sEdit%2$s', 'hubloy-membership' ), '<a href="' . $edit_link . '" target="_blank">', '</a>' ),
+				'edit_html' => sprintf( __( '%1$sEdit%2$s', 'memberships-by-hubloy' ), '<a href="' . $edit_link . '" target="_blank">', '</a>' ),
 				'view_link' => $view_link,
-				'view_html' => sprintf( __( '%1$sView%2$s', 'hubloy-membership' ), '<a href="' . $view_link . '" target="_blank">', '</a>' ),
+				'view_html' => sprintf( __( '%1$sView%2$s', 'memberships-by-hubloy' ), '<a href="' . $view_link . '" target="_blank">', '</a>' ),
 				'access'    => $access->render( true ),
 			);
 			$data[ $post->ID ] = $content;

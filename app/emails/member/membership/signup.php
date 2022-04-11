@@ -53,10 +53,10 @@ class Signup extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Membership Sign-up', 'hubloy-membership' ),
-			'description' => __( 'Email sent to user after they join a membership', 'hubloy-membership' ),
-			'heading'     => __( 'New sign-up', 'hubloy-membership' ),
-			'subject'     => sprintf( __( 'New sign-up to %s membership', 'hubloy-membership' ), '{membership_name}' ),
+			'title'       => __( 'Membership Sign-up', 'memberships-by-hubloy' ),
+			'description' => __( 'Email sent to user after they join a membership', 'memberships-by-hubloy' ),
+			'heading'     => __( 'New sign-up', 'memberships-by-hubloy' ),
+			'subject'     => sprintf( __( 'New sign-up to %s membership', 'memberships-by-hubloy' ), '{membership_name}' ),
 			'recipient'   => '',
 			'enabled'     => true,
 		);

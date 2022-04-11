@@ -22,7 +22,7 @@ class Controller extends Component {
 	 *
 	 * @var string
 	 */
-	const MENU_SLUG = 'hubloy-membership';
+	const MENU_SLUG = 'memberships-by-hubloy';
 
 	/**
 	 * If is base controller
@@ -173,7 +173,7 @@ class Controller extends Component {
 			);
 		} else {
 			if ( $json ) {
-				wp_send_json_error( __( 'Invalid request, you are not allowed to make this request', 'hubloy-membership' ) );
+				wp_send_json_error( __( 'Invalid request, you are not allowed to make this request', 'memberships-by-hubloy' ) );
 			} else {
 				return false;
 			}

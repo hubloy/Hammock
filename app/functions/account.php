@@ -33,11 +33,11 @@ function hubloy_membership_is_member_plan_active( $plan_id ) {
 function hubloy_membership_account_member_navigation_labels() {
 	$endpoints = \HubloyMembership\Services\Pages::account_page_endpoits();
 	$labels    = array(
-		'dashboard'     => __( 'Dashboard', 'hubloy-membership' ),
-		'transactions'  => __( 'Transactions', 'hubloy-membership' ),
-		'edit-account'  => __( 'Edit Account', 'hubloy-membership' ),
-		'subscriptions' => __( 'Subscriptions', 'hubloy-membership' ),
-		'member-logout' => __( 'Logout', 'hubloy-membership' ),
+		'dashboard'     => __( 'Dashboard', 'memberships-by-hubloy' ),
+		'transactions'  => __( 'Transactions', 'memberships-by-hubloy' ),
+		'edit-account'  => __( 'Edit Account', 'memberships-by-hubloy' ),
+		'subscriptions' => __( 'Subscriptions', 'memberships-by-hubloy' ),
+		'member-logout' => __( 'Logout', 'memberships-by-hubloy' ),
 	);
 
 	foreach ( $endpoints as $endpoint_id => $endpoint ) {

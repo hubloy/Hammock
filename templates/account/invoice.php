@@ -4,7 +4,7 @@
  * This manages the invoice
  * Used to pay or view existing invoices
  *
- * This template can be overridden by copying it to yourtheme/hubloy_membership/account/invoice.php.
+ * This template can be overridden by copying it to yourtheme/memberships-by-hubloy/account/invoice.php.
  *
  * @package HubloyMembership/Templates/Account
  * @version 1.0.0
@@ -15,13 +15,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! $invoice ) {
-	esc_html_e( 'Invalid invoice id', 'hubloy_membership' );
+	esc_html_e( 'Invalid invoice id', 'memberships-by-hubloy' );
 } else {
 	?>
 	<p>
 	<?php
 		printf(
-			esc_html__( '# %1$s', 'hubloy_membership' ),
+			esc_html__( '# %1$s', 'memberships-by-hubloy' ),
 			'<strong>' . esc_html( $invoice->invoice_id ) . '</strong>'
 		);
 	?>

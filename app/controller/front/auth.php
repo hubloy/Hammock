@@ -109,7 +109,7 @@ class Auth extends Controller {
 		$user_password = sanitize_text_field( $_POST['user_password'] );
 
 		if ( ! is_email( $user_email ) ) {
-			wp_send_json_error( __( 'Invalid email', 'hubloy-membership' ) );
+			wp_send_json_error( __( 'Invalid email', 'memberships-by-hubloy' ) );
 		}
 
 		/**
@@ -137,7 +137,7 @@ class Auth extends Controller {
 
 					do_action( 'hubloy_member_verification', $user->username, $user, $verify_key );
 
-					wp_send_json_success( __( 'Registration successful. An email has been sent with a link to verify your account', 'hubloy-membership' ) );
+					wp_send_json_success( __( 'Registration successful. An email has been sent with a link to verify your account', 'memberships-by-hubloy' ) );
 				} else {
 					if ( ! headers_sent() ) {
 						$auth_user = wp_signon(
@@ -150,7 +150,7 @@ class Auth extends Controller {
 
 						// Stop here in case the login failed.
 						if ( is_wp_error( $auth_user ) ) {
-							wp_send_json_error( sprintf( __( 'Error : %s', 'hubloy-membership' ), $auth_user->get_error_message() ) );
+							wp_send_json_error( sprintf( __( 'Error : %s', 'memberships-by-hubloy' ), $auth_user->get_error_message() ) );
 						}
 					}
 
@@ -160,13 +160,13 @@ class Auth extends Controller {
 
 					wp_send_json_success(
 						array(
-							'message' => __( 'Registration successful', 'hubloy-membership' ),
+							'message' => __( 'Registration successful', 'memberships-by-hubloy' ),
 							'reload'  => true,
 						)
 					);
 				}
 			} else {
-				wp_send_json_error( __( 'There was an error creating your account', 'hubloy-membership' ) );
+				wp_send_json_error( __( 'There was an error creating your account', 'memberships-by-hubloy' ) );
 			}
 		} else {
 			wp_send_json_error( $response['message'] );
@@ -186,11 +186,11 @@ class Auth extends Controller {
 		$this->verify_nonce( 'hubloy_membership_account_reset_nonce' );
 		$user_data = false;
 		if ( empty( $_POST['user_login'] ) || ! is_string( $_POST['user_login'] ) ) {
-			wp_send_json_error( __( 'Enter a username or email address', 'hubloy-membership' ) );
+			wp_send_json_error( __( 'Enter a username or email address', 'memberships-by-hubloy' ) );
 		} elseif ( is_email( $_POST['user_login'] ) ) {
 			$user_data = get_user_by( 'email', sanitize_email( $_POST['user_login'] ) );
 			if ( empty( $user_data ) ) {
-				wp_send_json_error( __( 'There is no account with that username or email address.', 'hubloy-membership' ) );
+				wp_send_json_error( __( 'There is no account with that username or email address.', 'memberships-by-hubloy' ) );
 			}
 		} else {
 			$login     = sanitize_text_field( $_POST['user_login'] );
@@ -198,7 +198,7 @@ class Auth extends Controller {
 		}
 
 		if ( ! $user_data ) {
-			wp_send_json_error( __( 'There is no account with that username or email address.', 'hubloy-membership' ) );
+			wp_send_json_error( __( 'There is no account with that username or email address.', 'memberships-by-hubloy' ) );
 		}
 
 		$user_login = $user_data->user_login;
@@ -211,7 +211,7 @@ class Auth extends Controller {
 
 		do_action( 'hubloy_member_account_reset', $user_data, $key );
 
-		wp_send_json_success( __( 'An email has been sent with a link to create a new password', 'hubloy-membership' ) );
+		wp_send_json_success( __( 'An email has been sent with a link to create a new password', 'memberships-by-hubloy' ) );
 	}
 
 	/**
@@ -256,20 +256,20 @@ class Auth extends Controller {
 						do_action( 'hubloy_membership_verification_failed', $login, $user );
 						wp_destroy_current_session();
 						wp_clear_auth_cookie();
-						wp_send_json_error( __( 'Account verification error. Please check your email for a verification link', 'hubloy-membership' ) );
+						wp_send_json_error( __( 'Account verification error. Please check your email for a verification link', 'memberships-by-hubloy' ) );
 					}
 				}
 
 				wp_send_json_success(
 					array(
-						'message' => __( 'Login successful', 'hubloy-membership' ),
+						'message' => __( 'Login successful', 'memberships-by-hubloy' ),
 						'reload'  => true,
 					)
 				);
 				do_action( 'hubloy_membership_account_login_success', $user_signon );
 			}
 		} else {
-			wp_send_json_error( __( 'Login is disabled for your account', 'hubloy-membership' ) );
+			wp_send_json_error( __( 'Login is disabled for your account', 'memberships-by-hubloy' ) );
 		}
 	}
 
@@ -300,7 +300,7 @@ class Auth extends Controller {
 						wp_safe_redirect( $login_url );
 						exit;
 					} else {
-						wp_send_json_error( __( 'Account verification error. Please check your email for a verification link', 'hubloy-membership' ) );
+						wp_send_json_error( __( 'Account verification error. Please check your email for a verification link', 'memberships-by-hubloy' ) );
 					}
 				}
 			}
@@ -319,7 +319,7 @@ class Auth extends Controller {
 		if ( isset( $_REQUEST['ver_error'] ) ) {
 			?>
 			<div class="hubloy_membership-notification hubloy_membership-notification--error">
-				<?php esc_html_e( 'Your account is not verified. Please check your email for a link to verify your account', 'hubloy-membership' ); ?>
+				<?php esc_html_e( 'Your account is not verified. Please check your email for a link to verify your account', 'memberships-by-hubloy' ); ?>
 			</div>
 			<?php
 		}
@@ -331,7 +331,7 @@ class Auth extends Controller {
 				if ( $membership ) {
 					?>
 					<div class="hubloy_membership-notification hubloy_membership-notification--primary">
-						<?php echo sprintf( esc_html__( 'Log in or create an account to join the %s plan', 'hubloy-membership' ), '<strong>' . $membership->name . '</strong>' ); ?>
+						<?php echo sprintf( esc_html__( 'Log in or create an account to join the %s plan', 'memberships-by-hubloy' ), '<strong>' . $membership->name . '</strong>' ); ?>
 					</div>
 					<?php
 				}

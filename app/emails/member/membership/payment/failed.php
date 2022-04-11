@@ -53,10 +53,10 @@ class Failed extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Payment failed', 'hubloy-membership' ),
-			'description' => __( 'Sent to a member when payment fails', 'hubloy-membership' ),
-			'heading'     => __( 'Payment failed', 'hubloy-membership' ),
-			'subject'     => sprintf( __( 'Your %s membership payment failed', 'hubloy-membership' ), '{membership_name}' ),
+			'title'       => __( 'Payment failed', 'memberships-by-hubloy' ),
+			'description' => __( 'Sent to a member when payment fails', 'memberships-by-hubloy' ),
+			'heading'     => __( 'Payment failed', 'memberships-by-hubloy' ),
+			'subject'     => sprintf( __( 'Your %s membership payment failed', 'memberships-by-hubloy' ), '{membership_name}' ),
 			'recipient'   => '',
 			'enabled'     => false,
 		);

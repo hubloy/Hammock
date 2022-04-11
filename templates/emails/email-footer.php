@@ -2,7 +2,7 @@
 /**
  * Email Footer
  *
- * This template can be overridden by copying it to yourtheme/hubloy_membership/emails/email-footer.php.
+ * This template can be overridden by copying it to yourtheme/memberships-by-hubloy/emails/email-footer.php.
  *
  * @package HubloyMembership/Templates/Emails
  * @version 1.0.0

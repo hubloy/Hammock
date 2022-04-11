@@ -81,11 +81,11 @@ class Transactions {
 	 */
 	public static function transaction_status() {
 		$transaction_status = array(
-			self::STATUS_PAID     => __( 'Paid', 'hubloy-membership' ),
-			self::STATUS_PENDING  => __( 'Pending', 'hubloy-membership' ),
-			self::STATUS_CANCELED => __( 'Canceled', 'hubloy-membership' ),
-			self::STATUS_REFUNDED => __( 'Refunded', 'hubloy-membership' ),
-			self::STATUS_FAILED   => __( 'Failed', 'hubloy-membership' ),
+			self::STATUS_PAID     => __( 'Paid', 'memberships-by-hubloy' ),
+			self::STATUS_PENDING  => __( 'Pending', 'memberships-by-hubloy' ),
+			self::STATUS_CANCELED => __( 'Canceled', 'memberships-by-hubloy' ),
+			self::STATUS_REFUNDED => __( 'Refunded', 'memberships-by-hubloy' ),
+			self::STATUS_FAILED   => __( 'Failed', 'memberships-by-hubloy' ),
 		);
 		return apply_filters( 'hubloy_membership_transaction_status', $transaction_status );
 	}
@@ -264,25 +264,25 @@ class Transactions {
 				if ( $invoice_id ) {
 					return array(
 						'status'  => true,
-						'message' => __( 'Invoice saved', 'hubloy-membership' ),
+						'message' => __( 'Invoice saved', 'memberships-by-hubloy' ),
 						'id'      => $invoice_id,
 					);
 				} else {
 					return array(
 						'status'  => false,
-						'message' => __( 'Error saving invoice', 'hubloy-membership' ),
+						'message' => __( 'Error saving invoice', 'memberships-by-hubloy' ),
 					);
 				}
 			} else {
 				return array(
 					'status'  => false,
-					'message' => __( 'Error adding plan to member', 'hubloy-membership' ),
+					'message' => __( 'Error adding plan to member', 'memberships-by-hubloy' ),
 				);
 			}
 		} else {
 			return array(
 				'status'  => false,
-				'message' => __( 'Member does not exist', 'hubloy-membership' ),
+				'message' => __( 'Member does not exist', 'memberships-by-hubloy' ),
 			);
 		}
 	}
@@ -318,7 +318,7 @@ class Transactions {
 		$invoice->amount      = Currency::format_price( $amount );
 		$invoice->custom_data = $custom_data;
 		$invoice->due_date    = $due_date;
-		$invoice->invoice_id  = $invoice_id ? $invoice_id : strtolower( sha1( $plan->id . date( 'Y-m-d H:i:s' ) . ( defined( 'AUTH_KEY' ) ? AUTH_KEY : '' ) . wp_unique_id( 'hubloy-membership' ) ) );
+		$invoice->invoice_id  = $invoice_id ? $invoice_id : strtolower( sha1( $plan->id . date( 'Y-m-d H:i:s' ) . ( defined( 'AUTH_KEY' ) ? AUTH_KEY : '' ) . wp_unique_id( 'memberships-by-hubloy' ) ) );
 		if ( $amount == 0 ) {
 			$invoice->status = self::STATUS_PAID;
 		}
@@ -457,11 +457,11 @@ class Transactions {
 	 */
 	public function process_transaction( $invoice_id, $gateway_id ) {
 		if ( ! Gateways::gateway_exists( $gateway_id ) ) {
-			wp_send_json_error( __( 'Invalid payment gateway selected', 'hubloy-membership' ) );
+			wp_send_json_error( __( 'Invalid payment gateway selected', 'memberships-by-hubloy' ) );
 		}
 		$invoice = new Invoice( $invoice_id );
 		if ( ! $invoice->is_valid() || ! $invoice->is_owner() ) {
-			wp_send_json_error( __( 'Invalid invoice selected', 'hubloy-membership' ) );
+			wp_send_json_error( __( 'Invalid invoice selected', 'memberships-by-hubloy' ) );
 		}
 		$invoice->gateway = $gateway_id;
 		$invoice->status  = self::STATUS_PENDING;
@@ -521,7 +521,7 @@ class Transactions {
 			if ( $invoice->is_valid() ) {
 				if ( isset( $_REQUEST['cancel'] ) ) {
 					$invoice->status = self::STATUS_CANCELED;
-					$invoice->add_note( __( 'Payment canceled by subscriber', 'hubloy-membership' ) );
+					$invoice->add_note( __( 'Payment canceled by subscriber', 'memberships-by-hubloy' ) );
 					$invoice->save();
 					wp_safe_redirect( hubloy_membership_get_invoice_link( $invoice->invoice_id ) );
 					exit;

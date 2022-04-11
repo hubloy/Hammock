@@ -53,10 +53,10 @@ class After extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Membership Ended', 'hubloy-membership' ),
-			'description' => __( 'Sent to a member after the membership finishes', 'hubloy-membership' ),
-			'heading'     => __( 'Membership Ended', 'hubloy-membership' ),
-			'subject'     => sprintf( __( 'Reminder: your %s membership has ended', 'hubloy-membership' ), '{membership_name}' ),
+			'title'       => __( 'Membership Ended', 'memberships-by-hubloy' ),
+			'description' => __( 'Sent to a member after the membership finishes', 'memberships-by-hubloy' ),
+			'heading'     => __( 'Membership Ended', 'memberships-by-hubloy' ),
+			'subject'     => sprintf( __( 'Reminder: your %s membership has ended', 'memberships-by-hubloy' ), '{membership_name}' ),
 			'recipient'   => '',
 			'enabled'     => false,
 		);

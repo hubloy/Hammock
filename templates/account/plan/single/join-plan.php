@@ -3,7 +3,7 @@
  * Account join subscription plan page
  * This view is used to join a plan
  *
- * This template can be overridden by copying it to yourtheme/hubloy_membership/account/plan/join-plan.php.
+ * This template can be overridden by copying it to yourtheme/memberships-by-hubloy/account/plan/join-plan.php.
  *
  * @package HubloyMembership/Templates/Account/Plan/Single/Join
  * @version 1.0.0
@@ -37,9 +37,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<button type="submit" class="button hubloy_membership-account-membership-plan--price--can-join">
 				<?php
 				if ( $plan->trial_enabled ) {
-					esc_html_e( 'Begin Trial', 'hubloy_membership' );
+					esc_html_e( 'Begin Trial', 'memberships-by-hubloy' );
 				} else {
-					esc_html_e( 'Start Membership', 'hubloy_membership' );
+					esc_html_e( 'Start Membership', 'memberships-by-hubloy' );
 				}
 				?>
 				</button>

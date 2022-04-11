@@ -199,7 +199,7 @@ class Settings extends Rest {
 
 		return array(
 			'status'  => true,
-			'message' => __( 'Settings updated', 'hubloy-membership' ),
+			'message' => __( 'Settings updated', 'memberships-by-hubloy' ),
 		);
 	}
 
@@ -212,7 +212,7 @@ class Settings extends Rest {
 	 */
 	public function get_pages( $request ) {
 		$pages      = Pages::list_pages();
-		$pages['c'] = __( 'Create New Page', 'hubloy-membership' );
+		$pages['c'] = __( 'Create New Page', 'memberships-by-hubloy' );
 		return $pages;
 	}
 

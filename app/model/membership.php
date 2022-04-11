@@ -398,11 +398,11 @@ class Membership {
 	public function get_readable_type() {
 		switch ( $this->type ) {
 			case Memberships::PAYMENT_TYPE_PERMANENT:
-				return __( 'one time', 'hubloy-membership' );
+				return __( 'one time', 'memberships-by-hubloy' );
 			break;
 			case Memberships::PAYMENT_TYPE_DATE_RANGE:
 				$days = $this->get_meta_value( 'membership_days' );
-				return sprintf( __( 'for %d days', 'hubloy-membership' ), $days );
+				return sprintf( __( 'for %d days', 'memberships-by-hubloy' ), $days );
 			break;
 			case Memberships::PAYMENT_TYPE_RECURRING:
 				return Memberships::get_payment_duration( $this->duration );
@@ -434,7 +434,7 @@ class Membership {
 	public function get_readable_trial_text() {
 		$trial_text = '';
 		if ( $this->trial_enabled ) {
-			$trial_text = sprintf( __( 'Free trial for %1$s %2$s', 'hubloy-membership' ), $this->trial_period, strtolower( $this->trial_duration_text ) );
+			$trial_text = sprintf( __( 'Free trial for %1$s %2$s', 'memberships-by-hubloy' ), $this->trial_period, strtolower( $this->trial_duration_text ) );
 		}
 		return apply_filters( 'hubloy_membership_membership_get_readable_trial_text', $trial_text, $this );
 	}
@@ -482,9 +482,9 @@ class Membership {
 				'date_updated'        => $this->date_updated,
 				'name'                => $this->name,
 				'details'             => $this->details,
-				'enabled'             => $this->enabled ? __( 'Active', 'hubloy-membership' ) : __( 'Inactive', 'hubloy-membership' ),
-				'trial_enabled'       => $this->trial_enabled ? __( 'Trial Enabled', 'hubloy-membership' ) : __( 'No Trial', 'hubloy-membership' ),
-				'limit_spaces'        => $this->limit_spaces ? __( 'Limited Registration', 'hubloy-membership' ) : __( 'Open Registration', 'hubloy-membership' ),
+				'enabled'             => $this->enabled ? __( 'Active', 'memberships-by-hubloy' ) : __( 'Inactive', 'memberships-by-hubloy' ),
+				'trial_enabled'       => $this->trial_enabled ? __( 'Trial Enabled', 'memberships-by-hubloy' ) : __( 'No Trial', 'memberships-by-hubloy' ),
+				'limit_spaces'        => $this->limit_spaces ? __( 'Limited Registration', 'memberships-by-hubloy' ) : __( 'Open Registration', 'memberships-by-hubloy' ),
 				'type'                => Memberships::get_type( $this->type ),
 				'duration'            => $this->duration,
 				'signup_price'        => hubloy_membership_format_currency( $this->signup_price ),

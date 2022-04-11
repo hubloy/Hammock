@@ -3,7 +3,7 @@
  * Account subscriptions method page
  * Manage users subscriptions
  *
- * This template can be overridden by copying it to yourtheme/hubloy_membership/account/subscriptions.php.
+ * This template can be overridden by copying it to yourtheme/memberships-by-hubloy/account/subscriptions.php.
  *
  * @package HubloyMembership/Templates/Account
  * @version 1.0.0
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! hubloy_membership_current_user_can_subscribe() ) {
-	esc_html_e( 'Subscriptions are not enabled for your account', 'hubloy_membership' );
+	esc_html_e( 'Subscriptions are not enabled for your account', 'memberships-by-hubloy' );
 } else {
 	if ( $member ) {
 		if ( count( $member->get_plan_ids() ) > 0 ) {
@@ -59,9 +59,9 @@ if ( ! hubloy_membership_current_user_can_subscribe() ) {
 			</table>
 			<?php
 		} else {
-			printf( esc_html__( 'No subscription plans found. Click %1$shere%2$s to sign up', 'hubloy_membership' ), '<a href="' . esc_url( hubloy_membership_get_page_permalink( 'membership_list' ) ) . '">', '</a>' );
+			printf( esc_html__( 'No subscription plans found. Click %1$shere%2$s to sign up', 'memberships-by-hubloy' ), '<a href="' . esc_url( hubloy_membership_get_page_permalink( 'membership_list' ) ) . '">', '</a>' );
 		}
 	} else {
-		esc_html_e( 'You have no subscriptions in your account', 'hubloy_membership' );
+		esc_html_e( 'You have no subscriptions in your account', 'memberships-by-hubloy' );
 	}
 }

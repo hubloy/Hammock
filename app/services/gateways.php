@@ -42,7 +42,7 @@ class Gateways {
 		$gateways = self::load_gateways();
 		if ( $include_select ) {
 			$drop_down = array(
-				'' => __( 'Select Gateway', 'hubloy-membership' ),
+				'' => __( 'Select Gateway', 'memberships-by-hubloy' ),
 			);
 		} else {
 			$drop_down = array();

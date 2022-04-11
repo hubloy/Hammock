@@ -21,7 +21,7 @@ class Manual extends View {
 		ob_start();
 		?>
 		<div class="uk-margin">
-			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Payment Title', 'hubloy-membership' ); ?></label>
+			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Payment Title', 'memberships-by-hubloy' ); ?></label>
 			<div class="uk-form-controls">
 				<?php
 					$this->ui->render(
@@ -35,13 +35,13 @@ class Manual extends View {
 					);
 				?>
 				<p class="uk-text-meta">
-					<?php esc_html_e( 'All transactions with this gateway will be manually approved', 'hubloy-membership' ); ?>
+					<?php esc_html_e( 'All transactions with this gateway will be manually approved', 'memberships-by-hubloy' ); ?>
 				</p>
 			</div>
 			
 		</div>
 		<div class="uk-margin">
-			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Payment Instructions', 'hubloy-membership' ); ?></label>
+			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Payment Instructions', 'memberships-by-hubloy' ); ?></label>
 			<div class="uk-form-controls">
 				<textarea class="uk-textarea" name="manual_instructions"><?php echo isset( $settings['manual_instructions'] ) ? esc_html( $settings['manual_instructions'] ) : ''; ?></textarea>
 			</div>

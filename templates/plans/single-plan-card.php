@@ -3,7 +3,7 @@
  * Account subscription plan page
  * renders a users subsscription plan
  *
- * This template can be overridden by copying it to yourtheme/hubloy_membership/account/subscription-plan.php.
+ * This template can be overridden by copying it to yourtheme/memberships-by-hubloy/account/subscription-plan.php.
  *
  * @package HubloyMembership/Templates/Account
  * @version 1.0.0
@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					$trial_text   = $plan->get_readable_trial_text();
 					$normal_price = hubloy_membership_format_currency( $plan->price );
 					$sub_text     = $plan->get_readable_type();
-					echo sprintf( esc_html__( '%1$s then %2$s %3$s', 'hubloy_membership' ), esc_attr( $trial_text ), esc_attr( $normal_price ), esc_attr( $sub_text ) );
+					echo sprintf( esc_html__( '%1$s then %2$s %3$s', 'memberships-by-hubloy' ), esc_attr( $trial_text ), esc_attr( $normal_price ), esc_attr( $sub_text ) );
 				?>
 				</span>
 				<?php
@@ -39,7 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<?php
 						$normal_price = hubloy_membership_format_currency( $plan->price );
 						$sub_text     = $plan->get_readable_type();
-						echo sprintf( esc_html__( 'then %1$s %2$s', 'hubloy_membership' ), esc_attr( $normal_price ), esc_attr( $sub_text ) );
+						echo sprintf( esc_html__( 'then %1$s %2$s', 'memberships-by-hubloy' ), esc_attr( $normal_price ), esc_attr( $sub_text ) );
 					?>
 					</span>
 					<?php
@@ -63,9 +63,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<a class="button hubloy_membership-account-membership-plan--price--can-join" href="<?php echo esc_url( hubloy_membership_get_account_page_links( 'view-plan', $plan->membership_id ) ); ?>">
 				<?php
 				if ( $plan->trial_enabled ) {
-					esc_html_e( 'Begin Trial', 'hubloy_membership' );
+					esc_html_e( 'Begin Trial', 'memberships-by-hubloy' );
 				} else {
-					esc_html_e( 'Join Membership', 'hubloy_membership' );
+					esc_html_e( 'Join Membership', 'memberships-by-hubloy' );
 				}
 				?>
 			</a>

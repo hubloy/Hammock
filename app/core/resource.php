@@ -84,7 +84,7 @@ class Resource {
 
 		wp_register_script(
 			'hubloy_membership-admin',
-			HUBMEMB_ASSETS_URL . '/js/hubloy-membership-admin.min.js',
+			HUBMEMB_ASSETS_URL . '/js/memberships-by-hubloy-admin.min.js',
 			array( 'jquery' ),
 			HUBMEMB_VERSION,
 			true
@@ -92,9 +92,9 @@ class Resource {
 		$vars = apply_filters(
 			'hubloy_membership_admin_vars',
 			array(
-				'error'        => __( 'An error occured', 'hubloy-membership' ),
-				'no_results'   => __( 'Ooops, no results found', 'hubloy-membership' ),
-				'no_data'      => __( 'Ooops, no data found', 'hubloy-membership' ),
+				'error'        => __( 'An error occured', 'memberships-by-hubloy' ),
+				'no_results'   => __( 'Ooops, no results found', 'memberships-by-hubloy' ),
+				'no_data'      => __( 'Ooops, no data found', 'memberships-by-hubloy' ),
 				'base_api_url' => rest_url( 'wp/v2/' ),
 				'api_url'      => rest_url( HUBMEMB_REST_NAMESPACE ),
 				'api_nonce'    => wp_create_nonce( 'wp_rest' ),
@@ -105,48 +105,48 @@ class Resource {
 				'active_page'  => 'dashboard',
 				'common'       => array(
 					'buttons'       => array(
-						'save'     => __( 'Save', 'hubloy-membership' ),
-						'continue' => __( 'Save and Continue', 'hubloy-membership' ),
-						'update'   => __( 'Update', 'hubloy-membership' ),
-						'edit'     => __( 'Edit', 'hubloy-membership' ),
-						'delete'   => __( 'Delete', 'hubloy-membership' ),
-						'manage'   => __( 'Manage', 'hubloy-membership' ),
-						'ok'       => __( 'Okay', 'hubloy-membership' ),
-						'cancel'   => __( 'Cancel', 'hubloy-membership' ),
-						'back'     => __( 'Back', 'hubloy-membership' ),
-						'reminder' => __( 'Send Reminder', 'hubloy-membership' ),
+						'save'     => __( 'Save', 'memberships-by-hubloy' ),
+						'continue' => __( 'Save and Continue', 'memberships-by-hubloy' ),
+						'update'   => __( 'Update', 'memberships-by-hubloy' ),
+						'edit'     => __( 'Edit', 'memberships-by-hubloy' ),
+						'delete'   => __( 'Delete', 'memberships-by-hubloy' ),
+						'manage'   => __( 'Manage', 'memberships-by-hubloy' ),
+						'ok'       => __( 'Okay', 'memberships-by-hubloy' ),
+						'cancel'   => __( 'Cancel', 'memberships-by-hubloy' ),
+						'back'     => __( 'Back', 'memberships-by-hubloy' ),
+						'reminder' => __( 'Send Reminder', 'memberships-by-hubloy' ),
 					),
 					'string'        => array(
-						'dashboard' => __( 'Dashboard', 'hubloy-membership' ),
-						'not_found' => __( "Sorry, we couldn't find what you are looking for", 'hubloy-membership' ),
-						'title'     => __( 'Dashboard', 'hubloy-membership' ),
+						'dashboard' => __( 'Dashboard', 'memberships-by-hubloy' ),
+						'not_found' => __( "Sorry, we couldn't find what you are looking for", 'memberships-by-hubloy' ),
+						'title'     => __( 'Dashboard', 'memberships-by-hubloy' ),
 						'search'    => array(
 							'users'   => array(
-								'select'    => __( 'Search for user', 'hubloy-membership' ),
-								'not_found' => __( 'User not found', 'hubloy-membership' ),
+								'select'    => __( 'Search for user', 'memberships-by-hubloy' ),
+								'not_found' => __( 'User not found', 'memberships-by-hubloy' ),
 							),
 							'members' => array(
-								'select'    => __( 'Search for member', 'hubloy-membership' ),
-								'not_found' => __( 'Member not found', 'hubloy-membership' ),
+								'select'    => __( 'Search for member', 'memberships-by-hubloy' ),
+								'not_found' => __( 'Member not found', 'memberships-by-hubloy' ),
 							),
 						),
 					),
 					'status'        => array(
-						'enabled'  => __( 'Enabled', 'hubloy-membership' ),
-						'disabled' => __( 'Disabled', 'hubloy-membership' ),
-						'status'   => __( 'Status', 'hubloy-membership' ),
-						'expired'  => __( 'Expired', 'hubloy-membership' ),
-						'loading'  => __( 'Loading...', 'hubloy-membership' ),
-						'success'  => __( 'Success', 'hubloy-membership' ),
-						'error'    => __( 'Error', 'hubloy-membership' ),
+						'enabled'  => __( 'Enabled', 'memberships-by-hubloy' ),
+						'disabled' => __( 'Disabled', 'memberships-by-hubloy' ),
+						'status'   => __( 'Status', 'memberships-by-hubloy' ),
+						'expired'  => __( 'Expired', 'memberships-by-hubloy' ),
+						'loading'  => __( 'Loading...', 'memberships-by-hubloy' ),
+						'success'  => __( 'Success', 'memberships-by-hubloy' ),
+						'error'    => __( 'Error', 'memberships-by-hubloy' ),
 					),
 					'general'       => array(
-						'settings'  => __( 'Settings', 'hubloy-membership' ),
-						'configure' => __( 'Configure', 'hubloy-membership' ),
-						'filter'    => __( 'Filter', 'hubloy-membership' ),
-						'select'    => __( 'Select', 'hubloy-membership' ),
-						'actions'   => __( 'Actions', 'hubloy-membership' ),
-						'all'       => __( 'All', 'hubloy-membership' ),
+						'settings'  => __( 'Settings', 'memberships-by-hubloy' ),
+						'configure' => __( 'Configure', 'memberships-by-hubloy' ),
+						'filter'    => __( 'Filter', 'memberships-by-hubloy' ),
+						'select'    => __( 'Select', 'memberships-by-hubloy' ),
+						'actions'   => __( 'Actions', 'memberships-by-hubloy' ),
+						'all'       => __( 'All', 'memberships-by-hubloy' ),
 					),
 					'urls'          => array(
 						'dash_url' => is_multisite() ? network_admin_url( 'admin.php?page=hubloy_membership' ) : admin_url( 'admin.php?page=hubloy_membership' ),
@@ -286,7 +286,7 @@ class Resource {
 		// Admin CSS
 		wp_register_style(
 			'hubloy_membership-admin',
-			HUBMEMB_ASSETS_URL . '/css/hubloy-membership-admin.min.css',
+			HUBMEMB_ASSETS_URL . '/css/memberships-by-hubloy-admin.min.css',
 			null,
 			HUBMEMB_VERSION
 		);
@@ -301,7 +301,7 @@ class Resource {
 	public static function register_front_styles() {
 		wp_register_style(
 			'hubloy_membership-front',
-			HUBMEMB_ASSETS_URL . '/css/hubloy-membership-front.min.css',
+			HUBMEMB_ASSETS_URL . '/css/memberships-by-hubloy-front.min.css',
 			null,
 			HUBMEMB_VERSION
 		);
@@ -325,7 +325,7 @@ class Resource {
 
 		wp_register_script(
 			'hubloy_membership-front',
-			HUBMEMB_ASSETS_URL . '/js/hubloy-membership-front.min.js',
+			HUBMEMB_ASSETS_URL . '/js/memberships-by-hubloy-front.min.js',
 			array( 'jquery' ),
 			HUBMEMB_VERSION,
 			true
@@ -333,21 +333,21 @@ class Resource {
 		$vars = apply_filters(
 			'hubloy_membership_front_vars',
 			array(
-				'error'      => __( 'An error occured', 'hubloy-membership' ),
+				'error'      => __( 'An error occured', 'memberships-by-hubloy' ),
 				'ajax_url'   => admin_url( 'admin-ajax.php' ),
-				'no_results' => __( 'Ooops, no results found', 'hubloy-membership' ),
+				'no_results' => __( 'Ooops, no results found', 'memberships-by-hubloy' ),
 				'assets'     => array(
 					'spinner' => HUBMEMB_ASSETS_URL . '/img/spinner.gif',
 				),
 				'common'     => array(
 					'buttons' => array(
-						'save'   => __( 'Save', 'hubloy-membership' ),
-						'update' => __( 'Update', 'hubloy-membership' ),
-						'edit'   => __( 'Edit', 'hubloy-membership' ),
-						'delete' => __( 'Delete', 'hubloy-membership' ),
-						'ok'     => __( 'Okay', 'hubloy-membership' ),
-						'cancel' => __( 'Cancel', 'hubloy-membership' ),
-						'back'   => __( 'Back', 'hubloy-membership' ),
+						'save'   => __( 'Save', 'memberships-by-hubloy' ),
+						'update' => __( 'Update', 'memberships-by-hubloy' ),
+						'edit'   => __( 'Edit', 'memberships-by-hubloy' ),
+						'delete' => __( 'Delete', 'memberships-by-hubloy' ),
+						'ok'     => __( 'Okay', 'memberships-by-hubloy' ),
+						'cancel' => __( 'Cancel', 'memberships-by-hubloy' ),
+						'back'   => __( 'Back', 'memberships-by-hubloy' ),
 					),
 				),
 			)

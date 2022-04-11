@@ -51,10 +51,10 @@ class Finished extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Membership Started', 'hubloy-membership' ),
-			'description' => __( 'Sent to a member when the membership starts', 'hubloy-membership' ),
-			'heading'     => __( 'Membership Started', 'hubloy-membership' ),
-			'subject'     => sprintf( __( 'Your %s membership hase started', 'hubloy-membership' ), '{membership_name}' ),
+			'title'       => __( 'Membership Started', 'memberships-by-hubloy' ),
+			'description' => __( 'Sent to a member when the membership starts', 'memberships-by-hubloy' ),
+			'heading'     => __( 'Membership Started', 'memberships-by-hubloy' ),
+			'subject'     => sprintf( __( 'Your %s membership hase started', 'memberships-by-hubloy' ), '{membership_name}' ),
 			'recipient'   => '',
 			'enabled'     => true,
 		);

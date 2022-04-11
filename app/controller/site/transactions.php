@@ -90,8 +90,8 @@ class Transactions extends Controller {
 		$this->_cap     = $cap;
 		add_submenu_page(
 			$slug,
-			__( 'Transactions', 'hubloy-membership' ),
-			__( 'Transactions', 'hubloy-membership' ),
+			__( 'Transactions', 'memberships-by-hubloy' ),
+			__( 'Transactions', 'memberships-by-hubloy' ),
 			$this->_cap,
 			$this->_page_id,
 			array( $this, 'render' )
@@ -109,7 +109,7 @@ class Transactions extends Controller {
 	 */
 	public function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'transactions' ) ) {
-			$vars['common']['string']['title'] = __( 'Transactions', 'hubloy-membership' );
+			$vars['common']['string']['title'] = __( 'Transactions', 'memberships-by-hubloy' );
 			$vars['active_page']               = 'transactions';
 			$vars['strings']                   = $this->get_strings();
 			$vars['page_strings']              = array(

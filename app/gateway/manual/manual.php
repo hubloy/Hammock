@@ -72,7 +72,7 @@ class Manual extends Gateway {
 	public function register( $gateways ) {
 		if ( ! isset( $gateways['manual'] ) ) {
 			$gateways['manual'] = array(
-				'name' => __( 'Manual Gateway', 'hubloy-membership' ),
+				'name' => __( 'Manual Gateway', 'memberships-by-hubloy' ),
 			);
 		}
 		return $gateways;

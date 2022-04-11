@@ -74,8 +74,8 @@ class Addon extends Component {
 	 * The addon must be registered as follows
 	 *
 	 * array(
-	 *          'name'          => __( 'Addon Name', 'hubloy-membership' ),
-	 *          'description'   => __( 'Addon Description', 'hubloy-membership' ),
+	 *          'name'          => __( 'Addon Name', 'memberships-by-hubloy' ),
+	 *          'description'   => __( 'Addon Description', 'memberships-by-hubloy' ),
 	 *          'icon'          => 'icon-class',
 	 *          'configure'     => true
 	 *      );

@@ -76,9 +76,9 @@ class Memberships {
 	 */
 	public static function payment_types() {
 		$payment_types = array(
-			self::PAYMENT_TYPE_PERMANENT  => __( 'One payment for permanent access', 'hubloy-membership' ),
-			self::PAYMENT_TYPE_DATE_RANGE => __( 'One payment for date range access', 'hubloy-membership' ),
-			self::PAYMENT_TYPE_RECURRING  => __( 'Recurring payment', 'hubloy-membership' ),
+			self::PAYMENT_TYPE_PERMANENT  => __( 'One payment for permanent access', 'memberships-by-hubloy' ),
+			self::PAYMENT_TYPE_DATE_RANGE => __( 'One payment for date range access', 'memberships-by-hubloy' ),
+			self::PAYMENT_TYPE_RECURRING  => __( 'Recurring payment', 'memberships-by-hubloy' ),
 		);
 		return apply_filters( 'hubloy_membership_membership_payment_types', $payment_types );
 	}
@@ -94,10 +94,10 @@ class Memberships {
 		return apply_filters(
 			'hubloy_membership_membership_payment_durations',
 			array(
-				Duration::PERIOD_TYPE_DAYS   => __( 'Daily', 'hubloy-membership' ),
-				Duration::PERIOD_TYPE_WEEKS  => __( 'Weekly', 'hubloy-membership' ),
-				Duration::PERIOD_TYPE_MONTHS => __( 'Monthly', 'hubloy-membership' ),
-				Duration::PERIOD_TYPE_YEARS  => __( 'Annually', 'hubloy-membership' ),
+				Duration::PERIOD_TYPE_DAYS   => __( 'Daily', 'memberships-by-hubloy' ),
+				Duration::PERIOD_TYPE_WEEKS  => __( 'Weekly', 'memberships-by-hubloy' ),
+				Duration::PERIOD_TYPE_MONTHS => __( 'Monthly', 'memberships-by-hubloy' ),
+				Duration::PERIOD_TYPE_YEARS  => __( 'Annually', 'memberships-by-hubloy' ),
 			)
 		);
 	}
@@ -113,7 +113,7 @@ class Memberships {
 	 */
 	public static function get_payment_duration( $duration ) {
 		$durations = self::payment_durations();
-		return isset( $durations[ $duration ] ) ? $durations[ $duration ] : __( 'N/A', 'hubloy-membership' );
+		return isset( $durations[ $duration ] ) ? $durations[ $duration ] : __( 'N/A', 'memberships-by-hubloy' );
 	}
 
 
@@ -129,10 +129,10 @@ class Memberships {
 		return apply_filters(
 			'hubloy_membership_membership_trial_duration',
 			array(
-				Duration::PERIOD_TYPE_DAYS   => __( 'Day', 'hubloy-membership' ),
-				Duration::PERIOD_TYPE_WEEKS  => __( 'Week', 'hubloy-membership' ),
-				Duration::PERIOD_TYPE_MONTHS => __( 'Month', 'hubloy-membership' ),
-				Duration::PERIOD_TYPE_YEARS  => __( 'Year', 'hubloy-membership' ),
+				Duration::PERIOD_TYPE_DAYS   => __( 'Day', 'memberships-by-hubloy' ),
+				Duration::PERIOD_TYPE_WEEKS  => __( 'Week', 'memberships-by-hubloy' ),
+				Duration::PERIOD_TYPE_MONTHS => __( 'Month', 'memberships-by-hubloy' ),
+				Duration::PERIOD_TYPE_YEARS  => __( 'Year', 'memberships-by-hubloy' ),
 			)
 		);
 	}
@@ -148,7 +148,7 @@ class Memberships {
 	 */
 	public static function get_trial_duration( $duration ) {
 		$durations = self::trial_duration();
-		return isset( $durations[ $duration ] ) ? $durations[ $duration ] : __( 'N/A', 'hubloy-membership' );
+		return isset( $durations[ $duration ] ) ? $durations[ $duration ] : __( 'N/A', 'memberships-by-hubloy' );
 	}
 
 	/**
@@ -162,7 +162,7 @@ class Memberships {
 	 */
 	public static function get_type( $type ) {
 		$types = self::payment_types();
-		return isset( $types[ $type ] ) ? $types[ $type ] : __( 'N/A', 'hubloy-membership' );
+		return isset( $types[ $type ] ) ? $types[ $type ] : __( 'N/A', 'memberships-by-hubloy' );
 	}
 
 	/**
@@ -281,7 +281,7 @@ class Memberships {
 		$where = '';
 		if ( $include_select ) {
 			$memberships = array(
-				0 => __( 'Select Membership', 'hubloy-membership' ),
+				0 => __( 'Select Membership', 'memberships-by-hubloy' ),
 			);
 		} else {
 			$memberships = array();

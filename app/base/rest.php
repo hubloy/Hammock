@@ -64,7 +64,7 @@ class Rest extends Component {
 		if ( ! $can_view ) {
 			return new \WP_Error(
 				'rest_user_cannot_view',
-				__( 'Invalid request, you are not allowed to make this request', 'hubloy-membership' ),
+				__( 'Invalid request, you are not allowed to make this request', 'memberships-by-hubloy' ),
 				array( 'status' => rest_authorization_required_code() )
 			);
 		}

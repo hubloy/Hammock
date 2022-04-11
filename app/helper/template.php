@@ -33,7 +33,7 @@ class Template {
 	 * @return string
 	 */
 	public static function template_directory() {
-		return apply_filters( 'hubloy_membership_template_directory', 'hubloy-membership' );
+		return apply_filters( 'hubloy_membership_template_directory', 'memberships-by-hubloy' );
 	}
 
 	/**
@@ -46,7 +46,7 @@ class Template {
 	 * @return string
 	 */
 	public static function get_theme_template_file( $template ) {
-		return get_stylesheet_directory() . '/' . apply_filters( 'hubloy_membership_template_directory', 'hubloy-membership', $template ) . '/' . $template;
+		return get_stylesheet_directory() . '/' . apply_filters( 'hubloy_membership_template_directory', 'memberships-by-hubloy', $template ) . '/' . $template;
 	}
 
 	/**
@@ -119,7 +119,7 @@ class Template {
 	 */
 	public static function get_template_part( $slug, $name = '' ) {
 		$cache_key = sanitize_key( implode( '-', array( 'template-part', $slug, $name, HUBMEMB_VERSION ) ) );
-		$template  = (string) wp_cache_get( $cache_key, 'hubloy-membership' );
+		$template  = (string) wp_cache_get( $cache_key, 'memberships-by-hubloy' );
 
 		if ( ! $template ) {
 			if ( $name ) {
@@ -146,7 +146,7 @@ class Template {
 				);
 			}
 
-			wp_cache_set( $cache_key, $template, 'hubloy-membership' );
+			wp_cache_set( $cache_key, $template, 'memberships-by-hubloy' );
 		}
 
 		// Allow 3rd party plugins to filter template file from their plugin.
@@ -167,11 +167,11 @@ class Template {
 	 */
 	public static function get_template( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
 		$cache_key = sanitize_key( implode( '-', array( 'template', $template_name, $template_path, $default_path, HUBMEMB_VERSION ) ) );
-		$template  = (string) wp_cache_get( $cache_key, 'hubloy-membership' );
+		$template  = (string) wp_cache_get( $cache_key, 'memberships-by-hubloy' );
 
 		if ( ! $template ) {
 			$template = self::locate_template( $template_name, $template_path, $default_path );
-			wp_cache_set( $cache_key, $template, 'hubloy-membership' );
+			wp_cache_set( $cache_key, $template, 'memberships-by-hubloy' );
 		}
 
 		// Allow 3rd party plugin filter template file from their plugin.
@@ -179,7 +179,7 @@ class Template {
 
 		if ( $filter_template !== $template ) {
 			if ( ! file_exists( $filter_template ) ) {
-				_doing_it_wrong( __METHOD__, sprintf( __( '%s does not exist.', 'hubloy-membership' ), '<code>' . $template . '</code>' ), '2.1' );
+				_doing_it_wrong( __METHOD__, sprintf( __( '%s does not exist.', 'memberships-by-hubloy' ), '<code>' . $template . '</code>' ), '2.1' );
 				return;
 			}
 			$template = $filter_template;

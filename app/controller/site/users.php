@@ -85,11 +85,11 @@ class Users extends Controller {
 		$columns_4   = array_slice( $columns, 0, 5 );
 		$columns_5   = array_slice( $columns, 5 );
 
-		$membership_column = array( 'membership' => __( 'Is Member', 'hubloy-membership' ) );
+		$membership_column = array( 'membership' => __( 'Is Member', 'memberships-by-hubloy' ) );
 		if ( $this->settings->get_general_setting( 'account_verification' ) === 1 ) {
 			$membership_column = array(
-				'membership' => __( 'Is Member', 'hubloy-membership' ),
-				'verified'   => __( 'Verified', 'hubloy-membership' ),
+				'membership' => __( 'Is Member', 'memberships-by-hubloy' ),
+				'verified'   => __( 'Verified', 'memberships-by-hubloy' ),
 			);
 		}
 
@@ -113,24 +113,24 @@ class Users extends Controller {
 	public function manage_users_custom_column( $value, $column_name, $user_id ) {
 		if ( 'membership' === $column_name ) {
 			if ( ! hubloy_membership_user_can_subscribe( $user_id ) ) {
-				$value = '<span style="font-weight:bold;">' . __( 'No (Not allowed)', 'hubloy-membership' ) . '</span>';
+				$value = '<span style="font-weight:bold;">' . __( 'No (Not allowed)', 'memberships-by-hubloy' ) . '</span>';
 			} else {
 				if ( hubloy_membership_user_is_member( $user_id ) ) {
 					$plans = hubloy_membership_user_has_plans( $user_id );
-					$value = sprintf( __( '%d plans', 'hubloy-membership' ), $plans );
+					$value = sprintf( __( '%d plans', 'memberships-by-hubloy' ), $plans );
 				} else {
-					$value = __( 'No', 'hubloy-membership' );
+					$value = __( 'No', 'memberships-by-hubloy' );
 				}
 			}
 		} elseif ( 'verified' === $column_name ) {
 			if ( is_super_admin( $user_id ) ) {
-				$value = '<span style="font-weight:bold;">' . __( 'No (Admin)', 'hubloy-membership' ) . '</span>';
+				$value = '<span style="font-weight:bold;">' . __( 'No (Admin)', 'memberships-by-hubloy' ) . '</span>';
 			} else {
 				$user_activation_status = get_user_meta( $user_id, '_hubloy_membership_activation_status', true );
-				$value                  = __( 'Not Verified', 'hubloy-membership' );
+				$value                  = __( 'Not Verified', 'memberships-by-hubloy' );
 				if ( $user_activation_status ) {
 					if ( intval( $user_activation_status ) === 3 ) {
-						$value = __( 'Verified', 'hubloy-membership' );
+						$value = __( 'Verified', 'memberships-by-hubloy' );
 					}
 				}
 			}
@@ -149,9 +149,9 @@ class Users extends Controller {
 	 */
 	public function add_verify_bulk_action( $actions ) {
 
-		$actions['hubloy_membership_bulk_approve']    = __( 'Approve', 'hubloy-membership' );
-		$actions['hubloy_membership_bulk_disapprove'] = __( 'Disapprove', 'hubloy-membership' );
-		$actions['hubloy_membership_bulk_resend']     = __( 'Resend Verification Email', 'hubloy-membership' );
+		$actions['hubloy_membership_bulk_approve']    = __( 'Approve', 'memberships-by-hubloy' );
+		$actions['hubloy_membership_bulk_disapprove'] = __( 'Disapprove', 'memberships-by-hubloy' );
+		$actions['hubloy_membership_bulk_resend']     = __( 'Resend Verification Email', 'memberships-by-hubloy' );
 
 		return $actions;
 	}
@@ -224,21 +224,21 @@ class Users extends Controller {
 			$user_count = intval( $_REQUEST['_hubloy_membership_approved'] );
 			?>
 			<div class="notice notice-success is-dismissible">
-				<p><?php echo sprintf( esc_html__( '%d user accounts approved', 'hubloy-membership' ), $user_count ); ?></p>
+				<p><?php echo sprintf( esc_html__( '%d user accounts approved', 'memberships-by-hubloy' ), $user_count ); ?></p>
 			</div>
 			<?php
 		} elseif ( isset( $_REQUEST['_hubloy_membership_disapproved'] ) ) {
 			$user_count = intval( $_REQUEST['_hubloy_membership_disapproved'] );
 			?>
 			<div class="notice notice-success is-dismissible">
-				<p><?php echo sprintf( esc_html__( '%d user accounts disapproved', 'hubloy-membership' ), $user_count ); ?></p>
+				<p><?php echo sprintf( esc_html__( '%d user accounts disapproved', 'memberships-by-hubloy' ), $user_count ); ?></p>
 			</div>
 			<?php
 		} elseif ( isset( $_REQUEST['_hubloy_membership_resend'] ) ) {
 			$user_count = intval( $_REQUEST['_hubloy_membership_resend'] );
 			?>
 			<div class="notice notice-success is-dismissible">
-				<p><?php echo sprintf( esc_html__( '%d user accounts resent emails', 'hubloy-membership' ), $user_count ); ?></p>
+				<p><?php echo sprintf( esc_html__( '%d user accounts resent emails', 'memberships-by-hubloy' ), $user_count ); ?></p>
 			</div>
 			<?php
 		}

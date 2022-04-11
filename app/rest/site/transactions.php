@@ -63,42 +63,42 @@ class Transactions extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
-						'description'       => __( 'The current page', 'hubloy-membership' ),
+						'description'       => __( 'The current page', 'memberships-by-hubloy' ),
 					),
 					'per_page'  => array(
 						'required'          => false,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
 						'default'           => 10,
-						'description'       => __( 'Items per page', 'hubloy-membership' ),
+						'description'       => __( 'Items per page', 'memberships-by-hubloy' ),
 					),
 					'gateway'   => array(
 						'required'          => false,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
 						'default'           => '',
-						'description'       => __( 'Gateway id', 'hubloy-membership' ),
+						'description'       => __( 'Gateway id', 'memberships-by-hubloy' ),
 					),
 					'status'    => array(
 						'required'          => false,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
 						'default'           => '',
-						'description'       => __( 'Transaction Status', 'hubloy-membership' ),
+						'description'       => __( 'Transaction Status', 'memberships-by-hubloy' ),
 					),
 					'member_id' => array(
 						'required'          => false,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
 						'default'           => false,
-						'description'       => __( 'The member id', 'hubloy-membership' ),
+						'description'       => __( 'The member id', 'memberships-by-hubloy' ),
 					),
 					'amount'    => array(
 						'required'          => false,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
 						'default'           => false,
-						'description'       => __( 'The amount', 'hubloy-membership' ),
+						'description'       => __( 'The amount', 'memberships-by-hubloy' ),
 					),
 				),
 			)
@@ -190,7 +190,7 @@ class Transactions extends Rest {
 	 */
 	public function list_transaction_status( $request ) {
 		$status = \HubloyMembership\Services\Transactions::transaction_status();
-		array_unshift( $status, array( 0 => __( 'Select Status', 'hubloy-membership' ) ) );
+		array_unshift( $status, array( 0 => __( 'Select Status', 'memberships-by-hubloy' ) ) );
 		return $status;
 	}
 
@@ -240,7 +240,7 @@ class Transactions extends Rest {
 		$success  = $service->update_transaction( $id, '', $status, $amount, $due_date );
 		return array(
 			'status'  => $success,
-			'message' => $success ? __( 'Transaction updated', 'hubloy-membership' ) : __( 'Error updating transaction', 'hubloy-membership' ),
+			'message' => $success ? __( 'Transaction updated', 'memberships-by-hubloy' ) : __( 'Error updating transaction', 'memberships-by-hubloy' ),
 		);
 	}
 }

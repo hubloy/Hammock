@@ -40,6 +40,6 @@ class Types extends Rule {
 	 */
 	public function init() {
 		$this->id   = 'custom_types';
-		$this->name = __( 'Custom Post Types', 'hubloy-membership' );
+		$this->name = __( 'Custom Post Types', 'memberships-by-hubloy' );
 	}
 }

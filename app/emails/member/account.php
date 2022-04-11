@@ -51,10 +51,10 @@ class Account extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Account Update', 'hubloy-membership' ),
-			'description' => __( 'Sent when a member updates any personal information (e.g. credit card, name, address details etc.)', 'hubloy-membership' ),
-			'heading'     => __( 'Your billing details have been changed.', 'hubloy-membership' ),
-			'subject'     => sprintf( __( '%s: Your billing details have been changed', 'hubloy-membership' ), '[{site_title}]' ),
+			'title'       => __( 'Account Update', 'memberships-by-hubloy' ),
+			'description' => __( 'Sent when a member updates any personal information (e.g. credit card, name, address details etc.)', 'memberships-by-hubloy' ),
+			'heading'     => __( 'Your billing details have been changed.', 'memberships-by-hubloy' ),
+			'subject'     => sprintf( __( '%s: Your billing details have been changed', 'memberships-by-hubloy' ), '[{site_title}]' ),
 			'recipient'   => '',
 			'enabled'     => true,
 		);

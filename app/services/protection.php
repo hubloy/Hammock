@@ -228,7 +228,7 @@ class Protection {
 
 		add_meta_box(
 			'hubloy_membership-content-protection',
-			__( 'Memberships', 'hubloy-membership' ),
+			__( 'Memberships', 'memberships-by-hubloy' ),
 			array( $this, 'render_meta_box' ),
 			$screen->id,
 			'normal',

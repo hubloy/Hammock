@@ -8,7 +8,7 @@
  * Author URI:          https://www.hubloy.com
  * License:             GPLv2
  * License URI:         https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:         hubloy-membership
+ * Text Domain:         memberships-by-hubloy
  * Domain Path:         /languages/
  *
  * @package HubloyMembership
@@ -102,7 +102,7 @@ if ( ! class_exists( 'HubloyMembership' ) ) :
 				// Load wp_cli
 			}
 
-			do_action( 'hubloy-membership_loaded' );
+			do_action( 'memberships-by-hubloy_loaded' );
 		}
 
 
@@ -115,7 +115,7 @@ if ( ! class_exists( 'HubloyMembership' ) ) :
 		protected function define_constants() {
 			$upload_dir = wp_upload_dir();
 			$this->define( 'HUBMEMB_MENU_LOCATION', '55.5' );
-			$this->define( 'HUBMEMB_REST_NAMESPACE', 'hubloy-membership/v1/' );
+			$this->define( 'HUBMEMB_REST_NAMESPACE', 'memberships-by-hubloy/v1/' );
 			$this->define( 'HUBMEMB_VERSION', $this->version );
 			$this->define( 'HUBMEMB_UIKIT_VERSION', '3.2.6' );
 			$this->define( 'HUBMEMB_DEBUG', true );
@@ -130,8 +130,8 @@ if ( ! class_exists( 'HubloyMembership' ) ) :
 			$this->define( 'HUBMEMB_LIB_DIR', HUBMEMB_PLUGIN_DIR . '/lib/' );
 			$this->define( 'HUBMEMB_LOCALE_DIR', HUBMEMB_PLUGIN_DIR . '/app/i18n' );
 			$this->define( 'HUBMEMB_ASSETS_URL', HUBMEMB_PLUGIN_URL . 'assets' );
-			$this->define( 'HUBMEMB_LOG_DIR', $upload_dir['basedir'] . '/hubloy-membership-logs/' );
-			$this->define( 'HUBMEMB_LOG_URL', $upload_dir['baseurl'] . '/hubloy-membership-logs/' );
+			$this->define( 'HUBMEMB_LOG_DIR', $upload_dir['basedir'] . '/memberships-by-hubloy-logs/' );
+			$this->define( 'HUBMEMB_LOG_URL', $upload_dir['baseurl'] . '/memberships-by-hubloy-logs/' );
 		}
 
 

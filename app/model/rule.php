@@ -277,7 +277,7 @@ class Rule {
 				'title'         => $item_title,
 				'time_limit'    => $this->time_limit,
 				'time_duration' => $this->time_duration,
-				'desc'          => sprintf( _n( '%1$s membership has access to %2$s', '%1$s memberships have access to %2$s', $membership_count, 'hubloy-membership' ), number_format_i18n( $membership_count ), $item_title ),
+				'desc'          => sprintf( _n( '%1$s membership has access to %2$s', '%1$s memberships have access to %2$s', $membership_count, 'memberships-by-hubloy' ), number_format_i18n( $membership_count ), $item_title ),
 			),
 			$this
 		);

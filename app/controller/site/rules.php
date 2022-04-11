@@ -103,8 +103,8 @@ class Rules extends Controller {
 		$this->_cap     = $cap;
 		add_submenu_page(
 			$slug,
-			__( 'Protection Rules', 'hubloy-membership' ),
-			__( 'Protection Rules', 'hubloy-membership' ),
+			__( 'Protection Rules', 'memberships-by-hubloy' ),
+			__( 'Protection Rules', 'memberships-by-hubloy' ),
 			$this->_cap,
 			$this->_page_id,
 			array( $this, 'render' )
@@ -123,7 +123,7 @@ class Rules extends Controller {
 	 */
 	public function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'rules' ) ) {
-			$vars['common']['string']['title'] = __( 'Membership Rules', 'hubloy-membership' );
+			$vars['common']['string']['title'] = __( 'Membership Rules', 'memberships-by-hubloy' );
 			$vars['active_page']               = 'rules';
 			$vars['strings']                   = $this->get_strings();
 			$vars['page_strings']              = array(

@@ -2,7 +2,7 @@
 /**
  * Account transaction pay
  *
- * This template can be overridden by copying it to yourtheme/hubloy_membership/account/transaction/single/pay-transaction.php.
+ * This template can be overridden by copying it to yourtheme/memberships-by-hubloy/account/transaction/single/pay-transaction.php.
  *
  * @package HubloyMembership/Templates/Account/Transaction/Single/Pay
  * @version 1.0.0
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php do_action( 'hubloy_membership_account_pay_single_transaction_before', $invoice ); ?>
 		<table class="hubloy_membership-account-transaction--pay-transaction-details">
 			<tr class="details">
-				<td><?php esc_html_e( 'Details:', 'hubloy_membership' ); ?></td>
+				<td><?php esc_html_e( 'Details:', 'memberships-by-hubloy' ); ?></td>
 				<td>
 					<?php
 						hubloy_membership_get_template(
@@ -33,12 +33,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</td>
 			</tr>
 			<tr class="total">
-				<td><?php esc_html_e( 'Total:', 'hubloy_membership' ); ?></td>
+				<td><?php esc_html_e( 'Total:', 'memberships-by-hubloy' ); ?></td>
 				<td><?php echo wp_kses_post( $invoice->get_amount_formated() ); ?></td>
 			</tr>
 			<?php if ( $invoice->is_owner() ) : ?>
 			<tr class="gateway">
-				<td><?php esc_html_e( 'Payment gateway:', 'hubloy_membership' ); ?></td>
+				<td><?php esc_html_e( 'Payment gateway:', 'memberships-by-hubloy' ); ?></td>
 				<td>
 					<?php
 						foreach( hubloy_membership_list_active_gateways() as $gateway_id => $gateway_name ) {

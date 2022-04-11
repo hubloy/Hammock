@@ -62,10 +62,10 @@ class Verify extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Account Verification', 'hubloy-membership' ),
-			'description' => __( 'Sent to customers to verify their account emails', 'hubloy-membership' ),
-			'heading'     => __( 'Account Verification', 'hubloy-membership' ),
-			'subject'     => sprintf( __( 'Verify your account on %s', 'hubloy-membership' ), '{site_title}' ),
+			'title'       => __( 'Account Verification', 'memberships-by-hubloy' ),
+			'description' => __( 'Sent to customers to verify their account emails', 'memberships-by-hubloy' ),
+			'heading'     => __( 'Account Verification', 'memberships-by-hubloy' ),
+			'subject'     => sprintf( __( 'Verify your account on %s', 'memberships-by-hubloy' ), '{site_title}' ),
 			'recipient'   => '',
 			'enabled'     => false,
 		);

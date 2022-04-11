@@ -22,9 +22,9 @@ function hubloy_membership_view_subscription_list_table_columns() {
 	return apply_filters(
 		'hubloy_membership_view_subscription_list_table_columns',
 		array(
-			'plan-name'    => __( 'Membership Name', 'hubloy-membership' ),
-			'plan-status'  => __( 'Status', 'hubloy-membership' ),
-			'plan-price'   => __( 'Price', 'hubloy-membership' ),
+			'plan-name'    => __( 'Membership Name', 'memberships-by-hubloy' ),
+			'plan-status'  => __( 'Status', 'memberships-by-hubloy' ),
+			'plan-price'   => __( 'Price', 'memberships-by-hubloy' ),
 			'plan-payment' => '',
 		)
 	);
@@ -41,11 +41,11 @@ function hubloy_membership_view_transaction_list_table_columns() {
 	return apply_filters(
 		'hubloy_membership_view_transaction_list_table_columns',
 		array(
-			'transaction-id'      => __( 'Transaction ID', 'hubloy-membership' ),
-			'transaction-status'  => __( 'Status', 'hubloy-membership' ),
-			'transaction-gateway' => __( 'Gateway', 'hubloy-membership' ),
-			'transaction-amount'  => __( 'Amount', 'hubloy-membership' ),
-			'transaction-date'    => __( 'Date', 'hubloy-membership' ),
+			'transaction-id'      => __( 'Transaction ID', 'memberships-by-hubloy' ),
+			'transaction-status'  => __( 'Status', 'memberships-by-hubloy' ),
+			'transaction-gateway' => __( 'Gateway', 'memberships-by-hubloy' ),
+			'transaction-amount'  => __( 'Amount', 'memberships-by-hubloy' ),
+			'transaction-date'    => __( 'Date', 'memberships-by-hubloy' ),
 		)
 	);
 }

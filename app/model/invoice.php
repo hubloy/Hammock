@@ -414,7 +414,7 @@ class Invoice {
 	 */
 	public function gateway_name() {
 		if ( empty( $this->gateway ) ) {
-			return apply_filters( 'hubloy_membership_invoice_gateway_blank', __( 'None', 'hubloy-membership' ), $this );
+			return apply_filters( 'hubloy_membership_invoice_gateway_blank', __( 'None', 'memberships-by-hubloy' ), $this );
 		} else {
 			$gateways = Gateways::load_gateways();
 			return isset( $gateways[ $this->gateway ] ) ? $gateways[ $this->gateway ]['name'] : apply_filters( 'hubloy_membership_invoice_gateway_missing', $this->gateway, $this );
@@ -605,7 +605,7 @@ class Invoice {
 				'user_id'         => $this->user_id,
 				'user_data'       => $this->get_user_details(),
 				'due'             => ! empty( $this->due_date ) ? date_i18n( 'Y-m-d', strtotime( $this->due_date ) ) : '',
-				'due_date'        => ! empty( $this->due_date ) ? $this->due_date : __( 'N/A', 'hubloy-membership' ),
+				'due_date'        => ! empty( $this->due_date ) ? $this->due_date : __( 'N/A', 'memberships-by-hubloy' ),
 				'date_created'    => $this->date_created,
 				'date_updated'    => $this->date_updated,
 				'admin_edit_url'  => $this->admin_edit_url,

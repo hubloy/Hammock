@@ -238,11 +238,11 @@ class Email extends Component {
 	 */
 	public function copy_theme() {
 		if ( ! current_user_can( 'edit_themes' ) ) {
-			wp_send_json_error( __( "You don't have permission to do this.", 'hubloy-membership' ) );
+			wp_send_json_error( __( "You don't have permission to do this.", 'memberships-by-hubloy' ) );
 		}
 		$success = Template::copy_to_theme( $this->template_html );
 		if ( $success ) {
-			wp_send_json_success( __( 'Template file copied to theme', 'hubloy-membership' ) );
+			wp_send_json_success( __( 'Template file copied to theme', 'memberships-by-hubloy' ) );
 		}
 	}
 
@@ -256,11 +256,11 @@ class Email extends Component {
 	 */
 	public function delete_theme() {
 		if ( ! current_user_can( 'edit_themes' ) ) {
-			wp_send_json_error( __( "You don't have permission to do this.", 'hubloy-membership' ) );
+			wp_send_json_error( __( "You don't have permission to do this.", 'memberships-by-hubloy' ) );
 		}
 		$success = Template::remove_template( $this->template_html );
 		if ( $success ) {
-			wp_send_json_success( __( 'Template file deleted from theme', 'hubloy-membership' ) );
+			wp_send_json_success( __( 'Template file deleted from theme', 'memberships-by-hubloy' ) );
 		}
 	}
 

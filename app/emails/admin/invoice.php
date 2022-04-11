@@ -54,10 +54,10 @@ class Invoice extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'New payment', 'hubloy-membership' ),
-			'description' => __( 'Email sent to admin to notify a new payment is received', 'hubloy-membership' ),
-			'heading'     => sprintf( __( 'New payment %s', 'hubloy-membership' ), '#{invoice_number}' ),
-			'subject'     => sprintf( __( '%1$s: New payment %2$s', 'hubloy-membership' ), '[{site_title}]', '#{invoice_number}' ),
+			'title'       => __( 'New payment', 'memberships-by-hubloy' ),
+			'description' => __( 'Email sent to admin to notify a new payment is received', 'memberships-by-hubloy' ),
+			'heading'     => sprintf( __( 'New payment %s', 'memberships-by-hubloy' ), '#{invoice_number}' ),
+			'subject'     => sprintf( __( '%1$s: New payment %2$s', 'memberships-by-hubloy' ), '[{site_title}]', '#{invoice_number}' ),
 			'recipient'   => get_option( 'admin_email' ),
 			'enabled'     => true,
 		);

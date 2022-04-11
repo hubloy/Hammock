@@ -62,13 +62,13 @@ class Category extends Addon {
 	public function register( $addons ) {
 		if ( ! isset( $addons['category'] ) ) {
 			$addons['category'] = array(
-				'name'        => __( 'Category Protection', 'hubloy-membership' ),
-				'description' => __( 'Protect your posts by category.', 'hubloy-membership' ),
+				'name'        => __( 'Category Protection', 'memberships-by-hubloy' ),
+				'description' => __( 'Protect your posts by category.', 'memberships-by-hubloy' ),
 				'icon'        => 'dashicons dashicons-category',
 				'settings'    => true,
 			);
 			if ( ! $this->plugin_active() ) {
-				$addons['category']['message'] = __( 'Content protection is currently disabled', 'hubloy-membership' );
+				$addons['category']['message'] = __( 'Content protection is currently disabled', 'memberships-by-hubloy' );
 			}
 		}
 		return $addons;
@@ -100,7 +100,7 @@ class Category extends Addon {
 	 * @return array
 	 */
 	public function protection_column( $columns ) {
-		$columns['hubloy-membership'] = __( 'Access', 'hubloy-membership' );
+		$columns['memberships-by-hubloy'] = __( 'Access', 'memberships-by-hubloy' );
 		return $columns;
 	}
 
@@ -116,12 +116,12 @@ class Category extends Addon {
 	 * @return string
 	 */
 	public function protection_column_content( $value, $column_name, $tax_id ) {
-		if ( $column_name === 'hubloy-membership' ) {
+		if ( $column_name === 'memberships-by-hubloy' ) {
 			$access = get_term_meta( $tax_id, '_hubloy_membership_mebership_access', true );
 			if ( ! is_array( $access ) ) {
 				$access = array();
 			}
-			return empty( $access ) ? __( 'All', 'hubloy-membership' ) : sprintf( __( '%d membership(s)', 'hubloy-membership' ), count( $access ) );
+			return empty( $access ) ? __( 'All', 'memberships-by-hubloy' ) : sprintf( __( '%d membership(s)', 'memberships-by-hubloy' ), count( $access ) );
 		}
 		return $value;
 	}
@@ -145,10 +145,10 @@ class Category extends Addon {
 		?>
 		<tr class="form-field">
 			<th scope="row" valign="top">
-				<label for="membership"><?php esc_html_e( 'Membership Access', 'hubloy-membership' ); ?></label>
+				<label for="membership"><?php esc_html_e( 'Membership Access', 'memberships-by-hubloy' ); ?></label>
 			</th>
 			<td>
-				<select name="hubloy_membership_membership[]" data-placeholder="<?php esc_html_e( 'Select Memberships', 'hubloy-membership' ); ?>" multiple class="hubloy_membership-multi-select">
+				<select name="hubloy_membership_membership[]" data-placeholder="<?php esc_html_e( 'Select Memberships', 'memberships-by-hubloy' ); ?>" multiple class="hubloy_membership-multi-select">
 					<?php
 					foreach ( $memberships as $id => $name ) {
 						?>
@@ -158,7 +158,7 @@ class Category extends Addon {
 					?>
 					
 				</select>
-				<p class='description'><?php esc_html_e( 'Membership access to items under this category', 'hubloy-membership' ); ?></p>
+				<p class='description'><?php esc_html_e( 'Membership access to items under this category', 'memberships-by-hubloy' ); ?></p>
 			</td>
 		</tr>
 		<?php
@@ -217,7 +217,7 @@ class Category extends Addon {
 		$this->settings->save();
 		return array(
 			'status'  => true,
-			'message' => __( 'Category Setting updated', 'hubloy-membership' ),
+			'message' => __( 'Category Setting updated', 'memberships-by-hubloy' ),
 		);
 	}
 

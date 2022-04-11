@@ -33,7 +33,7 @@ class Pages {
 	public static function list_pages() {
 		if ( empty( self::$drop_down ) ) {
 			$pages             = get_pages();
-			self::$drop_down[] = __( 'Select Page', 'hubloy-membership' );
+			self::$drop_down[] = __( 'Select Page', 'memberships-by-hubloy' );
 			foreach ( $pages as $page ) {
 				self::$drop_down[ $page->ID ] = $page->post_title;
 			}
@@ -91,23 +91,23 @@ class Pages {
 		$type = trim( $type );
 		switch ( $type ) {
 			case 'membership_list':
-				$page_id = self::create_page( __( 'Membership List', 'hubloy-membership' ), '[hubloy_membership_membership_list]' );
+				$page_id = self::create_page( __( 'Membership List', 'memberships-by-hubloy' ), '[hubloy_membership_membership_list]' );
 				return $page_id;
 			break;
 			case 'protected_content':
-				$page_id = self::create_page( __( 'Protected Content', 'hubloy-membership' ), '[hubloy_membership_protected_content]' );
+				$page_id = self::create_page( __( 'Protected Content', 'memberships-by-hubloy' ), '[hubloy_membership_protected_content]' );
 				return $page_id;
 			break;
 			case 'registration':
-				$page_id = self::create_page( __( 'Register', 'hubloy-membership' ), '[hubloy_membership_registration]' );
+				$page_id = self::create_page( __( 'Register', 'memberships-by-hubloy' ), '[hubloy_membership_registration]' );
 				return $page_id;
 			break;
 			case 'thank_you_page':
-				$page_id = self::create_page( __( 'Thank You', 'hubloy-membership' ), '[hubloy_membership_thank_you_page]' );
+				$page_id = self::create_page( __( 'Thank You', 'memberships-by-hubloy' ), '[hubloy_membership_thank_you_page]' );
 				return $page_id;
 			break;
 			case 'account_page':
-				$page_id = self::create_page( __( 'Account', 'hubloy-membership' ), '[hubloy_membership_account_page]' );
+				$page_id = self::create_page( __( 'Account', 'memberships-by-hubloy' ), '[hubloy_membership_account_page]' );
 				return $page_id;
 			break;
 			default:

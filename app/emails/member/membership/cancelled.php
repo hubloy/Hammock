@@ -53,10 +53,10 @@ class Cancelled extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Membership Cancelled', 'hubloy-membership' ),
-			'description' => __( 'Email sent to user after a membership subscription is cancelled', 'hubloy-membership' ),
-			'heading'     => __( 'Membership Cancelled', 'hubloy-membership' ),
-			'subject'     => sprintf( __( 'Membership %s cancelled', 'hubloy-membership' ), '{membership_name}' ),
+			'title'       => __( 'Membership Cancelled', 'memberships-by-hubloy' ),
+			'description' => __( 'Email sent to user after a membership subscription is cancelled', 'memberships-by-hubloy' ),
+			'heading'     => __( 'Membership Cancelled', 'memberships-by-hubloy' ),
+			'subject'     => sprintf( __( 'Membership %s cancelled', 'memberships-by-hubloy' ), '{membership_name}' ),
 			'recipient'   => '',
 			'enabled'     => false,
 		);

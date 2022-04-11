@@ -9,25 +9,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 return array(
 	'dashboard' => array(
 		'add_new'  => array(
-			'button' => __( 'Create Rule', 'hubloy-membership' ),
+			'button' => __( 'Create Rule', 'memberships-by-hubloy' ),
 			'modal'  => array(
-				'title'      => __( 'New Rule', 'hubloy-membership' ),
-				'rule'       => __( 'Select Rule', 'hubloy-membership' ),
-				'item'       => __( 'Select Item to protect', 'hubloy-membership' ),
-				'membership' => __( 'Membership', 'hubloy-membership' ),
+				'title'      => __( 'New Rule', 'memberships-by-hubloy' ),
+				'rule'       => __( 'Select Rule', 'memberships-by-hubloy' ),
+				'item'       => __( 'Select Item to protect', 'memberships-by-hubloy' ),
+				'membership' => __( 'Membership', 'memberships-by-hubloy' ),
 			),
 		),
 		'table'    => array(
-			'id'     => __( 'ID', 'hubloy-membership' ),
-			'desc'   => __( 'Description', 'hubloy-membership' ),
-			'status' => __( 'Status', 'hubloy-membership' ),
-			'type'   => __( 'Type', 'hubloy-membership' ),
-			'date'   => __( 'Date Created', 'hubloy-membership' ),
+			'id'     => __( 'ID', 'memberships-by-hubloy' ),
+			'desc'   => __( 'Description', 'memberships-by-hubloy' ),
+			'status' => __( 'Status', 'memberships-by-hubloy' ),
+			'type'   => __( 'Type', 'memberships-by-hubloy' ),
+			'date'   => __( 'Date Created', 'memberships-by-hubloy' ),
 			'delete' => array(
-				'prompt' => __( 'Are you sure you want to delete this rule?', 'hubloy-membership' ),
+				'prompt' => __( 'Are you sure you want to delete this rule?', 'memberships-by-hubloy' ),
 			),
 		),
-		'none'     => __( 'No protection rules found', 'hubloy-membership' ),
-		'disabled' => __( 'Content protection is currently disabled', 'hubloy-membership' ),
+		'none'     => __( 'No protection rules found', 'memberships-by-hubloy' ),
+		'disabled' => __( 'Content protection is currently disabled', 'memberships-by-hubloy' ),
 	),
 );

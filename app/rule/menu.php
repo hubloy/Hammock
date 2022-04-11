@@ -40,6 +40,6 @@ class Menu extends Rule {
 	 */
 	public function init() {
 		$this->id   = 'menu';
-		$this->name = __( 'Menu Items', 'hubloy-membership' );
+		$this->name = __( 'Menu Items', 'memberships-by-hubloy' );
 	}
 }

@@ -53,10 +53,10 @@ class Overdue extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Payment overdue', 'hubloy-membership' ),
-			'description' => __( 'Sent to a member when payment is overdue', 'hubloy-membership' ),
-			'heading'     => __( 'Payment overdue', 'hubloy-membership' ),
-			'subject'     => sprintf( __( 'Your %s membership payment is overdue', 'hubloy-membership' ), '{membership_name}' ),
+			'title'       => __( 'Payment overdue', 'memberships-by-hubloy' ),
+			'description' => __( 'Sent to a member when payment is overdue', 'memberships-by-hubloy' ),
+			'heading'     => __( 'Payment overdue', 'memberships-by-hubloy' ),
+			'subject'     => sprintf( __( 'Your %s membership payment is overdue', 'memberships-by-hubloy' ), '{membership_name}' ),
 			'recipient'   => '',
 			'enabled'     => false,
 		);

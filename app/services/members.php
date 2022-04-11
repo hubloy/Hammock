@@ -194,25 +194,25 @@ class Members {
 	public static function get_status_types( $change = false ) {
 		if ( $change ) {
 			$status_types = array(
-				self::STATUS_PENDING     => __( 'Pending', 'hubloy-membership' ),
-				self::STATUS_ACTIVE      => __( 'Active', 'hubloy-membership' ),
-				self::STATUS_PAUSED      => __( 'Paused', 'hubloy-membership' ),
-				self::STATUS_EXPIRED     => __( 'Expired', 'hubloy-membership' ),
-				self::STATUS_DEACTIVATED => __( 'Deactivated', 'hubloy-membership' ),
-				self::STATUS_CANCELED    => __( 'Canceled', 'hubloy-membership' ),
+				self::STATUS_PENDING     => __( 'Pending', 'memberships-by-hubloy' ),
+				self::STATUS_ACTIVE      => __( 'Active', 'memberships-by-hubloy' ),
+				self::STATUS_PAUSED      => __( 'Paused', 'memberships-by-hubloy' ),
+				self::STATUS_EXPIRED     => __( 'Expired', 'memberships-by-hubloy' ),
+				self::STATUS_DEACTIVATED => __( 'Deactivated', 'memberships-by-hubloy' ),
+				self::STATUS_CANCELED    => __( 'Canceled', 'memberships-by-hubloy' ),
 			);
 		} else {
 			$status_types = array(
-				self::STATUS_CREATED       => __( 'Created', 'hubloy-membership' ),
-				self::STATUS_PENDING       => __( 'Pending', 'hubloy-membership' ),
-				self::STATUS_ACTIVE        => __( 'Active', 'hubloy-membership' ),
-				self::STATUS_PAUSED        => __( 'Paused', 'hubloy-membership' ),
-				self::STATUS_TRIAL         => __( 'Trial', 'hubloy-membership' ),
-				self::STATUS_TRIAL_EXPIRED => __( 'Trial Expired', 'hubloy-membership' ),
-				self::STATUS_EXPIRED       => __( 'Expired', 'hubloy-membership' ),
-				self::STATUS_DEACTIVATED   => __( 'Deactivated', 'hubloy-membership' ),
-				self::STATUS_CANCELED      => __( 'Canceled', 'hubloy-membership' ),
-				self::STATUS_WAITING       => __( 'Not yet active', 'hubloy-membership' ),
+				self::STATUS_CREATED       => __( 'Created', 'memberships-by-hubloy' ),
+				self::STATUS_PENDING       => __( 'Pending', 'memberships-by-hubloy' ),
+				self::STATUS_ACTIVE        => __( 'Active', 'memberships-by-hubloy' ),
+				self::STATUS_PAUSED        => __( 'Paused', 'memberships-by-hubloy' ),
+				self::STATUS_TRIAL         => __( 'Trial', 'memberships-by-hubloy' ),
+				self::STATUS_TRIAL_EXPIRED => __( 'Trial Expired', 'memberships-by-hubloy' ),
+				self::STATUS_EXPIRED       => __( 'Expired', 'memberships-by-hubloy' ),
+				self::STATUS_DEACTIVATED   => __( 'Deactivated', 'memberships-by-hubloy' ),
+				self::STATUS_CANCELED      => __( 'Canceled', 'memberships-by-hubloy' ),
+				self::STATUS_WAITING       => __( 'Not yet active', 'memberships-by-hubloy' ),
 			);
 		}
 
@@ -233,7 +233,7 @@ class Members {
 	 */
 	public static function get_status( $status ) {
 		$types  = self::get_status_types();
-		$return = isset( $types[ $status ] ) ? $types[ $status ] : __( 'N/A', 'hubloy-membership' );
+		$return = isset( $types[ $status ] ) ? $types[ $status ] : __( 'N/A', 'memberships-by-hubloy' );
 		return apply_filters( 'hubloy_membership_member_subscription_get_status', $return, $status );
 	}
 
@@ -549,9 +549,9 @@ class Members {
 		} else {
 			$return = array(
 				'id'       => false,
-				'name'     => __( 'N/A', 'hubloy-membership' ),
-				'email'    => __( 'N/A', 'hubloy-membership' ),
-				'username' => __( 'N/A', 'hubloy-membership' ),
+				'name'     => __( 'N/A', 'memberships-by-hubloy' ),
+				'email'    => __( 'N/A', 'memberships-by-hubloy' ),
+				'username' => __( 'N/A', 'memberships-by-hubloy' ),
 				'lname'    => '',
 				'fname'    => '',
 				'picture'  => '',
@@ -683,20 +683,20 @@ class Members {
 		if ( ! is_email( $email ) ) {
 			return array(
 				'status'  => false,
-				'message' => __( 'The email address is not valid.', 'hubloy-membership' ),
+				'message' => __( 'The email address is not valid.', 'memberships-by-hubloy' ),
 			);
 		} else {
 			if ( email_exists( $email ) ) {
 				return array(
 					'status'  => false,
-					'message' => __( 'An account with the email address exists.', 'hubloy-membership' ),
+					'message' => __( 'An account with the email address exists.', 'memberships-by-hubloy' ),
 				);
 			} else {
 				if ( ! empty( $username ) ) {
 					if ( username_exists( $username ) ) {
 						return array(
 							'status'  => false,
-							'message' => sprintf( __( 'User with username %s exists', 'hubloy-membership' ), $username ),
+							'message' => sprintf( __( 'User with username %s exists', 'memberships-by-hubloy' ), $username ),
 						);
 					}
 				} else {
@@ -727,14 +727,14 @@ class Members {
 					} else {
 						return array(
 							'status'  => true,
-							'message' => __( 'User saved', 'hubloy-membership' ),
+							'message' => __( 'User saved', 'memberships-by-hubloy' ),
 							'user_id' => $user_id,
 						);
 					}
 				} else {
 					return array(
 						'status'  => false,
-						'message' => sprintf( __( 'Error saving user %s', 'hubloy-membership' ), $user_id->get_error_message() ),
+						'message' => sprintf( __( 'Error saving user %s', 'memberships-by-hubloy' ), $user_id->get_error_message() ),
 					);
 				}
 			}
@@ -766,7 +766,7 @@ class Members {
 		if ( ! $result ) {
 			return array(
 				'status'  => false,
-				'message' => __( 'Error saving member', 'hubloy-membership' ),
+				'message' => __( 'Error saving member', 'memberships-by-hubloy' ),
 			);
 		} else {
 			$id = (int) $wpdb->insert_id;
@@ -781,7 +781,7 @@ class Members {
 
 			return array(
 				'status'  => true,
-				'message' => __( 'Member saved', 'hubloy-membership' ),
+				'message' => __( 'Member saved', 'memberships-by-hubloy' ),
 				'id'      => $id,
 				'user_id' => $user_id,
 			);
@@ -854,19 +854,19 @@ class Members {
 				}
 				return array(
 					'status'  => true,
-					'message' => __( 'Plan saved', 'hubloy-membership' ),
+					'message' => __( 'Plan saved', 'memberships-by-hubloy' ),
 					'plan_id' => $plan->id,
 				);
 			} else {
 				return array(
 					'status'  => false,
-					'message' => __( 'Error adding plan to member', 'hubloy-membership' ),
+					'message' => __( 'Error adding plan to member', 'memberships-by-hubloy' ),
 				);
 			}
 		} else {
 			return array(
 				'status'  => false,
-				'message' => __( 'Member does not exist', 'hubloy-membership' ),
+				'message' => __( 'Member does not exist', 'memberships-by-hubloy' ),
 			);
 		}
 	}
@@ -906,12 +906,12 @@ class Members {
 			do_action( 'hubloy_membership_member_plan_update_plan', $old_status, $status, $plan );
 			return array(
 				'status'  => true,
-				'message' => __( 'Plan updated', 'hubloy-membership' ),
+				'message' => __( 'Plan updated', 'memberships-by-hubloy' ),
 			);
 		} else {
 			return array(
 				'status'  => false,
-				'message' => __( 'Selected plan does not exist', 'hubloy-membership' ),
+				'message' => __( 'Selected plan does not exist', 'memberships-by-hubloy' ),
 			);
 		}
 	}
@@ -936,17 +936,17 @@ class Members {
 				$member->delete();
 				return array(
 					'status'  => true,
-					'message' => __( 'Member and plan removed', 'hubloy-membership' ),
+					'message' => __( 'Member and plan removed', 'memberships-by-hubloy' ),
 				);
 			}
 			return array(
 				'status'  => true,
-				'message' => __( 'Plan removed', 'hubloy-membership' ),
+				'message' => __( 'Plan removed', 'memberships-by-hubloy' ),
 			);
 		} else {
 			return array(
 				'status'  => false,
-				'message' => __( 'Selected plan does not exist', 'hubloy-membership' ),
+				'message' => __( 'Selected plan does not exist', 'memberships-by-hubloy' ),
 			);
 		}
 	}
@@ -967,12 +967,12 @@ class Members {
 			$member->delete();
 			return array(
 				'status'  => true,
-				'message' => __( 'Member deleted', 'hubloy-membership' ),
+				'message' => __( 'Member deleted', 'memberships-by-hubloy' ),
 			);
 		} else {
 			return array(
 				'status'  => false,
-				'message' => __( 'Member does not exist', 'hubloy-membership' ),
+				'message' => __( 'Member does not exist', 'memberships-by-hubloy' ),
 			);
 		}
 	}

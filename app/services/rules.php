@@ -244,13 +244,13 @@ class Rules {
 		$args     = wp_parse_args( $args, $defaults );
 		$rule     = $this->get_rule_by_type( $args['type'] );
 		if ( ! $rule ) {
-			return new \WP_Error( 'not_found', __( 'Rule type not found', 'hubloy-membership' ) );
+			return new \WP_Error( 'not_found', __( 'Rule type not found', 'memberships-by-hubloy' ) );
 		}
 
 		$rule->save_rule( $args['memberships'], $args['id'], $args['status'] );
 		return array(
 			'status'  => true,
-			'message' => $args['is_update'] ? __( 'Rule updated', 'hubloy-membership' ) : __( 'Rule saved', 'hubloy-membership' ),
+			'message' => $args['is_update'] ? __( 'Rule updated', 'memberships-by-hubloy' ) : __( 'Rule saved', 'memberships-by-hubloy' ),
 		);
 	}
 
@@ -268,13 +268,13 @@ class Rules {
 		if ( 0 === $rule->rule_id ) {
 			return array(
 				'status'  => false,
-				'message' => __( 'Rule does not exist', 'hubloy-membership' ),
+				'message' => __( 'Rule does not exist', 'memberships-by-hubloy' ),
 			);
 		}
 		$rule->delete();
 		return array(
 			'status'  => true,
-			'message' => __( 'Rule deleted', 'hubloy-membership' ),
+			'message' => __( 'Rule deleted', 'memberships-by-hubloy' ),
 		);
 	}
 

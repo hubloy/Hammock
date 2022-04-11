@@ -20,17 +20,17 @@ class Pages {
 	public static function plugin_pages() {
 		return array(
 			'membership_list'   => array(
-				'title'     => __( 'Membership List', 'hubloy-membership' ),
+				'title'     => __( 'Membership List', 'memberships-by-hubloy' ),
 				'shortcode' => '[hubloy_membership_membership_list]',
 				'slug'      => 'memberships',
 			),
 			'protected_content' => array(
-				'title'     => __( 'Protected Content', 'hubloy-membership' ),
+				'title'     => __( 'Protected Content', 'memberships-by-hubloy' ),
 				'shortcode' => '[hubloy_membership_protected_content]',
 				'slug'      => 'protected-content',
 			),
 			'account_page'      => array(
-				'title'     => __( 'Account', 'hubloy-membership' ),
+				'title'     => __( 'Account', 'memberships-by-hubloy' ),
 				'shortcode' => '[hubloy_membership_account_page]',
 				'slug'      => 'account',
 			),

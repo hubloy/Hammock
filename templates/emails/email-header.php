@@ -2,7 +2,7 @@
 /**
  * Email Header
  *
- * This template can be overridden by copying it to yourtheme/hubloy_membership/emails/email-header.php.
+ * This template can be overridden by copying it to yourtheme/memberships-by-hubloy/emails/email-header.php.
  *
  * @package HubloyMembership/Templates/Emails
  * @version 1.0.0

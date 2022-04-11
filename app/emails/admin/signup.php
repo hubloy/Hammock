@@ -54,10 +54,10 @@ class Signup extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Membership Sign-up', 'hubloy-membership' ),
-			'description' => __( 'Email sent to admin to notify a new user has registered', 'hubloy-membership' ),
-			'heading'     => sprintf( __( 'New sign-up %s', 'hubloy-membership' ), '{membership_name}' ),
-			'subject'     => sprintf( __( '%1$s: New sign-up %2$s', 'hubloy-membership' ), '[{site_title}]', '{membership_name}' ),
+			'title'       => __( 'Membership Sign-up', 'memberships-by-hubloy' ),
+			'description' => __( 'Email sent to admin to notify a new user has registered', 'memberships-by-hubloy' ),
+			'heading'     => sprintf( __( 'New sign-up %s', 'memberships-by-hubloy' ), '{membership_name}' ),
+			'subject'     => sprintf( __( '%1$s: New sign-up %2$s', 'memberships-by-hubloy' ), '[{site_title}]', '{membership_name}' ),
 			'recipient'   => get_option( 'admin_email' ),
 			'enabled'     => true,
 		);

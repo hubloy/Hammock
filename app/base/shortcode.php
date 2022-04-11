@@ -60,7 +60,7 @@ class Shortcode {
 	 * @since 1.0.0
 	 */
 	public function output( $atts, $content = '' ) {
-		esc_html_e( 'Shortcode', 'hubloy-membership' );
+		esc_html_e( 'Shortcode', 'memberships-by-hubloy' );
 	}
 
 	/**

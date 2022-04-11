@@ -2,7 +2,7 @@
 /**
  * Membership list
  *
- * This template can be overridden by copying it to yourtheme/hubloy_membership/membership-list.php.
+ * This template can be overridden by copying it to yourtheme/memberships-by-hubloy/membership-list.php.
  *
  * @package HubloyMembership/Templates
  * @version 1.0.0
@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			);
 		}
 	} else {
-		esc_html_e( 'No membership plans to subscribe to', 'hubloy_membership' );
+		esc_html_e( 'No membership plans to subscribe to', 'memberships-by-hubloy' );
 	}
 	?>
 </div>

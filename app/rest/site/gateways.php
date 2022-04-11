@@ -80,7 +80,7 @@ class Gateways extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
-						'description'       => __( 'The gateway unique key', 'hubloy-membership' ),
+						'description'       => __( 'The gateway unique key', 'memberships-by-hubloy' ),
 					),
 				),
 			)
@@ -142,15 +142,15 @@ class Gateways extends Rest {
 		if ( isset( $gateways[ $name ] ) ) {
 			$settings = new Settings();
 			$settings = $settings->get_gateway_setting( $name );
-			$ipn      = apply_filters( 'hubloy_membership_gateway_' . $name . '_ipn', __( 'Not supported', 'hubloy-membership' ) );
-			$form     = apply_filters( 'hubloy_membership_gateway_' . $name . '_settings', __( 'Not implemented', 'hubloy-membership' ) );
+			$ipn      = apply_filters( 'hubloy_membership_gateway_' . $name . '_ipn', __( 'Not supported', 'memberships-by-hubloy' ) );
+			$form     = apply_filters( 'hubloy_membership_gateway_' . $name . '_settings', __( 'Not implemented', 'memberships-by-hubloy' ) );
 			return array(
 				'settings' => $settings,
 				'ipn'      => $ipn,
 				'form'     => $form,
 			);
 		} else {
-			return new \WP_Error( 'rest_gateway_invalid', esc_html__( 'The gateway does not exist.', 'hubloy-membership' ), array( 'status' => 404 ) );
+			return new \WP_Error( 'rest_gateway_invalid', esc_html__( 'The gateway does not exist.', 'memberships-by-hubloy' ), array( 'status' => 404 ) );
 		}
 	}
 
@@ -170,11 +170,11 @@ class Gateways extends Rest {
 			$response = apply_filters( 'hubloy_membership_gateway_' . $id . '_update_settings', array(), $request );
 			return array(
 				'status'   => true,
-				'message'  => __( 'Gateway updated', 'hubloy-membership' ),
+				'message'  => __( 'Gateway updated', 'memberships-by-hubloy' ),
 				'settings' => $response,
 			);
 		} else {
-			return new \WP_Error( 'rest_gateway_invalid', esc_html__( 'The gateway does not exist.', 'hubloy-membership' ), array( 'status' => 404 ) );
+			return new \WP_Error( 'rest_gateway_invalid', esc_html__( 'The gateway does not exist.', 'memberships-by-hubloy' ), array( 'status' => 404 ) );
 		}
 	}
 }

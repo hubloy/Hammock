@@ -154,8 +154,8 @@ class Communication extends Controller {
 		$this->_cap     = $cap;
 		add_submenu_page(
 			$slug,
-			__( 'Communication', 'hubloy-membership' ),
-			__( 'Communication', 'hubloy-membership' ),
+			__( 'Communication', 'memberships-by-hubloy' ),
+			__( 'Communication', 'memberships-by-hubloy' ),
 			$this->_cap,
 			$this->_page_id,
 			array( $this, 'render' )
@@ -173,7 +173,7 @@ class Communication extends Controller {
 	 */
 	public function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'comms' ) ) {
-			$vars['common']['string']['title'] = __( 'Communication', 'hubloy-membership' );
+			$vars['common']['string']['title'] = __( 'Communication', 'memberships-by-hubloy' );
 			$vars['active_page']               = 'comms';
 			$vars['strings']                   = $this->get_strings();
 		}
@@ -248,7 +248,7 @@ class Communication extends Controller {
 
 		do_action( 'hubloy_membership_email_copy_theme_' . $id );
 
-		wp_send_json_error( __( 'Action not implemented', 'hubloy-membership' ) );
+		wp_send_json_error( __( 'Action not implemented', 'memberships-by-hubloy' ) );
 	}
 
 
@@ -265,7 +265,7 @@ class Communication extends Controller {
 
 		do_action( 'hubloy_membership_email_delete_theme_' . $id );
 
-		wp_send_json_error( __( 'Action not implemented', 'hubloy-membership' ) );
+		wp_send_json_error( __( 'Action not implemented', 'memberships-by-hubloy' ) );
 	}
 
 	/**

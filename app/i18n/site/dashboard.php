@@ -9,26 +9,26 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 return array(
 	'members'     => array(
-		'title' => __( 'Members', 'hubloy-membership' ),
-		'none'  => __( 'No Members Found', 'hubloy-membership' ),
+		'title' => __( 'Members', 'memberships-by-hubloy' ),
+		'none'  => __( 'No Members Found', 'memberships-by-hubloy' ),
 		'url'   => admin_url( 'admin.php?page=hubloy_membership-members' ),
 	),
 	'memberships' => array(
-		'title' => __( 'Memberships', 'hubloy-membership' ),
-		'none'  => __( 'No Memberships Found', 'hubloy-membership' ),
+		'title' => __( 'Memberships', 'memberships-by-hubloy' ),
+		'none'  => __( 'No Memberships Found', 'memberships-by-hubloy' ),
 		'url'   => admin_url( 'admin.php?page=hubloy_membership-memberships' ),
 	),
 	'management'  => array(
-		'title' => __( 'Site Management', 'hubloy-membership' ),
+		'title' => __( 'Site Management', 'memberships-by-hubloy' ),
 		'types' => apply_filters(
 			'hubloy_membership_dashboard_links',
 			array(
 				'memberships' => array(
-					'name' => __( 'View Memberships', 'hubloy-membership' ),
+					'name' => __( 'View Memberships', 'memberships-by-hubloy' ),
 					'url'  => admin_url( 'admin.php?page=hubloy_membership-memberships' ),
 				),
 				'addons'      => array(
-					'name' => __( 'View Addons', 'hubloy-membership' ),
+					'name' => __( 'View Addons', 'memberships-by-hubloy' ),
 					'url'  => admin_url( 'admin.php?page=hubloy_membership-addons' ),
 				),
 			)
@@ -36,60 +36,60 @@ return array(
 	),
 	'stats'       => array(
 		'title'   => array(
-			'subscribers'  => __( 'Subscriber Data', 'hubloy-membership' ),
-			'transactions' => __( 'Transaction Data', 'hubloy-membership' ),
+			'subscribers'  => __( 'Subscriber Data', 'memberships-by-hubloy' ),
+			'transactions' => __( 'Transaction Data', 'memberships-by-hubloy' ),
 		),
 		'charts'  => array(
 			'days'         => array(
-				'mon'  => __( 'Mon', 'hubloy-membership' ),
-				'tue'  => __( 'Tue', 'hubloy-membership' ),
-				'wed'  => __( 'Wed', 'hubloy-membership' ),
-				'thur' => __( 'Thu', 'hubloy-membership' ),
-				'fri'  => __( 'Fri', 'hubloy-membership' ),
-				'sat'  => __( 'Sat', 'hubloy-membership' ),
-				'sub'  => __( 'Sun', 'hubloy-membership' ),
+				'mon'  => __( 'Mon', 'memberships-by-hubloy' ),
+				'tue'  => __( 'Tue', 'memberships-by-hubloy' ),
+				'wed'  => __( 'Wed', 'memberships-by-hubloy' ),
+				'thur' => __( 'Thu', 'memberships-by-hubloy' ),
+				'fri'  => __( 'Fri', 'memberships-by-hubloy' ),
+				'sat'  => __( 'Sat', 'memberships-by-hubloy' ),
+				'sub'  => __( 'Sun', 'memberships-by-hubloy' ),
 			),
-			'subscribers'  => sprintf( __( '%s of Subscribers', 'hubloy-membership' ), '#' ),
-			'transactions' => sprintf( __( '%s of Transactions', 'hubloy-membership' ), '#' ),
+			'subscribers'  => sprintf( __( '%s of Subscribers', 'memberships-by-hubloy' ), '#' ),
+			'transactions' => sprintf( __( '%s of Transactions', 'memberships-by-hubloy' ), '#' ),
 		),
 		'no_data' => array(
-			'subscribers'  => __( 'No data found for this week', 'hubloy-membership' ),
-			'transactions' => __( 'No data found for this week', 'hubloy-membership' ),
+			'subscribers'  => __( 'No data found for this week', 'memberships-by-hubloy' ),
+			'transactions' => __( 'No data found for this week', 'memberships-by-hubloy' ),
 		),
 	),
 	'wizard'      => array(
-		'title'      => __( 'Initial Setup', 'hubloy-membership' ),
+		'title'      => __( 'Initial Setup', 'memberships-by-hubloy' ),
 		'settings'   => array(
-			'title'    => __( 'General Settings', 'hubloy-membership' ),
+			'title'    => __( 'General Settings', 'memberships-by-hubloy' ),
 			'currency' => array(
-				'title'       => __( 'Membership Currency', 'hubloy-membership' ),
-				'description' => __( 'This is the currency used to purchase memberships', 'hubloy-membership' ),
+				'title'       => __( 'Membership Currency', 'memberships-by-hubloy' ),
+				'description' => __( 'This is the currency used to purchase memberships', 'memberships-by-hubloy' ),
 			),
 		),
 		'pages'      => array(
-			'title'             => __( 'Membership Pages', 'hubloy-membership' ),
+			'title'             => __( 'Membership Pages', 'memberships-by-hubloy' ),
 			'membership_list'   => array(
-				'title'       => __( 'Membership List', 'hubloy-membership' ),
-				'description' => __( 'List of public memberships', 'hubloy-membership' ),
+				'title'       => __( 'Membership List', 'memberships-by-hubloy' ),
+				'description' => __( 'List of public memberships', 'memberships-by-hubloy' ),
 			),
 			'protected_content' => array(
-				'title'       => __( 'Protected Content', 'hubloy-membership' ),
-				'description' => __( 'Displayed when a user cannot access the requested page', 'hubloy-membership' ),
+				'title'       => __( 'Protected Content', 'memberships-by-hubloy' ),
+				'description' => __( 'Displayed when a user cannot access the requested page', 'memberships-by-hubloy' ),
 			),
 			'account_page'      => array(
-				'title'       => __( 'Account', 'hubloy-membership' ),
-				'description' => __( 'Shows details about the current user', 'hubloy-membership' ),
+				'title'       => __( 'Account', 'memberships-by-hubloy' ),
+				'description' => __( 'Shows details about the current user', 'memberships-by-hubloy' ),
 			),
 		),
 		'membership' => array(
-			'title'    => __( 'Create your first membership', 'hubloy-membership' ),
+			'title'    => __( 'Create your first membership', 'memberships-by-hubloy' ),
 			'labels'   => array(
-				'name'               => __( 'Membership Name', 'hubloy-membership' ),
-				'status'             => __( 'Status', 'hubloy-membership' ),
-				'type'               => __( 'Membership Type', 'hubloy-membership' ),
-				'price'              => __( 'Membership Price', 'hubloy-membership' ),
-				'days'               => __( 'Grant access for the following days', 'hubloy-membership' ),
-				'recurring_duration' => __( 'Recurring Frequency', 'hubloy-membership' ),
+				'name'               => __( 'Membership Name', 'memberships-by-hubloy' ),
+				'status'             => __( 'Status', 'memberships-by-hubloy' ),
+				'type'               => __( 'Membership Type', 'memberships-by-hubloy' ),
+				'price'              => __( 'Membership Price', 'memberships-by-hubloy' ),
+				'days'               => __( 'Grant access for the following days', 'memberships-by-hubloy' ),
+				'recurring_duration' => __( 'Recurring Frequency', 'memberships-by-hubloy' ),
 			),
 			'type'     => \HubloyMembership\Services\Memberships::payment_types(),
 			'duration' => \HubloyMembership\Services\Memberships::payment_durations(),

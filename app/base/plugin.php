@@ -155,7 +155,7 @@ class Plugin {
 			$base_url      = 'admin.php?page=' . \HubloyMembership\Controller\Plugin::MENU_SLUG;
 			$settings_link = apply_filters(
 				'hubloy_membership_plugin_settings_link',
-				sprintf( '<a href="%s">%s</a>', admin_url( $base_url ), __( 'Settings', 'hubloy-membership' ) ),
+				sprintf( '<a href="%s">%s</a>', admin_url( $base_url ), __( 'Settings', 'memberships-by-hubloy' ) ),
 				$this
 			);
 			array_unshift( $links, $settings_link );
@@ -181,7 +181,7 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function translate_plugin() {
-		load_plugin_textdomain( 'hubloy-membership', false, HUBMEMB_LANG_DIR );
+		load_plugin_textdomain( 'memberships-by-hubloy', false, HUBMEMB_LANG_DIR );
 	}
 
 	/**
@@ -243,19 +243,19 @@ class Plugin {
 	public function cron_time_intervals( $schedules ) {
 		$schedules['weekly']     = array(
 			'interval' => 604800,
-			'display'  => __( 'Weekly', 'hubloy-membership' ),
+			'display'  => __( 'Weekly', 'memberships-by-hubloy' ),
 		);
 		$schedules['monthly']    = array(
 			'interval' => 2635200,
-			'display'  => __( 'Monthly', 'hubloy-membership' ),
+			'display'  => __( 'Monthly', 'memberships-by-hubloy' ),
 		);
 		$schedules['quarterly']  = array(
 			'interval' => 3 * 2635200,
-			'display'  => __( 'Every 3 Months', 'hubloy-membership' ),
+			'display'  => __( 'Every 3 Months', 'memberships-by-hubloy' ),
 		);
 		$schedules['biannually'] = array(
 			'interval' => 6 * 2635200,
-			'display'  => __( 'Every 6 Months', 'hubloy-membership' ),
+			'display'  => __( 'Every 6 Months', 'memberships-by-hubloy' ),
 		);
 		return $schedules;
 	}

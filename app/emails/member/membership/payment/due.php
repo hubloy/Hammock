@@ -53,10 +53,10 @@ class Due extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Before Payment is due', 'hubloy-membership' ),
-			'description' => __( 'Sent to a member before payment is due', 'hubloy-membership' ),
-			'heading'     => __( 'Payment is almost due', 'hubloy-membership' ),
-			'subject'     => sprintf( __( 'Your %s membership payment is due soon', 'hubloy-membership' ), '{membership_name}' ),
+			'title'       => __( 'Before Payment is due', 'memberships-by-hubloy' ),
+			'description' => __( 'Sent to a member before payment is due', 'memberships-by-hubloy' ),
+			'heading'     => __( 'Payment is almost due', 'memberships-by-hubloy' ),
+			'subject'     => sprintf( __( 'Your %s membership payment is due soon', 'memberships-by-hubloy' ), '{membership_name}' ),
 			'recipient'   => '',
 			'enabled'     => false,
 		);

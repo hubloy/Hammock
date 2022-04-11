@@ -63,14 +63,14 @@ class Memberships extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
-						'description'       => __( 'The current page', 'hubloy-membership' ),
+						'description'       => __( 'The current page', 'memberships-by-hubloy' ),
 					),
 					'per_page' => array(
 						'required'          => false,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
 						'default'           => 10,
-						'description'       => __( 'Items per page', 'hubloy-membership' ),
+						'description'       => __( 'Items per page', 'memberships-by-hubloy' ),
 					),
 				),
 			)
@@ -99,7 +99,7 @@ class Memberships extends Rest {
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
 						'default'           => 0,
-						'description'       => __( 'The member id', 'hubloy-membership' ),
+						'description'       => __( 'The member id', 'memberships-by-hubloy' ),
 					),
 				),
 			)
@@ -117,7 +117,7 @@ class Memberships extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
-						'description'       => __( 'The membership id', 'hubloy-membership' ),
+						'description'       => __( 'The membership id', 'memberships-by-hubloy' ),
 					),
 				),
 			)
@@ -249,13 +249,13 @@ class Memberships extends Rest {
 
 			return array(
 				'status'  => true,
-				'message' => __( 'Membership Saved', 'hubloy-membership' ),
+				'message' => __( 'Membership Saved', 'memberships-by-hubloy' ),
 				'id'      => $id,
 			);
 		} else {
 			return array(
 				'status'  => false,
-				'message' => __( 'Error saving membership', 'hubloy-membership' ),
+				'message' => __( 'Error saving membership', 'memberships-by-hubloy' ),
 			);
 		}
 	}
@@ -321,14 +321,14 @@ class Memberships extends Rest {
 				default:
 					return array(
 						'status'  => false,
-						'message' => sprintf( __( 'Action %s not supported', 'hubloy-membership' ), $method ),
+						'message' => sprintf( __( 'Action %s not supported', 'memberships-by-hubloy' ), $method ),
 					);
 				break;
 			}
 		} else {
 			return array(
 				'status'  => false,
-				'message' => __( 'Membership not found', 'hubloy-membership' ),
+				'message' => __( 'Membership not found', 'memberships-by-hubloy' ),
 			);
 		}
 	}
@@ -349,7 +349,7 @@ class Memberships extends Rest {
 		$membership = new \HubloyMembership\Model\Membership( $id );
 		return array(
 			'status'     => true,
-			'message'    => sprintf( __( '%s settings updated', 'hubloy-membership' ), ucfirst( $method ) ),
+			'message'    => sprintf( __( '%s settings updated', 'memberships-by-hubloy' ), ucfirst( $method ) ),
 			'membership' => $membership,
 		);
 	}

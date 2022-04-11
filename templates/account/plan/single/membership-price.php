@@ -3,7 +3,7 @@
  * Account membership price
  * This view is used to show the membership price
  *
- * This template can be overridden by copying it to yourtheme/hubloy_membership/account/plan/membership-price.php.
+ * This template can be overridden by copying it to yourtheme/memberships-by-hubloy/account/plan/membership-price.php.
  *
  * @package HubloyMembership/Templates/Account/Plan/Single
  * @version 1.0.0
@@ -20,7 +20,7 @@ if ( $plan->trial_enabled ) {
 		$trial_text   = $plan->get_readable_trial_text();
 		$normal_price = hubloy_membership_format_currency( $plan->price );
 		$sub_text     = $plan->get_readable_type();
-		echo sprintf( esc_html__( '%1$s then %2$s %3$s', 'hubloy_membership' ), esc_html( $trial_text ), esc_attr( $normal_price ), esc_html( $sub_text ) );
+		echo sprintf( esc_html__( '%1$s then %2$s %3$s', 'memberships-by-hubloy' ), esc_html( $trial_text ), esc_attr( $normal_price ), esc_html( $sub_text ) );
 	?>
 	</span>
 	<?php
@@ -32,7 +32,7 @@ if ( $plan->trial_enabled ) {
 		<?php
 			$normal_price = hubloy_membership_format_currency( $plan->price );
 			$sub_text     = $plan->get_readable_type();
-			echo sprintf( esc_html__( 'then %1$s %2$s', 'hubloy_membership' ), esc_attr( $normal_price ), esc_html( $sub_text ) );
+			echo sprintf( esc_html__( 'then %1$s %2$s', 'memberships-by-hubloy' ), esc_attr( $normal_price ), esc_html( $sub_text ) );
 		?>
 		</span>
 		<?php

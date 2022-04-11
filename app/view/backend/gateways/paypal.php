@@ -22,7 +22,7 @@ class Paypal extends View {
 		ob_start();
 		?>
 		<div class="uk-margin">
-			<label class="uk-form-label" for="form-stacked-text"><?php esc_html_e( 'Mode', 'hubloy-membership' ); ?></label>
+			<label class="uk-form-label" for="form-stacked-text"><?php esc_html_e( 'Mode', 'memberships-by-hubloy' ); ?></label>
 			<div class="uk-form-controls">
 				<?php
 					$this->ui->render(
@@ -35,8 +35,8 @@ class Paypal extends View {
 								'data-target' => 'paypal',
 							),
 							'values'     => array(
-								'live' => __( 'Live', 'hubloy-membership' ),
-								'test' => __( 'Sandbox', 'hubloy-membership' ),
+								'live' => __( 'Live', 'memberships-by-hubloy' ),
+								'test' => __( 'Sandbox', 'memberships-by-hubloy' ),
 							),
 						)
 					);
@@ -44,7 +44,7 @@ class Paypal extends View {
 			</div>
 		</div>
 		<div class="uk-margin hubloy_membership-paypal paypal-live" <?php echo $mode != 'live' ? 'style="display:none"' : ''; ?>>
-			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Live Business Email', 'hubloy-membership' ); ?></label>
+			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Live Business Email', 'memberships-by-hubloy' ); ?></label>
 			<div class="uk-form-controls">
 				<?php
 					$this->ui->render(
@@ -60,7 +60,7 @@ class Paypal extends View {
 			</div>
 		</div>
 		<div class="uk-margin hubloy_membership-paypal paypal-live" <?php echo $mode != 'live' ? 'style="display:none"' : ''; ?>>
-			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Live Merchant ID', 'hubloy-membership' ); ?></label>
+			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Live Merchant ID', 'memberships-by-hubloy' ); ?></label>
 			<div class="uk-form-controls">
 				<?php
 					$this->ui->render(
@@ -77,7 +77,7 @@ class Paypal extends View {
 			</div>
 		</div>
 		<div class="uk-margin hubloy_membership-paypal paypal-test" <?php echo $mode != 'test' ? 'style="display:none"' : ''; ?>>
-			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Sandbox Business Email', 'hubloy-membership' ); ?></label>
+			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Sandbox Business Email', 'memberships-by-hubloy' ); ?></label>
 			<div class="uk-form-controls">
 				<?php
 					$this->ui->render(
@@ -93,7 +93,7 @@ class Paypal extends View {
 			</div>
 		</div>
 		<div class="uk-margin hubloy_membership-paypal paypal-test" <?php echo $mode != 'test' ? 'style="display:none"' : ''; ?>>
-			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Sandbox Merchant ID', 'hubloy-membership' ); ?></label>
+			<label class="uk-form-label" for="form-stacked-select"><?php esc_html_e( 'Sandbox Merchant ID', 'memberships-by-hubloy' ); ?></label>
 			<div class="uk-form-controls">
 				<?php
 					$this->ui->render(

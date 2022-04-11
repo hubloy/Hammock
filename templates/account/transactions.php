@@ -3,7 +3,7 @@
  * Account transactions method page
  * Manage users transactions
  *
- * This template can be overridden by copying it to yourtheme/hubloy_membership/account/transactions.php.
+ * This template can be overridden by copying it to yourtheme/memberships-by-hubloy/account/transactions.php.
  *
  * @package HubloyMembership/Templates/Account
  * @version 1.0.0
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! hubloy_membership_current_user_can_subscribe() ) {
-	esc_html_e( 'No transactions, Subscriptions are not enabled for your account.', 'hubloy_membership' );
+	esc_html_e( 'No transactions, Subscriptions are not enabled for your account.', 'memberships-by-hubloy' );
 } else {
 	if ( $member ) {
 		$page               = hubloy_membership_get_current_page();
@@ -23,14 +23,14 @@ if ( ! hubloy_membership_current_user_can_subscribe() ) {
 		if ( $total_transactions <= 0 ) {
 			?>
 			<div class="hubloy_membership-notification hubloy_membership-notification--warning">
-				<?php esc_html_e( 'No transactions found', 'hubloy_membership' ); ?>
+				<?php esc_html_e( 'No transactions found', 'memberships-by-hubloy' ); ?>
 			</div>
 			<?php
 		} else {
 			$transactions = hubloy_membership_list_member_transactions( $member_id, $per_page, $page, $status );
 			?>
 			<div class="hubloy_membership-list-header">
-				<h3><?php printf( esc_html__( '%d transactions', 'hubloy_membership' ), esc_attr( $total_transactions ) ); ?></h3>
+				<h3><?php printf( esc_html__( '%d transactions', 'memberships-by-hubloy' ), esc_attr( $total_transactions ) ); ?></h3>
 			</div>
 			<table class="hubloy_membership-account-transactions hubloy_membership-list-table">
 				<thead>
@@ -72,6 +72,6 @@ if ( ! hubloy_membership_current_user_can_subscribe() ) {
 			<?php
 		}
 	} else {
-		esc_html_e( 'You have no subscriptions in your account', 'hubloy_membership' );
+		esc_html_e( 'You have no subscriptions in your account', 'memberships-by-hubloy' );
 	}
 }

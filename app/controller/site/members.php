@@ -90,8 +90,8 @@ class Members extends Controller {
 		$this->_cap     = $cap;
 		add_submenu_page(
 			$slug,
-			__( 'Members', 'hubloy-membership' ),
-			__( 'Members', 'hubloy-membership' ),
+			__( 'Members', 'memberships-by-hubloy' ),
+			__( 'Members', 'memberships-by-hubloy' ),
 			$this->_cap,
 			$this->_page_id,
 			array( $this, 'render' )
@@ -110,7 +110,7 @@ class Members extends Controller {
 	public function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'members' ) ) {
 			$service                           = new \HubloyMembership\Services\Memberships();
-			$vars['common']['string']['title'] = __( 'Members', 'hubloy-membership' );
+			$vars['common']['string']['title'] = __( 'Members', 'memberships-by-hubloy' );
 			$vars['active_page']               = 'members';
 			$vars['strings']                   = $this->get_strings();
 			$vars['page_strings']              = array(

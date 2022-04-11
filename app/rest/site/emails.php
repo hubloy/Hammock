@@ -70,7 +70,7 @@ class Emails extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
-						'description'       => __( 'The email id', 'hubloy-membership' ),
+						'description'       => __( 'The email id', 'memberships-by-hubloy' ),
 					),
 				),
 			)
@@ -134,7 +134,7 @@ class Emails extends Rest {
 		do_action( 'hubloy_membership_email_sender_' . $id . '_update_settings', $request );
 		return array(
 			'status'  => true,
-			'message' => __( 'Settings updated', 'hubloy-membership' ),
+			'message' => __( 'Settings updated', 'memberships-by-hubloy' ),
 		);
 	}
 

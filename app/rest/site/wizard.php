@@ -161,7 +161,7 @@ class Wizard extends Rest {
 
 		return array(
 			'status'   => true,
-			'message'  => __( 'Settings updated', 'hubloy-membership' ),
+			'message'  => __( 'Settings updated', 'memberships-by-hubloy' ),
 			'data'     => $stage,
 			'currency' => esc_html( $code ),
 		);
@@ -214,12 +214,12 @@ class Wizard extends Rest {
 
 			return array(
 				'status'  => true,
-				'message' => __( 'Membership Saved', 'hubloy-membership' ),
+				'message' => __( 'Membership Saved', 'memberships-by-hubloy' ),
 			);
 		} else {
 			return array(
 				'status'  => false,
-				'message' => __( 'Error saving membership', 'hubloy-membership' ),
+				'message' => __( 'Error saving membership', 'memberships-by-hubloy' ),
 			);
 		}
 

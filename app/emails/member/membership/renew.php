@@ -53,10 +53,10 @@ class Renew extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Membership Renewed', 'hubloy-membership' ),
-			'description' => __( 'Email sent to user after a membership subscription is renewed', 'hubloy-membership' ),
-			'heading'     => __( 'Membership Renewed', 'hubloy-membership' ),
-			'subject'     => sprintf( __( 'Membership %s has been renewed', 'hubloy-membership' ), '{membership_name}' ),
+			'title'       => __( 'Membership Renewed', 'memberships-by-hubloy' ),
+			'description' => __( 'Email sent to user after a membership subscription is renewed', 'memberships-by-hubloy' ),
+			'heading'     => __( 'Membership Renewed', 'memberships-by-hubloy' ),
+			'subject'     => sprintf( __( 'Membership %s has been renewed', 'memberships-by-hubloy' ), '{membership_name}' ),
 			'recipient'   => '',
 			'enabled'     => false,
 		);

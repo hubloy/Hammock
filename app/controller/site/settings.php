@@ -108,8 +108,8 @@ class Settings extends Controller {
 		$this->_cap     = $cap;
 		add_submenu_page(
 			$slug,
-			__( 'Settings', 'hubloy-membership' ),
-			__( 'Settings', 'hubloy-membership' ),
+			__( 'Settings', 'memberships-by-hubloy' ),
+			__( 'Settings', 'memberships-by-hubloy' ),
 			$this->_cap,
 			$this->_page_id,
 			array( $this, 'render' )
@@ -139,13 +139,13 @@ class Settings extends Controller {
 	 */
 	public function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'settings' ) ) {
-			$vars['common']['string']['title'] = __( 'Settings', 'hubloy-membership' );
+			$vars['common']['string']['title'] = __( 'Settings', 'memberships-by-hubloy' );
 			$vars['active_page']               = 'settings';
 			$vars['strings']                   = $this->get_strings();
 			$vars['page_strings']              = array(
 				'tabs' => array(
-					'general'  => __( 'General', 'hubloy-membership' ),
-					'gateways' => __( 'Gateways', 'hubloy-membership' ),
+					'general'  => __( 'General', 'memberships-by-hubloy' ),
+					'gateways' => __( 'Gateways', 'memberships-by-hubloy' ),
 				),
 
 			);

@@ -106,7 +106,7 @@ class Activity extends Controller {
 	 * @since 1.0.0
 	 */
 	public function log_save_member( $member_id, $user_id ) {
-		$this->service->log_member( $member_id, __( 'New member saved', 'hubloy-membership' ), 'member', 'member', $member_id );
+		$this->service->log_member( $member_id, __( 'New member saved', 'memberships-by-hubloy' ), 'member', 'member', $member_id );
 	}
 
 	/**
@@ -119,7 +119,7 @@ class Activity extends Controller {
 	 * @since 1.0.0
 	 */
 	public function log_add_plan( $membership, $new_plan, $member ) {
-		$this->service->log_member( $member->id, __( 'New plan added', 'hubloy-membership' ), 'plan', $membership->name, $new_plan->id );
+		$this->service->log_member( $member->id, __( 'New plan added', 'memberships-by-hubloy' ), 'plan', $membership->name, $new_plan->id );
 	}
 
 	/**
@@ -133,7 +133,7 @@ class Activity extends Controller {
 	 */
 	public function log_update_plan( $old_status, $status, $plan ) {
 		if ( $old_status !== $status ) {
-			$this->service->log_member( $plan->member_id, __( 'Plan updated', 'hubloy-membership' ), 'plan', $membership->name, $plan->id );
+			$this->service->log_member( $plan->member_id, __( 'Plan updated', 'memberships-by-hubloy' ), 'plan', $membership->name, $plan->id );
 		}
 	}
 
@@ -148,7 +148,7 @@ class Activity extends Controller {
 	public function log_delete_plan( $member_id, $membership_id ) {
 		$membership = new Membership( $membership_id, false );
 		if ( $membership->id > 0 ) {
-			$this->service->log_member( $member_id, __( 'Plan deleted', 'hubloy-membership' ), 'plan', $membership->name, 0 );
+			$this->service->log_member( $member_id, __( 'Plan deleted', 'memberships-by-hubloy' ), 'plan', $membership->name, 0 );
 		}
 	}
 }

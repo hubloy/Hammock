@@ -121,7 +121,7 @@ class Signup extends Controller {
 			}
 
 			if ( ! $member || $member->id <= 0 ) {
-				wp_send_json_error( __( 'Error getting member profile. Please try again', 'hubloy-membership' ) );
+				wp_send_json_error( __( 'Error getting member profile. Please try again', 'memberships-by-hubloy' ) );
 			}
 
 			$plan = $member->add_plan( $membership );
@@ -169,14 +169,14 @@ class Signup extends Controller {
 
 					wp_send_json_success(
 						array(
-							'message' => __( 'Plan joined. Proceeding to payments', 'hubloy-membership' ),
+							'message' => __( 'Plan joined. Proceeding to payments', 'memberships-by-hubloy' ),
 							'url'     => hubloy_membership_get_invoice_link( $invoice_id ),
 						)
 					);
 				}
 			}
 		}
-		wp_send_json_error( __( 'Error adding plan to your account. Please try again', 'hubloy-membership' ) );
+		wp_send_json_error( __( 'Error adding plan to your account. Please try again', 'memberships-by-hubloy' ) );
 	}
 
 	/**
@@ -190,7 +190,7 @@ class Signup extends Controller {
 
 		$plan = $this->get_user_plan( $plan_id );
 		if ( ! $plan ) {
-			wp_send_json_error( __( 'Plan is not linked to your account', 'hubloy-membership' ) );
+			wp_send_json_error( __( 'Plan is not linked to your account', 'memberships-by-hubloy' ) );
 		}
 
 		/**
@@ -206,7 +206,7 @@ class Signup extends Controller {
 
 		wp_send_json_success(
 			array(
-				'message' => __( 'Plan canceled', 'hubloy-membership' ),
+				'message' => __( 'Plan canceled', 'memberships-by-hubloy' ),
 				'reload'  => true,
 			)
 		);
@@ -223,7 +223,7 @@ class Signup extends Controller {
 
 		$plan = $this->get_user_plan( $plan_id );
 		if ( ! $plan ) {
-			wp_send_json_error( __( 'Plan is not linked to your account', 'hubloy-membership' ) );
+			wp_send_json_error( __( 'Plan is not linked to your account', 'memberships-by-hubloy' ) );
 		}
 
 		$plan->set_pending();
@@ -242,7 +242,7 @@ class Signup extends Controller {
 
 			wp_send_json_success(
 				array(
-					'message' => __( 'Plan joined. Proceeding to payments', 'hubloy-membership' ),
+					'message' => __( 'Plan joined. Proceeding to payments', 'memberships-by-hubloy' ),
 					'url'     => hubloy_membership_get_invoice_link( $invoice_id ),
 				)
 			);

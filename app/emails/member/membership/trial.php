@@ -53,10 +53,10 @@ class Trial extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'Before Trial Finishes', 'hubloy-membership' ),
-			'description' => __( 'Email sent to user before a trial is complete', 'hubloy-membership' ),
-			'heading'     => __( 'Trial about to end', 'hubloy-membership' ),
-			'subject'     => sprintf( __( 'Your %s membership trial will end soon', 'hubloy-membership' ), '{membership_name}' ),
+			'title'       => __( 'Before Trial Finishes', 'memberships-by-hubloy' ),
+			'description' => __( 'Email sent to user before a trial is complete', 'memberships-by-hubloy' ),
+			'heading'     => __( 'Trial about to end', 'memberships-by-hubloy' ),
+			'subject'     => sprintf( __( 'Your %s membership trial will end soon', 'memberships-by-hubloy' ), '{membership_name}' ),
 			'recipient'   => '',
 			'enabled'     => false,
 		);

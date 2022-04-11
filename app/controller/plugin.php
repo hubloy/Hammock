@@ -132,9 +132,9 @@ class Plugin extends Controller {
 		if ( 'page' === $post->post_type ) {
 			if ( Pages::is_membership_page( $post->ID ) ) {
 				$url                         = admin_url( 'admin.php?page=hubloy_membership-settings#/' );
-				$states['hubloy-membership'] = sprintf(
+				$states['memberships-by-hubloy'] = sprintf(
 					'<a style="%2$s" href="%3$s">%1$s</a>',
-					__( 'Membership Page', 'hubloy-membership' ),
+					__( 'Membership Page', 'memberships-by-hubloy' ),
 					'background:#aaa;color:#fff;padding:1px 4px;border-radius:4px;font-size:0.8em',
 					$url
 				);
@@ -151,8 +151,8 @@ class Plugin extends Controller {
 		$cap = self::get_cap();
 
 		add_menu_page(
-			__( 'Memberships', 'hubloy-membership' ),
-			__( 'Memberships', 'hubloy-membership' ),
+			__( 'Memberships', 'memberships-by-hubloy' ),
+			__( 'Memberships', 'memberships-by-hubloy' ),
 			$cap,
 			self::MENU_SLUG,
 			null,
@@ -162,8 +162,8 @@ class Plugin extends Controller {
 
 		add_submenu_page(
 			self::MENU_SLUG,
-			__( 'Membership Content', 'hubloy-membership' ),
-			__( 'Membership Content', 'hubloy-membership' ),
+			__( 'Membership Content', 'memberships-by-hubloy' ),
+			__( 'Membership Content', 'memberships-by-hubloy' ),
 			$cap,
 			self::MENU_SLUG,
 			array( $this, 'render' )
@@ -196,8 +196,8 @@ class Plugin extends Controller {
 		$cap = self::get_cap();
 
 		add_menu_page(
-			__( 'Memberships', 'hubloy-membership' ),
-			__( 'Memberships', 'hubloy-membership' ),
+			__( 'Memberships', 'memberships-by-hubloy' ),
+			__( 'Memberships', 'memberships-by-hubloy' ),
 			$cap,
 			self::MENU_SLUG,
 			null,
@@ -207,8 +207,8 @@ class Plugin extends Controller {
 
 		add_submenu_page(
 			self::MENU_SLUG,
-			__( 'Membership Content', 'hubloy-membership' ),
-			__( 'Membership Content', 'hubloy-membership' ),
+			__( 'Membership Content', 'memberships-by-hubloy' ),
+			__( 'Membership Content', 'memberships-by-hubloy' ),
 			$cap,
 			self::MENU_SLUG,
 			array( $this, 'network_render' )
@@ -262,7 +262,7 @@ class Plugin extends Controller {
 			wp_enqueue_style( 'hubloy_membership-select2' );
 			wp_enqueue_style( 'hubloy_membership-admin' );
 
-			$enabled_text = __( 'Enabled', 'hubloy-membership' );
+			$enabled_text = __( 'Enabled', 'memberships-by-hubloy' );
 			$custom_css   = "
 				.hubloy_membership-input .switch-checkbox .switch .knobs::after {
                     content: '{$enabled_text}';
@@ -357,8 +357,8 @@ class Plugin extends Controller {
 	public function admin_bar_menu( $admin_bar ) {
 		if ( ! defined( 'HUBMEMB_HIDE_TOP_BAR' ) ) {
 			$args = array(
-				'id'    => 'hubloy-membership',
-				'title' => __( 'Memberships', 'hubloy-membership' ),
+				'id'    => 'memberships-by-hubloy',
+				'title' => __( 'Memberships', 'memberships-by-hubloy' ),
 				'href'  => is_multisite() ? esc_url( network_admin_url( 'admin.php?page=hubloy_membership' ) ) : esc_url( admin_url( 'admin.php?page=hubloy_membership' ) ),
 			);
 			$admin_bar->add_node( $args );
@@ -385,22 +385,22 @@ class Plugin extends Controller {
 					if ( ! empty( $plan_id ) ) {
 						$membership = hubloy_membership_get_plan_by_id( $plan_id );
 						if ( $membership ) {
-							$title = sprintf( __( 'Membership Plan %1$s  %2$s', 'hubloy-membership' ), $sep, $membership->name );
+							$title = sprintf( __( 'Membership Plan %1$s  %2$s', 'memberships-by-hubloy' ), $sep, $membership->name );
 						}
 					}
 
 					break;
 
 				case 'edit-account':
-					$title .= sprintf( __( ' %s details', 'hubloy-membership' ), $sep );
+					$title .= sprintf( __( ' %s details', 'memberships-by-hubloy' ), $sep );
 					break;
 
 				case 'transactions':
-					$title .= sprintf( __( ' %s Transactions', 'hubloy-membership' ), $sep );
+					$title .= sprintf( __( ' %s Transactions', 'memberships-by-hubloy' ), $sep );
 					break;
 
 				case 'subscriptions':
-					$title .= sprintf( __( ' %s Subscriptions', 'hubloy-membership' ), $sep );
+					$title .= sprintf( __( ' %s Subscriptions', 'memberships-by-hubloy' ), $sep );
 					break;
 			}
 		}
@@ -489,8 +489,8 @@ class Plugin extends Controller {
 	 * @return array
 	 */
 	public function admin_js_vars( $vars ) {
-		if ( $this->is_page( 'hubloy-membership' ) ) {
-			$vars['common']['string']['title'] = __( 'Dashboard', 'hubloy-membership' );
+		if ( $this->is_page( 'memberships-by-hubloy' ) ) {
+			$vars['common']['string']['title'] = __( 'Dashboard', 'memberships-by-hubloy' );
 			$vars['active_page']               = 'dashboard';
 			$vars['strings']['dashboard']      = $this->get_strings();
 		}

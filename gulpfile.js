@@ -38,14 +38,14 @@ var adminJsFiles = [
 
 gulp.task('admin-scripts', function() {
 	return gulp.src(adminJsFiles)
-		.pipe(concat('hubloy-membership-admin.min.js'))
+		.pipe(concat('memberships-by-hubloy-admin.min.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest(jsDest));
 });
 
 gulp.task('front-scripts', function() {
 	return gulp.src(frontJsFiles)
-		.pipe(concat('hubloy-membership-front.min.js'))
+		.pipe(concat('memberships-by-hubloy-front.min.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest(jsDest));
 });

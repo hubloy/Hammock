@@ -4,7 +4,7 @@
  * renders a users subscription plan
  * This view is used to list plans
  *
- * This template can be overridden by copying it to yourtheme/hubloy_membership/account/subscription-plan-list.php.
+ * This template can be overridden by copying it to yourtheme/memberships-by-hubloy/account/subscription-plan-list.php.
  *
  * @package HubloyMembership/Templates/Account
  * @version 1.0.0

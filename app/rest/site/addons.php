@@ -71,7 +71,7 @@ class Addons extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
-						'description'       => __( 'The addon unique key', 'hubloy-membership' ),
+						'description'       => __( 'The addon unique key', 'memberships-by-hubloy' ),
 					),
 				),
 			)
@@ -89,7 +89,7 @@ class Addons extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
-						'description'       => __( 'The addon unique key', 'hubloy-membership' ),
+						'description'       => __( 'The addon unique key', 'memberships-by-hubloy' ),
 					),
 				),
 			)
@@ -108,13 +108,13 @@ class Addons extends Rest {
 							'required'          => true,
 							'sanitize_callback' => 'sanitize_text_field',
 							'type'              => 'string',
-							'description'       => __( 'The addon unique key', 'hubloy-membership' ),
+							'description'       => __( 'The addon unique key', 'memberships-by-hubloy' ),
 						),
 						'enabled' => array(
 							'required'          => true,
 							'sanitize_callback' => 'absint',
 							'type'              => 'integer',
-							'description'       => __( 'Enabled status either 1 or 0', 'hubloy-membership' ),
+							'description'       => __( 'Enabled status either 1 or 0', 'memberships-by-hubloy' ),
 						),
 					),
 				),
@@ -135,13 +135,13 @@ class Addons extends Rest {
 							'required'          => true,
 							'sanitize_callback' => 'sanitize_text_field',
 							'type'              => 'string',
-							'description'       => __( 'The addon unique key', 'hubloy-membership' ),
+							'description'       => __( 'The addon unique key', 'memberships-by-hubloy' ),
 						),
 						'action' => array(
 							'required'          => true,
 							'sanitize_callback' => 'sanitize_text_field',
 							'type'              => 'string',
-							'description'       => __( 'The custom addon action to call', 'hubloy-membership' ),
+							'description'       => __( 'The custom addon action to call', 'memberships-by-hubloy' ),
 						),
 					),
 				),
@@ -183,7 +183,7 @@ class Addons extends Rest {
 				)
 			);
 		} else {
-			return new \WP_Error( 'rest_addon_invalid', esc_html__( 'The addon does not exist.', 'hubloy-membership' ), array( 'status' => 404 ) );
+			return new \WP_Error( 'rest_addon_invalid', esc_html__( 'The addon does not exist.', 'memberships-by-hubloy' ), array( 'status' => 404 ) );
 		}
 	}
 
@@ -202,7 +202,7 @@ class Addons extends Rest {
 				'status'  => false,
 				'message' => __(
 					'Addon not found',
-					'hubloy-membership'
+					'memberships-by-hubloy'
 				),
 			),
 			$request
@@ -235,7 +235,7 @@ class Addons extends Rest {
 				200
 			);
 		} else {
-			return new \WP_Error( 'rest_addon_invalid', esc_html__( 'The addon does not exist.', 'hubloy-membership' ), array( 'status' => 404 ) );
+			return new \WP_Error( 'rest_addon_invalid', esc_html__( 'The addon does not exist.', 'memberships-by-hubloy' ), array( 'status' => 404 ) );
 		}
 	}
 
@@ -254,7 +254,7 @@ class Addons extends Rest {
 				'success' => true,
 				'message' => __(
 					'Action executed',
-					'hubloy-membership'
+					'memberships-by-hubloy'
 				),
 			),
 			$request

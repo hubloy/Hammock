@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 1.0.0
  */
 function hubloy_membership_content_protected_message( $content_id, $type, $object_type ) {
-	return apply_filters( 'hubloy_membership_content_protected_message', __( 'Access to this content is restricted', 'hubloy-membership' ), $content_id, $type, $object_type );
+	return apply_filters( 'hubloy_membership_content_protected_message', __( 'Access to this content is restricted', 'memberships-by-hubloy' ), $content_id, $type, $object_type );
 }
 
 /**

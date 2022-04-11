@@ -362,7 +362,7 @@ class Gateway extends Component {
 		wp_send_json_success(
 			array(
 				'url'     => $this->get_invoice_page( $invoice ),
-				'message' => __( 'Payment Successful', 'hubloy-membership' ),
+				'message' => __( 'Payment Successful', 'memberships-by-hubloy' ),
 			)
 		);
 	}
@@ -377,7 +377,7 @@ class Gateway extends Component {
 	 * @since 1.0.0
 	 */
 	public function process_refund( $invoice, $plan, $amount ) {
-		wp_send_json_error( __( 'Not supported', 'hubloy-membership' ) );
+		wp_send_json_error( __( 'Not supported', 'memberships-by-hubloy' ) );
 	}
 
 

@@ -44,7 +44,7 @@ Users have full control of their membership and subscription on your site.
 Please visit [our support site at https://hubloymembership.com/docs/](https://hubloymembership.com/docs/) for more documentation and our support forums.
 
 = I found a bug in the plugin. =
-Please post it in the [GitHub issues page](https://github.com/hubloy/hubloy-membership/issues/new/choose) and we'll fix it right away. Thanks for helping.
+Please post it in the [GitHub issues page](https://github.com/hubloy/memberships-by-hubloy/issues/new/choose) and we'll fix it right away. Thanks for helping.
 
 == Changelog ==
 = 1.0.0 =

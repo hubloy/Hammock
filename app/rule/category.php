@@ -49,7 +49,7 @@ class Category extends Rule {
 	 */
 	public function init() {
 		$this->id          = 'term';
-		$this->name        = __( 'Categories', 'hubloy-membership' );
+		$this->name        = __( 'Categories', 'memberships-by-hubloy' );
 		$this->has_setting = true;
 	}
 

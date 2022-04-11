@@ -40,6 +40,6 @@ class Items extends Rule {
 	 */
 	public function init() {
 		$this->id   = 'custom_items';
-		$this->name = __( 'Custom Post Type Items', 'hubloy-membership' );
+		$this->name = __( 'Custom Post Type Items', 'memberships-by-hubloy' );
 	}
 }

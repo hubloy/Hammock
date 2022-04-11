@@ -121,7 +121,7 @@
 	<rule ref="WordPress.WP.I18n">
 		<properties>
 			<property name="text_domain" type="array">
-				<element value="hubloy-membership"/>
+				<element value="memberships-by-hubloy"/>
 			</property>
 		</properties>
 	</rule>

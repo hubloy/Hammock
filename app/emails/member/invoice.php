@@ -51,10 +51,10 @@ class Invoice extends Email {
 	 */
 	public function register_defaults() {
 		return array(
-			'title'       => __( 'New payment', 'hubloy-membership' ),
-			'description' => __( 'Sent each time a payment has been made', 'hubloy-membership' ),
-			'heading'     => sprintf( __( 'Membership receipt %s', 'hubloy-membership' ), '#{invoice_number}' ),
-			'subject'     => sprintf( __( '%1$s: Your %2$s membership receipt %3$s', 'hubloy-membership' ), '[{site_title}]', '{membership_name}', '#{invoice_number}' ),
+			'title'       => __( 'New payment', 'memberships-by-hubloy' ),
+			'description' => __( 'Sent each time a payment has been made', 'memberships-by-hubloy' ),
+			'heading'     => sprintf( __( 'Membership receipt %s', 'memberships-by-hubloy' ), '#{invoice_number}' ),
+			'subject'     => sprintf( __( '%1$s: Your %2$s membership receipt %3$s', 'memberships-by-hubloy' ), '[{site_title}]', '{membership_name}', '#{invoice_number}' ),
 			'recipient'   => '',
 			'enabled'     => false,
 		);

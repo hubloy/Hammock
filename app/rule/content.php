@@ -40,6 +40,6 @@ class Content extends Rule {
 	 */
 	public function init() {
 		$this->id   = 'content';
-		$this->name = __( 'Comments & More Tag', 'hubloy-membership' );
+		$this->name = __( 'Comments & More Tag', 'memberships-by-hubloy' );
 	}
 }

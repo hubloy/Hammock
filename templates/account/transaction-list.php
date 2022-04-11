@@ -4,7 +4,7 @@
  * renders a users transactions
  * This view is used to list transactions
  *
- * This template can be overridden by copying it to yourtheme/hubloy_membership/account/transaction-list.php.
+ * This template can be overridden by copying it to yourtheme/memberships-by-hubloy/account/transaction-list.php.
  *
  * @package HubloyMembership/Templates/Account
  * @version 1.0.0

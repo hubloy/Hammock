@@ -79,7 +79,7 @@ class Post extends Rule {
 	 */
 	public function init() {
 		$this->id          = 'post';
-		$this->name        = __( 'Posts', 'hubloy-membership' );
+		$this->name        = __( 'Posts', 'memberships-by-hubloy' );
 		$this->has_setting = true;
 
 		add_filter( 'pre_trash_post', array( $this, 'pre_trash_post' ), 10, 2 );
@@ -138,11 +138,11 @@ class Post extends Rule {
 	 */
 	public function get_view_columns() {
 		return array(
-			'id'        => __( 'ID', 'hubloy-membership' ),
-			'title'     => __( 'Title', 'hubloy-membership' ),
-			'access'    => __( 'Who has access', 'hubloy-membership' ),
-			'edit_html' => __( 'Edit', 'hubloy-membership' ),
-			'view_html' => __( 'View', 'hubloy-membership' ),
+			'id'        => __( 'ID', 'memberships-by-hubloy' ),
+			'title'     => __( 'Title', 'memberships-by-hubloy' ),
+			'access'    => __( 'Who has access', 'memberships-by-hubloy' ),
+			'edit_html' => __( 'Edit', 'memberships-by-hubloy' ),
+			'view_html' => __( 'View', 'memberships-by-hubloy' ),
 		);
 	}
 

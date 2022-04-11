@@ -3,7 +3,7 @@
  * Account plan roe
  * This view is used as a row for transactions
  *
- * This template can be overridden by copying it to yourtheme/hubloy_membership/account/transaction/list/view-transaction.php.
+ * This template can be overridden by copying it to yourtheme/memberships-by-hubloy/account/transaction/list/view-transaction.php.
  *
  * @package HubloyMembership/Templates/Account/Transaction/List/View
  * @version 1.0.0

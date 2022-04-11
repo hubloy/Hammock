@@ -3,7 +3,7 @@
  * Auth Access
  * Handles login, registration and password reset
  *
- * This template can be overridden by copying it to yourtheme/hubloy_membership/account/auth-access.php.
+ * This template can be overridden by copying it to yourtheme/memberships-by-hubloy/account/auth-access.php.
  *
  * @package HubloyMembership/Templates/Account
  * @version 1.0.0

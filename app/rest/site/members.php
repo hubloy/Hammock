@@ -63,49 +63,49 @@ class Members extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
-						'description'       => __( 'The current page', 'hubloy-membership' ),
+						'description'       => __( 'The current page', 'memberships-by-hubloy' ),
 					),
 					'per_page'   => array(
 						'required'          => false,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
 						'default'           => 10,
-						'description'       => __( 'Items per page', 'hubloy-membership' ),
+						'description'       => __( 'Items per page', 'memberships-by-hubloy' ),
 					),
 					'membership' => array(
 						'required'          => false,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
 						'default'           => 0,
-						'description'       => __( 'The membership id', 'hubloy-membership' ),
+						'description'       => __( 'The membership id', 'memberships-by-hubloy' ),
 					),
 					'status'     => array(
 						'required'          => false,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
 						'default'           => null,
-						'description'       => __( 'The subscription status', 'hubloy-membership' ),
+						'description'       => __( 'The subscription status', 'memberships-by-hubloy' ),
 					),
 					'gateway'    => array(
 						'required'          => false,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
 						'default'           => null,
-						'description'       => __( 'The gateway id', 'hubloy-membership' ),
+						'description'       => __( 'The gateway id', 'memberships-by-hubloy' ),
 					),
 					'start_date' => array(
 						'required'          => false,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
 						'default'           => null,
-						'description'       => __( 'The subscription start date', 'hubloy-membership' ),
+						'description'       => __( 'The subscription start date', 'memberships-by-hubloy' ),
 					),
 					'end_date'   => array(
 						'required'          => false,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
 						'default'           => null,
-						'description'       => __( 'The subscription end date', 'hubloy-membership' ),
+						'description'       => __( 'The subscription end date', 'memberships-by-hubloy' ),
 					),
 				),
 			)
@@ -133,7 +133,7 @@ class Members extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
-						'description'       => __( 'The member id', 'hubloy-membership' ),
+						'description'       => __( 'The member id', 'memberships-by-hubloy' ),
 					),
 				),
 			)
@@ -151,7 +151,7 @@ class Members extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'absint',
 						'type'              => 'integer',
-						'description'       => __( 'The member id', 'hubloy-membership' ),
+						'description'       => __( 'The member id', 'memberships-by-hubloy' ),
 					),
 				),
 			)
@@ -179,7 +179,7 @@ class Members extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
-						'description'       => __( 'The search param', 'hubloy-membership' ),
+						'description'       => __( 'The search param', 'memberships-by-hubloy' ),
 					),
 				),
 			)
@@ -197,7 +197,7 @@ class Members extends Rest {
 						'required'          => true,
 						'sanitize_callback' => 'sanitize_text_field',
 						'type'              => 'string',
-						'description'       => __( 'The search param', 'hubloy-membership' ),
+						'description'       => __( 'The search param', 'memberships-by-hubloy' ),
 					),
 				),
 			)
@@ -439,7 +439,7 @@ class Members extends Rest {
 		} else {
 			return array(
 				'status'  => false,
-				'message' => __( 'Invalid email', 'hubloy-membership' ),
+				'message' => __( 'Invalid email', 'memberships-by-hubloy' ),
 			);
 		}
 	}
@@ -460,7 +460,7 @@ class Members extends Rest {
 		} else {
 			return array(
 				'status'  => false,
-				'message' => __( 'Invalid user id', 'hubloy-membership' ),
+				'message' => __( 'Invalid user id', 'memberships-by-hubloy' ),
 			);
 		}
 	}
@@ -486,7 +486,7 @@ class Members extends Rest {
 		} else {
 			return array(
 				'status'  => false,
-				'message' => __( 'Invalid membership id', 'hubloy-membership' ),
+				'message' => __( 'Invalid membership id', 'memberships-by-hubloy' ),
 			);
 		}
 	}

@@ -117,8 +117,8 @@ class Addon extends Controller {
 		$this->_cap     = $cap;
 		add_submenu_page(
 			$slug,
-			__( 'Addons', 'hubloy-membership' ),
-			__( 'Addons', 'hubloy-membership' ),
+			__( 'Addons', 'memberships-by-hubloy' ),
+			__( 'Addons', 'memberships-by-hubloy' ),
 			$this->_cap,
 			$this->_page_id,
 			array( $this, 'render' )
@@ -136,7 +136,7 @@ class Addon extends Controller {
 	 */
 	public function admin_js_vars( $vars ) {
 		if ( $this->is_page( 'addons' ) ) {
-			$vars['common']['string']['title'] = __( 'Addons', 'hubloy-membership' );
+			$vars['common']['string']['title'] = __( 'Addons', 'memberships-by-hubloy' );
 			$vars['active_page']               = 'addon';
 		}
 		return $vars;
@@ -172,7 +172,7 @@ class Addon extends Controller {
 
 		$addon_id = sanitize_text_field( $_POST['id'] );
 
-		$view = apply_filters( 'hubloy_membership_addon_' . $addon_id . '_settings', __( 'Not implemented', 'hubloy-membership' ) );
+		$view = apply_filters( 'hubloy_membership_addon_' . $addon_id . '_settings', __( 'Not implemented', 'memberships-by-hubloy' ) );
 		wp_send_json_success(
 			array(
 				'view' => $view,

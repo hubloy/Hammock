@@ -565,7 +565,7 @@ class Member {
 				'user_edit_url' => $this->user_edit_url,
 				'user_info'     => $this->user_info,
 				'enabled'       => $this->enabled,
-				'status'        => $this->enabled ? __( 'Enabled', 'hubloy-membership' ) : __( 'Disabled', 'hubloy-membership' ),
+				'status'        => $this->enabled ? __( 'Enabled', 'memberships-by-hubloy' ) : __( 'Disabled', 'memberships-by-hubloy' ),
 				'plans'         => count( $this->plans ),
 			),
 			$this

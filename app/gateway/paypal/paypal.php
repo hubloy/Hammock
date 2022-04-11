@@ -56,7 +56,7 @@ class PayPal extends Gateway {
 	public function register( $gateways ) {
 		if ( ! isset( $gateways['paypal'] ) ) {
 			$gateways['paypal'] = array(
-				'name' => __( 'PayPal Standard Gateway', 'hubloy-membership' ),
+				'name' => __( 'PayPal Standard Gateway', 'memberships-by-hubloy' ),
 				'logo' => HUBMEMB_ASSETS_URL . '/img/gateways/paypal.png',
 			);
 		}
@@ -275,10 +275,10 @@ class PayPal extends Gateway {
 			$invoice->status = Transactions::STATUS_PAID;
 		} elseif ( 'pending' === $paypal_status && ! empty( $_POST['pending_reason'] ) ) {
 			$invoice->status = Transactions::STATUS_PENDING;
-			$invoice->add_note( sprintf( __( 'PayPal has the payment on hold. Reason given: %s', 'hubloy-membership' ), sanitize_text_field( $_POST['pending_reason'] ) ) );
+			$invoice->add_note( sprintf( __( 'PayPal has the payment on hold. Reason given: %s', 'memberships-by-hubloy' ), sanitize_text_field( $_POST['pending_reason'] ) ) );
 		} else {
 			$invoice->status = Transactions::STATUS_FAILED;
-			$invoice->add_note( sprintf( __( 'PayPal rejected the payment. PayPal Status: %s', 'hubloy-membership' ), $paypal_status ) );
+			$invoice->add_note( sprintf( __( 'PayPal rejected the payment. PayPal Status: %s', 'memberships-by-hubloy' ), $paypal_status ) );
 		}
 
 		$invoice->save();
@@ -295,7 +295,7 @@ class PayPal extends Gateway {
 		}
 		$subscr_id       = sanitize_text_field( $_POST['subscr_id'] );
 		$invoice->status = Transactions::STATUS_PAID;
-		$invoice->add_note( sprintf( __( 'PayPal Subscription ID: %s', 'hubloy-membership' ), $subscr_id ) );
+		$invoice->add_note( sprintf( __( 'PayPal Subscription ID: %s', 'memberships-by-hubloy' ), $subscr_id ) );
 		$invoice->save();
 
 		$plan = $invoice->get_plan();
@@ -448,7 +448,7 @@ class PayPal extends Gateway {
 
 		wp_send_json_success(
 			array(
-				'message' => __( 'Redirecting to PayPal', 'hubloy-membership' ),
+				'message' => __( 'Redirecting to PayPal', 'memberships-by-hubloy' ),
 				'url'     => $url,
 			)
 		);
@@ -525,7 +525,7 @@ class PayPal extends Gateway {
 
 		wp_send_json_success(
 			array(
-				'message' => __( 'Redirecting to PayPal', 'hubloy-membership' ),
+				'message' => __( 'Redirecting to PayPal', 'memberships-by-hubloy' ),
 				'url'     => $url,
 			)
 		);
@@ -593,7 +593,7 @@ class PayPal extends Gateway {
 		}
 
 		if ( ! $best_match ) {
-			wp_die( __( 'Can not create a valid PayPal subscription configuration from plan.', 'hubloy-membership' ) );
+			wp_die( __( 'Can not create a valid PayPal subscription configuration from plan.', 'memberships-by-hubloy' ) );
 		}
 
 		return $best_match;

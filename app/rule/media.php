@@ -40,6 +40,6 @@ class Media extends Rule {
 	 */
 	public function init() {
 		$this->id   = 'media';
-		$this->name = __( 'Media Library Items', 'hubloy-membership' );
+		$this->name = __( 'Media Library Items', 'memberships-by-hubloy' );
 	}
 }

@@ -37,7 +37,7 @@ class Items extends View {
 		);
 		ob_start();
 		?>
-		<select name="item" data-placeholder="<?php esc_html_e( 'Select Item', 'hubloy-membership' ); ?>" class="uk-select hubloy_membership-select2-ajax" data-url="<?php echo esc_url( $url ); ?>" style="width: 100%">
+		<select name="item" data-placeholder="<?php esc_html_e( 'Select Item', 'memberships-by-hubloy' ); ?>" class="uk-select hubloy_membership-select2-ajax" data-url="<?php echo esc_url( $url ); ?>" style="width: 100%">
 			<?php
 			if ( $rule ) {
 				$content = $rule->to_html();

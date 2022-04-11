@@ -65,8 +65,8 @@ class Activity {
 			case 'author':
 				$return = sprintf(
 					'%s <span class="author-name">%s</span>',
-					__( 'by', 'hubloy-membership' ),
-					__( 'N/A', 'hubloy-membership' )
+					__( 'by', 'memberships-by-hubloy' ),
+					__( 'N/A', 'memberships-by-hubloy' )
 				);
 
 				if ( ! empty( $activity->user_id ) && 0 !== (int) $activity->user_id ) {
@@ -74,7 +74,7 @@ class Activity {
 					if ( $user instanceof \WP_User && 0 !== $user->ID ) {
 						$return = sprintf(
 							'%s <a href="%s" target="_blank"><span class="author-name">%s</span></a>',
-							__( 'by', 'hubloy-membership' ),
+							__( 'by', 'memberships-by-hubloy' ),
 							get_edit_user_link( $user->ID ),
 							$user->display_name
 						);
@@ -83,7 +83,7 @@ class Activity {
 				break;
 			case 'role':
 				global $wp_roles;
-				$return = isset( $activity->caps ) && isset( $wp_roles->role_names[ $activity->caps ] ) ? $wp_roles->role_names[ $activity->caps ] : __( 'Unknown', 'hubloy-membership' );
+				$return = isset( $activity->caps ) && isset( $wp_roles->role_names[ $activity->caps ] ) ? $wp_roles->role_names[ $activity->caps ] : __( 'Unknown', 'memberships-by-hubloy' );
 				break;
 			case 'type':
 				$return = ucfirst( $activity->object_type );
