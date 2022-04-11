@@ -172,7 +172,7 @@ class Plugin extends Controller {
 		$installed = Util::get_option( 'hubloy_membership_installed' );
 
 		// Flag to check if wizard has run for first use
-		if ( 1 === $installed ) {
+		if ( 1 == $installed ) {
 			/**
 			 * Action to set up additional admin pages
 			 * This is called by the base controller
@@ -217,7 +217,7 @@ class Plugin extends Controller {
 		$installed = Util::get_option( 'hubloy_membership_installed' );
 
 		// Flag to check if wizard has run for first use
-		if ( 1 === $installed ) {
+		if ( 1 == $installed ) {
 			/**
 			 * Action to set up additional admin pages
 			 * This is called by the base controller
@@ -427,9 +427,8 @@ class Plugin extends Controller {
 	 */
 	public function render() {
 		$installed = Util::get_option( 'hubloy_membership_installed' );
-
 		// Flag to check if wizard has run for first use
-		if ( 1 === $installed ) {
+		if ( 1 == $installed ) {
 			?>
 			<div id="hubloy_membership-admin-container"></div>
 			<?php
@@ -450,7 +449,7 @@ class Plugin extends Controller {
 		$installed = Util::get_option( 'hubloy_membership_installed' );
 
 		// Flag to check if wizard has run for first use
-		if ( 1 === $installed ) {
+		if ( 1 == $installed ) {
 			?>
 			<div id="hubloy_membership-admin-container"></div>
 			<?php
