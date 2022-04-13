@@ -58,7 +58,7 @@ export default class GatewaySetting extends PureComponent {
 		this.fetchWP.post( 'gateways/update', form, true )
 			.then( (json) => {
 				if ( json.status ) {
-					this.setState({
+					self.setState({
 						settings : json.settings
 					});
 					self.notify( json.message, 'success' );
@@ -70,7 +70,7 @@ export default class GatewaySetting extends PureComponent {
 			}, (err) => {
 				$button.removeAttr('disabled');
 				$button.html($btn_txt);
-				self.notify( this.props.hubloy_membership.error, 'error' );
+				self.notify( self.props.hubloy_membership.error, 'error' );
 			}
 		);
 	}

@@ -3,7 +3,7 @@ Contributors: hubloy, rixeo
 Tags: members, subscriptions, membership
 Requires at least: 5.9
 Tested up to: 5.9.3
-Stable tag: 1.0.0.1
+Stable tag: 1.0.1
 License: GPLv2 or later
 Requires PHP: 5.3
 
@@ -47,6 +47,13 @@ Please visit [our support site at https://hubloymembership.com/docs/](https://hu
 Please post it in the [GitHub issues page](https://github.com/hubloy/memberships-by-hubloy/issues/new/choose) and we'll fix it right away. Thanks for helping.
 
 == Changelog ==
+= 1.0.1 =
+* New : Add settings tab filter. This allows introduction of custom settings page
+* New : Add settings dynamic page content for tab filter.
+* New : Add action to manage custom settings form.
+
+More on this here https://hubloymembership.com/docs/custom-settings-page/
+
 = 1.0.0.1 =
 * Fix onboarding wizard
 * Add action on settings save

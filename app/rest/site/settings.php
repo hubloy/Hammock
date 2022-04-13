@@ -111,6 +111,28 @@ class Settings extends Rest {
 				'permission_callback' => array( $this, 'validate_request' ),
 			)
 		);
+
+		register_rest_route(
+			$namespace,
+			self::BASE_API_ROUTE . 'section/get/(?P<type>[\w-]+)',
+			array(
+				array(
+					'methods'             => \WP_REST_Server::READABLE,
+					'callback'            => array( $this, 'get_setting_section' ),
+					'permission_callback' => array( $this, 'validate_request' ),
+				),
+			)
+		);
+
+		register_rest_route(
+			$namespace,
+			self::BASE_API_ROUTE . 'section/update',
+			array(
+				'methods'             => \WP_REST_Server::CREATABLE,
+				'callback'            => array( $this, 'update_setting_section' ),
+				'permission_callback' => array( $this, 'validate_request' ),
+			)
+		);
 	}
 
 	/**
@@ -257,6 +279,75 @@ class Settings extends Rest {
 	 */
 	public function get_nav_items( $request ) {
 		return Addons::addon_settings_links();
+	}
+	
+	/**
+	 * Get setting section
+	 * 
+	 * @since 1.0.1
+	 * 
+	 * @return array
+	 */
+	public function get_setting_section( $request ) {
+		$type = sanitize_text_field( $request['type'] );
+
+		/**
+		 * Settings section custom html
+		 * 
+		 * @param string $type The section
+		 * 
+		 * @since 1.0.1
+		 * 
+		 * @return array
+		 */
+		do_action( 'hubloy_membership_get_settings_section', $type );
+
+		// Return default response.
+		return rest_ensure_response(
+			array(
+				'status'  => true,
+				'form'   => __( 'Not yet implemented', 'memberships-by-hubloy' ),
+			)
+		);
+	}
+
+	/**
+	 * Update setting section
+	 * 
+	 * @since 1.0.1
+	 * 
+	 * @return array
+	 */
+	public function update_setting_section( $request ) {
+		if ( ! isset( $request['section'] ) ) {
+			return rest_ensure_response(
+				array(
+					'status'  => false,
+					'message' => __( 'Invalid section', 'memberships-by-hubloy' ),
+				)
+			);
+		}
+		$section = sanitize_text_field( $request['section'] );
+
+		/**
+		 * Settings section custom html
+		 * 
+		 * @param string $section The section.
+		 * @param array $request The post data.
+		 * 
+		 * @since 1.0.1
+		 * 
+		 * @return array
+		 */
+		do_action( 'hubloy_membership_update_settings_section', $section, $request );
+
+		// Return default response.
+		return rest_ensure_response(
+			array(
+				'status'  => false,
+				'message' => __( 'Not yet implemented', 'memberships-by-hubloy' ),
+			)
+		);
 	}
 }
 

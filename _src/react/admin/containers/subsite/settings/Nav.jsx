@@ -9,12 +9,11 @@ export default class Nav extends PureComponent {
             <nav className="uk-navbar-container uk-navbar-transparent" uk-navbar="">
                 <div className="uk-navbar-left">
                     <ul className="uk-navbar-nav hubloy_membership-navbar">
-                        <li className={active_nav === 'general' ? 'uk-active' : '' }>
-                            <Link to="/"><span>{hubloy_membership.page_strings.tabs.general}</span></Link>
-                        </li>
-                        <li className={active_nav === 'gateways' ? 'uk-active' : '' }>
-                            <Link to="/gateways"><span>{hubloy_membership.page_strings.tabs.gateways}</span></Link>
-                        </li>
+                        {hubloy_membership.page_strings.tabs.map(tab =>
+                            <li key={tab.id} className={active_nav === tab.id ? 'uk-active' : '' }>
+                                <Link to={"/" + tab.url}><span>{tab.name}</span></Link>
+                            </li>
+                        )}
                     </ul>
                 </div>
             </nav>
