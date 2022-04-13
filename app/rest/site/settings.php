@@ -323,7 +323,7 @@ class Settings extends Rest {
 			return rest_ensure_response(
 				array(
 					'status'  => false,
-					'form'   => __( 'Invalid section', 'memberships-by-hubloy' ),
+					'message' => __( 'Invalid section', 'memberships-by-hubloy' ),
 				)
 			);
 		}
@@ -345,7 +345,7 @@ class Settings extends Rest {
 		return rest_ensure_response(
 			array(
 				'status'  => false,
-				'form'   => __( 'Not yet implemented', 'memberships-by-hubloy' ),
+				'message' => __( 'Not yet implemented', 'memberships-by-hubloy' ),
 			)
 		);
 	}
