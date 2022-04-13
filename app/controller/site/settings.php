@@ -143,15 +143,35 @@ class Settings extends Controller {
 			$vars['active_page']               = 'settings';
 			$vars['strings']                   = $this->get_strings();
 			$vars['page_strings']              = array(
-				'tabs' => array(
-					'general'  => __( 'General', 'memberships-by-hubloy' ),
-					'gateways' => __( 'Gateways', 'memberships-by-hubloy' ),
-				),
-
+				'tabs' => $this->get_tab_names(),
 			);
 
 		}
 		return $vars;
+	}
+
+	/**
+	 * Generate the tabs for the settings.
+	 * 
+	 * @since 1.0.1
+	 * 
+	 * @return array
+	 */
+	private function get_tab_names() {
+		return apply_filters( 'hubloy_membership_admin_settings_tabs',
+			array(
+				array(
+					'id'   => 'general',
+					'name' => __( 'General', 'memberships-by-hubloy' ),
+					'url'  => ''
+				),
+				array(
+					'id'   => 'gateways',
+					'name' => __( 'Gateways', 'memberships-by-hubloy' ),
+					'url'  => 'gateways'
+				),
+			)
+		);
 	}
 
 	/**

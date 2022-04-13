@@ -5,12 +5,24 @@ import LazyLoad from 'react-lazyload';
 import Dashboard from 'layout/Dashboard'
 import SubSiteGateways from './settings/sections/SubSiteGateways'
 import SubSiteSettings from './settings/sections/SubSiteSettings'
+import SubSiteDefault from './settings/sections/SubSiteDefault'
 
 import Nav from './settings/Nav'
 
 export default class SiteSettings extends Component {
 	constructor(props) {
 		super(props);
+	}
+
+	renderSettingSections( section, hubloy_membership ) {
+		switch ( section ) {
+			case 'gateways':
+				return <SubSiteGateways hubloy_membership={hubloy_membership} />;
+			case 'general':
+				return <SubSiteSettings hubloy_membership={hubloy_membership} />;
+			default :
+				return <SubSiteDefault hubloy_membership={hubloy_membership} section={section} />;
+		}
 	}
 
 	render() {
@@ -22,12 +34,7 @@ export default class SiteSettings extends Component {
 						<Nav hubloy_membership={this.props.hubloy_membership} active_nav={section}/>
 					</LazyLoad>
 					<div className="hubloy_membership-settings-settings uk-background-default uk-padding-small">
-						{
-							{
-								'gateways': <SubSiteGateways hubloy_membership={this.props.hubloy_membership} />,
-								'general': <SubSiteSettings hubloy_membership={this.props.hubloy_membership}/>
-							}[section]
-						}
+						{ this.renderSettingSections( section, this.props.hubloy_membership ) }
 					</div>
 				</div>
 			</Dashboard>

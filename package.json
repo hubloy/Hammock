@@ -2,7 +2,7 @@
 	"name": "memberships-by-hubloy",
 	"title": "Hubloy Membership",
 	"description": "Membership plugin",
-	"version": "1.0.0.1",
+	"version": "1.0.1",
 	"homepage": "https://www.hubloymembership.com",
 	"license": "GPL-3.0",
 	"scripts": {
