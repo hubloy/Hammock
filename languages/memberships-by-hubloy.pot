@@ -2,10 +2,10 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Memberships by Hubloy 1.0.0.1\n"
+"Project-Id-Version: Memberships by Hubloy 1.0.1\n"
 "Report-Msgid-Bugs-To: "
 "https://wordpress.org/support/plugin/hubloy-membership\n"
-"POT-Creation-Date: 2022-04-11 14:27:40+00:00\n"
+"POT-Creation-Date: 2022-04-13 14:04:17+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -299,11 +299,11 @@ msgstr ""
 msgid "Membership Rules"
 msgstr ""
 
-#: app/controller/site/settings.php:147 app/i18n/site/memberships.php:54
+#: app/controller/site/settings.php:165 app/i18n/site/memberships.php:54
 msgid "General"
 msgstr ""
 
-#: app/controller/site/settings.php:148
+#: app/controller/site/settings.php:170
 msgid "Gateways"
 msgstr ""
 
@@ -2397,7 +2397,7 @@ msgstr ""
 msgid "The email id"
 msgstr ""
 
-#: app/rest/site/emails.php:137 app/rest/site/settings.php:212
+#: app/rest/site/emails.php:137 app/rest/site/settings.php:234
 #: app/rest/site/wizard.php:164
 msgid "Settings updated"
 msgstr ""
@@ -2475,8 +2475,16 @@ msgstr ""
 msgid "The rule id"
 msgstr ""
 
-#: app/rest/site/settings.php:225
+#: app/rest/site/settings.php:247
 msgid "Create New Page"
+msgstr ""
+
+#: app/rest/site/settings.php:309 app/rest/site/settings.php:348
+msgid "Not yet implemented"
+msgstr ""
+
+#: app/rest/site/settings.php:326
+msgid "Invalid section"
 msgstr ""
 
 #: app/rest/site/transactions.php:80
