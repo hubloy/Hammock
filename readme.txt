@@ -50,6 +50,9 @@ Please post it in the [GitHub issues page](https://github.com/hubloy/memberships
 = 1.0.1 =
 * New : Add settings tab filter. This allows introduction of custom settings page
 * New : Add settings dynamic page content for tab filter.
+* New : Add action to manage custom settings form.
+
+More on this here https://hubloymembership.com/docs/custom-settings-page/
 
 = 1.0.0.1 =
 * Fix onboarding wizard
