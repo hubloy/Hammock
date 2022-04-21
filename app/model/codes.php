@@ -337,6 +337,37 @@ class Codes {
 	}
 
 	/**
+	 * Get allowed emails
+	 * 
+	 * @since 1.1.0
+	 * 
+	 * @return array
+	 */
+	public function get_allowed_emails() {
+		$data = $this->custom_data['restrict'];
+		if ( ! $data ) {
+			return array();
+		}
+		return explode( ',', strtolower( $data ) );
+	}
+
+
+	
+	/**
+	 * Check if an email is allowed to use the code.
+	 * 
+	 * @param string $email The email
+	 * 
+	 * @since 1.1.0
+	 * 
+	 * @return bool
+	 */
+	public function is_email_allowed( $email ) {
+		$emails = $this->get_allowed_emails();
+		return in_array( strtolower( $email ), $emails, true );
+	}
+
+	/**
 	 * List all codes for pagination
 	 *
 	 * @param int  $per_page - items per page
@@ -422,6 +453,7 @@ class Codes {
 			$this
 		);
 	}
+
 }
 
 

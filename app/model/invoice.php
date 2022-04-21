@@ -520,13 +520,25 @@ class Invoice {
 	 * @return int
 	 */
 	public function get_amount() {
-		$discount = $this->get_custom_data( 'discount' );
-		$total    = $this->amount;
-		if ( $discount ) {
-			$total = $total - $discount;
-		}
-		$total = Currency::round( $total, HUBMEMB_ROUNDING_PRECISION );
+		$discount = $this->get_total_discount();
+		$total    = $this->amount - $discount;
+		$total    = Currency::round( $total, HUBMEMB_ROUNDING_PRECISION );
 		return apply_filters( 'hubloy_membership_invoice_amount', $total, $this->id );
+	}
+
+	/**
+	 * Get the total discount
+	 * 
+	 * @since 1.1.0
+	 * 
+	 * @return int
+	 */
+	public function get_total_discount() {
+		$discount = $this->get_custom_data( 'discount' );
+		if ( $discount ) {
+			return $discount;
+		}
+		return 0;
 	}
 
 	/**

@@ -286,5 +286,36 @@ class Codes {
 		$model = $this->get_model();
 		return $model->drop_down( self::STATUS_ENABLED, $ids );
 	}
+
+	/**
+	 * Check if the selected code is valid for the current use.
+	 * 
+	 * @param string $code       The code.
+	 * @param int $membership_id The membership id.
+	 * @param string $param      The email of the current user.
+	 * 
+	 * @since 1.1.0
+	 * 
+	 * @return array
+	 */
+	public function is_valid_for_use( $code, $membership_id, $email ) {
+		$model = $this->get_code( $code );
+		if ( ! $model ) {
+			return array(
+				'status' => false,
+				'message' => __( 'Invalid code', 'memberships-by-hubloy' ),
+			);
+		}
+		// Check if is email restricted.
+		if ( ! $model->is_email_allowed( $email ) ) {
+			return array(
+				'status' => false,
+				'message' => __( 'You do not have access to this code', 'memberships-by-hubloy' ),
+			);
+		}
+
+		// Check for membership restriction.
+		
+	}
 }
 

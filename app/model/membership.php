@@ -388,6 +388,21 @@ class Membership {
 	}
 
 	/**
+	 * Check if the selected membership is invite only
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return bool
+	 */
+	public function is_invite_only() {
+		$codes = $this->get_meta_value( 'invite_list' );
+		if ( $codes ) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
 	 * Get the readable type
 	 * This returns a readable type to the user e.g. per month. one time access
 	 *
