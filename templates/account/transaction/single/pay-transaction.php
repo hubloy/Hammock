@@ -32,6 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					?>
 				</td>
 			</tr>
+			<?php do_action( 'hubloy_membership_account_fields_before_total', $invoice ); ?>
 			<tr class="total">
 				<td><?php esc_html_e( 'Total:', 'memberships-by-hubloy' ); ?></td>
 				<td><?php echo wp_kses_post( $invoice->get_amount_formated() ); ?></td>

@@ -57,7 +57,7 @@ return array(
 		),
 		'invites'   => array(
 			'select' => __( 'Select Invite codes', 'memberships-by-hubloy' ),
-			'empty'  => __( 'No Invite codes fount', 'memberships-by-hubloy' ),
+			'empty'  => __( 'No Invite codes found', 'memberships-by-hubloy' ),
 		),
 	),
 );

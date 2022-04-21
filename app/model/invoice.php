@@ -10,6 +10,7 @@ use HubloyMembership\Services\Gateways;
 use HubloyMembership\Services\Transactions;
 use HubloyMembership\Services\Members;
 use HubloyMembership\Helper\Duration;
+use HubloyMembership\Helper\Currency;
 
 /**
  * Invoice model
@@ -512,6 +513,23 @@ class Invoice {
 	}
 
 	/**
+	 * Get the invoice amount
+	 * 
+	 * @since 1.1.0
+	 * 
+	 * @return int
+	 */
+	public function get_amount() {
+		$discount = $this->get_custom_data( 'discount' );
+		$total    = $this->amount;
+		if ( $discount ) {
+			$total = $total - $discount;
+		}
+		$total = Currency::round( $total, HUBMEMB_ROUNDING_PRECISION );
+		return apply_filters( 'hubloy_membership_invoice_amount', $total, $this->id );
+	}
+
+	/**
 	 * Get the amount formatted
 	 *
 	 * @since 1.0.0
@@ -519,7 +537,7 @@ class Invoice {
 	 * @return string
 	 */
 	public function get_amount_formated() {
-		return hubloy_membership_format_currency( $this->amount );
+		return hubloy_membership_format_currency( $this->get_amount() );
 	}
 
 	/**
@@ -599,7 +617,7 @@ class Invoice {
 				'plan_id'         => $this->plan_id,
 				'plan'            => $this->get_plan(),
 				'invoice_id'      => $this->invoice_id,
-				'amount'          => $this->amount,
+				'amount'          => $this->get_amount(),
 				'amount_formated' => $this->get_amount_formated(),
 				'custom_data'     => $this->custom_data,
 				'user_id'         => $this->user_id,

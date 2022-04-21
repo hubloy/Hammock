@@ -118,6 +118,7 @@ if ( ! class_exists( 'HubloyMembership' ) ) :
 			$this->define( 'HUBMEMB_REST_NAMESPACE', 'memberships-by-hubloy/v1/' );
 			$this->define( 'HUBMEMB_VERSION', $this->version );
 			$this->define( 'HUBMEMB_UIKIT_VERSION', '3.2.6' );
+			$this->define( 'HUBMEMB_ROUNDING_PRECISION', 6 );
 			$this->define( 'HUBMEMB_DEBUG', true );
 			$this->define( 'HUBMEMB_PLUGIN_FILE', __FILE__ );
 			$this->define( 'HUBMEMB_PLUGIN', plugin_basename( __FILE__ ) );

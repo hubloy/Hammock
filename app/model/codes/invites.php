@@ -23,5 +23,3 @@ class Invites extends Codes {
 		$this->code_type = 'invites';
 	}
 }
-
-
