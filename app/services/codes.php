@@ -5,6 +5,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+use HubloyMembership\Model\Codes\Membership;
+
 class Codes {
 
 	/**
@@ -292,7 +294,7 @@ class Codes {
 	 * 
 	 * @param string $code       The code.
 	 * @param int $membership_id The membership id.
-	 * @param string $param      The email of the current user.
+	 * @param string $email      The email of the current user.
 	 * 
 	 * @since 1.1.0
 	 * 
@@ -310,12 +312,32 @@ class Codes {
 		if ( ! $model->is_email_allowed( $email ) ) {
 			return array(
 				'status' => false,
-				'message' => __( 'You do not have access to this code', 'memberships-by-hubloy' ),
+				'message' => __( 'You do not have permission to this code', 'memberships-by-hubloy' ),
 			);
 		}
 
 		// Check for membership restriction.
+		if ( 'coupons' === $model->get_code_type() ) {
+			return array(
+				'status'  => true,
+				'message' => __( 'Coupon code valid', 'memberships-by-hubloy' ),
+				'model'   => $model
+			);
+		}
 		
+		$membership = new Membership( $membership_id );
+		if ( $membership->is_code_isted( $model->id ) ) {
+			return array(
+				'status'  => true,
+				'message' => __( 'Invite code valid', 'memberships-by-hubloy' ),
+				'model'   => $model
+			);
+		}
+
+		return array(
+			'status' => false,
+			'message' => __( 'You do not have permission to use this code', 'memberships-by-hubloy' ),
+		);
 	}
 }
 
