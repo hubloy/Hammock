@@ -407,6 +407,22 @@ class Invoice {
 	}
 
 	/**
+	 * Apply a discount.
+	 * 
+	 * @param int $amount The total discount amount.
+	 * @param bool $save  Set to false to not save. Defaults to true.
+	 * 
+	 * @since 1.1.0
+	 */
+	public function apply_discount( $amount, $save = true ) {
+		$this->custom_data[ 'discount' ] = $amount;
+		$invoice->add_note( sprintf( __( 'Discount of %d applied', 'memberships-by-hubloy' ), $amount ) );
+		if ( $save ) {
+			$this->save();
+		}
+	}
+
+	/**
 	 * Get the gateway name
 	 *
 	 * @since 1.0.0

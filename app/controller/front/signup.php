@@ -89,6 +89,8 @@ class Signup extends Controller {
 		$this->add_ajax_action( 'hubloy_membership_activate_plan', 'activate_plan' );
 
 		$this->add_ajax_action( 'hubloy_membership_purchase_subscription', 'purchase_subscription' );
+
+		$this->add_ajax_action( 'hubloy_membership_validate_code', 'validate_code', true, true );
 	}
 
 
@@ -260,6 +262,15 @@ class Signup extends Controller {
 		$payment_method = sanitize_text_field( $_POST['payment_method'] );
 
 		$this->transaction_service->process_transaction( $invoice_id, $payment_method );
+	}
+
+	/**
+	 * Validate the coupon or invite code.
+	 * 
+	 * @since 1.1.0
+	 */
+	public function validate_code() {
+
 	}
 
 	/**

@@ -344,11 +344,27 @@ class Codes {
 	 * @return array
 	 */
 	public function get_allowed_emails() {
-		$data = $this->custom_data['restrict'];
+		$data = $this->get_custom_data( 'restrict' );
 		if ( ! $data ) {
 			return array();
 		}
 		return explode( ',', strtolower( $data ) );
+	}
+
+	/**
+	 * Get Custom data value
+	 *
+	 * @param string $meta_key - the meta key
+	 *
+	 * @since 1.1.0
+	 *
+	 * @return mixed
+	 */
+	public function get_custom_data( $meta_key ) {
+		if ( isset( $this->custom_data[ $meta_key ] ) ) {
+			return $this->custom_data[ $meta_key ];
+		}
+		return false;
 	}
 
 

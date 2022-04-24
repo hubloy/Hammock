@@ -544,4 +544,8 @@ class Transactions {
 		wp_safe_redirect( hubloy_membership_get_account_page_links() );
 		exit;
 	}
+
+	public function verify_code( $code ) {
+
+	}
 }

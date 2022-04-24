@@ -290,17 +290,77 @@ class Codes {
 	}
 
 	/**
-	 * Check if the selected code is valid for the current use.
+	 * Validate invite code is valid for membership
 	 * 
-	 * @param string $code       The code.
+	 * @param string $code       The invite code.
 	 * @param int $membership_id The membership id.
-	 * @param string $email      The email of the current user.
+	 * @param string $email      The user email.
 	 * 
 	 * @since 1.1.0
 	 * 
 	 * @return array
 	 */
-	public function is_valid_for_use( $code, $membership_id, $email ) {
+	public function validate_invite_code( $code, $membership_id, $email ) {
+		$model = false;
+		$this->is_valid_for_use( $model, $code, $email );
+
+		$membership = new Membership( $membership_id );
+		if ( $model && $membership->is_code_isted( $model->id ) ) {
+			return array(
+				'status'  => true,
+				'message' => __( 'Invite code valid', 'memberships-by-hubloy' ),
+			);
+		}
+
+		return array(
+			'status' => false,
+			'message' => __( 'You do not have permission to use this code', 'memberships-by-hubloy' ),
+		);
+	}
+
+	/**
+	 * Check if a coupon code is valid.
+	 * 
+	 * @param string $code       The coupon code.
+	 * @param string $email      The email address.
+	 * @param int    $invoice_id The invoice id.
+	 * 
+	 * @since 1.1.0
+	 * 
+	 * @return array
+	 */
+	public function validate_coupon_code( $code, $email, $invoice_id ) {
+		$model = false;
+		$this->is_valid_for_use( $model, $code, $email );
+		// Check for membership restriction.
+		if ( $model && 'coupons' === $model->get_code_type() ) {
+			$usage = $model->get_custom_data( 'usage' );
+			if ( $usage ) {
+
+			}
+			return array(
+				'status'  => true,
+				'message' => __( 'Coupon code valid', 'memberships-by-hubloy' ),
+			);
+		}
+		return array(
+			'status' => false,
+			'message' => __( 'You do not have permission to use this code', 'memberships-by-hubloy' ),
+		);
+	}
+
+	/**
+	 * Check if the selected code is valid for the current use.
+	 * 
+	 * @param bool|object $model   The code model
+	 * @param string $code         The code.
+	 * @param string $email        The email of the current user.
+	 * 
+	 * @since 1.1.0
+	 * 
+	 * @return array
+	 */
+	private function is_valid_for_use( &$model, $code, $email ) {
 		$model = $this->get_code( $code );
 		if ( ! $model ) {
 			return array(
@@ -315,29 +375,6 @@ class Codes {
 				'message' => __( 'You do not have permission to this code', 'memberships-by-hubloy' ),
 			);
 		}
-
-		// Check for membership restriction.
-		if ( 'coupons' === $model->get_code_type() ) {
-			return array(
-				'status'  => true,
-				'message' => __( 'Coupon code valid', 'memberships-by-hubloy' ),
-				'model'   => $model
-			);
-		}
-		
-		$membership = new Membership( $membership_id );
-		if ( $membership->is_code_isted( $model->id ) ) {
-			return array(
-				'status'  => true,
-				'message' => __( 'Invite code valid', 'memberships-by-hubloy' ),
-				'model'   => $model
-			);
-		}
-
-		return array(
-			'status' => false,
-			'message' => __( 'You do not have permission to use this code', 'memberships-by-hubloy' ),
-		);
 	}
 }
 
