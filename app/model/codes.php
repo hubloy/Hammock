@@ -136,6 +136,19 @@ class Codes {
 	}
 
 	/**
+	 * If membership is valid
+	 * This checks if the id is greater than 0
+	 *
+	 * @since 1.1.0
+	 *
+	 * @return bool
+	 */
+	public function is_valid() {
+		return $this->id > 0;
+	}
+
+
+	/**
 	 * Get one code
 	 *
 	 * @param int|string $id - the code id or the code

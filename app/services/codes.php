@@ -347,11 +347,11 @@ class Codes {
 				}
 			}
 			// Apply coupon to invoice. This will be markes as used after checkout.
-
+			$total = Transactions::apply_coupon_code( $model, $invoice_id );
 			return array(
 				'status'  => true,
 				'message' => __( 'Coupon code valid', 'memberships-by-hubloy' ),
-				'coupon'  => $model,
+				'total'   => $total,
 			);
 		}
 		return array(

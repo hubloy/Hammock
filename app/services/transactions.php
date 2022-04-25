@@ -10,6 +10,7 @@ use HubloyMembership\Model\Invoice;
 use HubloyMembership\Model\Member;
 use HubloyMembership\Model\Membership;
 use HubloyMembership\Model\Settings;
+use HubloyMembership\Model\Codes;
 use HubloyMembership\Helper\Currency;
 use HubloyMembership\Helper\Duration;
 /**
@@ -582,9 +583,33 @@ class Transactions {
 	 * @since 1.1.0
 	 */
 	public static function apply_coupon_code( $coupon, $invoice_id ) {
-		$invoice    = new Invoice( $invoice_id );
+		$invoice = new Invoice( $invoice_id );
 		if ( $invoice->is_valid() ) {
+			$invoice->set_custom_data( 'discount', $coupon->calculate_discount_value( $invoice->amount ) );
+			$invoice->set_custom_data( 'coupon', $coupon->code );
+			$invoice->set_custom_data( 'coupon_id', $coupon->id );
+			$invoice->save();
+			return $invoice->get_amount();
+		}
+		return 0;
+	}
 
+	/**
+	 * Register coupon usage.
+	 * 
+	 * @param \HubloyMembership\Model\Codes\Invoice The invoice.
+	 * 
+	 * @since 1.1.0
+	 */
+	public function register_coupon_usage( $invoice ) {
+		$coupon_id = $this->get_custom_data( 'coupon_id' );
+		if ( $coupon_id ) {
+			$coupon = new Codes( $coupon_id );
+			if ( $coupon->is_valid() ) {
+				$member = $invoice->get_member();
+				$email  = $member->get_user_info( 'email' );
+				$coupon->record_usage( $email );
+			}
 		}
 	}
 }

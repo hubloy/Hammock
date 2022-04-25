@@ -61,6 +61,8 @@ class Transaction extends Controller {
 		$this->transaction_service = new Transactions();
 		$this->add_action( 'hubloy_membership_api_ipn_notify', 'ipn_notify' );
 		$this->add_action( 'hubloy_membership_api_handle_return', 'handle_return' );
+
+		$this->add_action( 'hubloy_membership_after_invoice_update', 'after_invoice_update' );
 	}
 
 	/**
@@ -88,6 +90,20 @@ class Transaction extends Controller {
 	 */
 	public function handle_return() {
 		$this->transaction_service->process_payment_return();
+	}
+
+	/**
+	 * Handle invoice update
+	 * Hooks called after an invoice is updated.
+	 * 
+	 * @param \HubloyMembership\Model\Codes\Invoice The invoice.
+	 * 
+	 * @since 1.1.0
+	 */
+	public function after_invoice_update( $invoice ) {
+
+		// Register usage on coupons.
+		$this->transaction_service->register_coupon_usage( $invoice );
 	}
 }
 
