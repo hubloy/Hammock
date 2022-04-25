@@ -569,6 +569,17 @@ class Invoice {
 	}
 
 	/**
+	 * Get member
+	 * 
+	 * @since 1.1.0
+	 * 
+	 * @return object
+	 */
+	public function get_member() {
+		return new Member( $this->member_id );
+	}
+
+	/**
 	 * Get Custom data value
 	 *
 	 * @param string $meta_key - the meta key
@@ -641,7 +652,7 @@ class Invoice {
 				'status_name'     => $this->get_status_name(),
 				'is_overdue'      => $this->is_overdue(),
 				'member_id'       => $this->member_id,
-				'member_user'     => new Member( $this->member_id ),
+				'member_user'     => $this->get_member(),
 				'plan_id'         => $this->plan_id,
 				'plan'            => $this->get_plan(),
 				'invoice_id'      => $this->invoice_id,

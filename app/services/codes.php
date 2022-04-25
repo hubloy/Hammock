@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use HubloyMembership\Model\Codes\Membership;
+use HubloyMembership\Model\Membership;
 
 class Codes {
 
@@ -309,6 +309,7 @@ class Codes {
 			return array(
 				'status'  => true,
 				'message' => __( 'Invite code valid', 'memberships-by-hubloy' ),
+				'invote'  => $model,
 			);
 		}
 
@@ -336,11 +337,21 @@ class Codes {
 		if ( $model && 'coupons' === $model->get_code_type() ) {
 			$usage = $model->get_custom_data( 'usage' );
 			if ( $usage ) {
-
+				$current_usage = $model->get_usage( $email );
+				if ( $current_usage >= $usage ) {
+					// Usage cap reached.
+					return array(
+						'status' => false,
+						'message' => __( 'You have reached the maximum times this coupon is valid for', 'memberships-by-hubloy' ),
+					);
+				}
 			}
+			// Apply coupon to invoice. This will be markes as used after checkout.
+
 			return array(
 				'status'  => true,
 				'message' => __( 'Coupon code valid', 'memberships-by-hubloy' ),
+				'coupon'  => $model,
 			);
 		}
 		return array(

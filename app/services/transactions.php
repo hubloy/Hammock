@@ -545,7 +545,46 @@ class Transactions {
 		exit;
 	}
 
-	public function verify_code( $code ) {
+	/**
+	 * Verify a coupon code
+	 * 
+	 * @param string $code The coupon code
+	 * @param int $invoice_id The invoice id
+	 * 
+	 * @since 1.1.0
+	 * 
+	 * @return json
+	 */
+	public function verify_coupon_code( $code, $invoice_id ) {
 
+	}
+
+	/**
+	 * Verify a invite code
+	 * 
+	 * @param string $code The invite code
+	 * @param int $invoice_id The invoice id
+	 * 
+	 * @since 1.1.0
+	 * 
+	 * @return json
+	 */
+	public function verify_invite_code( $code, $invoice_id ) {
+
+	}
+
+	/**
+	 * Apply coupon code to invoice
+	 * 
+	 * @param \HubloyMembership\Model\Codes\Coupons $coupon The coupon
+	 * @param int $invoice_id The invoice id
+	 * 
+	 * @since 1.1.0
+	 */
+	public static function apply_coupon_code( $coupon, $invoice_id ) {
+		$invoice    = new Invoice( $invoice_id );
+		if ( $invoice->is_valid() ) {
+
+		}
 	}
 }

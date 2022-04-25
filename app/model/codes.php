@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use HubloyMembership\Core\Database;
 use HubloyMembership\Services\Members;
+use \HubloyMembership\Helper\Currency;
 
 /**
  * Codes model
@@ -292,10 +293,10 @@ class Codes {
 	 * @return string
 	 */
 	public function get_code_value() {
-		if ( $this->amount_type === 'percentage' ) {
+		if ( 'percentage' === $this->amount_type ) {
 			$value = $this->amount . '%';
 		} else {
-			$code  = \HubloyMembership\Helper\Currency::get_membership_currency();
+			$code  = Currency::get_membership_currency();
 			$value = $code . '' . $this->amount;
 		}
 		/**
@@ -309,6 +310,23 @@ class Codes {
 		 * @return string
 		 */
 		return apply_filters( 'hubloy_membership_get_code_value_' . $this->code_type, $value, $this );
+	}
+
+	/**
+	 * Calculate the discount value.
+	 * This is mainly for coupons.
+	 * 
+	 * @param int $total The invoice total.
+	 * 
+	 * @since 1.1.0
+	 * 
+	 * @return int
+	 */
+	public function calculate_discount_value( $total ) {
+		if ( 'percentage' === $this->amount_type ) {
+			return Currency::round( ( $this->amount * $total ) / 100 );
+		}
+		return $this->amount;
 	}
 
 	/**
