@@ -41,6 +41,17 @@ class Codes {
 	 * @since 1.0.0
 	 */
 	public function __construct( $type ) {
+		$this->set_model( $type );
+	}
+
+	/**
+	 * Set the model
+	 * 
+	 * @param string $type The model type.
+	 * 
+	 * @since 1.1.0
+	 */
+	public function set_model( $type ) {
 		if ( $type === 'coupons' ) {
 			$this->model = new \HubloyMembership\Model\Codes\Coupons();
 		} else {
@@ -301,6 +312,7 @@ class Codes {
 	 * @return array
 	 */
 	public function validate_invite_code( $code, $membership_id, $email ) {
+		$this->set_model( 'invite' );
 		$model = false;
 		$this->is_valid_for_use( $model, $code, $email );
 
@@ -308,7 +320,7 @@ class Codes {
 		if ( $model && $membership->is_code_isted( $model->id ) ) {
 			return array(
 				'status'  => true,
-				'message' => __( 'Invite code valid', 'memberships-by-hubloy' ),
+				'message' => __( 'Valid invite code', 'memberships-by-hubloy' ),
 				'invote'  => $model,
 			);
 		}
@@ -324,13 +336,13 @@ class Codes {
 	 * 
 	 * @param string $code       The coupon code.
 	 * @param string $email      The email address.
-	 * @param int    $invoice_id The invoice id.
 	 * 
 	 * @since 1.1.0
 	 * 
 	 * @return array
 	 */
-	public function validate_coupon_code( $code, $email, $invoice_id ) {
+	public function validate_coupon_code( $code, $email ) {
+		$this->set_model( 'coupons' );
 		$model = false;
 		$this->is_valid_for_use( $model, $code, $email );
 		// Check for membership restriction.
@@ -346,12 +358,10 @@ class Codes {
 					);
 				}
 			}
-			// Apply coupon to invoice. This will be markes as used after checkout.
-			$total = Transactions::apply_coupon_code( $model, $invoice_id );
 			return array(
 				'status'  => true,
-				'message' => __( 'Coupon code valid', 'memberships-by-hubloy' ),
-				'total'   => $total,
+				'message' => __( 'Valid coupon code', 'memberships-by-hubloy' ),
+				'model'   => $model,
 			);
 		}
 		return array(
@@ -385,6 +395,25 @@ class Codes {
 				'status' => false,
 				'message' => __( 'You do not have permission to this code', 'memberships-by-hubloy' ),
 			);
+		}
+	}
+
+	/**
+	 * Record coupon usage.
+	 * 
+	 * @param \HubloyMembership\Model\Codes\Invoice The invoice.
+	 * 
+	 * @since 1.1.0
+	 */
+	private function record_coupon_usage( $invoice ) {
+		$coupon_id = $invoice->get_custom_data( 'coupon_id' );
+		if ( $coupon_id ) {
+			$coupon = new Codes( $coupon_id );
+			if ( $coupon->is_valid() ) {
+				$member = $invoice->get_member();
+				$email  = $member->get_user_info( 'email' );
+				$coupon->record_usage( $email );
+			}
 		}
 	}
 }
