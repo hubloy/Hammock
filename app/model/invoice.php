@@ -558,6 +558,18 @@ class Invoice {
 	}
 
 	/**
+	 * Get the invite code id.
+	 * This is used to validate invite codes used.
+	 * 
+	 * @since 1.1.0
+	 * 
+	 * @return int
+	 */
+	public function get_invite_code_id() {
+		return $this->get_custom_data( 'invite_id' );
+	}
+
+	/**
 	 * Get the amount formatted
 	 *
 	 * @since 1.0.0

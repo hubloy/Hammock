@@ -606,6 +606,9 @@ class Transactions {
 			if ( ! $response['status'] ) {
 				wp_send_json_error( $response['message'] );
 			}
+
+			$this->apply_invite_code( $response['model'], $invoice );
+			
 			wp_send_json_success( $response['message'] );
 		}
 
@@ -620,7 +623,7 @@ class Transactions {
 	 * 
 	 * @since 1.1.0
 	 */
-	public static function apply_coupon_code( $coupon, $invoice ) {
+	public function apply_coupon_code( $coupon, $invoice ) {
 		if ( $invoice->is_valid() ) {
 			$invoice->set_custom_data( 'discount', $coupon->calculate_discount_value( $invoice->amount ) );
 			$invoice->set_custom_data( 'coupon', $coupon->code );
@@ -629,6 +632,22 @@ class Transactions {
 			return $invoice->get_amount();
 		}
 		return 0;
+	}
+
+	/**
+	 * Apply the invite code.
+	 * 
+	 * @param \HubloyMembership\Model\Codes\Invite $invite The invite.
+	 * @param \HubloyMembership\Model\Codes\Invoice $invoice The invoice.
+	 * 
+	 * @since 1.1.0
+	 */
+	public function apply_invite_code( $invite, $invoice ) {
+		if ( $invoice->is_valid() ) {
+			$invoice->set_custom_data( 'invite', $invite->code );
+			$invoice->set_custom_data( 'invite_id', $invite->id );
+			$invoice->save();
+		}
 	}
 
 	/**

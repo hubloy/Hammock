@@ -321,7 +321,7 @@ class Codes {
 			return array(
 				'status'  => true,
 				'message' => __( 'Valid invite code', 'memberships-by-hubloy' ),
-				'invote'  => $model,
+				'model'   => $model,
 			);
 		}
 
