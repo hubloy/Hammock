@@ -77,7 +77,7 @@ class Template extends Controller {
 	 */
 	public function add_submit_button( $invoice ) {
 		$membership = $invoice->get_plan()->get_membership();
-		$disabled   = $membership->is_invite_only() ? 'disabled="disabled"' : '';
+		$disabled   = ( ! $membership->is_code_isted( $invoice->get_invite_code_id() ) ) ? 'disabled="disabled"' : '';
 		?>
 		<button type="submit" class="button alt" name="hubloy_membership_checkout" <?php esc_attr( $disabled ); ?> id="checkout" value="<?php esc_attr_e( 'Complete Order', 'memberships-by-hubloy' ) ?>"><?php esc_html_e( 'Complete Order', 'memberships-by-hubloy' ); ?></button>
 		<?php

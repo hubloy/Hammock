@@ -413,7 +413,7 @@ class Membership {
 	 */
 	public function is_code_isted( $code_id ) {
 		$codes = $this->get_meta_value( 'invite_list' );
-		if ( ! $codes ) {
+		if ( ! $code_id || ! $codes ) {
 			return false;
 		}
 		return in_array( $code_id, $codes, true );
