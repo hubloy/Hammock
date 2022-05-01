@@ -37,6 +37,7 @@ class Controller {
 		\HubloyMembership\Controller\Front\Auth::instance();
 		\HubloyMembership\Controller\Front\Signup::instance();
 		\HubloyMembership\Controller\Front\Account::instance();
+		\HubloyMembership\Controller\Front\Template::instance();
 		\HubloyMembership\Controller\Front\Transaction::instance();
 	}
 
