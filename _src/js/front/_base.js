@@ -127,4 +127,38 @@ jQuery(function ($) {
 			});
 		}
 	});
+
+	// Invite code verification
+	$('body').on('click', 'a[name="apply_invite"]', function (e) {
+		e.preventDefault();
+		var $button = $(this),
+			$btn_txt = $button.text(),
+			$invoice = $button.attr('data-invoice'),
+			$nonce = $button.attr('data-nonce'),
+			$code_input = $('input[name="coupon_code"]'),
+			$code = $code_input.val(),
+			$submitButton = $('.hubloy-membership-invoice-amount');
+
+		if ( ! $code ) {
+			$code_input.focus();
+		} else {
+			$.post(
+				window.ajaxurl,
+				{ 'code' : code, 'invoice' : $invoice, '_wpnonce' : $nonce, 'action' : 'hubloy_membership_validate_coupon_code' }
+			).done( function( response ) {
+				$button.removeAttr('disabled');
+				$button.html( $btn_txt );
+				if ( response.success === true ) {
+					hubloy_membership.helper.notify( response.data.message, 'success');
+					$amount.html( response.data.total );
+				} else {
+					hubloy_membership.helper.notify(response.data, 'warning');
+				}
+			}).fail(function(xhr, status, error) {
+				$button.removeAttr('disabled');
+				$button.html( $btn_txt );
+				hubloy_membership.helper.notify(hubloy_membership.error, 'error');
+			});
+		}
+	});
 });

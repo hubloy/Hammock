@@ -590,25 +590,23 @@ class Transactions {
 	 * Verify a invite code
 	 * 
 	 * @param string $code The invite code
-	 * @param string $email The email address
-	 * @param int $membership_id The membership id
+	 * @param int $invoice_id The invoice id
 	 * 
 	 * @since 1.1.0
 	 * 
 	 * @return json
 	 */
-	public function verify_invite_code( $code, $email, $membership_id ) {
-		$membership = new Membership( $membership_id );
-		if ( $membership->is_valid() ) {
+	public function verify_invite_code( $code, $invoice_id ) {
+		$invoice = new Invoice( $invoice_id );
+		if ( $invoice->is_valid() ) {
+			$member = $invoice->get_member();
+			$email  = $member->get_user_info( 'email' );
 			$response = $this->codes_service->validate_invite_code( $code, $email );
 			if ( ! $response['status'] ) {
 				wp_send_json_error( $response['message'] );
-			}			
-			wp_send_json_success( array(
-				'message'    => $response['message'],
-				'id'         => $invite->id,
-				'membership' => $membership_id
-			) );
+			}
+			$this->apply_invite_code( $response['model'], $invoice );
+			wp_send_json_success( $response['message']  );
 		}
 
 		wp_send_json_error( __( 'Invalid invoice', 'memberships-by-hubloy' ) );
