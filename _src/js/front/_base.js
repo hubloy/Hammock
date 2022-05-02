@@ -135,24 +135,25 @@ jQuery(function ($) {
 			$btn_txt = $button.text(),
 			$invoice = $button.attr('data-invoice'),
 			$nonce = $button.attr('data-nonce'),
-			$code_input = $('input[name="coupon_code"]'),
+			$code_input = $('input[name="invite_code"]'),
 			$code = $code_input.val(),
-			$submitButton = $('.hubloy-membership-invoice-amount');
+			$submitButton = $('button[name="hubloy_membership_checkout"]');
 
 		if ( ! $code ) {
 			$code_input.focus();
 		} else {
 			$.post(
 				window.ajaxurl,
-				{ 'code' : code, 'invoice' : $invoice, '_wpnonce' : $nonce, 'action' : 'hubloy_membership_validate_coupon_code' }
+				{ 'code' : code, 'invoice' : $invoice, '_wpnonce' : $nonce, 'action' : 'hubloy_membership_validate_invite_code' }
 			).done( function( response ) {
 				$button.removeAttr('disabled');
 				$button.html( $btn_txt );
 				if ( response.success === true ) {
-					hubloy_membership.helper.notify( response.data.message, 'success');
-					$amount.html( response.data.total );
+					hubloy_membership.helper.notify( response.data, 'success');
+					$submitButton.prop( 'disabled', false );
 				} else {
 					hubloy_membership.helper.notify(response.data, 'warning');
+					$submitButton.prop( 'disabled', true );
 				}
 			}).fail(function(xhr, status, error) {
 				$button.removeAttr('disabled');
