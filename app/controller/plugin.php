@@ -338,7 +338,7 @@ class Plugin extends Controller {
 		if ( hubloy_membership_is_account_page() ) {
 			return array_merge( $classes, array( 'hubloy_membership-account-page' ) );
 		} elseif ( hubloy_membership_is_membership_page() ) {
-			return array_merge( $classes, array( 'hubloy_membership-memberhsip-page' ) );
+			return array_merge( $classes, array( 'hubloy_membership-membership-page' ) );
 		} elseif ( hubloy_membership_is_protected_content_page() ) {
 			return array_merge( $classes, array( 'hubloy_membership-protected-content-page' ) );
 		} elseif ( hubloy_membership_is_registration_page() ) {
@@ -355,14 +355,40 @@ class Plugin extends Controller {
 	 * @since 1.0.0
 	 */
 	public function admin_bar_menu( $admin_bar ) {
+		if ( ! is_admin() || ! is_admin_bar_showing() ) {
+			return;
+		}
+
+		// Show only when the user is a member of this site, or they're a super admin.
+		if ( ! is_user_member_of_blog() && ! is_super_admin() ) {
+			return;
+		}
+
 		if ( ! defined( 'HUBMEMB_HIDE_TOP_BAR' ) ) {
 			$args = array(
 				'id'    => 'memberships-by-hubloy',
 				'title' => __( 'Memberships', 'memberships-by-hubloy' ),
-				'href'  => is_multisite() ? esc_url( network_admin_url( 'admin.php?page=hubloy_membership' ) ) : esc_url( admin_url( 'admin.php?page=hubloy_membership' ) ),
+				'href'  => is_multisite() ? esc_url( network_admin_url( 'admin.php?page=memberships-by-hubloy' ) ) : esc_url( admin_url( 'admin.php?page=memberships-by-hubloy' ) ),
 			);
 			$admin_bar->add_node( $args );
 		}
+
+		$admin_bar->add_node(
+			array(
+				'parent' => 'site-name',
+				'id'     => 'view-account',
+				'title'  => __( 'View Account', 'memberships-by-hubloy' ),
+				'href'   => hubloy_membership_get_account_page_links(),
+			)
+		);
+		$admin_bar->add_node(
+			array(
+				'parent' => 'site-name',
+				'id'     => 'view-memberships',
+				'title'  => __( 'View Memberships', 'memberships-by-hubloy' ),
+				'href'   => hubloy_membership_get_page_permalink( 'membership_list' ),
+			)
+		);
 	}
 
 	/**

@@ -285,10 +285,21 @@ class Signup extends Controller {
 	 */
 	public function validate_invite_code() {
 		$this->verify_nonce( 'hubloy_membership_verify_code' );
-		$invoice_id = absint( sanitize_text_field( $_POST['invoice'] ) );
+		if ( ! is_user_logged_in() ) {
+			$user_email = sanitize_email( $_POST['user_email'] );
+		} else {
+			$current_user = wp_get_current_user();
+			$user_email   = $current_user->user_email;
+		}
+		
+		if ( ! is_email( $user_email ) ) {
+			wp_send_json_error( __( 'Invalid email', 'memberships-by-hubloy' ) );
+		}
+
+		$membership = absint( sanitize_text_field( $_POST['membership'] ) );
 		$code       = sanitize_text_field( $_POST['code'] );
 
-		$this->transaction_service->verify_invite_code( $code, $invoice_id );
+		$this->transaction_service->verify_invite_code( $code, $user_email, $membership );
 	}
 
 	/**

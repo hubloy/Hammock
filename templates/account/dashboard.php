@@ -16,9 +16,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 <p>
 <?php
 	printf(
-		esc_html__( 'Hello %1$s (not %1$s? <a href="%2$s">Log out</a>)', 'memberships-by-hubloy' ),
+		esc_html__( 'Hello %1$s (not %1$s? %2$sLog out%3$s)', 'memberships-by-hubloy' ),
+		
 		'<strong>' . esc_html( $current_user->name ) . '</strong>',
-		esc_url( hubloy_membership_logout_url() )
+		sprintf( '<a href="%s">', esc_url( hubloy_membership_logout_url() ) ),
+		'</a>'
 	);
 	?>
 </p>
