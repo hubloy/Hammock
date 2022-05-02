@@ -56,9 +56,9 @@ jQuery(function ($) {
 			$item = $container.find($target);
 
 		$container.children('div').each(function (i, obj) {
-			$(obj).addClass('hubloy_membership-hidden');
+			$(obj).addClass('memberships-by-hubloy-hidden');
 		});
-		$item.removeClass('hubloy_membership-hidden');
+		$item.removeClass('memberships-by-hubloy-hidden');
 	});
 
 	$('body').on('submit', 'form.hubloy_membership-checkout-form', function (e) {

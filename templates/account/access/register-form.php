@@ -24,7 +24,7 @@ do_action( 'hubloy_membership_before_account_register_form' );
  *
  * @return string
  */
-$extra_classes = apply_filters( 'hubloy_membership_account_access_register_form_extra_classes', 'hubloy_membership-hidden' );
+$extra_classes = apply_filters( 'hubloy_membership_account_access_register_form_extra_classes', 'memberships-by-hubloy-hidden' );
 ?>
 
 <div class="hubloy_membership-account-access-register <?php echo $extra_classes; ?>">

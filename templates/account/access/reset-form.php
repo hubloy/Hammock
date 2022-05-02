@@ -24,7 +24,7 @@ do_action( 'hubloy_membership_before_account_reset_form' );
  *
  * @return string
  */
-$extra_classes = apply_filters( 'hubloy_membership_account_access_reset_form_extra_classes', 'hubloy_membership-hidden' );
+$extra_classes = apply_filters( 'hubloy_membership_account_access_reset_form_extra_classes', 'memberships-by-hubloy-hidden' );
 
 ?>
 
