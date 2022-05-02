@@ -13,18 +13,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<tr class="invite">
+<div class="invite">
 	<?php if ( ! is_user_logged_in() ) : ?>
-		<tr class="email">
-			<td><?php esc_html_e( 'Email:', 'memberships-by-hubloy' ); ?></td>
-			<td><input type="text" name="email_address" class="input-text" placeholder="<?php esc_attr_e( 'Email Address', 'memberships-by-hubloy' ); ?>" id="email_address" value="" /></td>
-		</tr>
+		<div class="email">
+			<p><?php esc_html_e( 'Email:', 'memberships-by-hubloy' ); ?></p>
+			<p><input type="text" name="email_address" class="input-text" placeholder="<?php esc_attr_e( 'Email Address', 'memberships-by-hubloy' ); ?>" id="email_address" value="" /></p>
+		</div>
 	<?php endif; ?>
-	<td>
+	<div>
 		<p><?php esc_html_e( 'You need an invitation to access this plan.', 'memberships-by-hubloy' ); ?></p>
-		<input type="text" name="invite_code" class="input-text" placeholder="<?php esc_attr_e( 'Invite code', 'memberships-by-hubloy' ); ?>" id="invite_code" value="" />
-	</td>
-	<td>
+		<p><input type="text" name="invite_code" class="input-text" placeholder="<?php esc_attr_e( 'Invite code', 'memberships-by-hubloy' ); ?>" id="invite_code" value="" /></p>
+	</div>
+	<div>
 		<button class="button" name="apply_invite" value="<?php esc_attr_e( 'Apply Code', 'memberships-by-hubloy' ); ?>"><?php esc_html_e( 'Apply Code', 'woocommerce' ); ?></button>
-	</td>
-</tr>
+	</div>
+</div>

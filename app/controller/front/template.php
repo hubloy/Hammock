@@ -49,21 +49,7 @@ class Template extends Controller {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$this->add_action( 'hubloy_membership_account_fields_before_total', 'coupons_and_invite_sections' );
 		$this->add_action( 'hubloy_membership_account_pay_single_transaction_after', 'add_submit_button' );
-	}
-
-	/**
-	 * Add coupon and invite sections
-	 * 
-	 * @param \HubloyMembership\Model\Codes\Invoice $invoice The invoice.
-	 * 
-	 * @since 1.1.0
-	 * 
-	 * @return string
-	 */
-	public function coupons_and_invite_sections( $invoice ) {
-		
 	}
 
 	/**

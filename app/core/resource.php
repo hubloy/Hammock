@@ -370,7 +370,7 @@ class Resource {
 						'cancel' => __( 'Cancel', 'memberships-by-hubloy' ),
 						'back'   => __( 'Back', 'memberships-by-hubloy' ),
 					),
-				),
+				)
 			)
 		);
 

@@ -577,7 +577,7 @@ class Invoice {
 	 * @return string
 	 */
 	public function get_amount_formated() {
-		return hubloy_membership_format_currency( $this->get_amount() );
+		return "<span class='hubloy-membership-invoice-amount'>" . hubloy_membership_format_currency( $this->get_amount() ) . "</span>";
 	}
 
 	/**

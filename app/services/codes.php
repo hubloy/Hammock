@@ -40,7 +40,7 @@ class Codes {
 	 *
 	 * @since 1.0.0
 	 */
-	public function __construct( $type ) {
+	public function __construct( $type = '' ) {
 		$this->set_model( $type );
 	}
 

@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use HubloyMembership\Base\Addon;
+use HubloyMembership\Helper\Template;
 
 class Coupon extends Addon {
 
@@ -44,7 +45,7 @@ class Coupon extends Addon {
 	 *
 	 * @param array $addons - the current list of addons
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 *
 	 * @return array
 	 */
@@ -65,7 +66,7 @@ class Coupon extends Addon {
 	 *
 	 * @param array $links
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 *
 	 * @return array
 	 */
@@ -82,10 +83,29 @@ class Coupon extends Addon {
 	/**
 	 * Initialize the addon action
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public function init_addon() {
+		$this->add_action( 'hubloy_membership_account_fields_before_total', 'coupons_section' );
+	}
 
+
+	/**
+	 * Add coupon form.
+	 * 
+	 * @param \HubloyMembership\Model\Codes\Invoice $invoice The invoice.
+	 * 
+	 * @since 1.1.0
+	 * 
+	 * @return string
+	 */
+	public function coupons_section( $invoice ) {
+		Template::get_template(
+			'account/transaction/codes/coupon-form.php',
+			array(
+				'invoice' => $invoice,
+			)
+		);
 	}
 }
 
