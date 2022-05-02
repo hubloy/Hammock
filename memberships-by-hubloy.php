@@ -3,7 +3,7 @@
  * Plugin Name:         Memberships by Hubloy
  * Plugin URI:          https://www.hubloymembership.com
  * Description:         A complete membership and subscription experience.
- * Version:             1.0.1
+ * Version:             1.1.0
  * Author:              Hubloy
  * Author URI:          https://www.hubloy.com
  * License:             GPLv2
@@ -38,7 +38,7 @@ if ( ! class_exists( 'HubloyMembership' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '1.0.1';
+		public $version = '1.1.0';
 
 		/**
 		 * The single instance of the class
@@ -118,6 +118,7 @@ if ( ! class_exists( 'HubloyMembership' ) ) :
 			$this->define( 'HUBMEMB_REST_NAMESPACE', 'memberships-by-hubloy/v1/' );
 			$this->define( 'HUBMEMB_VERSION', $this->version );
 			$this->define( 'HUBMEMB_UIKIT_VERSION', '3.2.6' );
+			$this->define( 'HUBMEMB_ROUNDING_PRECISION', 6 );
 			$this->define( 'HUBMEMB_DEBUG', true );
 			$this->define( 'HUBMEMB_PLUGIN_FILE', __FILE__ );
 			$this->define( 'HUBMEMB_PLUGIN', plugin_basename( __FILE__ ) );

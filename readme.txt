@@ -3,7 +3,7 @@ Contributors: hubloy, rixeo
 Tags: members, subscriptions, membership
 Requires at least: 5.9
 Tested up to: 5.9.3
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 License: GPLv2 or later
 Requires PHP: 5.3
 
@@ -47,6 +47,15 @@ Please visit [our support site at https://hubloymembership.com/docs/](https://hu
 Please post it in the [GitHub issues page](https://github.com/hubloy/memberships-by-hubloy/issues/new/choose) and we'll fix it right away. Thanks for helping.
 
 == Changelog ==
+= 1.1.1 =
+* Fix : Membership join form.
+* Fix : JS on login and registration form.
+* Fix : Other bugs.
+* New : Coupon code support. These can be set to be limited to emails and specific usages.
+* New : Invite code support. These can be limited based on emails and memberships.
+
+We are currently working on other features and also trying to imporove our testing processes of this plugin.
+
 = 1.0.1 =
 * New : Add settings tab filter. This allows introduction of custom settings page
 * New : Add settings dynamic page content for tab filter.

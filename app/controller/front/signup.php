@@ -89,6 +89,9 @@ class Signup extends Controller {
 		$this->add_ajax_action( 'hubloy_membership_activate_plan', 'activate_plan' );
 
 		$this->add_ajax_action( 'hubloy_membership_purchase_subscription', 'purchase_subscription' );
+
+		$this->add_ajax_action( 'hubloy_membership_validate_coupon_code', 'validate_coupon_code' );
+		$this->add_ajax_action( 'hubloy_membership_validate_invite_code', 'validate_invite_code' );
 	}
 
 
@@ -260,6 +263,32 @@ class Signup extends Controller {
 		$payment_method = sanitize_text_field( $_POST['payment_method'] );
 
 		$this->transaction_service->process_transaction( $invoice_id, $payment_method );
+	}
+
+	/**
+	 * Validate the coupon code.
+	 * 
+	 * @since 1.1.0
+	 */
+	public function validate_coupon_code() {
+		$this->verify_nonce( 'hubloy_membership_verify_code' );
+		$invoice_id = absint( sanitize_text_field( $_POST['invoice'] ) );
+		$code       = sanitize_text_field( $_POST['code'] );
+
+		$this->transaction_service->verify_coupon_code( $code, $invoice_id );
+	}
+
+	/**
+	 * Validate the invite code.
+	 * 
+	 * @since 1.1.0
+	 */
+	public function validate_invite_code() {
+		$this->verify_nonce( 'hubloy_membership_verify_code' );
+		$invoice_id = absint( sanitize_text_field( $_POST['invoice'] ) );
+		$code       = sanitize_text_field( $_POST['code'] );
+
+		$this->transaction_service->verify_invite_code( $code, $invoice_id );
 	}
 
 	/**

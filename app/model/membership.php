@@ -388,6 +388,38 @@ class Membership {
 	}
 
 	/**
+	 * Check if the selected membership is invite only
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return bool
+	 */
+	public function is_invite_only() {
+		$codes = $this->get_meta_value( 'invite_list' );
+		if ( $codes ) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Check if the invite code is in the list.
+	 * 
+	 * @param int $code_id The code id.
+	 * 
+	 * @since 1.1.0
+	 * 
+	 * @return bool
+	 */
+	public function is_code_isted( $code_id ) {
+		$codes = $this->get_meta_value( 'invite_list' );
+		if ( ! $code_id || ! $codes ) {
+			return false;
+		}
+		return in_array( $code_id, $codes, true );
+	}
+
+	/**
 	 * Get the readable type
 	 * This returns a readable type to the user e.g. per month. one time access
 	 *

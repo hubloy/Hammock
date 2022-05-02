@@ -61,6 +61,13 @@ class Transactions {
 	 */
 	const STATUS_FAILED = 'failed';
 
+	/**
+	 * The codes service
+	 * 
+	 * @since 1.1.0
+	 */
+	private $codes_service = null;
+
 
 	/**
 	 * Main service constructor
@@ -68,7 +75,8 @@ class Transactions {
 	 * Sets up the service
 	 */
 	public function __construct() {
-		$this->table_name = Database::get_table_name( Database::INVOICE );
+		$this->table_name    = Database::get_table_name( Database::INVOICE );
+		$this->codes_service = new Codes();
 	}
 
 
@@ -543,5 +551,110 @@ class Transactions {
 		}
 		wp_safe_redirect( hubloy_membership_get_account_page_links() );
 		exit;
+	}
+
+	/**
+	 * Verify a coupon code
+	 * 
+	 * @param string $code The coupon code
+	 * @param int $invoice_id The invoice id
+	 * 
+	 * @since 1.1.0
+	 * 
+	 * @return json
+	 */
+	public function verify_coupon_code( $code, $invoice_id ) {
+		$invoice = new Invoice( $invoice_id );
+		if ( $invoice->is_valid() ) {
+			$member = $invoice->get_member();
+			$email  = $member->get_user_info( 'email' );
+			$response = $this->codes_service->validate_coupon_code( $code, $email );
+			if ( ! $response['status'] ) {
+				wp_send_json_error( $response['message'] );
+			}
+			// Apply the coupon
+			$total = $this->apply_coupon_code( $response['model'], $invoice );
+
+			wp_send_json_success(
+				array(
+					'message' => $response['message'],
+					'total'   => $total,
+				)
+			);
+		}
+
+		wp_send_json_error( __( 'Invalid invoice', 'memberships-by-hubloy' ) );
+	}
+
+	/**
+	 * Verify a invite code
+	 * 
+	 * @param string $code The invite code
+	 * @param int $invoice_id The invoice id
+	 * 
+	 * @since 1.1.0
+	 * 
+	 * @return json
+	 */
+	public function verify_invite_code( $code, $invoice_id ) {
+		$invoice = new Invoice( $invoice_id );
+		if ( $invoice->is_valid() ) {
+			$member = $invoice->get_member();
+			$email  = $member->get_user_info( 'email' );
+			$response = $this->codes_service->validate_invite_code( $code, $email );
+			if ( ! $response['status'] ) {
+				wp_send_json_error( $response['message'] );
+			}
+			$this->apply_invite_code( $response['model'], $invoice );
+			wp_send_json_success( $response['message']  );
+		}
+
+		wp_send_json_error( __( 'Invalid invoice', 'memberships-by-hubloy' ) );
+	}
+
+	/**
+	 * Apply coupon code to invoice
+	 * 
+	 * @param \HubloyMembership\Model\Codes\Coupons $coupon The coupon.
+	 * @param \HubloyMembership\Model\Codes\Invoice $invoice The invoice.
+	 * 
+	 * @since 1.1.0
+	 */
+	public function apply_coupon_code( $coupon, $invoice ) {
+		if ( $invoice->is_valid() ) {
+			$invoice->set_custom_data( 'discount', $coupon->calculate_discount_value( $invoice->amount ) );
+			$invoice->set_custom_data( 'coupon', $coupon->code );
+			$invoice->set_custom_data( 'coupon_id', $coupon->id );
+			$invoice->save();
+			return $invoice->get_amount();
+		}
+		return 0;
+	}
+
+	/**
+	 * Apply the invite code.
+	 * 
+	 * @param \HubloyMembership\Model\Codes\Invite $invite The invite.
+	 * @param \HubloyMembership\Model\Codes\Invoice $invoice The invoice.
+	 * 
+	 * @since 1.1.0
+	 */
+	public function apply_invite_code( $invite, $invoice ) {
+		if ( $invoice->is_valid() ) {
+			$invoice->set_custom_data( 'invite', $invite->code );
+			$invoice->set_custom_data( 'invite_id', $invite->id );
+			$invoice->save();
+		}
+	}
+
+	/**
+	 * Register coupon usage.
+	 * 
+	 * @param \HubloyMembership\Model\Codes\Invoice $invoice The invoice.
+	 * 
+	 * @since 1.1.0
+	 */
+	public function register_coupon_usage( $invoice ) {
+		$this->codes_service->record_coupon_usage( $invoice );
 	}
 }

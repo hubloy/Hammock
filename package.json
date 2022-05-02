@@ -2,7 +2,7 @@
 	"name": "memberships-by-hubloy",
 	"title": "Hubloy Membership",
 	"description": "Membership plugin",
-	"version": "1.0.1",
+	"version": "1.1.0",
 	"homepage": "https://www.hubloymembership.com",
 	"license": "GPL-3.0",
 	"scripts": {
@@ -43,7 +43,7 @@
 		"eslint-plugin-import": "2.25.3",
 		"eslint-plugin-react": "7.27.1",
 		"fancy-log": "1.3.3",
-		"grunt": "1.4.1",
+		"grunt": "1.5.2",
 		"grunt-contrib-clean": "^2.0.0",
 		"grunt-contrib-compress": "^2.0.0",
 		"grunt-contrib-concat": "~1.0.1",

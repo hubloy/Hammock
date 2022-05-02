@@ -407,5 +407,24 @@ class Currency {
 			$price
 		);
 	}
+
+
+	/**
+	 * Round to the nearest number.
+	 * 
+	 * @param mixed $val The value to round.
+	 * @param int   $precision The optional number of decimal digits to round to.
+	 * @param int   $mode A constant to specify the mode in which rounding occurs.
+	 * 
+	 * @since 1.1.0
+	 *
+	 * @return float The value rounded to the given precision as a float, or the supplied default value.
+	 */
+	public static function round( $val, int $precision = 0, int $mode = PHP_ROUND_HALF_UP ) {
+		if ( ! is_numeric( $val ) ) {
+			$val = floatval( $val );
+		}
+		return round( $val, $precision, $mode );
+	}
 }
 

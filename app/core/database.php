@@ -26,6 +26,7 @@ class Database {
 	const CODES            = 'codes';
 	const ACTIVITY         = 'activity';
 	const LOGS             = 'log';
+	const USAGE            = 'usage';
 
 
 	/**
@@ -55,6 +56,7 @@ class Database {
 			self::CODES            => $db->prefix . 'hubloy_m_codes',
 			self::ACTIVITY         => $db->prefix . 'hubloy_m_activity',
 			self::LOGS             => $db->prefix . 'hubloy_m_subscription_log',
+			self::USAGE            => $db->prefix . 'hubloy_m_usage',
 		);
 	}
 
@@ -316,6 +318,27 @@ class Database {
 				KEY `member_log` (`member_id` ASC, `membership_id` ASC, `user_id` ASC),
 				KEY `log_member_id` (`member_id`),
 				KEY `log_membership_id` (`membership_id`))
+				$charset_collate;";
+			dbDelta( $sql );
+		}
+
+		// Usage tracking for specific models that have restrictions.
+		$table_name = self::get_table_name( self::USAGE );
+		if ( $table_name ) {
+			$sql = "CREATE TABLE {$table_name} (
+				`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				`object_id` int(11) NOT NULL DEFAULT '0',
+				`object_type` varchar($max_index_length) NOT NULL,
+				`item_ref` varchar($max_index_length) NOT NULL,
+				`total_usage` bigint(20) unsigned NULL,
+				`date_created` datetime NOT NULL default '0000-00-00 00:00:00',
+				PRIMARY KEY (`id`),
+				KEY `object_type` (`object_type`($max_index_length)),
+				KEY `item_ref` (`item_ref`($max_index_length)),
+				KEY `ref_date_created` (`date_created`),
+				KEY `object_id` (`object_id`),
+				KEY `item_ref_object_id_type` (`item_ref` ASC, `object_id` ASC, `object_type` ASC),
+				KEY `item_object_id_type` (`object_id` ASC, `object_type` ASC))
 				$charset_collate;";
 			dbDelta( $sql );
 		}

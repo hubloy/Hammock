@@ -11,12 +11,12 @@ return array(
 	'members'     => array(
 		'title' => __( 'Members', 'memberships-by-hubloy' ),
 		'none'  => __( 'No Members Found', 'memberships-by-hubloy' ),
-		'url'   => admin_url( 'admin.php?page=hubloy_membership-members' ),
+		'url'   => admin_url( 'admin.php?page=memberships-by-hubloy-members' ),
 	),
 	'memberships' => array(
 		'title' => __( 'Memberships', 'memberships-by-hubloy' ),
 		'none'  => __( 'No Memberships Found', 'memberships-by-hubloy' ),
-		'url'   => admin_url( 'admin.php?page=hubloy_membership-memberships' ),
+		'url'   => admin_url( 'admin.php?page=memberships-by-hubloy-memberships' ),
 	),
 	'management'  => array(
 		'title' => __( 'Site Management', 'memberships-by-hubloy' ),
@@ -25,11 +25,11 @@ return array(
 			array(
 				'memberships' => array(
 					'name' => __( 'View Memberships', 'memberships-by-hubloy' ),
-					'url'  => admin_url( 'admin.php?page=hubloy_membership-memberships' ),
+					'url'  => admin_url( 'admin.php?page=memberships-by-hubloy-memberships' ),
 				),
 				'addons'      => array(
 					'name' => __( 'View Addons', 'memberships-by-hubloy' ),
-					'url'  => admin_url( 'admin.php?page=hubloy_membership-addons' ),
+					'url'  => admin_url( 'admin.php?page=memberships-by-hubloy-addons' ),
 				),
 			)
 		),

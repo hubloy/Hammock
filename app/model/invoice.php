@@ -10,6 +10,7 @@ use HubloyMembership\Services\Gateways;
 use HubloyMembership\Services\Transactions;
 use HubloyMembership\Services\Members;
 use HubloyMembership\Helper\Duration;
+use HubloyMembership\Helper\Currency;
 
 /**
  * Invoice model
@@ -406,6 +407,22 @@ class Invoice {
 	}
 
 	/**
+	 * Apply a discount.
+	 * 
+	 * @param int $amount The total discount amount.
+	 * @param bool $save  Set to false to not save. Defaults to true.
+	 * 
+	 * @since 1.1.0
+	 */
+	public function apply_discount( $amount, $save = true ) {
+		$this->custom_data[ 'discount' ] = $amount;
+		$invoice->add_note( sprintf( __( 'Discount of %d applied', 'memberships-by-hubloy' ), $amount ) );
+		if ( $save ) {
+			$this->save();
+		}
+	}
+
+	/**
 	 * Get the gateway name
 	 *
 	 * @since 1.0.0
@@ -512,6 +529,47 @@ class Invoice {
 	}
 
 	/**
+	 * Get the invoice amount
+	 * 
+	 * @since 1.1.0
+	 * 
+	 * @return int
+	 */
+	public function get_amount() {
+		$discount = $this->get_total_discount();
+		$total    = $this->amount - $discount;
+		$total    = Currency::round( $total, HUBMEMB_ROUNDING_PRECISION );
+		return apply_filters( 'hubloy_membership_invoice_amount', $total, $this->id );
+	}
+
+	/**
+	 * Get the total discount
+	 * 
+	 * @since 1.1.0
+	 * 
+	 * @return int
+	 */
+	public function get_total_discount() {
+		$discount = $this->get_custom_data( 'discount' );
+		if ( $discount ) {
+			return $discount;
+		}
+		return 0;
+	}
+
+	/**
+	 * Get the invite code id.
+	 * This is used to validate invite codes used.
+	 * 
+	 * @since 1.1.0
+	 * 
+	 * @return int
+	 */
+	public function get_invite_code_id() {
+		return $this->get_custom_data( 'invite_id' );
+	}
+
+	/**
 	 * Get the amount formatted
 	 *
 	 * @since 1.0.0
@@ -519,7 +577,18 @@ class Invoice {
 	 * @return string
 	 */
 	public function get_amount_formated() {
-		return hubloy_membership_format_currency( $this->amount );
+		return "<span class='hubloy-membership-invoice-amount'>" . hubloy_membership_format_currency( $this->get_amount() ) . "</span>";
+	}
+
+	/**
+	 * Get member
+	 * 
+	 * @since 1.1.0
+	 * 
+	 * @return object
+	 */
+	public function get_member() {
+		return new Member( $this->member_id );
 	}
 
 	/**
@@ -595,11 +664,11 @@ class Invoice {
 				'status_name'     => $this->get_status_name(),
 				'is_overdue'      => $this->is_overdue(),
 				'member_id'       => $this->member_id,
-				'member_user'     => new Member( $this->member_id ),
+				'member_user'     => $this->get_member(),
 				'plan_id'         => $this->plan_id,
 				'plan'            => $this->get_plan(),
 				'invoice_id'      => $this->invoice_id,
-				'amount'          => $this->amount,
+				'amount'          => $this->get_amount(),
 				'amount_formated' => $this->get_amount_formated(),
 				'custom_data'     => $this->custom_data,
 				'user_id'         => $this->user_id,
