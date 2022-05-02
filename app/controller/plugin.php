@@ -336,15 +336,15 @@ class Plugin extends Controller {
 	 */
 	public function front_body_class( $classes ) {
 		if ( hubloy_membership_is_account_page() ) {
-			return array_merge( $classes, array( 'hubloy_membership-account-page' ) );
+			return array_merge( $classes, array( 'memberships-by-hubloy-account-page' ) );
 		} elseif ( hubloy_membership_is_membership_page() ) {
-			return array_merge( $classes, array( 'hubloy_membership-membership-page' ) );
+			return array_merge( $classes, array( 'memberships-by-hubloy-membership-page' ) );
 		} elseif ( hubloy_membership_is_protected_content_page() ) {
-			return array_merge( $classes, array( 'hubloy_membership-protected-content-page' ) );
+			return array_merge( $classes, array( 'memberships-by-hubloy-protected-content-page' ) );
 		} elseif ( hubloy_membership_is_registration_page() ) {
-			return array_merge( $classes, array( 'hubloy_membership-registration-page' ) );
+			return array_merge( $classes, array( 'memberships-by-hubloy-registration-page' ) );
 		} elseif ( hubloy_membership_is_thank_you_page() ) {
-			return array_merge( $classes, array( 'hubloy_membership-thank-you-page' ) );
+			return array_merge( $classes, array( 'memberships-by-hubloy-thank-you-page' ) );
 		}
 		return $classes;
 	}
