@@ -28,7 +28,7 @@ class Controller {
 		\HubloyMembership\Controller\Site\Invites::instance();
 		\HubloyMembership\Controller\Site\Settings::instance();
 		\HubloyMembership\Controller\Site\Activity::instance();
-		\HubloyMembership\Controller\Site\Marketing::instance();
+		// \HubloyMembership\Controller\Site\Marketing::instance();
 		\HubloyMembership\Controller\Site\Shortcodes::instance();
 
 		\HubloyMembership\Controller\Site\Transactions::instance();
