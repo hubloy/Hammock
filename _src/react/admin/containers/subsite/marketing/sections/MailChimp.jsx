@@ -198,7 +198,11 @@ export default class MailChimpSettings extends Component {
 												</div>
 											</div>
 										</div>
-										{!loading_lists &&
+										{loading_lists ? (
+											<div className="uk-container uk-padding-small uk-margin-top uk-width-1-1 uk-background-default">
+												<span className="uk-text-center" uk-spinner="ratio: 3"></span>
+											</div>
+										) : (
 											<React.Fragment>
 												<div className="uk-margin">
 													<label className="uk-form-label" htmlFor="registered_list">{hubloy_membership.strings.mailchimp.lists.registered}</label>
@@ -219,7 +223,7 @@ export default class MailChimpSettings extends Component {
 													</div>
 												</div>
 											</React.Fragment>
-										}
+										)}
 									</React.Fragment>
 								}
 							</React.Fragment>
