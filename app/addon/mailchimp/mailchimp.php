@@ -168,7 +168,7 @@ class Mailchimp extends Addon {
 				);
 			break;
 			case 'get_lists':
-				$this->configure_api( $apikey );
+				$this->configure_api();
 				$lists = $this->get_lists();
 				if ( is_wp_error( $lists ) ) {
 					return array(
