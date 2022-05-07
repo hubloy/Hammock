@@ -547,6 +547,16 @@ class Transactions {
 				 * @since 1.0.0
 				 */
 				do_action( 'hubloy_membership_gateway_' . $gateway_id . '_handle_return', $invoice );
+
+
+				/**
+				 * Process payment return
+				 *
+				 * @see \HubloyMembership\Base\Gateway
+				 *
+				 * @since 1.10.0
+				 */
+				do_action( 'hubloy_membership_gateway_handle_return', $invoice, $gateway_id );
 			}
 		}
 		wp_safe_redirect( hubloy_membership_get_account_page_links() );
