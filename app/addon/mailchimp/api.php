@@ -178,6 +178,21 @@ class Api {
 		);
 	}
 
+
+	/**
+	 * Delete detail of member
+	 *
+	 * @param $list_id
+	 * @param $email
+	 *
+	 * @return array|mixed|object|WP_Error
+	 */
+	public function delete_email( $list_id, $email ) {
+		$md5_email = md5( strtolower( $email ) );
+		$this->update_subscription_patch( $list_id, $email, array( 'status' => 'unsubscribed' ) );
+		return $this->_delete( 'lists/' . $list_id . '/members/' . $md5_email );
+	}
+
 	/**
 	 * Add custom field for list
 	 *
