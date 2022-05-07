@@ -3,7 +3,7 @@ Contributors: hubloy, rixeo
 Tags: members, subscriptions, membership
 Requires at least: 5.9
 Tested up to: 5.9.3
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 Requires PHP: 5.3
 
@@ -48,6 +48,9 @@ Please post it in the [GitHub issues page](https://github.com/hubloy/memberships
 
 == Changelog ==
 = 1.1.1 =
+* New : Add Mailchimp integration
+
+= 1.1.0 =
 * Fix : Membership join form.
 * Fix : JS on login and registration form.
 * Fix : Other bugs.

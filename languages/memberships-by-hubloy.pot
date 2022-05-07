@@ -2,10 +2,10 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Memberships by Hubloy 1.1.0\n"
+"Project-Id-Version: Memberships by Hubloy 1.1.1\n"
 "Report-Msgid-Bugs-To: "
 "https://wordpress.org/support/plugin/hubloy-membership\n"
-"POT-Creation-Date: 2022-05-02 11:05:48+00:00\n"
+"POT-Creation-Date: 2022-05-07 12:24:52+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -88,29 +88,29 @@ msgstr ""
 msgid "Users need an invitation code to subscribe to a membership."
 msgstr ""
 
-#: app/addon/mailchimp/api.php:213
+#: app/addon/mailchimp/api.php:228
 msgid ""
 "Something went wrong, please compare your Opt-in fields with MailChimp "
 "fields and add any missing fields."
 msgstr ""
 
-#: app/addon/mailchimp/api.php:216
+#: app/addon/mailchimp/api.php:231
 msgid "Successful subscription"
 msgstr ""
 
-#: app/addon/mailchimp/api.php:239
+#: app/addon/mailchimp/api.php:254
 msgid "This email address has already subscribed"
 msgstr ""
 
-#: app/addon/mailchimp/api.php:242
+#: app/addon/mailchimp/api.php:257
 msgid "You have been added to the new group"
 msgstr ""
 
-#: app/addon/mailchimp/api.php:280
+#: app/addon/mailchimp/api.php:295
 msgid "Couldn't update the user"
 msgstr ""
 
-#: app/addon/mailchimp/api.php:282
+#: app/addon/mailchimp/api.php:297
 msgid "User updated"
 msgstr ""
 
@@ -122,23 +122,23 @@ msgstr ""
 msgid "MailChimp integration."
 msgstr ""
 
-#: app/addon/mailchimp/mailchimp.php:127
+#: app/addon/mailchimp/mailchimp.php:129
 msgid "MailChimp Settings Saved"
 msgstr ""
 
-#: app/addon/mailchimp/mailchimp.php:151 app/addon/mailchimp/mailchimp.php:178
+#: app/addon/mailchimp/mailchimp.php:153 app/addon/mailchimp/mailchimp.php:176
 msgid "Error: %s"
 msgstr ""
 
-#: app/addon/mailchimp/mailchimp.php:164
+#: app/addon/mailchimp/mailchimp.php:166
 msgid "Valid API key"
 msgstr ""
 
-#: app/addon/mailchimp/mailchimp.php:190 app/rest/site/addons.php:255
+#: app/addon/mailchimp/mailchimp.php:188 app/rest/site/addons.php:255
 msgid "Action executed"
 msgstr ""
 
-#: app/addon/mailchimp/mailchimp.php:207
+#: app/addon/mailchimp/mailchimp.php:218
 msgid "Select List"
 msgstr ""
 
@@ -2932,7 +2932,7 @@ msgstr ""
 msgid "Payment canceled by subscriber"
 msgstr ""
 
-#: app/services/transactions.php:586 app/services/transactions.php:612
+#: app/services/transactions.php:596 app/services/transactions.php:622
 msgid "Invalid invoice"
 msgstr ""
 
